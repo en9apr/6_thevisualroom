@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.4.3. Ghost Cell Boundary Conditions &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.5.1. The Courant-Friedrichs-Lewy Condition" href="courant_number.html" />
+    <link rel="prev" title="1.4.2. The Marker and Cell Method" href="marker_and_cell_method.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.4.3. Ghost Cell Boundary Conditions</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="marker_and_cell_method.html">1.4.2. The Marker and Cell Method</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="courant_number.html">1.5.1. The Courant-Friedrichs-Lewy Condition</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="ghost-cell-boundary-conditions">
+<h1>1.4.3. Ghost Cell Boundary Conditions<a class="headerlink" href="#ghost-cell-boundary-conditions" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#boundary-conditions-for-incompressible-navier-stokes" id="id1">Boundary Conditions for Incompressible Navier Stokes</a></li>
+<li><a class="reference internal" href="#fractional-step-method-or-projection-method" id="id2">Fractional Step Method or Projection Method</a><ul>
+<li><a class="reference internal" href="#method-used-by-rempfer-2006" id="id3">Method used by Rempfer (2006)</a></li>
+<li><a class="reference internal" href="#method-by-gresho-and-sani-1987" id="id4">Method by Gresho and Sani (1987)</a></li>
+<li><a class="reference internal" href="#method-by-kim-and-moin" id="id5">Method by Kim and Moin</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ghost-cells" id="id6">Ghost Cells</a><ul>
+<li><a class="reference internal" href="#method-by-harlow-and-welsh" id="id7">Method by Harlow and Welsh</a></li>
+<li><a class="reference internal" href="#boundary-conditions-at-rigid-walls" id="id8">Boundary Conditions at Rigid Walls</a><ul>
+<li><a class="reference internal" href="#free-slip-wall" id="id9">Free slip wall</a></li>
+<li><a class="reference internal" href="#no-slip-wall" id="id10">No slip wall</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="boundary-conditions-for-incompressible-navier-stokes">
+<h2><a class="toc-backref" href="#id1">1.4.3.1. Boundary Conditions for Incompressible Navier Stokes</a><a class="headerlink" href="#boundary-conditions-for-incompressible-navier-stokes" title="Permalink to this headline">¶</a></h2>
+<p>In dimensionless form, the Navier-Stokes Equations are:</p>
+<div class="math" id="equation-1">
+<span class="eqno">(1)</span>\[\nabla \cdot \mathbf{u} = 0\]</div>
+<div class="math" id="equation-2">
+<span class="eqno">(2)</span>\[{\partial \mathbf{u} \over \partial t} + \mathbf{u} \cdot \nabla \mathbf{u}=
+       -\nabla p + {1 \over Re} \nabla^2 \mathbf{u}\]</div>
+<p>The independent variable is <span class="math">\(\mathbf{x} \in \Omega\)</span></p>
+<p><strong>Initial Conditions</strong> are (some function for the initial conditions), with the the velocity divergence free in the domain <span class="math">\(\Omega\)</span> i.e. <span class="math">\(\nabla \cdot \mathbf{u}_0 = 0\)</span></p>
+<div class="math" id="equation-3">
+<span class="eqno">(3)</span>\[\mathbf{u}(\mathbf{x},t_0) = \mathbf{u}_0(\mathbf{x})\]</div>
+<p><strong>Boundary Conditions</strong> are at <span class="math">\(\mathbf{x} \in \Gamma = \partial \Omega\)</span></p>
+<div class="math" id="equation-4">
+<span class="eqno">(4)</span>\[\mathbf{u}(\mathbf{x},t) = \mathbf{u}_\Gamma (\mathbf{x},t)\]</div>
+<p><strong>Global Mass Conservation</strong> these are at the inflow or outflow boundaries (<span class="math">\(\mathbf{n}\)</span> is the vector normal to the boundary <span class="math">\(\Gamma\)</span>)</p>
+<div class="math" id="equation-5">
+<span class="eqno">(5)</span>\[\oint_\Gamma \mathbf{n} \cdot \mathbf{u}_\Gamma d \sigma = 0\]</div>
+<p>In practice, B.C.s are stipulated separately for the different types:</p>
+<ul class="simple">
+<li>inflow</li>
+<li>outflow</li>
+<li>solid surface</li>
+<li>far field</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/boundary_conditions.png"><img alt="../_images/boundary_conditions.png" src="../_images/boundary_conditions.png" style="width: 675.0px; height: 300.0px;" /></a>
+</div>
+<ul class="simple">
+<li>No slip at body surface <span class="math">\(\Rightarrow \mathbf{u}_\Gamma = \mathbf{u}_{body}\)</span> (=0 usually)</li>
+<li>Pressure at surface is not known - no equation for p (we have to derive one - e.g. Poisson Equation) - PPE (Pressure Poisson Equation) - the divergence of convection</li>
+</ul>
+<div class="math" id="equation-6">
+<span class="eqno">(6)</span>\[\nabla^2 p = -\nabla \cdot (\mathbf{u} \cdot \nabla \mathbf{u})\]</div>
+<p>Need to use <a href="#equation-2">(2)</a> and <a href="#equation-6">(6)</a> (<a href="#equation-6">(6)</a> ensures continuity, as the divergence of velocity has been set to zero in it&#8217;s derivation)</p>
+<p>Still don&#8217;t know BCs for pressure, we have replaced the Continuity Equation (<a href="#equation-1">(1)</a>) with the Poisson Equation (<a href="#equation-6">(6)</a>), so we have increased the order of the equations by one, which means we would need an additional boundary condition, which we don&#8217;t have.</p>
+</div>
+<div class="section" id="fractional-step-method-or-projection-method">
+<h2><a class="toc-backref" href="#id2">1.4.3.2. Fractional Step Method or Projection Method</a><a class="headerlink" href="#fractional-step-method-or-projection-method" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="method-used-by-rempfer-2006">
+<h3><a class="toc-backref" href="#id3">Method used by Rempfer (2006)</a><a class="headerlink" href="#method-used-by-rempfer-2006" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Step 1:</strong> Omit pressure term in NS and find intermediate velocity - for explicit formulation (we could use implicit):</li>
+</ul>
+<div class="math" id="equation-7">
+<span class="eqno">(7)</span>\[{{\mathbf{u}^* - \mathbf{u}^n} \over {\Delta t}} = -(\mathbf{u}^n \cdot \nabla) \mathbf{u}^n + {1 \over Re} \nabla^2 \mathbf{u}^n\]</div>
+<ul class="simple">
+<li><strong>Step 2:</strong> Apply no slip boundary condition:</li>
+</ul>
+<div class="math" id="equation-8">
+<span class="eqno">(8)</span>\[\left . \mathbf{u}^* \right |_\Gamma = \mathbf{u}_\Gamma (\mathbf{x}, t^{n+1}) \quad \mathbf{x} \in \Gamma\]</div>
+<ul class="simple">
+<li><strong>Step 3:</strong> <span class="math">\(\mathbf{u}^*\)</span> is not necessarily divergence free, so restore divergence free velocity by introducing a &#8220;projector&#8221; <span class="math">\(\tilde{p}\)</span>: (this is the projection in the <strong>Pressure Projection Method</strong>)</li>
+</ul>
+<div class="math" id="equation-9">
+<span class="eqno">(9)</span>\[{{ \mathbf{u}^{n+1} - \mathbf{u}^* } \over {\Delta t}} = -\nabla \tilde{p}^{n+1} \quad \mathbf{x} \in \Gamma\]</div>
+<ul class="simple">
+<li><strong>Step 4:</strong> Apply Continuity Equation at <span class="math">\(n+1\)</span> (divergence free condition):</li>
+</ul>
+<div class="math" id="equation-10">
+<span class="eqno">(10)</span>\[\nabla \cdot \mathbf{u}^{n+1} = 0\]</div>
+<ul class="simple">
+<li><strong>Step 5:</strong> Apply boundary condition using normal vector:</li>
+</ul>
+<div class="math" id="equation-11">
+<span class="eqno">(11)</span>\[\left . \mathbf{n} \cdot \mathbf{u}^{n+1} \right |_\Gamma = \mathbf{n} \cdot \mathbf{u}_\Gamma (\mathbf{x},t^{n+1})\]</div>
+<p><strong>Observations:</strong> <span class="math">\(\tilde{p}\)</span> is not identical with pressure - we have taken two steps so the equations contain an error. The pressure is a <strong>pseudo pressure</strong> (numerical pressure) - all it does is correct the velocity so it&#8217;s divergence free</p>
+<div class="math" id="equation-12">
+<span class="eqno">(12)</span>\[\nabla^2 \tilde{p}^{n+1} ={ {\nabla \cdot \mathbf{u}^*} \over \Delta t}\]</div>
+<p>Kim and Moin (1984) Say that the pressure, p is given by:</p>
+<div class="math">
+\[p = \tilde{p} + {{\Delta t} \over {2 Re}} \nabla^2 \tilde{p}\]</div>
+<p>Equation for <span class="math">\(\tilde{p}\)</span></p>
+<div class="math">
+\[\nabla^2 \tilde{p}^{n+1} = {{\nabla \cdot \mathbf{u}^*} \over {\Delta t}}\]</div>
+<p>By considering BCs <a href="#equation-8">(8)</a>  <a href="#equation-11">(11)</a>  <span class="math">\(\Rightarrow \quad \left . \mathbf{n} \cdot \nabla \tilde{p}^{n+1} \right |_\Gamma = 0\)</span></p>
+<p>Or:</p>
+<div class="math" id="equation-13">
+<span class="eqno">(13)</span>\[{{\partial \tilde{p}^{n+1}} \over {\partial n}} = 0\]</div>
+<p>i.e. homogeneous Neumann Boundary Condition</p>
+<p><strong>Highly controversial issue</strong></p>
+</div>
+<div class="section" id="method-by-gresho-and-sani-1987">
+<h3><a class="toc-backref" href="#id4">Method by Gresho and Sani (1987)</a><a class="headerlink" href="#method-by-gresho-and-sani-1987" title="Permalink to this headline">¶</a></h3>
+<p>Another paper has an alternate method - take the normal of the momentum equation at the boundary to set pressure normal to boundary, everywhere else use Poisson Equation, Continuity Equation and ordinary Momentum Equation, i.e.</p>
+<div class="math">
+\[{\partial u \over \partial t} + \nabla P = \nu \nabla^2 u - u \cdot \nabla u = f\]</div>
+<p>and</p>
+<div class="math">
+\[\nabla \cdot ({\partial u \over \partial t}) = 0 \qquad \text{in} \ \Omega\]</div>
+<p>these imply</p>
+<div class="math">
+\[\nabla^2 P = \nabla \cdot f \qquad \text{in} \ \Omega\]</div>
+<p>also</p>
+<div class="math">
+\[{\partial P \over \partial n} = \mathbf{n} \cdot (f - ({\partial u \over \partial t})) \qquad \text{on} \ \Gamma\]</div>
+<p>Again this gives a Neumann boundary condition - <strong>but Rempfer says that this is not correct</strong></p>
+<p>It looks like one method says that the velocity should be normal to the boundary and the other that pressure should be normal to the boundary.</p>
+</div>
+<div class="section" id="method-by-kim-and-moin">
+<h3><a class="toc-backref" href="#id5">Method by Kim and Moin</a><a class="headerlink" href="#method-by-kim-and-moin" title="Permalink to this headline">¶</a></h3>
+<p>Say that pressure boundary conditions are not important because of the use of a staggered grid - <strong>could be naive</strong></p>
+</div>
+</div>
+<div class="section" id="ghost-cells">
+<h2><a class="toc-backref" href="#id6">1.4.3.3. Ghost Cells</a><a class="headerlink" href="#ghost-cells" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="method-by-harlow-and-welsh">
+<h3><a class="toc-backref" href="#id7">Method by Harlow and Welsh</a><a class="headerlink" href="#method-by-harlow-and-welsh" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Use of &#8220;Ghost Cells&#8221; - for reflection of field variables near a wall.</li>
+<li>Normal pressure is not a condition set directly at the wall, but implied by the values either side of the wall.</li>
+<li>The same is true for velocity.</li>
+</ul>
+<p>Hence, in this scheme there is no difference between the opinions of Rempfer (2006) and Gresho and Sani (1987), although the opinion of Kim and Moin (1984) is clearly slightly misleading.</p>
+</div>
+<div class="section" id="boundary-conditions-at-rigid-walls">
+<h3><a class="toc-backref" href="#id8">Boundary Conditions at Rigid Walls</a><a class="headerlink" href="#boundary-conditions-at-rigid-walls" title="Permalink to this headline">¶</a></h3>
+<p>Rigid walls may be of two types:</p>
+<ul class="simple">
+<li>No-slip</li>
+<li>Free-slip (could be a plane of symmetry - or a greased surface)</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/wall.png"><img alt="../_images/wall.png" src="../_images/wall.png" style="width: 376.0px; height: 264.0px;" /></a>
+</div>
+<ul class="simple">
+<li>At the wall <span class="math">\(v = 0\)</span></li>
+<li>On the fluid side <span class="math">\(v \ne 0\)</span></li>
+<li>On the outside <span class="math">\(v' = -v\)</span> (no slip)</li>
+<li>On the outside <span class="math">\(v' = +v\)</span> (free slip)</li>
+</ul>
+<p>Harlow and Welch use these velocity BCs in order to set the pressure BCs using <strong>&#8220;Ghost Cells&#8221;</strong>. The velocity at the wall is <strong>not set directly</strong>, but is implied by the pressure BCs.</p>
+<div class="section" id="free-slip-wall">
+<h4><a class="toc-backref" href="#id9">Free slip wall</a><a class="headerlink" href="#free-slip-wall" title="Permalink to this headline">¶</a></h4>
+<p><strong>Vertical wall</strong>: from the momentum equation for <span class="math">\(u\)</span> (with the reversal of all normal velocities and no change in the tangential velocity):</p>
+<p>For a wall at <span class="math">\(i+{1 \over 2}\)</span>, the implied wall velocity <span class="math">\(\forall j\)</span> is:</p>
+<div class="math">
+\[u_{i+{1 \over 2}} = 0\]</div>
+<p>In the Ghost Cell, the velocities are:</p>
+<div class="math">
+\[u_{i+{3 \over 2}} = -u_{i+{1 \over 2}}\]</div>
+<div class="math">
+\[u_{i+{1}} = -u_{i}\]</div>
+<p>Hence, the pressure BCs to set is:</p>
+<div class="math">
+\[\psi' = \psi \pm g_x \Delta x\]</div>
+<p><span class="math">\(+ \Rightarrow\)</span> fluid is on the left of the wall</p>
+<p><span class="math">\(- \Rightarrow\)</span> fluid is on the right of the wall</p>
+<p>Similarly for a <strong>Horizontal wall</strong> at <span class="math">\(j + {1 \over 2}\)</span>:</p>
+<div class="math">
+\[\psi' = \psi \pm g_y \Delta y\]</div>
+<p><span class="math">\(+ \Rightarrow\)</span> fluid is below the wall</p>
+<p><span class="math">\(- \Rightarrow\)</span> fluid is above the wall</p>
+</div>
+<div class="section" id="no-slip-wall">
+<h4><a class="toc-backref" href="#id10">No slip wall</a><a class="headerlink" href="#no-slip-wall" title="Permalink to this headline">¶</a></h4>
+<p><strong>Vertical wall</strong>: from the momentum equation for <span class="math">\(u\)</span> (with the reversal of all tangential velocities and no change in the normal velocity):</p>
+<p>For a wall at <span class="math">\(i+{1 \over 2}\)</span>, the implied wall velocity <span class="math">\(\forall j\)</span> is:</p>
+<div class="math">
+\[u_{i+{1 \over 2}} = 0\]</div>
+<p>In the Ghost Cell, the velocities are:</p>
+<div class="math">
+\[u_{i+{3 \over 2}} = u_{i+{1 \over 2}}\]</div>
+<div class="math">
+\[u_{i+{1}} = u_{i}\]</div>
+<p>Hence, the pressure BCs to set is:</p>
+<div class="math">
+\[\psi' = \psi \pm g_x \Delta x \pm ({{2 \nu u_{i-{1 \over 2}}} \over {\Delta x}})\]</div>
+<p><span class="math">\(+ \Rightarrow\)</span> fluid is on the left of the wall</p>
+<p><span class="math">\(- \Rightarrow\)</span> fluid is on the right of the wall</p>
+<p>Similarly for a <strong>Horizontal wall</strong> at <span class="math">\(j + {1 \over 2}\)</span>:</p>
+<div class="math">
+\[\psi' = \psi \pm g_y \Delta y \pm ({{2 \nu v_{j-{1 \over 2}}} \over {\Delta y}})\]</div>
+<p><span class="math">\(+ \Rightarrow\)</span> fluid is below the wall</p>
+<p><span class="math">\(- \Rightarrow\)</span> fluid is above the wall</p>
+</div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="marker_and_cell_method.html">1.4.2. The Marker and Cell Method</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="courant_number.html">1.5.1. The Courant-Friedrichs-Lewy Condition</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

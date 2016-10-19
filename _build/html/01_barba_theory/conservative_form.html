@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.6.2. Conservative Form &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.6.3. Explicit and Implicit Numerical Methods" href="explicit_implicit_non_linear_convection.html" />
+    <link rel="prev" title="1.6.1. Multi-step Numerical Methods" href="multi_step_methods.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.6.2. Conservative Form</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="multi_step_methods.html">1.6.1. Multi-step Numerical Methods</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="explicit_implicit_non_linear_convection.html">1.6.3. Explicit and Implicit Numerical Methods</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="conservative-form">
+<h1>1.6.2. Conservative Form<a class="headerlink" href="#conservative-form" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#conversion-from-non-conservative-form-to-conservative-form" id="id2">Conversion from Non-Conservative Form to Conservative Form</a></li>
+<li><a class="reference internal" href="#conversion-of-the-burgers-equation-from-non-conservative-to-conservative-form" id="id3">Conversion of the Burgers Equation from Non-Conservative to Conservative Form</a></li>
+<li><a class="reference internal" href="#what-is-the-difference-between-the-conservative-and-non-conservative-forms" id="id4">What is the Difference Between the Conservative and Non-Conservative Forms?</a><ul>
+<li><a class="reference internal" href="#id1" id="id5">Conservative Form</a></li>
+<li><a class="reference internal" href="#non-conservative-form" id="id6">Non-Conservative Form</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="conversion-from-non-conservative-form-to-conservative-form">
+<h2><a class="toc-backref" href="#id2">1.6.2.1. Conversion from Non-Conservative Form to Conservative Form</a><a class="headerlink" href="#conversion-from-non-conservative-form-to-conservative-form" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Scalar conservation laws have the following <strong>Conservative Form</strong> in 1D (where <span class="math">\(F\)</span> = Flux):</li>
+</ul>
+<div class="math">
+\[{{\partial u} \over {\partial t}} + {\partial \over {\partial x}} \left[ F(u(x,t))  \right] = 0\]</div>
+<ul class="simple">
+<li>Scalar conservation laws have the following <strong>Non-Conservative Form</strong> in 1D (where <span class="math">\(A\)</span> = Jacobian):</li>
+</ul>
+<div class="math">
+\[{{\partial u} \over {\partial t}} + A(u(x,t)) {{\partial u} \over {\partial x}}= 0\]</div>
+<ul class="simple">
+<li>To find the Conservative Form from the Non-Conservative Form, we find the Flux, by equating the appropriate terms from the Conservative and Non-Conservative Forms:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial x}} (F(u)) = A(u) {{\partial u} \over {\partial x}}\]</div>
+<ul class="simple">
+<li>LHS given by the definition of a function of a function:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial x}} (F(u(x,t))) =
+{{\partial F} \over {\partial u}} {{\partial u} \over {\partial x}} =
+A(u) {{\partial u} \over {\partial x}}\]</div>
+<ul class="simple">
+<li>By comparing the above, we observe that:</li>
+</ul>
+<div class="math">
+\[{{\partial F} \over {\partial u}} = A(u)\]</div>
+<ul class="simple">
+<li>By integration:</li>
+</ul>
+<div class="math">
+\[F(u) = \int A(u) du\]</div>
+</div>
+<div class="section" id="conversion-of-the-burgers-equation-from-non-conservative-to-conservative-form">
+<h2><a class="toc-backref" href="#id3">1.6.2.2. Conversion of the Burgers Equation from Non-Conservative to Conservative Form</a><a class="headerlink" href="#conversion-of-the-burgers-equation-from-non-conservative-to-conservative-form" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Non-Conservative Form:</li>
+</ul>
+<div class="math">
+\[{\partial u \over \partial t} + u {\partial u \over \partial x} = 0\]</div>
+<ul class="simple">
+<li>Identification of A(u):</li>
+</ul>
+<div class="math">
+\[A(u) = u\]</div>
+<ul class="simple">
+<li>Integration of A(u) to determine the flux F(u)</li>
+</ul>
+<div class="math">
+\[F(u) = \int A(u) du = \int u du = {{u^2} \over 2}\]</div>
+<ul class="simple">
+<li>Conservative Form:</li>
+</ul>
+<div class="math">
+\[{\partial u \over \partial t} + {\partial \over {\partial x}}{ \left( {u^2 \over 2} \right)} = 0\]</div>
+<p><strong>Conversion from Non-Conservative Form to Conservative Form could result in multiple Conservative Forms e.g.</strong></p>
+<div class="math">
+\[u {\partial \over {\partial t}} + u^2 {\partial \over {\partial x}} = 0\]</div>
+<p>Converts to</p>
+<div class="math">
+\[{\partial \over {\partial t}} \left( u^2 \over 2 \right) +
+{\partial \over {\partial x}}{ \left( {u^3 \over 3} \right)} = 0\]</div>
+<p><strong>Is this now an alternate solution?</strong></p>
+</div>
+<div class="section" id="what-is-the-difference-between-the-conservative-and-non-conservative-forms">
+<h2><a class="toc-backref" href="#id4">1.6.2.3. What is the Difference Between the Conservative and Non-Conservative Forms?</a><a class="headerlink" href="#what-is-the-difference-between-the-conservative-and-non-conservative-forms" title="Permalink to this headline">¶</a></h2>
+<p>Using BD for the Flux term for both Conservative and Non-Conservative Forms (we had to do this as it doesn&#8217;t make sense to integrate the Non-Conservative Form):</p>
+<div class="section" id="id1">
+<h3><a class="toc-backref" href="#id5">Conservative Form</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\sum {\partial \over {\partial x}} \left( {{u^2} \over 2} \right) =
+{{u_1^2-u_0^2} \over {2 \Delta x}} +
+{{u_2^2-u_1^2} \over {2 \Delta x}} +
+{{u_3^2-u_2^2} \over {2 \Delta x}} =
+{{u_3^2-u_0^2} \over {2 \Delta x}}\]</div>
+<p>i.e. Conservative Form gives <span class="math">\(\text{flux}_{out} - \text{flux}_{in}\)</span> which is how it should be</p>
+<p>In other words, if:</p>
+<div class="math">
+\[{\partial u \over \partial t} + {\partial \over \partial x} (F(u)) = 0\]</div>
+<p>Then the time derivative of the integral of the <strong>conserved quantity</strong> equals the difference between the outlet and inlet fluxes.</p>
+<div class="math">
+\[{d \over dt} \int_{out}^{in} u(x,t) dx = F(u(out,t))-F(u(in,t))\]</div>
+</div>
+<div class="section" id="non-conservative-form">
+<h3><a class="toc-backref" href="#id6">Non-Conservative Form</a><a class="headerlink" href="#non-conservative-form" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\sum u {{\partial u} \over {\partial x}}=
+u_1 {(u_1-u_0) \over {\Delta x}} +
+u_2 {(u_2-u_1) \over {\Delta x}} +
+u_3 {(u_3-u_2) \over {\Delta x}} =
+{{u_1 (u_1-u_0) + u_2 (u_2-u_1) + u_3 (u_3-u_2)} \over {\Delta x}}\]</div>
+<p>i.e. Non-Conservative Form gives a growing function that is not conserving the flux! These are internal numerical sources that do not cancel out like in the conservative form.</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="multi_step_methods.html">1.6.1. Multi-step Numerical Methods</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="explicit_implicit_non_linear_convection.html">1.6.3. Explicit and Implicit Numerical Methods</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

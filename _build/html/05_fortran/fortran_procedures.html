@@ -1,0 +1,717 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.5. Intrinsic Procedures &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Fortran Programming Language" href="fortran.html" />
+    <link rel="next" title="1.6. Input/Output" href="fortran_input_output.html" />
+    <link rel="prev" title="1.4. Program Structure" href="fortran_program_structure.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.5. Intrinsic Procedures</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="fortran_program_structure.html">1.4. Program Structure</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="fortran_input_output.html">1.6. Input/Output</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="intrinsic-procedures">
+<h1>1.5. Intrinsic Procedures<a class="headerlink" href="#intrinsic-procedures" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#transfer-and-conversion-functions" id="id1">Transfer and Conversion Functions</a></li>
+<li><a class="reference internal" href="#arrays-and-matrices" id="id2">Arrays and Matrices</a></li>
+<li><a class="reference internal" href="#computation-functions" id="id3">Computation Functions</a></li>
+<li><a class="reference internal" href="#numeric-inquiry-and-manipulation-functions" id="id4">Numeric Inquiry and Manipulation Functions</a></li>
+<li><a class="reference internal" href="#string-functions" id="id5">String Functions</a></li>
+<li><a class="reference internal" href="#bit-functions-on-integers" id="id6">Bit Functions (on integers)</a></li>
+<li><a class="reference internal" href="#miscellaneous-intrinsic-subroutines" id="id7">Miscellaneous Intrinsic Subroutines</a></li>
+</ul>
+</div>
+<div class="section" id="transfer-and-conversion-functions">
+<h2><a class="toc-backref" href="#id1">1.5.1. Transfer and Conversion Functions</a><a class="headerlink" href="#transfer-and-conversion-functions" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Absolute value</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">aimag</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Imaginary part of complex z</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">aint</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">kind</span><span class="p">),</span> <span class="nb">anint</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">kind</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>To whole number real</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">dble</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>To double precision</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">cmplx</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="nb">kind</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Create x + iy (y optional)</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">kind</span><span class="p">),</span> <span class="nb">nint</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">kind</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>To int (truncated/rounded)</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="kt">real</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">kind</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>To real</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">conj</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Complex conjugate</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">char</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">kind</span><span class="p">),</span> <span class="nb">achar</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Char of ASCII code (pure 7bit)</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">ichar</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="nb">iachar</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>ASCII code of character</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="kt">logical</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="nb">kind</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Change kind of logical l</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">ibits</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="nb">len</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Extract sequence of bits</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">transfer</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">mold</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Reinterpret data</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="arrays-and-matrices">
+<h2><a class="toc-backref" href="#id2">1.5.2. Arrays and Matrices</a><a class="headerlink" href="#arrays-and-matrices" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">allocated</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Check if array is allocated</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">lbound</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">dim</span><span class="p">),</span> <span class="nb">ubound</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="nb">dim</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Lowest/highest index in array</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">shape</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Shape (dimensions) of array</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">size</span><span class="p">(</span><span class="k">array</span><span class="p">,</span> <span class="nb">dim</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Extent of array along dim</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">all</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="nb">dim</span><span class="p">),</span> <span class="nb">any</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="nb">dim</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Check boolean array</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">count</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="nb">dim</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Number of true elements</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">maxval</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">m</span><span class="p">),</span> <span class="nb">minval</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Find max/min in masked array</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">product</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">dim</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Product along masked dimen.</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">dot_product</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Dot product</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">dim</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Sum along masked dimension</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">merge</span><span class="p">(</span><span class="n">tsource</span><span class="p">,</span> <span class="n">fsource</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Combine arrays as mask says</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">pack</span><span class="p">(</span><span class="k">array</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">vector</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Packs masked array into vect.</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">unpack</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span> <span class="n">mask</span> <span class="p">,</span> <span class="n">field</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Unpack vect. into masked field</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">spread</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="nb">dim</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Extend source array into dim.</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">reshape</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="nb">shape</span><span class="p">,</span><span class="n">pad</span><span class="p">,</span><span class="n">order</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Make array of shape from src</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">cshift</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">d</span><span class="p">),</span><span class="nb">eoshift</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>(Circular) shift</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">transpose</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Transpose a matrix</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">maxloc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">mask</span><span class="p">),</span> <span class="nb">minloc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">mask</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Find pos. of max/min in array</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="computation-functions">
+<h2><a class="toc-backref" href="#id3">1.5.3. Computation Functions</a><a class="headerlink" href="#computation-functions" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">ceiling</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">floor</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>To next higher/lower int</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">conj</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>complex conjugate</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">dim</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>max(x-y, 0)</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">max</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">a3</span><span class="p">),</span>
+<span class="nb">min</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">a3</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>maximum/minimum</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">dprod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>dp product of  sp a, b</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">mod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>a mod p</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">modulo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>modulo with sign of a/p</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">sign</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>make sign of a = sign of b</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">matmul</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>matrix multiplication</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">dot_product</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>dot product of vectors</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">sin</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">cos</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">tan</span><span class="p">(</span><span class="n">a</span><span class="p">),</span>
+<span class="nb">sinh</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">cosh</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">tanh</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Trigonometric functions where <span class="math">\(a\)</span> is in radians</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">dsin</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">dcos</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">dtan</span><span class="p">(</span><span class="n">a</span><span class="p">),</span>
+<span class="nb">dsinh</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">dcosh</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">dtanh</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Trigonometric functions where <span class="math">\(a\)</span> is in degrees</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">acos</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="nb">asin</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="nb">atan</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Trigonometric functions where the result is in radians</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">dacos</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="nb">dasin</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="nb">datan</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Trigonometric functions where the result is in degrees</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">exp</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Exponential function</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">log</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Natural logarithm</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">log10</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Base 10 logarithm</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Square root</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="numeric-inquiry-and-manipulation-functions">
+<h2><a class="toc-backref" href="#id4">1.5.4. Numeric Inquiry and Manipulation Functions</a><a class="headerlink" href="#numeric-inquiry-and-manipulation-functions" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">kind</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Kind-parameter of variable x</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">digits</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Significant digits in model</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">bit_size</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Number of bits for int in model</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">epsilon</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Small pos. number in model</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">huge</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Largest number in model</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">minexponent</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Smallest exponent in model</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">maxexponent</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Largest exponent in model</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">precision</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Decimal precision for reals in</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">radix</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Base of the model</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Dec. exponent range in model</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">tiny</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Smallest positive number</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">exponent</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Exponent part of x  in model</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">fraction</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Fractional part of x in model</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">nearest</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Nearest machine number</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">rrspacing</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Reciprocal of relative spacing</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">scale</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>x b**i</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">set_exponent</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>x b**(i-e)</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">spacing</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Absolute spacing of model</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="string-functions">
+<h2><a class="toc-backref" href="#id5">1.5.5. String Functions</a><a class="headerlink" href="#string-functions" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">lge</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">),</span> <span class="nb">lgt</span><span class="p">,</span> <span class="nb">lle</span><span class="p">,</span> <span class="nb">llt</span>
+</pre></div>
+</div>
+</td>
+<td>String comparison</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">adjustl</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="nb">adjustr</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>left- or right-justify string</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">index</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">sub</span><span class="p">,</span> <span class="n">from_back</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>find substr. in string (or 0)</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">trim</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="nb">trim</span><span class="p">(</span><span class="nb">adjustl</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+</pre></div>
+</div>
+</td>
+<td>s without trailing blanks
+s without leading or trailing blanks</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">len_trim</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>length of s, w/ trailing blanks</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">scan</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">setd</span><span class="p">,</span> <span class="n">from_back</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>search for any char in set</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">verify</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">set</span><span class="p">,</span> <span class="n">from_back</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>check for presence of set-chars</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>length of string</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">repeat</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>concat n copies of string</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="bit-functions-on-integers">
+<h2><a class="toc-backref" href="#id6">1.5.6. Bit Functions (on integers)</a><a class="headerlink" href="#bit-functions-on-integers" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">btest</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">pos</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Test bit of integer value</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">iand</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">),</span> <span class="nb">ieor</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">),</span> <span class="nb">ior</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>And, xor, or of bit in 2 integers</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">ibclr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">pos</span><span class="p">),</span> <span class="nb">ibset</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Set bit of integer to 0 / 1</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">ishft</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">sh</span><span class="p">),</span> <span class="nb">ishftc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">sh</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Shift bits in i</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">not</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>Bit-reverse integer</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="miscellaneous-intrinsic-subroutines">
+<h2><a class="toc-backref" href="#id7">1.5.7. Miscellaneous Intrinsic Subroutines</a><a class="headerlink" href="#miscellaneous-intrinsic-subroutines" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">date_and_time</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>put current time in d,t,z,v</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">mvbits</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fpos</span><span class="p">,</span> <span class="nb">len</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tpos</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>copy bits between int vars</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">random_number</span><span class="p">(</span><span class="n">harvest</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>fill harvest randomly</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">random_seed</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">put</span><span class="p">,</span> <span class="n">get</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>restart/query random generator</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">system_clock</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">cr</span><span class="p">,</span> <span class="n">cm</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td>get processor clock info</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="fortran_program_structure.html">1.4. Program Structure</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="fortran_input_output.html">1.6. Input/Output</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

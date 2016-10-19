@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.2.3. Explicit and Implicit Finite Difference Formulas &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.2.4. Finite Difference Formulas in 2D" href="finite_difference_formulas_in_2D.html" />
+    <link rel="prev" title="1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations" href="order_of_accuracy.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.2.3. Explicit and Implicit Finite Difference Formulas</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="order_of_accuracy.html">1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="finite_difference_formulas_in_2D.html">1.2.4. Finite Difference Formulas in 2D</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="explicit-and-implicit-finite-difference-formulas">
+<h1>1.2.3. Explicit and Implicit Finite Difference Formulas<a class="headerlink" href="#explicit-and-implicit-finite-difference-formulas" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="d-diffusion-equation">
+<h2>1.2.3.1. 1D Diffusion Equation<a class="headerlink" href="#d-diffusion-equation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Recall the 1D diffusion equation (Parabolic type):</li>
+</ul>
+<div class="math">
+\[{\partial u \over \partial t} = \nu {\partial^2 u \over \partial x^2}\]</div>
+<div class="section" id="explicit-solution">
+<h3>Explicit Solution<a class="headerlink" href="#explicit-solution" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">In step 3, we had:</p>
+<ul>
+<li><p class="first"><strong>FD</strong> in time</p>
+</li>
+<li><p class="first"><strong>CD</strong> in space</p>
+</li>
+<li><p class="first">Equation for <span class="math">\(u_i^{n+1}\)</span> was the only unknown</p>
+</li>
+<li><p class="first">Computed values at <span class="math">\(n+1\)</span> depend only on past history</p>
+</li>
+<li><p class="first">To start the solution we need:</p>
+<blockquote>
+<div><ul class="simple">
+<li>An Initial Condition</li>
+<li>Two Boundary Conditions</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Explicit Method</strong> = a formulation of a continuum equation into a FD equation that expresses <strong>one</strong> unknown in terms of the known values</p>
+</li>
+</ul>
+</li>
+</ul>
+<div class="math">
+\[\left . {{u_i^{n+1} - u_i^n} \over {\Delta t}}  \right \vert_{n} = \left . \nu {{u_{i+1}^{n} -2u_i^{n}+ u_{i-1}^{n}} \over \Delta x^2} \right \vert_{n}\]</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/stencil_1.png"><img alt="../_images/stencil_1.png" src="../_images/stencil_1.png" style="width: 375.0px; height: 135.0px;" /></a>
+</div>
+<ul class="simple">
+<li>The Lag of the BCs:<ul>
+<li>Look at the grid at time <span class="math">\(n+4\)</span>, the boundary conditions are imposed at <span class="math">\(i-4\)</span> and <span class="math">\(i+4\)</span>:</li>
+<li>The information at the boundaries at <span class="math">\(n+4\)</span> does not feed into the computations of unknowns at <span class="math">\(n+4\)</span></li>
+<li>This is contrary to the physics (for parabolic equations, the charactistic lines are of constant <span class="math">\(t\)</span>, and therefore all values at a given time level should affect the solution)</li>
+<li><strong>If the BCs are constant with time, then this may not affect the solution. If the BCs vary with time, it may affect the solution</strong></li>
+<li>In an <strong>explicit</strong> formula, the BCs <strong>lag behind</strong> by one step</li>
+</ul>
+</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/stencil_2.png"><img alt="../_images/stencil_2.png" src="../_images/stencil_2.png" style="width: 465.0px; height: 252.0px;" /></a>
+</div>
+</div>
+<div class="section" id="implicit-solution">
+<h3>Implicit Solution<a class="headerlink" href="#implicit-solution" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>How can we have a scheme that includes the BCs at every time level for the computations?<ul>
+<li>Approximate <span class="math">\({\partial u} \over {\partial t}\)</span> and  <span class="math">\({\partial^2 u} \over {\partial x^2}\)</span> at <span class="math">\(n+1\)</span></li>
+<li>So that <span class="math">\({\partial u} \over {\partial t}\)</span> is effectively looking <strong>backwards in time</strong> (in other words if you took 1 off all the <span class="math">\(n\)</span> values, you would get backward differencing on the LHS - but we want to march forwards on time, not backwards, so using <span class="math">\(n+1\)</span> instead of <span class="math">\(n\)</span> is better).</li>
+</ul>
+</li>
+</ul>
+<div class="math">
+\[\left . {{u_i^{n+1} - u_i^n} \over {\Delta t}}  \right \vert_{n+1} = \left . \nu {{u_{i+1}^{n+1} -2u_i^{n+1}+ u_{i-1}^{n+1}} \over \Delta x^2} \right \vert_{n+1}\]</div>
+<ul class="simple">
+<li>3 unknowns, producing this stencil:</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/stencil_3.png"><img alt="../_images/stencil_3.png" src="../_images/stencil_3.png" style="width: 375.0px; height: 135.0px;" /></a>
+</div>
+<ul class="simple">
+<li>Need a set of <strong>coupled</strong> FD equations found by writing FD formulas for <strong>all</strong> grid points.</li>
+</ul>
+<div class="section" id="tranpose">
+<h4>Tranpose<a class="headerlink" href="#tranpose" title="Permalink to this headline">¶</a></h4>
+<div class="math">
+\[-r{u_{i-1}^{n+1}}+
+(1+2r) {u_i^{n+1}}-
+r{u_{i+1}^{n+1}}=u_i^n\]</div>
+<p>where:</p>
+<div class="math">
+\[r = \nu \left (\Delta t \over \Delta x^2 \right )\]</div>
+<ul class="simple">
+<li>Linear system in matrix form will be a <strong>tri-diagonal coefficient matrix</strong></li>
+<li>A formulation which includes more than one unknown in the FD equation - known as an <strong>implicit</strong> method</li>
+<li>Can use sparse methods to save memory.</li>
+</ul>
+</div>
+<div class="section" id="crank-nicholson-method">
+<h4>Crank-Nicholson method<a class="headerlink" href="#crank-nicholson-method" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>There are many numerical methods:<ul>
+<li>Forward Differencing - 1st order, conditionally stable</li>
+<li>Backward Differencing - 1st order, unconditionally stable</li>
+<li>Crank-Nicholson - 2nd order, unconditionally stable</li>
+<li>Richardson - 2nd order, unconditionally unstable</li>
+<li>DuFort-Frankel - 2nd order, conditionally stable</li>
+</ul>
+</li>
+<li>Of these methods, <strong>Crank-Nicholson</strong> shows the highest accuracy and stability</li>
+<li>Average of explicit and implicit schemes for <span class="math">\({\partial^2 u} \over {\partial x^2}\)</span></li>
+<li>This makes <span class="math">\({\partial u} \over {\partial t}\)</span> at <span class="math">\(n+{1 \over 2}\)</span> represent second order central differencing in time</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/stencil_4.png"><img alt="../_images/stencil_4.png" src="../_images/stencil_4.png" style="width: 375.0px; height: 165.0px;" /></a>
+</div>
+<ul class="simple">
+<li>Numerical scheme:</li>
+</ul>
+<div class="math">
+\[\left . {{u_i^{n+1} - u_i^n} \over {\Delta t}}  \right \vert_{n+{1 \over 2}}  = \left . {1 \over 2} \nu {{u_{i+1}^{n} -2u_i^{n}+ u_{i-1}^{n}} \over \Delta x^2} \right \vert_{n} +  \left . {1 \over 2} \nu {{u_{i+1}^{n+1} -2u_i^{n+1}+ u_{i-1}^{n+1}} \over \Delta x^2}  \right \vert_{n+1}\]</div>
+<ul class="simple">
+<li>Re-arrange in the form of the tri-diagonal matrix:</li>
+</ul>
+<div class="math">
+\[\left (r \over 2 \right)u_{i-1}^{n+1}+
+(1+r)u_i^{n+1}-
+\left (r \over 2 \right)u_{i+1}^{n+1}=
+\left (r \over 2 \right)u_{i-1}^{n}+
+(1-r)u_i^n+
+\left (r \over 2 \right)u_{i+1}^{n}\]</div>
+<p>where:</p>
+<div class="math">
+\[r = \nu {\Delta t \over \Delta x^2}\]</div>
+<ul class="simple">
+<li>This is <strong>second order in time and space</strong></li>
+<li>Implicit <span class="math">\(\Rightarrow\)</span> tridiagonal system to solve</li>
+</ul>
+</div>
+<div class="section" id="crank-nicholson-two-step-interpretation">
+<h4>Crank-Nicholson: Two step Interpretation<a class="headerlink" href="#crank-nicholson-two-step-interpretation" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><strong>Note</strong> we noted before than an expression like <span class="math">\({u_i^{n+1}-u_i^n} \over {\Delta t}\)</span> can be a CD approximation for the <strong>midpoint</strong> <span class="math">\(n+1/2\)</span></li>
+<li>In terms of the grid points, we have a CD representation of <span class="math">\(\partial u / \partial t\)</span> at the midpoint and the average of the diffusion at the same point</li>
+<li>Two-step computation:</li>
+</ul>
+<ol class="arabic simple">
+<li>Explicit Step (FD in time, CD in space):</li>
+</ol>
+<div class="math">
+\[\left . {{u_i^{n+ {1 \over 2}}-u_i^n} \over {\Delta t / 2}}  \right \vert_{n}   = \left . \nu { {{u_{i+1}^{n} -2u_i^{n}+ u_{i-1}^{n}}} \over \Delta x^2}   \right \vert_{n}\]</div>
+<ol class="arabic simple" start="2">
+<li>Implicit Step (BD in time, CD in space):</li>
+</ol>
+<div class="math">
+\[\left . {{u_i^{n+1}-u_i^{n+ {1 \over 2}}} \over {\Delta t / 2}}  \right \vert_{n+1}    = \left . \nu { {{u_{i+1}^{n+1} -2u_i^{n+1}+ u_{i-1}^{n+1}}} \over \Delta x^2}   \right \vert_{n+1}\]</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/stencil_5.png"><img alt="../_images/stencil_5.png" src="../_images/stencil_5.png" style="width: 375.0px; height: 165.0px;" /></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="order_of_accuracy.html">1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="finite_difference_formulas_in_2D.html">1.2.4. Finite Difference Formulas in 2D</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.2.3. Explicit and Implicit Finite Difference Formulas" href="explicit_implicit.html" />
+    <link rel="prev" title="1.2.1. The Finite Difference Method" href="finite_difference_method.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="finite_difference_method.html">1.2.1. The Finite Difference Method</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="explicit_implicit.html">1.2.3. Explicit and Implicit Finite Difference Formulas</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="order-of-accuracy-midpoint-scheme-and-model-equations">
+<h1>1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations<a class="headerlink" href="#order-of-accuracy-midpoint-scheme-and-model-equations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="order-of-accuracy">
+<h2>1.2.2.1. Order of Accuracy<a class="headerlink" href="#order-of-accuracy" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\left .  {\partial u \over \partial x} \right \vert_i = \lim_{\Delta x \rightarrow 0} {u(x_i + \Delta x) - u(x_i) \over \Delta x}\]</div>
+<ul class="simple">
+<li>If <span class="math">\(\Delta x\)</span> is small <span class="math">\(\rightarrow\)</span> approximates <span class="math">\(\partial u / \partial x\)</span></li>
+<li>Improve approximation if <span class="math">\(\Delta x\)</span> is reduced</li>
+<li>Errors are always introduced (truncation error)</li>
+</ul>
+<div class="section" id="truncation-error">
+<h3>Truncation Error<a class="headerlink" href="#truncation-error" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Definition: The power of <span class="math">\(\Delta x\)</span> with which the truncation error tends to zero is called the Order of Accuracy of the Finite Difference approximation.</li>
+<li>The Taylor Series Expansions:<ul>
+<li>FD and BD are both first order or are <span class="math">\(O(\Delta x)\)</span> (Big-O Notation)</li>
+<li>CD is second order or are <span class="math">\(O(\Delta x^2)\)</span> (Big-O Notation)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="difference-formulas-for-first-derivatives">
+<h3>Difference formulas for first derivatives<a class="headerlink" href="#difference-formulas-for-first-derivatives" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>FD and BD are called &#8220;one-sided&#8221; formulas, in other words they only involve points on one side of the point you are evaluating.</li>
+<li>FD:</li>
+</ul>
+<div class="math">
+\[\left . {\partial u \over \partial x} \right \vert_i = {(u_{i+1} - u_i) \over \Delta x} -  {\Delta x \over 2} \left . {\partial^2 u \over \partial x^2} \right \vert_i - {\Delta x^2 \over 6} \left . {\partial^3 u \over \partial x^3} \right \vert_i - \cdots - h.o.t\]</div>
+<ul class="simple">
+<li>BD:</li>
+</ul>
+<div class="math">
+\[\left . {\partial u \over \partial x} \right \vert_i = {(u_i - u_{i-1}) \over \Delta x} + {\Delta x \over 2} \left . {\partial^2 u \over \partial x^2} \right \vert_i - {\Delta x^2 \over 6} \left . {\partial^3 u \over \partial x^3} \right \vert_i - \cdots - h.o.t\]</div>
+<ul class="simple">
+<li>CD - Add FD &amp; BD:</li>
+</ul>
+<div class="math">
+\[\left . {\partial u \over \partial x} \right \vert_i = {(u_{i+1} - u_{i-1}) \over 2 \Delta x} - {\Delta x^2 \over 6} \left . {\partial^3 u \over \partial x^3} \right \vert_i - \cdots - h.o.t\]</div>
+</div>
+<div class="section" id="difference-formula-for-second-derivative">
+<h3>Difference Formula for Second Derivative<a class="headerlink" href="#difference-formula-for-second-derivative" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>FD:</li>
+</ul>
+<div class="math">
+\[u_{i+1} = u_i + \Delta x \left . {\partial u \over \partial x} \right \vert_i + {\Delta x^2 \over 2} \left . {\partial^2 u \over \partial x^2} \right \vert_i + {\Delta x^3 \over 6} \left . {\partial^3 u \over \partial x^3} \right \vert_i + \cdots + h.o.t\]</div>
+<ul class="simple">
+<li>BD:</li>
+</ul>
+<div class="math">
+\[u_{i-1} = u_i - \Delta x \left . {\partial u \over \partial x} \right \vert_i + {\Delta x^2 \over 2} \left . {\partial^2 u \over \partial x^2} \right \vert_i - {\Delta x^3 \over 6} \left . {\partial^3 u \over \partial x^3} \right \vert_i + \cdots + h.o.t\]</div>
+<ul class="simple">
+<li>CD - Add FD &amp; BD:</li>
+</ul>
+<div class="math">
+\[\left . {\partial^2 u \over \partial x^2} \right \vert_i = {(u_{i+1}-2u_i + u_{i-1}) \over  \Delta x^2} - O(\Delta x^2)\]</div>
+</div>
+<div class="section" id="meaning-of-the-accuracy">
+<h3>Meaning of the Accuracy<a class="headerlink" href="#meaning-of-the-accuracy" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Note: 1D domain (0,1) with 11 points (10 intervals) so <span class="math">\(\Delta x = 0.1\)</span></li>
+</ul>
+<ul class="simple">
+<li>1st order <span class="math">\(\sim O(\Delta x) \sim O(10 \%)\)</span> Error is order of 10%</li>
+<li>2nd order <span class="math">\(\sim O(\Delta x ^2) \sim O(1 \%)\)</span> Error is order 1%</li>
+<li>For 1% in 1st order: <span class="math">\(\sim O(1 \%)\)</span> need 100 divisions <span class="math">\(\Delta x = 0.01\)</span> i.e. 101 mesh points</li>
+<li>Hence first order methods are more expensive than second order.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="midpoint-scheme">
+<h2>1.2.2.2. Midpoint Scheme<a class="headerlink" href="#midpoint-scheme" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Now consider the CD approximation and look at a CD approximation at the point <span class="math">\(i+{1 \over 2}\)</span></li>
+</ul>
+<div class="math">
+\[\left . {\partial u \over \partial x} \right \vert_{i+{1 \over 2}} = {(u_{i+1} - u_{i}) \over \Delta x} - O(\Delta x^2)\]</div>
+<ul class="simple">
+<li>Now consider the CD approximation and look at a CD approximation at the point <span class="math">\(i-{1 \over 2}\)</span></li>
+</ul>
+<div class="math">
+\[\left . {\partial u \over \partial x} \right \vert_{i-{1 \over 2}} = {(u_{i} - u_{i-1}) \over \Delta x} - O(\Delta x^2)\]</div>
+<ul class="simple">
+<li>It looks like FD and BD gained an order of accuracy (they are really both just CD)</li>
+</ul>
+</div>
+<div class="section" id="model-equations">
+<h2>1.2.2.3. Model Equations<a class="headerlink" href="#model-equations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Recall the Navier-Stokes Equations:</li>
+</ul>
+<div class="math">
+\[{\partial \vec V \over \partial t} + \vec V (\nabla \cdot \vec V) = -{\nabla p \over \rho} + \nu \nabla^2 \vec V\]</div>
+<ul class="simple">
+<li>Diffusive terms appear through 2nd order derivative terms. If inviscid <span class="math">\(\rightarrow 0\)</span></li>
+<li>Convective fluxes appear as 1st order derivatives in space. If symmetry <span class="math">\(\rightarrow 0\)</span></li>
+<li>Transient term appears as 1st order derivative. If steady <span class="math">\(\rightarrow 0\)</span></li>
+<li>Various modelling assumptions (inviscid, symmetric, steady etc) <span class="math">\(\rightarrow\)</span> Model equations</li>
+<li>This results in a system of PDEs, where the highest space derivative is 2nd order and the highest time derivative is 1st order.</li>
+</ul>
+<p><strong>How do we identify whether diffusion, convection and unsteadyness are compatible in terms of the physics?</strong></p>
+<ul class="simple">
+<li>Numerical discretizations: Must be adequate for the physical process <span class="math">\(\rightarrow\)</span> Convection, Diffusion, Unsteadyness</li>
+<li>Model Equations are simplified forms of the Navier Stokes Equations.</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="finite_difference_method.html">1.2.1. The Finite Difference Method</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="explicit_implicit.html">1.2.3. Explicit and Implicit Finite Difference Formulas</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

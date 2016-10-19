@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3.5. Relational Expressions &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="3. Python Programming Language" href="python_language.html" />
+    <link rel="next" title="3.6. Assignment Sentences" href="assignment_sentences.html" />
+    <link rel="prev" title="3.4. Logical Expressions" href="logical_expressions.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>3.5. Relational Expressions</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="logical_expressions.html">3.4. Logical Expressions</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="assignment_sentences.html">3.6. Assignment Sentences</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="relational-expressions">
+<h1>3.5. Relational Expressions<a class="headerlink" href="#relational-expressions" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#relational-operators" id="id1">Relational Operators</a></li>
+<li><a class="reference internal" href="#order-of-precedence" id="id2">Order of Precedence</a></li>
+<li><a class="reference internal" href="#examples-of-relational-expressions" id="id3">Examples of Relational Expressions</a></li>
+</ul>
+</div>
+<div class="section" id="relational-operators">
+<h2><a class="toc-backref" href="#id1">3.5.1. Relational Operators</a><a class="headerlink" href="#relational-operators" title="Permalink to this headline">¶</a></h2>
+<p>The values of two arithmetic expressions can be compared using the
+operators:</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>==</cite></li>
+<li><cite>!=</cite></li>
+<li><cite>&lt;</cite></li>
+<li><cite>&gt;</cite></li>
+<li><cite>&lt;=</cite></li>
+<li><cite>&gt;=</cite></li>
+</ul>
+</div></blockquote>
+<p>These return either:</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>True</cite></li>
+<li><cite>False</cite></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="order-of-precedence">
+<h2><a class="toc-backref" href="#id2">3.5.2. Order of Precedence</a><a class="headerlink" href="#order-of-precedence" title="Permalink to this headline">¶</a></h2>
+<p>Now we have looked at all the operators, we can give the order of precedence:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="44%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Order</th>
+<th class="head">Name</th>
+<th class="head">Symbol</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>Brackets</td>
+<td><code class="docutils literal"><span class="pre">()</span></code></td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>Unary</td>
+<td><code class="docutils literal"><span class="pre">not</span> <span class="pre">-</span> <span class="pre">+</span></code></td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>Binary Arithmetic 1</td>
+<td><code class="docutils literal"><span class="pre">**</span></code></td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>Binary Arithmetic 2</td>
+<td><code class="docutils literal"><span class="pre">*</span> <span class="pre">/</span> <span class="pre">%</span></code></td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>Binary Arithmetic 3</td>
+<td><code class="docutils literal"><span class="pre">+</span> <span class="pre">-</span></code></td>
+</tr>
+<tr class="row-odd"><td>6</td>
+<td>Relational 1</td>
+<td><code class="docutils literal"><span class="pre">&lt;</span> <span class="pre">&lt;=</span> <span class="pre">=&gt;</span> <span class="pre">&gt;</span></code></td>
+</tr>
+<tr class="row-even"><td>7</td>
+<td>Relational 2</td>
+<td><code class="docutils literal"><span class="pre">==</span> <span class="pre">!=</span></code></td>
+</tr>
+<tr class="row-odd"><td>8</td>
+<td>Logical And</td>
+<td><code class="docutils literal"><span class="pre">and</span></code></td>
+</tr>
+<tr class="row-even"><td>9</td>
+<td>Logical Or</td>
+<td><code class="docutils literal"><span class="pre">or</span></code></td>
+</tr>
+<tr class="row-odd"><td>10</td>
+<td>Assignment</td>
+<td><code class="docutils literal"><span class="pre">=</span> <span class="pre">+=</span> <span class="pre">-=</span> <span class="pre">*=</span> <span class="pre">/=</span> <span class="pre">%=</span> <span class="pre">**=</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Basically:</p>
+<ul class="simple">
+<li>Brackets</li>
+<li>Unary</li>
+<li>Arithmetic 1,2,3</li>
+<li>Relational 1,2</li>
+<li>Logical 1,2</li>
+<li>Assignment</li>
+</ul>
+</div>
+<div class="section" id="examples-of-relational-expressions">
+<h2><a class="toc-backref" href="#id3">3.5.3. Examples of Relational Expressions</a><a class="headerlink" href="#examples-of-relational-expressions" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># True and False not directly set, but we have comparison operators</span>
+
+<span class="c1"># Relational operators</span>
+<span class="c1"># &gt;</span>
+<span class="c1"># &lt;</span>
+<span class="c1"># &gt;=</span>
+<span class="c1"># &lt;=</span>
+<span class="c1"># ==</span>
+<span class="c1"># !=</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">&gt;</span> <span class="mi">3</span>
+<span class="nb">print</span> <span class="n">a</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span>
+<span class="nb">print</span> <span class="n">b</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span> <span class="o">==</span> <span class="s1">&#39;Hello&#39;</span>  <span class="c1">#only the text is compared not the quotes</span>
+<span class="nb">print</span> <span class="n">c</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="mf">20.6</span> <span class="o">&lt;=</span> <span class="mf">18.3</span>
+<span class="nb">print</span> <span class="n">d</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>True
+False
+True
+False
+</pre></div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="logical_expressions.html">3.4. Logical Expressions</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="assignment_sentences.html">3.6. Assignment Sentences</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

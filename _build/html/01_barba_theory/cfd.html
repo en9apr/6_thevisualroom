@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.1.1. Computational Fluid Dynamics &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.1.2. Derivation of the Continuity Equation" href="continuity.html" />
+    <link rel="prev" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.1.1. Computational Fluid Dynamics</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="barba_cfd_theory.html">1. Computational Fluid Dynamics - Theory</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="continuity.html">1.1.2. Derivation of the Continuity Equation</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="computational-fluid-dynamics">
+<h1>1.1.1. Computational Fluid Dynamics<a class="headerlink" href="#computational-fluid-dynamics" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="meaning-of-the-navier-stokes-equations">
+<h2>1.1.1.1. Meaning of the Navier-Stokes Equations<a class="headerlink" href="#meaning-of-the-navier-stokes-equations" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[ \begin{align}\begin{aligned}{\partial \vec V \over \partial t} + \vec V (\nabla \cdot \vec V) = -{\nabla p \over \rho} + \nu \nabla^2 \vec V\\\text{Unsteady term + Convective term = Pressure gradient term + Viscous term}\end{aligned}\end{align} \]</div>
+<ul class="simple">
+<li>The momentum equation in the Navier Stokes Equations is a 2nd order, non-linear partial differential equation:<ul>
+<li><span class="math">\(\vec V (\nabla \cdot \vec V)\)</span> the convective term is the non-linear term</li>
+<li><span class="math">\(\nu \nabla^2 \vec V\)</span> the viscous term is also the 2nd order term</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="assumptions">
+<h3>Assumptions:<a class="headerlink" href="#assumptions" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>A Newtonian Fluid - shear stress proportional to strain</li>
+<li>Incompressible flow - density constant</li>
+<li>Isothermal flow - temperature constant</li>
+<li>If the fluid is inviscid <span class="math">\(\nu = 0\)</span>. Then we have the Euler Equations. But it&#8217;s still non-linear:</li>
+</ul>
+<div class="math">
+\[{\partial \vec V \over \partial t} + \vec V (\nabla \cdot \vec V) = -{\nabla p \over \rho}\]</div>
+</div>
+</div>
+<div class="section" id="what-is-a-solution">
+<h2>1.1.1.2. What is a solution?<a class="headerlink" href="#what-is-a-solution" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The velocity field (vector)</li>
+<li>The associated pressure field (scalar)</li>
+</ul>
+</div>
+<div class="section" id="why-do-we-need-cfd">
+<h2>1.1.1.3. Why do we Need CFD?<a class="headerlink" href="#why-do-we-need-cfd" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>There are very few known analytical solutions to the Navier Stokes Equations, e.g. when the convective term goes to zero, when there is flow in a pipe, flow between parallel plates and flow between concentric circles.</li>
+<li>Systems may be difficult to test through experimentation - e.g. experiment doesn&#8217;t allow us to see inside or the instrumentation is limited, or it&#8217;s dangerous to do the experiment.</li>
+<li>Faster and easier than experiment - CFD allows us to ask &#8220;what if&#8221; questions about a situation. Don&#8217;t have to build prototype.</li>
+<li>CFD can be used in animation for films</li>
+</ul>
+</div>
+<div class="section" id="components-of-a-cfd-model">
+<h2>1.1.1.4. Components of a CFD Model<a class="headerlink" href="#components-of-a-cfd-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mathematical-model">
+<h3>Mathematical Model<a class="headerlink" href="#mathematical-model" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>A set of partial differential equations or integral-differential equations</li>
+<li>Associated boundary conditions</li>
+<li>The non linearity is a source of turbulence, vorticity, shock waves, combustion, multi-phase, bubble dynamics, evaporation, condensation. Therefore the model is associated with a target application - e.g. incompressible, inviscid, turbulent, 2D or 3D model</li>
+</ul>
+</div>
+<div class="section" id="discretization-method-the-major-part-of-cfd">
+<h3>Discretization Method - the major part of CFD<a class="headerlink" href="#discretization-method-the-major-part-of-cfd" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Method for approximating the partial differential equations or the integral-differential equations by a system of algebraic equations, i.e. we have a PDE <span class="math">\(\mathcal{L} [u(\underline{x})] = f(\underline{x})\)</span> and we need to convert it to arithmetic <span class="math">\(A\underline{x} = \underline{b}\)</span></li>
+<li>The most important methods for doing this are:<ul>
+<li>Finite Difference (1950s)</li>
+<li>Finite Element (1960s)</li>
+<li>Spectral Methods (1970s)</li>
+<li>Finite Volume (1980s)</li>
+<li>Boundary Element Method</li>
+<li>Particle Methods</li>
+</ul>
+</li>
+<li>Discretization has two aspects:<ul>
+<li>The Geometry (grid or mesh or particles) - gives us a vessel for the solution</li>
+<li>The Model - all mathematical operators converted into arithmetic operations on grid</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="analyse-numerical-scheme">
+<h3>Analyse Numerical Scheme<a class="headerlink" href="#analyse-numerical-scheme" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>All numerical schemes must satisfy certain conditions to be accepted:<ul>
+<li>Consistency</li>
+<li>Stability</li>
+<li>Convergence</li>
+<li>Accuracy</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="solve">
+<h3>Solve<a class="headerlink" href="#solve" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Obtain grid/point values of all flow variables</li>
+<li>Two situations:<ul>
+<li>Time dependent <span class="math">\(\Rightarrow\)</span> ODEs</li>
+<li>Steady <span class="math">\(\Rightarrow\)</span> algebraic system of equations</li>
+</ul>
+</li>
+<li>To solve these equations we require:<ul>
+<li>Time integrators</li>
+<li>Linear solvers</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="post-processing">
+<h3>Post Processing<a class="headerlink" href="#post-processing" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Visualization</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="barba_cfd_theory.html">1. Computational Fluid Dynamics - Theory</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="continuity.html">1.1.2. Derivation of the Continuity Equation</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

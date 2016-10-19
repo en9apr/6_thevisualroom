@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.5.2. Second Order Numerical Methods &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.5.3. The Diffusion of Heaviside and Sinusoidal Input" href="heavy_side_and_sinusoidal_input.html" />
+    <link rel="prev" title="1.5.1. The Courant-Friedrichs-Lewy Condition" href="courant_number.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.5.2. Second Order Numerical Methods</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="courant_number.html">1.5.1. The Courant-Friedrichs-Lewy Condition</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="heavy_side_and_sinusoidal_input.html">1.5.3. The Diffusion of Heaviside and Sinusoidal Input</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="second-order-numerical-methods">
+<h1>1.5.2. Second Order Numerical Methods<a class="headerlink" href="#second-order-numerical-methods" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#leapfrog-scheme" id="id5">Leapfrog Scheme</a><ul>
+<li><a class="reference internal" href="#equations" id="id6">Equations</a></li>
+<li><a class="reference internal" href="#von-neumann-analysis" id="id7">von Neumann analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lax-friedrichs-scheme" id="id8">Lax-Friedrichs Scheme</a><ul>
+<li><a class="reference internal" href="#id1" id="id9">Equations</a></li>
+<li><a class="reference internal" href="#id2" id="id10">von Neumann analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lax-wendroff-scheme" id="id11">Lax-Wendroff Scheme</a><ul>
+<li><a class="reference internal" href="#id3" id="id12">Equations</a></li>
+<li><a class="reference internal" href="#notes-on-lax-wendroff-scheme" id="id13">Notes on Lax-Wendroff Scheme</a></li>
+<li><a class="reference internal" href="#id4" id="id14">von Neumann analysis</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="leapfrog-scheme">
+<h2><a class="toc-backref" href="#id5">1.5.2.1. Leapfrog Scheme</a><a class="headerlink" href="#leapfrog-scheme" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="equations">
+<h3><a class="toc-backref" href="#id6">Equations</a><a class="headerlink" href="#equations" title="Permalink to this headline">¶</a></h3>
+<p><strong>For linear convection</strong> the schemes we have considered so far are:</p>
+<ul class="simple">
+<li>Unconditionally unstable (1st order FD in time, <strong>2nd order CD in space</strong>)</li>
+</ul>
+<div class="math">
+\[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{u_{i+1}^n - u_{i-1}^n} \over 2\Delta x}=0\]</div>
+<div class="math" id="equation-FTCS">
+<span class="eqno">(1)</span>\[u_i^{n+1} = u_i^{n} - {\sigma \over 2} (u_{i+1}^n - u_{i-1}^n)\]</div>
+<ul class="simple">
+<li>Introduce numerical diffusion (1st order FD in time, <strong>1st order BD in space</strong>)</li>
+</ul>
+<div class="math">
+\[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{u_i^n - u_{i-1}^n} \over \Delta x}=0\]</div>
+<div class="math" id="equation-FTBS">
+<span class="eqno">(2)</span>\[u_i^{n+1} = u_i^{n} - \sigma (u_{i}^n - u_{i-1}^n)\]</div>
+<p>For demonstrations of this, see <a class="reference external" href="http://www.thevisualroom.com/numerical_scheme_1.html">numerical_scheme_1</a></p>
+<p>For the leapfrog scheme, both space and time are discretised by 2nd order CD formulas</p>
+<div class="math">
+\[{{u_i^{n+1} - u_i^{n-1}} \over {2 \Delta t}} + c {{u_{i-1}^n - u_{i-1}^n} \over {2 \Delta x}}=0\]</div>
+<p>i.e.</p>
+<div class="math">
+\[u_i^{n+1} = u_i^{n-1} - {{c \Delta t} \over \Delta x} (u_{i+1}^n - u_{i-1}^n)\]</div>
+<div class="math">
+\[u_i^{n+1} = u_i^{n-1} - \sigma (u_{i+1}^n - u_{i-1}^n)\]</div>
+<p>where the CFL number is <span class="math">\(\sigma =  {{c \Delta t} \over \Delta x}\)</span></p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/leapfrog_scheme.png"><img alt="../_images/leapfrog_scheme.png" src="../_images/leapfrog_scheme.png" style="width: 500.0px; height: 300.0px;" /></a>
+</div>
+<ul class="simple">
+<li><span class="math">\(u_i^{n+1} \Rightarrow\)</span> New Solution</li>
+<li><span class="math">\(u_i^{n}\)</span> Does not contribute (leapfrogging)</li>
+<li>3 time levels in the discretisation</li>
+<li>Requires initialisation by using another method - e.g. <strong>upwind</strong> (a starting scheme)</li>
+</ul>
+</div>
+<div class="section" id="von-neumann-analysis">
+<h3><a class="toc-backref" href="#id7">von Neumann analysis</a><a class="headerlink" href="#von-neumann-analysis" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[V^{n+1} = V^{n-1} - \sigma V^n(e^{I \phi} - e^{-I \phi})\]</div>
+<p>As G is independent of n, write:</p>
+<div class="math">
+\[G = {V^{n+1} \over V^n} = {{V^{n}} \over {V^{n-1}}}\]</div>
+<p>Quadratic Equation for G:</p>
+<div class="math">
+\[G - {1 \over G} = - \sigma (e^{I \phi} - e^{-I \phi})\]</div>
+<p>Solution:</p>
+<div class="math">
+\[G = I \sigma sin \phi \pm \sqrt{ 1 - \sigma^2 sin^2 \phi  }\]</div>
+<ul class="simple">
+<li>If <span class="math">\(\sigma &gt; 1\)</span> the scheme is unstable, since sqrt term can be negative, thus G pure imaginary and magnitude of G &gt; 0 (e.g. <span class="math">\(\phi = \pi / 2\)</span>)</li>
+<li>If <span class="math">\(\sigma &lt; 1\)</span> them in sqrt is always real and</li>
+</ul>
+<div class="math">
+\[G.G^* = Re(G)^2 + Im(G)^2 = (1- \sigma^2 sin^2 \phi)+\sigma^2 sin^2 \phi = 1\]</div>
+<p>Therefore the scheme is <strong>neutrally stable</strong> (oscillations will neither grow nor reduce) because the amplification factor is equal to 1 for the convection equation.</p>
+<p><strong>Question: would this therefore be useful for analysing ocean waves that have an oscillatory input?</strong></p>
+</div>
+</div>
+<div class="section" id="lax-friedrichs-scheme">
+<h2><a class="toc-backref" href="#id8">1.5.2.2. Lax-Friedrichs Scheme</a><a class="headerlink" href="#lax-friedrichs-scheme" title="Permalink to this headline">¶</a></h2>
+<p>Introduced in the paper:</p>
+<p>Lax P.D. &#8220;Weak Solutions of Nonlinear Hyperbolic Equations and Their Numerical Computation&#8221;, Communications on Pure and Applied Mathematics (1954)</p>
+<p>History:</p>
+<ul class="simple">
+<li>Peter Lax laid the foundations for the modern theory of non-linear hyperbolic equations and shock wave theory. In 2005 he won the Abel Prize for mathematics.</li>
+</ul>
+<div class="section" id="id1">
+<h3><a class="toc-backref" href="#id9">Equations</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>The idea of the Lax-Friedrichs scheme is to replace <span class="math">\(u_i^n\)</span> in <a href="#equation-FTCS">(1)</a> by the average:</p>
+<div class="math">
+\[u_i^n = {1 \over 2} (u_{i-1}^n + u_{i+1}^n)\]</div>
+<p>This will stabilize FD in t / CD in x (Forward Time, Centred Scheme - FTCS)</p>
+<div class="math">
+\[u_i^{n+1} = {1 \over 2} (u_{i-1}^n + u_{i+1}^n) - {\sigma \over 2}(u_{i+1}^n - u_{i-1}^n)\]</div>
+<p>Substitution introduces an error <span class="math">\(O(\Delta x) \Rightarrow\)</span> Reduces the order of the scheme to <strong>first order</strong> - however it is now stable (FTCS was unconditionally unstable for the convection equation)</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/lax_friedrichs.png"><img alt="../_images/lax_friedrichs.png" src="../_images/lax_friedrichs.png" style="width: 500.0px; height: 300.0px;" /></a>
+</div>
+<p><span class="math">\(u_i^{n+1}\)</span> does not depend on <span class="math">\(u_i^n\)</span></p>
+</div>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id10">von Neumann analysis</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Insert the following into discretized equation:</p>
+<div class="math">
+\[{V^n} {e^{I \phi}}\]</div>
+<p>In the usual way we obtain:</p>
+<div class="math">
+\[G = cos \phi - I \sigma \phi\]</div>
+<p>This results in an ellipse in the complex plane</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/lax_friedrichs_stability.png"><img alt="../_images/lax_friedrichs_stability.png" src="../_images/lax_friedrichs_stability.png" style="width: 510.0px; height: 390.0px;" /></a>
+</div>
+<p>CFL stabilty condition applies, <span class="math">\(\sigma \le 1\)</span></p>
+<p><strong>Question: is this useful for shock wave modelling, because the scheme introduces an artificial viscosity term, i.e.</strong> <span class="math">\(1 \over 2\)</span> <strong>?</strong></p>
+</div>
+</div>
+<div class="section" id="lax-wendroff-scheme">
+<h2><a class="toc-backref" href="#id11">1.5.2.3. Lax-Wendroff Scheme</a><a class="headerlink" href="#lax-wendroff-scheme" title="Permalink to this headline">¶</a></h2>
+<p>Introduced in the paper:</p>
+<p>Lax, P. and Wendroff, B. &#8220;System of Conservation Laws&#8221;, Communications on Pure and Applied Mathematics (1960)</p>
+<p>The Lax-Friedrichs scheme stabilized FTCS scheme, but introduced an error that was too large, i.e. <strong>unacceptable 1st order error</strong>.</p>
+<p><strong>The Lax-Wendroff scheme was the first scheme introduced that was 2nd order in space and time - with only TWO time levels (unlike the Leapfrog scheme which has THREE)</strong></p>
+<p><strong>History:</strong> This is a landmark scheme in the history of CFD and was used in aeronautical applications from the 1960s - 1980s</p>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id12">Equations</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p><strong>Procedure</strong></p>
+<ul class="simple">
+<li>Taylor expansion in time:</li>
+</ul>
+<div class="math" id="equation-one">
+<span class="eqno">(3)</span>\[u_i^{n+1} = u_i^n + {\Delta t}(u_t)_i^n + {\Delta t^2 \over 2} (u_{tt})_i^n + O(\Delta t^3)\]</div>
+<p>where:</p>
+<div class="math">
+\[u_{t} = {{\partial u} \over {\partial t}}\]</div>
+<ul class="simple">
+<li>Keep the second time derivative in the discretisation</li>
+<li>Replace the time derivatives by equivalent space derivatives</li>
+</ul>
+<p><strong>Application of Procedure</strong></p>
+<ul class="simple">
+<li>Use convection equation: <span class="math">\(u_t + cu_x = 0 \quad \Rightarrow \qquad u_t = -cu_x\)</span></li>
+<li>Take the time derivative of the convection equation: <span class="math">\(\partial / {\partial t} \quad \Rightarrow \qquad u_{tt} = -c(u_x)_t = -c(u_t)_x = c^2u_{xx}\)</span></li>
+<li>Replace <span class="math">\(u_t\)</span> and <span class="math">\(u_{tt}\)</span> in <a href="#equation-one">(3)</a>:</li>
+</ul>
+<div class="math">
+\[u_i^{n+1} = u_i^n - c{\Delta t}(u_x)_i^n + {{c^2 \Delta t^2} \over 2} (u_{xx})_i^n + O(\Delta t^3)\]</div>
+<p>This has introduced an additional dissipative term <span class="math">\({{c^2 \Delta t^2} \over 2} (u_{xx})_i^n\)</span></p>
+<ul class="simple">
+<li>Using CD in x on the Taylor Expansion results in the <strong>Lax-Wendroff Scheme</strong>:</li>
+</ul>
+<div class="math">
+\[u_i^{n+1} = u_i^n - {\sigma \over 2}(u_{i+1}^n - u_{i-1}^n) + {\sigma^2 \over 2} (u_{i+1}^n - 2u_i^n + u_{i-1}^n)\]</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/lax_wendroff.png"><img alt="../_images/lax_wendroff.png" src="../_images/lax_wendroff.png" style="width: 600.0px; height: 300.0px;" /></a>
+</div>
+</div>
+<div class="section" id="notes-on-lax-wendroff-scheme">
+<h3><a class="toc-backref" href="#id13">Notes on Lax-Wendroff Scheme</a><a class="headerlink" href="#notes-on-lax-wendroff-scheme" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Looking back at the Modified Differential Equation for FTCS</li>
+<li>LW scheme is the discretisation of a modified convection equation obtained by adding the lowest order truncation error term:</li>
+</ul>
+<div class="math">
+\[u_t + cu_x + {{\Delta t} \over 2} c^2 u_{xx} = 0\]</div>
+<ul class="simple">
+<li>LW dominating truncation error is <span class="math">\(\sim u_{xxx}\)</span> and it&#8217;s modified differential equation:</li>
+</ul>
+<div class="math">
+\[\bar{u}_t + c \bar{u}_x + {{\Delta t} \over 2} c^2 \bar{u}_{xx} = {{c \Delta x^2} \over 6} \bar{u}_{xxx} + O(\Delta t^2, \Delta x^4)\]</div>
+</div>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id14">von Neumann analysis</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>The result is the following amplification factor:</p>
+<div class="math">
+\[G = 1 - {\sigma \over 2} (e^{I \phi} - e^{-I \phi}) + {\sigma^2 \over 2} (e^{I \phi} - 2 + e^{-I \phi})
+= 1 - I \sigma sin \phi - \sigma^2(1- cos \phi)\]</div>
+<p>Real and imaginary parts:</p>
+<div class="math">
+\[\xi = Re(G) = (1- \sigma^2) + \sigma^2 cos \phi\]</div>
+<div class="math">
+\[\eta = Im(G) = -\sigma sin \phi\]</div>
+<p>This results in:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/lax_wendroff_stability.png"><img alt="../_images/lax_wendroff_stability.png" src="../_images/lax_wendroff_stability.png" style="width: 900.0px; height: 400.0px;" /></a>
+</div>
+<p><strong>Lax Wendroff scheme is stable if</strong> <span class="math">\(\sigma &lt; 1\)</span> <strong>(CFL condition)</strong></p>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="courant_number.html">1.5.1. The Courant-Friedrichs-Lewy Condition</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="heavy_side_and_sinusoidal_input.html">1.5.3. The Diffusion of Heaviside and Sinusoidal Input</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

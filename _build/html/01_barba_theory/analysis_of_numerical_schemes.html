@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.3.3. The Modified Differential Equation &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.3.4. von Neumann Stability Analysis" href="von_neumann_stability_analysis.html" />
+    <link rel="prev" title="1.3.2. Numerical Schemes 2" href="numerical_schemes_2.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.3.3. The Modified Differential Equation</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="numerical_schemes_2.html">1.3.2. Numerical Schemes 2</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="von_neumann_stability_analysis.html">1.3.4. von Neumann Stability Analysis</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="the-modified-differential-equation">
+<h1>1.3.3. The Modified Differential Equation<a class="headerlink" href="#the-modified-differential-equation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-truncation-error">
+<h2>1.3.3.1. The Truncation Error<a class="headerlink" href="#the-truncation-error" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The <em>truncation error</em> is the difference between the numerical scheme and the differential equation.</li>
+</ul>
+<div class="math">
+\[\epsilon_T =  {\Delta t \over 2} \left . {\partial^2 u \over \partial t^2} \right \vert_i^n +
+       c {\Delta x^2 \over 6} \left . {\partial^3 u \over \partial x^3} \right \vert_i^n +
+       O(\Delta t^2) + O(\Delta x^4)\]</div>
+<ul class="simple">
+<li>NOTE: The exact solution of the numerical scheme satisfies a MODIFIED differential equation</li>
+</ul>
+</div>
+<div class="section" id="modified-differential-equation">
+<h2>1.3.3.2. Modified Differential Equation<a class="headerlink" href="#modified-differential-equation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Consider <strong>exact</strong> solution of the <strong>discretised</strong> equation <span class="math">\(\rightarrow \bar{u}_i^n\)</span>:</li>
+</ul>
+<div class="math">
+\[{{\bar{u}_i^{n+1} - \bar{u}_i^n} \over {\Delta t}} + {c \over {2 \Delta x}} {(\bar{u}_{i+1}^n - \bar{u}_{i-1}^n)} \equiv 0\]</div>
+<ul class="simple">
+<li>From before, with <span class="math">\(u = \bar{u}\)</span></li>
+</ul>
+<div class="math">
+\[{{\bar{u}_i^{n+1} - \bar{u}_i^n} \over {\Delta t}} + {c \over {2 \Delta x}} {{(\bar{u}_{i+1}^n - \bar{u}_{i-1}^n)} } -
+\left ( \left . {\partial \bar{u} \over \partial t}  \right \vert_i^n  +
+\left . {{c}} {\partial \bar{u} \over \partial x} \right \vert_i^n \right )  =
+ \left .{{\Delta t} \over 2} {\partial^2 \bar{u} \over \partial t^2} \right \vert_i^n +
+O(\Delta t^2) + O(\Delta x^2)\]</div>
+<ul class="simple">
+<li>The above implies that for the exact solution:</li>
+</ul>
+<div class="math" id="equation-one">
+<span class="eqno">(1)</span>\[\left . {\partial \bar{u} \over \partial t}  \right \vert_i^n  +
+       \left . c {\partial \bar{u} \over \partial x} \right \vert_i^n =
+       -{\Delta t \over 2} \left . {\partial^2 \bar{u} \over \partial t^2} \right \vert_i^n -
+       O(\Delta t^2) - O(\Delta x^2)\]</div>
+<ul class="simple">
+<li>Hence:</li>
+</ul>
+<div class="math">
+\[\left . {\partial \bar{u} \over \partial t}  \right \vert_i^n = -
+\left . c {\partial \bar{u} \over \partial x} \right \vert_i^n - O(\Delta t) - O(\Delta x^2)\]</div>
+<ul class="simple">
+<li>Take <span class="math">\(\partial \over {\partial t}\)</span>:</li>
+</ul>
+<div class="math">
+\[\left . {\partial^2 \bar{u} \over \partial t^2}  \right \vert_i^n = -
+\left . c {\partial^2 \bar{u} \over \partial x \partial t} \right \vert_i^n - O(\Delta t) - O(\Delta x^2)\]</div>
+<ul class="simple">
+<li>Or:</li>
+</ul>
+<div class="math">
+\[\left . {\partial^2 \bar{u} \over \partial t^2}  \right \vert_i^n = -
+\left . c {{\partial \over \partial x}{\left (\partial \bar{u} \over \partial t \right) }} \right \vert_i^n - O(\Delta t) - O(\Delta x^2)\]</div>
+<ul class="simple">
+<li>i.e.</li>
+</ul>
+<div class="math" id="equation-two">
+<span class="eqno">(2)</span>\[\left . {\partial^2 \bar{u} \over \partial t^2}  \right \vert_i^n =
+       \left . c^2 {{\left (\partial^2 \bar{u} \over \partial x^2 \right) }} \right \vert_i^n - O(\Delta t) - O(\Delta x^2)\]</div>
+<ul class="simple">
+<li>Substitute Equation <a href="#equation-two">(2)</a> into Equation <a href="#equation-one">(1)</a>. The exact solution to the numerical scheme <span class="math">\(\bar{u}\)</span> satisfies the following differential equation - called the <strong>Modified Differential Equation</strong></li>
+</ul>
+<div class="math">
+\[\left . {\partial \bar{u} \over \partial t}  \right \vert_i^n  +
+\left . c {\partial \bar{u} \over \partial x} \right \vert_i^n = -
+\left . {{c^2 \Delta t} \over 2}  {{\left (\partial^2 \bar{u} \over \partial x^2 \right) }} \right \vert_i^n -
+O(\Delta t) - O(\Delta x^2)\]</div>
+<ul class="simple">
+<li>Observations: The <strong>Modified Differential Equation</strong> is <strong>NOT</strong> a convection equation, it is a <strong>convection-diffusion equation</strong>, with a <strong>numerical diffusion</strong> coefficient equal to:</li>
+</ul>
+<div class="math">
+\[{-c^2 \Delta t} \over 2\]</div>
+<ul class="simple">
+<li>This is negative diffusion - a process of <strong>explosion</strong></li>
+<li>This shows why the scheme is <strong>UNSTABLE</strong> - it will amplify any disturbance exponentially</li>
+<li>The <strong>Modified Differential Equation</strong> and the <strong>Truncation Error</strong> provide essential information about the scheme</li>
+</ul>
+<div class="section" id="summary-of-the-method-for-obtaining-the-modified-de">
+<h3>Summary of the Method for obtaining the  Modified DE<a class="headerlink" href="#summary-of-the-method-for-obtaining-the-modified-de" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Denote <span class="math">\(D(u)=0\)</span> the mathematical model we are to solve numerically (the Differential Equation)</li>
+<li>And <span class="math">\(N(u_i^n)=0\)</span> the numerical scheme (the Numerical Scheme)</li>
+</ul>
+<p>How to obtain the Modified Differential Equation?</p>
+<ol class="arabic simple">
+<li>Perform consistency analysis, using Taylor series and obtain the truncation error <span class="math">\(\epsilon_T\)</span></li>
+</ol>
+<div class="math">
+\[N(u_i^n)-D(u)=\epsilon_T\]</div>
+<ol class="arabic simple" start="2">
+<li>Consider the <strong>exact</strong> solution of the numerical scheme <span class="math">\(\bar{u}_i^n\)</span> defined by</li>
+</ol>
+<div class="math">
+\[N(\bar{u}_i^n)\equiv 0\]</div>
+<p>leaning to the differential equation <span class="math">\(D(\bar(u)_i^n)=-\epsilon_T\)</span></p>
+<ol class="arabic simple" start="3">
+<li>Replace lowest time derivative by space derivatives in <span class="math">\(\epsilon_T\)</span> by applying Differential Equation from 2)</li>
+<li>The Modified Differential Equation is defined as an equation obtained after replacement step 3), restricted to the lowest order terms (contains only space derivatives)</li>
+</ol>
+</div>
+</div>
+<div class="section" id="example-convection-with-1st-order-upwind-bd-in-space-fd-in-time">
+<h2>1.3.3.3. Example: Convection with 1st order Upwind (BD in space, FD in time)<a class="headerlink" href="#example-convection-with-1st-order-upwind-bd-in-space-fd-in-time" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Introduce the Taylor expansions as before</li>
+<li>Follow steps just listed</li>
+</ul>
+<p>The Modified Differential Equation looks like this:</p>
+<div class="math">
+\[\left . {\partial \bar{u} \over \partial t}  \right \vert_i^n  +
+\left . c {\partial \bar{u} \over \partial x} \right \vert_i^n =
+\left . {{c \Delta x} \over 2} \left ( 1-{{c \Delta t} \over {\Delta x}} \right )
+{{\partial^2 \bar{u} \over \partial x^2 }} \right \vert_i^n\]</div>
+<p>The Diffusion Term is:</p>
+<div class="math">
+\[{{c \Delta x} \over 2} \left ( 1-{{c \Delta t} \over {\Delta x}} \right )\]</div>
+</div>
+<div class="section" id="cfl-condition">
+<h2>1.3.3.4. CFL Condition<a class="headerlink" href="#cfl-condition" title="Permalink to this headline">¶</a></h2>
+<p>The CFL Condition is to ensure stability of the scheme:</p>
+<div class="math">
+\[ \begin{align}\begin{aligned}\text {For } c \gt 0\\\sigma = {{c \Delta t} \over {\Delta x}} \lt 1\end{aligned}\end{align} \]</div>
+<p><span class="math">\(\sigma\)</span> is called the CFL number, the <strong>Courant-Friedrichs-Lewy</strong> number</p>
+<ul class="simple">
+<li>CFL has a deep physical significance</li>
+<li>For a constant value of <span class="math">\(\sigma \lt 1\)</span> this scheme has numerical diffusion of <span class="math">\(O(\Delta x)\)</span> which is generally excessive (the scheme has poor accuracy)</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="numerical_schemes_2.html">1.3.2. Numerical Schemes 2</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="von_neumann_stability_analysis.html">1.3.4. von Neumann Stability Analysis</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

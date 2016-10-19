@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.3.1. Numerical Schemes 1 &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.3.2. Numerical Schemes 2" href="numerical_schemes_2.html" />
+    <link rel="prev" title="1.2.4. Finite Difference Formulas in 2D" href="finite_difference_formulas_in_2D.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.3.1. Numerical Schemes 1</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="finite_difference_formulas_in_2D.html">1.2.4. Finite Difference Formulas in 2D</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="numerical_schemes_2.html">1.3.2. Numerical Schemes 2</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="numerical-schemes-1">
+<h1>1.3.1. Numerical Schemes 1<a class="headerlink" href="#numerical-schemes-1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="setting-the-scene-stability">
+<h2>1.3.1.1. Setting the Scene: Stability<a class="headerlink" href="#setting-the-scene-stability" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>We encounter several instances when the solution &#8220;blows up&#8221;. Why?</li>
+<li>Upwind schemes, implicit schemes, 2nd order schemes, leapfrog schemes</li>
+</ul>
+</div>
+<div class="section" id="consistency-stability-and-error-analysis">
+<h2>1.3.1.2. Consistency, stability and error analysis<a class="headerlink" href="#consistency-stability-and-error-analysis" title="Permalink to this headline">¶</a></h2>
+<p>Recall step one: 1D Linear Convection:</p>
+<div class="math">
+\[{\partial u \over \partial t} + c {\partial u \over \partial x} = 0\]</div>
+<div class="section" id="fd-in-time-bd-in-space">
+<h3>FD in time, BD in space<a class="headerlink" href="#fd-in-time-bd-in-space" title="Permalink to this headline">¶</a></h3>
+<p><strong>Explicit version:</strong></p>
+<div class="math">
+\[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{u_i^n - u_{i-1}^n} \over \Delta x}=0\]</div>
+<p>Explicit schemes:</p>
+<ul class="simple">
+<li>Very simple and economical</li>
+<li>Restrictions for stability</li>
+</ul>
+<p><strong>Implicit version:</strong></p>
+<div class="math">
+\[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{u_i^{n+1} - u_{i-1}^{n+1}} \over \Delta x}=0\]</div>
+</div>
+<div class="section" id="fd-in-time-cd-in-space">
+<h3>FD in time, CD in space<a class="headerlink" href="#fd-in-time-cd-in-space" title="Permalink to this headline">¶</a></h3>
+<p><strong>Explicit version:</strong></p>
+<div class="math">
+\[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{u_{i+1}^n - u_{i-1}^n} \over {2 \Delta x}}=0\]</div>
+<p><strong>Implicit version:</strong> <span class="math">\(n=n+1\)</span> in the CD scheme</p>
+<div class="math">
+\[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{u_{i+1}^{n+1} - u_{i-1}^{n+1}} \over {2 \Delta x}}=0\]</div>
+<p>Results in linear system of equation with tridiagonal matrix</p>
+</div>
+<div class="section" id="fd-in-time-fd-in-space">
+<h3>FD in time, FD in space<a class="headerlink" href="#fd-in-time-fd-in-space" title="Permalink to this headline">¶</a></h3>
+<p><strong>Explicit version:</strong></p>
+<div class="math">
+\[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{u_{i+1}^n - u_{i}^n} \over {\Delta x}}=0\]</div>
+<p><strong>Implicit version:</strong></p>
+<div class="math">
+\[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{u_{i+1}^{n+1} - u_{i}^{n+1}} \over {\Delta x}}=0\]</div>
+<p>FD or BD in space and implicit versions are called <strong>first order upwind</strong> schemes for the <strong>convection equation</strong>.</p>
+</div>
+<div class="section" id="fd-in-time-2nd-order-bd-in-space">
+<h3>FD in time, 2nd order BD in space<a class="headerlink" href="#fd-in-time-2nd-order-bd-in-space" title="Permalink to this headline">¶</a></h3>
+<p><strong>Explicit version:</strong></p>
+<div class="math">
+\[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{3u_i^n - 4 u_{i-1}^n + u_{i-2}^n} \over {2 \Delta x}}=0\]</div>
+<p><strong>Implicit version:</strong></p>
+<div class="math">
+\[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{3u_i^{n+1} - 4 u_{i-1}^{n+1} + u_{i-2}^{n+1}} \over {2 \Delta x}}=0\]</div>
+</div>
+<div class="section" id="nd-order-cd-in-time-2nd-order-cd-in-space">
+<h3>2nd order CD in time, 2nd order CD in space<a class="headerlink" href="#nd-order-cd-in-time-2nd-order-cd-in-space" title="Permalink to this headline">¶</a></h3>
+<p><strong>Explicit version:</strong> (Leapfrog scheme)</p>
+<div class="math">
+\[{{u_i^{n+1} - u_i^{n-1}} \over {2 \Delta t}} + c {{u_{i+1}^n - u_{i-1}^n} \over {2 \Delta x}}=0\]</div>
+<p><strong>Implicit version:</strong></p>
+<div class="math">
+\[{{u_i^{n+1} - u_i^{n-1}} \over {2 \Delta t}} + c {{u_{i+1}^{n+1} - u_{i-1}^{n+1}} \over {2 \Delta x}}=0\]</div>
+</div>
+</div>
+<div class="section" id="example">
+<h2>1.3.1.3. Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>Recall step one: 1D Linear Convection:</p>
+<div class="math">
+\[{\partial u \over \partial t} + c {\partial u \over \partial x} = 0\]</div>
+<p>With these initial conditions:</p>
+<div class="math">
+\[x \le 0.9 \Rightarrow u_0(x) = 0\]</div>
+<div class="math">
+\[0.9 \le x \le 1.0 \Rightarrow u_0(x) = 10(x-0.9)\]</div>
+<div class="math">
+\[1.0 \le x \le 1.1 \Rightarrow u_0(x) = 10(1.1-x)\]</div>
+<div class="math">
+\[x \ge 1.1 \Rightarrow u_0(x) = 0\]</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">diffusion</span><span class="p">(</span><span class="n">nt</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   Returns the velocity field and distance for 2D diffusion</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="c1"># Increments</span>
+   <span class="n">dt</span> <span class="o">=</span> <span class="n">tmax</span><span class="o">/</span><span class="p">(</span><span class="n">nt</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">dx</span> <span class="o">=</span> <span class="n">xmax</span><span class="o">/</span><span class="p">(</span><span class="n">nx</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+   <span class="c1"># Compute c (given sigma)</span>
+   <span class="n">c</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">/</span> <span class="n">dt</span>
+
+   <span class="c1"># Initialise data structures</span>
+   <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+   <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nx</span><span class="p">,</span><span class="n">nt</span><span class="p">))</span>
+   <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nx</span><span class="p">)</span>
+
+   <span class="c1"># X Loop</span>
+   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nx</span><span class="p">):</span>
+      <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="n">dx</span>
+
+   <span class="c1"># Boundary conditions</span>
+   <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">nx</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="mi">0</span>
+
+   <span class="c1"># Initial conditions</span>
+   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nx</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+      <span class="k">if</span><span class="p">(</span><span class="mf">0.9</span><span class="o">&lt;=</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">1</span><span class="p">):</span>
+         <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mf">0.9</span><span class="p">)</span>
+      <span class="k">elif</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;=</span><span class="mf">1.1</span><span class="p">):</span>
+         <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="p">(</span><span class="mf">1.1</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+      <span class="k">else</span><span class="p">:</span>
+         <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+   <span class="c1"># Loop</span>
+   <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nt</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nx</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+         <span class="k">if</span><span class="p">(</span><span class="n">method</span><span class="o">==</span><span class="s1">&#39;BD&#39;</span><span class="p">):</span>
+            <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">-</span><span class="n">dt</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="p">(</span> <span class="p">(</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">-</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="p">)</span> <span class="o">/</span><span class="n">dx</span> <span class="p">)</span>
+         <span class="k">elif</span><span class="p">(</span><span class="n">method</span><span class="o">==</span><span class="s1">&#39;CD&#39;</span><span class="p">):</span>
+            <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">-</span><span class="n">dt</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="p">(</span> <span class="p">(</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">-</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">dx</span><span class="p">)</span> <span class="p">)</span>
+
+   <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">x</span>
+
+<span class="k">def</span> <span class="nf">plot_diffusion</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">nt</span><span class="p">,</span><span class="n">title</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   Plots the 1D velocity field</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+   <span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="kn">as</span> <span class="nn">cm</span>
+   <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+   <span class="n">colour</span><span class="o">=</span><span class="nb">iter</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">rainbow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">nt</span><span class="p">)))</span>
+   <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nt</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+      <span class="n">c</span><span class="o">=</span><span class="nb">next</span><span class="p">(</span><span class="n">colour</span><span class="p">)</span>
+      <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">u</span><span class="p">[:,</span><span class="n">n</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+      <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x (m)&#39;</span><span class="p">)</span>
+      <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;u (m/s)&#39;</span><span class="p">)</span>
+      <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+      <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../01_barba_theory/numerical_scheme_1-1.py">Source code</a>)</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">diffusion</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;CD&#39;</span><span class="p">)</span>
+<span class="n">plot_diffusion</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="s1">&#39;Figure 1: sigma=0.8, Central Differencing in x&#39;</span><span class="p">)</span>
+
+<span class="n">u</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">diffusion</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;BD&#39;</span><span class="p">)</span>
+<span class="n">plot_diffusion</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="s1">&#39;Figure 1: sigma=0.8, Backward Differencing in x&#39;</span><span class="p">)</span>
+
+<span class="n">u</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">diffusion</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;BD&#39;</span><span class="p">)</span>
+<span class="n">plot_diffusion</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="s1">&#39;Figure 1: sigma=1.5, Backward Differencing in x&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure" id="id1">
+<img alt="../_images/numerical_scheme_1-1_01_00.png" src="../_images/numerical_scheme_1-1_01_00.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href="../01_barba_theory/numerical_scheme_1-1_01_00.png">png</a>, <a class="reference external" href="../01_barba_theory/numerical_scheme_1-1_01_00.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/numerical_scheme_1-1_01_00.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id2">
+<img alt="../_images/numerical_scheme_1-1_01_01.png" src="../_images/numerical_scheme_1-1_01_01.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href="../01_barba_theory/numerical_scheme_1-1_01_01.png">png</a>, <a class="reference external" href="../01_barba_theory/numerical_scheme_1-1_01_01.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/numerical_scheme_1-1_01_01.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id3">
+<img alt="../_images/numerical_scheme_1-1_01_02.png" src="../_images/numerical_scheme_1-1_01_02.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href="../01_barba_theory/numerical_scheme_1-1_01_02.png">png</a>, <a class="reference external" href="../01_barba_theory/numerical_scheme_1-1_01_02.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/numerical_scheme_1-1_01_02.pdf">pdf</a>)</span></p>
+</div>
+</div>
+<div class="section" id="what-happened">
+<h2>1.3.1.4. What Happened?<a class="headerlink" href="#what-happened" title="Permalink to this headline">¶</a></h2>
+<ol class="loweralpha simple">
+<li>Explicit CD scheme with the parameter <span class="math">\(\sigma = {{c \Delta t} \over {\Delta x}} = 0.8 \Rightarrow\)</span> <strong>UNSTABLE</strong></li>
+<li>1st order upwind (Step 1) BD scheme <span class="math">\(\sigma = 0.8 \Rightarrow\)</span> <strong>STABLE, but significantly diffused</strong></li>
+<li>Do b) but with <span class="math">\(\sigma = 1.5 \Rightarrow\)</span> <strong>UNSTABLE</strong>. This is conditional stability.</li>
+</ol>
+</div>
+<div class="section" id="basic-questions">
+<h2>1.3.1.5. Basic Questions<a class="headerlink" href="#basic-questions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>What <strong>conditions</strong> should we impose on a numerical scheme to obtain an acceptable approximation to the problem?</li>
+<li>Why do various schemes have such different behaviour?</li>
+<li>How can we predict their <strong>stability</strong>?</li>
+<li>For a stable scheme, how can we obtain information on the <strong>accuracy</strong>?</li>
+</ul>
+<p><strong>Need to define</strong>:</p>
+<ul class="simple">
+<li>Consistency, Stability and Convergence</li>
+<li>Truncation error - modified differential equation</li>
+<li>Diffusion, Dispersion of the solution</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="finite_difference_formulas_in_2D.html">1.2.4. Finite Difference Formulas in 2D</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="numerical_schemes_2.html">1.3.2. Numerical Schemes 2</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

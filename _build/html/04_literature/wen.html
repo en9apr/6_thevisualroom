@@ -1,0 +1,1091 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.9. Wen (2012) “Wet/Dry Areas Method” &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="4. Literature" href="literature.html" />
+    <link rel="next" title="4.10. Wen and Mobbs (2014) “Numerical Simulations of Laminar Air-Water Flow”" href="wen_mobbs.html" />
+    <link rel="prev" title="4.8. Feng at al. (2011) “Evaluation of Cloud Convection and Tracer Transport”" href="feng.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.9. Wen (2012) “Wet/Dry Areas Method”</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="feng.html">4.8. Feng at al. (2011) &#8220;Evaluation of Cloud Convection and Tracer Transport&#8221;</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="wen_mobbs.html">4.10. Wen and Mobbs (2014) &#8220;Numerical Simulations of Laminar Air-Water Flow&#8221;</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="wen-2012-wet-dry-areas-method">
+<h1>4.9. Wen (2012) &#8220;Wet/Dry Areas Method&#8221;<a class="headerlink" href="#wen-2012-wet-dry-areas-method" title="Permalink to this headline">¶</a></h1>
+<p>Wen, X. &#8220;Wet-dry areas method for interfacial (free surface) flow&#8221;, International Journal for Numerical Methods in Fluids, vol 71, pp 316 - 338, 2012</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#where-is-this-study-placed-within-the-wave-modelling-community" id="id7">Where is this study placed within the wave modelling community?</a><ul>
+<li><a class="reference internal" href="#non-linear-breaking-waves-in-shallow-water" id="id8">Non-linear Breaking Waves in Shallow Water</a></li>
+<li><a class="reference internal" href="#numerics" id="id9">Numerics</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#summary-of-findings" id="id10">Summary of Findings</a></li>
+<li><a class="reference internal" href="#literature-review" id="id11">Literature Review</a><ul>
+<li><a class="reference internal" href="#problems" id="id12">Problems</a></li>
+<li><a class="reference internal" href="#purposes" id="id13">Purposes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mathematical-formulation" id="id14">Mathematical Formulation</a><ul>
+<li><a class="reference internal" href="#governing-equations" id="id15">Governing Equations</a></li>
+<li><a class="reference internal" href="#discretisation-of-governing-equations" id="id16">Discretisation of Governing Equations</a></li>
+<li><a class="reference internal" href="#apply-numerical-schemes" id="id17">Apply Numerical Schemes</a><ul>
+<li><a class="reference internal" href="#transient-terms-second-order-backward-euler" id="id18">Transient Terms: Second Order Backward Euler</a></li>
+<li><a class="reference internal" href="#velocity-terms-at-faces-blended-scheme" id="id19">Velocity Terms at Faces: Blended Scheme</a></li>
+<li><a class="reference internal" href="#apply-the-first-order-schemes-to-the-momentum-and-continuity-equations" id="id20">Apply the First Order Schemes to the Momentum and Continuity Equations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-wet-dry-areas-method" id="id21">The Wet-Dry Areas Method</a><ul>
+<li><a class="reference internal" href="#u-control-volume" id="id22">u-control volume</a><ul>
+<li><a class="reference internal" href="#and-where-on-north-face" id="id23"><span class="math">\(L_w\)</span> and <span class="math">\(L_a\)</span> where <span class="math">\(tan(\alpha) &lt; \Delta y / \Delta x\)</span> on north face</a></li>
+<li><a class="reference internal" href="#id1" id="id24"><span class="math">\(L_w\)</span> and <span class="math">\(L_a\)</span> where <span class="math">\(tan(\alpha) &gt; \Delta y / \Delta x\)</span> on north face</a></li>
+<li><a class="reference internal" href="#and-on-south-east-and-west-faces" id="id25"><span class="math">\(L_w\)</span> and <span class="math">\(L_a\)</span> on south, east and west faces</a></li>
+<li><a class="reference internal" href="#on-north-face" id="id26"><span class="math">\(\mu\)</span> on north face (<span class="math">\(\mu_n\)</span>)</a></li>
+<li><a class="reference internal" href="#on-the-south-east-and-west-faces" id="id27"><span class="math">\(\mu\)</span> on the south, east and west faces (<span class="math">\(\mu_s\)</span>, <span class="math">\(\mu_e\)</span>, <span class="math">\(\mu_w\)</span>)</a></li>
+<li><a class="reference internal" href="#total-mass-in-u-control-volume" id="id28">Total mass in u-control volume</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v-control-volume" id="id29">v-control volume</a><ul>
+<li><a class="reference internal" href="#id2" id="id30"><span class="math">\(L_w\)</span> and <span class="math">\(L_a\)</span> where <span class="math">\(tan(\alpha) &lt; \Delta y / \Delta x\)</span> on north face</a></li>
+<li><a class="reference internal" href="#id3" id="id31"><span class="math">\(L_w\)</span> and <span class="math">\(L_a\)</span> where <span class="math">\(tan(\alpha) &gt; \Delta y / \Delta x\)</span> on north face</a></li>
+<li><a class="reference internal" href="#id4" id="id32"><span class="math">\(L_w\)</span> and <span class="math">\(L_a\)</span> on south, east and west faces</a></li>
+<li><a class="reference internal" href="#id5" id="id33"><span class="math">\(\mu\)</span> on north face (<span class="math">\(\mu_n\)</span>)</a></li>
+<li><a class="reference internal" href="#id6" id="id34"><span class="math">\(\mu\)</span> on the south, east and west faces (<span class="math">\(\mu_s\)</span>, <span class="math">\(\mu_e\)</span>, <span class="math">\(\mu_w\)</span>)</a></li>
+<li><a class="reference internal" href="#total-mass-in-v-control-volume" id="id35">Total mass in v-control volume</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#solution-algorithms" id="id36">Solution Algorithms</a><ul>
+<li><a class="reference internal" href="#simple-and-simplec-algorithms" id="id37">SIMPLE and SIMPLEC Algorithms</a><ul>
+<li><a class="reference internal" href="#simple" id="id38">SIMPLE</a></li>
+<li><a class="reference internal" href="#simplec" id="id39">SIMPLEC</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cicsam-algorithm" id="id40">CICSAM Algorithm</a></li>
+<li><a class="reference internal" href="#cicsam-simple-piso-procedure" id="id41">CICSAM, SIMPLE-PISO Procedure</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#application-to-a-non-linear-non-breaking-deep-water-wave" id="id42">Application to a Non-Linear, Non-Breaking Deep Water Wave</a><ul>
+<li><a class="reference internal" href="#velocity" id="id43">Velocity</a></li>
+<li><a class="reference internal" href="#streamlines" id="id44">Streamlines</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#application-to-collapse-of-a-water-column" id="id45">Application to Collapse of a Water Column</a></li>
+<li><a class="reference internal" href="#application-to-a-non-linear-breaking-shallow-water-wave" id="id46">Application to a Non-Linear, Breaking Shallow Water Wave</a></li>
+<li><a class="reference internal" href="#grid-independence-robustness-and-efficiency-of-the-wet-dry-areas-method" id="id47">Grid Independence, Robustness and Efficiency of the Wet-Dry Areas Method</a><ul>
+<li><a class="reference internal" href="#grid-independence" id="id48">Grid Independence</a></li>
+<li><a class="reference internal" href="#the-robustness" id="id49">The Robustness</a></li>
+<li><a class="reference internal" href="#efficiency" id="id50">Efficiency</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusions" id="id51">Conclusions</a></li>
+</ul>
+</div>
+<div class="section" id="where-is-this-study-placed-within-the-wave-modelling-community">
+<h2><a class="toc-backref" href="#id7">4.9.1. Where is this study placed within the wave modelling community?</a><a class="headerlink" href="#where-is-this-study-placed-within-the-wave-modelling-community" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="non-linear-breaking-waves-in-shallow-water">
+<h3><a class="toc-backref" href="#id8">4.9.1.1. Non-linear Breaking Waves in Shallow Water</a><a class="headerlink" href="#non-linear-breaking-waves-in-shallow-water" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>This paper has an important application to non-linear breaking waves in shallow water. The approach taken in this category follows the fully non-linear equations for a deterministic time-resolving model for one realisation of wave frequency, similar to the approach of Ravel et al (2009). However, unlike Ravel, the numerical method used reformulates the convective mass fluxes in order to allow highly non-linear behaviour at the interface. This allows breaking waves to be considered, which was not considered by Ravel et al (2009).</li>
+<li>It is known in the wave modelling community that as the water depth reduces, wave breaking becomes an important phenomenon. However, there is also the simultaneous effect of bottom friction, and it is difficult to separate the effect of bottom friction from the effect of wave breaking in shallow water. Although this study focusses mainly on wave breaking, it follows the approach outlined by Cavaleri et al (2007) in which wave breaking and bottom friction could be studied together if needed.</li>
+<li>The time resolving approach may be better suited to non-linear breaking in shallow water compared with stochastic methods because of the highly non-linear and dissipative effects that are present. However, there is an inherent computational penalty of the time-resolving approach as multiple realisations may be needed.</li>
+</ul>
+</div>
+<div class="section" id="numerics">
+<h3><a class="toc-backref" href="#id9">4.9.1.2. Numerics</a><a class="headerlink" href="#numerics" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>This study is also in the class of numerics, attempting to minimise the numerical errors created due to the description of the flow field.</li>
+<li>The approach has the potential to introduce less numerical error compared to the arithmetic mean approach for the density term in the convective mass fluxes of say Zwart, Burns and Galpin (2007).</li>
+<li>The approach is 2D, such that the wet-dry areas are really wet-dry lengths, but most numerical simulations of this type are 2D.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="summary-of-findings">
+<h2><a class="toc-backref" href="#id10">4.9.2. Summary of Findings</a><a class="headerlink" href="#summary-of-findings" title="Permalink to this headline">¶</a></h2>
+<p>New numerical method for 2D free surface flows using:</p>
+<ul class="simple">
+<li>Standard staggered grid</li>
+<li><strong>Conservative integral form</strong> of Navier-Stokes equations</li>
+<li>2 continuity equations: 1) mass conservation, 2) volume conservation</li>
+<li>Convective mass flux computed from wet/dry area exposed</li>
+</ul>
+<p>Main benefit compared to standard approaches:</p>
+<ul class="simple">
+<li>The mean density approach can be shown to produce 450 times the convective mass flux compared with the wet-dry areas method.</li>
+<li>The mean viscosity approach produces 10 times the diffusive mass flux, due to the smaller change in viscosity compared to density across the interface (so this was not considered).</li>
+</ul>
+<p>Comparison between this new method shows good agreement with:</p>
+<ul class="simple">
+<li>Analytical solution</li>
+<li>Experimental images</li>
+<li>Experimental velocities</li>
+</ul>
+</div>
+<div class="section" id="literature-review">
+<h2><a class="toc-backref" href="#id11">4.9.3. Literature Review</a><a class="headerlink" href="#literature-review" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="problems">
+<h3><a class="toc-backref" href="#id12">4.9.3.1. Problems</a><a class="headerlink" href="#problems" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Instantaneous density jump across a free surface - use conservative integral form of Navier-Stokes because density in convection term stays inside integrand</li>
+<li>Computing accurate velocity field, hence shear stress for wind blowing over waves - use finite volume method to ensure conservation of mass and momentum</li>
+</ol>
+</div>
+<div class="section" id="purposes">
+<h3><a class="toc-backref" href="#id13">4.9.3.2. Purposes</a><a class="headerlink" href="#purposes" title="Permalink to this headline">¶</a></h3>
+<p><strong>Purpose 1: Explore conservative integral form for free surface flows</strong></p>
+<ul class="simple">
+<li>The conservative integral form of the Navier-Stokes equations has been used in the <strong>cut-cell method</strong> - to cut solid boundaries from the Cartesian grid to include only fluid in the calculation</li>
+<li>High resolution Godunov scheme was used for free surface flows to calculate density and velocity</li>
+<li>Cut cell method has been used to cut air out of the solution</li>
+</ul>
+<p><strong>Purpose 2: Accurately calculate mass fluxes using standard staggered grid</strong></p>
+<ul class="simple">
+<li>Mass fluxes passing through the u and v control volumes are the most important</li>
+<li>For co-located grids, mass fluxes on the f control volumes have been for the mass fluxes on the u and v control volumes before</li>
+<li>For staggered grids, more difficult to get u and v fluxes from f flux - can use an f-grid that is twice as fine as the u and v grid - but this is not standard</li>
+</ul>
+<p><strong>Other features</strong></p>
+<ul class="simple">
+<li>Second order scheme for time derivatives</li>
+<li>High-resolution scheme for interpolation of velocity onto the surface of the control volume</li>
+<li>Second order scheme for viscous terms</li>
+<li>SIMPLEC-PISO scheme for pressure-velocity coupling</li>
+<li>Explicit high resolution compressive interface capturing scheme for arbitrary meshes (CICSAM) for predicting the volume fraction of the fluid</li>
+</ul>
+</div>
+</div>
+<div class="section" id="mathematical-formulation">
+<h2><a class="toc-backref" href="#id14">4.9.4. Mathematical Formulation</a><a class="headerlink" href="#mathematical-formulation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="governing-equations">
+<h3><a class="toc-backref" href="#id15">4.9.4.1. Governing Equations</a><a class="headerlink" href="#governing-equations" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Volume Conservation:</li>
+</ul>
+<div class="math" id="equation-volume">
+<span class="eqno">(1)</span>\[\int_{S}( \mathbf n \cdot \mathbf v ) dS = 0\]</div>
+<ul class="simple">
+<li>Mass Conservation:</li>
+</ul>
+<div class="math" id="equation-mass">
+<span class="eqno">(2)</span>\[\int_V {\partial \rho \over \partial t} dV +
+        \int_S (\rho \mathbf n \cdot \mathbf v) dS = 0\]</div>
+<ul class="simple">
+<li>Momentum Conservation for <span class="math">\(u\)</span>:</li>
+</ul>
+<div class="math" id="equation-momentum_u">
+<span class="eqno">(3)</span>\[\int_V {\partial (\rho u) \over \partial t} dV +
+       \int_S {(\rho \mathbf n \cdot \mathbf v)u} dS =
+       -\int_S {n_x p} dS +
+       \int_S {\mu {\partial u \over \partial n}} dS\]</div>
+<ul class="simple">
+<li>Momentum Conservation for <span class="math">\(v\)</span>:</li>
+</ul>
+<div class="math" id="equation-momentum_v">
+<span class="eqno">(4)</span>\[\int_V {\partial (\rho v) \over \partial t} dV +
+       \int_S {(\rho \mathbf n \cdot \mathbf v)v} dS =
+       -\int_S {n_y p} dS +
+       \int_S {\mu {\partial v \over \partial n}} dS - mg\]</div>
+<ul class="simple">
+<li>Volume Fraction Conservation:</li>
+</ul>
+<div class="math" id="equation-volume_fraction">
+<span class="eqno">(5)</span>\[\int_V {\partial f \over \partial t} dV +
+        \int_S (\mathbf n \cdot \mathbf v)f dS = 0\]</div>
+<p>where:</p>
+<p><span class="math">\(\mathbf n = n_x \mathbf i + n_y \mathbf j = \begin{bmatrix} 1 &amp; 0 \end{bmatrix} \text{for east surface}, \begin{bmatrix} 0 &amp; 1 \end{bmatrix} \text{for north surface}, \begin{bmatrix} -1 &amp; 0 \end{bmatrix} \text{for west surface}, \begin{bmatrix} 0 &amp; -1 \end{bmatrix} \text{for south surface}\)</span></p>
+<p><span class="math">\(\mathbf v = u \mathbf i + v \mathbf j\)</span> = <span class="math">\(\begin{bmatrix} u \\ v \end{bmatrix}\)</span></p>
+<p><span class="math">\(n_x = 1 \text{ for east surface}, -1 \text{ for west surface}\)</span>, <span class="math">\(n_y = 1 \text{ for north surface}, -1 \text{ for south surface}\)</span></p>
+<p><span class="math">\({\partial \over \partial n} = {\partial \over \partial x} \text{ for east surface}, -{\partial \over \partial x} \text{ for west surface}\)</span>,
+<span class="math">\({\partial \over \partial y} \text{ for north surface}, -{\partial \over \partial y} \text{ for south surface}\)</span></p>
+<p>Unknowns:</p>
+<ul class="simple">
+<li>Velocities <span class="math">\(u\)</span> and <span class="math">\(v\)</span></li>
+<li>Pressure <span class="math">\(p\)</span></li>
+<li>Volume fraction <span class="math">\(f\)</span></li>
+</ul>
+</div>
+<div class="section" id="discretisation-of-governing-equations">
+<h3><a class="toc-backref" href="#id16">4.9.4.2. Discretisation of Governing Equations</a><a class="headerlink" href="#discretisation-of-governing-equations" title="Permalink to this headline">¶</a></h3>
+<p><strong>Aim: Obtain an algebraic formulation for velocities at centre of control volume</strong> <span class="math">\(u_P\)</span> <strong>and</strong> <span class="math">\(v_P\)</span></p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/staggered_location.png"><img alt="../_images/staggered_location.png" src="../_images/staggered_location.png" style="width: 600.0px; height: 225.0px;" /></a>
+</div>
+<p><strong>LHS:</strong> Staggered Location for <span class="math">\(u, v, p\)</span> and <span class="math">\(f\)</span> <strong>RHS:</strong> <span class="math">\(u\)</span> control volume</p>
+<p><strong>Discrete Mass Conservation Equation</strong></p>
+<p>Mass Conservation Equation <a href="#equation-mass">(2)</a> - all values are at time n+1</p>
+<div class="math" id="equation-mass_int">
+<span class="eqno">(6)</span>\[\begin{split}{\partial m \over \partial t} +
+        \int_{A_e} {\rho u} dS -
+        \int_{A_w} {\rho u} dS +
+        \int_{A_n} {\rho v} dS -
+        \int_{A_s} {\rho v} dS = 0 \\
+        \Rightarrow {\partial m \over \partial t} +
+        (\rho u A)_e -
+        (\rho u A)_w +
+        (\rho v A)_n -
+        (\rho v A)_s = 0 \\
+        \Rightarrow {\partial m \over \partial t} +
+        F_e - F_w + F_n - F_s = 0\end{split}\]</div>
+<p><strong>Discrete Momentum Conservation Equation for</strong> <span class="math">\(u\)</span></p>
+<p>Momentum Conservation Equation <a href="#equation-momentum_u">(3)</a> - all values are at time n+1</p>
+<div class="math" id="equation-mom_int">
+<span class="eqno">(7)</span>\[\begin{split}{\partial (u_P m) \over \partial t} +
+        \int_{A_e} {(\rho u)u} dS -
+        \int_{A_w} {(\rho u)u} dS +
+        \int_{A_n} {(\rho v)u} dS -
+        \int_{A_s} {(\rho v)u} dS = \\
+        \int_{A_w} {p} dS -
+        \int_{A_e} {p} dS +
+        \int_{A_e} {\mu{\partial u \over \partial x}} dS -
+        \int_{A_w} {\mu{\partial u \over \partial x}} dS +
+        \int_{A_n} {\mu{\partial u \over \partial y}} dS -
+        \int_{A_s} {\mu{\partial u \over \partial y}} dS \\
+        \Rightarrow  {\partial (u_P m) \over \partial t} +
+        (\rho u A u)_e -
+        (\rho u A u)_w +
+        (\rho v A u)_n -
+        (\rho v A u)_s = \\
+        (p A)_w -
+        (p A)_e +
+        \left ( {\mu A {\partial u \over \partial x}} \right )_e -
+        \left ( {\mu A {\partial u \over \partial x}} \right )_w +
+        \left ( {\mu A {\partial u \over \partial y}} \right )_n -
+        \left ( {\mu A {\partial u \over \partial y}} \right )_s \\
+        \Rightarrow  {\partial (u_P m) \over \partial t} +
+        F_e u_e - F_w u_w + F_n u_n - F_s u_s = \\
+        (p A)_w - (p A)_e +
+        D_e(u_E - u_P) - D_w(u_P - u_W) + D_n(u_N - u_P) - D_s(u_P - u_S)\end{split}\]</div>
+</div>
+<div class="section" id="apply-numerical-schemes">
+<h3><a class="toc-backref" href="#id17">4.9.4.3. Apply Numerical Schemes</a><a class="headerlink" href="#apply-numerical-schemes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="transient-terms-second-order-backward-euler">
+<h4><a class="toc-backref" href="#id18">Transient Terms: Second Order Backward Euler</a><a class="headerlink" href="#transient-terms-second-order-backward-euler" title="Permalink to this headline">¶</a></h4>
+<div class="math" id="equation-trans_1">
+<span class="eqno">(8)</span>\[{\partial m \over \partial t} =
+        {m_{n+1}-m^{n} \over  \Delta t} +
+        {m_{n+1}-2m^{n}+m^{n-1} \over 2 \Delta t}\]</div>
+<div class="math" id="equation-trans_2">
+<span class="eqno">(9)</span>\[{\partial (u_Pm) \over \partial t} =
+        {(mu_P)^{n+1}-(mu_P)^{n} \over  \Delta t} +
+        {(mu_P)^{n+1}-2(mu_P)^{n}+(mu_P)^{n-1} \over 2 \Delta t}\]</div>
+<p><strong>Simplification to 1st Order (to illutrate numerical scheme):</strong> all values are at n+1 unless stated otherwise (including the derivative)</p>
+<div class="math" id="equation-trans_3">
+<span class="eqno">(10)</span>\[{\partial m \over \partial t} =
+        {m-m^n \over  \Delta t}\]</div>
+<div class="math" id="equation-trans_4">
+<span class="eqno">(11)</span>\[{\partial (u_Pm) \over \partial t} =
+        {(mu_P)-(mu_P)^n \over  \Delta t}\]</div>
+</div>
+<div class="section" id="velocity-terms-at-faces-blended-scheme">
+<h4><a class="toc-backref" href="#id19">Velocity Terms at Faces: Blended Scheme</a><a class="headerlink" href="#velocity-terms-at-faces-blended-scheme" title="Permalink to this headline">¶</a></h4>
+<div class="math" id="equation-face_velocity">
+<span class="eqno">(12)</span>\[u_e = u_P + \beta {{u_P-u_W} \over 2}\]</div>
+<p>where for flow in +ve x-direction: <span class="math">\(\beta = 0 \text{ (1st order upwind)}\)</span> <span class="math">\(\beta = {{u_E-u_P} \over {u_P-u_W}} \text{ (central)}\)</span> and <span class="math">\(\beta = 1 \text{ (2nd order upwind)}\)</span></p>
+<p>For flow in other directions:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="11%" />
+<col width="10%" />
+<col width="20%" />
+<col width="23%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Face velocity</th>
+<th class="head">+ve upwind</th>
+<th class="head">-ve upwind</th>
+<th class="head">Central</th>
+<th class="head">+ve 2nd order upwind</th>
+<th class="head">-ve 2nd order upwind</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="math">\(u_e\)</span></td>
+<td><span class="math">\(u_P\)</span></td>
+<td><span class="math">\(u_E\)</span></td>
+<td><span class="math">\({u_P+u_E} \over 2\)</span></td>
+<td><span class="math">\({3u_P-u_W} \over 2\)</span></td>
+<td><span class="math">\({3u_E-u_{EE}} \over 2\)</span></td>
+</tr>
+<tr class="row-odd"><td><span class="math">\(u_w\)</span></td>
+<td><span class="math">\(u_W\)</span></td>
+<td><span class="math">\(u_P\)</span></td>
+<td><span class="math">\({u_W+u_P} \over 2\)</span></td>
+<td><span class="math">\({3u_W-u_{WW}} \over 2\)</span></td>
+<td><span class="math">\({3u_P-u_E} \over 2\)</span></td>
+</tr>
+<tr class="row-even"><td><span class="math">\(u_n\)</span></td>
+<td><span class="math">\(u_P\)</span></td>
+<td><span class="math">\(u_N\)</span></td>
+<td><span class="math">\({u_P+u_N} \over 2\)</span></td>
+<td><span class="math">\({3u_P-u_S} \over 2\)</span></td>
+<td><span class="math">\({3u_N-u_{NN}} \over 2\)</span></td>
+</tr>
+<tr class="row-odd"><td><span class="math">\(u_s\)</span></td>
+<td><span class="math">\(u_S\)</span></td>
+<td><span class="math">\(u_P\)</span></td>
+<td><span class="math">\({u_S+u_P} \over 2\)</span></td>
+<td><span class="math">\({3u_S-u_{SS}} \over 2\)</span></td>
+<td><span class="math">\({3u_P-u_N} \over 2\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/discretisation_schemes.png"><img alt="../_images/discretisation_schemes.png" src="../_images/discretisation_schemes.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+<p><strong>Simplification to 1st order upwind scheme (to illustrate numerical scheme)</strong></p>
+<p><span class="math">\(F_e &gt; 0 \Rightarrow u_e = u_P\)</span></p>
+<p><span class="math">\(F_e &lt; 0 \Rightarrow u_e = u_E\)</span></p>
+<div class="math" id="equation-face_velocity_e">
+<span class="eqno">(13)</span>\[F_e u_e = u_P \begin{bmatrix}F_e, &amp; 0 \end{bmatrix}  - u_E\begin{bmatrix}-F_e, &amp; 0 \end{bmatrix}\]</div>
+<p>where  <span class="math">\(\begin{bmatrix} F_e, &amp; 0 \end{bmatrix}\)</span> means the maximum of <span class="math">\(F_e\)</span> and 0</p>
+<p>Similarly:</p>
+<div class="math" id="equation-face_velocity_w">
+<span class="eqno">(14)</span>\[F_w u_w = u_W \begin{bmatrix}F_w, &amp; 0 \end{bmatrix}  - u_P\begin{bmatrix}-F_w, &amp; 0 \end{bmatrix}\]</div>
+<div class="math" id="equation-face_velocity_n">
+<span class="eqno">(15)</span>\[F_n u_n = u_P \begin{bmatrix}F_n, &amp; 0 \end{bmatrix}  - u_N\begin{bmatrix}-F_n, &amp; 0 \end{bmatrix}\]</div>
+<div class="math" id="equation-face_velocity_s">
+<span class="eqno">(16)</span>\[F_s u_s = u_S \begin{bmatrix}F_s, &amp; 0 \end{bmatrix}  - u_P\begin{bmatrix}-F_s, &amp; 0 \end{bmatrix}\]</div>
+</div>
+<div class="section" id="apply-the-first-order-schemes-to-the-momentum-and-continuity-equations">
+<h4><a class="toc-backref" href="#id20">Apply the First Order Schemes to the Momentum and Continuity Equations</a><a class="headerlink" href="#apply-the-first-order-schemes-to-the-momentum-and-continuity-equations" title="Permalink to this headline">¶</a></h4>
+<p><strong>Rule: With no source terms, and in steady flow, when all the values of</strong> <span class="math">\(u\)</span> <strong>are the same at the edges, the central value of</strong> <span class="math">\(u\)</span> <strong>must be equal to them. This means we must take</strong> <span class="math">\(u_P\)</span> <strong>times the continuity equation away from the momentum equation</strong></p>
+<p>Momentum Equation <a href="#equation-mom_int">(7)</a> - <span class="math">\(u_P\)</span> times Continuity Equation <a href="#equation-mass_int">(6)</a></p>
+<div class="math">
+\[\begin{split}{m_P u_P-m_P^n u_P^n \over  \Delta t} - {m_P u_P -m_P^n u_P \over  \Delta t}
++ u_P \begin{bmatrix}F_e, &amp; 0 \end{bmatrix}  - u_E\begin{bmatrix}-F_e, &amp; 0 \end{bmatrix} - F_e u_P
+- u_W \begin{bmatrix}F_w, &amp; 0 \end{bmatrix}  - u_P\begin{bmatrix}-F_w, &amp; 0 \end{bmatrix} + F_w u_P \\
++ u_P \begin{bmatrix}F_n, &amp; 0 \end{bmatrix}  - u_N\begin{bmatrix}-F_n, &amp; 0 \end{bmatrix} - F_n u_P
+- u_S \begin{bmatrix}F_s, &amp; 0 \end{bmatrix}  - u_P\begin{bmatrix}-F_s, &amp; 0 \end{bmatrix} + F_s u_P = \\
+ p_w A_w - p_e A_e + D_e(u_E - u_P) - D_w(u_P - u_W) + D_n(u_N - u_P) - D_s(u_P - u_S)\end{split}\]</div>
+<p>Apply the identities:</p>
+<p><span class="math">\(\begin{bmatrix}F_e, &amp; 0 \end{bmatrix} - F_e = \begin{bmatrix}-F_e, &amp; 0 \end{bmatrix}\)</span></p>
+<p><span class="math">\(\begin{bmatrix}-F_w, &amp; 0 \end{bmatrix} + F_w = \begin{bmatrix}F_w, &amp; 0 \end{bmatrix}\)</span></p>
+<p><span class="math">\(\begin{bmatrix}F_n, &amp; 0 \end{bmatrix} - F_n = \begin{bmatrix}-F_n, &amp; 0 \end{bmatrix}\)</span></p>
+<p><span class="math">\(\begin{bmatrix}-F_s, &amp; 0 \end{bmatrix} + F_s = \begin{bmatrix}F_s, &amp; 0 \end{bmatrix}\)</span></p>
+<div class="math">
+\[\begin{split}\left ({m_P^n \over  \Delta t}
++  D_e + \begin{bmatrix}-F_e, &amp; 0 \end{bmatrix}
++ D_w + \begin{bmatrix}F_w, &amp; 0 \end{bmatrix}
++ D_n + \begin{bmatrix}-F_n, &amp; 0 \end{bmatrix}
++ D_s + \begin{bmatrix}F_s, &amp; 0 \end{bmatrix} \right ) u_P = \\
+{m_P^n \over  \Delta t}u_P^n
++ \left (D_e + \begin{bmatrix}-F_e, &amp; 0 \end{bmatrix} \right ) u_E
++ \left (D_w + \begin{bmatrix}F_w, &amp; 0 \end{bmatrix} \right ) u_W
++ \left (D_n + \begin{bmatrix}-F_n, &amp; 0 \end{bmatrix} \right ) u_N
++ \left (D_s + \begin{bmatrix}F_s, &amp; 0 \end{bmatrix} \right ) u_S
++ p_w A_w - p_e A_e\end{split}\]</div>
+<p>Collect like terms: higher order terms (h.o.t) would be collected on the R.H.S. (all values at n+1 unless otherwise stated):</p>
+<div class="math" id="equation-u_momentum_equation">
+<span class="eqno">(17)</span>\[a_P u_P =  {m_P^n \over  \Delta t} u_P^n + a_E u_E + a_W u_W + a_N u_N + a_S u_S + p_w A_w - p_e A_e + \text { h.o.t}\]</div>
+<p>Similarly for the <span class="math">\(v\)</span> momentum equation and continuity equation (all values at n+1 unless otherwise stated):</p>
+<div class="math" id="equation-v_momentum_equation">
+<span class="eqno">(18)</span>\[a_P v_P =  {m_P^n \over  \Delta t} v_P^n + a_E v_E + a_W v_W + a_N v_N + a_S v_S + p_s A_s - p_n A_n - mg + \text { h.o.t}\]</div>
+<p><strong>Note:</strong> The Rule we needed in steady state with no source terms holds, since <span class="math">\(a_P = a_E + a_W + a_N + a_S\)</span></p>
+<p>Such that in this situation <span class="math">\(u_P = u_E = u_W = u_N = u_S\)</span></p>
+<p><strong>The wet-dry areas method must now DESCRIBE the following for u-control volume and v-control volume:</strong></p>
+<ul class="simple">
+<li><strong>Convective fluxes</strong> <span class="math">\(F_e, F_w, F_n, F_s\)</span> (using new method for wet-dry lengths at each face)</li>
+<li><strong>Diffusive fluxes</strong>  <span class="math">\(D_e, D_w, D_n, D_s\)</span> (using conventional harmonic mean viscosity approach)</li>
+<li><strong>Mass of control volume</strong> <span class="math">\(m_P\)</span> (using conventional arithmetic mean density approach)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="the-wet-dry-areas-method">
+<h2><a class="toc-backref" href="#id21">4.9.5. The Wet-Dry Areas Method</a><a class="headerlink" href="#the-wet-dry-areas-method" title="Permalink to this headline">¶</a></h2>
+<p>Terms integrated over the surface:</p>
+<ul class="simple">
+<li>Volume flux <span class="math">\(m^3s^{-1}m^{-2}\)</span> (in the Volume Conservation Equation <a href="#equation-volume">(1)</a> and Volume Fraction Conservation Equation <a href="#equation-volume_fraction">(5)</a>)</li>
+<li>Mass flux <span class="math">\(kgs^{-1}m^{-2}\)</span> (in the Mass Conservation Equation <a href="#equation-mass">(2)</a>)</li>
+<li>Convective acceleration (in the u Momentum Equation <a href="#equation-momentum_u">(3)</a> and the v Momentum Equation <a href="#equation-momentum_v">(4)</a>)</li>
+<li>Diffusion (in the u Momentum Equation <a href="#equation-momentum_u">(3)</a> and the v Momentum Equation <a href="#equation-momentum_v">(4)</a>)</li>
+</ul>
+<p>Terms integrated over the volume:</p>
+<ul class="simple">
+<li>Unsteady acceleration (in the Mass Conservation Equation <a href="#equation-mass">(2)</a>, u Momentum Equation <a href="#equation-momentum_u">(3)</a>, v Momentum Equation <a href="#equation-momentum_v">(4)</a> and Volume Fraction Conservation Equation <a href="#equation-volume_fraction">(5)</a>)</li>
+<li>Body forces (in the v Momentum Equation <a href="#equation-momentum_v">(4)</a>)</li>
+</ul>
+<div class="section" id="u-control-volume">
+<h3><a class="toc-backref" href="#id22">4.9.5.1. u-control volume</a><a class="headerlink" href="#u-control-volume" title="Permalink to this headline">¶</a></h3>
+<p><strong>Determine the Flux Terms by considering the Convective Term for the North Face:</strong></p>
+<div class="math">
+\[\int_{A_n} {(\rho v)u} dS = v_n u_n \int_{L_w+L_a} {\rho dS} =
+v_n u_n \left ( \int_{L_w} {\rho_w dS} + \int_{L_a} {\rho_a dS} \right ) =
+v_n u_n ( \rho_w L_w + \rho_a L_a ) =
+F_n u_n\]</div>
+<div class="math">
+\[F_n = v_n ( \rho_w L_w + \rho_a L_a )_n\]</div>
+<p>Similarly:</p>
+<div class="math">
+\[F_e = u_e ( \rho_w L_w + \rho_a L_a )_e\]</div>
+<div class="math">
+\[F_w = u_w ( \rho_w L_w + \rho_a L_a )_w\]</div>
+<div class="math">
+\[F_s = v_s ( \rho_w L_w + \rho_a L_a )_s\]</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/wet_dry.png"><img alt="../_images/wet_dry.png" src="../_images/wet_dry.png" style="width: 600.0px; height: 225.0px;" /></a>
+</div>
+<p><strong>What value do the terms</strong> <span class="math">\(L_a\)</span> <strong>and</strong> <span class="math">\(L_w\)</span> <strong>have?</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="38%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">State</th>
+<th class="head"><span class="math">\(L_a\)</span></th>
+<th class="head"><span class="math">\(L_w\)</span></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>100% air</td>
+<td><span class="math">\(\Delta x\)</span></td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td>100% water</td>
+<td>0</td>
+<td><span class="math">\(\Delta x\)</span></td>
+</tr>
+<tr class="row-even"><td>air-water mix</td>
+<td><span class="math">\(\Delta x - L_w\)</span></td>
+<td><span class="math">\(\Delta x - L_a\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Outward Normal Vector</strong></p>
+<p>Negative sign indicates that the change in volume fraction in the positive x and y directions is negative</p>
+<div class="math">
+\[\mathbf n = {{- \nabla \cdot f} \over {\left\vert \nabla \cdot f \right\vert}} =
+-{{1} \over {\left\vert \nabla \cdot f \right\vert}}
+ {\left ( {{\partial f} \over {\partial x}} \mathbf i + {{\partial f} \over {\partial y}} \mathbf j \right )}\]</div>
+<ul class="simple">
+<li>Case 1: <span class="math">\(-{{\partial f} \over {\partial y}}&gt;0\)</span> and <span class="math">\(\left\vert{{\partial f} \over {\partial y}}\right\vert&gt;\left\vert{{\partial f} \over {\partial x}}\right\vert\)</span></li>
+<li>Case 2: <span class="math">\(-{{\partial f} \over {\partial y}}&lt;0\)</span> and <span class="math">\(\left\vert{{\partial f} \over {\partial y}}\right\vert&gt;\left\vert{{\partial f} \over {\partial x}}\right\vert\)</span></li>
+<li>Case 3: <span class="math">\(-{{\partial f} \over {\partial x}}&gt;0\)</span> and <span class="math">\(\left\vert{{\partial f} \over {\partial x}}\right\vert&gt;\left\vert{{\partial f} \over {\partial y}}\right\vert\)</span></li>
+<li>Case 4: <span class="math">\(-{{\partial f} \over {\partial x}}&lt;0\)</span> and <span class="math">\(\left\vert{{\partial f} \over {\partial x}}\right\vert&gt;\left\vert{{\partial f} \over {\partial y}}\right\vert\)</span></li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/normals.png"><img alt="../_images/normals.png" src="../_images/normals.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+<p>Now we only need to calculate the wet dry areas case 1, and then rotate it&#8217;s orientation for the other cases.</p>
+<div class="section" id="and-where-on-north-face">
+<h4><a class="toc-backref" href="#id23"><span class="math">\(L_w\)</span> and <span class="math">\(L_a\)</span> where <span class="math">\(tan(\alpha) &lt; \Delta y / \Delta x\)</span> on north face</a><a class="headerlink" href="#and-where-on-north-face" title="Permalink to this headline">¶</a></h4>
+<p><strong>Consider Case 1</strong></p>
+<p>Compute for each u and v control volume:</p>
+<ul class="simple">
+<li>Wet area</li>
+<li>Dry area</li>
+<li>Viscosity on each face</li>
+<li>Total mass</li>
+</ul>
+<p>Assumptions:</p>
+<ul class="simple">
+<li>Angle between unit vector <span class="math">\(\mathbf n\)</span> and positive y axis is in the range -45 degrees to +45 degrees</li>
+<li>Bottom to top, <span class="math">\(f\)</span> and <span class="math">\(\mu\)</span> are discontinuous</li>
+<li>Left to right, the <span class="math">\(f\)</span> is a continous function and conventional interpolation or averaging can be applied</li>
+<li>Air-water interface is a straight line in control volume</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/similar_triangles.png"><img alt="../_images/similar_triangles.png" src="../_images/similar_triangles.png" style="width: 600.0px; height: 450.0px;" /></a>
+</div>
+<div class="math" id="equation-alpha">
+<span class="eqno">(19)</span>\[tan(\alpha) = \left \vert {{(f_{i+1,j+1}+f_{i+1,j}-f_{i,j+1}-f_{i,j})\Delta y} \over {(f_{i,j+1}+f_{i+1,j+1}-f_{i,j}-f_{i+1,j})\Delta x}} \right \vert\]</div>
+<p>A table might also clarify:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="11%" />
+<col width="12%" />
+<col width="12%" />
+<col width="14%" />
+<col width="24%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Case</th>
+<th class="head"><span class="math">\(f_{i,j}\)</span></th>
+<th class="head"><span class="math">\(f_{i+1,j}\)</span></th>
+<th class="head"><span class="math">\(f_{i,j+1}\)</span></th>
+<th class="head"><span class="math">\(f_{i+1,j+1}\)</span></th>
+<th class="head"><span class="math">\(tan(\alpha)\)</span></th>
+<th class="head"><span class="math">\(\alpha\)</span></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>1</td>
+<td>0.5</td>
+<td>0.5</td>
+<td>0</td>
+<td><span class="math">\(\left \vert 1  \right \vert\)</span></td>
+<td>45</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>0</td>
+<td>0.5</td>
+<td>0.5</td>
+<td>1</td>
+<td><span class="math">\(\left \vert 1  \right \vert\)</span></td>
+<td>45</td>
+</tr>
+<tr class="row-even"><td>1 flipped horizontally</td>
+<td>0.5</td>
+<td>1</td>
+<td>0</td>
+<td>0.5</td>
+<td><span class="math">\(\left \vert -1 \right \vert\)</span></td>
+<td>45</td>
+</tr>
+<tr class="row-odd"><td>2 flipped horizontally</td>
+<td>0.5</td>
+<td>0</td>
+<td>1</td>
+<td>0.5</td>
+<td><span class="math">\(\left \vert -1 \right \vert\)</span></td>
+<td>45</td>
+</tr>
+</tbody>
+</table>
+<p>The volume fraction is continuous from left to right, so the standard average process is applied:</p>
+<div class="math" id="equation-FA">
+<span class="eqno">(20)</span>\[f_a = {{f_{i+1,j}+f_{i,j}} \over 2}\]</div>
+<div class="math" id="equation-FB">
+<span class="eqno">(21)</span>\[f_b = {{f_{i+1,j+1}+f_{i,j+1}} \over 2}\]</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/similar_triangles_2.png"><img alt="../_images/similar_triangles_2.png" src="../_images/similar_triangles_2.png" style="width: 600.0px; height: 337.5px;" /></a>
+</div>
+<p><span class="math">\(f\)</span> is defined as:</p>
+<div class="math">
+\[f = {{\text{area of water}} \over {\text{area of cell}}}\]</div>
+<p><span class="math">\(1-f\)</span> is defined as:</p>
+<div class="math">
+\[1-f = {{\text{area of air}} \over {\text{area of cell}}}\]</div>
+<p>For similar triangles:</p>
+<div class="math">
+\[\left ( {{\text{length of water}} \over {\text{length of air}}} \right )^2 =
+{{\text{area of water}} \over {\text{area of air}}}\]</div>
+<p>Hence:</p>
+<div class="math">
+\[\left ( {L_w} \over {L_a} \right )^2 =
+ {{f_b \Delta x \Delta y_{j+1}} \over {(1-f_a) \Delta x \Delta y_{j}}}\]</div>
+<p><strong>Solution for</strong> <span class="math">\(L_w\)</span></p>
+<div class="math" id="equation-LW">
+<span class="eqno">(22)</span>\[L_w = {({f_b \Delta y_{j+1})^{0.5}} \over {{(f_b \Delta y_{j+1})^{0.5}} + ((1-f_a) \Delta y_{j})^{0.5} }}\]</div>
+<p><strong>Solution for</strong> <span class="math">\(L_a\)</span></p>
+<div class="math" id="equation-LA">
+<span class="eqno">(23)</span>\[L_a = \Delta x - L_w\]</div>
+<p>From Equation <a href="#equation-LW">(22)</a> and <a href="#equation-LA">(23)</a></p>
+<ul class="simple">
+<li>If <span class="math">\(f_b = 0\)</span> and <span class="math">\(f_a = 1\)</span> then <span class="math">\(L_w = 0\)</span> and <span class="math">\(L_a = \Delta x\)</span></li>
+<li>If <span class="math">\(f_b = 1\)</span> and <span class="math">\(f_a = 0\)</span> then <span class="math">\(L_w = \Delta x\)</span> and <span class="math">\(L_a = 0\)</span></li>
+</ul>
+<p>Advantages of Equation <a href="#equation-LW">(22)</a>:</p>
+<ul class="simple">
+<li>We don&#8217;t need to know that the interface is between P and N for Equation <a href="#equation-LW">(22)</a></li>
+<li>We don&#8217;t need the angle <span class="math">\(\alpha\)</span></li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h4><a class="toc-backref" href="#id24"><span class="math">\(L_w\)</span> and <span class="math">\(L_a\)</span> where <span class="math">\(tan(\alpha) &gt; \Delta y / \Delta x\)</span> on north face</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p><strong>Case A solution for</strong> <span class="math">\(L_w\)</span> <strong>(</strong> <span class="math">\(L_a\)</span> <strong>from equation</strong> <a href="#equation-LA">(23)</a> <strong>)</strong></p>
+<div class="math">
+\[\begin{split}f_a V_a + f_b V_b \leqslant {{(\Delta y_j)^2} \over {2 tan \alpha}} \\\end{split}\]</div>
+<div class="math" id="equation-LWA">
+<span class="eqno">(24)</span>\[L_w = 0\]</div>
+<div class="math">
+\[f_b = 0\]</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/limits_a.png"><img alt="../_images/limits_a.png" src="../_images/limits_a.png" style="width: 600.0px; height: 300.0px;" /></a>
+</div>
+<p><strong>Case B solution for</strong> <span class="math">\(L_w\)</span> <strong>(</strong> <span class="math">\(L_a\)</span> <strong>from equation</strong> <a href="#equation-LA">(23)</a> <strong>)</strong></p>
+<div class="math">
+\[{{(\Delta y_j)^2} \over {2 tan \alpha}} \le  f_a V_a + f_b V_b
+\le  {{(\Delta y_j + \Delta y_{j+1})^2} \over {2 tan \alpha}}\]</div>
+<p>Area of a triangle:</p>
+<div class="math" id="equation-LWB">
+<span class="eqno">(25)</span>\[L_w = \left ({2 f_b V_b} \over {tan \alpha}  \right )^{0.5}\]</div>
+<a class="reference internal image-reference" href="../_images/limits_b.png"><img alt="../_images/limits_b.png" class="align-center" src="../_images/limits_b.png" style="width: 600.0px; height: 300.0px;" /></a>
+<p><strong>Case C solution for</strong> <span class="math">\(L_w\)</span> <strong>(</strong> <span class="math">\(L_a\)</span> <strong>from equation</strong> <a href="#equation-LA">(23)</a> <strong>)</strong></p>
+<div class="math">
+\[{{(\Delta y_j + \Delta y_{j+1})^2} \over {2 tan \alpha}} \le  f_a V_a + f_b V_b
+\le (\Delta y_{j+1} + \Delta y_{j}) \Delta x- {{(\Delta y_j + \Delta y_{j+1})^2} \over {2 tan \alpha}}\]</div>
+<p>From the area of a trapezoid:</p>
+<div class="math" id="equation-LWC">
+<span class="eqno">(26)</span>\[L_w = {{f_a V_a + f_b V_b} \over {\Delta y_j + \Delta y_{j+1}}}\]</div>
+<a class="reference internal image-reference" href="../_images/limits_c.png"><img alt="../_images/limits_c.png" class="align-center" src="../_images/limits_c.png" style="width: 600.0px; height: 300.0px;" /></a>
+<p><strong>Case D solution for</strong> <span class="math">\(L_w\)</span> <strong>(this is just Case B but rotated 180 degrees and i.t.o. air</strong> <span class="math">\(L_a\)</span> <strong>from equation</strong> <a href="#equation-LA">(23)</a> <strong>)</strong></p>
+<p>From Case B (i.t.o. air):</p>
+<div class="math">
+\[{{(\Delta y_{j+1})^2} \over {2 tan \alpha}} \le  (1-f_a) V_a + (1-f_b) V_b
+\le  {{(\Delta y_j + \Delta y_{j+1})^2} \over {2 tan \alpha}}\]</div>
+<p>From the area of a triangle:</p>
+<div class="math" id="equation-LWD">
+<span class="eqno">(27)</span>\[L_w = \Delta x - \left ({2 (1-f_a) V_a} \over {tan \alpha}  \right )^{0.5}\]</div>
+<a class="reference internal image-reference" href="../_images/limits_d.png"><img alt="../_images/limits_d.png" class="align-center" src="../_images/limits_d.png" style="width: 600.0px; height: 300.0px;" /></a>
+<p><strong>Case E  solution for</strong> <span class="math">\(L_w\)</span> <strong>(this is just Case A but rotated 180 degrees and i.t.o. air</strong> <span class="math">\(L_a\)</span> <strong>from equation</strong> <a href="#equation-LA">(23)</a> <strong>)</strong></p>
+<p>From Case A (i.t.o. air):</p>
+<div class="math">
+\[(1-f_a) V_a + (1-f_b) V_b \le  {({\Delta y_{j+1})^2} \over {2 tan \alpha}}\]</div>
+<p>From the area of a triangle:</p>
+<div class="math" id="equation-LWE">
+<span class="eqno">(28)</span>\[L_w = \Delta x\]</div>
+<div class="math">
+\[f_a = 1\]</div>
+<a class="reference internal image-reference" href="../_images/limits_e.png"><img alt="../_images/limits_e.png" class="align-center" src="../_images/limits_e.png" style="width: 600.0px; height: 300.0px;" /></a>
+</div>
+<div class="section" id="and-on-south-east-and-west-faces">
+<h4><a class="toc-backref" href="#id25"><span class="math">\(L_w\)</span> and <span class="math">\(L_a\)</span> on south, east and west faces</a><a class="headerlink" href="#and-on-south-east-and-west-faces" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><strong>Solution for</strong> <span class="math">\(L_w\)</span> <strong>on south face by replacing</strong> <span class="math">\(j\)</span> <strong>by</strong> <span class="math">\(j-1\)</span> <strong>in equations</strong> <a href="#equation-FA">(20)</a>, <a href="#equation-FB">(21)</a>, <a href="#equation-LW">(22)</a>, <a href="#equation-LA">(23)</a>, <a href="#equation-LWA">(24)</a>, <a href="#equation-LWB">(25)</a>, <a href="#equation-LWC">(26)</a>, <a href="#equation-LWD">(27)</a>, <a href="#equation-LWE">(28)</a></li>
+<li><strong>Solution for</strong> <span class="math">\(L_w\)</span> <strong>on east face</strong>:</li>
+</ul>
+<div class="math" id="equation-LWEast">
+<span class="eqno">(29)</span>\[L_w = f_{i+1,j} \Delta y_j\]</div>
+<ul class="simple">
+<li><strong>Solution for</strong> <span class="math">\(L_w\)</span> <strong>on west face by replacing</strong> <span class="math">\(i\)</span> <strong>by</strong> <span class="math">\(i-1\)</span> <strong>in</strong> <a href="#equation-LWEast">(29)</a></li>
+<li><strong>Solution for</strong> <span class="math">\(L_a\)</span> <strong>on south face from equation</strong> <a href="#equation-LA">(23)</a></li>
+<li><strong>Solution for</strong> <span class="math">\(L_a\)</span> <strong>on west and east face</strong></li>
+</ul>
+<div class="math">
+\[L_a = \Delta y_j - L_w\]</div>
+</div>
+<div class="section" id="on-north-face">
+<h4><a class="toc-backref" href="#id26"><span class="math">\(\mu\)</span> on north face (<span class="math">\(\mu_n\)</span>)</a><a class="headerlink" href="#on-north-face" title="Permalink to this headline">¶</a></h4>
+<p><strong>What do we need to compute?</strong></p>
+<p>The diffusive flux on the north face:</p>
+<div class="math">
+\[D_n = \mu_n {{A_n} \over {\Delta y_n}}\]</div>
+<p>What is <span class="math">\(\mu_n\)</span>?</p>
+<ul class="simple">
+<li>We are concerned with the viscosity at the interface between points P and N.</li>
+<li>As Patankar (1980) suggests, we must determine the distance to the interface from the points P and N.</li>
+<li><strong>The governing assumption here is that very steep angles &gt; 45 degrees or &lt; -45 degrees are not present</strong></li>
+<li>Note that this assumption only applies to the viscosity and not to the convective flux, which does allow sharp angles</li>
+<li><strong>The second governing assumption is that the viscosity at the interface is represented by the harmonic mean, so significant variation in the viscosity (e.g. due to turbulence) between the grid points at the interface is negligible</strong></li>
+</ul>
+<p>The use of the harmonic mean follows the suggestion of Patankar (1980) who used it for non-uniform conductivity in the diffusive term. Patankar (1980) dismisses the use of the arithmetic mean as too simplistic, but he did not consider the geometric mean or the infinite norm mean see Schmeling et al (2008). We also don&#8217;t know whether turbulent viscosity can be best represented by these averaging methods.</p>
+<p>There are four cases:</p>
+<ul class="simple">
+<li><span class="math">\(f_a &lt; 0.5\)</span> and <span class="math">\(f_b = 0\)</span> so <span class="math">\(d_w = 0\)</span></li>
+<li><span class="math">\(f_a &gt; 0.5\)</span> and <span class="math">\(f_b = 0\)</span> so <span class="math">\(d_w = (f_a - 0.5)\Delta y_j\)</span></li>
+<li><span class="math">\(f_a &gt; 0.5\)</span> and <span class="math">\(f_b &lt; 0.5\)</span> so <span class="math">\(d_w = {(f_a - 0.5)\Delta y_j} +f_b \Delta y_{j+1}\)</span></li>
+<li><span class="math">\(f_a &gt; 0.5\)</span> and <span class="math">\(f_b &gt; 0.5\)</span> so <span class="math">\(d_w = {(f_a - 0.5)\Delta y_j} +0.5 \Delta y_{j+1}\)</span></li>
+</ul>
+<p>This can be summarized like this, where <span class="math">\(d_w\)</span> is the distance from P to the interface:</p>
+<div class="math" id="equation-DW">
+<span class="eqno">(30)</span>\[d_w = max(f_a-0.5,0)\Delta y_j + min(f_b,0.5)\Delta y_{j+1}\]</div>
+<a class="reference internal image-reference" href="../_images/viscosity.png"><img alt="../_images/viscosity.png" class="align-center" src="../_images/viscosity.png" style="width: 750.0px; height: 600.0px;" /></a>
+<p>The distance from N to the interface is <span class="math">\(d_a\)</span> and this is simply the distance between P and N minus <span class="math">\(d_w\)</span>:</p>
+<div class="math" id="equation-DA">
+<span class="eqno">(31)</span>\[d_a = {{\Delta y_j + \Delta y_{j+1}} \over 2} - d_w\]</div>
+<p><strong>Harmonic Mean Viscosity</strong></p>
+<p>This is how Patankar (1980) defines the harmonic mean viscosity (for the north face):</p>
+<div class="math" id="equation-MUN">
+<span class="eqno">(32)</span>\[\mu_n = \left ( {f_w \over \mu_w} + {f_a \over \mu_a} \right )^{-1}\]</div>
+<p>Where:</p>
+<div class="math" id="equation-FWMU">
+<span class="eqno">(33)</span>\[f_w = {d_w \over {d_a + d_w}}\]</div>
+<p>And:</p>
+<div class="math" id="equation-FAMU">
+<span class="eqno">(34)</span>\[f_a = {d_a \over {d_a + d_w}}\]</div>
+<p>Substituting Equation <a href="#equation-FWMU">(33)</a> and <a href="#equation-FAMU">(34)</a> into <a href="#equation-MUN">(32)</a> and re-arranging gives:</p>
+<div class="math" id="equation-MUNORTH">
+<span class="eqno">(35)</span>\[\mu_n ={ {\mu_w \mu_a (d_w + d_a)} \over {\mu_a d_w + \mu_w d_a}}\]</div>
+</div>
+<div class="section" id="on-the-south-east-and-west-faces">
+<h4><a class="toc-backref" href="#id27"><span class="math">\(\mu\)</span> on the south, east and west faces (<span class="math">\(\mu_s\)</span>, <span class="math">\(\mu_e\)</span>, <span class="math">\(\mu_w\)</span>)</a><a class="headerlink" href="#on-the-south-east-and-west-faces" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><strong>Solution for</strong> <span class="math">\(\mu_s\)</span> <strong>on south face by replacing</strong> <span class="math">\(j\)</span> <strong>by</strong> <span class="math">\(j-1\)</span> <strong>in equation</strong> <a href="#equation-DW">(30)</a> <strong>and</strong> <a href="#equation-DA">(31)</a></li>
+<li><strong>Solution for</strong> <span class="math">\(\mu_e\)</span> <strong>on east face by convectional VOF method (the arithmetic mean) assuming linear variations in viscosity</strong>:</li>
+</ul>
+<div class="math" id="equation-MUE">
+<span class="eqno">(36)</span>\[\mu_e = f_{i+1,j} \mu_w + (1-f_{i+1,j}) \mu_a\]</div>
+<ul class="simple">
+<li><strong>Solution for</strong> <span class="math">\(\mu_w\)</span> <strong>on west face by replacing</strong> <span class="math">\(i\)</span> <strong>by</strong> <span class="math">\(i-1\)</span> <strong>in equation</strong> <a href="#equation-MUE">(36)</a></li>
+</ul>
+</div>
+<div class="section" id="total-mass-in-u-control-volume">
+<h4><a class="toc-backref" href="#id28">Total mass in u-control volume</a><a class="headerlink" href="#total-mass-in-u-control-volume" title="Permalink to this headline">¶</a></h4>
+<p>The total mass in the u-control volume can be seen as a function of time, because the values of <span class="math">\(f\)</span> are changing with time, especially near the interface. So the mass in the control volume is:</p>
+<div class="math">
+\[m = \int_{V} \rho dV = (f_a \rho_w + f_b \rho_a)V\]</div>
+<div class="math">
+\[f_b = 1-f_a\]</div>
+<p>(Seriously consider changing <span class="math">\(f_a\)</span> to <span class="math">\(f_P\)</span> and <span class="math">\(f_b\)</span> to <span class="math">\(f_N\)</span> to avoid confusion with air)</p>
+</div>
+</div>
+<div class="section" id="v-control-volume">
+<h3><a class="toc-backref" href="#id29">4.9.5.2. v-control volume</a><a class="headerlink" href="#v-control-volume" title="Permalink to this headline">¶</a></h3>
+<p>The angle <span class="math">\(\alpha\)</span> is from Brackbill et al (1994) - <strong>I&#8217;m not sure why the angle the interface makes with the x-axis would be different for the v control volume? Or why we would need another equation for the same value? Is this because the v-volume fraction is stored at the faces and not the cell centres?</strong></p>
+<div class="math">
+\[tan(\alpha) = \left \vert {{(f_{i+1,j+2}+2f_{i+1,j+1}+f_{i+1,j}-f_{i-1,j+2}-2f_{i-1,j+1}-f_{i-1,j})\Delta y} \over
+{(f_{i+1,j+2}+2f_{i,j+2}+f_{i-1,j+2}-f_{i+1,j}-2f_{i,j}-f_{i-1,j})\Delta x}} \right \vert\]</div>
+<p><strong>Why isn&#8217;t this the same as Equation</strong> <a href="#equation-alpha">(19)</a>?</p>
+<div class="section" id="id2">
+<h4><a class="toc-backref" href="#id30"><span class="math">\(L_w\)</span> and <span class="math">\(L_a\)</span> where <span class="math">\(tan(\alpha) &lt; \Delta y / \Delta x\)</span> on north face</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p><strong>Case A - Solution for</strong> <span class="math">\(L_w\)</span></p>
+<div class="math">
+\[f_{i,j+1} \le {{\Delta x tan \alpha} \over {2 \Delta y}}\]</div>
+<div class="math">
+\[L_w = 0\]</div>
+<p><strong>Case B - Solution for</strong> <span class="math">\(L_w\)</span></p>
+<div class="math">
+\[{{\Delta x tan \alpha} \over {2 \Delta y}} \le f_{i,j+1} \le  {1 \over 2} +{{\Delta x tan \alpha} \over {2 \Delta y}}\]</div>
+<p>From the area of a trapezoid:</p>
+<div class="math">
+\[L_w = \left ( {{f_{i,j+1}\Delta y } \over {\Delta x tan \alpha} } - {1 \over 2}   \right )\]</div>
+<p><strong>Case C - Solution for</strong> <span class="math">\(L_w\)</span></p>
+<div class="math">
+\[f_{i,j+1} \ge {1 \over 2} +{{\Delta x tan \alpha} \over {2 \Delta y}}\]</div>
+<div class="math">
+\[L_w = \Delta x\]</div>
+<a class="reference internal image-reference" href="../_images/v_con_1.png"><img alt="../_images/v_con_1.png" class="align-center" src="../_images/v_con_1.png" style="width: 600.0px; height: 510.0px;" /></a>
+</div>
+<div class="section" id="id3">
+<h4><a class="toc-backref" href="#id31"><span class="math">\(L_w\)</span> and <span class="math">\(L_a\)</span> where <span class="math">\(tan(\alpha) &gt; \Delta y / \Delta x\)</span> on north face</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p><strong>Case A - Solution for</strong> <span class="math">\(L_w\)</span></p>
+<div class="math">
+\[f_{i,j+1} \le {{\Delta y} \over {8 \Delta x tan \alpha}}\]</div>
+<div class="math">
+\[L_w = 0\]</div>
+<p><strong>Case B - Solution for</strong> <span class="math">\(L_w\)</span></p>
+<div class="math">
+\[{{\Delta y} \over {8 \Delta x tan \alpha}} \le f_{i,j+1} \le {{\Delta y} \over {2 \Delta x tan \alpha}}\]</div>
+<p>From the area of a triangle:</p>
+<div class="math">
+\[L_w ={{(2 \Delta x \Delta y f_{i,j+1} tan \alpha)^{0.5} - {\Delta y \over 2}} \over {tan \alpha}}\]</div>
+<p><strong>Case C - Solution for</strong> <span class="math">\(L_w\)</span></p>
+<div class="math">
+\[{{\Delta y} \over {2 \Delta x tan \alpha}} \le f_{i,j+1} \le 1-{{\Delta y} \over {2 \Delta x tan \alpha}}\]</div>
+<div class="math">
+\[L_w =  f_{i,j+1} \Delta x\]</div>
+<p><strong>Case D - Solution for</strong> <span class="math">\(L_w\)</span></p>
+<div class="math">
+\[1-{{\Delta y} \over {2 \Delta x tan \alpha}} \le f_{i,j+1} \le 1-{{\Delta y} \over {8 \Delta x tan \alpha}}\]</div>
+<div class="math">
+\[L_w = \Delta x + {\Delta y \over {2 tan \alpha}} - {{(2 \Delta x \Delta y (1-f_{i,j+1}) tan \alpha)^{0.5}} \over {tan \alpha}}\]</div>
+<p><strong>Case E - Solution for</strong> <span class="math">\(L_w\)</span></p>
+<div class="math">
+\[f_{i,j+1} \ge 1-{{\Delta y} \over {8 \Delta x tan \alpha}}\]</div>
+<div class="math">
+\[L_w = \Delta x\]</div>
+<a class="reference internal image-reference" href="../_images/v_con_2.png"><img alt="../_images/v_con_2.png" class="align-center" src="../_images/v_con_2.png" style="width: 937.5px; height: 750.0px;" /></a>
+<p><strong>Resulting flux</strong></p>
+<p>Depending on the value of <span class="math">\(f_{i,j+1}\)</span> and <span class="math">\(\alpha\)</span>, the fluid flux produced may vary from:</p>
+<ul class="simple">
+<li><span class="math">\(\rho_a v_n \Delta x\)</span> when <span class="math">\(L_w = 0\)</span> and <span class="math">\(L_a = \Delta x\)</span></li>
+<li><span class="math">\(\rho_w v_n \Delta x\)</span> when <span class="math">\(L_w = \Delta x\)</span> and <span class="math">\(L_a = 0\)</span></li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h4><a class="toc-backref" href="#id32"><span class="math">\(L_w\)</span> and <span class="math">\(L_a\)</span> on south, east and west faces</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><strong>Solution for</strong> <span class="math">\(L_w\)</span> <strong>on south face by replacing</strong> <span class="math">\(j\)</span> <strong>by</strong> <span class="math">\(j-1\)</span> <strong>in equations for north face</strong></li>
+<li><strong>Solution for</strong> <span class="math">\(L_w\)</span> <strong>on east face</strong></li>
+</ul>
+<div class="math">
+\[f_a = {f_{i,j}+f_{i+1,j}}\over 2\]</div>
+<div class="math">
+\[f_b = {f_{i,j+1}+f_{i+1,j+1}}\over 2\]</div>
+<a class="reference internal image-reference" href="../_images/v_con_east.png"><img alt="../_images/v_con_east.png" class="align-center" src="../_images/v_con_east.png" style="width: 337.5px; height: 307.5px;" /></a>
+<div class="math">
+\[L_w = max(f_a-0.5,0)\Delta y_j+min(f_b,0.5)\Delta y_{j+1}\]</div>
+<a class="reference internal image-reference" href="../_images/v_con_west.png"><img alt="../_images/v_con_west.png" class="align-center" src="../_images/v_con_west.png" style="width: 862.5px; height: 487.5px;" /></a>
+<p><strong>not sure about the following:</strong></p>
+<div class="math">
+\[L_e ={{{ {{\Delta y_{j+1}}}\over 2} + {{\Delta y_{j}}\over 2}} - L_w}\]</div>
+<ul class="simple">
+<li><strong>Solution for</strong> <span class="math">\(L_w\)</span> <strong>on west face by replacing</strong> <span class="math">\(i-1\)</span> <strong>with</strong> <span class="math">\(i\)</span> <strong>in equations for east face</strong></li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h4><a class="toc-backref" href="#id33"><span class="math">\(\mu\)</span> on north face (<span class="math">\(\mu_n\)</span>)</a><a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<div class="math" id="equation-DWN">
+<span class="eqno">(37)</span>\[d_w = f_{i,j+1} {\Delta y_{j+1}}\]</div>
+<div class="math" id="equation-DAN">
+<span class="eqno">(38)</span>\[d_a = {\Delta y_{j+1}} - d_w\]</div>
+<p><strong>I&#8217;m not sure about the positioning of the indices, in the above equations</strong></p>
+<p><strong>BIG QUESTION: Why is the wet length based on the u-volume fraction cell-centred and the wet length based on the v-volume fraction face-centred?</strong></p>
+<a class="reference internal image-reference" href="../_images/v_con_4.png"><img alt="../_images/v_con_4.png" class="align-center" src="../_images/v_con_4.png" style="width: 270.0px; height: 232.5px;" /></a>
+<p>The harmonic mean is used for the viscosity <span class="math">\(\mu_n\)</span> from Equation <a href="#equation-MUNORTH">(35)</a></p>
+</div>
+<div class="section" id="id6">
+<h4><a class="toc-backref" href="#id34"><span class="math">\(\mu\)</span> on the south, east and west faces (<span class="math">\(\mu_s\)</span>, <span class="math">\(\mu_e\)</span>, <span class="math">\(\mu_w\)</span>)</a><a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><strong>Solution for</strong> <span class="math">\(\mu_s\)</span> <strong>on south face by replacing</strong> <span class="math">\(j+1\)</span> <strong>by</strong> <span class="math">\(j\)</span> <strong>in equation</strong> <a href="#equation-DWN">(37)</a> <strong>and</strong> <a href="#equation-DAN">(38)</a></li>
+<li><strong>Solution for</strong> <span class="math">\(\mu_e\)</span> <strong>on east face by convectional VOF method (the arithmetic mean) assuming linear variations in viscosity</strong>:</li>
+</ul>
+<div class="math">
+\[\mu_e = f_e \mu_w + (1-f_e) \mu_a\]</div>
+<p>Similar to <span class="math">\(L_w\)</span>:</p>
+<div class="math">
+\[f_e = max(f_a-0.5) + min(f_b, 0.5)\]</div>
+<ul class="simple">
+<li><strong>Solution for</strong> <span class="math">\(\mu_w\)</span> <strong>on west face by replacing</strong> <span class="math">\(i\)</span> <strong>by</strong> <span class="math">\(i-1\)</span> <strong>in equations for east face</strong></li>
+</ul>
+</div>
+<div class="section" id="total-mass-in-v-control-volume">
+<h4><a class="toc-backref" href="#id35">Total mass in v-control volume</a><a class="headerlink" href="#total-mass-in-v-control-volume" title="Permalink to this headline">¶</a></h4>
+<p>The total mass in the v-control volume:</p>
+<div class="math">
+\[m = \int_{V} \rho dV = (f \rho_w + (1-f) \rho_a)V\]</div>
+<p>Similar to <span class="math">\(L_w\)</span>:</p>
+<div class="math">
+\[f = max(f_{i,j}-0.5) + min(f_{i,j+1}, 0.5)\]</div>
+<p>It should be mentioned that there are various methods for reconstructing the interface, e.g. Rider and Kothe (1998)</p>
+</div>
+</div>
+</div>
+<div class="section" id="solution-algorithms">
+<h2><a class="toc-backref" href="#id36">4.9.6. Solution Algorithms</a><a class="headerlink" href="#solution-algorithms" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="simple-and-simplec-algorithms">
+<h3><a class="toc-backref" href="#id37">4.9.6.1. SIMPLE and SIMPLEC Algorithms</a><a class="headerlink" href="#simple-and-simplec-algorithms" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The u momentum equation <a href="#equation-u_momentum_equation">(17)</a> and v momentum equation <a href="#equation-v_momentum_equation">(18)</a> are solved iteratively until the normalised residuals are small (perhaps using the tri-diagonal matrix algorithm). At this point we have satisfied momentum conservation.</li>
+<li>However, there is no guarantee that this solution satisfies the <strong>volume conservation equation</strong>, from equation <a href="#equation-volume">(1)</a>:</li>
+</ul>
+<div class="math">
+\[u_e A_e - u_w A_w + v_n A_n v_s A_s = 0\]</div>
+<ul class="simple">
+<li>A pressure-correction algorithm is needed in the loop in order to satisfy volume conservation by correcting the following according to the volume conservation equation:<ul>
+<li>velocity</li>
+<li>pressure</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="simple">
+<h4><a class="toc-backref" href="#id38">SIMPLE</a><a class="headerlink" href="#simple" title="Permalink to this headline">¶</a></h4>
+<p>The SIMPLE algorithm leads to a slow convergence when there is a sudden change in the geometry or solution property. The u velocity correction is <span class="math">\(u_P^c\)</span>:</p>
+<div class="math">
+\[u_P^c ={ {p_w^c A_w - p_e^c A_e} \over {{m_P^n \over \Delta t} + \sum a_N}}\]</div>
+</div>
+<div class="section" id="simplec">
+<h4><a class="toc-backref" href="#id39">SIMPLEC</a><a class="headerlink" href="#simplec" title="Permalink to this headline">¶</a></h4>
+<p>The SIMPLEC algorithm is used instead:</p>
+<div class="math">
+\[u_P^c ={ {p_w^c A_w - p_e^c A_e} \over {{m_P^n \over \Delta t}}}\]</div>
+<p>Now obtain the pressure correction by replacing <span class="math">\(u = u^* + u^c\)</span> (<span class="math">\(u\)</span> is the true velocity and equals the uncorrected velocity <span class="math">\(u^*\)</span> plus the corrected velocity <span class="math">\(u^c\)</span>)</p>
+<div class="math">
+\[p_P^c = {1 \over a_P}{(a_E p_E^c + a_W p_W^c + a_N p_N^c + a_S p_S^c + b)}\]</div>
+<p>where b is the mass imbalance around P:</p>
+<div class="math">
+\[b = -(u_e^*A_e - u_w^*A_w + v_n^*A_n - v_s^*A_s)\]</div>
+<p>The pressure and velocity corrections are applied like this:</p>
+<div class="math">
+\[p_P = p_P^* + p_P^c\]</div>
+<div class="math">
+\[u_P = u_P^* + u_P^c\]</div>
+<div class="math">
+\[v_P = v_P^* + v_P^c\]</div>
+</div>
+</div>
+<div class="section" id="cicsam-algorithm">
+<h3><a class="toc-backref" href="#id40">4.9.6.2. CICSAM Algorithm</a><a class="headerlink" href="#cicsam-algorithm" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>At this point we have satisfied the equations for volume, mass, u momentum and v momentum conservation.</li>
+<li>The final equation to satisfy is the equation for volume fraction conservation <a href="#equation-volume_fraction">(5)</a>, which is solved explicitly:</li>
+</ul>
+<div class="math" id="equation-volume_fraction_solution">
+<span class="eqno">(39)</span>\[f_P = f_P^n - {\Delta t \over V}(u_e^n f_e^n A_e - u_w^n f_w^n A_w + u_n^n f_n^n A_n - u_s^n f_s^n A_s)\]</div>
+<ul class="simple">
+<li>The values on the surfaces are computed by a high resolution scheme CICSAM. The reason for using CICSAM is that this method is able to produce a sharp water surface</li>
+<li>Normal to the interface, the volume fraction is between 0 and 1 on only one node.</li>
+<li>The problem with Equation <a href="#equation-volume_fraction_solution">(39)</a> is that when the points <span class="math">\(u, w, n, s\)</span> and <span class="math">\(P\)</span> are all in water, the RHS of Equation <a href="#equation-volume_fraction_solution">(39)</a> is:</li>
+</ul>
+<div class="math">
+\[f_P = 1 - {\Delta t \over V}(u_e^n A_e - u_w^n A_w + u_n^n A_n - u_s^n A_s)\]</div>
+<ul class="simple">
+<li>Clearly <span class="math">\(f_P\)</span> won&#8217;t be exactly 1, so the equation for volume fraction conservation won&#8217;t reduce to the equation of volume conservation (which it should in this case). So in solving Equation <a href="#equation-volume_fraction_solution">(39)</a> a correction is applied to the velocity:</li>
+</ul>
+<div class="math">
+\[V^c = {{(u_e^n A_e - u_w^n A_w + v_n^n A_n - v_s^n A_s)} \over {2 \Delta x + 2 \Delta y}}\]</div>
+<ul class="simple">
+<li>The correction is applied like this to Equation <a href="#equation-volume_fraction_solution">(39)</a></li>
+</ul>
+<div class="math">
+\[u_e^n = u_e^n + V^c\]</div>
+<div class="math">
+\[u_w^n = u_w^n - V^c\]</div>
+<div class="math">
+\[u_n^n = u_n^n + V^c\]</div>
+<div class="math">
+\[u_s^n = u_s^n - V^c\]</div>
+</div>
+<div class="section" id="cicsam-simple-piso-procedure">
+<h3><a class="toc-backref" href="#id41">4.9.6.3. CICSAM, SIMPLE-PISO Procedure</a><a class="headerlink" href="#cicsam-simple-piso-procedure" title="Permalink to this headline">¶</a></h3>
+<p>In order to accelerate convergence, we add a second velocity and pressure produced by the PISO algorithm <strong>at the last iteration in each time step</strong></p>
+<p>The implicit SIMPLEC-PISO algorithm is combined with the explicit CICSAM algorithm like this:</p>
+<ol class="arabic simple">
+<li>The solution of volume fraction is calculated from the solutions of <span class="math">\(u^n\)</span>, <span class="math">\(v^n\)</span> and <span class="math">\(f^n\)</span> by CICSAM.</li>
+<li>The solutions of <span class="math">\(u\)</span>,  <span class="math">\(v\)</span> and <span class="math">\(p\)</span> are obtained from the SIMPLEC-PISO algorithm after <span class="math">\(f\)</span> has already been obtained.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="application-to-a-non-linear-non-breaking-deep-water-wave">
+<h2><a class="toc-backref" href="#id42">4.9.7. Application to a Non-Linear, Non-Breaking Deep Water Wave</a><a class="headerlink" href="#application-to-a-non-linear-non-breaking-deep-water-wave" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>A wave is modelled using the inviscid non-linear solution to the wave equation as the inlet and initial conditions (the harmonic solution to the velocity potential described by Laplace&#8217;s equation plus boundary conditions).</li>
+<li>The model uses <span class="math">\(h/L = 0.6\)</span> i.e. it&#8217;s a deep water case (<span class="math">\(h/L &gt; 0.5\)</span>)</li>
+<li>Also <span class="math">\(ka = 0.1885\)</span> i.e. it&#8217;s non-linear (<span class="math">\(ka &gt; 0.1\)</span>)</li>
+<li>And <span class="math">\(2a/L = 0.06\)</span> i.e. it&#8217;s non-breaking (<span class="math">\(2a/L &lt; 0.08\)</span>)</li>
+<li>No wind input is used, i.e. the air follows the water</li>
+<li>The model has a wall at the bottom boundary, a symmetry condition at the top, an inlet velocity, plus an opening at the outlet.</li>
+</ul>
+<div class="section" id="velocity">
+<h3><a class="toc-backref" href="#id43">4.9.7.1. Velocity</a><a class="headerlink" href="#velocity" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>Potential flow compares well with the wet-dry areas method in the water, however the difference occurs in the air and near the interface:</dt>
+<dd><ul class="first last simple">
+<li>The velocity field is discontinuous in the potential flow solution, because the viscosity is zero</li>
+<li>The wet-dry areas method produces a rapid but continuous change in the velocity field</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">However remarkably over most of the velocity profile the difference is less than 1%</p>
+</li>
+<li><p class="first">The v-velocity variation is continuous in both cases and little difference is seen</p>
+</li>
+</ul>
+</div>
+<div class="section" id="streamlines">
+<h3><a class="toc-backref" href="#id44">4.9.7.2. Streamlines</a><a class="headerlink" href="#streamlines" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>At the peak and trough, streamlines for potential flow are centred at the interface, whereas streamlines for the wet-dry areas method are centred in the air</li>
+</ul>
+<p><strong>Generally speaking this exercise of comparing the potential flow solution with the wet-dry areas method was for validation purposes and it showed that sensible results are being produced</strong></p>
+<p><strong>I wonder whether a comparison between the standard arithmetic approach to the mass fluxes and the wet-dry areas method would also be useful to compare the shear stress computed at the interface.</strong></p>
+</div>
+</div>
+<div class="section" id="application-to-collapse-of-a-water-column">
+<h2><a class="toc-backref" href="#id45">4.9.8. Application to Collapse of a Water Column</a><a class="headerlink" href="#application-to-collapse-of-a-water-column" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The validation with experimental data was also conducted against images for the a collapse of a water column.</li>
+<li>It was found that the qualitative flow features, such as the hump in the water column, the strong jetting and the air pocket near the wall were all present in both the simulation and the experimental images. However, as the paper admits, there is no quantitative measurement to make this validation more complete.</li>
+</ul>
+</div>
+<div class="section" id="application-to-a-non-linear-breaking-shallow-water-wave">
+<h2><a class="toc-backref" href="#id46">4.9.9. Application to a Non-Linear, Breaking Shallow Water Wave</a><a class="headerlink" href="#application-to-a-non-linear-breaking-shallow-water-wave" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The breaking point is defined as the point where the speed of the water particles becomes larger than the phase speed of the wave.</li>
+<li>At this point the front of the water wave becomes vertical.</li>
+<li>To test whether the physics of this phenomenon is reproduced, a numerical simulation was run with the wet-dry areas method using the same parameters as the PIV experiment of Change and Liu (1998), which is where wave breaking was measured.</li>
+<li>Wave steepness: <span class="math">\(2a/L = 0.12\)</span> (i.e. <span class="math">\(2a/L &gt; 0.08\)</span> which implies a breaking wave)</li>
+<li>Depth: <span class="math">\(h/L = 0.166\)</span> (i.e. <span class="math">\(h/L &lt; 0.5\)</span> which implies a shallow wave)</li>
+<li>It was found that the dimensionless water particle velocity was in the range 1.0c to 1.1c (where c is the phase speed), which matches the measured value of 1.07c.</li>
+</ul>
+</div>
+<div class="section" id="grid-independence-robustness-and-efficiency-of-the-wet-dry-areas-method">
+<h2><a class="toc-backref" href="#id47">4.9.10. Grid Independence, Robustness and Efficiency of the Wet-Dry Areas Method</a><a class="headerlink" href="#grid-independence-robustness-and-efficiency-of-the-wet-dry-areas-method" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="grid-independence">
+<h3><a class="toc-backref" href="#id48">4.9.10.1. Grid Independence</a><a class="headerlink" href="#grid-independence" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>This was performed for the water column collapse application for T=3.99.</li>
+<li>Uniform, structured grids were used in this case.</li>
+<li><strong>I wonder whether non-uniform structured grids or non-uniform unstructured grids might be more numerically efficient, although they may not be less diffuse.</strong></li>
+</ul>
+</div>
+<div class="section" id="the-robustness">
+<h3><a class="toc-backref" href="#id49">4.9.10.2. The Robustness</a><a class="headerlink" href="#the-robustness" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The first 20 timesteps of the water column collapse application was also used test robustness.</li>
+<li>The SIMPLEC algorithm used is unconditionally stable, however the convergence at each timestep depends on the timestep - i.e. divergence may occur if the timestep is too large.</li>
+<li>The robustness was tested by using a fixed timestep and testing to see if the volume residual became less than <span class="math">\(5x10^{-4}\)</span></li>
+<li>The minimum number of iterations per timestep was set to 15, which was achieved quickly after the first five timesteps.</li>
+</ul>
+</div>
+<div class="section" id="efficiency">
+<h3><a class="toc-backref" href="#id50">4.9.10.3. Efficiency</a><a class="headerlink" href="#efficiency" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The efficiency of the wet-dry areas method is less than the average density method due to the use of different cases in the u and v control volumes</li>
+<li>For the water column collapse it is 20% greater (as this uses all 4 cases)</li>
+<li>For the non-linear non-breaking wave and the non-linear breaking wave it is around 10% longer (as these are mainly case 1)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="conclusions">
+<h2><a class="toc-backref" href="#id51">4.9.11. Conclusions</a><a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
+<p>The Navier-Stokes Equations have been solved using:</p>
+<ul class="simple">
+<li>Conservative integral form</li>
+<li>Standard staggered grid</li>
+<li>A new analytical expression for wet-dry areas in the convective mass flux (instead of the standard average density approach), which is a function of volume fraction</li>
+<li>SIMPLEC algorithm (which is faster than SIMPLE for interfacial flows)</li>
+</ul>
+<p>Advantages of wet-dry areas method:</p>
+<ul class="simple">
+<li>Improves the computation of convective mass flux</li>
+<li>Bussmann&#8217;s consistency problem is avoided</li>
+<li>The new numerical method is robust</li>
+</ul>
+<p>Disadvantages of wet-dry areas method:</p>
+<ul class="simple">
+<li>Less efficient than the average density approach.</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="feng.html">4.8. Feng at al. (2011) &#8220;Evaluation of Cloud Convection and Tracer Transport&#8221;</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="wen_mobbs.html">4.10. Wen and Mobbs (2014) &#8220;Numerical Simulations of Laminar Air-Water Flow&#8221;</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

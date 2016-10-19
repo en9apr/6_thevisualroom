@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.9.6. Examples of the Finite Volume Method with Numerical Methods &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.9.7. Higher Order Finite Volume Interpolation: QUICK Scheme" href="quick.html" />
+    <link rel="prev" title="1.9.5. Evaluating Fluxes and Derivatives of Fluxes in 2D" href="finite_volume_method_5.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.9.6. Examples of the Finite Volume Method with Numerical Methods</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="finite_volume_method_5.html">1.9.5. Evaluating Fluxes and Derivatives of Fluxes in 2D</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="quick.html">1.9.7. Higher Order Finite Volume Interpolation: QUICK Scheme</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="examples-of-the-finite-volume-method-with-numerical-methods">
+<h1>1.9.6. Examples of the Finite Volume Method with Numerical Methods<a class="headerlink" href="#examples-of-the-finite-volume-method-with-numerical-methods" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#d-diffusion-equation" id="id1">2D Diffusion Equation</a></li>
+<li><a class="reference internal" href="#lax-wendroff-method-in-fvm" id="id2">Lax-Wendroff Method in FVM</a></li>
+<li><a class="reference internal" href="#maccormack-method-in-fvm" id="id3">MacCormack Method in FVM</a><ul>
+<li><a class="reference internal" href="#cell-centered-formulation" id="id4">Cell-Centered Formulation</a></li>
+<li><a class="reference internal" href="#boundaries" id="id5">Boundaries</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="d-diffusion-equation">
+<h2><a class="toc-backref" href="#id1">1.9.6.1. 2D Diffusion Equation</a><a class="headerlink" href="#d-diffusion-equation" title="Permalink to this headline">¶</a></h2>
+<p>For example - 2D diffusion equation:</p>
+<div class="math">
+\[{\partial u \over \partial t} +
+{\partial \over \partial x} \left( k {\partial u \over \partial x}  \right) +
+{\partial \over \partial y} \left( k {\partial u \over \partial y}  \right) = 0\]</div>
+<p>Diffusive Flux:</p>
+<div class="math">
+\[f = k {\partial u \over \partial x}\]</div>
+<div class="math">
+\[g = k {\partial u \over \partial y}\]</div>
+<p>Balance of fluxes:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/flux_balance_2.png"><img alt="../_images/flux_balance_2.png" src="../_images/flux_balance_2.png" style="width: 420.0px; height: 420.0px;" /></a>
+</div>
+<p>To express the balance of fluxes, we use</p>
+<div class="math">
+\[f_{AB} = {1 \over 2}(f_A + f_B)\]</div>
+<p><strong>We can&#8217;t evaluate</strong> <span class="math">\(f_{AB}\)</span> <strong>perpendicular to the face, because we&#8217;d need values at the midpoints. The gradient evaluation is on the basis of Gauss&#8217; Divergence Theorem, which requires a line integral over a 4 neighbour surfaces, where the corners are points we know the values of.</strong></p>
+<p>To get <span class="math">\(f_A\)</span> and <span class="math">\(f_B\)</span> we need to evalutate <span class="math">\(\partial u / \partial x\)</span>:</p>
+<div class="math">
+\[f_A = k \left( \partial \overline{u} \over \partial x \right)_A\]</div>
+</div>
+<div class="section" id="lax-wendroff-method-in-fvm">
+<h2><a class="toc-backref" href="#id2">1.9.6.2. Lax-Wendroff Method in FVM</a><a class="headerlink" href="#lax-wendroff-method-in-fvm" title="Permalink to this headline">¶</a></h2>
+<p>Recall for the model equation:</p>
+<div class="math">
+\[{\partial u \over \partial t} + {\partial \over \partial x} f(u)\]</div>
+<p>We used the Taylor Expansion:</p>
+<div class="math">
+\[u^{n+1} = u^n + \Delta t \left( {\partial u \over \partial t} \right)^n +
+{{\Delta t^2} \over 2} \left(\partial ^2 u \over \partial t^2 \right)^n\]</div>
+<p>And we use:</p>
+<div class="math">
+\[u_{tt} = (u_t)_t = -
+{\partial \over \partial t} \left(\partial f \over \partial x \right) = -
+{\partial \over \partial x} \left(\partial f \over \partial t \right) = -
+{\partial \over \partial x} \left({\partial f \over \partial u} {\partial u \over \partial t} \right) =          {\partial \over \partial x} \left(a(u) {\partial f \over \partial x} \right)\]</div>
+<p>where:</p>
+<p><span class="math">\(a = {\partial f \over \partial u}\)</span> is the Jacobian</p>
+<div class="math" id="equation-1D">
+<span class="eqno">(1)</span>\[u^{n+1} = u^n + \Delta t \left( -{\partial f \over \partial x} \right)^n +
+       {{\Delta t^2} \over 2} \left({\partial \over \partial x} \left( {a {\partial f \over \partial x}} \right) \right)^n\]</div>
+<p>2D version:</p>
+<div class="math" id="equation-2D">
+<span class="eqno">(2)</span>\[\mathbf{u}^{n+1} = \mathbf{u}^n +
+       \Delta t \left( -{\partial f \over \partial x} - {\partial g \over \partial y} \right)^n +
+       {{\Delta t^2} \over 2} \left(   {\partial \over \partial x} \left(
+       {A^n \left( {\partial f \over \partial x} + {\partial g \over \partial y} \right)^n } \right)+
+       {\partial \over \partial y} \left(
+       {B^n \left( {\partial f \over \partial x} + {\partial g \over \partial y} \right)^n } \right)  \right)\]</div>
+<p><span class="math">\(A = {\partial f \over \partial u}\)</span> and <span class="math">\(B = {\partial g \over \partial u}\)</span></p>
+<p><a href="#equation-1D">(1)</a> and <a href="#equation-2D">(2)</a> can be discretised using the FDM to get one step LW</p>
+<p>Note that they have the form of a flux balance - in theory can use FVM - <strong>however the fluxes contain derivatives</strong></p>
+<p>For this reason, one-step LW is not used with the finite volume.</p>
+<p>Instead, we can use <strong>MacCormack</strong></p>
+</div>
+<div class="section" id="maccormack-method-in-fvm">
+<h2><a class="toc-backref" href="#id3">1.9.6.3. MacCormack Method in FVM</a><a class="headerlink" href="#maccormack-method-in-fvm" title="Permalink to this headline">¶</a></h2>
+<p>Write <a href="#equation-1D">(1)</a> in MacCormack:</p>
+<p>Predictor:</p>
+<div class="math">
+\[\tilde{u}_i^{n+1} = u_i^n - {\Delta t \over \Delta x} (f_{i+1}^n - f_i^n)\]</div>
+<p>Corrector:</p>
+<div class="math">
+\[u_i^{n+1} = {1 \over 2}(u_i^n + \tilde{u}_i^{n+1}) - {\Delta t \over {2 \Delta x}} (\tilde{f}_i^{n+1} - \tilde{f}_{i-1}^{n+1})\]</div>
+<p>FV formulation: mimic &#8220;forward-backward&#8221; predictor-corrector approach in flux evaluation</p>
+<div class="section" id="cell-centered-formulation">
+<h3><a class="toc-backref" href="#id4">Cell-Centered Formulation</a><a class="headerlink" href="#cell-centered-formulation" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/flux_balance_2.png"><img alt="../_images/flux_balance_2.png" src="../_images/flux_balance_2.png" style="width: 420.0px; height: 420.0px;" /></a>
+</div>
+<p>Possible variants for the predictor step. Invert bias for the corrector step. 4 choices:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/cell_centered_new.png"><img alt="../_images/cell_centered_new.png" src="../_images/cell_centered_new.png" style="width: 420.0px; height: 420.0px;" /></a>
+</div>
+</div>
+<div class="section" id="boundaries">
+<h3><a class="toc-backref" href="#id5">Boundaries</a><a class="headerlink" href="#boundaries" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Inflow/outflow - extrapolation formulas are used</li>
+<li>Solid boundaries - convective fluxes are set to zero</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="finite_volume_method_5.html">1.9.5. Evaluating Fluxes and Derivatives of Fluxes in 2D</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="quick.html">1.9.7. Higher Order Finite Volume Interpolation: QUICK Scheme</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

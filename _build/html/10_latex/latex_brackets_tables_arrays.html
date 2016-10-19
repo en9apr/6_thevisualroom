@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.3. Brackets, Tables and Arrays &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="6. LaTeX" href="latex.html" />
+    <link rel="next" title="6.4. Lists" href="latex_lists.html" />
+    <link rel="prev" title="6.2. Common Math Notation" href="latex_common_math_notation.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>6.3. Brackets, Tables and Arrays</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="latex_common_math_notation.html">6.2. Common Math Notation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="latex_lists.html">6.4. Lists</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="brackets-tables-and-arrays">
+<h1>6.3. Brackets, Tables and Arrays<a class="headerlink" href="#brackets-tables-and-arrays" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#brackets" id="id1">Brackets</a></li>
+<li><a class="reference internal" href="#tables" id="id2">Tables</a></li>
+<li><a class="reference internal" href="#equation-arrays" id="id3">Equation Arrays</a></li>
+</ul>
+</div>
+<div class="section" id="brackets">
+<h2><a class="toc-backref" href="#id1">6.3.1. Brackets</a><a class="headerlink" href="#brackets" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="s">$</span><span class="o">(</span><span class="nb">x</span><span class="o">+</span><span class="m">1</span><span class="o">)</span><span class="s">$</span>
+</pre></div>
+</div>
+</td>
+<td>Brackets</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="s">$</span><span class="m">3</span><span class="o">[</span><span class="m">2</span><span class="o">+(</span><span class="nb">x</span><span class="o">+</span><span class="m">1</span><span class="o">)]</span><span class="s">$</span>
+</pre></div>
+</div>
+</td>
+<td>Square brackets and normal brackets</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="s">$</span><span class="nv">\{</span><span class="nb">a,b,c</span><span class="nv">\}</span><span class="s">$</span>
+</pre></div>
+</div>
+</td>
+<td>Curly brackets - <strong>curly bracket is reserved in Latex</strong></td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="s">$</span><span class="nv">\%</span><span class="nb"> </span><span class="m">50</span><span class="s">$</span>
+</pre></div>
+</div>
+</td>
+<td>Dollar sign - <strong>dollar sign is reserved in Latex</strong></td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="s">$</span><span class="m">3</span><span class="nv">\left</span><span class="o">(</span><span class="nv">\frac</span><span class="nb">{</span><span class="m">2</span><span class="nb">}{</span><span class="m">5</span><span class="nb">}</span><span class="nv">\right</span><span class="o">)</span><span class="s">$</span>
+</pre></div>
+</div>
+</td>
+<td>Expanded brackets</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="s">$</span><span class="m">3</span><span class="nv">\left</span><span class="o">[</span><span class="nv">\frac</span><span class="nb">{</span><span class="m">2</span><span class="nb">}{</span><span class="m">5</span><span class="nb">}</span><span class="nv">\right</span><span class="o">]</span><span class="s">$</span>
+</pre></div>
+</div>
+</td>
+<td>Expanded square brackets</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="s">$</span><span class="m">3</span><span class="nv">\left\{\frac</span><span class="nb">{</span><span class="m">2</span><span class="nb">}{</span><span class="m">5</span><span class="nb">}</span><span class="nv">\right\}</span><span class="s">$</span>
+</pre></div>
+</div>
+</td>
+<td>Expanded curly brackets</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="s">$</span><span class="nv">\left</span><span class="nb">|</span><span class="nv">\frac</span><span class="nb">{</span><span class="m">2</span><span class="nb">}{</span><span class="m">5</span><span class="nb">}</span><span class="nv">\right</span><span class="nb">|</span><span class="s">$</span>
+</pre></div>
+</div>
+</td>
+<td>Absolute value</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="s">$</span><span class="nv">\left</span><span class="nb">.</span><span class="nv">\frac</span><span class="nb">{</span><span class="m">2</span><span class="nb">}{</span><span class="m">5</span><span class="nb">}</span><span class="nv">\right</span><span class="nb">|</span><span class="s">$</span>
+</pre></div>
+</div>
+</td>
+<td>No left bracket</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="s">$</span><span class="nv">\left</span><span class="nb">.</span><span class="nv">\frac</span><span class="nb">{dy}{dx}</span><span class="nv">\right</span><span class="nb">|_{x</span><span class="o">=</span><span class="m">1</span><span class="nb">}</span><span class="s">$</span>
+</pre></div>
+</div>
+</td>
+<td>Value of a derivative at x=1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tables">
+<h2><a class="toc-backref" href="#id2">6.3.2. Tables</a><a class="headerlink" href="#tables" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|c|c|c|c|c|c|<span class="nb">}</span>
+<span class="k">\hline</span>
+<span class="s">$</span><span class="nb">x</span><span class="s">$</span> <span class="nb">&amp;</span> 1 <span class="nb">&amp;</span> 2 <span class="nb">&amp;</span> 3 <span class="nb">&amp;</span> 4 <span class="nb">&amp;</span> 5 <span class="k">\\</span> <span class="k">\hline</span>
+<span class="s">$</span><span class="nb">f</span><span class="o">(</span><span class="nb">x</span><span class="o">)</span><span class="s">$</span> <span class="nb">&amp;</span> 10 <span class="nb">&amp;</span> 11 <span class="nb">&amp;</span> 12 <span class="nb">&amp;</span> 13 <span class="nb">&amp;</span> 14 <span class="k">\\</span> <span class="k">\hline</span>
+<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
+</pre></div>
+</div>
+</td>
+<td><p class="first">Table with border and grid:</p>
+<ul class="last simple">
+<li><code class="docutils literal"><span class="pre">c</span></code> = column</li>
+<li><code class="docutils literal"><span class="pre">&amp;</span></code> = next column</li>
+<li><code class="docutils literal"><span class="pre">|</span></code> = vertical line</li>
+<li><code class="docutils literal"><span class="pre">\\</span></code> = new line</li>
+<li><code class="docutils literal"><span class="pre">\hline</span></code> = horizontal line</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="equation-arrays">
+<h2><a class="toc-backref" href="#id3">6.3.3. Equation Arrays</a><a class="headerlink" href="#equation-arrays" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>eqnarray*<span class="nb">}</span>
+5x<span class="nb">^</span>2 - 9 <span class="nb">&amp;</span>=<span class="nb">&amp;</span> x + 3 <span class="k">\\</span>
+4x<span class="nb">^</span>2 <span class="nb">&amp;</span>=<span class="nb">&amp;</span> 12 <span class="k">\\</span>
+x<span class="nb">^</span>2 <span class="nb">&amp;</span>=<span class="nb">&amp;</span> 3 <span class="k">\\</span>
+x <span class="nb">&amp;</span><span class="k">\approx</span><span class="nb">&amp;</span> <span class="k">\pm</span> 1.732
+<span class="k">\end</span><span class="nb">{</span>eqnarray*<span class="nb">}</span>
+</pre></div>
+</div>
+</td>
+<td><p class="first">Equation array:</p>
+<ul class="last simple">
+<li><code class="docutils literal"><span class="pre">*</span></code> = no equation numbers</li>
+<li><code class="docutils literal"><span class="pre">\\</span></code> = new line</li>
+<li><code class="docutils literal"><span class="pre">&amp;=&amp;</span></code> = line up by equals sign</li>
+<li><code class="docutils literal"><span class="pre">&amp;\approx&amp;</span></code> = line up by approx. equals sign</li>
+<li><code class="docutils literal"><span class="pre">\pm</span></code> = plus or minus</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="latex_common_math_notation.html">6.2. Common Math Notation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="latex_lists.html">6.4. Lists</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

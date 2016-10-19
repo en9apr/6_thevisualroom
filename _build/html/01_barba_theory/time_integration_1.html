@@ -1,0 +1,360 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.10.1. The Method of Lines &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.10.2. The Matrix Method for Stability of Spatial Discretisation" href="matrix_method.html" />
+    <link rel="prev" title="1.9.7. Higher Order Finite Volume Interpolation: QUICK Scheme" href="quick.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.10.1. The Method of Lines</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="quick.html">1.9.7. Higher Order Finite Volume Interpolation: QUICK Scheme</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="matrix_method.html">1.10.2. The Matrix Method for Stability of Spatial Discretisation</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="the-method-of-lines">
+<h1>1.10.1. The Method of Lines<a class="headerlink" href="#the-method-of-lines" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#general-method" id="id1">General Method</a></li>
+<li><a class="reference internal" href="#the-method-of-lines-analysis-of-the-space-discretised-systems" id="id2">The Method of Lines: Analysis of the Space-Discretised Systems</a></li>
+<li><a class="reference internal" href="#example-1-diffusion" id="id3">Example 1 - Diffusion</a><ul>
+<li><a class="reference internal" href="#dirichlet-bcs" id="id4">Dirichlet BCs</a></li>
+<li><a class="reference internal" href="#neumann-bcs" id="id5">Neumann BCs</a></li>
+<li><a class="reference internal" href="#importance-of-bcs-for-stability" id="id6">Importance of BCs for stability</a></li>
+<li><a class="reference internal" href="#periodic-bcs" id="id7">Periodic BCs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example-2-convection" id="id8">Example 2 - Convection</a><ul>
+<li><a class="reference internal" href="#upwind" id="id9">Upwind</a></li>
+<li><a class="reference internal" href="#central-space-discretisation-with-periodic-bcs" id="id10">Central space discretisation with periodic BCs</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>e.g. Convection <span class="math">\(\Rightarrow\)</span> combinations of space and time schemes show very different behaviour</p>
+<p>Using CD in space for the convection term <span class="math">\(c \partial u / \partial x\)</span>:</p>
+<blockquote>
+<div><ul class="simple">
+<li>FD in time <span class="math">\(\Rightarrow\)</span> unstable</li>
+<li>BD in time <span class="math">\(\Rightarrow\)</span> unconditionally stable</li>
+<li>CD in time <span class="math">\(\Rightarrow\)</span> conditionally stable</li>
+</ul>
+</div></blockquote>
+<p><strong>Question: What criteria should we impose on a time-discretisation method?</strong> Applied to given space-discretisation, so that we obtain a stable and accurate scheme.</p>
+<div class="section" id="general-method">
+<h2><a class="toc-backref" href="#id1">1.10.1.1. General Method</a><a class="headerlink" href="#general-method" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Perform a space discretisation <span class="math">\(\Rightarrow\)</span> system of ODEs
+And express space discretisation in <strong>matrix</strong> form (including BCs)</p>
+</li>
+<li><p class="first">Perform a <strong>spectral</strong> analysis of the matrix <span class="math">\(\Rightarrow\)</span> eigenvalues</p>
+</li>
+<li><p class="first">Stability conditions on the space discretisation</p>
+<ul class="simple">
+<li>The exact time integrated solution of the system of ODEs should not grow unbounded in time</li>
+<li>The eigenvalues <span class="math">\(\Omega\)</span> of the space discretisation matrix must have a <strong>non-positive real part</strong></li>
+</ul>
+</li>
+<li><p class="first">Select a time integration method for the <strong>semi-discretised</strong> system (discretised in space not time)</p>
+<p><span class="math">\(\Rightarrow\)</span> stability analysis as a function of eigenvalues <span class="math">\(\Omega\)</span></p>
+</li>
+<li><p class="first"><strong>Compatibility</strong> <span class="math">\(\Rightarrow\)</span> the <strong>stability</strong> region of the time discretisation must include the whole spectrum <span class="math">\(\Omega\)</span></p>
+</li>
+</ol>
+</div>
+<div class="section" id="the-method-of-lines-analysis-of-the-space-discretised-systems">
+<h2><a class="toc-backref" href="#id2">1.10.1.2. The Method of Lines: Analysis of the Space-Discretised Systems</a><a class="headerlink" href="#the-method-of-lines-analysis-of-the-space-discretised-systems" title="Permalink to this headline">¶</a></h2>
+<p>Consider a general conservation law as I.BVP over domain <span class="math">\(\Omega\)</span> with boundary <span class="math">\(\Gamma\)</span>:</p>
+<div class="math">
+\[{\partial u \over \partial t} + \nabla \cdot \mathbf{F} = 0\]</div>
+<ul class="simple">
+<li>I.C. <span class="math">\(u(\mathbf{x},0) = u^0(\mathbf{x})\)</span>, <span class="math">\(\mathbf{x} \in \Omega\)</span></li>
+<li>B.C. <span class="math">\(u(\mathbf{x},t) = g(\mathbf{x},t)\)</span>, <span class="math">\(\mathbf{x} \in \Gamma\)</span></li>
+</ul>
+<p>In 1D: discretise flux differential operator:</p>
+<p>System of ODES:</p>
+<div class="math">
+\[{d u_i \over dt} = -{1 \over \Delta x_i}(f_{i+1/2}^* - f_{i-1/2}^*)\]</div>
+<p>Group all mesh points to form a column vector <span class="math">\(\mathbf{u}\)</span> and write a system of ODEs</p>
+<div class="math">
+\[{d \mathbf{u} \over dt} = \mathbf{S} \cdot \mathbf{u} + \mathbf{Q}\]</div>
+<p>Where <span class="math">\(\mathbf{S}\)</span> is a matrix representing space discritisation</p>
+<p>And <span class="math">\(\mathbf{Q}\)</span> is the contribution from BCs</p>
+<p>In the FVM formulation, the RHS is the &#8220;residual&#8221;</p>
+<p>This is the &#8220;Method of Lines&#8221;</p>
+</div>
+<div class="section" id="example-1-diffusion">
+<h2><a class="toc-backref" href="#id3">1.10.1.3. Example 1 - Diffusion</a><a class="headerlink" href="#example-1-diffusion" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[u_t = \alpha u_{xx}\]</div>
+<p>CD in space:</p>
+<div class="math">
+\[{d u_i \over dt} = {\alpha \over \Delta x_i}(u_{i+1} - 2u_{i} + u_{i-1})\]</div>
+<p>To get complete matrix <span class="math">\(S\)</span>, we need BCs</p>
+<div class="section" id="dirichlet-bcs">
+<h3><a class="toc-backref" href="#id4">Dirichlet BCs</a><a class="headerlink" href="#dirichlet-bcs" title="Permalink to this headline">¶</a></h3>
+<p>Domain <span class="math">\((0, L)\)</span> with <span class="math">\(N\)</span> mesh points (0 and N-1 are the BCs)</p>
+<div class="math">
+\[x_i = i \Delta x\]</div>
+<div class="math">
+\[\Delta x = {L \over {N-1}}\]</div>
+<p>B.C. <span class="math">\(u(0,t) = a\)</span> and <span class="math">\(u(L,t) = b\)</span></p>
+<p>i = 1 (a occurs at i=0)</p>
+<div class="math">
+\[{d u_1 \over dt} = {\alpha \over \Delta x_i}(u_{2} - 2u_{1} + a)\]</div>
+<p>i = N-2 (b occurs at i=N-1)</p>
+<div class="math">
+\[{d u_{N-2} \over dt} = {\alpha \over \Delta x_i}(b - 2u_{N-2} + u_{N-3})\]</div>
+<p>Finally:</p>
+<div class="math">
+\[\begin{split}{du \over dt} =
+{\alpha \over {\Delta x^2}}
+\begin{bmatrix}
+ -2 &amp; 1 &amp; &amp; &amp;  0 \\
+ 1 &amp; -2 &amp; 1 &amp; &amp; \\
+ \vdots   &amp; \ddots &amp; \ddots &amp; \ddots &amp; \vdots \\
+ &amp; &amp;  1 &amp; -2 &amp;  1 \\
+ 0 &amp; &amp; &amp; 1 &amp; -2
+\end{bmatrix}
+\begin{bmatrix}
+u_1 \\
+u_2 \\
+\vdots \\
+u_{N-3} \\
+u_{N-2}
+\end{bmatrix} +
+\begin{bmatrix}
+a \alpha / \Delta x^2 \\
+0 \\
+\vdots \\
+0 \\
+b \alpha / \Delta x^2 \\
+\end{bmatrix} =
+\mathbf{S} \cdot \mathbf{u} + \mathbf{Q}\end{split}\]</div>
+</div>
+<div class="section" id="neumann-bcs">
+<h3><a class="toc-backref" href="#id5">Neumann BCs</a><a class="headerlink" href="#neumann-bcs" title="Permalink to this headline">¶</a></h3>
+<p><span class="math">\({\partial u \over \partial x} = a\)</span> at <span class="math">\(x = 0\)</span> and <span class="math">\(u_N = u(L,t) = b\)</span></p>
+<p>The Neumann BC needs to be discretised using a one-sided difference</p>
+<p>i = 0:</p>
+<div class="math">
+\[{{u_1 - u_0} \over {\Delta x}} = a \Rightarrow u_0 = u_1 - a \Delta x\]</div>
+<p>i = 1:</p>
+<div class="math">
+\[{d u_1 \over dt} = {\alpha \over \Delta x_i}(u_2 - 2u_1 + u_0) =
+{\alpha \over \Delta x_i}(u_2 - 2u_1 + u_1 - a \Delta x) =
+{\alpha \over \Delta x_i}(u_2 - u_1) - {{a \alpha} \over {\Delta x}}\]</div>
+<p>Finally (we don&#8217;t know <span class="math">\(u_0\)</span> anymore, but we have substituted for it at i=1)</p>
+<div class="math">
+\[\begin{split}{du \over dt} =
+{\alpha \over {\Delta x^2}}
+\begin{bmatrix}
+ -1 &amp; 1 &amp; &amp; &amp;  0 \\
+ 1 &amp; -2 &amp; 1 &amp; &amp; \\
+ \vdots   &amp; \ddots &amp; \ddots &amp; \ddots &amp; \vdots \\
+ &amp; &amp;  1 &amp; -2 &amp;  1 \\
+ 0 &amp; &amp; &amp; 1 &amp; -2
+\end{bmatrix}
+\begin{bmatrix}
+u_1 \\
+u_2 \\
+\vdots \\
+u_{N-3} \\
+u_{N-2}
+\end{bmatrix} +
+\begin{bmatrix}
+-a \alpha / \Delta x \\
+0 \\
+\vdots \\
+0 \\
+b \alpha / \Delta x^2 \\
+\end{bmatrix} =
+\mathbf{S} \cdot \mathbf{u} + \mathbf{Q}\end{split}\]</div>
+</div>
+<div class="section" id="importance-of-bcs-for-stability">
+<h3><a class="toc-backref" href="#id6">Importance of BCs for stability</a><a class="headerlink" href="#importance-of-bcs-for-stability" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The form of <span class="math">\(\mathbf{S}\)</span> depends on BCs</li>
+<li>The eigenvalues depend on <span class="math">\(\mathbf{S}\)</span></li>
+<li>The stability depends on the eigenvalues</li>
+</ul>
+<p><strong>Hence, the stability depends on the BCs</strong></p>
+</div>
+<div class="section" id="periodic-bcs">
+<h3><a class="toc-backref" href="#id7">Periodic BCs</a><a class="headerlink" href="#periodic-bcs" title="Permalink to this headline">¶</a></h3>
+<p><strong>We must solve all the way to the boundaries, and set any values outside the domain to be equal to the values inside the domain at the opposite end of the domain</strong></p>
+<p><span class="math">\(u_N = u_0\)</span> and <span class="math">\(u_{-1} = u_{N-1}\)</span></p>
+<p>In this case, write an equation for i = 0:</p>
+<div class="math">
+\[{d u_0 \over dt} = {\alpha \over \Delta x^2}(u_1 - 2u_0 + u_{N-1})\]</div>
+<p>For i = N-1:</p>
+<div class="math">
+\[{d u_{N-1} \over dt} = {\alpha \over \Delta x^2}(u_0 - 2u_{N-1} + u_{N-2})\]</div>
+<div class="math">
+\[\begin{split}{du \over dt} =
+{\alpha \over {\Delta x^2}}
+\begin{bmatrix}
+ -2 &amp; 1 &amp; &amp; &amp;  1 \\
+ 1 &amp; -2 &amp; 1 &amp; &amp; \\
+ \vdots   &amp; \ddots &amp; \ddots &amp; \ddots &amp; \vdots \\
+ &amp; &amp;  1 &amp; -2 &amp;  1 \\
+ 1 &amp; &amp; &amp; 1 &amp; -2
+\end{bmatrix}
+\begin{bmatrix}
+u_0 \\
+u_1 \\
+\vdots \\
+u_{N-2} \\
+u_{N-1}
+\end{bmatrix}  =
+\mathbf{S} \cdot \mathbf{u} + \mathbf{Q}\end{split}\]</div>
+<p><span class="math">\(\mathbf{S}\)</span> similar to the case with Dirichlet BCs, but with 1 in upper right and lower left corners.</p>
+<p>Typical for periodic matrices</p>
+</div>
+</div>
+<div class="section" id="example-2-convection">
+<h2><a class="toc-backref" href="#id8">1.10.1.4. Example 2 - Convection</a><a class="headerlink" href="#example-2-convection" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[u_t + a u_x = 0\]</div>
+<p>with <span class="math">\(a \gt 0\)</span></p>
+<div class="section" id="upwind">
+<h3><a class="toc-backref" href="#id9">Upwind</a><a class="headerlink" href="#upwind" title="Permalink to this headline">¶</a></h3>
+<p>Upwind for interior points:</p>
+<div class="math">
+\[{{d u_i} \over dt} = -{a \over {\Delta x}}(u_i - u_{i-1})\]</div>
+<p>B.C. <span class="math">\(u(0,t) = g(t)\)</span> at the left boundary</p>
+<p>i = 1 (first internal point)</p>
+<div class="math">
+\[{d u_1 \over dt} = -{a \over \Delta x}(u_1 - u_{0})
+= -{a \over \Delta x}u_1 + {a \over \Delta x} g(t)\]</div>
+<p>i = N-1 (at the right boundary)</p>
+<div class="math">
+\[{d u_{N-1} \over dt} = -{a \over \Delta x}(u_{N-1} - u_{N-2})\]</div>
+<p>Note: no additional boundary condition is needed at the right boundary (because we are using backward differencing, or upwind)</p>
+<p>Finally:</p>
+<div class="math">
+\[\begin{split}{{d \mathbf{u}} \over dt} =
+{a \over {\Delta x}}
+\begin{bmatrix}
+ 1 &amp; 0 &amp; &amp; &amp;  0 \\
+ -1 &amp; 1 &amp; 0 &amp; &amp; \\
+ \vdots   &amp; \ddots &amp; \ddots &amp; \ddots &amp; \vdots \\
+ &amp; &amp;  -1 &amp; 1 &amp;  0 \\
+ 0 &amp; &amp; &amp; -1 &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+u_1 \\
+u_2 \\
+\vdots \\
+u_{N-2} \\
+u_{N-1}
+\end{bmatrix} +
+\begin{bmatrix}
+a g(t) / \Delta x \\
+0 \\
+\vdots \\
+0 \\
+0 \\
+\end{bmatrix} =
+\mathbf{S} \cdot \mathbf{u} + \mathbf{Q}\end{split}\]</div>
+<p><strong>Question: What would happen if we imposed a boundary condition at:</strong> <span class="math">\(u_{N-1} = g(t)\)</span></p>
+<p>The last equation would be:</p>
+<div class="math">
+\[{d u_{N-2} \over dt} = -{a \over \Delta x}(u_{N-2} - u_{N-3})\]</div>
+<p>This is decoupled from the data at <span class="math">\(i = N-1\)</span></p>
+<p>No way to ensure that a numerical condition at <span class="math">\(u_0\)</span> will lead to a downstream value that satisfies <span class="math">\(u_{N-1} = g(t)\)</span>. Problem is not well-posed</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/downstream.png"><img alt="../_images/downstream.png" src="../_images/downstream.png" style="width: 560.0px; height: 280.0px;" /></a>
+</div>
+<p><strong>For a &gt; 0</strong></p>
+<p>The value at A, <span class="math">\(u_0\)</span> must be specified at i=0. The corresponding value at B will be part of the solution, following the characteristic <span class="math">\(dx/dt = a\)</span></p>
+<p>Any other BC at x=L would be incompatible with <span class="math">\(u_0\)</span> at A.</p>
+</div>
+<div class="section" id="central-space-discretisation-with-periodic-bcs">
+<h3><a class="toc-backref" href="#id10">Central space discretisation with periodic BCs</a><a class="headerlink" href="#central-space-discretisation-with-periodic-bcs" title="Permalink to this headline">¶</a></h3>
+<p>Assume:</p>
+<p><span class="math">\(u_N = u_0\)</span> and <span class="math">\(u_{-1} = u_{N-1}\)</span></p>
+<p>i = 0:</p>
+<div class="math">
+\[{d u_0 \over dt} = -{a \over {2 \Delta x}}(u_1 - u_{-1}) = -{a \over {2 \Delta x}}(u_1 - u_{N-1})\]</div>
+<p>i = N-1:</p>
+<div class="math">
+\[{d u_{N-1} \over dt} = -{a \over {2 \Delta x}}(u_N - u_{N-2}) = -{a \over {2 \Delta x}}(u_0 - u_{N-2})\]</div>
+<p>Finally:</p>
+<div class="math">
+\[\begin{split}{{d \mathbf{u}} \over dt} =
+-{a \over {2 \Delta x}}
+\begin{bmatrix}
+ 0 &amp; 1 &amp; &amp; &amp;  -1 \\
+ -1 &amp; 0 &amp; 1 &amp; &amp; \\
+ \vdots   &amp; \ddots &amp; \ddots &amp; \ddots &amp; \vdots \\
+ &amp; &amp;  -1 &amp; 0 &amp;  1 \\
+ 1 &amp; &amp; &amp; -1 &amp; 0
+\end{bmatrix}
+\begin{bmatrix}
+u_0 \\
+u_1 \\
+\vdots \\
+u_{N-2} \\
+u_{N-1}
+\end{bmatrix}\end{split}\]</div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="quick.html">1.9.7. Higher Order Finite Volume Interpolation: QUICK Scheme</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="matrix_method.html">1.10.2. The Matrix Method for Stability of Spatial Discretisation</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

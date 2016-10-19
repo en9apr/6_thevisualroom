@@ -1,0 +1,426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2.1.8. 2D Second-order Non-Linear Convection-Diffusion &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="2. Computational Fluid Dynamics - Projects" href="barba_cfd_projects.html" />
+    <link rel="next" title="2.3.1. Finite Difference and Finite Volume Projects" href="assignments.html" />
+    <link rel="prev" title="2.1.7. 2D Second-order Linear Diffusion" href="2D_linear_diffusion.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>2.1.8. 2D Second-order Non-Linear Convection-Diffusion</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="2D_linear_diffusion.html">2.1.7. 2D Second-order Linear Diffusion</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="assignments.html">2.3.1. Finite Difference and Finite Volume Projects</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="d-second-order-non-linear-convection-diffusion">
+<h1>2.1.8. 2D Second-order Non-Linear Convection-Diffusion<a class="headerlink" href="#d-second-order-non-linear-convection-diffusion" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#understand-the-problem" id="id5">Understand the Problem</a></li>
+<li><a class="reference internal" href="#formulate-the-problem" id="id6">Formulate the Problem</a><ul>
+<li><a class="reference internal" href="#input-data" id="id7">Input Data</a></li>
+<li><a class="reference internal" href="#output-data" id="id8">Output Data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#design-algorithm-to-solve-problem" id="id9">Design Algorithm to Solve Problem</a><ul>
+<li><a class="reference internal" href="#space-time-discretisation" id="id10">Space-time discretisation</a></li>
+<li><a class="reference internal" href="#numerical-scheme" id="id11">Numerical scheme</a></li>
+<li><a class="reference internal" href="#discrete-equation" id="id12">Discrete equation</a></li>
+<li><a class="reference internal" href="#transpose" id="id13">Transpose</a></li>
+<li><a class="reference internal" href="#pseudo-code" id="id14">Pseudo-code</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implement-algorithm-in-python" id="id15">Implement Algorithm in Python</a></li>
+<li><a class="reference internal" href="#conclusions" id="id16">Conclusions</a><ul>
+<li><a class="reference internal" href="#why-isn-t-the-square-wave-maintained" id="id17">Why isn&#8217;t the square wave maintained?</a></li>
+<li><a class="reference internal" href="#why-does-the-wave-shift" id="id18">Why does the wave shift?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="understand-the-problem">
+<h2><a class="toc-backref" href="#id5">2.1.8.1. Understand the Problem</a><a class="headerlink" href="#understand-the-problem" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>What is the final velocity profile for 2D non-linear convection-diffusion when the initial conditions are a square wave and the boundary conditions are unity?</li>
+<li>2D non-linear convection-diffusion is described as follows:</li>
+</ul>
+<div class="math">
+\[{\partial u \over \partial t} + u {\partial u \over \partial x} + v {\partial u \over \partial y} = \nu \left ( {\partial^2 u \over \partial x^2}+  {\partial^2 u \over \partial y^2}  \right )\]</div>
+<div class="math">
+\[{\partial v \over \partial t} + u {\partial v \over \partial x} + v {\partial v \over \partial y} = \nu \left ( {\partial^2 v \over \partial x^2}+  {\partial^2 v \over \partial y^2}  \right )\]</div>
+</div>
+<div class="section" id="formulate-the-problem">
+<h2><a class="toc-backref" href="#id6">2.1.8.2. Formulate the Problem</a><a class="headerlink" href="#formulate-the-problem" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="input-data">
+<h3><a class="toc-backref" href="#id7">Input Data</a><a class="headerlink" href="#input-data" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><cite>nt</cite> = 51 (number of temporal points)</li>
+<li><cite>tmax</cite> = 0.5</li>
+<li><cite>nx</cite> = 21 (number of x spatial points)</li>
+<li><cite>nj</cite> = 21 (number of y spatial points)</li>
+<li><cite>xmax</cite> = 2</li>
+<li><cite>ymax</cite> = 2</li>
+<li><cite>nu</cite> = 0.1</li>
+</ul>
+<p><strong>Initial Conditions:</strong> <span class="math">\(t=0\)</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="21%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">x</th>
+<th class="head">i</th>
+<th class="head">y</th>
+<th class="head">j</th>
+<th class="head">u(x,y,t), v(x,y,t)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="math">\(0\)</span></td>
+<td><span class="math">\(0\)</span></td>
+<td><span class="math">\(0\)</span></td>
+<td><span class="math">\(0\)</span></td>
+<td><span class="math">\(1\)</span></td>
+</tr>
+<tr class="row-odd"><td><span class="math">\(0 &lt; x \le 0.5\)</span></td>
+<td><span class="math">\(0 &lt; i \le 5\)</span></td>
+<td><span class="math">\(0 &lt; y \le 0.5\)</span></td>
+<td><span class="math">\(0 &lt; j \le 5\)</span></td>
+<td><span class="math">\(1\)</span></td>
+</tr>
+<tr class="row-even"><td><span class="math">\(0.5 &lt; x \le 1\)</span></td>
+<td><span class="math">\(5 &lt; i \le 10\)</span></td>
+<td><span class="math">\(0.5 &lt; y \le 1\)</span></td>
+<td><span class="math">\(5 &lt; j \le 10\)</span></td>
+<td><span class="math">\(2\)</span></td>
+</tr>
+<tr class="row-odd"><td><span class="math">\(1 &lt; x &lt; 2\)</span></td>
+<td><span class="math">\(10 &lt; i &lt; 20\)</span></td>
+<td><span class="math">\(1 &lt; y &lt; 2\)</span></td>
+<td><span class="math">\(10 &lt; j &lt; 20\)</span></td>
+<td><span class="math">\(1\)</span></td>
+</tr>
+<tr class="row-even"><td><span class="math">\(2\)</span></td>
+<td><span class="math">\(20\)</span></td>
+<td><span class="math">\(2\)</span></td>
+<td><span class="math">\(20\)</span></td>
+<td><span class="math">\(1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Boundary Conditions:</strong> <span class="math">\(x=0\)</span> and <span class="math">\(x=2\)</span>, <span class="math">\(y=0\)</span> and <span class="math">\(y=2\)</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="32%" />
+<col width="34%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">t</th>
+<th class="head">n</th>
+<th class="head">u(x,y,t), v(x,y,t)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="math">\(0 \le t \le 0.5\)</span></td>
+<td><span class="math">\(0 \le n \le 50\)</span></td>
+<td><span class="math">\(1\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="output-data">
+<h3><a class="toc-backref" href="#id8">Output Data</a><a class="headerlink" href="#output-data" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="26%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">x</th>
+<th class="head">y</th>
+<th class="head">t</th>
+<th class="head">u(x,y,t), v(x,y,t)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="math">\(0 \le x \le 2\)</span></td>
+<td><span class="math">\(0 \le y \le 2\)</span></td>
+<td><span class="math">\(0 \le t \le 0.5\)</span></td>
+<td><span class="math">\(?\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="design-algorithm-to-solve-problem">
+<h2><a class="toc-backref" href="#id9">2.1.8.3. Design Algorithm to Solve Problem</a><a class="headerlink" href="#design-algorithm-to-solve-problem" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="space-time-discretisation">
+<h3><a class="toc-backref" href="#id10">Space-time discretisation</a><a class="headerlink" href="#space-time-discretisation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>i <span class="math">\(\rightarrow\)</span> index of grid in x</li>
+<li>j <span class="math">\(\rightarrow\)</span> index of grid in y</li>
+<li>n <span class="math">\(\rightarrow\)</span> index of grid in t</li>
+</ul>
+</div>
+<div class="section" id="numerical-scheme">
+<h3><a class="toc-backref" href="#id11">Numerical scheme</a><a class="headerlink" href="#numerical-scheme" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>FD</strong> for transient term</li>
+<li><strong>BD</strong> for convection term</li>
+<li><strong>CD</strong> for diffusion term</li>
+</ul>
+</div>
+<div class="section" id="discrete-equation">
+<h3><a class="toc-backref" href="#id12">Discrete equation</a><a class="headerlink" href="#discrete-equation" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[{{u_{i,j}^{n+1} - u_{i,j}^n} \over {\Delta t}} +
+u_{i,j}^n {{u_{i,j}^n - u_{i-1,j}^n} \over \Delta x} +
+v_{i,j}^n {{u_{i,j}^n - u_{i,j-1}^n} \over \Delta y} =
+\nu {{u_{i-1,j}^n - 2u_{i,j}^n + u_{i+1,j}^n} \over \Delta x^2} +
+\nu {{u_{i,j-1}^n - 2u_{i,j}^n + u_{i,j+1}^n} \over \Delta y^2}\]</div>
+<div class="math">
+\[{{v_{i,j}^{n+1} - v_{i,j}^n} \over {\Delta t}} +
+u_{i,j}^n {{v_{i,j}^n - v_{i-1,j}^n} \over \Delta x} +
+v_{i,j}^n {{v_{i,j}^n - v_{i,j-1}^n} \over \Delta y} =
+\nu {{v_{i-1,j}^n - 2v_{i,j}^n + v_{i+1,j}^n} \over \Delta x^2} +
+\nu {{v_{i,j-1}^n - 2v_{i,j}^n + v_{i,j+1}^n} \over \Delta y^2}\]</div>
+</div>
+<div class="section" id="transpose">
+<h3><a class="toc-backref" href="#id13">Transpose</a><a class="headerlink" href="#transpose" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[u_{i,j}^{n+1} = u_{i,j}^n - \Delta t \left(
+                {u_{i,j}^n \over \Delta x} (u_{i,j}^n - u_{i-1,j}^n)+
+                {v_{i,j}^n \over \Delta y} (u_{i,j}^n - u_{i,j-1}^n)-
+                \nu {{u_{i-1,j}^n - 2u_{i,j}^n + u_{i+1,j}^n} \over \Delta x^2} -
+                \nu {{u_{i,j-1}^n - 2u_{i,j}^n + u_{i,j+1}^n} \over \Delta y^2}
+                \right)\]</div>
+<div class="math">
+\[v_{i,j}^{n+1} = v_{i,j}^n - \Delta t \left(
+                {u_{i,j}^n \over \Delta x} (v_{i,j}^n - v_{i-1,j}^n)+
+                {v_{i,j}^n \over \Delta y} (v_{i,j}^n - v_{i,j-1}^n)-
+                \nu {{v_{i-1,j}^n - 2v_{i,j}^n + v_{i+1,j}^n} \over \Delta x^2}-
+                \nu {{v_{i,j-1}^n - 2v_{i,j}^n + v_{i,j+1}^n} \over \Delta y^2}
+                \right)\]</div>
+</div>
+<div class="section" id="pseudo-code">
+<h3><a class="toc-backref" href="#id14">Pseudo-code</a><a class="headerlink" href="#pseudo-code" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#Constants</span>
+<span class="n">nt</span> <span class="o">=</span> <span class="mi">51</span>
+<span class="n">tmax</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">dt</span> <span class="o">=</span>  <span class="n">tmax</span><span class="o">/</span><span class="p">(</span><span class="n">nt</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">nx</span> <span class="o">=</span>  <span class="mi">21</span>
+<span class="n">xmax</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">ny</span> <span class="o">=</span> <span class="mi">21</span>
+<span class="n">ymax</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">dx</span> <span class="o">=</span> <span class="n">xmax</span><span class="o">/</span><span class="p">(</span><span class="n">nx</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dy</span> <span class="o">=</span> <span class="n">ymax</span><span class="o">/</span><span class="p">(</span><span class="n">ny</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">nu</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="c1">#Boundary Conditions</span>
+<span class="c1">#u boundary, bottom and top</span>
+<span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">)</span><span class="o">=</span><span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">)</span><span class="o">=</span><span class="mi">1</span>
+<span class="c1">#v boundary, bottom and top</span>
+<span class="n">v</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">)</span><span class="o">=</span><span class="n">v</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">)</span><span class="o">=</span><span class="mi">1</span>
+<span class="c1">#u boundary left and right</span>
+<span class="n">u</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">)</span><span class="o">=</span><span class="n">u</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">)</span><span class="o">=</span><span class="mi">1</span>
+<span class="c1">#v boundary left and right</span>
+<span class="n">v</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">)</span><span class="o">=</span><span class="n">v</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">)</span><span class="o">=</span><span class="mi">1</span>
+
+<span class="c1">#Initial Conditions</span>
+<span class="n">u</span><span class="p">(:,:,</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">v</span><span class="p">(:,:,</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">u</span><span class="p">(</span><span class="mi">5</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">v</span><span class="p">(</span><span class="mi">5</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1">#Iteration</span>
+<span class="k">for</span> <span class="n">n</span> <span class="n">between</span> <span class="mi">0</span> <span class="ow">and</span> <span class="mi">49</span>
+   <span class="k">for</span> <span class="n">i</span> <span class="n">between</span> <span class="mi">1</span> <span class="ow">and</span> <span class="mi">19</span>
+      <span class="k">for</span> <span class="n">j</span> <span class="n">between</span> <span class="mi">1</span> <span class="ow">and</span> <span class="mi">19</span>
+          <span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="n">dt</span><span class="o">*</span><span class="p">[(</span><span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">dx</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">))</span><span class="o">+</span>
+                                    <span class="p">(</span><span class="n">v</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">dy</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">))</span><span class="o">-</span>
+                                    <span class="n">nu</span><span class="o">*</span><span class="p">(</span><span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">))</span> <span class="o">/</span> <span class="n">dx</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span>
+                                    <span class="n">nu</span><span class="o">*</span><span class="p">(</span><span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">))</span> <span class="o">/</span> <span class="n">dy</span><span class="o">^</span><span class="mi">2</span><span class="p">]</span>
+          <span class="n">v</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">v</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="n">dt</span><span class="o">*</span><span class="p">[(</span><span class="n">u</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">dx</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">v</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="n">v</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">))</span><span class="o">+</span>
+                                    <span class="p">(</span><span class="n">v</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">dy</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">v</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="n">v</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">))</span><span class="o">-</span>
+                                    <span class="n">nu</span><span class="o">*</span><span class="p">(</span><span class="n">v</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">v</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">v</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">))</span> <span class="o">/</span> <span class="n">dx</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span>
+                                    <span class="n">nu</span><span class="o">*</span><span class="p">(</span><span class="n">v</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">v</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">v</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">))</span> <span class="o">/</span> <span class="n">dy</span><span class="o">^</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="implement-algorithm-in-python">
+<h2><a class="toc-backref" href="#id15">2.1.8.4. Implement Algorithm in Python</a><a class="headerlink" href="#implement-algorithm-in-python" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">non_linear_convection_diffusion</span><span class="p">(</span><span class="n">nt</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">nu</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   Returns the velocity field and distance for 2D non-linear convection-diffusion</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="c1"># Increments</span>
+   <span class="n">dt</span> <span class="o">=</span> <span class="n">tmax</span><span class="o">/</span><span class="p">(</span><span class="n">nt</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">dx</span> <span class="o">=</span> <span class="n">xmax</span><span class="o">/</span><span class="p">(</span><span class="n">nx</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">dy</span> <span class="o">=</span> <span class="n">ymax</span><span class="o">/</span><span class="p">(</span><span class="n">ny</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+   <span class="c1"># Initialise data structures</span>
+   <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+   <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(((</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">,</span><span class="n">nt</span><span class="p">)))</span>
+   <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(((</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">,</span><span class="n">nt</span><span class="p">)))</span>
+   <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nx</span><span class="p">)</span>
+   <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">ny</span><span class="p">)</span>
+
+   <span class="c1"># Boundary conditions</span>
+   <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,:]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">nx</span><span class="o">-</span><span class="mi">1</span><span class="p">,:,:]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[:,</span><span class="n">ny</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="mi">1</span>
+   <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,:]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">nx</span><span class="o">-</span><span class="mi">1</span><span class="p">,:,:]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[:,</span><span class="n">ny</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="mi">1</span>
+
+   <span class="c1"># Initial conditions</span>
+   <span class="n">u</span><span class="p">[:,:,:]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[:,:,:]</span> <span class="o">=</span> <span class="mi">1</span>
+   <span class="n">u</span><span class="p">[(</span><span class="n">nx</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">:(</span><span class="n">nx</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,(</span><span class="n">ny</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">:(</span><span class="n">ny</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+   <span class="n">v</span><span class="p">[(</span><span class="n">nx</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">:(</span><span class="n">nx</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,(</span><span class="n">ny</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">:(</span><span class="n">ny</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+
+   <span class="c1"># Loop</span>
+   <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nt</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nx</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">ny</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">+</span>
+            <span class="o">-</span><span class="n">dt</span><span class="o">*</span><span class="p">((</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">/</span><span class="n">dx</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">-</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">])</span><span class="o">+</span>
+                 <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">/</span><span class="n">dy</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">-</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">]))</span><span class="o">+</span>
+             <span class="n">dt</span><span class="o">*</span><span class="n">nu</span><span class="o">*</span><span class="p">(</span> <span class="p">(</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">+</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="p">)</span> <span class="o">/</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span>
+                     <span class="p">(</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">+</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="p">)</span> <span class="o">/</span><span class="n">dy</span><span class="o">**</span><span class="mi">2</span> <span class="p">))</span>
+            <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">+</span>
+            <span class="o">-</span><span class="n">dt</span><span class="o">*</span><span class="p">((</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">/</span><span class="n">dx</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">-</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">])</span><span class="o">+</span>
+                 <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">/</span><span class="n">dy</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">-</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">]))</span><span class="o">+</span>
+             <span class="n">dt</span><span class="o">*</span><span class="n">nu</span><span class="o">*</span><span class="p">(</span> <span class="p">(</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">+</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="p">)</span> <span class="o">/</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span>
+                     <span class="p">(</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">+</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="p">)</span> <span class="o">/</span><span class="n">dy</span><span class="o">**</span><span class="mi">2</span> <span class="p">))</span>
+
+   <span class="c1"># X Loop</span>
+   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nx</span><span class="p">):</span>
+      <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="n">dx</span>
+
+   <span class="c1"># Y Loop</span>
+   <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">ny</span><span class="p">):</span>
+      <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">*</span><span class="n">dy</span>
+
+   <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+<span class="k">def</span> <span class="nf">plot_3D</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">time</span><span class="p">,</span><span class="n">title</span><span class="p">,</span><span class="n">label</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   Plots the 2D velocity field</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+
+   <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+   <span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+   <span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+   <span class="n">ax</span><span class="o">=</span><span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+   <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x (m)&#39;</span><span class="p">)</span>
+   <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y (m)&#39;</span><span class="p">)</span>
+   <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+   <span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+   <span class="n">surf</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">u</span><span class="p">[:,:,</span><span class="n">time</span><span class="p">],</span><span class="n">rstride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">cstride</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+   <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+   <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../02_barba_projects/2D_burgers_equation-1.py">Source code</a>)</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">non_linear_convection_diffusion</span><span class="p">(</span><span class="mi">311</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">plot_3D</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Figure 1: nu=0.1, nt=51, nx=21, ny=21, t=0sec&#39;</span><span class="p">,</span><span class="s1">&#39;u (m/s)&#39;</span><span class="p">)</span>
+<span class="n">plot_3D</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="mi">310</span><span class="p">,</span><span class="s1">&#39;Figure 2: nu=0.1, nt=51, nx=21, ny=21, t=0.5sec&#39;</span><span class="p">,</span><span class="s1">&#39;u (m/s)&#39;</span><span class="p">)</span>
+<span class="n">plot_3D</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Figure 3: nu=0.1, nt=51, nx=21, ny=21, t=0sec&#39;</span><span class="p">,</span><span class="s1">&#39;v (m/s)&#39;</span><span class="p">)</span>
+<span class="n">plot_3D</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="mi">310</span><span class="p">,</span><span class="s1">&#39;Figure 4: nu=0.1, nt=51, nx=21, ny=21, t=0.5sec&#39;</span><span class="p">,</span><span class="s1">&#39;v (m/s)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure" id="id1">
+<img alt="../_images/2D_burgers_equation-1_01_00.png" src="../_images/2D_burgers_equation-1_01_00.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href="../02_barba_projects/2D_burgers_equation-1_01_00.png">png</a>, <a class="reference external" href="../02_barba_projects/2D_burgers_equation-1_01_00.hires.png">hires.png</a>, <a class="reference external" href="../02_barba_projects/2D_burgers_equation-1_01_00.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id2">
+<img alt="../_images/2D_burgers_equation-1_01_01.png" src="../_images/2D_burgers_equation-1_01_01.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href="../02_barba_projects/2D_burgers_equation-1_01_01.png">png</a>, <a class="reference external" href="../02_barba_projects/2D_burgers_equation-1_01_01.hires.png">hires.png</a>, <a class="reference external" href="../02_barba_projects/2D_burgers_equation-1_01_01.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id3">
+<img alt="../_images/2D_burgers_equation-1_01_02.png" src="../_images/2D_burgers_equation-1_01_02.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href="../02_barba_projects/2D_burgers_equation-1_01_02.png">png</a>, <a class="reference external" href="../02_barba_projects/2D_burgers_equation-1_01_02.hires.png">hires.png</a>, <a class="reference external" href="../02_barba_projects/2D_burgers_equation-1_01_02.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id4">
+<img alt="../_images/2D_burgers_equation-1_01_03.png" src="../_images/2D_burgers_equation-1_01_03.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href="../02_barba_projects/2D_burgers_equation-1_01_03.png">png</a>, <a class="reference external" href="../02_barba_projects/2D_burgers_equation-1_01_03.hires.png">hires.png</a>, <a class="reference external" href="../02_barba_projects/2D_burgers_equation-1_01_03.pdf">pdf</a>)</span></p>
+</div>
+</div>
+<div class="section" id="conclusions">
+<h2><a class="toc-backref" href="#id16">2.1.8.5. Conclusions</a><a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="why-isn-t-the-square-wave-maintained">
+<h3><a class="toc-backref" href="#id17">Why isn&#8217;t the square wave maintained?</a><a class="headerlink" href="#why-isn-t-the-square-wave-maintained" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>This is caused by physical diffusion and numerical diffusion (probably hard to separate these)</li>
+</ul>
+</div>
+<div class="section" id="why-does-the-wave-shift">
+<h3><a class="toc-backref" href="#id18">Why does the wave shift?</a><a class="headerlink" href="#why-does-the-wave-shift" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>As with 1D, the square wave is being convected by the  wave speed <cite>u</cite> and <cite>v</cite> in 2 dimensions</li>
+<li>Profiles shift by <span class="math">\(u \Delta t\)</span> and <span class="math">\(v \Delta t\)</span> - compare Figure 1, 2, 3 and 4</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="2D_linear_diffusion.html">2.1.7. 2D Second-order Linear Diffusion</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="assignments.html">2.3.1. Finite Difference and Finite Volume Projects</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

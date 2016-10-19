@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.9.4. 2D Finite Volume Method: Non-Cartesian Grids &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.9.5. Evaluating Fluxes and Derivatives of Fluxes in 2D" href="finite_volume_method_5.html" />
+    <link rel="prev" title="1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation" href="finite_volume_method_3.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.9.4. 2D Finite Volume Method: Non-Cartesian Grids</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="finite_volume_method_3.html">1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="finite_volume_method_5.html">1.9.5. Evaluating Fluxes and Derivatives of Fluxes in 2D</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="d-finite-volume-method-non-cartesian-grids">
+<h1>1.9.4. 2D Finite Volume Method: Non-Cartesian Grids<a class="headerlink" href="#d-finite-volume-method-non-cartesian-grids" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#summary" id="id1">Summary</a></li>
+<li><a class="reference internal" href="#non-cartesian-grid" id="id2">Non-Cartesian Grid</a></li>
+<li><a class="reference internal" href="#evaluation-of-the-flow-quantity-terms" id="id3">Evaluation of the Flow Quantity Terms</a></li>
+<li><a class="reference internal" href="#evaluation-of-the-source-terms" id="id4">Evaluation of the Source Terms</a></li>
+<li><a class="reference internal" href="#evaluation-of-the-volumes" id="id5">Evaluation of the Volumes</a></li>
+<li><a class="reference internal" href="#evaluation-of-the-fluxes" id="id6">Evaluation of the Fluxes</a><ul>
+<li><a class="reference internal" href="#central-scheme-and-cell-centered-fvm" id="id7">Central Scheme and Cell Centered FVM</a></li>
+<li><a class="reference internal" href="#central-scheme-and-cell-vertex-fvm" id="id8">Central scheme and Cell Vertex FVM</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#d-example-fvm-reduces-to-fd" id="id9">2D Example - FVM Reduces to FD</a></li>
+</ul>
+</div>
+<div class="section" id="summary">
+<h2><a class="toc-backref" href="#id1">1.9.4.1. Summary</a><a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The cross product is used to compute the volume</li>
+<li>The midpoint rule is used to compute the flow quantity and the source term</li>
+<li>The FVM with the cell-centred or cell-vertex formulation can be used to compute the fluxes</li>
+<li>If the FVM is applied on a Cartesian grid (every angle is a right angle), the FD formulas are recovered</li>
+</ul>
+</div>
+<div class="section" id="non-cartesian-grid">
+<h2><a class="toc-backref" href="#id2">1.9.4.2. Non-Cartesian Grid</a><a class="headerlink" href="#non-cartesian-grid" title="Permalink to this headline">¶</a></h2>
+<p>Non-Cartesian, although shown as Cartesian, but we will not assume we know the volume of the cell ABCD</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/centred_scheme_2.png"><img alt="../_images/centred_scheme_2.png" src="../_images/centred_scheme_2.png" style="width: 420.0px; height: 420.0px;" /></a>
+</div>
+<p>For cell ABCD:</p>
+<div class="math">
+\[{\partial \over \partial t} \int_{\Omega_{ij}} U d \Omega + \oint_{ABCD} \mathbf{F} \cdot d \mathbf{S} = \int_{\Omega_{ij}} Q d \Omega\]</div>
+<div class="math">
+\[{\partial \over \partial t}  U_{ij} d \Omega_{ij} + \sum_{ABCD} (\pm fdy \pm gdx) =  Q_{ij} d \Omega_{ij}\]</div>
+<p>where: <span class="math">\(f\)</span> and <span class="math">\(g\)</span> are the Cartesian components of the flux vector <span class="math">\(\mathbf{F}\)</span></p>
+<p>The sign in the flux appears due to the surface vector, e.g for Side AB:</p>
+<div class="math">
+\[\mathbf{S}_{AB} = \Delta y_{AB} \mathbf{i} - \Delta x_{AB} \mathbf{j} = (y_B - y_A) \mathbf{i} - (x_B - x_A) \mathbf{j}\]</div>
+</div>
+<div class="section" id="evaluation-of-the-flow-quantity-terms">
+<h2><a class="toc-backref" href="#id3">1.9.4.3. Evaluation of the Flow Quantity Terms</a><a class="headerlink" href="#evaluation-of-the-flow-quantity-terms" title="Permalink to this headline">¶</a></h2>
+<p>Can use <strong>midpoint rule</strong> which approximates a volume integral by the product of the centre value and the CV:</p>
+<div class="math">
+\[U_{i,j} = \int_{\Omega_{i,j}} U d \Omega = U_{i,j} \Delta \Omega_{i,j}\]</div>
+</div>
+<div class="section" id="evaluation-of-the-source-terms">
+<h2><a class="toc-backref" href="#id4">1.9.4.4. Evaluation of the Source Terms</a><a class="headerlink" href="#evaluation-of-the-source-terms" title="Permalink to this headline">¶</a></h2>
+<p>Can use <strong>midpoint rule</strong> which approximates a volume integral by the product of the centre value and the CV:</p>
+<div class="math">
+\[Q_{i,j} = \int_{\Omega_{i,j}} Q d \Omega = Q_{i,j} \Delta \Omega_{i,j}\]</div>
+</div>
+<div class="section" id="evaluation-of-the-volumes">
+<h2><a class="toc-backref" href="#id5">1.9.4.5. Evaluation of the Volumes</a><a class="headerlink" href="#evaluation-of-the-volumes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The vector product is the area of a parallelogram</li>
+<li>Take the absolute value to ensure the value is positive (<span class="math">\(\Delta x\)</span> and <span class="math">\(\Delta y\)</span> can be negative)</li>
+</ul>
+<div class="math">
+\[\begin{split}\left| \mathbf{a} \times \mathbf{b} \right| =
+\left| \text{det} \begin{bmatrix} \Delta x_1 &amp; \Delta x_2 \\ \Delta y_1 &amp; \Delta y_2  \end{bmatrix} \right| =
+\left| \Delta x_1 \Delta y_2 - \Delta x_2 \Delta y_1 \right|\end{split}\]</div>
+<ul class="simple">
+<li>The area we are looking for (the quadrilateral) is half the area of the parallelogram:</li>
+</ul>
+<div class="math">
+\[\Omega_{ABCD} = {1 \over 2} \left| \mathbf{AC} \times \mathbf{BD} \right|\]</div>
+<div class="math">
+\[\begin{split}\mathbf{AC} = \begin{bmatrix} \Delta x_{AC} \\ \Delta y_{AC} \end{bmatrix}\end{split}\]</div>
+<div class="math">
+\[\begin{split}\mathbf{BD} = \begin{bmatrix} \Delta x_{BD} \\ \Delta y_{BD} \end{bmatrix}\end{split}\]</div>
+<div class="math">
+\[\Omega_{ABCD} = {1 \over 2} \left|  \Delta x_{AC}  \Delta y_{BD} - \Delta x_{BD} \Delta y_{AC} \right|\]</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/parallelogram.png"><img alt="../_images/parallelogram.png" src="../_images/parallelogram.png" style="width: 420.0px; height: 420.0px;" /></a>
+</div>
+</div>
+<div class="section" id="evaluation-of-the-fluxes">
+<h2><a class="toc-backref" href="#id6">1.9.4.6. Evaluation of the Fluxes</a><a class="headerlink" href="#evaluation-of-the-fluxes" title="Permalink to this headline">¶</a></h2>
+<p>The evaluation of fluxes determines the difference between a variety of schemes, e.g. cell vertex or cell centered</p>
+<p>It depends on the location of the flow variables w.r.t. the mesh and selected scheme</p>
+<div class="section" id="central-scheme-and-cell-centered-fvm">
+<h3><a class="toc-backref" href="#id7">Central Scheme and Cell Centered FVM</a><a class="headerlink" href="#central-scheme-and-cell-centered-fvm" title="Permalink to this headline">¶</a></h3>
+<p>We know the values at the black dots, we don&#8217;t know the values in red</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/centred_scheme_3.png"><img alt="../_images/centred_scheme_3.png" src="../_images/centred_scheme_3.png" style="width: 420.0px; height: 420.0px;" /></a>
+</div>
+<ul class="simple">
+<li><strong>Option 1:</strong> Average of fluxes perpendicular to face - e.g. <strong>midpoint rule</strong></li>
+</ul>
+<div class="math">
+\[f_{AB} = f_{i+1/2,j}\]</div>
+<p>Take the average flux:</p>
+<div class="math">
+\[f_{i+1/2,j} =  {1 \over 2} (f_{i,j} + f_{i+1,j})\]</div>
+<p>where <span class="math">\(f_{i,j} = f(u_{i,j})\)</span></p>
+<p>Flux of the average flow quantity:</p>
+<div class="math">
+\[f_{AB} = f \left( {u_{i,j} + u_{i+1,j} \over 2} \right)\]</div>
+<p>(not the same, because f is generally non-linear)</p>
+<p>Can also use Upwind, Linear Interpolation, QUICK and Higher Order Schemes for midpoint rule</p>
+<ul class="simple">
+<li><strong>Option 2:</strong> Average of fluxes parallel to face A and B - e.g. <strong>trapezoid rule</strong></li>
+</ul>
+<div class="math">
+\[f_{AB} = {1 \over 2} (f_A + f_B)\]</div>
+<p>Evaluate flow quantity in A and B (at the corner A)</p>
+<div class="math">
+\[u_A = {1 \over 4}(u_{i,j} + u_{i+1,j} + u_{i+1,j-1} + u_{i,j-1})\]</div>
+<p>Or average the fluxes:</p>
+<div class="math">
+\[f_A = {1 \over 4}(f_{i,j} + f_{i+1,j} + f_{i+1,j-1} + f_{i,j-1})\]</div>
+<p>(more flux evaluations - could be expensive computationally)</p>
+<p>Can also use Simpson&#8217;s Rule, cubic polynomials for this type of rule</p>
+</div>
+<div class="section" id="central-scheme-and-cell-vertex-fvm">
+<h3><a class="toc-backref" href="#id8">Central scheme and Cell Vertex FVM</a><a class="headerlink" href="#central-scheme-and-cell-vertex-fvm" title="Permalink to this headline">¶</a></h3>
+<p>We know the values at the black dots, we don&#8217;t know the values in red - remember flux is not at a point, it&#8217;s <strong>through a face</strong> by integration.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/vertex_scheme_4.png"><img alt="../_images/vertex_scheme_4.png" src="../_images/vertex_scheme_4.png" style="width: 420.0px; height: 420.0px;" /></a>
+</div>
+<ul class="simple">
+<li><strong>Option 1</strong> - fluxes perpendicular to face:</li>
+</ul>
+<div class="math">
+\[f_{AB} = f \left( {u_{i,j} + u_{i+1,j} \over 2} \right)\]</div>
+<ul class="simple">
+<li><strong>Option 2</strong> - fluxes parallel to face:</li>
+</ul>
+<div class="math">
+\[f_{AB} = {1 \over 2} (f_A + f_B)\]</div>
+<ul class="simple">
+<li>The last one corresponds to trapezoidal rule for the integral:</li>
+</ul>
+<div class="math">
+\[\int_{AB} f dy = {1 \over 2}(f_A + f_B)(y_B - y_A)\]</div>
+<p>Summing over the sides ABCD:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/vertex_scheme_6.png"><img alt="../_images/vertex_scheme_6.png" src="../_images/vertex_scheme_6.png" style="width: 350.0px; height: 350.0px;" /></a>
+</div>
+<p>Use trapezium rule: half the sum of the parallel sides times the distance between them:</p>
+<div class="math">
+\[\begin{split}\oint_{ABCD} \mathbf{F} \cdot d \mathbf{S} =
+{1 \over 2} \left( \begin{bmatrix} {f_A - f_C \\ g_C - g_A} \end{bmatrix} \cdot
+            \begin{bmatrix} {\Delta y_{DB} \\ \Delta x_{DB}} \end{bmatrix} +
+            \begin{bmatrix} {f_B - f_D \\ g_B - g_D} \end{bmatrix} \cdot
+            \begin{bmatrix} {\Delta y_{AC} \\ \Delta x_{AC}} \end{bmatrix} \right) \\
+            = {1 \over 2} \left( (f_A-f_C) \Delta y_{DB} + (g_C-g_A) \Delta x_{DB} +
+                            (f_B-f_D) \Delta y_{AC} + (g_B-g_D) \Delta x_{AC} \right)\end{split}\]</div>
+</div>
+</div>
+<div class="section" id="d-example-fvm-reduces-to-fd">
+<h2><a class="toc-backref" href="#id9">1.9.4.7. 2D Example - FVM Reduces to FD</a><a class="headerlink" href="#d-example-fvm-reduces-to-fd" title="Permalink to this headline">¶</a></h2>
+<p>This is a generic example - we could use cell centered or cell vertex here (but just showing cell centered):</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/centred_scheme_6.png"><img alt="../_images/centred_scheme_6.png" src="../_images/centred_scheme_6.png" style="width: 315.0px; height: 315.0px;" /></a>
+</div>
+<p>For cell ABCD:</p>
+<div class="math">
+\[{\partial \over \partial t} \int_{\Omega_{i,j}} U d \Omega + \oint_{ABCD} \mathbf{F} \cdot d \mathbf{S} = \int_{\Omega_{i,j}} Q d \Omega\]</div>
+<div class="math">
+\[\begin{split}{\partial \over \partial t} u_{i,j} \Omega_{i,j} +
+\begin{bmatrix} {f_{AB} \\ g_{AB}} \end{bmatrix} \cdot
+\begin{bmatrix} {\Delta y_{AB} \\ \Delta x_{AB}} \end{bmatrix} +
+\begin{bmatrix} {f_{BC} \\ g_{BC}} \end{bmatrix} \cdot
+\begin{bmatrix} {\Delta y_{BC} \\ \Delta x_{BC}} \end{bmatrix} +
+\begin{bmatrix} {f_{CD} \\ g_{CD}} \end{bmatrix} \cdot
+\begin{bmatrix} {\Delta y_{CD} \\ \Delta x_{CD}} \end{bmatrix} +
+\begin{bmatrix} {f_{DA} \\ g_{DA}} \end{bmatrix} \cdot
+\begin{bmatrix} {\Delta y_{DA} \\ \Delta x_{DA}} \end{bmatrix} =
+q_{i,j} d \Omega_{i,j}\end{split}\]</div>
+<p>Volume:</p>
+<p><span class="math">\(\Omega_{i,j} = \Delta x \Delta y\)</span></p>
+<p>Surfaces:</p>
+<p><span class="math">\(\Delta y_{AB}\)</span> = <span class="math">\(\Delta y\)</span>  <span class="math">\(\quad\)</span>  <span class="math">\(\Delta x_{AB}\)</span> = <span class="math">\(0\)</span>  <span class="math">\(\quad\)</span>  <span class="math">\(\Delta y_{BC}\)</span> = <span class="math">\(0\)</span>  <span class="math">\(\quad\)</span>  <span class="math">\(\Delta x_{BC}\)</span> = <span class="math">\(\Delta x\)</span>  <span class="math">\(\quad\)</span>  <span class="math">\(\Delta y_{CD}\)</span> = <span class="math">\(\Delta y\)</span>  <span class="math">\(\quad\)</span>  <span class="math">\(\Delta x_{CD}\)</span> = <span class="math">\(0\)</span>  <span class="math">\(\quad\)</span>  <span class="math">\(\Delta y_{DA}\)</span> = <span class="math">\(0\)</span>  <span class="math">\(\quad\)</span>  <span class="math">\(\Delta x_{DA}\)</span> = <span class="math">\(\Delta x\)</span></p>
+<p>Fluxes:</p>
+<p><span class="math">\(f_{AB}\)</span> = <span class="math">\(f_{i+1/2,j}\)</span>  <span class="math">\(\quad\)</span>  <span class="math">\(g_{AB}\)</span> = <span class="math">\(0\)</span>  <span class="math">\(\quad\)</span>  <span class="math">\(f_{BC}\)</span> = <span class="math">\(0\)</span>  <span class="math">\(\quad\)</span>  <span class="math">\(g_{BC}\)</span> = <span class="math">\(g_{i,j+1/2}\)</span>  <span class="math">\(\quad\)</span>  <span class="math">\(f_{CD}\)</span> = <span class="math">\(-f_{i-1/2,j}\)</span>  <span class="math">\(\quad\)</span>  <span class="math">\(g_{CD}\)</span> = <span class="math">\(0\)</span>  <span class="math">\(\quad\)</span>  <span class="math">\(f_{DA}\)</span> = <span class="math">\(0\)</span>  <span class="math">\(\quad\)</span>  <span class="math">\(g_{DA}\)</span> = <span class="math">\(-g_{i,j-1/2}\)</span></p>
+<p>Hence:</p>
+<div class="math">
+\[{\partial \over \partial t} u_{i,j} \Delta x \Delta y +
+({f_{i+1/2,j} - f_{i-1/2,j}}) \Delta y + ({g_{i,j+1/2} - g_{i,j-1/2}}) \Delta x =
+q_{i,j} \Delta x \Delta y\]</div>
+<p>Dividing by the volume we have recovered the finite difference formula:</p>
+<div class="math">
+\[{\partial \over \partial t} u_{i,j} +
+{({f_{i+1/2,j} - f_{i-1/2,j}}) \over \Delta x} + {({g_{i,j+1/2} - g_{i,j-1/2}}) \over \Delta y} =
+q_{i,j}\]</div>
+<p>Note: <span class="math">\(f_{i,j}\)</span> and <span class="math">\(g_{i,j}\)</span> do not appear, hence <strong>odd-even decoupling</strong> can occur</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="finite_volume_method_3.html">1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="finite_volume_method_5.html">1.9.5. Evaluating Fluxes and Derivatives of Fluxes in 2D</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

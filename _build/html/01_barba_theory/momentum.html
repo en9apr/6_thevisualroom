@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.1.3. Derivation of the Momentum Equation &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.1.4. Derivation of the Navier-Stokes Equations" href="navier_stokes.html" />
+    <link rel="prev" title="1.1.2. Derivation of the Continuity Equation" href="continuity.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.1.3. Derivation of the Momentum Equation</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="continuity.html">1.1.2. Derivation of the Continuity Equation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="navier_stokes.html">1.1.4. Derivation of the Navier-Stokes Equations</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="derivation-of-the-momentum-equation">
+<h1>1.1.3. Derivation of the Momentum Equation<a class="headerlink" href="#derivation-of-the-momentum-equation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="newton-s-second-law-the-net-force-equals-the-rate-of-change-of-momentum">
+<h2>1.1.3.1. Newton&#8217;s Second Law - The net force equals the rate of change of momentum<a class="headerlink" href="#newton-s-second-law-the-net-force-equals-the-rate-of-change-of-momentum" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\vec F = {D {\vec V M} \over D t}\]</div>
+<div class="section" id="for-a-system">
+<h3>For a system:<a class="headerlink" href="#for-a-system" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\vec F = {D \over D t} \int_{SYS} \vec V dM\]</div>
+</div>
+<div class="section" id="for-a-control-volume-via-reynolds-transport-theorem">
+<h3>For a control volume (via Reynolds Transport Theorem):<a class="headerlink" href="#for-a-control-volume-via-reynolds-transport-theorem" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\sum \vec F_{CV} = {\partial \over \partial t} \int_{CV} \vec V \rho dV + \int_{CS} \vec V \rho \vec V \cdot \hat n dA\]</div>
+</div>
+</div>
+<div class="section" id="lhs-1-body-forces-weight-for-an-element">
+<h2>1.1.3.2. LHS 1) Body forces - weight for an element <span class="math">\(\delta m\)</span>:<a class="headerlink" href="#lhs-1-body-forces-weight-for-an-element" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\delta \vec F = {D \over D t} \vec V \delta m = \delta m {D \over {Dt}} \vec V = \delta m \cdot \vec a\]</div>
+<div class="math">
+\[\delta \vec F_b = \delta m \cdot \vec g = \rho \delta x \delta y \delta z \cdot \vec g\]</div>
+</div>
+<div class="section" id="lhs-2-normal-force-and-tangential-force">
+<h2>1.1.3.3. LHS 2) Normal force and Tangential force<a class="headerlink" href="#lhs-2-normal-force-and-tangential-force" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<img alt="../_images/stress_diagram.png" src="../_images/stress_diagram.png" />
+</div>
+<dl class="docutils">
+<dt>Subscript notation:</dt>
+<dd><ul class="first last simple">
+<li>1st subscript refers to the direction of the normal vector</li>
+<li>2nd subscript refers to the direction of the stress vector</li>
+</ul>
+</dd>
+<dt>Sign convention:</dt>
+<dd><ul class="first last simple">
+<li>Normal Stress is positive if it&#8217;s in the same direction as the outward normal vector</li>
+<li>Shear Stress is positive if it&#8217;s in the same direction as the coordinate system w.r.t the outward normal vector (i.e. the right hand rule applies - thumb is the direction of the outward normal vector, the two fingers are the shear stresses)</li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="conservation-of-momentum-in-x-direction">
+<h3>Conservation of Momentum in x-direction:<a class="headerlink" href="#conservation-of-momentum-in-x-direction" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\delta F_{sx} = \left( {\partial \sigma_{xx} \over \partial x} + {\partial \tau_{yx} \over \partial y} + {\partial \tau_{zx} \over \partial z} \right) \delta x \delta y \delta z\]</div>
+</div>
+<div class="section" id="conservation-of-momentum-in-y-direction">
+<h3>Conservation of Momentum in y-direction:<a class="headerlink" href="#conservation-of-momentum-in-y-direction" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\delta F_{sy} = \left( {\partial \tau_{xy}  \over \partial x} + {\partial \sigma_{yy} \over \partial y} + {\partial \tau_{zy} \over \partial z} \right) \delta x \delta y \delta z\]</div>
+</div>
+<div class="section" id="conservation-of-momentum-in-z-direction">
+<h3>Conservation of Momentum in z-direction:<a class="headerlink" href="#conservation-of-momentum-in-z-direction" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\delta F_{sz} = \left( {\partial \tau_{xz} \over \partial x} + {\partial \tau_{yz} \over \partial y} + {\partial \sigma_{zz} \over \partial z} \right) \delta x \delta y \delta z\]</div>
+</div>
+</div>
+<div class="section" id="equation-of-motion">
+<h2>1.1.3.4. Equation of motion:<a class="headerlink" href="#equation-of-motion" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[ \begin{align}\begin{aligned}\rho g_x + {\partial \sigma_{xx} \over \partial x} + {\partial \tau_{yx} \over \partial y} + {\partial \tau_{zx} \over \partial z} = \rho \left ( {\partial u \over \partial t} + u{\partial u \over \partial x} + v {\partial u \over \partial y} + w {\partial u \over \partial z} \right )\\\rho g_y + {\partial \tau_{xy} \over \partial x} + {\partial \sigma_{yy} \over \partial y} + {\partial \tau_{zy} \over \partial z} = \rho \left ( {\partial v \over \partial t} + u {\partial v \over \partial x} + v {\partial v \over \partial y} + w {\partial v \over \partial z} \right )\\\rho g_z + {\partial \tau_{xz} \over \partial x} + {\partial \tau_{yz} \over \partial y} + {\partial \sigma_{zz} \over \partial z} = \rho \left ( {\partial w \over \partial t} + u {\partial w \over \partial x} + v {\partial w \over \partial y} + w {\partial w \over \partial z} \right )\end{aligned}\end{align} \]</div>
+<div class="section" id="three-equations-continuity-four-equations">
+<h3>Three equations + continuity = Four equations<a class="headerlink" href="#three-equations-continuity-four-equations" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="unknowns-u-v-w-and-nine-stresses-twelve-unknowns-need-more-information">
+<h3>Unknowns: u, v, w and nine stresses = Twelve unknowns - need more information<a class="headerlink" href="#unknowns-u-v-w-and-nine-stresses-twelve-unknowns-need-more-information" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="inviscid-flow-no-shearing-stresses">
+<h3>Inviscid flow - no shearing stresses<a class="headerlink" href="#inviscid-flow-no-shearing-stresses" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\sigma_{xx} = \sigma_{yy} = \sigma_{zz}  = -p\]</div>
+</div>
+<div class="section" id="euler-s-equation-in-the-x-direction">
+<h3>Euler&#8217;s Equation in the x-direction:<a class="headerlink" href="#euler-s-equation-in-the-x-direction" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\rho g_x - {\partial p \over \partial x} = \rho \left ( {\partial u \over \partial t} + u {\partial u \over \partial x} + v {\partial u \over \partial y} + w {\partial u \over \partial z} \right )\]</div>
+</div>
+<div class="section" id="vector-notation">
+<h3>Vector Notation:<a class="headerlink" href="#vector-notation" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\rho \vec g- \nabla p = \rho \left ( {\partial \vec V \over \partial t} + \vec V(\nabla \cdot \vec V) \right )\]</div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="continuity.html">1.1.2. Derivation of the Continuity Equation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="navier_stokes.html">1.1.4. Derivation of the Navier-Stokes Equations</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.6.3. Explicit and Implicit Numerical Methods &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.6.4. Strong and Weak Solutions" href="strong_weak.html" />
+    <link rel="prev" title="1.6.2. Conservative Form" href="conservative_form.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.6.3. Explicit and Implicit Numerical Methods</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="conservative_form.html">1.6.2. Conservative Form</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="strong_weak.html">1.6.4. Strong and Weak Solutions</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="explicit-and-implicit-numerical-methods">
+<h1>1.6.3. Explicit and Implicit Numerical Methods<a class="headerlink" href="#explicit-and-implicit-numerical-methods" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#why-study-non-linear-convection" id="id5">Why study Non-linear Convection?</a></li>
+<li><a class="reference internal" href="#inviscid-burgers-equation-non-conservative-form" id="id6">Inviscid Burgers Equation - Non Conservative Form</a></li>
+<li><a class="reference internal" href="#inviscid-burgers-equation-conservative-form" id="id7">Inviscid Burgers Equation - Conservative Form</a></li>
+<li><a class="reference internal" href="#lax-friedrichs" id="id8">Lax-Friedrichs</a><ul>
+<li><a class="reference internal" href="#numerical-method" id="id9">Numerical Method</a></li>
+<li><a class="reference internal" href="#stability" id="id10">Stability</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lax-wendroff" id="id11">Lax-Wendroff</a><ul>
+<li><a class="reference internal" href="#id1" id="id12">Numerical Method</a></li>
+<li><a class="reference internal" href="#id2" id="id13">Stability</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#maccormack" id="id14">MacCormack</a><ul>
+<li><a class="reference internal" href="#id3" id="id15">Numerical Method</a></li>
+<li><a class="reference internal" href="#id4" id="id16">Stability</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#beam-and-warming" id="id17">Beam and Warming</a><ul>
+<li><a class="reference internal" href="#taylor-expansions-to-replace-time-derivatives-with-spatial-derivatives" id="id18">Taylor Expansions to replace time derivatives with spatial derivatives</a></li>
+<li><a class="reference internal" href="#linearisation-of-beam-warming-using-the-jacobian" id="id19">Linearisation of Beam-Warming using the Jacobian</a></li>
+<li><a class="reference internal" href="#formation-of-the-tri-diagonal-matrix" id="id20">Formation of the Tri-diagonal Matrix</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#practical-module-non-linear-convection" id="id21">Practical Module - Non-linear Convection</a><ul>
+<li><a class="reference internal" href="#notes-on-damping-term" id="id22">Notes on damping term</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="why-study-non-linear-convection">
+<h2><a class="toc-backref" href="#id5">1.6.3.1. Why study Non-linear Convection?</a><a class="headerlink" href="#why-study-non-linear-convection" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Non-linear convection is used in compressible flows</li>
+<li>Navier-Stokes Equations are also non-linear</li>
+<li>In incompressible flow the non-linearity usually dominates over the viscous terms</li>
+</ul>
+</div>
+<div class="section" id="inviscid-burgers-equation-non-conservative-form">
+<h2><a class="toc-backref" href="#id6">1.6.3.2. Inviscid Burgers Equation - Non Conservative Form</a><a class="headerlink" href="#inviscid-burgers-equation-non-conservative-form" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[{\partial u \over \partial t} = -u {\partial u \over \partial x}\]</div>
+<p>Velocity is not constant, <span class="math">\(u\)</span> depends on the solution - leads to wave steepening which translates into a shock.</p>
+</div>
+<div class="section" id="inviscid-burgers-equation-conservative-form">
+<h2><a class="toc-backref" href="#id7">1.6.3.3. Inviscid Burgers Equation - Conservative Form</a><a class="headerlink" href="#inviscid-burgers-equation-conservative-form" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[{\partial u \over \partial t} = - {\partial \over \partial x} \left( {u^2 \over 2} \right)\]</div>
+<p>Conservative Form indicates all of the space derivatives appear in the gradient operator. Alternatively:</p>
+<div class="math">
+\[{\partial u \over \partial t} = - {\partial F \over \partial x} \quad \text{where:} \quad F = {u^2 \over 2} \quad F = \text{Flux}\]</div>
+<p>Physical interpretation - a wave propagating with different speeds at different points, giving rise to wave steepening, such that <strong>SHOCKS</strong> will be formed</p>
+<div class="figure align-center">
+<img alt="../_images/wave_steepening.png" src="../_images/wave_steepening.png" />
+</div>
+<ul class="simple">
+<li>Can use different Fluxes for different non-linear equations</li>
+<li>Can also apply the flux to multi-dimensions, so that F becomes a vector</li>
+</ul>
+</div>
+<div class="section" id="lax-friedrichs">
+<h2><a class="toc-backref" href="#id8">1.6.3.4. Lax-Friedrichs</a><a class="headerlink" href="#lax-friedrichs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="numerical-method">
+<h3><a class="toc-backref" href="#id9">Numerical Method</a><a class="headerlink" href="#numerical-method" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Explicit</li>
+<li>1st order</li>
+</ul>
+<div class="math">
+\[\begin{split}u_i^{n+1} = {1 \over 2}(u_{i+1}^n + u_{i-1}^n) -
+{\Delta t \over {2 \Delta x}}(F_{i+1}^n - F_{i-1}^n) \\ =
+{1 \over 2}(u_{i+1}^n + u_{i-1}^n) -
+{\Delta t \over {4 \Delta x}}[(u_{i+1}^n)^2 - (u_{i-1}^n)^2]\end{split}\]</div>
+</div>
+<div class="section" id="stability">
+<h3><a class="toc-backref" href="#id10">Stability</a><a class="headerlink" href="#stability" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Assessing stability only applies to linear equations.</li>
+<li>Therefore, in order to study stability, we need to <strong>LINEARIZE</strong></li>
+<li><span class="math">\(u\)</span> is an <strong>average (or maximum)</strong> i.e. some normalising value for the speed, a local value of the solution (similar to <span class="math">\(c\)</span> in the linear equation)</li>
+</ul>
+<div class="math">
+\[u_i^{n+1} = {1 \over 2}(u_{i+1}^n + u_{i-1}^n) -
+{u \Delta t \over {2 \Delta x}}[u_{i+1}^n - u_{i-1}^n]\]</div>
+<ul class="simple">
+<li>Consider at <span class="math">\(x_i\)</span>:</li>
+</ul>
+<div class="math">
+\[u_i^n = V^n e^{Ik(i \Delta x)} \quad \text{recall} \quad \phi = k \Delta x\]</div>
+<div class="math">
+\[V^{n+1} e^{I i \phi} = V^n {1 \over 2}(e^{I(i+1) \phi} + e^{I(i-1) \phi}) -
+{{V^n u \Delta t} \over {2 \Delta x}}(e^{I(i+1) \phi} - e^{I(i-1) \phi})\]</div>
+<ul class="simple">
+<li>Recall the trigonometric functions:</li>
+</ul>
+<div class="math">
+\[sin z = {{e^{Iz} - e^{-Iz}} \over 2}\]</div>
+<div class="math">
+\[cos z = {{e^{Iz} + e^{-Iz}} \over 2}\]</div>
+<ul class="simple">
+<li>From the von Neumman stability analysis and dividing by <span class="math">\(e^{Ii \phi}\)</span>:</li>
+</ul>
+<div class="math">
+\[G = {V^{n+1} \over V^n} = cos \phi - {{u \Delta t} \over {2 \Delta x}} 2 I sin \phi\]</div>
+<div class="math">
+\[\begin{split}\left| G \right| =  cos^2 \phi - \left( {{u \Delta t} \over {\Delta x}} \right)^2 sin^2 \phi \\
+= 1- \left(1- \left( {{u \Delta t} \over {\Delta x}} \right)^2 \right) sin^2 \phi\end{split}\]</div>
+<ul class="simple">
+<li>For stability:</li>
+</ul>
+<div class="math">
+\[{{\Delta t} \over {\Delta x}} \lt {1 \over {\left| u \right|}}\]</div>
+<p>Stability now changes with the solution and <strong>depends on the solution u</strong></p>
+</div>
+</div>
+<div class="section" id="lax-wendroff">
+<h2><a class="toc-backref" href="#id11">1.6.3.5. Lax-Wendroff</a><a class="headerlink" href="#lax-wendroff" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3><a class="toc-backref" href="#id12">Numerical Method</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Consider Taylor expansion:</p>
+<div class="math">
+\[u_i^{n+1} = u_i^n + \Delta t (u_t)_i^n + {{\Delta t^2} \over 2} (u_{tt})_i^n\]</div>
+<p>The equation is:</p>
+<div class="math">
+\[u_t = -F_x\]</div>
+<p>Take <span class="math">\(\partial / {\partial t}\)</span></p>
+<div class="math">
+\[u_{tt} = -(F_x)_t = -(F_t)_x\]</div>
+<p>Note that:</p>
+<div class="math">
+\[{\partial F \over \partial t} = {\partial F \over \partial u} {\partial u \over \partial t}
+= {\partial F \over \partial u} \left(- {\partial F \over \partial x} \right)
+= -A {\partial F \over \partial x}\]</div>
+<p>Where <span class="math">\(A\)</span> is known as the <strong>Jacobian</strong> (used for applying the equations to higher number of dimensions)</p>
+<ul class="simple">
+<li>We have:</li>
+</ul>
+<div class="math">
+\[u_{tt} = - {\partial \over \partial x}\left( -A {\partial F \over \partial x} \right) = {\partial \over {\partial x}} \left( A {\partial F \over \partial x}  \right)\]</div>
+<ul class="simple">
+<li>In the case of the inviscid Burgers Equation:</li>
+</ul>
+<div class="math">
+\[F = {1 \over 2} u^2\]</div>
+<div class="math">
+\[A = {\partial F \over \partial u} = u\]</div>
+<p>Putting this into the Taylor Expansion:</p>
+<div class="math">
+\[u_i^{n+1} = u_i^n + \Delta t \left(-{\partial F \over \partial x} \right)_i^n +
+{{\Delta t^2} \over 2} \left( {\partial \over {\partial x}} \left( A {\partial F \over \partial x}  \right) \right)_i^n\]</div>
+<p>Thus:</p>
+<div class="math">
+\[{{u_i^{n+1} - u_i^n} \over \Delta t} = -{\partial F \over \partial x} +
+{{\Delta t} \over 2} {\partial \over {\partial x}} \left( A {\partial F \over \partial x}  \right) + O(\Delta t^2)\]</div>
+<p>(Lax-Wendroff being a 2nd order method)</p>
+<ul class="simple">
+<li>Approximate spatial derivatives with CD:</li>
+</ul>
+<div class="math">
+\[{{u_i^{n+1} - u_i^n} \over \Delta t} = -{{F_{i+1}^n - F_{i-1}^n} \over 2 \Delta x} +
+{{\Delta t} \over 2} \left( {{ \left( A {\partial F \over \partial x}  \right)_{i+{1 \over 2}}^n-
+\left( A {\partial F \over \partial x}  \right)_{i-{1 \over 2}}^n} \over {\Delta x}}       \right)\]</div>
+<p>We are using a midpoint scheme for the approximation of the flux term because it allows the result to be on integer points (because the midpoint approximation is a function of integer points)</p>
+<div class="math">
+\[{{ \left( A {\partial F \over \partial x}  \right)_{i+{1 \over 2}}^n-
+\left( A {\partial F \over \partial x}  \right)_{i-{1 \over 2}}^n} \over {\Delta x}} =
+{1 \over {\Delta x}} (A_{i+{1 \over 2}}^n{{{F_{i+1}^n - F_i^n} \over {\Delta x} }} -
+A_{i-{1 \over 2}}^n{{{F_{i}^n - F_{i-1}^n} \over {\Delta x} }})\]</div>
+<p>Now evaluate the Jacobian at the midpoint:</p>
+<div class="math">
+\[{{ \left( A {\partial F \over \partial x}  \right)_{i+{1 \over 2}}^n-
+\left( A {\partial F \over \partial x}  \right)_{i-{1 \over 2}}^n} \over {\Delta x}} =
+{1 \over {\Delta x}} \left( {1 \over 2}({A_{i+1}^n + A_{i}^n}){{{F_{i+1}^n - F_i^n} \over {\Delta x} }} -
+{1 \over 2}({A_{i}^n + A_{i-1}^n}) {{{F_{i}^n - F_{i-1}^n} \over {\Delta x} }} \right)\]</div>
+<p>For the inviscid Burgers&#8217; Equation <span class="math">\(A = u\)</span> and <span class="math">\(F = {u^2 \over 2}\)</span></p>
+<p>Finally we have:</p>
+<div class="math">
+\[u_i^{n+1} = u_i^n - {{\Delta t}} {(F_{i+1}^n - F_{i-1}^n) \over {2 \Delta x}} +
+{\Delta t^2 \over {4 \Delta x^2}} \left( {({A_{i+1}^n + A_i^n}) } {{ ({F_{i+1}^n - F_i^n}) }} -
+{({A_{i}^n + A_{i-1}^n})}{{ ({F_{i}^n - F_{i-1}^n}) }} \right)\]</div>
+<div class="math">
+\[u_i^{n+1} = u_i^n - {{\sigma \over 2}} {(F_{i+1}^n - F_{i-1}^n)} +
+{\sigma^2 \over {4}} \left( {({A_{i+1}^n + A_i^n}) } {{ ({F_{i+1}^n - F_i^n}) }} -
+{({A_{i}^n + A_{i-1}^n})}{{ ({F_{i}^n - F_{i-1}^n}) }} \right)\]</div>
+</div>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id13">Stability</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Stability requires:</p>
+<div class="math">
+\[{{\Delta t} \over {\Delta x}} \lt {1 \over {\left| u \right|}}\]</div>
+</div>
+</div>
+<div class="section" id="maccormack">
+<h2><a class="toc-backref" href="#id14">1.6.3.6. MacCormack</a><a class="headerlink" href="#maccormack" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id15">Numerical Method</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Step 1: FTFS from <span class="math">\(n\)</span> to <span class="math">\(n+1\)</span> (approx)</p>
+<div class="math">
+\[\tilde{u}_i^{n+1} = u_i^n - {\Delta t \over \Delta x}(F_{i+1}^n - F_{i}^n)\]</div>
+<p>Step 2: FTBS from <span class="math">\(n\)</span> to <span class="math">\(n+{1 \over 2}\)</span> with average at <span class="math">\(n+{1 \over 2}\)</span>:</p>
+<div class="math">
+\[u_i^{n+1} = {1 \over 2}(\tilde{u}_i^{n+1} + u_i^n) -
+{\Delta t \over {2 \Delta x}} (\tilde{F}_i^n - \tilde{F}_{i-1}^n)\]</div>
+</div>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id16">Stability</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>Stability requires:</p>
+<div class="math">
+\[{{\Delta t} \over {\Delta x}} \lt {1 \over {\left| u \right|}}\]</div>
+</div>
+</div>
+<div class="section" id="beam-and-warming">
+<h2><a class="toc-backref" href="#id17">1.6.3.7. Beam and Warming</a><a class="headerlink" href="#beam-and-warming" title="Permalink to this headline">¶</a></h2>
+<p>This is different from the explicit 2nd order upwind Beam-Warming</p>
+<div class="section" id="taylor-expansions-to-replace-time-derivatives-with-spatial-derivatives">
+<h3><a class="toc-backref" href="#id18">Taylor Expansions to replace time derivatives with spatial derivatives</a><a class="headerlink" href="#taylor-expansions-to-replace-time-derivatives-with-spatial-derivatives" title="Permalink to this headline">¶</a></h3>
+<p>Consider Taylor expansion:</p>
+<div class="math" id="equation-1">
+<span class="eqno">(1)</span>\[u(x,t+\Delta t) = u(x,t) + \Delta t \left. {\partial u \over \partial t} \right|_{x,t} +
+                         {{\Delta t^2} \over 2}  \left. {\partial^2 u \over \partial t^2} \right|_{x,t} +
+                         O(\Delta t^3)\]</div>
+<div class="math" id="equation-2">
+<span class="eqno">(2)</span>\[u(x,t) = u(x,t+\Delta t)- \Delta t \left. {\partial u \over \partial t} \right|_{x,t+\Delta t} +
+                {{\Delta t^2} \over 2}  \left. {\partial^2 u \over \partial t^2} \right|_{x,t+\Delta t} -
+                O(\Delta t^3)\]</div>
+<p><a href="#equation-1">(1)</a> - <a href="#equation-2">(2)</a>:</p>
+<div class="math">
+\[2 u(x,t+\Delta t) = 2 u(x,t) + \Delta t \left. {\partial u \over \partial t} \right|_{x,t} +
+\Delta t \left. {\partial u \over \partial t} \right|_{x,t+\Delta t} +
+{{\Delta t^2} \over 2} \left. {\partial^2 u \over \partial t^2} \right|_{x,t} -
+{{\Delta t^2} \over 2} \left. {\partial^2 u \over \partial t^2} \right|_{x,t+\Delta t} +
+O(\Delta t^3)\]</div>
+<div class="math" id="equation-3">
+<span class="eqno">(3)</span>\[u_i^{n+1} = u_i^n + {\Delta t \over 2} \left( \left. {\partial u \over \partial t} \right|_i^n +
+                            \left. {\partial u \over \partial t} \right|_i^{n+1} \right)+
+                           {{\Delta t^2} \over 4} \left( \left. {\partial^2 u \over \partial t^2} \right|_i^n -
+                            \left. {\partial^2 u \over \partial t^2} \right|_i^{n+1} \right)+
+                            O(\Delta t^3)\]</div>
+<div class="math" id="equation-4">
+<span class="eqno">(4)</span>\[\left. {\partial^2 u \over \partial t^2} \right|_i^{n+1} =
+       \left. {\partial^2 u \over \partial t^2} \right|_i^n +
+       \Delta t {\partial \over \partial t} \left( \left. {\partial^2 u \over \partial t^2} \right|_i^{n} \right) +
+       O(\Delta t^2)\]</div>
+<p>Substitute <a href="#equation-4">(4)</a> into <a href="#equation-3">(3)</a> and absorb the O(Delta t^3) errors</p>
+<div class="math">
+\[u_i^{n+1} = u_i^n + {\Delta t \over 2} \left( \left. {\partial u \over \partial t} \right|_i^n +
+\left. {\partial u \over \partial t} \right|_i^{n+1}    \right) +
+O(\Delta t^3)\]</div>
+<p>Replacing the time derivatives with spatial derivatives from the Burgers&#8217; Equation:</p>
+<div class="math">
+\[{\partial u \over \partial t} = - {\partial F \over \partial x}\]</div>
+<div class="math" id="equation-5">
+<span class="eqno">(5)</span>\[{{u_i^{n+1} - u_i^n} \over \Delta t} =
+       - {1 \over 2} \left( \left. {\partial F \over \partial x} \right|_i^n +
+                                         \left. {\partial F \over \partial x} \right|_i^{n+1}    \right) +
+                                         O(\Delta t^3)\]</div>
+<p>With an explicit scheme, the formation of the difference equation was linear (although the PDE was non-linear) by using the flux at the previous timestep (F at n)</p>
+</div>
+<div class="section" id="linearisation-of-beam-warming-using-the-jacobian">
+<h3><a class="toc-backref" href="#id19">Linearisation of Beam-Warming using the Jacobian</a><a class="headerlink" href="#linearisation-of-beam-warming-using-the-jacobian" title="Permalink to this headline">¶</a></h3>
+<p>With an implicit scheme, we need to incorporate a linearisation system</p>
+<p>Taylor Expansion on F:</p>
+<div class="math">
+\[\begin{split}F(t + \Delta t) = F(t)+ {\partial F \over \partial t} \Delta t + O(\Delta t^2) \\
+= F(t) + {\partial F \over \partial u}{\partial u \over \partial t} \Delta t + O(\Delta t^2)\end{split}\]</div>
+<p>So:</p>
+<div class="math">
+\[F^{n+1} = F^n + {\partial F \over \partial u} \left( {{u^{n+1} - u^n} \over \Delta t} \right) \Delta t + O(\Delta t^2)\]</div>
+<p>For the Burgers&#8217; Equation:</p>
+<div class="math">
+\[{\partial F \over \partial u} = A = u\]</div>
+<p>Now take the derivative <span class="math">\(\partial \over \partial x\)</span> of the previous equation:</p>
+<div class="math" id="equation-6">
+<span class="eqno">(6)</span>\[\left( {\partial F \over \partial x} \right)^{n+1} =
+       \left( \partial F \over \partial x \right)^n +
+       {\partial \over \partial x} \left( A \left( {{u^{n+1} - u^n}} \right) \right)\]</div>
+<p>Substitute <a href="#equation-6">(6)</a> into <a href="#equation-5">(5)</a>:</p>
+<div class="math">
+\[{{u_i^{n+1} - u_i^n} \over \Delta t} = -
+{1 \over 2} \left(
+ \left. {\partial F \over \partial x} \right|_i^n +
+\left. {\partial F \over \partial x} \right|_i^n +
+{\partial \over \partial x} A ( {u_i^{n+1} - u_i^n} ) \right)\]</div>
+<p>For the second term on the RHS use 2nd order CD</p>
+<div class="math">
+\[{\partial \over \partial x} A ( {u_i^{n+1} - u_i^n} ) =
+{{A_{i+1}^n u_{i+1}^{n+1} -  A_{i-1}^n u_{i-1}^{n+1}} \over {2 \Delta x}} -
+{{A_{i+1}^n u_{i+1}^{n} -  A_{i-1}^n u_{i-1}^{n}} \over {2 \Delta x}}\]</div>
+<p>Use the value of the Jacobian at the known time level <span class="math">\(n\)</span> (the <strong>lagging value</strong> of the Jacobian)</p>
+</div>
+<div class="section" id="formation-of-the-tri-diagonal-matrix">
+<h3><a class="toc-backref" href="#id20">Formation of the Tri-diagonal Matrix</a><a class="headerlink" href="#formation-of-the-tri-diagonal-matrix" title="Permalink to this headline">¶</a></h3>
+<p>Can now re-arrange the whole system, to form a tri-diagonal matrix.</p>
+<div class="math">
+\[- {\Delta t \over {4 \Delta x}} \left( A_{i-1}^n u_{i-1}^{n+1} \right) +
+u_i^{n+1} + {\Delta t \over {4 \Delta x}} \left( A_{i+1}^n u_{i+1}^{n+1} \right) =
+u_i^n - {1 \over 2} {\Delta t \over \Delta x} (F_{i+1}^n - F_{i-1}^n) +
+{\Delta t \over 4 \Delta x}(A_{i+1}^n u_{i+1}^n - A_{i-1}^n u_{i-1}^n)\]</div>
+<ul class="simple">
+<li>This is a linear system of equations forming a <strong>tri-diagonal coefficient matrix</strong></li>
+<li>This scheme is 2nd order and <strong>unconditionally stable</strong></li>
+<li>There will still be oscillations, i.e. <strong>dispersion error</strong></li>
+</ul>
+</div>
+</div>
+<div class="section" id="practical-module-non-linear-convection">
+<h2><a class="toc-backref" href="#id21">1.6.3.8. Practical Module - Non-linear Convection</a><a class="headerlink" href="#practical-module-non-linear-convection" title="Permalink to this headline">¶</a></h2>
+<p>Initial condition is a travelling shock:</p>
+<div class="figure align-center">
+<img alt="../_images/travelling_shock.png" src="../_images/travelling_shock.png" />
+</div>
+<ol class="arabic simple">
+<li>Lax-Friedrichs</li>
+<li>Lax-Wendroff</li>
+<li>MacCormack</li>
+<li>Beam-Warming Implicit</li>
+<li>Beam-Warming Implicit with <strong>Damping</strong> - add on the RHS a fourth order damping term</li>
+</ol>
+<div class="math">
+\[D = - \epsilon_e(u_{i+2}^n - 4u_{i+1}^n + 6u_i^n - 4u_{i-1}^n + u_{i-2}^n)\]</div>
+<ul class="simple">
+<li>Experiment with values of <span class="math">\(0 \le \epsilon_e \le 0.125\)</span></li>
+<li>Try some values <span class="math">\(\epsilon_e \gt 0.125\)</span></li>
+<li>With <span class="math">\(\epsilon_e = 0.1\)</span> experiment with different step sizes and Courant numbers (<span class="math">\(\Delta t \over \Delta x\)</span>)</li>
+</ul>
+<p><strong>Question: Which yields the best solution for the Burgers&#8217; Equation?</strong></p>
+<div class="section" id="notes-on-damping-term">
+<h3><a class="toc-backref" href="#id22">Notes on damping term</a><a class="headerlink" href="#notes-on-damping-term" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Adding a fourth order damping to a 2nd order scheme does not alter the order of accuracy of the overall method</li>
+<li>Above, we add damping explicitly to the RHS of the equation. As a result, stability of the scheme changes, will require an upper limit in the value of the damping coefficient. Damping coefficient is require to reduce oscillations - but may not work, because the scheme may become unstable.</li>
+<li>Typical fourth order damping (in 1D) - e means &#8220;explicit&#8221;:</li>
+</ol>
+<div class="math">
+\[D_e = -\epsilon_e(\Delta x)^4 {\partial^4 u \over \partial x^4}\]</div>
+<p>Can be extended to higher dimensions</p>
+<ol class="arabic simple" start="4">
+<li>Sometimes, if 2) leads to insufficient damping. Add 2nd order implicit damping (add to LHS of the equation) - approximate with central differences</li>
+</ol>
+<div class="math">
+\[D_i = \epsilon_i(\Delta x)^2 {\partial^2 u \over \partial x^2}\]</div>
+<ol class="arabic simple" start="5">
+<li>Stability analysis required to identify <span class="math">\((\epsilon_e)_{max}\)</span> and also <span class="math">\(\epsilon_e / \epsilon_i\)</span>, typically <span class="math">\(\epsilon_i \gt 2 \epsilon_e\)</span></li>
+</ol>
+<p>The damping is also called &#8220;artificial viscosity&#8221; or &#8220;artificial diffusion&#8221;</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="conservative_form.html">1.6.2. Conservative Form</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="strong_weak.html">1.6.4. Strong and Weak Solutions</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

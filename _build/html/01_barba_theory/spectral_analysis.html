@@ -1,0 +1,562 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.5.5. Spectral Analysis of Errors &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.6.1. Multi-step Numerical Methods" href="multi_step_methods.html" />
+    <link rel="prev" title="1.5.4. Second Order Formulas" href="second_order_formulas.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.5.5. Spectral Analysis of Errors</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="second_order_formulas.html">1.5.4. Second Order Formulas</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="multi_step_methods.html">1.6.1. Multi-step Numerical Methods</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="spectral-analysis-of-errors">
+<h1>1.5.5. Spectral Analysis of Errors<a class="headerlink" href="#spectral-analysis-of-errors" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#von-neumann-stability-analysis" id="id7">von Neumann Stability Analysis</a></li>
+<li><a class="reference internal" href="#amplitude-and-phase-error" id="id8">Amplitude and Phase Error</a><ul>
+<li><a class="reference internal" href="#analytical-solution" id="id9">Analytical Solution</a></li>
+<li><a class="reference internal" href="#numerical-solution" id="id10">Numerical Solution</a></li>
+<li><a class="reference internal" href="#diffusion-and-dispersion-error" id="id11">Diffusion and Dispersion Error</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#error-analysis-for-hyperbolic-problems" id="id12">Error Analysis for Hyperbolic Problems</a><ul>
+<li><a class="reference internal" href="#governing-equation" id="id13">Governing Equation</a></li>
+<li><a class="reference internal" href="#id1" id="id14">Analytical Solution</a></li>
+<li><a class="reference internal" href="#id2" id="id15">Numerical Solution</a></li>
+<li><a class="reference internal" href="#leading-and-trailing-error" id="id16">Leading and Trailing Error</a></li>
+<li><a class="reference internal" href="#accuracy-and-stability-paradox" id="id17">Accuracy and Stability Paradox</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#analysis-of-1st-order-upwind" id="id18">Analysis of 1st Order Upwind</a><ul>
+<li><a class="reference internal" href="#dispersion-phase-error-for-1st-order-upwind" id="id19">Dispersion (Phase) Error for 1st Order Upwind</a></li>
+<li><a class="reference internal" href="#diffusion-amplitude-error-for-1st-order-upwind" id="id20">Diffusion (Amplitude) Error for 1st Order Upwind</a><ul>
+<li><a class="reference internal" href="#explanation-of-the-frequency-axis" id="id21">Explanation of the Frequency Axis</a></li>
+<li><a class="reference internal" href="#test-1" id="id22">Test 1</a></li>
+<li><a class="reference internal" href="#test-2" id="id23">Test 2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#analysis-of-lax-friedrichs" id="id24">Analysis of Lax-Friedrichs</a><ul>
+<li><a class="reference internal" href="#diffusion-error-for-lax-friedrichs" id="id25">Diffusion Error for Lax-Friedrichs</a></li>
+<li><a class="reference internal" href="#dipersion-error-for-lax-friedrichs" id="id26">Dipersion Error for Lax-Friedrichs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#analysis-of-lax-wendroff" id="id27">Analysis of Lax-Wendroff</a><ul>
+<li><a class="reference internal" href="#diffusion-error-for-lax-wendroff" id="id28">Diffusion Error for Lax-Wendroff</a><ul>
+<li><a class="reference internal" href="#id3" id="id29">Test 2</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dispersion-error-for-lax-wendroff" id="id30">Dispersion Error for Lax-Wendroff</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#summary" id="id31">Summary</a><ul>
+<li><a class="reference internal" href="#spectral-analysis" id="id32">Spectral Analysis</a></li>
+<li><a class="reference internal" href="#st-order-upwind" id="id33">1st order Upwind</a></li>
+<li><a class="reference internal" href="#lax-friedrichs" id="id34">Lax-Friedrichs</a></li>
+<li><a class="reference internal" href="#lax-wendroff" id="id35">Lax-Wendroff</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#analysis-of-leapfrog" id="id36">Analysis of Leapfrog</a><ul>
+<li><a class="reference internal" href="#diffusion-error" id="id37">Diffusion Error</a></li>
+<li><a class="reference internal" href="#dispersion-error" id="id38">Dispersion Error</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#what-is-the-origin-of-the-oscillations" id="id39">What is the Origin of the Oscillations?</a></li>
+<li><a class="reference internal" href="#analysis-of-beam-warming" id="id40">Analysis of Beam-Warming</a><ul>
+<li><a class="reference internal" href="#id4" id="id41">Lax-Wendroff</a></li>
+<li><a class="reference internal" href="#beam-warming" id="id42">Beam-Warming</a><ul>
+<li><a class="reference internal" href="#id5" id="id43">Diffusion Error</a></li>
+<li><a class="reference internal" href="#id6" id="id44">Dispersion Error</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#final-notes" id="id45">Final Notes</a></li>
+<li><a class="reference internal" href="#implications-of-diffusion-error-for-grid-density" id="id46">Implications of Diffusion Error for Grid Density</a></li>
+<li><a class="reference internal" href="#question" id="id47">Question</a></li>
+</ul>
+</div>
+<div class="section" id="von-neumann-stability-analysis">
+<h2><a class="toc-backref" href="#id7">1.5.5.1. von Neumann Stability Analysis</a><a class="headerlink" href="#von-neumann-stability-analysis" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>von Neumann stability analysis introduced a Fourier decomposition of the solution, defining an amplification factor, <cite>G</cite>, <span class="math">\(\Rightarrow\)</span> stability condition <cite>G &lt; 1</cite></li>
+<li>What else can we know about the errors?</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Amplitude error <span class="math">\(\Rightarrow\)</span> numerical diffusion</li>
+<li>Phase error <span class="math">\(\Rightarrow\)</span> numerical dispersion</li>
+</ul>
+</div></blockquote>
+<p>We introduced a Fourier decomposition of the solution (where <span class="math">\(I = \sqrt{-1}\)</span>):</p>
+<div class="math">
+\[u_i^n = \sum_{j=-N}^N V_j^n e^{Ik_j x_i} \qquad x_i = i \Delta x\]</div>
+<p>A single harmonic is:</p>
+<div class="math">
+\[(u_i^n)_k = V^n e^{I k i \Delta x}\]</div>
+<p>We define an amplification factor:</p>
+<div class="math">
+\[G = {{V^{n+1}} \over {V^n}}\]</div>
+<p>A function of the scheme parameters and of the phase angle <span class="math">\(\phi\)</span> but not a function of <span class="math">\(n\)</span></p>
+<p>von Neumann stability condition:</p>
+<div class="math">
+\[\left| G \right| \le 1 \qquad \forall \phi_j = k_j \Delta x\]</div>
+</div>
+<div class="section" id="amplitude-and-phase-error">
+<h2><a class="toc-backref" href="#id8">1.5.5.2. Amplitude and Phase Error</a><a class="headerlink" href="#amplitude-and-phase-error" title="Permalink to this headline">¶</a></h2>
+<p>Now we want additional information on the error, in particular the time dependency of the:</p>
+<ul class="simple">
+<li>Amplitude <span class="math">\(V^n\)</span></li>
+<li>Phase <span class="math">\(\phi\)</span></li>
+</ul>
+<div class="section" id="analytical-solution">
+<h3><a class="toc-backref" href="#id9">Analytical Solution</a><a class="headerlink" href="#analytical-solution" title="Permalink to this headline">¶</a></h3>
+<p>Consider the analytical solution of:</p>
+<div class="math">
+\[u_t + cu_x = 0\]</div>
+<p>Fourier decomposition - analytical solution is <span class="math">\(\tilde{u}\)</span>:</p>
+<div class="math">
+\[\tilde{u}_i^n = \hat{V} e^{Ik(x_i-ct^n)}\]</div>
+<p>Rewrite with <span class="math">\(c = {{\tilde{\omega}} / k}\)</span>:</p>
+<div class="math">
+\[\tilde{u}_i^n = \hat{V} e^{I k x_i} e^{-I \tilde{\omega} t^n}\]</div>
+<p>A single harmonic is:</p>
+<div class="math" id="equation-analytical">
+<span class="eqno">(1)</span>\[(\tilde{u}_i^n)_k = \hat{V}(k) e^{I k x_i} e^{-I \tilde{\omega} t^n}\]</div>
+<p>With <span class="math">\(\hat{V}(k)\)</span> from the initial condition <span class="math">\(u(x,t=0) = u_0(x)\)</span> we get an initial amplitude:</p>
+<div class="math">
+\[\hat{V}(k) = {1 \over {2L}} \int_{-L}^L u_0(x)e^{-Ikx} dx\]</div>
+<p>Assume that I.C. is represented exactly on the mesh (except for round-off error)</p>
+</div>
+<div class="section" id="numerical-solution">
+<h3><a class="toc-backref" href="#id10">Numerical Solution</a><a class="headerlink" href="#numerical-solution" title="Permalink to this headline">¶</a></h3>
+<p>Numerical amplitude represented similarly to <a href="#equation-analytical">(1)</a> (<span class="math">\(\omega\)</span> is analytical):</p>
+<div class="math">
+\[V^n = \hat{V}(k) e^{-I \omega n \Delta t} = \hat{V}(k) (e^{-I \omega \Delta t})^n\]</div>
+<p>Phase waves <span class="math">\(\tilde{\omega} = \tilde{\omega}(k) \Rightarrow\)</span> called a &#8220;dispersion relation&#8221;</p>
+<p>Now write:</p>
+<div class="math">
+\[V^n = G V^{n-1} = G^2 V^{n-2} = ... = G^n V^0 = G^n \hat{V}(k)\]</div>
+<p>Hence:</p>
+<div class="math">
+\[G = e^{-I \omega \Delta t} \Rightarrow \qquad \text{this defines} \qquad \omega(k)\]</div>
+<p>Similarly with the analytical solution:</p>
+<div class="math">
+\[\hat{V}^n = ({e^{-I \tilde{\omega} \Delta t}})^n \hat{V}(k) = (\tilde{G})^n \hat{V}(k)\]</div>
+<p>Where: <span class="math">\(\tilde{G}\)</span> is the exact amplification factor</p>
+<p>Note that <span class="math">\(\omega\)</span> is a complex function, so:</p>
+<div class="math">
+\[G = \left| G \right| e^{-I \phi}\]</div>
+<p>And</p>
+<div class="math">
+\[V^n = GV^{n-1} = \left| G \right| e^{-I \phi} V^{n-1}\]</div>
+</div>
+<div class="section" id="diffusion-and-dispersion-error">
+<h3><a class="toc-backref" href="#id11">Diffusion and Dispersion Error</a><a class="headerlink" href="#diffusion-and-dispersion-error" title="Permalink to this headline">¶</a></h3>
+<p>For convection dominated flows <span class="math">\(\tilde{\phi} = kc \Delta t\)</span> and <span class="math">\(\left | \tilde{G} \right | = 1\)</span>:</p>
+<p><strong>The error in amplitude is the diffusion or dissipation error:</strong></p>
+<div class="math">
+\[\epsilon_D = {{\left| G \right|} \over {\left| \tilde{G} \right|}}\]</div>
+<p><strong>The error in the phase of the solution is the dispersion error:</strong></p>
+<div class="math">
+\[\epsilon_\phi = {{\phi} \over {\tilde{\phi}}}\]</div>
+<p>For pure diffusion <span class="math">\(\tilde{\phi} = 0\)</span> so therefore use the alternative definition:</p>
+<div class="math">
+\[\epsilon_\phi = {\phi} - {\tilde{\phi}}\]</div>
+</div>
+</div>
+<div class="section" id="error-analysis-for-hyperbolic-problems">
+<h2><a class="toc-backref" href="#id12">1.5.5.3. Error Analysis for Hyperbolic Problems</a><a class="headerlink" href="#error-analysis-for-hyperbolic-problems" title="Permalink to this headline">¶</a></h2>
+<p>Considering 1D linear convection, we will define:</p>
+<ul class="simple">
+<li>Leading error as numerical convection is faster than physical</li>
+<li>Lagging error as numerical convection is slower than physical</li>
+</ul>
+<p>We will also analyse the 1st-order upwind scheme</p>
+<div class="section" id="governing-equation">
+<h3><a class="toc-backref" href="#id13">Governing Equation</a><a class="headerlink" href="#governing-equation" title="Permalink to this headline">¶</a></h3>
+<p>Consider the solution of:</p>
+<div class="math">
+\[u_t + cu_x = 0\]</div>
+</div>
+<div class="section" id="id1">
+<h3><a class="toc-backref" href="#id14">Analytical Solution</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>The exact solution for a wave form: <span class="math">\(\tilde{\omega} = ct\)</span></p>
+<p>And:</p>
+<div class="math">
+\[\tilde{u} =  \hat{V} e^{Ikx} e^{-Ikct}\]</div>
+<p>Exact amplification factor <span class="math">\(\left | \tilde{G} \right | = 1\)</span> and</p>
+<div class="math">
+\[\tilde{\phi} = ck \Delta t = {{c \Delta t} \over {\Delta x}}.k \Delta x = \sigma \phi\]</div>
+<p>Therefore</p>
+<div class="math">
+\[\tilde{G} = e^{-I \sigma \phi}\]</div>
+<p>i.e. <strong>the exact solution propagates without change in amplitude</strong> For example, the exact solution of the wave equation with square wave input simply moves to the right with positive c</p>
+</div>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id15">Numerical Solution</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Initial wave damped by a factor <span class="math">\(\left| G \right|\)</span> at each <span class="math">\(\Delta t\)</span></p>
+<p>Diffusion error is <span class="math">\(\epsilon_D = \left| G \right|\)</span></p>
+<p>Phase of numerical solution defines a <strong>numerical</strong> convection speed:</p>
+<div class="math">
+\[c_{num} = {\Phi \over {k \Delta t}}\]</div>
+<p>And since:</p>
+<div class="math">
+\[\tilde{\phi} = ck \Delta t = \sigma \phi\]</div>
+<div class="math">
+\[c_{num} = {{c \Phi} \over {\sigma \phi}}\]</div>
+<p>Dispersion error:</p>
+<div class="math">
+\[{\epsilon_\phi} = {\Phi \over {c k \Delta t}} = {\Phi \over {\sigma \phi}} = {c_{num} \over c}\]</div>
+</div>
+<div class="section" id="leading-and-trailing-error">
+<h3><a class="toc-backref" href="#id16">Leading and Trailing Error</a><a class="headerlink" href="#leading-and-trailing-error" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>When the dispersion error is larger than 1 <span class="math">\(\epsilon_\phi \gt 1\)</span> the phase error is a &#8220;leading error&#8221;, the numerical convection speed <span class="math">\(c_{num}\)</span> is larger than the exact <span class="math">\(c\)</span>. The computed solution moves faster than the physical one.</li>
+<li>When <span class="math">\(\epsilon_{\phi} \lt 1\)</span> the phase error is a lagging error and the computed solution travels at a lower velocity than the physical one.</li>
+</ul>
+</div>
+<div class="section" id="accuracy-and-stability-paradox">
+<h3><a class="toc-backref" href="#id17">Accuracy and Stability Paradox</a><a class="headerlink" href="#accuracy-and-stability-paradox" title="Permalink to this headline">¶</a></h3>
+<p>Accuracy requires <span class="math">\(\left| G \right |\)</span> to be as close to 1 as possible, but stability requires <span class="math">\(\left | G \right | \lt 1\)</span>.</p>
+<p>To maintain stability we always need a diffusion error.</p>
+</div>
+</div>
+<div class="section" id="analysis-of-1st-order-upwind">
+<h2><a class="toc-backref" href="#id18">1.5.5.4. Analysis of 1st Order Upwind</a><a class="headerlink" href="#analysis-of-1st-order-upwind" title="Permalink to this headline">¶</a></h2>
+<p>We found:</p>
+<div class="math">
+\[G = 1- 2\sigma sin^2 \left({\phi \over 2}\right)-I \sigma sin \phi\]</div>
+<p>Separate real and imaginary parts of <span class="math">\(G\)</span>, <span class="math">\(\xi\)</span>, <span class="math">\(\eta\)</span></p>
+<div class="math">
+\[\xi = Re(G) =  1- 2\sigma sin^2 \left({\phi \over 2}\right) = (1-\sigma)+\sigma cos \phi\]</div>
+<div class="math">
+\[\eta = Im(G) = -\sigma sin \phi\]</div>
+<p>Amplitude error:</p>
+<div class="math">
+\[\epsilon_D = \sqrt{Im^2 + Re^2}= \left| G \right| = (1-4 \sigma(1-\sigma)sin^2 ({\phi \over 2}))^{0.5}\]</div>
+<p>Phase error:</p>
+<div class="math">
+\[tan \Phi = -{Im(G) \over Re(G)}\]</div>
+<div class="math">
+\[\epsilon_{\phi} =  {\Phi \over {\sigma \phi}} = {{tan^{-1}[( \sigma sin \phi ) / (1-\sigma + \sigma cos \phi )]} \over { \sigma \phi  }}\]</div>
+<div class="section" id="dispersion-phase-error-for-1st-order-upwind">
+<h3><a class="toc-backref" href="#id19">Dispersion (Phase) Error for 1st Order Upwind</a><a class="headerlink" href="#dispersion-phase-error-for-1st-order-upwind" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>For <span class="math">\(\sigma \gt 0.5 \Rightarrow \epsilon_\phi \gt 1 \Rightarrow\)</span> Leading Error</li>
+<li>For <span class="math">\(\sigma = 0.5 \Rightarrow \epsilon_\phi = 1 \Rightarrow\)</span> No Error</li>
+<li>For <span class="math">\(\sigma \lt 0.5 \Rightarrow \epsilon_\phi \lt 1 \Rightarrow\)</span> Lagging Error</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/UD_dispersion.png"><img alt="../_images/UD_dispersion.png" src="../_images/UD_dispersion.png" style="width: 560.6999999999999px; height: 406.0px;" /></a>
+</div>
+</div>
+<div class="section" id="diffusion-amplitude-error-for-1st-order-upwind">
+<h3><a class="toc-backref" href="#id20">Diffusion (Amplitude) Error for 1st Order Upwind</a><a class="headerlink" href="#diffusion-amplitude-error-for-1st-order-upwind" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Using</strong> <span class="math">\(\sigma = 0.5\)</span> <strong>may give no dispersion error, but gives large diffusion error</strong></li>
+<li>The amplitude error increases dramatically with an increase in &#8220;frequency&#8221; i.e. reduced wavelength</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/UD_diffusion.png"><img alt="../_images/UD_diffusion.png" src="../_images/UD_diffusion.png" style="width: 563.5px; height: 420.7px;" /></a>
+</div>
+<div class="section" id="explanation-of-the-frequency-axis">
+<h4><a class="toc-backref" href="#id21">Explanation of the Frequency Axis</a><a class="headerlink" href="#explanation-of-the-frequency-axis" title="Permalink to this headline">¶</a></h4>
+<p>Phase:</p>
+<div class="math">
+\[\phi = k \Delta x\]</div>
+<p>Wavenumber:</p>
+<div class="math">
+\[k = {{2 \pi} \over \lambda}\]</div>
+<p>So Phase i.t.o Wavenumber:</p>
+<div class="math">
+\[\phi = {{2 \pi} \over \lambda} \Delta x\]</div>
+<p>Highest frequency you can represent in a mesh given by <span class="math">\(\lambda = 2 \Delta x \quad \Rightarrow \quad \phi = \pi\)</span></p>
+</div>
+<div class="section" id="test-1">
+<h4><a class="toc-backref" href="#id22">Test 1</a><a class="headerlink" href="#test-1" title="Permalink to this headline">¶</a></h4>
+<p><span class="math">\(k = 4 \pi\)</span> and <span class="math">\(\phi = {\pi \over {12.5}}\)</span></p>
+<p>Diffusion Error = 0.995</p>
+<p>For 80 timesteps <span class="math">\(\left| G \right| ^n = (0.995)^{80} = 0.67\)</span></p>
+</div>
+<div class="section" id="test-2">
+<h4><a class="toc-backref" href="#id23">Test 2</a><a class="headerlink" href="#test-2" title="Permalink to this headline">¶</a></h4>
+<p><span class="math">\(\phi = {\pi \over {6.25}} = 28.8^{\circ}\)</span></p>
+<p>For 80 timesteps <span class="math">\(\left| G \right| ^n = (0.98)^{80} = 0.20\)</span></p>
+<p>This is a problem for first order schemes:</p>
+<ul class="simple">
+<li>Only a small diffusion error (1%) for one timestep after 100 timesteps will lead to an amplitude error of 36%</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="analysis-of-lax-friedrichs">
+<h2><a class="toc-backref" href="#id24">1.5.5.5. Analysis of Lax-Friedrichs</a><a class="headerlink" href="#analysis-of-lax-friedrichs" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\left| G \right| = [cos^2 \phi + \sigma^2 sin^2 \phi]^{0.5}\]</div>
+<div class="math">
+\[\Phi = tan^{-1} (\sigma tan \phi)\]</div>
+<p>Diffusion error:</p>
+<div class="math">
+\[\epsilon_D =   [cos^2 \phi + \sigma^2 sin^2 \phi]^{0.5}\]</div>
+<p>Dispersion error:</p>
+<div class="math">
+\[\epsilon_\Phi = {\Phi \over {\sigma \phi}} = { {tan^{-1} (\sigma tan \phi)} \over {\sigma \phi}}\]</div>
+<div class="section" id="diffusion-error-for-lax-friedrichs">
+<h3><a class="toc-backref" href="#id25">Diffusion Error for Lax-Friedrichs</a><a class="headerlink" href="#diffusion-error-for-lax-friedrichs" title="Permalink to this headline">¶</a></h3>
+<p>Amplitude strongly damped for small values of <span class="math">\(\sigma\)</span></p>
+<p>No diffusion error for <span class="math">\(\phi = 0\)</span> and <span class="math">\(\phi = \pi\)</span></p>
+<p><span class="math">\(\phi = \pi\)</span> is related to the minimum realisable wavelength <span class="math">\(2 \Delta x\)</span></p>
+<p>Any errors that occur at <span class="math">\(2 \Delta x\)</span> <strong>will not be damped</strong> by the solution, which is related to the odd-even decoupling (the value of the point at <cite>i, n+1</cite> doesn&#8217;t depend on the value at <cite>i, n</cite>)</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/LF_diffusion.png"><img alt="../_images/LF_diffusion.png" src="../_images/LF_diffusion.png" style="width: 557.9px; height: 420.0px;" /></a>
+</div>
+</div>
+<div class="section" id="dipersion-error-for-lax-friedrichs">
+<h3><a class="toc-backref" href="#id26">Dipersion Error for Lax-Friedrichs</a><a class="headerlink" href="#dipersion-error-for-lax-friedrichs" title="Permalink to this headline">¶</a></h3>
+<p>Dispersion error <span class="math">\(\epsilon_{\Phi} \gt 1 \quad \Rightarrow \quad\)</span> Leading Error</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/LF_dispersion.png"><img alt="../_images/LF_dispersion.png" src="../_images/LF_dispersion.png" style="width: 553.6999999999999px; height: 417.2px;" /></a>
+</div>
+</div>
+</div>
+<div class="section" id="analysis-of-lax-wendroff">
+<h2><a class="toc-backref" href="#id27">1.5.5.6. Analysis of Lax-Wendroff</a><a class="headerlink" href="#analysis-of-lax-wendroff" title="Permalink to this headline">¶</a></h2>
+<p>Dissipation error:</p>
+<div class="math">
+\[\left| G \right| = (1- 4 \sigma^2(1- \sigma^2)sin^4 {\phi \over 2})^{0.5}\]</div>
+<p>Dispersion error:</p>
+<div class="math">
+\[\epsilon_D = {{ {tan^{-1} [ (\sigma sin \phi) / (1-2 \sigma^2 sin^2 {\phi \over 2})]} \over {\sigma \phi}}}\]</div>
+<div class="section" id="diffusion-error-for-lax-wendroff">
+<h3><a class="toc-backref" href="#id28">Diffusion Error for Lax-Wendroff</a><a class="headerlink" href="#diffusion-error-for-lax-wendroff" title="Permalink to this headline">¶</a></h3>
+<p>Diffusion Error is close to one for a large phase range</p>
+<div class="section" id="id3">
+<h4><a class="toc-backref" href="#id29">Test 2</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p><span class="math">\(\phi = {\pi \over {6.25}} = 28.8^{\circ}\)</span></p>
+<p>For <span class="math">\(sigma = 0.8 \qquad \epsilon_D = 0.9985\)</span></p>
+<p>After 80 timesteps <span class="math">\(\left| G \right| ^n = (0.9985)^{80} = 0.89\)</span></p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/LW_diffusion.png"><img alt="../_images/LW_diffusion.png" src="../_images/LW_diffusion.png" style="width: 567.6999999999999px; height: 422.09999999999997px;" /></a>
+</div>
+</div>
+</div>
+<div class="section" id="dispersion-error-for-lax-wendroff">
+<h3><a class="toc-backref" href="#id30">Dispersion Error for Lax-Wendroff</a><a class="headerlink" href="#dispersion-error-for-lax-wendroff" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/LW_dispersion.png"><img alt="../_images/LW_dispersion.png" src="../_images/LW_dispersion.png" style="width: 553.6999999999999px; height: 408.79999999999995px;" /></a>
+</div>
+</div>
+</div>
+<div class="section" id="summary">
+<h2><a class="toc-backref" href="#id31">1.5.5.7. Summary</a><a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="spectral-analysis">
+<h3><a class="toc-backref" href="#id32">Spectral Analysis</a><a class="headerlink" href="#spectral-analysis" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Error in amplitude or diffusion error:</li>
+</ul>
+<div class="math">
+\[\epsilon_D = {{\left| G \right|} \over {\left| \tilde{G} \right|}}\]</div>
+<ul class="simple">
+<li>Error in the phase or dipsersion error:</li>
+</ul>
+<div class="math">
+\[\epsilon_{\phi} = {{\Phi} \over {\tilde{\Phi}}}\]</div>
+<ul class="simple">
+<li>For a hyperbolic problem <span class="math">\(\left| \tilde{G} \right| = 1\)</span></li>
+</ul>
+<div class="math">
+\[\epsilon_{D} = {\left| G \right|}\]</div>
+<div class="math">
+\[\epsilon_{\phi} = {{c_{num}} \over c} = {{tan^{-1} {-Im (G) / Re (G)}} \over {\sigma \phi}}\]</div>
+<p>Looked at plots of <span class="math">\(\epsilon_D\)</span>, <span class="math">\(\epsilon_{\phi}\)</span> vs <span class="math">\(\phi ( = k \Delta x)\)</span> with <span class="math">\(\sigma\)</span> as parameter</p>
+</div>
+<div class="section" id="st-order-upwind">
+<h3><a class="toc-backref" href="#id33">1st order Upwind</a><a class="headerlink" href="#st-order-upwind" title="Permalink to this headline">¶</a></h3>
+<p><span class="math">\(\epsilon_D\)</span> decreases away from 1 quickly with increasing frequency. For high frequencies damping is very large - <strong>very difficult to use 1st order upwind for any transport problems</strong></p>
+<p><span class="math">\(\epsilon_{\phi} \lt 1\)</span> (lagging error - numerical convection velocity is slower than analytical) for <span class="math">\(\sigma \gt 0.5\)</span></p>
+<p><span class="math">\(\epsilon_{\phi} \gt 1\)</span> (leading error) for <span class="math">\(\sigma \lt 0.5\)</span></p>
+<p><span class="math">\(\epsilon_{\phi} = 1\)</span> (no error) for <span class="math">\(\sigma = 0.5\)</span></p>
+</div>
+<div class="section" id="lax-friedrichs">
+<h3><a class="toc-backref" href="#id34">Lax-Friedrichs</a><a class="headerlink" href="#lax-friedrichs" title="Permalink to this headline">¶</a></h3>
+<p><strong>Why?</strong> Introduced to stabilize FTCS</p>
+<p><strong>What?</strong> Introduced considerable numerical diffusion</p>
+<p><span class="math">\(\epsilon_D\)</span> shows strong damping for smaller <span class="math">\(\sigma\)</span> and no damping for <span class="math">\(\phi = \pi\)</span> <strong>any errors that appear in the solution at twice the mesh size will not be damped</strong> - results in the staircase &#8220;jagged&#8221; result observed for the 1D Burgers Equation.</p>
+<p><span class="math">\(\epsilon_{\phi} \gt 1\)</span> (leading error)</p>
+</div>
+<div class="section" id="lax-wendroff">
+<h3><a class="toc-backref" href="#id35">Lax-Wendroff</a><a class="headerlink" href="#lax-wendroff" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Second Order Method - little numerical diffusion</li>
+<li>Oscillations appear in the solution - especially where the solution is non-smooth</li>
+</ul>
+<p><span class="math">\(\epsilon_D\)</span> shows larger accurate region where <span class="math">\(\epsilon_D = 1\)</span></p>
+<p><span class="math">\(\epsilon_{\phi} \lt 1\)</span> (lagging error)</p>
+</div>
+</div>
+<div class="section" id="analysis-of-leapfrog">
+<h2><a class="toc-backref" href="#id36">1.5.5.8. Analysis of Leapfrog</a><a class="headerlink" href="#analysis-of-leapfrog" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="diffusion-error">
+<h3><a class="toc-backref" href="#id37">Diffusion Error</a><a class="headerlink" href="#diffusion-error" title="Permalink to this headline">¶</a></h3>
+<p>Note that <span class="math">\(\left| G \right| = 1 \quad \Rightarrow \quad\)</span> No diffusion error</p>
+<p>Leapfrog scheme is useful for simulations that are required for <strong>long-time simulations</strong> e.g. weather forecast codes</p>
+<p>Can have stability problems with non-linear PDEs</p>
+</div>
+<div class="section" id="dispersion-error">
+<h3><a class="toc-backref" href="#id38">Dispersion Error</a><a class="headerlink" href="#dispersion-error" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\epsilon_D = \pm {{ {tan^{-1} [ (\sigma sin \phi) / \sqrt{(1-\sigma^2 sin^2 {\phi}})]} \over {\sigma \phi}}} =
+\pm {{sin^{-1}(\sigma sin \phi)} \over {\sigma \phi}}\]</div>
+<p><span class="math">\(\epsilon_{\phi} \lt 1\)</span> (lagging error)</p>
+<p>Accurate results for smooth solutions <span class="math">\(u(x)\)</span> smooth:</p>
+<ul class="simple">
+<li>Amplitudes correctly modelled</li>
+<li>Low frequencies, the phase error is close to 1</li>
+</ul>
+<p>Neutral stability <span class="math">\(\left| G \right| =1\)</span> for all <span class="math">\(\sigma\)</span> some problems, as high frequency errors are not damped</p>
+<p>Leapfrog unstable for Burgers Equation. Not good for any high speed flows with shocks</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/Leapfrog_dispersion.png"><img alt="../_images/Leapfrog_dispersion.png" src="../_images/Leapfrog_dispersion.png" style="width: 534.1px; height: 394.09999999999997px;" /></a>
+</div>
+</div>
+</div>
+<div class="section" id="what-is-the-origin-of-the-oscillations">
+<h2><a class="toc-backref" href="#id39">1.5.5.9. What is the Origin of the Oscillations?</a><a class="headerlink" href="#what-is-the-origin-of-the-oscillations" title="Permalink to this headline">¶</a></h2>
+<p>Have not explained the origin of oscillations</p>
+<p>We can explain why they occur <strong>behind</strong> the travelling wave</p>
+<ul class="simple">
+<li>Oscillations have high frequency</li>
+<li>Dispersion error <span class="math">\(\epsilon_{\phi} \lt 1\)</span> for LW and Leapfrog (especially at higher frequency) - Convection speed of errors is slower than the physical one</li>
+<li>Leapfrog <span class="math">\(\epsilon_{\phi} \Rightarrow 0\)</span> for <span class="math">\(\phi \Rightarrow \pi\)</span> and so oscillations are stronger than for LW</li>
+</ul>
+</div>
+<div class="section" id="analysis-of-beam-warming">
+<h2><a class="toc-backref" href="#id40">1.5.5.10. Analysis of Beam-Warming</a><a class="headerlink" href="#analysis-of-beam-warming" title="Permalink to this headline">¶</a></h2>
+<p>Consider an alternative scheme due to Beam and Warming</p>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id41">Lax-Wendroff</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>Recalled derivation of LW for linear convection:</p>
+<div class="math">
+\[u_i^{i+1} = u_i^n - c \Delta t(u_x)_i + {{c^2 \Delta t^2} \over 2}(u_{xx})_i + O(\Delta t^3)\]</div>
+<p>Lax Wendroff uses CD for the derivatives</p>
+</div>
+<div class="section" id="beam-warming">
+<h3><a class="toc-backref" href="#id42">Beam-Warming</a><a class="headerlink" href="#beam-warming" title="Permalink to this headline">¶</a></h3>
+<p>Beam-Warming uses 2nd order upwind for the derivatives</p>
+<div class="math">
+\[u_i^{i+1} = u_i^n - \sigma(3u_i^n - 4u_{i-1}^n+u_{i-2}^n) + {\sigma^2 \over 2}(u_i^n - 2u_{i-1}^n+u_{i-2}^n)\]</div>
+<div class="section" id="id5">
+<h4><a class="toc-backref" href="#id43">Diffusion Error</a><a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<div class="math">
+\[\left| G \right| = 1 - I \sigma [1 + 2(1- \sigma) sin^2 {\phi \over 2}]sin \phi-
+2 \sigma [1 - (1- \sigma) cos \phi]sin^2{\phi \over 2}\]</div>
+<p>Conditionally stable for <span class="math">\(0 \le \sigma \le 2\)</span></p>
+<p>Diffusion error:</p>
+<div class="math">
+\[\epsilon_D = \left| G \right| = \sqrt{1 - \sigma(1-\sigma)^2(2-\sigma)(1-cos{\phi})^2}\]</div>
+</div>
+<div class="section" id="id6">
+<h4><a class="toc-backref" href="#id44">Dispersion Error</a><a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<div class="math">
+\[\epsilon_{\phi} = \text{not given}\]</div>
+<p>Beam-Warming shows flat region for a range of frequencies</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/BW_diffusion.png"><img alt="../_images/BW_diffusion.png" src="../_images/BW_diffusion.png" style="width: 568.4px; height: 377.29999999999995px;" /></a>
+</div>
+<p>Dispersion error <span class="math">\(\epsilon_{\phi} \gt 1\)</span> for <span class="math">\(\sigma \lt 1\)</span></p>
+<p>Numerical solution will move faster than analytical solution. High frequency oscillations should move ahead of the solution.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/BW_dispersion.png"><img alt="../_images/BW_dispersion.png" src="../_images/BW_dispersion.png" style="width: 577.5px; height: 378.7px;" /></a>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="final-notes">
+<h2><a class="toc-backref" href="#id45">1.5.5.11. Final Notes</a><a class="headerlink" href="#final-notes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>1st order schemes generate large errors - not recommended</li>
+<li>2nd order schemes acceptable errors - but should be careful with oscillations at higher frequencies</li>
+</ul>
+</div>
+<div class="section" id="implications-of-diffusion-error-for-grid-density">
+<h2><a class="toc-backref" href="#id46">1.5.5.12. Implications of Diffusion Error for Grid Density</a><a class="headerlink" href="#implications-of-diffusion-error-for-grid-density" title="Permalink to this headline">¶</a></h2>
+<p>Look at plot for <span class="math">\(\epsilon_D\)</span> for LW, establishes a phase angle limit. We require <span class="math">\(\epsilon_D\)</span> close to 1. Choose <span class="math">\(\phi_{lim} = 10^{\circ} = {\pi \over {18}}\)</span> (arbitrarily).</p>
+<p>Key quantity defining accuracy:</p>
+<ul class="simple">
+<li>Number of mesh points per wavelength = <span class="math">\(N_{\lambda} = {\lambda \over {\Delta x}}\)</span></li>
+<li>We require <span class="math">\(\phi = k \Delta x = {{2 \pi} \over \lambda} \le \phi_{lim}\)</span></li>
+<li>Or:</li>
+</ul>
+<div class="math">
+\[N_{\lambda} = {\lambda \over {\Delta x}} \ge {{2 \pi} \over {\phi_{lim}}}\]</div>
+<p>So if <span class="math">\(\phi_{lim} = {\pi \over {18}}\)</span> then <span class="math">\(N_{lambda} = 36\)</span> points per wavelength to resolve frequencies up to <span class="math">\({\pi \over {18}}\)</span></p>
+<p>This is quite a severe requirement for unsteady problems</p>
+<p>Even in steady problems you have artificial time in a transient period - otherwise you have an excessively damped solution.</p>
+</div>
+<div class="section" id="question">
+<h2><a class="toc-backref" href="#id47">1.5.5.13. Question</a><a class="headerlink" href="#question" title="Permalink to this headline">¶</a></h2>
+<p>What is the dissipation error for <span class="math">\(\sigma = 1\)</span> ? For upwind is this a horizontal line?</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="second_order_formulas.html">1.5.4. Second Order Formulas</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="multi_step_methods.html">1.6.1. Multi-step Numerical Methods</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

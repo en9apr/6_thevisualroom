@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5. OpenFOAM Commands &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="next" title="6. LaTeX" href="../10_latex/latex.html" />
+    <link rel="prev" title="4. How to Use Version Control" href="../08_version_control/git.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>5. OpenFOAM Commands</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../08_version_control/git.html">4. How to Use Version Control</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../10_latex/latex.html">6. LaTeX</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="openfoam-commands">
+<h1>5. OpenFOAM Commands<a class="headerlink" href="#openfoam-commands" title="Permalink to this headline">¶</a></h1>
+<p>Here is a list of some commands in OpenFOAM</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#how-to-build-a-mesh" id="id1">How to build a mesh?</a></li>
+<li><a class="reference internal" href="#how-to-run-a-case" id="id2">How to run a case?</a></li>
+<li><a class="reference internal" href="#how-to-post-process-data" id="id3">How to post-process data?</a></li>
+</ul>
+</div>
+<div class="section" id="how-to-build-a-mesh">
+<h2><a class="toc-backref" href="#id1">5.1. How to build a mesh?</a><a class="headerlink" href="#how-to-build-a-mesh" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-default"><div class="highlight"><pre><span></span>$ blockMesh
+</pre></div>
+</div>
+</td>
+<td>Creates parametric meshes with grading and curved edges</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-to-run-a-case">
+<h2><a class="toc-backref" href="#id2">5.2. How to run a case?</a><a class="headerlink" href="#how-to-run-a-case" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-default"><div class="highlight"><pre><span></span>$ icoFoam
+</pre></div>
+</div>
+</td>
+<td>Laminar, incompressible, isothermal solver</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-default"><div class="highlight"><pre><span></span>$ pisoFoam
+</pre></div>
+</div>
+</td>
+<td>Turbulent, incompressible, isothermal solver</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-to-post-process-data">
+<h2><a class="toc-backref" href="#id3">5.3. How to post-process data?</a><a class="headerlink" href="#how-to-post-process-data" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-default"><div class="highlight"><pre><span></span>$ paraFoam
+</pre></div>
+</div>
+</td>
+<td>Opens Paraview</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../08_version_control/git.html">4. How to Use Version Control</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../10_latex/latex.html">6. LaTeX</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.6.1. Multi-step Numerical Methods &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.6.2. Conservative Form" href="conservative_form.html" />
+    <link rel="prev" title="1.5.5. Spectral Analysis of Errors" href="spectral_analysis.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.6.1. Multi-step Numerical Methods</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="spectral_analysis.html">1.5.5. Spectral Analysis of Errors</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="conservative_form.html">1.6.2. Conservative Form</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="multi-step-numerical-methods">
+<h1>1.6.1. Multi-step Numerical Methods<a class="headerlink" href="#multi-step-numerical-methods" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#about-multi-step-methods" id="id1">About Multi-step methods</a></li>
+<li><a class="reference internal" href="#richtmyer-lax-wendroff" id="id2">Richtmyer/Lax-Wendroff</a><ul>
+<li><a class="reference internal" href="#variant-1-richtmyer-lax-friedrichs-and-leapfrog" id="id3">Variant 1 - Richtmyer (Lax-Friedrichs and Leapfrog)</a></li>
+<li><a class="reference internal" href="#variant-2-2-step-lax-wendroff" id="id4">Variant 2 - 2 Step Lax-Wendroff</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#maccormack-method" id="id5">MacCormack Method</a></li>
+<li><a class="reference internal" href="#conclusion" id="id6">Conclusion</a></li>
+</ul>
+</div>
+<p>Summary:</p>
+<ul class="simple">
+<li>Schemes presented for linear equations are not well-suited to the solution of <strong>non-linear</strong> problems</li>
+<li>Multi-step methods work well in non-linear hyperbolic equations<ul>
+<li>FD schemes at split time levels, also called &#8220;predictor-corrector&#8221; methods</li>
+<li>Richtmyer/Lax-Wendroff</li>
+<li>MacCormack</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="about-multi-step-methods">
+<h2><a class="toc-backref" href="#id1">1.6.1.1. About Multi-step methods</a><a class="headerlink" href="#about-multi-step-methods" title="Permalink to this headline">¶</a></h2>
+<p>Multi-step are FD schemes are at split time levels and work well in <strong>non-linear hyperbolic problems</strong>. They are also called predictor-corrector methods.</p>
+<ul class="simple">
+<li>1st step, a &#8220;temporary value&#8221; for u(x) is &#8220;predicted&#8221;</li>
+<li>2nd step a &#8220;corrected value&#8221; is computed</li>
+</ul>
+</div>
+<div class="section" id="richtmyer-lax-wendroff">
+<h2><a class="toc-backref" href="#id2">1.6.1.2. Richtmyer/Lax-Wendroff</a><a class="headerlink" href="#richtmyer-lax-wendroff" title="Permalink to this headline">¶</a></h2>
+<p>Two variants:</p>
+<ul class="simple">
+<li>Variant 1 - Richtmyer - at point <span class="math">\(i\)</span></li>
+<li>Variant 2 - 2 step LW - at point <span class="math">\(i + {1 \over 2}\)</span></li>
+</ul>
+<div class="section" id="variant-1-richtmyer-lax-friedrichs-and-leapfrog">
+<h3><a class="toc-backref" href="#id3">Variant 1 - Richtmyer (Lax-Friedrichs and Leapfrog)</a><a class="headerlink" href="#variant-1-richtmyer-lax-friedrichs-and-leapfrog" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Step 1: Predictor Step</strong> use LF method at time level <span class="math">\(n + {1 \over 2}\)</span></li>
+</ul>
+<div class="math">
+\[{{u_i^{n+{1 \over 2}} - {1 \over 2} (u_{i+1}^n + u_{i-1}^n)} \over {{\Delta t} \over 2 } }
+=-c{ {( {u_{i+1}^n - u_{i-1}^n})} \over {2 \Delta x}}\]</div>
+<ul class="simple">
+<li><strong>Step 2: Corrector Step</strong> Leapfrog with <span class="math">\({\Delta t} \over 2\)</span></li>
+</ul>
+<div class="math">
+\[{{u_i^{n+1} - u_i^n} \over {\Delta t} }
+=-c{ {( {u_{i+1}^{n+{1 \over 2}} - u_{i-1}^{n+{1 \over 2}}})} \over {2 \Delta x}}\]</div>
+<p>Transpose Step 1 and 2 for outputs:</p>
+<ul class="simple">
+<li>Predictor:</li>
+</ul>
+<div class="math">
+\[u_i^{n+{1 \over 2}} = {1 \over 2} (u_{i+1}^n + u_{i-1}^n) - {\sigma \over 4}(u_{i+1}^n - u_{i-1}^n)\]</div>
+<ul class="simple">
+<li>Corrector:</li>
+</ul>
+<div class="math">
+\[u_i^{n+1} = u_i^{n-1} - {\sigma \over 2} (u_{i+1}^{n+{1 \over 2}} - u_{i-1}^{n+{1 \over 2}})\]</div>
+<ul class="simple">
+<li>Stable for Courant Number = <span class="math">\(\sigma = {{c \Delta t} \over {\Delta x}} \le 2\)</span> (possibly as a consequence of the half-time step in the method?)</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/richtmyer.png"><img alt="../_images/richtmyer.png" src="../_images/richtmyer.png" style="width: 800.0px; height: 320.0px;" /></a>
+</div>
+</div>
+<div class="section" id="variant-2-2-step-lax-wendroff">
+<h3><a class="toc-backref" href="#id4">Variant 2 - 2 Step Lax-Wendroff</a><a class="headerlink" href="#variant-2-2-step-lax-wendroff" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Step 1: Predictor Step</strong> use LF on <span class="math">\(i+{1 \over 2}\)</span></li>
+</ul>
+<div class="math">
+\[u_{i+{1 \over 2}}^{n+{1 \over 2}} = {1 \over 2} (u_{i+1}^n + u_{i}^n) - {\sigma \over 2}(u_{i+1}^n - u_{i}^n)\]</div>
+<ul class="simple">
+<li><strong>Step 2: Corrector Step</strong> use FTCS</li>
+</ul>
+<div class="math">
+\[u_i^{n+1} = u_i^{n} - {\sigma} (u_{i+{1 \over 2}}^{n+{1 \over 2}} - u_{i-{1 \over 2}}^{n+{1 \over 2}})\]</div>
+<ul class="simple">
+<li>Stable for Courant Number = <span class="math">\(\sigma = {{c \Delta t} \over {\Delta x}} \le 1\)</span></li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/2_step_LW_scheme.png"><img alt="../_images/2_step_LW_scheme.png" src="../_images/2_step_LW_scheme.png" style="width: 800.0px; height: 320.0px;" /></a>
+</div>
+<ul class="simple">
+<li>This scheme is 2nd order</li>
+<li>For linear PDEs it is equivalent to the single step LW</li>
+</ul>
+</div>
+</div>
+<div class="section" id="maccormack-method">
+<h2><a class="toc-backref" href="#id5">1.6.1.3. MacCormack Method</a><a class="headerlink" href="#maccormack-method" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Step 1</strong> - uses FD scheme in x - call <span class="math">\(\tilde{u}^{n+1}\)</span> the temporary solution</li>
+</ul>
+<div class="math">
+\[{{\tilde{u}_i^{n+1} - u_i^n} \over {\Delta t}} = -c {{{(u_{i+1}^n - u_i^n)}} \over {\Delta x}}\]</div>
+<ul class="simple">
+<li><strong>Step 2</strong> - uses BD scheme in x with <span class="math">\({{\Delta t} \over 2}\)</span></li>
+</ul>
+<div class="math">
+\[{{u_i^{n+1} - u_i^{n+{1 \over 2}} } \over {{\Delta t} \over 2}}
+= -c{{({\tilde{u}_{i}^{n+1} - \tilde{u}_{i-1}^{n+1}})} \over {\Delta x}}\]</div>
+<p><strong>and</strong> replace the value <span class="math">\(u_i^{n+{1 \over 2}}\)</span> by the average</p>
+<div class="math">
+\[{u_i^{n + {1 \over 2}}} = {1 \over 2}(u_i^n + \tilde{u}_i^{n+1})\]</div>
+<ul class="simple">
+<li><strong>Predictor</strong></li>
+</ul>
+<div class="math">
+\[\tilde{u}_i^{n+1} = u_i^n - {{c \Delta t} \over {\Delta x}} (u_{i+1}^n - u_i^n)\]</div>
+<ul class="simple">
+<li><strong>Corrector</strong></li>
+</ul>
+<div class="math">
+\[u_i^{n+1} = {1 \over 2} \left [ (u_i^n + \tilde{u}_i^{n+1}) - {{c \Delta t} \over {\Delta x}} (\tilde{u}_i^{n+1} - \tilde{u}_{i-1}^{n+1})  \right ]\]</div>
+<ul class="simple">
+<li>2nd order method</li>
+<li>Stability <span class="math">\(\sigma &lt; 1\)</span></li>
+<li>For linear PDEs equivalent to LW</li>
+<li>Can alternate FD/BD - BD/FD works well for <strong>nonlinear</strong> problems</li>
+<li>Don&#8217;t need to store values at intermediate mesh points (like 2 step Lax Wendroff)</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/MacCormack_scheme.png"><img alt="../_images/MacCormack_scheme.png" src="../_images/MacCormack_scheme.png" style="width: 1000.0px; height: 700.0px;" /></a>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2><a class="toc-backref" href="#id6">1.6.1.4. Conclusion</a><a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The majority of PDEs in fluid mechanics are <strong>non-linear</strong></li>
+<li>You can learn a lot by just studying Burgers Equation, that are especially important if you are studying the Euler Equations (for compressible flows)</li>
+<li>In general, the <strong>non-linearity dominates over viscous terms</strong> - especially in high Reynolds Number flows - but not for mixing flows, e.g. Stokes flow (where viscous terms dominate)</li>
+<li>So studying inviscid Burgers equation has <strong>important consequences</strong> for fluid mechanics</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="spectral_analysis.html">1.5.5. Spectral Analysis of Errors</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="conservative_form.html">1.6.2. Conservative Form</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

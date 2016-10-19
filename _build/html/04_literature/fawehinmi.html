@@ -1,0 +1,437 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.5. Fawehinmi et al. (2005) “Experimental and CFD Analysis of Drop Formation” &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="4. Literature" href="literature.html" />
+    <link rel="next" title="4.6. Cavaleri et al. (2007) “Wave Modelling - The State of the Art”" href="cavaleri.html" />
+    <link rel="prev" title="4.4. Drikakis (2003) “Advances in Turbulent Flow Computations”" href="drikakis.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.5. Fawehinmi et al. (2005) “Experimental and CFD Analysis of Drop Formation”</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="drikakis.html">4.4. Drikakis (2003) &#8220;Advances in Turbulent Flow Computations&#8221;</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="cavaleri.html">4.6. Cavaleri et al. (2007) &#8220;Wave Modelling - The State of the Art&#8221;</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="fawehinmi-et-al-2005-experimental-and-cfd-analysis-of-drop-formation">
+<h1>4.5. Fawehinmi et al. (2005) &#8220;Experimental and CFD Analysis of Drop Formation&#8221;<a class="headerlink" href="#fawehinmi-et-al-2005-experimental-and-cfd-analysis-of-drop-formation" title="Permalink to this headline">¶</a></h1>
+<p>Fawehinmi, O.B., Gaskell, P.H., Jimack, P.K., Kapur, N., Thompson, H.M. &#8220;A combined experimental and computational fluid dynamics analysis of the dynamics of drop formation&#8221;, Proc. IMechE Part C; J. Mechanical Engineering Science, vol 219, 2005.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#abstract" id="id1">Abstract</a><ul>
+<li><a class="reference internal" href="#primary-drop-volume" id="id2">Primary drop volume</a></li>
+<li><a class="reference internal" href="#fine-interfacial-features" id="id3">Fine interfacial features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#literature-review" id="id4">Literature Review</a><ul>
+<li><a class="reference internal" href="#applications-for-the-dynamics-of-drop-formation" id="id5">Applications for the dynamics of drop formation</a></li>
+<li><a class="reference internal" href="#the-overall-dynamics-of-drop-formation" id="id6">The overall dynamics of drop formation</a></li>
+<li><a class="reference internal" href="#the-dynamics-of-dripping" id="id7">The dynamics of dripping</a></li>
+<li><a class="reference internal" href="#experimental-studies" id="id8">Experimental studies</a></li>
+<li><a class="reference internal" href="#modelling" id="id9">Modelling</a><ul>
+<li><a class="reference internal" href="#macroscopic-force-balance" id="id10">Macroscopic force balance</a></li>
+<li><a class="reference internal" href="#one-dimensional-modelling" id="id11">One-dimensional modelling</a></li>
+<li><a class="reference internal" href="#two-dimensional-modelling" id="id12">Two-dimensional modelling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#experimental-method" id="id13">Experimental Method</a><ul>
+<li><a class="reference internal" href="#apparatus" id="id14">Apparatus</a></li>
+<li><a class="reference internal" href="#materials-and-property-measurements" id="id15">Materials and Property Measurements</a></li>
+<li><a class="reference internal" href="#procedure" id="id16">Procedure</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cfd-analysis-of-drop-formation" id="id17">CFD Analysis of Drop Formation</a></li>
+<li><a class="reference internal" href="#results" id="id18">Results</a><ul>
+<li><a class="reference internal" href="#experimental" id="id19">Experimental</a></li>
+<li><a class="reference internal" href="#numerical-simulation" id="id20">Numerical Simulation</a><ul>
+<li><a class="reference internal" href="#initial-drop-formation" id="id21">Initial drop formation</a></li>
+<li><a class="reference internal" href="#drop-development" id="id22">Drop development</a></li>
+<li><a class="reference internal" href="#comparison-with-visualised-drops-20-glycerine" id="id23">Comparison with visualised drops - 20% glycerine</a></li>
+<li><a class="reference internal" href="#comparison-with-visualised-drops-50-and-20-glycerine" id="id24">Comparison with visualised drops - 50% and 20% glycerine</a></li>
+<li><a class="reference internal" href="#comparison-of-drop-length" id="id25">Comparison of drop length</a></li>
+<li><a class="reference internal" href="#comparison-of-drop-volume" id="id26">Comparison of drop volume</a></li>
+<li><a class="reference internal" href="#comparison-of-time-to-breakup" id="id27">Comparison of time to breakup</a></li>
+<li><a class="reference internal" href="#prediction-of-satellite-drop" id="id28">Prediction of satellite drop</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusions" id="id29">Conclusions</a></li>
+</ul>
+</div>
+<div class="section" id="abstract">
+<h2><a class="toc-backref" href="#id1">4.5.1. Abstract</a><a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h2>
+<p>This paper is a comparison between CFX and FLOW3D for the modelling of the dynamics of <strong>drop formation</strong> for:</p>
+<ul class="simple">
+<li><strong>Primary drop volume as a function of flowrate</strong> (which is of significant engineering interest)</li>
+<li><strong>Interfacial features</strong> (which seems less important in engineering, but may have an influence in extreme cases)</li>
+</ul>
+<div class="section" id="primary-drop-volume">
+<h3><a class="toc-backref" href="#id2">4.5.1.1. Primary drop volume</a><a class="headerlink" href="#primary-drop-volume" title="Permalink to this headline">¶</a></h3>
+<p>FLOW3D is more efficient than CFX because FLOW3D uses a single phase approach, whereas CFX uses two phases. Both are able to predict the primary drop volume.</p>
+</div>
+<div class="section" id="fine-interfacial-features">
+<h3><a class="toc-backref" href="#id3">4.5.1.2. Fine interfacial features</a><a class="headerlink" href="#fine-interfacial-features" title="Permalink to this headline">¶</a></h3>
+<p>For low flowrates and viscosity there are two phenomena:</p>
+<ul class="simple">
+<li>Fine interfacial threads</li>
+<li>Satellite drops</li>
+</ul>
+<p>Both CFX and FLOW3D are poorer at predicting these, because of:</p>
+<ul class="simple">
+<li><strong>Free surface smearing</strong> introduced by the VOF method.</li>
+<li><strong>Surface tension</strong> becoming dominant</li>
+</ul>
+</div>
+</div>
+<div class="section" id="literature-review">
+<h2><a class="toc-backref" href="#id4">4.5.2. Literature Review</a><a class="headerlink" href="#literature-review" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="applications-for-the-dynamics-of-drop-formation">
+<h3><a class="toc-backref" href="#id5">4.5.2.1. Applications for the dynamics of drop formation</a><a class="headerlink" href="#applications-for-the-dynamics-of-drop-formation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Separation and extraction processes</li>
+<li>Spraying</li>
+<li>Digital-jet printing technologies</li>
+</ul>
+</div>
+<div class="section" id="the-overall-dynamics-of-drop-formation">
+<h3><a class="toc-backref" href="#id6">4.5.2.2. The overall dynamics of drop formation</a><a class="headerlink" href="#the-overall-dynamics-of-drop-formation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Mode 1: <strong>Dripping</strong> - at low efflux velocity - where liquid leaves the tube in periodic drops</li>
+<li>Mode 2: <strong>Jetting</strong> - at high efflux velocity - a coherent laminar jet emerges from the tube before breaking into discrete drops due to the <strong>Rayleigh instability</strong></li>
+</ul>
+</div>
+<div class="section" id="the-dynamics-of-dripping">
+<h3><a class="toc-backref" href="#id7">4.5.2.3. The dynamics of dripping</a><a class="headerlink" href="#the-dynamics-of-dripping" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Stage 1: <strong>Quasi-static growth of the drop</strong> - ends when surface tension is unable to counter the weight of the drop</li>
+<li>Stage 2: <strong>Necking and breakup:</strong></li>
+</ul>
+<ul class="simple">
+<li>Caused by destabilising effect of surface tension and leads drop to develop a conical upper portion and almost spherical lower portion.</li>
+<li>The liquid thread connecting these two simultaneously increases in length and decreases in diameter to a <strong>critical breaking point</strong> at which the spherical portion is released to form the primary drop.</li>
+<li>The remaining liquid column recoils rapidly due to surface tension and may then break up again at the top, leading to the formation of a <strong>satellite drop</strong></li>
+</ul>
+<p><strong>Q: If the industrial application involved any time dependency - the critical breaking point may be important</strong></p>
+<p><strong>Q: Satellite drops may be important for accuracy? - or are these an extreme case?</strong></p>
+</div>
+<div class="section" id="experimental-studies">
+<h3><a class="toc-backref" href="#id8">4.5.2.4. Experimental studies</a><a class="headerlink" href="#experimental-studies" title="Permalink to this headline">¶</a></h3>
+<p>Experimental study of Peregrine (1990) showed four stages:</p>
+<ul class="simple">
+<li>necking</li>
+<li>bifurcation</li>
+<li>recoil</li>
+<li>secondary necking</li>
+</ul>
+<p>Shi (1994) showed increasing drop viscosity leads to formation of long thin threads - showing a microthread or a series of smaller necks can by spawned near breakup.</p>
+<p>Zhang and Basaran (1995) showed effect of capillary radius and fluid properties on primary and satellite drops, for cases with and without surfactants - comparing water with 85% glycerine at low flowrate.</p>
+</div>
+<div class="section" id="modelling">
+<h3><a class="toc-backref" href="#id9">4.5.2.5. Modelling</a><a class="headerlink" href="#modelling" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="macroscopic-force-balance">
+<h4><a class="toc-backref" href="#id10">Macroscopic force balance</a><a class="headerlink" href="#macroscopic-force-balance" title="Permalink to this headline">¶</a></h4>
+<p>Early models attempted to predict drop size as a function of fluid properties, nozzle geometry and flowrate  - based on <strong>simple macroscopic force balance</strong> - where necking and breakup are preceded by pure static growth from the nozzle. However such models are inaccurate by &gt;20%</p>
+</div>
+<div class="section" id="one-dimensional-modelling">
+<h4><a class="toc-backref" href="#id11">One-dimensional modelling</a><a class="headerlink" href="#one-dimensional-modelling" title="Permalink to this headline">¶</a></h4>
+<p>Based on Rayleigh (1878) drop breakup was analysed by a range of 1D axi-symmetric models, this can provide information on <strong>interface rupture during drop formation</strong>. The method is to solve the axial mass and momentum conservation equations. These can predict the <strong>time evolution of the drop shape</strong> at low flowrates - showing how thin liquid threads above the primary drop can spawn a series of smaller necks with ever thinner diameter prior to breakup.</p>
+<p>No 1D model can capture simultaneously:</p>
+<ol class="arabic simple">
+<li>Macroscopic features, e.g. the primary drop volume and time to breakup</li>
+<li>Microscopic features, e.g. thin liquid threads and satellite drops</li>
+</ol>
+</div>
+<div class="section" id="two-dimensional-modelling">
+<h4><a class="toc-backref" href="#id12">Two-dimensional modelling</a><a class="headerlink" href="#two-dimensional-modelling" title="Permalink to this headline">¶</a></h4>
+<p>Boundary integral method / boundary element method of Schulkes (1994):</p>
+<ul class="simple">
+<li>Inviscid, irrotational or Stokes flow</li>
+<li>2D axisymmetric</li>
+</ul>
+<p>VOF method of Richards (1995):</p>
+<ul class="simple">
+<li>liquid jet formation from a nozzle into a second liquid</li>
+</ul>
+<p>Full axi-symmetric Navier-Stokes equations method of Wilkes (1999):</p>
+<ul class="simple">
+<li>Formation of a drop of Newtonian fluid at the finite Reynolds number encountered in ink-jet printing.</li>
+<li>Used FE method - allowing body fitted grid.</li>
+<li>Can simulate drop volume and thin filaments successfully.</li>
+<li>Chen (2002) showed that this can be used to simulate the <strong>pinch off</strong> of a low viscosity fluid where the surface overturns before pinch off.</li>
+</ul>
+<p>VOF common because of the ability to simulate micro/macroscopic features.</p>
+<p>Engineers don&#8217;t have time or expertise to develop codes for complex free surface flows - so this study compares CFX and FLOW3D.</p>
+<p>Method of comparision:</p>
+<ul class="simple">
+<li>Previous experiments</li>
+<li>Previous computational studies</li>
+<li>New experiments</li>
+</ul>
+<p>In the end there is a compromise between:</p>
+<ul class="simple">
+<li>Computing time</li>
+<li>Accuracy</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="experimental-method">
+<h2><a class="toc-backref" href="#id13">4.5.3. Experimental Method</a><a class="headerlink" href="#experimental-method" title="Permalink to this headline">¶</a></h2>
+<p>Drop formation visualised with high-speed photography with image analysis - quantitative information about:</p>
+<ul class="simple">
+<li>limiting length of the drop</li>
+<li>primary drop volume</li>
+<li>time to break-up</li>
+</ul>
+<div class="section" id="apparatus">
+<h3><a class="toc-backref" href="#id14">4.5.3.1. Apparatus</a><a class="headerlink" href="#apparatus" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Constant flow rate to a capillary tube supplied by <strong>syringe pump</strong></li>
+<li>Capillary tube is on a vibration isolation table</li>
+<li>Ambient temperature is monitored using a thermometer</li>
+<li>Three sizes of capillary tube 0.4mm, 0.8mm, 1.375mm (outer radii)</li>
+<li>Square edge to tube ensures interfacial surface is at the outer edge.</li>
+<li>Length to diameter ratio &gt;10 for fully developed flow at outlet</li>
+<li>Ratio of inner to outer radii &gt; 0.3 <span class="math">\(\Rightarrow\)</span> effect of capillary wall thickness is negligible</li>
+<li>Pump produced flowrate in range 0.01 to 25 ml/min</li>
+</ul>
+<p><strong>Really need dimensionless numbers here - e.g. what is the Reynolds number &amp; Stokes number range?</strong></p>
+<ul class="simple">
+<li>Images captured with a 4500frame/sec camera (256x256 pixels) and 40500 frames/sec (64x64 pixels)</li>
+<li>Lighting with a 250W halogen light reflected off white card</li>
+<li>Use of a video monitor to view the images</li>
+</ul>
+</div>
+<div class="section" id="materials-and-property-measurements">
+<h3><a class="toc-backref" href="#id15">4.5.3.2. Materials and Property Measurements</a><a class="headerlink" href="#materials-and-property-measurements" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Glycerine-water was used because the viscosity can be made to vary by three orders of magnitude as the concentration increases from 0 to 100, whilst the surface tension varies only by 10% and the density by 20%.</li>
+<li>Density of mixtures measured with a density bottle</li>
+<li>Viscosities measured using a rheometer</li>
+<li>Surface tension measured with a ring probe mounted on a torsion balance.</li>
+</ul>
+</div>
+<div class="section" id="procedure">
+<h3><a class="toc-backref" href="#id16">4.5.3.3. Procedure</a><a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Air is cleared and steady flow established.</li>
+<li>Drop formation at constant flow rate is extremely repeatable - volume at break off varies by only 5%</li>
+</ul>
+</div>
+</div>
+<div class="section" id="cfd-analysis-of-drop-formation">
+<h2><a class="toc-backref" href="#id17">4.5.4. CFD Analysis of Drop Formation</a><a class="headerlink" href="#cfd-analysis-of-drop-formation" title="Permalink to this headline">¶</a></h2>
+<p>Assumptions:</p>
+<ul class="simple">
+<li>Incompressible</li>
+<li>Newtonian</li>
+<li>Axisymmetric</li>
+</ul>
+<p>Dimensional analysis:</p>
+<ul class="simple">
+<li>Used dimensionless velocity, lengths, stresses and time</li>
+</ul>
+<p>Physics:</p>
+<ul class="simple">
+<li>Momentum Equation contains Reynolds number and Stokes Number</li>
+<li>Surface tension introduced via free surface boundary condition (i.e. viscous and surface tension stresses should be in balance)</li>
+<li>Applied a fully developed velocity profile at inlet</li>
+<li>No mass transfer across free surface</li>
+</ul>
+<p>Mathematical description of free surface:</p>
+<ul class="simple">
+<li>Eulerian - fixed mesh - fluid moves through mesh</li>
+<li>Lagrangian - moving mesh - fluid convected with mesh</li>
+</ul>
+<p>Some problem with Lagrangian approach - unable to predict drop dynamics past the point of necking and subsequent drop pinch off</p>
+<p>Eulerian approach with VOF method tracks interface using a fluid marker function convected with flow. Fluid marked as 0, air as 1. Between 0 and 1 is the free surface. This requires a finer mesh than Lagrangian approach.</p>
+<p>CFX - uses two phase approach - flow equations are solved in liquid and air regions</p>
+<p>FLOW3D - uses single phase approach - free surface is a discontinuity - flow equations are only solved for liquid. Hence FLOW3D should be more efficient than CFX.</p>
+</div>
+<div class="section" id="results">
+<h2><a class="toc-backref" href="#id18">4.5.5. Results</a><a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="experimental">
+<h3><a class="toc-backref" href="#id19">4.5.5.1. Experimental</a><a class="headerlink" href="#experimental" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Plotted time to breakup vs flowrate on log scale for different concentrations of glycerine.</p>
+</li>
+<li><p class="first">Agreement with previous results is excellent</p>
+</li>
+<li><p class="first">Viscous effects cause:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Elongation of liquid cone above primary drop</li>
+<li>Lengthening of liquid thread</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">For a fixed capillary size - decrease in time between breakup is 10% when viscosity is reduced from 50% glycerine to 20% glycerine</p>
+</li>
+<li><p class="first">Effect of increasing flow rate is a reduction in time between breakup - which decays exponentially, (except for smallest diameter tubes, which approaches jetting at higher flowrates)</p>
+</li>
+<li><p class="first">For small tube diameters, as flow is increased the inertia of the fluid forces more fluid into the droplet, increasing it&#8217;s size. At larger flowrates, this inertia pushes the droplet further from the tube and ultimately a jet is formed.</p>
+</li>
+<li><p class="first">The droplet formation is now dominated by the Rayleigh instability occurring along a column of fluid, with a diameter of the order of the inner tube diameter, as opposed to the diameter of the order of the droplet, hence drop volume is reduced.</p>
+</li>
+<li><p class="first"><strong>Important industrial driver is need to increase resolution by reducing drop size by reducing capillary size. However, we must avoid blockage</strong> Ways of reducing drop diameter:</p>
+</li>
+</ul>
+<ol class="arabic simple">
+<li>There is a diminished return on the reduction of drop volume by reducing tube diameter</li>
+<li>Control waveform used to drive a piezo element</li>
+<li>Use a non-circular cross section for the tube</li>
+</ol>
+</div>
+<div class="section" id="numerical-simulation">
+<h3><a class="toc-backref" href="#id20">4.5.5.2. Numerical Simulation</a><a class="headerlink" href="#numerical-simulation" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="initial-drop-formation">
+<h4><a class="toc-backref" href="#id21">Initial drop formation</a><a class="headerlink" href="#initial-drop-formation" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Big issue - smearing of the free surface at the interface</li>
+<li>CFX (multi-phase solution) shows slightly more diffuse results than FLOW3D (single phase solution)</li>
+<li>Marker cell function (or volume fraction) of 0.5 was best representative of the free surface</li>
+</ul>
+</div>
+<div class="section" id="drop-development">
+<h4><a class="toc-backref" href="#id22">Drop development</a><a class="headerlink" href="#drop-development" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>CFX shows better agreement in terms of shape with previous simulations</li>
+<li>FLOW3D shows better agreement in terms of time taken to reach a drop shape with previous simulations</li>
+<li>FLOW3D is much more efficient than CFD (2000 versus 433000 CPU seconds)</li>
+</ul>
+</div>
+<div class="section" id="comparison-with-visualised-drops-20-glycerine">
+<h4><a class="toc-backref" href="#id23">Comparison with visualised drops - 20% glycerine</a><a class="headerlink" href="#comparison-with-visualised-drops-20-glycerine" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Time between drop breakup shows good comparison</li>
+<li>Agreement deteriorates as drop break up approaches</li>
+</ul>
+</div>
+<div class="section" id="comparison-with-visualised-drops-50-and-20-glycerine">
+<h4><a class="toc-backref" href="#id24">Comparison with visualised drops - 50% and 20% glycerine</a><a class="headerlink" href="#comparison-with-visualised-drops-50-and-20-glycerine" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Higher flow rates and higher viscosity liquid mean than the thread is not present - where surface tension isn&#8217;t dominant</li>
+<li>When surface tension is dominant, the comparison is poorer</li>
+</ul>
+<p><strong>Failure may be due to CSF algorithm used by FLOW3D, which represents surface tension via a body force, which is known to have limitations for surface tension-dominated flows.</strong></p>
+<p>Finite element schemes are able to capture this long neck feature</p>
+</div>
+<div class="section" id="comparison-of-drop-length">
+<h4><a class="toc-backref" href="#id25">Comparison of drop length</a><a class="headerlink" href="#comparison-of-drop-length" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Drop length versus % glycerine shows a good comparison at low viscosity</li>
+<li>At high viscosity the error is larger</li>
+<li>Unable to obtain converged solutions for very low viscosity - i.e. water</li>
+</ul>
+</div>
+<div class="section" id="comparison-of-drop-volume">
+<h4><a class="toc-backref" href="#id26">Comparison of drop volume</a><a class="headerlink" href="#comparison-of-drop-volume" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Generally good comparison, with some differences</li>
+</ul>
+</div>
+<div class="section" id="comparison-of-time-to-breakup">
+<h4><a class="toc-backref" href="#id27">Comparison of time to breakup</a><a class="headerlink" href="#comparison-of-time-to-breakup" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Time to breakup is in excellent agreement between simulation and experiment</li>
+</ul>
+</div>
+<div class="section" id="prediction-of-satellite-drop">
+<h4><a class="toc-backref" href="#id28">Prediction of satellite drop</a><a class="headerlink" href="#prediction-of-satellite-drop" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>This is predicted, however, requires a much finer grid - probably requires local grid refinement</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="conclusions">
+<h2><a class="toc-backref" href="#id29">4.5.6. Conclusions</a><a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
+<p>Drop formation dynamics is important because:</p>
+<ul class="simple">
+<li>It has a large array of industrial applications</li>
+<li>The nature of the free surface flow is complex</li>
+</ul>
+<p>Justification of approach:</p>
+<ul class="simple">
+<li>There are accurate methods for simulating drop formation, but they are too complex for engineering applications</li>
+<li>Hence this study compared CFX and FLOW3D</li>
+</ul>
+<p>Physics:</p>
+<ul class="simple">
+<li>Drop length is sensitive to viscosity at higher viscosities</li>
+<li>Drop volumes are less sensitive to viscosity</li>
+<li>Drop volume has a complex relation with flow rate</li>
+<li>Drop volume can be reduced by reducing tube diameter, but at a diminished return</li>
+</ul>
+<p>Prediction using CFD:</p>
+<ul class="simple">
+<li>At higher flowrates and viscosities CFD predicts well (<strong>due to greater influence of viscous effects over surface tension?</strong>)</li>
+<li>It can predict time to break-up, primary drop volume</li>
+<li>Not good at predicting interfacial shapes, due to smearing at free surface (<strong>due to volume fraction averaging?</strong>)</li>
+<li>It can&#8217;t predict long thin threads between liquid and cones at low flows and satellite drops on breakup</li>
+<li>More generally CFD packages perform poorly where there are low flowrates and high surface tension forces</li>
+</ul>
+<p>Efficiency:</p>
+<ul class="simple">
+<li>FLOW3D is much more efficient than CFX, because of the use of a single phase with a discontinuity (FLOW3D) versus two phases (CFX)</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="drikakis.html">4.4. Drikakis (2003) &#8220;Advances in Turbulent Flow Computations&#8221;</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="cavaleri.html">4.6. Cavaleri et al. (2007) &#8220;Wave Modelling - The State of the Art&#8221;</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

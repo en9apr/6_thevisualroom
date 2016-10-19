@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.9.7. Higher Order Finite Volume Interpolation: QUICK Scheme &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.10.1. The Method of Lines" href="time_integration_1.html" />
+    <link rel="prev" title="1.9.6. Examples of the Finite Volume Method with Numerical Methods" href="finite_volume_method_6.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.9.7. Higher Order Finite Volume Interpolation: QUICK Scheme</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="finite_volume_method_6.html">1.9.6. Examples of the Finite Volume Method with Numerical Methods</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="time_integration_1.html">1.10.1. The Method of Lines</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="higher-order-finite-volume-interpolation-quick-scheme">
+<h1>1.9.7. Higher Order Finite Volume Interpolation: QUICK Scheme<a class="headerlink" href="#higher-order-finite-volume-interpolation-quick-scheme" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#problem-with-upwind-scheme" id="id1">Problem with Upwind Scheme</a></li>
+<li><a class="reference internal" href="#quick-scheme-for-quadratic-interpolation" id="id2">Quick Scheme for Quadratic Interpolation</a></li>
+</ul>
+</div>
+<div class="section" id="problem-with-upwind-scheme">
+<h2><a class="toc-backref" href="#id1">1.9.7.1. Problem with Upwind Scheme</a><a class="headerlink" href="#problem-with-upwind-scheme" title="Permalink to this headline">¶</a></h2>
+<p>Upwind scheme is 1st order accurate, which creates numerical diffusion.</p>
+</div>
+<div class="section" id="quick-scheme-for-quadratic-interpolation">
+<h2><a class="toc-backref" href="#id2">1.9.7.2. Quick Scheme for Quadratic Interpolation</a><a class="headerlink" href="#quick-scheme-for-quadratic-interpolation" title="Permalink to this headline">¶</a></h2>
+<p>To address this, B.P. Leonard (1979) introduced the &#8220;Quadratic Interpolation for Convective Kinetics&#8221; scheme (QUICK)</p>
+<p>QUICK uses a 3-point upstream weighted quadratic interpolation for the cell face values</p>
+<p>Example in 1D:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/quick.png"><img alt="../_images/quick.png" src="../_images/quick.png" style="width: 454.99999999999994px; height: 280.0px;" /></a>
+</div>
+<p>For a uniform grid:</p>
+<div class="math">
+\[f_{i-1/2} = {6 \over 8} f_{i-1} + {3 \over 8} f_i - {1 \over 8} f_{i-2}\]</div>
+<p>Quadratic interpolation, 3rd order accuracy</p>
+<p><strong>But with the Trapezoid Rule to approximate the derivatives of the flux using Gauss Divergence Theorem for surface integrals, the overall accuracy is still 2nd order (because the Trapezoid Rule is 2nd order)</strong></p>
+<p>Can only use higher order interpolation with higher order quadrature - but stencils get wider and boundary conditions are difficult with wide stencils. <strong>It doesn&#8217;t make sense to use higher order interpolation without higher order quadrature, because the quadrature would still limit the order of accuracy.</strong></p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="finite_volume_method_6.html">1.9.6. Examples of the Finite Volume Method with Numerical Methods</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="time_integration_1.html">1.10.1. The Method of Lines</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

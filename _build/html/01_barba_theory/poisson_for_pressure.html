@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.4.1. Poisson Equation for Pressure &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.4.2. The Marker and Cell Method" href="marker_and_cell_method.html" />
+    <link rel="prev" title="1.3.4. von Neumann Stability Analysis" href="von_neumann_stability_analysis.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.4.1. Poisson Equation for Pressure</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="von_neumann_stability_analysis.html">1.3.4. von Neumann Stability Analysis</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="marker_and_cell_method.html">1.4.2. The Marker and Cell Method</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="poisson-equation-for-pressure">
+<h1>1.4.1. Poisson Equation for Pressure<a class="headerlink" href="#poisson-equation-for-pressure" title="Permalink to this headline">¶</a></h1>
+<p>For compressible flow, pressure and velocity can be coupled with the Equation of State. <strong>But for incompressible flow, there is no obvious way to couple pressure and velocity.</strong></p>
+<p>So, take the divergence of the momentum equation and use the continuity equation to get a Poisson equation for pressure.</p>
+<div class="section" id="poisson-s-equation-in-continuous-domain">
+<h2>1.4.1.1. Poisson&#8217;s Equation in Continuous Domain<a class="headerlink" href="#poisson-s-equation-in-continuous-domain" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="navier-stokes-equations-in-vector-notation">
+<h3>Navier Stokes Equations in Vector Notation<a class="headerlink" href="#navier-stokes-equations-in-vector-notation" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="the-continuity-equation-for-an-incompressible-fluid">
+<h4>The Continuity Equation for an <strong>incompressible fluid</strong>:<a class="headerlink" href="#the-continuity-equation-for-an-incompressible-fluid" title="Permalink to this headline">¶</a></h4>
+<p>Using the divergence operator (div):</p>
+<div class="math">
+\[\text{div}\ \mathbf{u} = 0\]</div>
+<p>Or using the nabla operator <span class="math">\(\nabla\)</span>:</p>
+<div class="math" id="equation-one">
+<span class="eqno">(1)</span>\[\nabla \cdot \mathbf{u} = 0\]</div>
+</div>
+<div class="section" id="the-momentum-equation-for-an-incompressible-fluid">
+<h4>The Momentum Equation for an <strong>incompressible fluid</strong>:<a class="headerlink" href="#the-momentum-equation-for-an-incompressible-fluid" title="Permalink to this headline">¶</a></h4>
+<p>Using the gradient (grad) and Laplacian operators (<span class="math">\(\nabla^2\)</span>):</p>
+<div class="math">
+\[{{\partial \mathbf{u}} \over {\partial t}} + \mathbf{u} \cdot \text{grad } \mathbf{u} =
+{-{1 \over \rho} \text{grad } p} + {\nu \nabla^2 \mathbf{u}}\]</div>
+<p>Using the nabla operator <span class="math">\(\nabla\)</span> and Laplacian operators (<span class="math">\(\nabla^2\)</span>) :</p>
+<div class="math" id="equation-two">
+<span class="eqno">(2)</span>\[{{\partial \mathbf{u}} \over {\partial t}} + \mathbf{u} \cdot \nabla \mathbf{u} =
+       {-{1 \over \rho} \nabla p} + {\nu \nabla^2 \mathbf{u}}\]</div>
+<ul class="simple">
+<li>Mass conservation <a href="#equation-one">(1)</a> for <span class="math">\(\rho = \text{constant}\)</span> is a kind of <strong>kinematic constraint</strong> to the momentum equation <a href="#equation-two">(2)</a></li>
+<li>PROBLEM: There is no obvious way to couple the velocity and pressure (for compressible fluids we would have an equation of state, which provides a relation between density and pressure)</li>
+</ul>
+</div>
+<div class="section" id="continuity-equation">
+<h4>Continuity Equation<a class="headerlink" href="#continuity-equation" title="Permalink to this headline">¶</a></h4>
+<div class="math">
+\[{{\partial u} \over {\partial x}} + {{\partial v} \over {\partial y}} = 0\]</div>
+</div>
+<div class="section" id="momentum-equations">
+<h4>Momentum Equations<a class="headerlink" href="#momentum-equations" title="Permalink to this headline">¶</a></h4>
+<div class="math">
+\[{{\partial u} \over {\partial t}} + {u {{\partial u} \over {\partial x}}} + v {{\partial u} \over {\partial y}} =
+-{1 \over \rho} {{\partial p} \over {\partial x}} +
+\nu \left( {{\partial^2 u} \over {\partial x^2}} + {{\partial^2 u} \over {\partial y^2}} \right)\]</div>
+<div class="math">
+\[{{\partial v} \over {\partial t}} + {u {{\partial v} \over {\partial x}}} + v {{\partial v} \over {\partial y}} =
+-{1 \over \rho} {{\partial p} \over {\partial y}} +
+\nu \left( {{\partial^2 v} \over {\partial x^2}} + {{\partial^2 v} \over {\partial y^2}} \right)\]</div>
+</div>
+</div>
+<div class="section" id="the-divergence-of-the-momentum-equation-in-partial-notation">
+<h3>The Divergence of the Momentum Equation in Partial Notation<a class="headerlink" href="#the-divergence-of-the-momentum-equation-in-partial-notation" title="Permalink to this headline">¶</a></h3>
+<p>Now take the divergence of the momentum equations, if <span class="math">\(\mathbf{M}\)</span> is the &#8220;vector&#8221; of momentum equations, the divergence is:</p>
+<div class="math">
+\[\nabla \cdot \mathbf{M} = {\partial \over {\partial x}} M_x + {\partial \over {\partial y}} M_y\]</div>
+<div class="math">
+\[{\partial \over {\partial x}} M_x =
+{\partial \over {\partial x}}  {{\partial u} \over {\partial t}} +
+{{\partial u} \over {\partial x}} {{\partial u} \over {\partial x}} + u {{\partial^2 u} \over {\partial x^2}} +
+{{\partial v} \over {\partial x}} {{\partial u} \over {\partial y}} + v {{\partial^2 u} \over {\partial x \partial y}}  =
+-{1 \over \rho} {{\partial^2 p} \over {\partial x^2}} +
+\nu \left( {{\partial^3 u} \over {\partial x^3}} + {{\partial^3 u} \over {\partial x \partial y^2}} \right)\]</div>
+<div class="math">
+\[{\partial \over {\partial y}} M_y =
+{\partial \over {\partial y}}  {{\partial v} \over {\partial t}} +
+{{\partial u} \over {\partial y}} {{\partial v} \over {\partial x}} + u {{\partial^2 v} \over {\partial x \partial y}} +
+{{\partial v} \over {\partial y}} {{\partial v} \over {\partial y}} + v {{\partial^2 y} \over {\partial y^2}}  =
+-{1 \over \rho} {{\partial^2 p} \over {\partial y^2}} +
+\nu \left( {{\partial^3 v} \over {\partial x^2 \partial y}} + {{\partial^3 v} \over {\partial y^3}} \right)\]</div>
+<div class="section" id="add-the-lhs">
+<h4>Add the LHS<a class="headerlink" href="#add-the-lhs" title="Permalink to this headline">¶</a></h4>
+<div class="math">
+\[{\partial \over {\partial x}} M_x + {\partial \over {\partial y}} M_y =
+{\partial \over {\partial t}} \left( {{\partial u} \over {\partial x}} + {{\partial v} \over {\partial y}} \right) +
+\left( {{\partial u} \over {\partial x}} \right)^2 +
+{{\partial u} \over {\partial y}} {{\partial v} \over {\partial x}}+
+u {{\partial^2 u} \over {\partial x^2}} +
+u {{\partial^2 v} \over {\partial x \partial y}} +
+{{\partial v} \over {\partial x}} {{\partial u} \over {\partial y}} +
+\left( {{\partial v} \over {\partial y}} \right)^2 +
+v {{\partial^2 u} \over {\partial x \partial y}} +
+v {{\partial^2 v} \over {\partial y^2}} = RHS\]</div>
+<p>Re-arrange:</p>
+<div class="math">
+\[{\partial \over {\partial x}} M_x + {\partial \over {\partial y}} M_y =
+{\partial \over {\partial t}} \left( {{\partial u} \over {\partial x}} + {{\partial v} \over {\partial y}} \right) +
+\left( {{\partial u} \over {\partial x}} \right)^2 +
+2 {{\partial u} \over {\partial y}} {{\partial v} \over {\partial x}}+
+u {\partial \over {\partial x}} \left( {{\partial u} \over {\partial x}} +
+{{\partial v} \over {\partial y}} \right) +
+\left( {{\partial v} \over {\partial y}} \right)^2 +
+v {\partial \over {\partial y}} \left( {{\partial u} \over {\partial x}} +
+{{\partial v} \over {\partial y}} \right) = RHS\]</div>
+<p>Apply Continuity, so <span class="math">\(\nabla \cdot \mathbf{u} = 0\)</span>. Hence:</p>
+<div class="math">
+\[{\partial \over {\partial x}} M_x + {\partial \over {\partial y}} M_y =
+\left( {{\partial u} \over {\partial x}} \right)^2 +
+2 {{\partial u} \over {\partial y}} {{\partial v} \over {\partial x}}+
+\left( {{\partial v} \over {\partial y}} \right)^2 = RHS\]</div>
+</div>
+<div class="section" id="add-the-rhs">
+<h4>Add the RHS<a class="headerlink" href="#add-the-rhs" title="Permalink to this headline">¶</a></h4>
+<div class="math">
+\[-{1 \over \rho} \left( {{\partial^2 p} \over {\partial x^2}} + {{\partial^2 p} \over {\partial y^2}} \right)+
+\nu \left( {{\partial^3 u} \over {\partial x^3}} + {{\partial^3 u} \over {\partial x \partial y^2}} +
+ {{\partial^3 v} \over {\partial x^2 \partial y}} + {{\partial^3 v} \over {\partial y^3}} \right) = LHS\]</div>
+<p>Re-arrange:</p>
+<div class="math">
+\[-{1 \over \rho} \left( {{\partial^2 p} \over {\partial x^2}} + {{\partial^2 p} \over {\partial y^2}} \right)+
+\nu \left( {{\partial^2} \over {\partial x^2}} \left( {{\partial u} \over {\partial x}} + {{\partial v} \over {\partial y}} \right) +
+{{\partial^2} \over {\partial y^2}} \left( {{\partial u} \over {\partial x}} + {{\partial v} \over {\partial y}} \right) \right) = LHS\]</div>
+<p>Apply Continuity, so <span class="math">\(\nabla \cdot \mathbf{u} = 0\)</span>. Hence:</p>
+<div class="math">
+\[-{1 \over \rho} \left( {{\partial^2 p} \over {\partial x^2}} + {{\partial^2 p} \over {\partial y^2}} \right) = LHS\]</div>
+</div>
+</div>
+<div class="section" id="the-poisson-equation-in-vector-notation">
+<h3>The Poisson Equation in Vector Notation<a class="headerlink" href="#the-poisson-equation-in-vector-notation" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="equate-lhs-and-rhs">
+<h4>Equate LHS and RHS<a class="headerlink" href="#equate-lhs-and-rhs" title="Permalink to this headline">¶</a></h4>
+<div class="math">
+\[-{1 \over \rho} \left( {{\partial^2 p} \over {\partial x^2}} + {{\partial^2 p} \over {\partial y^2}} \right) =
+ \left( {{\partial u} \over {\partial x}} \right)^2 +
+2 {{\partial u} \over {\partial y}} {{\partial v} \over {\partial x}}+
+\left( {{\partial v} \over {\partial y}} \right)^2\]</div>
+</div>
+<div class="section" id="in-vector-form">
+<h4>In Vector Form<a class="headerlink" href="#in-vector-form" title="Permalink to this headline">¶</a></h4>
+<div class="math">
+\[\nabla^2 p = -f\]</div>
+<ul class="simple">
+<li>A Poisson Equation for pressure, which ensures that continuity is satisfied.</li>
+<li>Now pressure and velocity are coupled in the continuous domain.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="poisson-s-equation-in-numerical-domain">
+<h2>1.4.1.2. Poisson&#8217;s Equation in Numerical Domain<a class="headerlink" href="#poisson-s-equation-in-numerical-domain" title="Permalink to this headline">¶</a></h2>
+<p>We have shown that the Poisson&#8217;s Equation is valid in the continuous domain, but in the numerical domain, we use discretisation</p>
+<div class="section" id="momentum-equations-in-vector-form">
+<h3>Momentum Equations in Vector Form<a class="headerlink" href="#momentum-equations-in-vector-form" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h4>The Momentum Equation for an <strong>incompressible fluid</strong>:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<div class="math">
+\[{{\partial \mathbf{u}} \over {\partial t}} + \mathbf{u} \cdot \nabla \mathbf{u} =
+{-{1 \over \rho} \nabla p} + {\nu \nabla^2 \mathbf{u}}\]</div>
+</div>
+</div>
+<div class="section" id="discretised-momentum-equations-in-vector-form">
+<h3>Discretised Momentum Equations in Vector Form<a class="headerlink" href="#discretised-momentum-equations-in-vector-form" title="Permalink to this headline">¶</a></h3>
+<p>Discretise in time: FD in time, with pressure at time <span class="math">\(n+1\)</span> (the pressure that corresponds with the velocity at <span class="math">\(n+1\)</span>)</p>
+<div class="math">
+\[\mathbf{u}^{n+1} = \mathbf{u}^n + \Delta t \left(-\mathbf{u}^n \cdot \nabla \mathbf{u}^n - {1 \over \rho} \nabla p^{n+1} + \nu \nabla^2 \mathbf{u}^n \right)\]</div>
+</div>
+<div class="section" id="the-divergence-of-the-momentum-equations-in-vector-form">
+<h3>The Divergence of the Momentum Equations in Vector Form<a class="headerlink" href="#the-divergence-of-the-momentum-equations-in-vector-form" title="Permalink to this headline">¶</a></h3>
+<p>Now take the divergence of the momentum equations, if <span class="math">\(\mathbf{M}\)</span> is the &#8220;vector&#8221; of momentum equations, the divergence is:</p>
+<div class="math">
+\[\nabla \cdot \mathbf{u}^{n+1} = \nabla \cdot \mathbf{u}^n +
+\Delta t \left(-\nabla \cdot (\mathbf{u}^n \cdot \nabla \mathbf{u}^n) -
+{1 \over \rho} \nabla^2 p^{n+1} +
+\nu \nabla^2 (\nabla \cdot \mathbf{u}^n) \right)\]</div>
+<ul class="simple">
+<li>In the numerical scheme, we want a divergence free velocity at the next step, i.e. <span class="math">\(\nabla \cdot \mathbf{u}^{n+1} = 0\)</span> to satisfy continuity</li>
+<li>But at the current step we may have <span class="math">\(\nabla \cdot \mathbf{u}^{n} \ne 0\)</span> due to numerical errors</li>
+<li>So we can&#8217;t cancel out the divergence of velocity in the numerical domain (although we could in the continuous domain)</li>
+</ul>
+<p>This is a Fractional Step approach:</p>
+<ul class="simple">
+<li>Solve the momentum equation for velocity, numerically (the divergence of the velocity might not be zero) <span class="math">\(\mathbf{u}^{n+1/2}\)</span></li>
+<li>Solve the Poisson equation for pressure, forcing the divergence to be zero</li>
+<li>Correct the velocity to satisfy continuity</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h3>The Poisson Equation in Vector Notation<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Poisson Equation for <span class="math">\(p\)</span> at time <span class="math">\(n+1\)</span> and forcing <span class="math">\(\nabla \cdot \mathbf{u}^{n+1} = 0\)</span></p>
+<div class="math">
+\[\nabla^2 p^{n+1} = \rho {{\nabla \cdot \mathbf{u}^n} \over {\Delta t}}-
+\rho \nabla \cdot (\mathbf{u}^n \cdot \nabla \mathbf{u}^n)+
+\mu \nabla^2 (\nabla \cdot \mathbf{u}^n)\]</div>
+<ul class="simple">
+<li>In the <strong>numerical domain</strong> the velocity field we are producing with the Navier Stokes equations is <strong>not</strong> completely divergence free</li>
+<li>Think of the velocity obtained from the Navier Stokes as being at an intermediate step <span class="math">\(\mathbf{u}^{n+1/2}\)</span></li>
+<li>And <span class="math">\(\nabla \cdot \mathbf{u}^{n+1/2} \ne 0\)</span></li>
+<li>We need <span class="math">\(p^{n+1}\)</span> so that <strong>continuity is satisfied</strong></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="von_neumann_stability_analysis.html">1.3.4. von Neumann Stability Analysis</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="marker_and_cell_method.html">1.4.2. The Marker and Cell Method</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

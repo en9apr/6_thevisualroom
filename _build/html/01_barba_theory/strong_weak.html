@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.6.4. Strong and Weak Solutions &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.7.1. Tri-Diagonal Matrix Algorithm" href="tri_diagonal_matrix.html" />
+    <link rel="prev" title="1.6.3. Explicit and Implicit Numerical Methods" href="explicit_implicit_non_linear_convection.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.6.4. Strong and Weak Solutions</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="explicit_implicit_non_linear_convection.html">1.6.3. Explicit and Implicit Numerical Methods</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="tri_diagonal_matrix.html">1.7.1. Tri-Diagonal Matrix Algorithm</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="strong-and-weak-solutions">
+<h1>1.6.4. Strong and Weak Solutions<a class="headerlink" href="#strong-and-weak-solutions" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#conservative-and-non-conservative-form-of-the-burgers-equation" id="id1">Conservative and Non-conservative Form of the Burgers&#8217; Equation</a><ul>
+<li><a class="reference internal" href="#non-conservative-form" id="id2">Non-Conservative Form</a></li>
+<li><a class="reference internal" href="#conservative-form" id="id3">Conservative Form</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hyperbolic" id="id4">Hyperbolic</a></li>
+<li><a class="reference internal" href="#strong-solution" id="id5">Strong Solution</a></li>
+<li><a class="reference internal" href="#weak-solution" id="id6">Weak Solution</a></li>
+</ul>
+</div>
+<div class="section" id="conservative-and-non-conservative-form-of-the-burgers-equation">
+<h2><a class="toc-backref" href="#id1">1.6.4.1. Conservative and Non-conservative Form of the Burgers&#8217; Equation</a><a class="headerlink" href="#conservative-and-non-conservative-form-of-the-burgers-equation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="non-conservative-form">
+<h3><a class="toc-backref" href="#id2">Non-Conservative Form</a><a class="headerlink" href="#non-conservative-form" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[{\partial u \over \partial t} + u {\partial u \over \partial x} = 0\]</div>
+</div>
+<div class="section" id="conservative-form">
+<h3><a class="toc-backref" href="#id3">Conservative Form</a><a class="headerlink" href="#conservative-form" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[{\partial u \over \partial t} + {\partial F \over \partial x} = 0\]</div>
+<p>where the Flux is <span class="math">\(F\)</span> is (for Burgers&#8217; Equation):</p>
+<div class="math">
+\[F = {u^2 \over 2}\]</div>
+<p>May also write:</p>
+<div class="math">
+\[{\partial u \over \partial t} + A {\partial u \over \partial x} = 0\]</div>
+<p>where the Jacobian <span class="math">\(A\)</span> is (for Burgers&#8217; Equation):</p>
+<div class="math">
+\[A = A(u) = u\]</div>
+<p>For more than 1 dimension, A is a matrix</p>
+<div class="math">
+\[A = {\partial F_i \over \partial u_j}\]</div>
+</div>
+</div>
+<div class="section" id="hyperbolic">
+<h2><a class="toc-backref" href="#id4">1.6.4.2. Hyperbolic</a><a class="headerlink" href="#hyperbolic" title="Permalink to this headline">¶</a></h2>
+<p>The Equation is <strong>hyperbolic</strong> <span class="math">\(\Rightarrow\)</span> all of the eigenvalues of A are real.</p>
+</div>
+<div class="section" id="strong-solution">
+<h2><a class="toc-backref" href="#id5">1.6.4.3. Strong Solution</a><a class="headerlink" href="#strong-solution" title="Permalink to this headline">¶</a></h2>
+<p>u is continuous, but bounded discontinuties in derivatives may occur</p>
+</div>
+<div class="section" id="weak-solution">
+<h2><a class="toc-backref" href="#id6">1.6.4.4. Weak Solution</a><a class="headerlink" href="#weak-solution" title="Permalink to this headline">¶</a></h2>
+<p>u is continuous almost everywhere, i.e. it has a jump (e.g. a shock wave)</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="explicit_implicit_non_linear_convection.html">1.6.3. Explicit and Implicit Numerical Methods</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="tri_diagonal_matrix.html">1.7.1. Tri-Diagonal Matrix Algorithm</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

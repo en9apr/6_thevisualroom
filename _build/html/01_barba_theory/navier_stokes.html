@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.1.4. Derivation of the Navier-Stokes Equations &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.2.1. The Finite Difference Method" href="finite_difference_method.html" />
+    <link rel="prev" title="1.1.3. Derivation of the Momentum Equation" href="momentum.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.1.4. Derivation of the Navier-Stokes Equations</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="momentum.html">1.1.3. Derivation of the Momentum Equation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="finite_difference_method.html">1.2.1. The Finite Difference Method</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="derivation-of-the-navier-stokes-equations">
+<h1>1.1.4. Derivation of the Navier-Stokes Equations<a class="headerlink" href="#derivation-of-the-navier-stokes-equations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="assumptions">
+<h2>1.1.4.1. Assumptions<a class="headerlink" href="#assumptions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Newtonian fluid: linear relationship between stress and strain, hence viscosity is constant</li>
+<li>Flow is incompressible: density is constant</li>
+<li>Flow is isothermal: temperature is constant</li>
+</ul>
+</div>
+<div class="section" id="normal-stresses">
+<h2>1.1.4.2. Normal Stresses<a class="headerlink" href="#normal-stresses" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\sigma_{xx} = -p + 2 \mu {\partial u \over \partial x}\]</div>
+<div class="math">
+\[\sigma_{yy} = -p + 2 \mu {\partial v \over \partial y}\]</div>
+<div class="math">
+\[\sigma_{zz} = -p + 2 \mu {\partial w \over \partial z}\]</div>
+<div class="section" id="for-incompressible-flow">
+<h3><span class="math">\(\nabla \cdot \vec V = 0\)</span> for incompressible flow:<a class="headerlink" href="#for-incompressible-flow" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[{1 \over 3} ( \sigma_{xx} + \sigma_{yy} + \sigma_{zz}) = -p\]</div>
+</div>
+</div>
+<div class="section" id="shear-stresses">
+<h2>1.1.4.3. Shear Stresses<a class="headerlink" href="#shear-stresses" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\tau_{xy} = \tau_{yx} = \mu \left ({\partial u \over \partial y} + {\partial v \over \partial x} \right )\]</div>
+<div class="math">
+\[\tau_{yz} = \tau_{zy} = \mu \left ({\partial v \over \partial z} + {\partial w \over \partial y} \right )\]</div>
+<div class="math">
+\[\tau_{zx} = \tau_{xz} = \mu \left ({\partial w \over \partial x} + {\partial u \over \partial z} \right )\]</div>
+</div>
+<div class="section" id="x-direction-momentum-equation-for-a-newtonian-incompressible-isothermal-fluid">
+<h2>1.1.4.4. x-direction Momentum Equation for a Newtonian, incompressible, isothermal fluid<a class="headerlink" href="#x-direction-momentum-equation-for-a-newtonian-incompressible-isothermal-fluid" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="from-the-momentum-equation">
+<h3>From the Momentum Equation:<a class="headerlink" href="#from-the-momentum-equation" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\rho g_x + {\partial \sigma_{xx} \over \partial x} + {\partial \tau_{yx} \over \partial y} + {\partial \tau_{zx} \over \partial z} = \rho \left ( {\partial u \over \partial t} + u{\partial u \over \partial x} + v {\partial u \over \partial y} + w {\partial u \over \partial z} \right )\]</div>
+</div>
+<div class="section" id="substitute-in-normal-stresses-and-shear-stresses">
+<h3>Substitute in normal stresses and shear stresses:<a class="headerlink" href="#substitute-in-normal-stresses-and-shear-stresses" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\rho g_x -{\partial p \over \partial x}+2 \mu {\partial^2 u \over \partial x^2} + \mu \left ({\partial^2 u \over \partial y^2} + {\partial^2 v \over \partial y \partial x} \right ) + \mu \left ({\partial^2 w \over \partial z \partial x} + {\partial^2 u \over \partial z^2} \right ) = \rho \left ( {\partial u \over \partial t} + u{\partial u \over \partial x} + v {\partial u \over \partial y} + w {\partial u \over \partial z} \right )\]</div>
+</div>
+<div class="section" id="rewrite">
+<h3>Rewrite:<a class="headerlink" href="#rewrite" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\rho g_x -{\partial p \over \partial x}+\mu \left ({\partial^2 u \over \partial x^2} + {\partial^2 u \over \partial y^2} + {\partial^2 u \over \partial z^2} \right ) + \mu {\partial \over \partial x} \left ({\partial u \over \partial x} + {\partial v \over \partial y} + {\partial w \over \partial z} \right ) = \rho \left ( {\partial u \over \partial t} + u{\partial u \over \partial x} + v {\partial u \over \partial y} + w {\partial u \over \partial z} \right )\]</div>
+</div>
+<div class="section" id="id1">
+<h3><span class="math">\(\nabla \cdot \vec V = 0\)</span> for incompressible flow:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\rho g_x -{\partial p \over \partial x}+\mu \left ({\partial^2 u \over \partial x^2} + {\partial^2 u \over \partial y^2} + {\partial^2 u \over \partial z^2} \right ) = \rho \left ( {\partial u \over \partial t} + u{\partial u \over \partial x} + v {\partial u \over \partial y} + w {\partial u \over \partial z} \right )\]</div>
+</div>
+<div class="section" id="vector-notation">
+<h3>Vector Notation<a class="headerlink" href="#vector-notation" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\rho \vec g-  \nabla p + \mu \nabla^2 \vec V = \rho \left ( {\partial \vec V \over \partial t} + \vec V (\nabla \cdot \vec V) \right )\]</div>
+</div>
+</div>
+<div class="section" id="solutions">
+<h2>1.1.4.5. Solutions<a class="headerlink" href="#solutions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>3 Momentum Equations + Continuity = 4 Equations</li>
+<li>Unknowns = u, v, w, p, <span class="math">\(\rho = 5\)</span> Unknowns</li>
+<li>Need an equation of state - to relate pressure and density</li>
+<li>The Navier-Stokes Equations are time-dependent, non-linear, 2nd order PDEs - very few known solutions (parallel plates, pipe flow, concentric cylinders).<ul>
+<li>The Transient Term is <span class="math">\({\partial \vec V / \partial t}\)</span></li>
+<li>The Convection Term is <span class="math">\(\vec V(\nabla \cdot \vec V)\)</span>. This is the non-linear term and is the cause most of the difficulty in solving these equations.</li>
+<li>The Diffusion Term is <span class="math">\(\mu \nabla^2 \vec V\)</span>. This is the 2nd order term.</li>
+<li>The Body Force Term is <span class="math">\(\rho \vec g\)</span></li>
+<li>The Pressure Gradient Term is <span class="math">\(\nabla p\)</span></li>
+</ul>
+</li>
+<li>The only general approach is computational</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="momentum.html">1.1.3. Derivation of the Momentum Equation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="finite_difference_method.html">1.2.1. The Finite Difference Method</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

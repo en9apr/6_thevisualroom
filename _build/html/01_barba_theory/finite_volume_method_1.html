@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.9.1. Advantages of The Finite Volume Method &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.9.2. Conservative Discretisation" href="finite_volume_method_2.html" />
+    <link rel="prev" title="1.8.4. Sod’s Test Problems: The Shock Tube Problem" href="sods_test_problem.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.9.1. Advantages of The Finite Volume Method</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="sods_test_problem.html">1.8.4. Sod&#8217;s Test Problems: The Shock Tube Problem</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="finite_volume_method_2.html">1.9.2. Conservative Discretisation</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="advantages-of-the-finite-volume-method">
+<h1>1.9.1. Advantages of The Finite Volume Method<a class="headerlink" href="#advantages-of-the-finite-volume-method" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#reason-for-not-implementing-finite-volume-method-in-python" id="id1">Reason for Not Implementing Finite Volume Method in Python</a></li>
+<li><a class="reference internal" href="#finite-volume-method-advantages" id="id2">Finite Volume Method Advantages</a><ul>
+<li><a class="reference internal" href="#can-be-used-on-unstructured-grids" id="id3">Can be used on Unstructured Grids</a></li>
+<li><a class="reference internal" href="#uses-integral-formulation-of-conservation-laws" id="id4">Uses Integral Formulation of Conservation Laws</a></li>
+<li><a class="reference internal" href="#based-on-cell-averaged-values" id="id5">Based on Cell Averaged Values</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="reason-for-not-implementing-finite-volume-method-in-python">
+<h2><a class="toc-backref" href="#id1">1.9.1.1. Reason for Not Implementing Finite Volume Method in Python</a><a class="headerlink" href="#reason-for-not-implementing-finite-volume-method-in-python" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Finite Volume Method gets most of it&#8217;s advantages from being used on unstructured meshes - lots of bookeeping in order to show Finite Volume vs Finite Difference.</li>
+<li>Next stage would be to try the Euler Equations in the Finite Difference Method. Then compare with 1D Finite Volume Method e.g. Godunov&#8217;s method?</li>
+</ul>
+</div>
+<div class="section" id="finite-volume-method-advantages">
+<h2><a class="toc-backref" href="#id2">1.9.1.2. Finite Volume Method Advantages</a><a class="headerlink" href="#finite-volume-method-advantages" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="can-be-used-on-unstructured-grids">
+<h3><a class="toc-backref" href="#id3">Can be used on Unstructured Grids</a><a class="headerlink" href="#can-be-used-on-unstructured-grids" title="Permalink to this headline">¶</a></h3>
+<p>There are no requirements on the grid to be <strong>structured</strong> (although structured grids can still be used). The Finite Volume Method is therefore suitable for complex geometries.</p>
+<p>For 2D, <em>Structured Grid</em> means <strong>Quadrilateral</strong> i.e.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/finite_difference_grids.png"><img alt="../_images/finite_difference_grids.png" src="../_images/finite_difference_grids.png" style="width: 600.0px; height: 200.0px;" /></a>
+</div>
+<p>For 2D, <em>Unstructured Grid</em> means <strong>Triangle</strong> i.e.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/finite_volume_grids.png"><img alt="../_images/finite_volume_grids.png" src="../_images/finite_volume_grids.png" style="width: 250.0px; height: 200.0px;" /></a>
+</div>
+<ul class="simple">
+<li><strong>Computational efficiency</strong> Structured grids are less computationally efficient than unstructured grids, because of the rigid connectivity restriction. This resitrction may require high grid density where low grid density is needed - but this is dependent on the particular case.</li>
+<li><strong>Memory requirements</strong> However, for the same number of grid points, structured grids require less memory to store than unstructured grids, because of the simpler connectivity.</li>
+<li><strong>Convergence</strong> Structured grids may allow better convergence and higher resolution than unstructured grids and therefore higher accuracy, as the rigid connectivity limits the possibility for skewed elements.</li>
+<li><strong>Geometry complexity</strong> Unstructured grids are more suited for highly complex geometries, whereas structured grids are better suited to simple geometries</li>
+</ul>
+<p>Possiblities for the Finite Difference Method:</p>
+<ul class="simple">
+<li>The grid spacing can be <strong>non-uniform</strong> in the Finite Difference Method</li>
+<li>Local <strong>mesh adaption</strong> can be used with the Finite Difference Method.</li>
+<li>Curvilinear grids can be used, where the grid is transformed from cartesian to curvilinear and back again - cannot really have very complex geometries - the transformation must be <strong>smooth</strong>, but there is no such restruction on the Finite Volume Method. All the finite difference calculations are done on the cartesian grid and then the grid is transformed.</li>
+</ul>
+</div>
+<div class="section" id="uses-integral-formulation-of-conservation-laws">
+<h3><a class="toc-backref" href="#id4">Uses Integral Formulation of Conservation Laws</a><a class="headerlink" href="#uses-integral-formulation-of-conservation-laws" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The native form of the conservation laws are integral</li>
+<li>We have set limits on the gradient by differentiating</li>
+<li>When we obtain the differential equations from the conservation laws, <strong>we are assuming that we can differentiate</strong> - i.e. that the solution is <strong>continuous</strong></li>
+<li>If we have <strong>discontinuities</strong>, the integral formulation is more appropriate because we are not making the assumption of smoothness</li>
+</ul>
+</div>
+<div class="section" id="based-on-cell-averaged-values">
+<h3><a class="toc-backref" href="#id5">Based on Cell Averaged Values</a><a class="headerlink" href="#based-on-cell-averaged-values" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Finite Difference approach uses <strong>points</strong> on a mesh</li>
+<li>Finite Volume Method uses <strong>cell-averaged</strong> values, areas in 2D, volumes in 3D, i.e.</li>
+<li>Discretisation form is a set of small cells - finite volumes</li>
+<li>Advantage: A <strong>conservative discretisation</strong> is automatically obtained, through the direct use of the integral conervation laws</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/cell_averaged.png"><img alt="../_images/cell_averaged.png" src="../_images/cell_averaged.png" style="width: 200.0px; height: 200.0px;" /></a>
+</div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="sods_test_problem.html">1.8.4. Sod&#8217;s Test Problems: The Shock Tube Problem</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="finite_volume_method_2.html">1.9.2. Conservative Discretisation</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

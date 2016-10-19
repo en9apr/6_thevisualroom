@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.1. Harlow and Welch (1965) “Numercial Calculation of Fluid with Free Surface” &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="4. Literature" href="literature.html" />
+    <link rel="next" title="4.2. Thompson et al. (2001) “Investigation of Rigid-Roll Coating”" href="thompson.html" />
+    <link rel="prev" title="4. Literature" href="literature.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.1. Harlow and Welch (1965) “Numercial Calculation of Fluid with Free Surface”</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="literature.html">4. Literature</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="thompson.html">4.2. Thompson et al. (2001) &#8220;Investigation of Rigid-Roll Coating&#8221;</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="harlow-and-welch-1965-numercial-calculation-of-fluid-with-free-surface">
+<h1>4.1. Harlow and Welch (1965) &#8220;Numercial Calculation of Fluid with Free Surface&#8221;<a class="headerlink" href="#harlow-and-welch-1965-numercial-calculation-of-fluid-with-free-surface" title="Permalink to this headline">¶</a></h1>
+<p>Harlow, F.H. and Welch, J.E. &#8220;Numerical Calculation of Time-Dependent Viscous Incompressible Flow of Fluid with Free Surface&#8221; The Physics of Fluids, Volume 8, 1965</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#introduction" id="id1">Introduction</a></li>
+<li><a class="reference internal" href="#description-of-the-method" id="id2">Description of the Method</a><ul>
+<li><a class="reference internal" href="#outline" id="id3">Outline</a></li>
+<li><a class="reference internal" href="#finite-difference-equations" id="id4">Finite Difference Equations</a></li>
+<li><a class="reference internal" href="#finite-difference-discretisation" id="id5">Finite Difference Discretisation</a></li>
+<li><a class="reference internal" href="#marker-particles" id="id6">Marker Particles</a></li>
+<li><a class="reference internal" href="#boundary-conditions-at-rigid-walls-velocity" id="id7">Boundary Conditions at Rigid Walls - Velocity</a></li>
+<li><a class="reference internal" href="#boundary-conditions-at-rigid-walls-pressure" id="id8">Boundary Conditions at Rigid Walls - Pressure</a><ul>
+<li><a class="reference internal" href="#free-slip-wall" id="id9">Free slip wall</a></li>
+<li><a class="reference internal" href="#no-slip-wall" id="id10">No slip wall</a></li>
+<li><a class="reference internal" href="#boundary-conditions-at-free-surface-velocity" id="id11">Boundary Conditions at Free Surface - Velocity</a></li>
+<li><a class="reference internal" href="#boundary-conditions-at-free-surface-pressure" id="id12">Boundary Conditions at Free Surface - Pressure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#numerical-stability-and-accuracy" id="id13">Numerical Stability and Accuracy</a></li>
+<li><a class="reference internal" href="#examples" id="id14">Examples</a><ul>
+<li><a class="reference internal" href="#broken-dam-problem" id="id15">Broken Dam Problem</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusions" id="id16">Conclusions</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id1">4.1.1. Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>New technique for numerical solution of free surface problems, designated the &#8220;Marker and Cell Method&#8221;</li>
+<li>Physical assumptions:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Time dependent motion</li>
+<li>Viscous</li>
+<li>Incompressible</li>
+<li>2D with <strong>Cartesian Coordinates</strong></li>
+<li>Uniform body force (gravity) may act on the fluid</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Possible boundary conditions:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Wall boundaries for an <strong>irregular box</strong></li>
+<li>Lines of reflective symmetry</li>
+<li>Prescribed pressure may be applied to the surface - <strong>variable in position and time</strong></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Method uses:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Finite difference method</li>
+<li>Full Navier Stokes Equations</li>
+<li>Dependent variables are pressure and two component velocity</li>
+<li>Fluid divided into cells - variables in each cell are single average values</li>
+<li>Time divided into increments</li>
+<li>Small spatial and temporal steps are needed</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Comparison with other methods:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Most of work directed at compressible flows in 1965</li>
+<li>Incompressible flow was being directed at weather forecasting</li>
+<li>Non-steady viscous flows were being studied - von Karman vortex street behind a cylinder - i.e. Fromm and Harlow (1965) - primary dependent variables were vorticity and the stream function - marker and cell may be easier because BCs are easier to apply and physical significance of modification is easy to visualise</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="description-of-the-method">
+<h2><a class="toc-backref" href="#id2">4.1.2. Description of the Method</a><a class="headerlink" href="#description-of-the-method" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="outline">
+<h3><a class="toc-backref" href="#id3">4.1.2.1. Outline</a><a class="headerlink" href="#outline" title="Permalink to this headline">¶</a></h3>
+<p>The derivation of the finite difference method is based on:</p>
+<ol class="arabic simple">
+<li>The initial velocity field is known and <strong>divergence free</strong></li>
+<li>Coordinates of a set of marker particles is known - showing which regions are fluid and which are not fluid</li>
+<li>Pressure field is calculated so that <strong>the rate of change of the divergence of velocity is zero</strong>, which requires the solution of Poisson&#8217;s Equation - which can be done via an SOR method</li>
+<li>Two components of acceleration are calculated</li>
+<li>Marker particles move according to the velocity field</li>
+<li>Adjustments are made for passage of marker particles across cell boundaries - i.e. the velocity changes when a cell is emptied and filled with fluid</li>
+</ol>
+<p>The marker particles are not like the particle-in-cell method, i.e. the marker particles <strong>do not</strong> participate in the calculation, where as in the particle-in-cell method, they do.</p>
+</div>
+<div class="section" id="finite-difference-equations">
+<h3><a class="toc-backref" href="#id4">4.1.2.2. Finite Difference Equations</a><a class="headerlink" href="#finite-difference-equations" title="Permalink to this headline">¶</a></h3>
+<p>Use the Conservative Form of the Navier-Stokes Equations:</p>
+<div class="math" id="equation-1">
+<span class="eqno">(1)</span>\[{\partial u \over \partial x}+ {\partial v \over \partial y} = 0\]</div>
+<div class="math" id="equation-2">
+<span class="eqno">(2)</span>\[{\partial u \over \partial t} + {\partial u^2 \over \partial x}+ {\partial {uv} \over \partial y} =
+       - {\partial \psi \over \partial x} + \nu \left( {{\partial^2 u \over \partial x^2} +{ \partial^2 u \over \partial y^2} } \right) + g_x\]</div>
+<div class="math" id="equation-3">
+<span class="eqno">(3)</span>\[{\partial v \over \partial t} + {\partial vu \over \partial x}+ {\partial {v^2} \over \partial y} =
+       - {\partial \psi \over \partial y} + \nu \left( {{\partial^2 v \over \partial x^2} +{ \partial^2 v \over \partial y^2} } \right) + g_y\]</div>
+<p>Harlow and Welch use <span class="math">\(\psi\)</span> to denote a pressure at a constant density i.e. <span class="math">\(p \over \rho\)</span></p>
+</div>
+<div class="section" id="finite-difference-discretisation">
+<h3><a class="toc-backref" href="#id5">4.1.2.3. Finite Difference Discretisation</a><a class="headerlink" href="#finite-difference-discretisation" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/h_w.png"><img alt="../_images/h_w.png" src="../_images/h_w.png" style="width: 466.0px; height: 298.0px;" /></a>
+</div>
+<ul class="simple">
+<li>Indices i and j count the <strong>centre</strong> of each cell</li>
+<li>Cell boundaries are labelled with half-integer values</li>
+<li>The superscript <cite>n+1</cite> is used for time and where it is not used <cite>n</cite> is implied</li>
+</ul>
+<p>The Finite Difference approximations are:</p>
+<div class="math">
+\[\begin{split}{{u_{i+{1 \over 2},j}^{n+1} - u_{i+{1 \over 2},j}^{n}} \over {\Delta t}} +
+{{(u_{i+1,j}^n)^2 - (u_{i,j}^{n})^2} \over {\Delta x}} +
+{ { (u_{i+{1 \over 2},j+{1 \over 2}}^n)(v_{i+{1 \over 2},j+{1 \over 2}}^n)-
+         (u_{i+{1 \over 2},j-{1 \over 2}}^n)(v_{i+{1 \over 2},j-{1 \over 2}}^n)}
+         \over {\Delta y} } =  \\
+- \left( {{(\psi_{i+1,j}^n) - (\psi_{i,j}^{n})} \over {\Delta x}} \right) +
+ \nu \left( {{u_{i+{3 \over 2},j}^n - 2u_{i+{1 \over 2},j}^n + u_{i-{1 \over 2},j}^{n}} \over {\Delta x^2}} +
+            {{u_{i+{1 \over 2},j+1}^n - 2u_{i+{1 \over 2},j}^n + u_{i+{1 \over 2},j-1}^{n}} \over {\Delta y^2}} \right)                       + g_x\end{split}\]</div>
+<div class="math">
+\[\begin{split}{{v_{i,j+{1 \over 2}}^{n+1} - v_{i,j+{1 \over 2}}^{n}} \over {\Delta t}} +
+{ { (u_{i+{1 \over 2},j+{1 \over 2}}^n)(v_{i+{1 \over 2},j+{1 \over 2}}^n)-
+         (u_{i-{1 \over 2},j+{1 \over 2}}^n)(v_{i-{1 \over 2},j+{1 \over 2}}^n)}
+         \over {\Delta x} } +
+{{(v_{i,j+1}^n)^2 - (v_{i,j}^{n})^2} \over {\Delta y}} =  \\
+-\left( {{(\psi_{i,j+1}^n) - (\psi_{i,j}^{n})} \over {\Delta y}} \right) +
+ \nu \left( {{v_{i+{1},j+{1 \over 2}}^n - 2v_{i,j+{1 \over 2}}^n + v_{i-{1},j+{1 \over 2}}^{n}} \over {\Delta x^2}} +
+            {{v_{i,j+{3 \over 2}}^n - 2v_{i,j+{1 \over 2}}^n + v_{i,j-{1 \over 2}}^{n}} \over {\Delta y^2}} \right)                       + g_y\end{split}\]</div>
+<p>Some of the velocity values are not located at the centre of the mesh diagram, so an average of adjacent values is taken - i.e. <strong>the average of the velocity at the closest two points - which could be the vertical or horizontal direction, depending on which are the adjacent points</strong></p>
+<div class="math">
+\[u_{i+{1 \over 2},j+{1 \over 2}}^n =
+{1 \over 2}({ u_{i+{1 \over 2},j+{1}}^n + u_{i+{1 \over 2},j}^n })\]</div>
+<div class="math">
+\[v_{i+{1 \over 2},j+{1 \over 2}}^n =
+{1 \over 2}({ v_{i+{1},j+{1 \over 2}}^n + v_{i,j+{1 \over 2}}^n })\]</div>
+<div class="math">
+\[u_{i,j}^n =
+{1 \over 2}({ u_{i+{1 \over 2},j}^n + u_{i-{1 \over 2},j}^n })\]</div>
+<div class="math">
+\[v_{i,j}^n =
+{1 \over 2}({ v_{i,j+{1 \over 2}}^n + v_{i,j-{1 \over 2}}^n })\]</div>
+<p>Harlow and Welch now take the divergence of the momentum equation:</p>
+<div class="math">
+\[{\partial \over {\partial t}} \mathbf{u}^n = -\mathbf{u}^n \cdot \nabla \mathbf{u}^n - \nabla \psi^{n} + \nu \nabla^2 \mathbf{u}^n\]</div>
+<div class="math">
+\[{\partial \over {\partial t}} \nabla \cdot \mathbf{u}^n = -\nabla \cdot (\mathbf{u}^n \cdot \nabla \mathbf{u}^n)
+- \nabla^2 \psi^{n} + \nu \nabla^2 (\nabla \cdot \mathbf{u}^n)\]</div>
+<p>Now set:</p>
+<div class="math">
+\[{\partial \over {\partial t}} \nabla \cdot \mathbf{u}^n = {{\nabla \cdot \mathbf{u}^{n+1} - \nabla \cdot \mathbf{u}^n} \over {\Delta t}}\]</div>
+<p>Applying the principle of continuity:</p>
+<ul class="simple">
+<li>The divergence of velocity at the new timestep <span class="math">\(\mathbf{u}^{n+1} = 0\)</span></li>
+<li>The divergence at the current timestep <span class="math">\(\mathbf{u}^n \ne 0\)</span></li>
+</ul>
+<p>Re-arrange for a form of the Poisson Equation <strong>at time n</strong>:</p>
+<div class="math">
+\[\nabla^2 \psi^{n} = \rho {{\nabla \cdot \mathbf{u}^n} \over {\Delta t}}-
+\rho \nabla \cdot (\mathbf{u}^n \cdot \nabla \mathbf{u}^n)+
+\mu \nabla^2 (\nabla \cdot \mathbf{u}^n)\]</div>
+<p>Harlow and Welch say that you can neglect viscosity in the Poisson Equation <strong>with strict convergence critera</strong></p>
+<p>The loop in time is like this:</p>
+<ul class="simple">
+<li>Compute the RHS of the Poisson Equation at n</li>
+<li>Compute pressure using Poisson Equation at n</li>
+<li>Compute velocities at n+1 using Momentum Equations (from the pressure previously calculated at n)</li>
+</ul>
+<p><strong>The divergence of velocity must also vanish at the boundaries</strong></p>
+</div>
+<div class="section" id="marker-particles">
+<h3><a class="toc-backref" href="#id6">4.1.2.4. Marker Particles</a><a class="headerlink" href="#marker-particles" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Harlow and Welch developed (a now obsolete) particles method for tracking the motion of the free surface</li>
+<li>They actually track the motion of particles throughout the fluid (not just at the free surface)</li>
+<li>Linear interpolation is performed to calculate the velocity with which a particle should move</li>
+<li>The interpolation weighting depends on the distance of the particle from the nearest velocity point</li>
+</ul>
+</div>
+<div class="section" id="boundary-conditions-at-rigid-walls-velocity">
+<h3><a class="toc-backref" href="#id7">4.1.2.5. Boundary Conditions at Rigid Walls - Velocity</a><a class="headerlink" href="#boundary-conditions-at-rigid-walls-velocity" title="Permalink to this headline">¶</a></h3>
+<p>Rigid walls may be of two types:</p>
+<ul class="simple">
+<li>No-slip</li>
+<li>Free-slip (could be a plane of symmetry - or a greased surface)</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/wall1.png"><img alt="../_images/wall1.png" src="../_images/wall1.png" style="width: 376.0px; height: 264.0px;" /></a>
+</div>
+<ul class="simple">
+<li>At the wall <span class="math">\(v = 0\)</span></li>
+<li>On the fluid side <span class="math">\(v \ne 0\)</span></li>
+<li>On the outside <span class="math">\(v' = -v\)</span> (no slip)</li>
+<li>On the outside <span class="math">\(v' = +v\)</span> (free slip)</li>
+</ul>
+<p>(Similarly for horizontal walls)</p>
+<p>In general:</p>
+<ul class="simple">
+<li>the tangential velocity reverses or remains unchanged for no-slip or free slip</li>
+<li>the normal velocity reverses for a free slip wall</li>
+<li>the normal velocity is calculated to ensure the divergence vanishes for an external cell for a no-slip wall</li>
+</ul>
+</div>
+<div class="section" id="boundary-conditions-at-rigid-walls-pressure">
+<h3><a class="toc-backref" href="#id8">4.1.2.6. Boundary Conditions at Rigid Walls - Pressure</a><a class="headerlink" href="#boundary-conditions-at-rigid-walls-pressure" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The boundary condition for <span class="math">\(\psi\)</span> must be consistent with the velocity</li>
+</ul>
+<div class="section" id="free-slip-wall">
+<h4><a class="toc-backref" href="#id9">Free slip wall</a><a class="headerlink" href="#free-slip-wall" title="Permalink to this headline">¶</a></h4>
+<p><strong>Vertical wall</strong> From the momentum equation for <span class="math">\(u\)</span> (with the reversal of all normal velocities and no change in the tangential velocity):</p>
+<div class="math">
+\[\psi' = \psi \pm g_x \Delta x\]</div>
+<p><span class="math">\(+ \Rightarrow\)</span> fluid is on the left of the wall</p>
+<p><span class="math">\(- \Rightarrow\)</span> fluid is on the right of the wall</p>
+<p><strong>Horizontal wall</strong> From the momentum equation for <span class="math">\(v\)</span>:</p>
+<div class="math">
+\[\psi' = \psi \pm g_y \Delta y\]</div>
+<p><span class="math">\(+ \Rightarrow\)</span> fluid is below the wall</p>
+<p><span class="math">\(- \Rightarrow\)</span> fluid is above the wall</p>
+</div>
+<div class="section" id="no-slip-wall">
+<h4><a class="toc-backref" href="#id10">No slip wall</a><a class="headerlink" href="#no-slip-wall" title="Permalink to this headline">¶</a></h4>
+<p>Condition is that the divergence of velocity on the outer cell must be zero:</p>
+<p><strong>Vertical wall</strong></p>
+<div class="math">
+\[\psi' = \psi_1 \pm g_x \Delta x \pm ({{2 \nu u_1} \over {\Delta x}})\]</div>
+<p><span class="math">\(+ \Rightarrow\)</span> fluid is on the left of the wall</p>
+<p><span class="math">\(- \Rightarrow\)</span> fluid is on the right of the wall</p>
+<p><strong>Horizontal wall</strong></p>
+<div class="math">
+\[\psi' = \psi_1 \pm g_y \Delta y \pm ({{2 \nu v_1} \over {\Delta y}})\]</div>
+<p><span class="math">\(+ \Rightarrow\)</span> fluid is on the left of the wall</p>
+<p><span class="math">\(- \Rightarrow\)</span> fluid is on the right of the wall</p>
+</div>
+<div class="section" id="boundary-conditions-at-free-surface-velocity">
+<h4><a class="toc-backref" href="#id11">Boundary Conditions at Free Surface - Velocity</a><a class="headerlink" href="#boundary-conditions-at-free-surface-velocity" title="Permalink to this headline">¶</a></h4>
+<p>Condition is that the free surface has zero divergence of velocity</p>
+<ul class="simple">
+<li>One side facing vacuum: three sides computed normally, fourth side follows from vanished divergence</li>
+<li>Two sides facing vacuum: <span class="math">\(\partial u \over \partial x\)</span> and <span class="math">\(\partial v \over \partial y\)</span> must vanish separately - each vacuum dies velocity is set equal to the velocity of the cell across from it</li>
+<li>Three sides facing vacuum: rare, but vacuum side opposite fluid side carries the same velocity of that side. The other two vacuum sides which oppose each other are calculated to follow freely the effects of the body force and do not otherwise change</li>
+<li>Four sides facing vacuum: similar to three so that this isolated drop follows a free fall trajectory.</li>
+</ul>
+</div>
+<div class="section" id="boundary-conditions-at-free-surface-pressure">
+<h4><a class="toc-backref" href="#id12">Boundary Conditions at Free Surface - Pressure</a><a class="headerlink" href="#boundary-conditions-at-free-surface-pressure" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Condition is that the normal stress is zero or of equating it to the applied external pressure</li>
+<li><strong>Neglected the effect of viscous stress in the surface boundary and equated surface pressure directly to applied pressure</strong> (to reduce complexity of simulation)</li>
+<li>May be valid for small viscosities</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="numerical-stability-and-accuracy">
+<h2><a class="toc-backref" href="#id13">4.1.3. Numerical Stability and Accuracy</a><a class="headerlink" href="#numerical-stability-and-accuracy" title="Permalink to this headline">¶</a></h2>
+<p>The method is stable - viscosity is not needed to ensure stability</p>
+<p>&#8220;Artificial viscosity&#8221; term is not needed (which it is in the treatment of shocks in compressible flow and for the elimination of stagnation fluctuations)</p>
+<p>Condition 1 for diffusional stability:</p>
+<div class="math">
+\[{{4 \nu \Delta t} \over {\Delta x^2}} \lt 1\]</div>
+<p>Condition 2 for incompressible flow analogy to Courant condition (g is gravity, d is maximum depth):</p>
+<div class="math">
+\[{{g d \Delta t^2} \over {\Delta x^2}} \lt 1\]</div>
+<p>Harlow and Welsh also did internal consistency checks</p>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id14">4.1.4. Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="broken-dam-problem">
+<h3><a class="toc-backref" href="#id15">4.1.4.1. Broken Dam Problem</a><a class="headerlink" href="#broken-dam-problem" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Variant 1: Entire Dam Removed Instantly</li>
+<li>Variant 2: Dam Partly Broken (like a sluice gate)</li>
+</ul>
+<p>Comparison is good with experiment, but poor with hydrodynamic theory</p>
+<p>Free surface is sensitive to grid density, but the effect is negligible</p>
+<p>For the partly broken dam problem, the zero-pressure boundary condition applied at the centre of the cells leads to an inward dip of the zero pressure isobar at the earliest time.</p>
+</div>
+</div>
+<div class="section" id="conclusions">
+<h2><a class="toc-backref" href="#id16">4.1.5. Conclusions</a><a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
+<p>Harlow and Walsh conclude by saying:</p>
+<ul class="simple">
+<li>The technique can be extended to 3D</li>
+<li>Other coordinate systems can be used</li>
+</ul>
+<p>Other applications tested:</p>
+<ul class="simple">
+<li>Rayleigh-Taylor instability of a falling free surface</li>
+<li>Splash of a falling column of water</li>
+<li>Breaking of a dam</li>
+<li>Flow under a sluice gate</li>
+<li>Flow over an underwater obstacle</li>
+<li>The slow creep of a highly viscous blob</li>
+<li>Splash of a linear drop</li>
+</ul>
+<p>Calculations planned:</p>
+<ul class="simple">
+<li>Formation of waves by a linear explosion over the surface</li>
+<li>Breaking waves on a sloping beach</li>
+</ul>
+<p>Modification to cylindrical coordinates allows studies of spherical explosion and the splash of a drop</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="literature.html">4. Literature</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="thompson.html">4.2. Thompson et al. (2001) &#8220;Investigation of Rigid-Roll Coating&#8221;</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

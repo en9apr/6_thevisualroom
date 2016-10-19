@@ -1,0 +1,421 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.8.4. Sod’s Test Problems: The Shock Tube Problem &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.9.1. Advantages of The Finite Volume Method" href="finite_volume_method_1.html" />
+    <link rel="prev" title="1.8.3. The Riemann Problem" href="the_riemann_problem.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.8.4. Sod’s Test Problems: The Shock Tube Problem</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="the_riemann_problem.html">1.8.3. The Riemann Problem</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="finite_volume_method_1.html">1.9.1. Advantages of The Finite Volume Method</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="sod-s-test-problems-the-shock-tube-problem">
+<h1>1.8.4. Sod&#8217;s Test Problems: The Shock Tube Problem<a class="headerlink" href="#sod-s-test-problems-the-shock-tube-problem" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#assumptions" id="id5">Assumptions</a></li>
+<li><a class="reference internal" href="#initial-conditions" id="id6">Initial Conditions</a></li>
+<li><a class="reference internal" href="#regions-of-flow" id="id7">Regions of Flow</a></li>
+<li><a class="reference internal" href="#sod-s-test-number-1" id="id8">Sod&#8217;s Test Number 1</a><ul>
+<li><a class="reference internal" href="#id1" id="id9">Initial Conditions</a></li>
+<li><a class="reference internal" href="#discretisation" id="id10">Discretisation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sod-s-test-number-2" id="id11">Sod&#8217;s Test Number 2</a><ul>
+<li><a class="reference internal" href="#id2" id="id12">Initial Conditions</a></li>
+<li><a class="reference internal" href="#id3" id="id13">Discretisation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#test-1" id="id14">Test 1</a><ul>
+<li><a class="reference internal" href="#lax-friedrichs" id="id15">Lax-Friedrichs</a></li>
+<li><a class="reference internal" href="#maccormack" id="id16">MacCormack</a></li>
+<li><a class="reference internal" href="#richtmyer" id="id17">Richtmyer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#test-2" id="id18">Test 2</a><ul>
+<li><a class="reference internal" href="#id4" id="id19">Lax-Friedrichs</a></li>
+<li><a class="reference internal" href="#maccormack-with-artificial-viscosity" id="id20">MacCormack with Artificial Viscosity</a></li>
+<li><a class="reference internal" href="#richtmyer-with-artificial-viscosity" id="id21">Richtmyer with Artificial Viscosity</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusion" id="id22">Conclusion</a></li>
+</ul>
+</div>
+<p>This set of problems was introduced in the paper by Gary Sod in 1978 called &#8220;A Survey of Several Finite Difference Methods for Systems of Non-linear Hyperbolic Conservation Laws&#8221;</p>
+<div class="section" id="assumptions">
+<h2><a class="toc-backref" href="#id5">1.8.4.1. Assumptions</a><a class="headerlink" href="#assumptions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>1D</li>
+<li>Infinitely long tube</li>
+<li>Inviscid fluid</li>
+</ul>
+</div>
+<div class="section" id="initial-conditions">
+<h2><a class="toc-backref" href="#id6">1.8.4.2. Initial Conditions</a><a class="headerlink" href="#initial-conditions" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/IC_sod.png"><img alt="../_images/IC_sod.png" src="../_images/IC_sod.png" style="width: 420.0px; height: 210.0px;" /></a>
+</div>
+<ul class="simple">
+<li>At t=0 the diaphragm is instantaneously removed (this is done experimentally using a a thin sheet of metal and a small explosion bursts the diaphragm)</li>
+</ul>
+</div>
+<div class="section" id="regions-of-flow">
+<h2><a class="toc-backref" href="#id7">1.8.4.3. Regions of Flow</a><a class="headerlink" href="#regions-of-flow" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The bursting of the diaphragm causes a 1D unsteady flow consisting of a steadily moving <strong>shock</strong> - A Riemann Problem.</li>
+<li>1 discontinuity is present</li>
+<li>The solution is self-similar with 5 regions</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/solution_sod.png"><img alt="../_images/solution_sod.png" src="../_images/solution_sod.png" style="width: 420.0px; height: 280.0px;" /></a>
+</div>
+<ul class="simple">
+<li>Region 1 &amp; 5 - left and right sides of initial states</li>
+<li>Region 2 - expansion or rarefaction wave (x-dependent state)</li>
+<li>Regions 3 &amp; 4 - steady states independent of x within the region (uniform)</li>
+</ul>
+<p>Contact line between 3 and 4 separates fluids of different entropy (but they have the same pressure and velocity) i.e. it&#8217;s an invisible line - e.g. two fluids one side with water and the other with dye - contact line is moving.</p>
+<div class="math">
+\[p_3 = p_4\]</div>
+<div class="math">
+\[u_3 = u_4\]</div>
+</div>
+<div class="section" id="sod-s-test-number-1">
+<h2><a class="toc-backref" href="#id8">1.8.4.4. Sod&#8217;s Test Number 1</a><a class="headerlink" href="#sod-s-test-number-1" title="Permalink to this headline">¶</a></h2>
+<p>Unknowns:</p>
+<ul class="simple">
+<li>Pressure</li>
+<li>Velocity</li>
+<li>Speed of sound</li>
+<li>Density</li>
+<li>Entropy</li>
+<li>Mach Number</li>
+</ul>
+<p>Can also use Euler Equations in Primitive Form with:</p>
+<ul class="simple">
+<li>Pressure</li>
+<li>Velocity</li>
+<li>Density</li>
+</ul>
+<p>Vector notation for the Euler Equations with Primitive Variables, <span class="math">\(p, u, \rho\)</span></p>
+<div class="section" id="id1">
+<h3><a class="toc-backref" href="#id9">Initial Conditions</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\begin{split}\mathbf{V}(x,0) = \begin{cases}
+\mathbf{V}_L \quad x \lt 0 \\
+\mathbf{V}_R \quad x \ge 0
+\end{cases}\end{split}\]</div>
+<div class="math">
+\[\begin{split}\mathbf{V}_L = \begin{bmatrix}
+  \rho_L \\
+  u_L \\
+  p_L
+  \end{bmatrix}
+= \begin{bmatrix}
+  1 kg/m^3 \\
+  0 m/s \\
+  100 kN/m^2
+  \end{bmatrix}\end{split}\]</div>
+<div class="math">
+\[\begin{split}\mathbf{V}_R = \begin{bmatrix}
+  \rho_R \\
+  u_R \\
+  p_R
+  \end{bmatrix}
+= \begin{bmatrix}
+  0.125 kg/m^3 \\
+  0 m/s \\
+  10 kN/m^2
+  \end{bmatrix}\end{split}\]</div>
+<ul class="simple">
+<li>Everything is quiet until you break the diaphragm (u=0)</li>
+<li>The pressure ratio is 10</li>
+</ul>
+</div>
+<div class="section" id="discretisation">
+<h3><a class="toc-backref" href="#id10">Discretisation</a><a class="headerlink" href="#discretisation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>N = 50 points in [-10m, 10m]</li>
+<li><span class="math">\(\Delta x\)</span> = 20m / 50 = 0.4m</li>
+<li>Initial CFL = 0.3</li>
+<li>Initial wave speed = 374.17m/s</li>
+<li>Timestep <span class="math">\(\Delta t\)</span> = 0.4(0.4/374.17) = 4.276 <span class="math">\(\times 10^{-4}\)</span></li>
+<li><span class="math">\(\Delta t / \Delta x\)</span> = 1.069 <span class="math">\(\times 10^{-3}\)</span></li>
+</ul>
+<p><strong>Solution at t = 0.01s</strong> (in about 23 timesteps)</p>
+<p>Now the problem is described, the numerical schemes can be applied.</p>
+</div>
+</div>
+<div class="section" id="sod-s-test-number-2">
+<h2><a class="toc-backref" href="#id11">1.8.4.5. Sod&#8217;s Test Number 2</a><a class="headerlink" href="#sod-s-test-number-2" title="Permalink to this headline">¶</a></h2>
+<p>Unknowns are same as Test Number 1</p>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id12">Initial Conditions</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\begin{split}\mathbf{V}_L = \begin{bmatrix}
+  \rho_L \\
+  u_L \\
+  p_L
+  \end{bmatrix}
+= \begin{bmatrix}
+  1 kg/m^3 \\
+  0 m/s \\
+  100 kN/m^2
+  \end{bmatrix}\end{split}\]</div>
+<div class="math">
+\[\begin{split}\mathbf{V}_R = \begin{bmatrix}
+  \rho_R \\
+  u_R \\
+  p_R
+  \end{bmatrix}
+= \begin{bmatrix}
+  0.01 kg/m^3 \\
+  0 m/s \\
+  1 kN/m^2
+  \end{bmatrix}\end{split}\]</div>
+<p>Pressure ratio is 100 - this test is harder</p>
+</div>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id13">Discretisation</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>N = 50 points in [-10m, 15m]</li>
+<li><span class="math">\(\Delta x\)</span> = 25m / 50 = 0.5m</li>
+<li>Initial CFL = 0.3</li>
+<li>Initial wave speed = 374.17m/s</li>
+<li>Timestep <span class="math">\(\Delta t\)</span> = 0.3(0.5/374.17) = 4.01 <span class="math">\(\times 10^{-4}\)</span></li>
+<li><span class="math">\(\Delta t / \Delta x\)</span> = 8.02 <span class="math">\(\times 10^{-4}\)</span></li>
+</ul>
+<p><strong>Solution at t = 0.01s</strong> (in about 25 timesteps)</p>
+<p>Now the problem is described, the numerical schemes can be applied.</p>
+</div>
+</div>
+<div class="section" id="test-1">
+<h2><a class="toc-backref" href="#id14">1.8.4.6. Test 1</a><a class="headerlink" href="#test-1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="lax-friedrichs">
+<h3><a class="toc-backref" href="#id15">Lax-Friedrichs</a><a class="headerlink" href="#lax-friedrichs" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Pressure has a jump due to shockwave</li>
+<li>Solution has numerical dissipation</li>
+<li>Odd-even decoupling is present (staircase pattern)</li>
+<li>Burgers Equation simulated all the important features of the Euler Equations</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/LF_pressure_1.jpg"><img alt="../_images/LF_pressure_1.jpg" src="../_images/LF_pressure_1.jpg" style="width: 616.0px; height: 425.59999999999997px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/LF_velocity_1.jpg"><img alt="../_images/LF_velocity_1.jpg" src="../_images/LF_velocity_1.jpg" style="width: 602.6999999999999px; height: 431.2px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/LF_density_1.jpg"><img alt="../_images/LF_density_1.jpg" src="../_images/LF_density_1.jpg" style="width: 564.1999999999999px; height: 425.59999999999997px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/LF_entropy_1.jpg"><img alt="../_images/LF_entropy_1.jpg" src="../_images/LF_entropy_1.jpg" style="width: 580.3px; height: 417.9px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/LF_sound_1.jpg"><img alt="../_images/LF_sound_1.jpg" src="../_images/LF_sound_1.jpg" style="width: 574.0px; height: 417.9px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/LF_mach_1.jpg"><img alt="../_images/LF_mach_1.jpg" src="../_images/LF_mach_1.jpg" style="width: 578.1999999999999px; height: 424.2px;" /></a>
+</div>
+</div>
+<div class="section" id="maccormack">
+<h3><a class="toc-backref" href="#id16">MacCormack</a><a class="headerlink" href="#maccormack" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Similar to inviscid Burgers</li>
+<li>Overshoot in pressure, speed of sound, density, entropy is bad</li>
+<li>Lax-Friedrichs is better than MacCormack</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/MC_pressure_1.jpg"><img alt="../_images/MC_pressure_1.jpg" src="../_images/MC_pressure_1.jpg" style="width: 599.9px; height: 422.09999999999997px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/MC_velocity_1.jpg"><img alt="../_images/MC_velocity_1.jpg" src="../_images/MC_velocity_1.jpg" style="width: 584.5px; height: 431.9px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/MC_density_1.jpg"><img alt="../_images/MC_density_1.jpg" src="../_images/MC_density_1.jpg" style="width: 585.9px; height: 421.4px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/MC_entropy_1.jpg"><img alt="../_images/MC_entropy_1.jpg" src="../_images/MC_entropy_1.jpg" style="width: 625.0999999999999px; height: 427.7px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/MC_sound_1.jpg"><img alt="../_images/MC_sound_1.jpg" src="../_images/MC_sound_1.jpg" style="width: 583.0999999999999px; height: 420.0px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/MC_mach_1.jpg"><img alt="../_images/MC_mach_1.jpg" src="../_images/MC_mach_1.jpg" style="width: 564.9px; height: 412.29999999999995px;" /></a>
+</div>
+</div>
+<div class="section" id="richtmyer">
+<h3><a class="toc-backref" href="#id17">Richtmyer</a><a class="headerlink" href="#richtmyer" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Less overshooting than MacCormack</li>
+<li>Undershoot in pressure is bad</li>
+<li>Overshoot in velocity is bad</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/RM_pressure_1.jpg"><img alt="../_images/RM_pressure_1.jpg" src="../_images/RM_pressure_1.jpg" style="width: 623.0px; height: 429.09999999999997px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/RM_velocity_1.jpg"><img alt="../_images/RM_velocity_1.jpg" src="../_images/RM_velocity_1.jpg" style="width: 599.1999999999999px; height: 432.59999999999997px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/RM_density_1.jpg"><img alt="../_images/RM_density_1.jpg" src="../_images/RM_density_1.jpg" style="width: 599.9px; height: 441.0px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/RM_entropy_1.jpg"><img alt="../_images/RM_entropy_1.jpg" src="../_images/RM_entropy_1.jpg" style="width: 610.4px; height: 440.29999999999995px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/RM_sound_1.jpg"><img alt="../_images/RM_sound_1.jpg" src="../_images/RM_sound_1.jpg" style="width: 595.6999999999999px; height: 439.59999999999997px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/RM_mach_1.jpg"><img alt="../_images/RM_mach_1.jpg" src="../_images/RM_mach_1.jpg" style="width: 607.5999999999999px; height: 438.9px;" /></a>
+</div>
+</div>
+</div>
+<div class="section" id="test-2">
+<h2><a class="toc-backref" href="#id18">1.8.4.7. Test 2</a><a class="headerlink" href="#test-2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id19">Lax-Friedrichs</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Diffusion</li>
+<li>Odd-even decoupling</li>
+<li>Speed of sound very diffused</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/LF_pressure_2.jpg"><img alt="../_images/LF_pressure_2.jpg" src="../_images/LF_pressure_2.jpg" style="width: 592.9px; height: 417.2px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/LF_velocity_2.jpg"><img alt="../_images/LF_velocity_2.jpg" src="../_images/LF_velocity_2.jpg" style="width: 579.5999999999999px; height: 410.9px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/LF_density_2.jpg"><img alt="../_images/LF_density_2.jpg" src="../_images/LF_density_2.jpg" style="width: 546.0px; height: 396.2px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/LF_entropy_2.jpg"><img alt="../_images/LF_entropy_2.jpg" src="../_images/LF_entropy_2.jpg" style="width: 569.8px; height: 412.29999999999995px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/LF_sound_2.jpg"><img alt="../_images/LF_sound_2.jpg" src="../_images/LF_sound_2.jpg" style="width: 582.4px; height: 425.59999999999997px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/LF_mach_2.jpg"><img alt="../_images/LF_mach_2.jpg" src="../_images/LF_mach_2.jpg" style="width: 568.4px; height: 430.5px;" /></a>
+</div>
+</div>
+<div class="section" id="maccormack-with-artificial-viscosity">
+<h3><a class="toc-backref" href="#id20">MacCormack with Artificial Viscosity</a><a class="headerlink" href="#maccormack-with-artificial-viscosity" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Smaller amplitude of oscillations even in Test 2</li>
+<li>Small number of points - is a hard test for numerical scheme (coarse mesh)</li>
+<li>Overshoot in velocity</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/MC_pressure_2_AV.jpg"><img alt="../_images/MC_pressure_2_AV.jpg" src="../_images/MC_pressure_2_AV.jpg" style="width: 605.5px; height: 432.59999999999997px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/MC_velocity_2_AV.jpg"><img alt="../_images/MC_velocity_2_AV.jpg" src="../_images/MC_velocity_2_AV.jpg" style="width: 596.4px; height: 443.79999999999995px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/MC_density_2_AV.jpg"><img alt="../_images/MC_density_2_AV.jpg" src="../_images/MC_density_2_AV.jpg" style="width: 577.5px; height: 425.59999999999997px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/MC_entropy_2_AV.jpg"><img alt="../_images/MC_entropy_2_AV.jpg" src="../_images/MC_entropy_2_AV.jpg" style="width: 600.5999999999999px; height: 431.2px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/MC_sound_2_AV.jpg"><img alt="../_images/MC_sound_2_AV.jpg" src="../_images/MC_sound_2_AV.jpg" style="width: 581.0px; height: 434.7px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/MC_mach_2_AV.jpg"><img alt="../_images/MC_mach_2_AV.jpg" src="../_images/MC_mach_2_AV.jpg" style="width: 578.1999999999999px; height: 424.9px;" /></a>
+</div>
+</div>
+<div class="section" id="richtmyer-with-artificial-viscosity">
+<h3><a class="toc-backref" href="#id21">Richtmyer with Artificial Viscosity</a><a class="headerlink" href="#richtmyer-with-artificial-viscosity" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Nice result - better than MacCormack</li>
+<li>Smaller about of overshoot</li>
+<li>No oscillations in density - negative density might result in mass not being conserved</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/RM_pressure_2_AV.jpg"><img alt="../_images/RM_pressure_2_AV.jpg" src="../_images/RM_pressure_2_AV.jpg" style="width: 602.6999999999999px; height: 414.4px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/RM_velocity_2_AV.jpg"><img alt="../_images/RM_velocity_2_AV.jpg" src="../_images/RM_velocity_2_AV.jpg" style="width: 603.4px; height: 435.4px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/RM_density_2_AV.jpg"><img alt="../_images/RM_density_2_AV.jpg" src="../_images/RM_density_2_AV.jpg" style="width: 576.8px; height: 431.9px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/RM_entropy_2_AV.jpg"><img alt="../_images/RM_entropy_2_AV.jpg" src="../_images/RM_entropy_2_AV.jpg" style="width: 613.1999999999999px; height: 450.09999999999997px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/RM_sound_2_AV.jpg"><img alt="../_images/RM_sound_2_AV.jpg" src="../_images/RM_sound_2_AV.jpg" style="width: 585.1999999999999px; height: 438.2px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/RM_mach_2_AV.jpg"><img alt="../_images/RM_mach_2_AV.jpg" src="../_images/RM_mach_2_AV.jpg" style="width: 586.5999999999999px; height: 440.29999999999995px;" /></a>
+</div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2><a class="toc-backref" href="#id22">1.8.4.8. Conclusion</a><a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Conclusions from Burgers Equation apply to Euler Equations</li>
+<li>This is the usefulness of the model equations</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="the_riemann_problem.html">1.8.3. The Riemann Problem</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="finite_volume_method_1.html">1.9.1. Advantages of The Finite Volume Method</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

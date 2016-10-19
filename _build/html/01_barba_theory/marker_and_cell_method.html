@@ -1,0 +1,318 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.4.2. The Marker and Cell Method &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.4.3. Ghost Cell Boundary Conditions" href="ghost_cells.html" />
+    <link rel="prev" title="1.4.1. Poisson Equation for Pressure" href="poisson_for_pressure.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.4.2. The Marker and Cell Method</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="poisson_for_pressure.html">1.4.1. Poisson Equation for Pressure</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="ghost_cells.html">1.4.3. Ghost Cell Boundary Conditions</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="the-marker-and-cell-method">
+<h1>1.4.2. The Marker and Cell Method<a class="headerlink" href="#the-marker-and-cell-method" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#collocated-vs-staggered-grids" id="id1">Collocated vs. Staggered Grids</a></li>
+<li><a class="reference internal" href="#apply-pressure-correction-approach" id="id2">Apply Pressure Correction Approach</a></li>
+<li><a class="reference internal" href="#odd-even-decoupling" id="id3">Odd-Even Decoupling</a></li>
+<li><a class="reference internal" href="#demonstration-of-odd-even-decoupling" id="id4">Demonstration of Odd-Even Decoupling</a></li>
+<li><a class="reference internal" href="#solution-to-odd-even-decoupling" id="id5">Solution to Odd-Even Decoupling</a></li>
+<li><a class="reference internal" href="#extension-of-staggered-grid-to-2d" id="id6">Extension of Staggered Grid to 2D</a></li>
+<li><a class="reference internal" href="#application-of-finite-difference-method-to-staggered-grid" id="id7">Application of Finite Difference Method to Staggered Grid</a></li>
+<li><a class="reference internal" href="#where-is-the-velocity-known" id="id8">Where is the Velocity Known?</a></li>
+<li><a class="reference internal" href="#how-do-we-get-the-velocity-at-the-corners-and-centre-of-the-cells" id="id9">How do we get the Velocity at the Corners and Centre of the Cells?</a></li>
+<li><a class="reference internal" href="#historical-notes" id="id10">Historical Notes</a></li>
+</ul>
+</div>
+<div class="section" id="collocated-vs-staggered-grids">
+<h2><a class="toc-backref" href="#id1">1.4.2.1. Collocated vs. Staggered Grids</a><a class="headerlink" href="#collocated-vs-staggered-grids" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Illustration: consider a 1D Navier-Stokes System</li>
+</ul>
+<div class="math" id="equation-1">
+<span class="eqno">(1)</span>\[{\partial u \over \partial x} = 0\]</div>
+<div class="math" id="equation-2">
+<span class="eqno">(2)</span>\[{\partial u \over \partial t} + {\partial u^2 \over \partial x} =
+       - {1 \over \rho} {\partial p \over \partial x} + \nu {\partial^2 u \over \partial x^2}\]</div>
+<ul class="simple">
+<li>On a standard <strong>collocated grid</strong> we have the following with <strong>FTCS</strong>:</li>
+</ul>
+<div class="math" id="equation-3">
+<span class="eqno">(3)</span>\[{{u_{i+1}^{n+1} - u_{i-1}^{n+1}} \over {2 \Delta x}} = 0\]</div>
+<div class="math" id="equation-4">
+<span class="eqno">(4)</span>\[{{u_{i}^{n+1} - u_{i}^{n}} \over {\Delta t}} +
+       {({u_{i+1}^{n})^2 - (u_{i-1}^{n})^2} \over {2 \Delta x}} = -
+       {1 \over \rho}{ {p_{i+1}^n - p_{i-1}^n} \over {2 \Delta x}} +
+       \nu{{u_{i+1}^{n} -2u_i^n + u_{i-1}^{n}} \over {\Delta x^2}}\]</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/collocated.png"><img alt="../_images/collocated.png" src="../_images/collocated.png" style="width: 300.0px; height: 125.0px;" /></a>
+</div>
+</div>
+<div class="section" id="apply-pressure-correction-approach">
+<h2><a class="toc-backref" href="#id2">1.4.2.2. Apply Pressure Correction Approach</a><a class="headerlink" href="#apply-pressure-correction-approach" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Split the N-S Equations into two parts</li>
+<li><strong>Step One:</strong> Ignore pressure gradient in momentum equation for intermediate velocity (<span class="math">\(u^*\)</span> is not divergence free). From Equation <a href="#equation-4">(4)</a>:</li>
+</ul>
+<div class="math" id="equation-5">
+<span class="eqno">(5)</span>\[{{u_{i}^{*} - u_{i}^{n}} \over {\Delta t}} +
+       {({u_{i+1}^{n})^2 - (u_{i-1}^{n})^2} \over {2 \Delta x}} = -
+       \nu{{u_{i+1}^{n} -2u_i^n + u_{i-1}^{n}} \over {\Delta x^2}}\]</div>
+<ul class="simple">
+<li><strong>Step Two:</strong> Use intermediate velocity and correct it with the pressure (pressure enforces continuity) to obtain <span class="math">\(u^{n+1}\)</span>. From Equation <a href="#equation-4">(4)</a>:</li>
+</ul>
+<div class="math">
+\[{{u_{i}^{n+1} - u_{i}^{*}} \over {\Delta t}}  = -
+{1 \over \rho}{ {p_{i+1}^n - p_{i-1}^n} \over {2 \Delta x}}\]</div>
+<div class="math" id="equation-6">
+<span class="eqno">(6)</span>\[u_{i}^{n+1} =  u_{i}^{*} - {\Delta t \over \rho}{ {p_{i+1}^n - p_{i-1}^n} \over {2 \Delta x}}\]</div>
+<ul class="simple">
+<li><strong>Step Three:</strong> Use pressure correction Equation <a href="#equation-6">(6)</a> to satsfy continuity, i.e. Equation <a href="#equation-3">(3)</a> (just replace i in LHS of <a href="#equation-6">(6)</a> with i+1 or i-1 and correct RHS)</li>
+</ul>
+<div class="math">
+\[{1 \over {2 \Delta x}} \left[ \left({u_{i+1}^{*} - {\Delta t \over \rho}{ {p_{i+2}^n - p_{i}^n} \over {2 \Delta x}}} \right) -
+\left( {u_{i-1}^{*} - {\Delta t \over \rho}{ {p_{i}^n - p_{i-2}^n} \over {2 \Delta x}}} \right) \right] = 0\]</div>
+<p>Re-arranging this gives a form of the Poisson Equation, that ensures continuity:</p>
+<div class="math" id="equation-7">
+<span class="eqno">(7)</span>\[{{p_{i+2}^n - 2p_{i}^n + p_{i-2}^n} \over {4 \Delta x^2}} =
+       {{u_{i+1}^{*} - u_{i-1}^{*}} \over {2 \Delta x}} {\rho \over {\Delta t} }\]</div>
+<p>This is similar to using FTCS on the divergence of the momentum equation and setting the divergence of velocity to zero, as shown in <a class="reference external" href="http://www.thevisualroom.com/poisson_for_pressure.html">the Poisson Equation for pressure</a>. The form here includes only the first term on the RHS of that complex expression.</p>
+</div>
+<div class="section" id="odd-even-decoupling">
+<h2><a class="toc-backref" href="#id3">1.4.2.3. Odd-Even Decoupling</a><a class="headerlink" href="#odd-even-decoupling" title="Permalink to this headline">¶</a></h2>
+<p>Note:</p>
+<ul class="simple">
+<li>The discretisation of pressure is on a <span class="math">\(2 \Delta x\)</span> grid.</li>
+<li>The discretisation of velocity is on a <span class="math">\(\Delta x\)</span> grid.</li>
+</ul>
+<p>In the final equation for <span class="math">\(p_i^n\)</span> if the pressure used is at an <strong>even</strong> point on the grid, the velocity is at an <strong>odd</strong> point, this is called <strong>odd-even decoupling</strong></p>
+<div class="math">
+\[p_{i}^n = {{p_{i+2}^n + p_{i-2}^n} \over {2}} - {{\Delta x \rho} \over {\Delta t}} ({u_{i+1}^{*} - u_{i-1}^{*}})\]</div>
+<p><strong>Possible drawback of odd-even decoupling:</strong></p>
+<p>The pressure at point <span class="math">\(i\)</span> is not influence by the velocity component <span class="math">\(u_i^n\)</span> and viceversa <span class="math">\(\Rightarrow\)</span> can result in <strong>high-frequency oscillations</strong>.</p>
+<ul class="simple">
+<li>Stencil for <span class="math">\(p\)</span>: <span class="math">\(\quad i-2, \qquad i, \qquad i+2\)</span></li>
+<li>Stencil for <span class="math">\(u^*\)</span>: <span class="math">\(\ \ \qquad i-1, \quad i+1\)</span></li>
+</ul>
+</div>
+<div class="section" id="demonstration-of-odd-even-decoupling">
+<h2><a class="toc-backref" href="#id4">1.4.2.4. Demonstration of Odd-Even Decoupling</a><a class="headerlink" href="#demonstration-of-odd-even-decoupling" title="Permalink to this headline">¶</a></h2>
+<p>For the <a class="reference external" href="http://nbviewer.ipython.org/github/en9apr/sphinx/blob/master/Navier_Stokes_Cavity_Slices.ipynb">cavity flow</a>, using:</p>
+<ul class="simple">
+<li>41 x 41 mesh</li>
+<li>dx = dy = 0.05</li>
+<li><span class="math">\(\nu\)</span> = 0.01</li>
+<li>Re = 200</li>
+</ul>
+<p><strong>Pressure is not monotonic due to odd-even decoupling</strong></p>
+<p>The stencil with the previous pressure correction method was:</p>
+<ul class="simple">
+<li>Stencil for <span class="math">\(p\)</span>: <span class="math">\(\quad i-1, \qquad i, \  \qquad i+1\)</span></li>
+<li>Stencil for <span class="math">\(u\)</span>: <span class="math">\(\quad i-1, \qquad \qquad \quad i+1\)</span></li>
+</ul>
+<p>So the pressure at <span class="math">\(p_i\)</span> is <strong>not influenced</strong> by <span class="math">\(u_i\)</span></p>
+<p>(<a class="reference external" href="../01_barba_theory/marker_and_cell_method-1.py">Source code</a>, <a class="reference external" href="../01_barba_theory/marker_and_cell_method-1.png">png</a>, <a class="reference external" href="../01_barba_theory/marker_and_cell_method-1.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/marker_and_cell_method-1.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/marker_and_cell_method-1.png" src="../_images/marker_and_cell_method-1.png" />
+</div>
+</div>
+<div class="section" id="solution-to-odd-even-decoupling">
+<h2><a class="toc-backref" href="#id5">1.4.2.5. Solution to Odd-Even Decoupling</a><a class="headerlink" href="#solution-to-odd-even-decoupling" title="Permalink to this headline">¶</a></h2>
+<p>Define velocity and pressure <strong>on separate grids</strong></p>
+<ul class="simple">
+<li>Collocated grid (where odd-even decoupling took place):</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/collocated_2.png"><img alt="../_images/collocated_2.png" src="../_images/collocated_2.png" style="width: 585.0px; height: 162.5px;" /></a>
+</div>
+<ul class="simple">
+<li>Staggered grid (to prevent odd-even decoupling):</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/staggered.png"><img alt="../_images/staggered.png" src="../_images/staggered.png" style="width: 585.0px; height: 162.5px;" /></a>
+</div>
+<p>This solution was due to Harlow and Welch (1965)</p>
+<p>What effect does this have on the discretised equations?</p>
+<ul class="simple">
+<li>Continuity Equation written as:</li>
+</ul>
+<div class="math" id="equation-8">
+<span class="eqno">(8)</span>\[{{u_{i+{1 \over 2}}^{n+1} - u_{i-{1 \over 2}}^{n+1}} \over {\Delta x}} = 0\]</div>
+<ul class="simple">
+<li>&#8220;Fractional step&#8221; or &#8220;pressure correction&#8221;</li>
+</ul>
+<div class="math" id="equation-9">
+<span class="eqno">(9)</span>\[{{u_{i+{1 \over 2}}^{n+1} - u_{i+{1 \over 2}}^{*}} \over {\Delta t}} = -
+       {1 \over \rho}{ {p_{i+1}^n - p_{i}^n} \over {\Delta x}} +\]</div>
+<p>As before, substitute <a href="#equation-9">(9)</a> into <a href="#equation-8">(8)</a></p>
+<div class="math" id="equation-10">
+<span class="eqno">(10)</span>\[{{p_{i+1}^n - 2p_{i}^n + p_{i-1}^n} \over {\Delta x^2}} =
+       {{u_{i+{1 \over 2}}^{*} - u_{i-{1 \over 2}}^{*}} \over {\Delta x}} {\rho \over {\Delta t} }\]</div>
+<p><strong>How do we obtain</strong> <span class="math">\({u_{i+{1 \over 2}}^{*}}\)</span> <strong>etc ?</strong></p>
+<p>Answer: <strong>Averaging</strong> We get values at <span class="math">\(i+{1 \over 2}\)</span> and <span class="math">\(i-{1 \over 2}\)</span> by averaging adjacent values</p>
+<p>This makes the equations <strong>fully coupled</strong> and <strong>eliminates odd-even decoupling</strong></p>
+</div>
+<div class="section" id="extension-of-staggered-grid-to-2d">
+<h2><a class="toc-backref" href="#id6">1.4.2.6. Extension of Staggered Grid to 2D</a><a class="headerlink" href="#extension-of-staggered-grid-to-2d" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/2D_staggered.png"><img alt="../_images/2D_staggered.png" src="../_images/2D_staggered.png" style="width: 450.0px; height: 450.0px;" /></a>
+</div>
+<p>This uses three independent grids:</p>
+<ul class="simple">
+<li>One for <span class="math">\(p_{i,j}\)</span> etc</li>
+<li>One for <span class="math">\(u_{{i \pm {1 \over 2}}, {j}}\)</span> etc</li>
+<li>One for <span class="math">\(v_{i,{j \pm {1 \over 2}}}\)</span> etc</li>
+</ul>
+<p>Equations to be solved:</p>
+<div class="math" id="equation-11">
+<span class="eqno">(11)</span>\[{\partial u \over \partial x}+ {\partial v \over \partial y} = 0\]</div>
+<div class="math" id="equation-12">
+<span class="eqno">(12)</span>\[{\partial u \over \partial t} + {\partial u^2 \over \partial x}+ {\partial {uv} \over \partial y} =
+       - {1 \over \rho} {\partial p \over \partial x} + \nu \left( {{\partial^2 u \over \partial x^2} +{ \partial^2 u \over \partial y^2} } \right) = - {\partial \psi \over \partial x} + \nu \left( {{\partial^2 u \over \partial x^2} +{ \partial^2 u \over \partial y^2} } \right)\]</div>
+<div class="math" id="equation-14">
+<span class="eqno">(13)</span>\[{\partial v \over \partial t} + {\partial vu \over \partial x}+ {\partial {v^2} \over \partial y} =
+       - {\partial \psi \over \partial y} + \nu \left( {{\partial^2 v \over \partial x^2} +{ \partial^2 v \over \partial y^2} } \right)\]</div>
+<p><span class="math">\(\psi \Rightarrow\)</span> pressure divided by density</p>
+<p>Conversion from Conservative Form to Non-Conservative Form (to check equivalence) via product rule:</p>
+<div class="math">
+\[{\partial {uu} \over \partial x} + {\partial {uv} \over \partial y} =
+u {\partial u \over \partial x} + {\partial u \over \partial x}u +
+{\partial u \over \partial y}v + u{\partial {v} \over \partial y} =
+u \left( {\partial u \over \partial x} + {\partial v \over \partial y} \right)+
+u {\partial u \over \partial x} +  v {\partial u \over \partial y} =
+u {\partial u \over \partial x} +  v {\partial u \over \partial y}\]</div>
+</div>
+<div class="section" id="application-of-finite-difference-method-to-staggered-grid">
+<h2><a class="toc-backref" href="#id7">1.4.2.7. Application of Finite Difference Method to Staggered Grid</a><a class="headerlink" href="#application-of-finite-difference-method-to-staggered-grid" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\left . {\partial u \over \partial t} \right |_{i+{1 \over 2},j}^n =
+{{u_{i+{1 \over 2},j}^{n+1} - u_{i+{1 \over 2},j}^{n}} \over {\Delta t}}\]</div>
+<div class="math">
+\[\left . {\partial u^2 \over \partial x} \right |_{i+{1 \over 2},j}^n =
+{{(u_{i,j}^n)^2 - (u_{i+1,j}^{n})^2} \over {\Delta x}}\]</div>
+<div class="math">
+\[\left . {\partial {uv} \over \partial y} \right |_{i+{1 \over 2},j}^n =
+{ { (u_{i+{1 \over 2},j+{1 \over 2}}^n)(v_{i+{1 \over 2},j+{1 \over 2}}^n)-
+ (u_{i+{1 \over 2},j-{1 \over 2}}^n)(v_{i+{1 \over 2},j-{1 \over 2}}^n)}
+ \over {\Delta y} }\]</div>
+<div class="math">
+\[\left . {\partial \psi \over \partial x} \right |_{i+{1 \over 2},j}^n =
+{{(\psi_{i,j}^n) - (\psi_{i+1,j}^{n})} \over {\Delta x}}\]</div>
+<div class="math">
+\[\left . {\partial^2 u \over \partial x^2} \right |_{i+{1 \over 2},j}^n =
+{{u_{i+{3 \over 2},j}^n - 2u_{i+{1 \over 2},j}^n + u_{i-{1 \over 2},j}^{n}} \over {\Delta x^2}}\]</div>
+</div>
+<div class="section" id="where-is-the-velocity-known">
+<h2><a class="toc-backref" href="#id8">1.4.2.8. Where is the Velocity Known?</a><a class="headerlink" href="#where-is-the-velocity-known" title="Permalink to this headline">¶</a></h2>
+<p>Velocities <span class="math">\(u,v\)</span> are known only at half mesh points - i.e. at <strong>mid points of vertical and horizontal cell edges</strong>.</p>
+<ul class="simple">
+<li>Known at <span class="math">\(u_{i \pm {1 \over 2},j}\)</span> and <span class="math">\(v_{i \pm {1 \over 2},j}\)</span> etc</li>
+<li>Unknown at <span class="math">\(u_{i,j}\)</span> or <span class="math">\(u_{i \pm {1 \over 2},j \pm {1 \over 2}}\)</span> etc</li>
+</ul>
+<p>You need to average from the half mesh points</p>
+</div>
+<div class="section" id="how-do-we-get-the-velocity-at-the-corners-and-centre-of-the-cells">
+<h2><a class="toc-backref" href="#id9">1.4.2.9. How do we get the Velocity at the Corners and Centre of the Cells?</a><a class="headerlink" href="#how-do-we-get-the-velocity-at-the-corners-and-centre-of-the-cells" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The velocity is known at the midpoint of the cell edges</li>
+<li>The velocity is unknown at the corners and centres of cells (e.g. points a, b, c and d)</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/2D_staggered_averages.png"><img alt="../_images/2D_staggered_averages.png" src="../_images/2D_staggered_averages.png" style="width: 520.0px; height: 390.0px;" /></a>
+</div>
+<p>So for example, if we wanted the following derivative:</p>
+<div class="math">
+\[\left . {\partial {uv} \over \partial y} \right |_{i+{1 \over 2},j}^n =
+{ { (u_{i+{1 \over 2},j+{1 \over 2}}^n)(v_{i+{1 \over 2},j+{1 \over 2}}^n)-
+ (u_{i+{1 \over 2},j-{1 \over 2}}^n)(v_{i+{1 \over 2},j-{1 \over 2}}^n)}
+ \over {\Delta y} }\]</div>
+<p>At Point a:</p>
+<div class="math">
+\[u_{i+{1 \over 2},j+{1 \over 2}}^n =
+{1 \over 2}({ u_{i+{1 \over 2},j+{1}}^n + u_{i+{1 \over 2},j}^n })\]</div>
+<div class="math">
+\[v_{i+{1 \over 2},j+{1 \over 2}}^n =
+{1 \over 2}({ v_{i+{1},j+{1 \over 2}}^n + v_{i,j+{1 \over 2}}^n })\]</div>
+<p>Similarly for Point b</p>
+<p>If we wanted to know this derivative:</p>
+<div class="math">
+\[\left . {\partial u^2 \over \partial x} \right |_{i+{1 \over 2},j}^n =
+{{(u_{i,j}^n)^2 - (u_{i+1,j}^{n})^2} \over {\Delta x}}\]</div>
+<p>At Point c:</p>
+<div class="math">
+\[u_{i+1,j}^{n} =
+{1 \over 2}({ u_{i+{3 \over 2},j}^n + u_{i+{1 \over 2},j}^n })\]</div>
+<p>At Point d:</p>
+<div class="math">
+\[u_{i,j}^n =
+{1 \over 2}({ u_{i+{1 \over 2},j}^n + u_{i-{1 \over 2},j}^n })\]</div>
+</div>
+<div class="section" id="historical-notes">
+<h2><a class="toc-backref" href="#id10">1.4.2.10. Historical Notes</a><a class="headerlink" href="#historical-notes" title="Permalink to this headline">¶</a></h2>
+<p>Harlow and Welch (1965) introduced the &#8220;Marker and Cell&#8221; method:</p>
+<ul class="simple">
+<li>It included marker particles to follow free surfaces (now obsolete)</li>
+<li>Current usage of <strong>&#8220;Marker and Cell&#8221;</strong> method (MAC method) means - <strong>&#8220;Projection Method using a Staggered Grid&#8221;</strong></li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="poisson_for_pressure.html">1.4.1. Poisson Equation for Pressure</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="ghost_cells.html">1.4.3. Ghost Cell Boundary Conditions</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

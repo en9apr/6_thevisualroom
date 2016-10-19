@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.1.2. Derivation of the Continuity Equation &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.1.3. Derivation of the Momentum Equation" href="momentum.html" />
+    <link rel="prev" title="1.1.1. Computational Fluid Dynamics" href="cfd.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.1.2. Derivation of the Continuity Equation</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="cfd.html">1.1.1. Computational Fluid Dynamics</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="momentum.html">1.1.3. Derivation of the Momentum Equation</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="derivation-of-the-continuity-equation">
+<h1>1.1.2. Derivation of the Continuity Equation<a class="headerlink" href="#derivation-of-the-continuity-equation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="mass-is-not-gained-or-lost-so-the-rate-of-change-of-mass-is-zero">
+<h2>1.1.2.1. Mass is not gained or lost - so the rate of change of mass is zero<a class="headerlink" href="#mass-is-not-gained-or-lost-so-the-rate-of-change-of-mass-is-zero" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[{D M \over Dt} = 0\]</div>
+<div class="section" id="for-a-system-where-system-identifiable-group-of-matter">
+<h3>For a system (where &#8216;system&#8217; = identifiable group of matter):<a class="headerlink" href="#for-a-system-where-system-identifiable-group-of-matter" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[{D \over D t} \int_{SYS} dM = {D \over D t} \int_{SYS} \rho dV = 0\]</div>
+</div>
+<div class="section" id="for-a-control-volume-via-reynolds-transport-theorem">
+<h3>For a control volume (via Reynolds Transport Theorem):<a class="headerlink" href="#for-a-control-volume-via-reynolds-transport-theorem" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\underbrace{{\partial \over \partial t} \int_{CV} \rho dV}_{\text{(1) Rate of change of mass in CV}} + \underbrace{\int_{CS} \rho \vec V \cdot \hat n dA}_{\text{(2) Net rate of flow of mass across CS}} = 0\]</div>
+</div>
+</div>
+<div class="section" id="for-1-rate-of-change-of-mass-in-cv">
+<h2>1.1.2.2. For (1) Rate of change of mass in CV<a class="headerlink" href="#for-1-rate-of-change-of-mass-in-cv" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="consider-a-small-element">
+<h3>Consider a small element <span class="math">\(\delta x \delta y \delta z\)</span>:<a class="headerlink" href="#consider-a-small-element" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[{\partial \over \partial t} \int_{CV} \rho dV = {\partial \rho \over \partial t} \delta x \delta y \delta z\]</div>
+</div>
+<div class="section" id="for-incompressible-flow">
+<h3>For incompressible flow:<a class="headerlink" href="#for-incompressible-flow" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[{\partial \rho \over \partial t} = 0\]</div>
+</div>
+</div>
+<div class="section" id="for-2-net-rate-of-flow-of-mass-across-cs">
+<h2>1.1.2.3. For (2) Net rate of flow of mass across CS<a class="headerlink" href="#for-2-net-rate-of-flow-of-mass-across-cs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rate-of-mass-flow-in-x-direction-is-the-same-throughout-is-the-x-component-of-mass-flow-rate">
+<h3>Rate of mass flow in x-direction, <span class="math">\(\rho\)</span> is the same throughout. <span class="math">\(u\)</span> is the x-component of mass flow rate.<a class="headerlink" href="#rate-of-mass-flow-in-x-direction-is-the-same-throughout-is-the-x-component-of-mass-flow-rate" title="Permalink to this headline">¶</a></h3>
+<div class="figure">
+<img alt="../_images/continuity_diagram.png" src="../_images/continuity_diagram.png" />
+</div>
+</div>
+<div class="section" id="taylor-series-expansion-leaving-cv">
+<h3>Taylor series expansion leaving CV:<a class="headerlink" href="#taylor-series-expansion-leaving-cv" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\dot m_{out} = \rho u (x + {\delta x \over 2}) \delta y \delta z \simeq \rho \left[u + {\partial u \over \partial x} {\delta x \over 2} \right]\delta y \delta z\]</div>
+</div>
+<div class="section" id="taylor-series-expansion-entering-cv">
+<h3>Taylor series expansion entering CV:<a class="headerlink" href="#taylor-series-expansion-entering-cv" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\dot m_{in} = \rho u (x - {\delta x \over 2}) \delta y \delta z \simeq \rho \left[u - {\partial u \over \partial x} {\delta x \over 2} \right]\delta y \delta z\]</div>
+</div>
+<div class="section" id="net-rate-of-mass-outflow-in-x">
+<h3>Net rate of mass outflow in x:<a class="headerlink" href="#net-rate-of-mass-outflow-in-x" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\dot m_{x} = \dot m_{out} - \dot m_{in} = \rho {\partial u \over \partial x} \delta x \delta y \delta z\]</div>
+</div>
+<div class="section" id="similarly-net-rate-of-mass-outflow-in-y">
+<h3>Similarly net rate of mass outflow in y:<a class="headerlink" href="#similarly-net-rate-of-mass-outflow-in-y" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\dot m_{y} = \rho {\partial v \over \partial y} \delta x \delta y \delta z\]</div>
+</div>
+<div class="section" id="similarly-net-rate-of-mass-outflow-in-z">
+<h3>Similarly net rate of mass outflow in z:<a class="headerlink" href="#similarly-net-rate-of-mass-outflow-in-z" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\dot m_{z} = \rho {\partial w \over \partial z} \delta x \delta y \delta z\]</div>
+</div>
+</div>
+<div class="section" id="sum-the-discretised-equations-1-and-2-to-obtain-the-differential-equation-for-conservation-of-mass">
+<h2>1.1.2.4. Sum the discretised equations (1) and (2) to obtain the differential equation for conservation of mass:<a class="headerlink" href="#sum-the-discretised-equations-1-and-2-to-obtain-the-differential-equation-for-conservation-of-mass" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[{\partial u \over \partial x} + {\partial v \over \partial y} + {\partial w \over \partial z} = 0\]</div>
+<div class="section" id="or-in-vector-notation">
+<h3>Or in vector notation:<a class="headerlink" href="#or-in-vector-notation" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\nabla \cdot \vec V = 0\]</div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="cfd.html">1.1.1. Computational Fluid Dynamics</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="momentum.html">1.1.3. Derivation of the Momentum Equation</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

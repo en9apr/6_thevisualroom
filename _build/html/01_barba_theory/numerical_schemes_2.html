@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.3.2. Numerical Schemes 2 &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.3.3. The Modified Differential Equation" href="analysis_of_numerical_schemes.html" />
+    <link rel="prev" title="1.3.1. Numerical Schemes 1" href="numerical_scheme_1.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.3.2. Numerical Schemes 2</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="numerical_scheme_1.html">1.3.1. Numerical Schemes 1</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="analysis_of_numerical_schemes.html">1.3.3. The Modified Differential Equation</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="numerical-schemes-2">
+<h1>1.3.2. Numerical Schemes 2<a class="headerlink" href="#numerical-schemes-2" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="definition-of-consistency">
+<h2>1.3.2.1. Definition of Consistency<a class="headerlink" href="#definition-of-consistency" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Consistency is a condition on the <strong>numerical scheme</strong>, i.e.</li>
+<li>The scheme must tend to the differential equation when the step in time and space tend to zero.</li>
+</ul>
+</div>
+<div class="section" id="definition-of-stability">
+<h2>1.3.2.2. Definition of Stability<a class="headerlink" href="#definition-of-stability" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Stability is a condition on the <strong>numerical solution</strong>, i.e.</li>
+<li>All errors must <strong>remain bounded</strong> when the iteration process progresses</li>
+<li>For finite values of <span class="math">\(\Delta t\)</span> and <span class="math">\(\Delta x\)</span>, the error has to remain bounded when the number of time steps <span class="math">\(n\)</span> tends to infinity.</li>
+<li>If the error:</li>
+</ul>
+<div class="math">
+\[\bar{\epsilon}_i^n = u_i^n-\bar{u}_i^n\]</div>
+<p>where:</p>
+<p><span class="math">\(\qquad u_i^n\)</span> = computed solution</p>
+<p><span class="math">\(\qquad \bar{u}_i^n\)</span> = discretised solution</p>
+<ul class="simple">
+<li>Then the stability condition is:</li>
+</ul>
+<div class="math">
+\[\lim_{n \to \infty} \left \vert \bar{\epsilon}_i^n \right \vert \le \kappa \quad \text{  at fixed  } \Delta t\]</div>
+<ul class="simple">
+<li><strong>NOTE:</strong></li>
+</ul>
+<ol class="arabic simple">
+<li>The stability condition is a requirement on the <strong>numerical scheme</strong> only (does not require any condition on the differential equation)</li>
+<li>Stability does not ensure that the <strong>error</strong> will not become unacceptably large at intermediate timesteps <span class="math">\(t^n = n \Delta t\)</span> (while remaining bounded)</li>
+<li>A more general definition of stability later!</li>
+</ol>
+</div>
+<div class="section" id="definition-of-convergence">
+<h2>1.3.2.3. Definition of Convergence<a class="headerlink" href="#definition-of-convergence" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Convergence is a condition on the <strong>numerical solution</strong></li>
+<li>The numerical solution must <strong>tend</strong> to the exact solution of the mathematical model, when steps in <span class="math">\(t\)</span> and <span class="math">\(x\)</span> tend to zero (i.e. when the mesh is refined).</li>
+<li>If the error:</li>
+</ul>
+<div class="math">
+\[\tilde{\epsilon}_i^n = u_i^n-\tilde{u}_i^n\]</div>
+<p>where:</p>
+<p><span class="math">\(\qquad u_i^n\)</span> = computed solution</p>
+<p><span class="math">\(\qquad \tilde{u}_i^n = \tilde{u}_i^n(i\Delta x, n \Delta t)\)</span> = solution of differential equation</p>
+<ul class="simple">
+<li><strong>Convergence condition:</strong></li>
+</ul>
+<div class="math">
+\[\lim_{\Delta x \to 0, \Delta t \to 0} \left \vert \tilde{\epsilon}_i^n \right \vert = 0\]</div>
+</div>
+<div class="section" id="equivalence-theorem-of-lax">
+<h2>1.3.2.4. Equivalence Theorem of Lax<a class="headerlink" href="#equivalence-theorem-of-lax" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>For a well-posed IVP and a <strong>consistent</strong> discretisation scheme, <strong>stability</strong> is the necessary and sufficient condition for <strong>convergence</strong></li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/consistency_stability_convergence.png"><img alt="../_images/consistency_stability_convergence.png" src="../_images/consistency_stability_convergence.png" style="width: 650.0px; height: 450.0px;" /></a>
+</div>
+</div>
+<div class="section" id="consistency-and-the-modified-differential-equation">
+<h2>1.3.2.5. Consistency and the modified differential equation<a class="headerlink" href="#consistency-and-the-modified-differential-equation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>A consistent scheme is one in which the <strong>truncation error</strong> tends to zero for <span class="math">\(\Delta t\)</span>, <span class="math">\(\Delta x \rightarrow 0\)</span></li>
+<li>e.g. CD in space and FD in time for linear convection:</li>
+</ul>
+<div class="math" id="equation-one">
+<span class="eqno">(1)</span>\[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{u_{i+1}^n - u_{i-1}^n} \over {2 \Delta x}}=0\]</div>
+<ul class="simple">
+<li>Taylor expansions:</li>
+</ul>
+<div class="math" id="equation-two">
+<span class="eqno">(2)</span>\[u_i^{n+1} = u_i^n + \Delta t \left . {\partial u \over \partial t} \right \vert_i^n + {\Delta t^2 \over 2} \left . {\partial^2 u \over \partial t^2} \right \vert_i^n + {\Delta t^3 \over 6} \left . {\partial^3 u \over \partial t^3} \right \vert_i^n + {\Delta t^4 \over 24} \left . {\partial^4 u \over \partial t^4} \right \vert_i^n + {\Delta t^5 \over 120} \left . {\partial^5 u \over \partial t^5} \right \vert_i^n\]</div>
+<div class="math" id="equation-three">
+<span class="eqno">(3)</span>\[u_{i+1}^n = u_i^n + \Delta x \left . {\partial u \over \partial x} \right \vert_i^n + {\Delta x^2 \over 2} \left . {\partial^2 u \over \partial x^2} \right \vert_i^n + {\Delta x^3 \over 6} \left . {\partial^3 u \over \partial x^3} \right \vert_i^n + {\Delta x^4 \over 24} \left . {\partial^4 u \over \partial x^4} \right \vert_i^n + {\Delta x^5 \over 120} \left . {\partial^5 u \over \partial x^5} \right \vert_i^n\]</div>
+<div class="math" id="equation-four">
+<span class="eqno">(4)</span>\[u_{i-1}^n = u_i^n - \Delta x \left . {\partial u \over \partial x} \right \vert_i^n + {\Delta x^2 \over 2} \left . {\partial^2 u \over \partial x^2} \right \vert_i^n - {\Delta x^3 \over 6} \left . {\partial^3 u \over \partial x^3} \right \vert_i^n + {\Delta x^4 \over 24} \left . {\partial^4 u \over \partial x^4} \right \vert_i^n - {\Delta x^5 \over 120} \left . {\partial^5 u \over \partial x^5} \right \vert_i^n\]</div>
+<ul class="simple">
+<li>Re-arranging Equation <a href="#equation-two">(2)</a>:</li>
+</ul>
+<div class="math" id="equation-five">
+<span class="eqno">(5)</span>\[{{u_i^{n+1} - u_i^n} \over {\Delta t}} = \left . {\partial u \over \partial t} \right \vert_i^n + {\Delta t \over 2} \left . {\partial^2 u \over \partial t^2} \right \vert_i^n + O(\Delta t^2)\]</div>
+<ul class="simple">
+<li>Equation <a href="#equation-three">(3)</a> minus Equation <a href="#equation-four">(4)</a> and rearranging:</li>
+</ul>
+<div class="math" id="equation-six">
+<span class="eqno">(6)</span>\[{c \over {2 \Delta x}} {(u_{i+1}^n -  u_{i-1}^n)}  = c \left . {\partial u \over \partial x} \right \vert_i^n + c {\Delta x^2 \over 6} \left . {\partial^3 u \over \partial x^3} \right \vert_i^n + O(\Delta x^4)\]</div>
+<ul class="simple">
+<li>Including the truncation error in <a href="#equation-one">(1)</a>, defined as the difference between the numerical approximation and the differential equation:</li>
+</ul>
+<div class="math">
+\[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{u_{i+1}^n - u_{i-1}^n} \over {2 \Delta x}} -
+\left ( \left . {\partial u \over \partial t}  \right \vert_i^n  +
+\left . c {\partial u \over \partial x} \right \vert_i^n \right )  =
+{\Delta t \over 2} \left . {\partial^2 u \over \partial t^2} \right \vert_i^n +
+c {\Delta x^2 \over 6} \left . {\partial^3 u \over \partial x^3} \right \vert_i^n +
+O(\Delta t^2) + O(\Delta x^4)\]</div>
+<ul class="simple">
+<li>The RHS of the above equation is the <strong>truncation error</strong></li>
+</ul>
+<div class="math">
+\[\epsilon_T =  {\Delta t \over 2} \left . {\partial^2 u \over \partial t^2} \right \vert_i^n +
+       c {\Delta x^2 \over 6} \left . {\partial^3 u \over \partial x^3} \right \vert_i^n +
+       O(\Delta t^2) + O(\Delta x^4)\]</div>
+<ul class="simple">
+<li>The scheme is consistent because when <span class="math">\(\Delta t\)</span>, <span class="math">\(\Delta x \rightarrow 0\)</span>, <span class="math">\(\epsilon_T \rightarrow 0\)</span></li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="numerical_scheme_1.html">1.3.1. Numerical Schemes 1</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="analysis_of_numerical_schemes.html">1.3.3. The Modified Differential Equation</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

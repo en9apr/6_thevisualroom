@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.2.4. Finite Difference Formulas in 2D &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.3.1. Numerical Schemes 1" href="numerical_scheme_1.html" />
+    <link rel="prev" title="1.2.3. Explicit and Implicit Finite Difference Formulas" href="explicit_implicit.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.2.4. Finite Difference Formulas in 2D</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="explicit_implicit.html">1.2.3. Explicit and Implicit Finite Difference Formulas</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="numerical_scheme_1.html">1.3.1. Numerical Schemes 1</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="finite-difference-formulas-in-2d">
+<h1>1.2.4. Finite Difference Formulas in 2D<a class="headerlink" href="#finite-difference-formulas-in-2d" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="extend-1d-formulas-to-2d">
+<h2>1.2.4.1. Extend 1D formulas to 2D<a class="headerlink" href="#extend-1d-formulas-to-2d" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Just apply the definition of a partial derivative w.r.t. <span class="math">\(x\)</span> is the variation in <span class="math">\(x\)</span> holding <span class="math">\(y\)</span> constant</li>
+<li>Build 2D grid defined by the following:</li>
+<li>For i between <span class="math">\(0\)</span> and <span class="math">\(nx-1\)</span>:</li>
+</ul>
+<div class="math">
+\[x_i = x_0 + i \Delta x\]</div>
+<ul class="simple">
+<li>For j between <span class="math">\(0\)</span> and <span class="math">\(nj-1\)</span>:</li>
+</ul>
+<div class="math">
+\[y_j = y_0 + j \Delta y\]</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/2D.png"><img alt="../_images/2D.png" src="../_images/2D.png" style="width: 637.5px; height: 487.5px;" /></a>
+</div>
+<ul class="simple">
+<li>Define <span class="math">\(u_{i,j} = u(x_i,y_j)\)</span></li>
+</ul>
+</div>
+<div class="section" id="forward-differencing-in-2d-for-1st-derivative">
+<h2>1.2.4.2. Forward Differencing in 2D for 1st derivative<a class="headerlink" href="#forward-differencing-in-2d-for-1st-derivative" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>For the point <span class="math">\((i+1,j+1)\)</span>, Taylor series in 2D:</li>
+</ul>
+<div class="math">
+\[u_{i+1,j+1} = u_{i,j} +
+\left . \left ( \Delta x {\partial \over \partial x} + \Delta y {\partial \over \partial y} \right )  u \right \vert_{i,j} +
+\left . {1 \over 2} \left ( \Delta x {\partial \over \partial x} + \Delta y {\partial \over \partial y} \right )^2 u \right \vert_{i,j} +
+\left . {1 \over 6} \left ( \Delta x {\partial \over \partial x} + \Delta y {\partial \over \partial y} \right )^3 u \right \vert_{i,j} +
+\cdots + \text{h.o.t}\]</div>
+<ul class="simple">
+<li>1st order FD in x-direction, i.e.<ul>
+<li><span class="math">\(\Delta y = 0\)</span></li>
+<li><span class="math">\(j+1=j\)</span></li>
+<li>Terms of higher order than 1 are zero</li>
+</ul>
+</li>
+</ul>
+<div class="math">
+\[\left . {{\partial u} \over {\partial x}} \right \vert_{i,j} = {{u_{i+1,j}-u_{i,j}} \over {\Delta x}} + O(\Delta x)\]</div>
+</div>
+<div class="section" id="central-differencing-in-2d-for-1st-derivative">
+<h2>1.2.4.3. Central Differencing in 2D for 1st derivative<a class="headerlink" href="#central-differencing-in-2d-for-1st-derivative" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Take one foward Taylor step, one backward Taylor step</li>
+<li><strong>Subtract</strong> the forward and the backward steps</li>
+<li>Re-arrange for the derivative</li>
+</ul>
+<div class="math">
+\[\left . {{\partial u} \over {\partial x}} \right \vert_{i,j} = {{u_{i+1,j}-u_{i-1,j}} \over {2 \Delta x}} + O(\Delta x^2)\]</div>
+</div>
+<div class="section" id="central-differencing-in-2d-for-2nd-derivative">
+<h2>1.2.4.4. Central Differencing in 2D for 2nd derivative<a class="headerlink" href="#central-differencing-in-2d-for-2nd-derivative" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Take one foward Taylor step, one backward Taylor step</li>
+<li><strong>Add</strong> the forward and the backward steps</li>
+<li>Re-arrange for the derivative</li>
+</ul>
+<div class="math">
+\[\left . {{\partial^2 u} \over {\partial x^2}} \right \vert_{i,j} = {{u_{i+1,j}-2u_{i,j}+u_{i-1,j}} \over {\Delta x^2}} + O(\Delta x^2)\]</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="explicit_implicit.html">1.2.3. Explicit and Implicit Finite Difference Formulas</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="numerical_scheme_1.html">1.3.1. Numerical Schemes 1</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

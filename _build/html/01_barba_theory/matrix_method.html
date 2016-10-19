@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.10.2. The Matrix Method for Stability of Spatial Discretisation &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.10.3. Amplification of the Semi-discretised System for Space-Time Discretisation" href="spatial_numerical_stability.html" />
+    <link rel="prev" title="1.10.1. The Method of Lines" href="time_integration_1.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.10.2. The Matrix Method for Stability of Spatial Discretisation</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="time_integration_1.html">1.10.1. The Method of Lines</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="spatial_numerical_stability.html">1.10.3. Amplification of the Semi-discretised System for Space-Time Discretisation</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="the-matrix-method-for-stability-of-spatial-discretisation">
+<h1>1.10.2. The Matrix Method for Stability of Spatial Discretisation<a class="headerlink" href="#the-matrix-method-for-stability-of-spatial-discretisation" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#the-eigenvalue-spectrum-of" id="id1">The Eigenvalue Spectrum of <span class="math">\(\mathbf{S}\)</span></a></li>
+<li><a class="reference internal" href="#recall" id="id2">Recall</a></li>
+<li><a class="reference internal" href="#model-decomposition" id="id3">Model Decomposition</a></li>
+<li><a class="reference internal" href="#model-equation" id="id4">Model Equation</a></li>
+<li><a class="reference internal" href="#modal-solution" id="id5">Modal Solution</a></li>
+<li><a class="reference internal" href="#stability-condition" id="id6">Stability Condition</a></li>
+<li><a class="reference internal" href="#matrix-method-for-stability-analysis" id="id7">Matrix Method for Stability Analysis</a><ul>
+<li><a class="reference internal" href="#example-1-1d-diffusion" id="id8">Example 1 - 1D Diffusion</a></li>
+<li><a class="reference internal" href="#example-2-1d-convection" id="id9">Example 2 - 1D Convection</a></li>
+<li><a class="reference internal" href="#example-3-1d-convection" id="id10">Example 3 - 1D Convection</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusion" id="id11">Conclusion</a></li>
+</ul>
+</div>
+<div class="section" id="the-eigenvalue-spectrum-of">
+<h2><a class="toc-backref" href="#id1">1.10.2.1. The Eigenvalue Spectrum of <span class="math">\(\mathbf{S}\)</span></a><a class="headerlink" href="#the-eigenvalue-spectrum-of" title="Permalink to this headline">¶</a></h2>
+<p>von Neumann stability analysis assumes a periodic solution and a uniform mesh</p>
+<p>We need to establish a more general method that includes the influence of the BCs</p>
+<p>Let <span class="math">\(\Omega_j\)</span> where <span class="math">\(j = 1 .... N\)</span> be eigenvalues of <span class="math">\(\mathbf{S}\)</span>:</p>
+<div class="math">
+\[det \left| \mathbf{S} - \Omega I \right| = 0\]</div>
+<p>Associated eigenvectors <span class="math">\(V^j\)</span>  <span class="math">\(\Rightarrow\)</span></p>
+<div class="math">
+\[\mathbf{S} \cdot V^j(\mathbf{x}) = \Omega_j V^j\]</div>
+<p><span class="math">\(T\)</span>: the matrix formed by <span class="math">\(V^j\)</span> as columns:</p>
+<div class="math">
+\[\mathbf{S} \cdot \mathbf{T} = \mathbf{T} \Omega\]</div>
+<p>where:</p>
+<div class="math">
+\[\begin{split}\Omega =
+\begin{bmatrix}
+ \Omega_1 &amp;  &amp; &amp; &amp;   \\
+ &amp; \Omega_2 &amp; &amp; &amp; \\
+ &amp; &amp; \ddots &amp; &amp; \\
+ &amp; &amp; &amp; &amp; \Omega_N
+\end{bmatrix}\end{split}\]</div>
+<div class="math">
+\[\Omega = \mathbf{T}^{-1} \mathbf{S} \mathbf{T}\]</div>
+<p>Eigenvectors are a complete basis set</p>
+</div>
+<div class="section" id="recall">
+<h2><a class="toc-backref" href="#id2">1.10.2.2. Recall</a><a class="headerlink" href="#recall" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[{d \mathbf{u} \over dt} = \mathbf{S} \cdot \mathbf{u} + \mathbf{Q}\]</div>
+</div>
+<div class="section" id="model-decomposition">
+<h2><a class="toc-backref" href="#id3">1.10.2.3. Model Decomposition</a><a class="headerlink" href="#model-decomposition" title="Permalink to this headline">¶</a></h2>
+<p>Exact solution <span class="math">\(\overline{\mathbf{u}}(t,\mathbf{x})\)</span></p>
+<div class="math">
+\[\overline{\mathbf{u}}(t, \mathbf{x}) = \sum_{j=1}^N \overline{\mathbf{u}_j}(t) \cdot \mathbf{V}^j(\mathbf{x})\]</div>
+<p>First term depends only on time, the second only on space.</p>
+<div class="math">
+\[Q = \sum_{j=1}^N Q_{j} V^j\]</div>
+</div>
+<div class="section" id="model-equation">
+<h2><a class="toc-backref" href="#id4">1.10.2.4. Model Equation</a><a class="headerlink" href="#model-equation" title="Permalink to this headline">¶</a></h2>
+<p>Leads to <strong>&#8220;Modal Equation&#8221;</strong> for the time dependent coefficient</p>
+<div class="math">
+\[{\overline{\mathbf{u}_j} \over t} = \Omega_j \overline{\mathbf{u}_j} + Q_j\]</div>
+<p>The exact solution is the sum of the homogeneous solution:</p>
+<div class="math">
+\[{\overline{\mathbf{u}_{jT}} \over t} = \Omega_j \overline{\mathbf{u}_{jT}} \Rightarrow
+\overline{\mathbf{u}_{jT}}(t) = c_{0j} e^{\Omega_j t}\]</div>
+<p>And a particular solution e.g. a solution of the steady state equation:</p>
+<div class="math">
+\[\Omega_j \overline{\mathbf{u}_{jS}} + Q_j = 0 \Rightarrow
+\overline{\mathbf{u}_{jS}} = - {Q_j \over {\Omega_j}}\]</div>
+</div>
+<div class="section" id="modal-solution">
+<h2><a class="toc-backref" href="#id5">1.10.2.5. Modal Solution</a><a class="headerlink" href="#modal-solution" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\overline{\mathbf{u}_j}(t) = c_{0j} e^{\Omega_j t} - {Q_j \over {\Omega_j}}\]</div>
+<p>Where <span class="math">\(c_{0j}\)</span> are from the I.C.</p>
+<p>IC:</p>
+<div class="math">
+\[\mathbf{u}^0(\mathbf{x}) = u(t=0, \mathbf{x})\]</div>
+<p>In matrix representation:</p>
+<div class="math">
+\[\begin{split}\mathbf{u}^0 =
+\begin{bmatrix}
+ u_0^0 \\
+ \vdots \\
+ u_i^0 \\
+ \vdots \\
+ u_{N-1}
+\end{bmatrix}\end{split}\]</div>
+<p>And:</p>
+<div class="math">
+\[\mathbf{u}^0 = \sum_{j=1}^N \mathbf{u}_j^0 \mathbf{V}^j\]</div>
+<p>At t=0 we get the coefficients</p>
+<div class="math">
+\[c_{0j} = \mathbf{u}_j^0 + {Q_j \over \Omega_j}\]</div>
+<p>Hence:</p>
+<div class="math">
+\[\overline{\mathbf{u}_j}(t) = \mathbf{u}_j^0 e^{\Omega_j t} -
+{Q_j \over {\Omega_j}} \left( e^{\Omega_j t} - 1  \right)\]</div>
+<p><strong>The eigenvalues of the space-discretisation matrix completely determine the stability of the solution</strong></p>
+<p><strong>S completely determines the behaviour of the solution!</strong></p>
+</div>
+<div class="section" id="stability-condition">
+<h2><a class="toc-backref" href="#id6">1.10.2.6. Stability Condition</a><a class="headerlink" href="#stability-condition" title="Permalink to this headline">¶</a></h2>
+<p>For the ODE system:</p>
+<div class="math">
+\[{d \mathbf{u} \over dt} = \mathbf{S} \cdot \mathbf{u} + Q\]</div>
+<p>The exact solution <span class="math">\(\overline{\mathbf{u}}(t,\mathbf{x})\)</span> must remain bounded</p>
+<p>All the modal components must be bounded</p>
+<p>Require that exponential terms <strong>do not grow</strong></p>
+<p>Hence <strong>the real part of the eigenvalues must be negative or zero</strong></p>
+<div class="math" id="equation-1">
+<span class="eqno">(1)</span>\[Re(\Omega_j) \le 0 \quad \forall j\]</div>
+<p><span class="math">\(\Omega\)</span>- plane: The eigenvalue spectrum has to be restricted to the left half plane</p>
+<p>Note that if <a href="#equation-1">(1)</a> is satisfied:</p>
+<div class="math" id="equation-2">
+<span class="eqno">(2)</span>\[\lim_{t \Rightarrow \infty} \mathbf{u}(t) = - \sum_{j=1}^N {Q_j \over \Omega_j} V^j\]</div>
+<p>this is a solution to the stationary problem:</p>
+<div class="math">
+\[\mathbf{S} \cdot \overline{\mathbf{u}}_S = 0\]</div>
+<p>Want <span class="math">\(\Omega\)</span> to have large negative real parts, to converge quickly to a steady state solution using an iterative method</p>
+<div class="math">
+\[exp(-Re (\Omega_j)) \Rightarrow 0\]</div>
+</div>
+<div class="section" id="matrix-method-for-stability-analysis">
+<h2><a class="toc-backref" href="#id7">1.10.2.7. Matrix Method for Stability Analysis</a><a class="headerlink" href="#matrix-method-for-stability-analysis" title="Permalink to this headline">¶</a></h2>
+<p>From the previous examples: the structure of <span class="math">\(\mathbf{S}\)</span> depends on the BCs and how they are implemented (e.g. one sided difference etc)</p>
+<p>We now have a method of investigating the influence of BCs on stability</p>
+<p>We can also investigate effects of non-uniform meshes</p>
+<p><strong>More general method than von Neumann analysis</strong></p>
+<p>But, difficult for general boundary conditions to get analytical expressions for the eigenspectrum of <span class="math">\(\mathbf{S}\)</span></p>
+<p>We use periodic BCs <span class="math">\(\Rightarrow V^j = e^{Ik_jx}\)</span> (Fourier modes in 1D)</p>
+<div class="math">
+\[x_i = v_i^j = e^{Ik_ji \Delta x} = e^{Ii \phi_j}\]</div>
+<p>where <span class="math">\(\phi_j = k_j \Delta x\)</span></p>
+<p>Applied to the <span class="math">\(\mathbf{S}\)</span>:</p>
+<div class="math">
+\[\mathbf{S} \cdot e^{Ik_j i \Delta x} = \Omega (\phi_j)e^{Ik_j i \Delta x}\]</div>
+<div class="section" id="example-1-1d-diffusion">
+<h3><a class="toc-backref" href="#id8">Example 1 - 1D Diffusion</a><a class="headerlink" href="#example-1-1d-diffusion" title="Permalink to this headline">¶</a></h3>
+<p>CD scheme - leaving time discretisation undefined, so that we write ODEs:</p>
+<div class="math">
+\[{d u_i \over dt} = {\alpha \over \Delta x^2} (u_{i+1} - 2 u_i + u_{i-1}) =
+\mathbf{S} \cdot \mathbf{u}_i\]</div>
+<p>Using eigenfunctions: <span class="math">\(V^j (\mathbf{x}) = e^{Ik_j x}\)</span></p>
+<div class="math">
+\[\mathbf{S} \cdot e^{Ik_j i \Delta x} =
+{\alpha \over \Delta x^2} \left( e^{Ik_j (i+1) \Delta x} - 2 e^{Ik_j i \Delta x} + e^{Ik_j (i-1) \Delta x} \right) =
+{\alpha \over \Delta x^2}  \left( e^{Ik_j \Delta x} - 2 + e^{-Ik_j \Delta x} \right) e^{Ik_j i \Delta x} =
+{2 \alpha \over \Delta x^2} (cos \phi_j - 1) e^{Ik_j i \Delta x}\]</div>
+<p>Eigenvalues are real and negative between <span class="math">\({-4 \alpha} / {\Delta x^2}\)</span> and <span class="math">\(0\)</span></p>
+</div>
+<div class="section" id="example-2-1d-convection">
+<h3><a class="toc-backref" href="#id9">Example 2 - 1D Convection</a><a class="headerlink" href="#example-2-1d-convection" title="Permalink to this headline">¶</a></h3>
+<p>With 1st order upwind</p>
+<div class="math">
+\[\left( a {du \over dx} \right) = -{a \over {\Delta x}} (u_i - u_{i-1}) = \mathbf{S} \cdot \mathbf{u}_i\]</div>
+<div class="math">
+\[\mathbf{S} \cdot e^{Ik_j i \Delta x} =
+-{a \over {\Delta x}}  \left( e^{Ik_j i \Delta x} - e^{Ik_j (i-1) \Delta x} \right) =
+-{a \over {\Delta x}}  \left( 1 - e^{Ik_j \Delta x} \right) e^{Ik_j i \Delta x} =
+-{a \over {\Delta x}}  \left( 1 - cos \phi_j + I sin \phi_j \right) e^{Ik_j i \Delta x}\]</div>
+<p>The eigenvalues are complex with negative real part, so stable</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/convection_spectrum.png"><img alt="../_images/convection_spectrum.png" src="../_images/convection_spectrum.png" style="width: 420.0px; height: 280.0px;" /></a>
+</div>
+</div>
+<div class="section" id="example-3-1d-convection">
+<h3><a class="toc-backref" href="#id10">Example 3 - 1D Convection</a><a class="headerlink" href="#example-3-1d-convection" title="Permalink to this headline">¶</a></h3>
+<p>With CD scheme</p>
+<div class="math">
+\[\left( a {du \over dx} \right) = -{a \over {\Delta x}} (u_{i+1} - u_{i-1}) = \mathbf{S} \cdot \mathbf{u}_i\]</div>
+<div class="math">
+\[\mathbf{S} \cdot e^{Ik_j i \Delta x} =
+-{a \over {\Delta x}}  \left( e^{Ik_j (i+1) \Delta x} - e^{Ik_j (i-1) \Delta x} \right) =
+-I {a \over {\Delta x}} sin \phi_j e^{Ik_j i \Delta x}\]</div>
+<p>The eigenvalues are imaginary in range <span class="math">\({{-Ia} / \Delta x}\)</span>, <span class="math">\({{Ia} / \Delta x}\)</span></p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/convection_spectrum_2.png"><img alt="../_images/convection_spectrum_2.png" src="../_images/convection_spectrum_2.png" style="width: 420.0px; height: 280.0px;" /></a>
+</div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2><a class="toc-backref" href="#id11">1.10.2.8. Conclusion</a><a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>All 3 examples satisfy the stability condition</strong></li>
+<li>Also, negative real part contributes <span class="math">\(e^{-\left| I Re \Omega_j \right| t }\)</span>, this creates damping</li>
+<li>Numerical diffusion</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="time_integration_1.html">1.10.1. The Method of Lines</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="spatial_numerical_stability.html">1.10.3. Amplification of the Semi-discretised System for Space-Time Discretisation</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.5.1. The Courant-Friedrichs-Lewy Condition &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.5.2. Second Order Numerical Methods" href="new_convection_schemes.html" />
+    <link rel="prev" title="1.4.3. Ghost Cell Boundary Conditions" href="ghost_cells.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.5.1. The Courant-Friedrichs-Lewy Condition</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="ghost_cells.html">1.4.3. Ghost Cell Boundary Conditions</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="new_convection_schemes.html">1.5.2. Second Order Numerical Methods</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="the-courant-friedrichs-lewy-condition">
+<h1>1.5.1. The Courant-Friedrichs-Lewy Condition<a class="headerlink" href="#the-courant-friedrichs-lewy-condition" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#comments-on-the-12-steps-to-navier-stokes" id="id1">Comments on the 12 Steps to Navier Stokes</a></li>
+<li><a class="reference internal" href="#stability-and-convergence-modified-differential-equation-and-truncation-error" id="id2">Stability and Convergence, Modified Differential Equation and Truncation Error</a></li>
+<li><a class="reference internal" href="#summary-of-stability" id="id3">Summary of Stability</a><ul>
+<li><a class="reference internal" href="#implicit-and-explicit-schemes" id="id4">Implicit and Explicit Schemes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#physical-interpretation-of-the-cfl-condition" id="id5">Physical Interpretation of the CFL Condition</a></li>
+</ul>
+</div>
+<div class="section" id="comments-on-the-12-steps-to-navier-stokes">
+<h2><a class="toc-backref" href="#id1">1.5.1.1. Comments on the 12 Steps to Navier Stokes</a><a class="headerlink" href="#comments-on-the-12-steps-to-navier-stokes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>We have really used the simplest possible methods for the 12 Steps to Navier-Stokes</li>
+<li>These methods are unsuitable for practical purposes, because of diffusion e.g. the use of <strong>1st order upwinding (BD in space)</strong> for the convection term in the momentum equation for example.</li>
+<li>We must now develop new methods that are higher order methods.</li>
+</ul>
+</div>
+<div class="section" id="stability-and-convergence-modified-differential-equation-and-truncation-error">
+<h2><a class="toc-backref" href="#id2">1.5.1.2. Stability and Convergence, Modified Differential Equation and Truncation Error</a><a class="headerlink" href="#stability-and-convergence-modified-differential-equation-and-truncation-error" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>For 1D convection, CD in space with FD in time produced a <strong>Modified Differential Equation</strong>, which was not a <strong>convection equation</strong>, but a <strong>convection-diffusion equation</strong> with a negative diffusion coefficient (helping to explain why the scheme was unstable).</li>
+</ul>
+<div class="math">
+\[\bar{u}_t + c \bar{u}_x = -{{\Delta t} \over 2} c^2 \bar{u}_{xx} + O({\Delta t^2}, \Delta x^2)\]</div>
+<p>Negative diffusion coefficient represents an explosion (unstable)</p>
+<ul class="simple">
+<li>In contrast, 1st order upwind for 1D convection:</li>
+</ul>
+<div class="math">
+\[\bar{u}_t + c \bar{u}_x = {{c \Delta x} \over 2} (1+{{c \Delta t} \over {\Delta x}}) \bar{u}_{xx}\]</div>
+<p>Contained numerical diffusion proportional to <span class="math">\(\Delta x\)</span> (first order) which is why the diffusion is excessive</p>
+<p>Stability condition <span class="math">\(c \gt 0\)</span> and <span class="math">\(\sigma = {{c \Delta t} \over \Delta x}\)</span> (CFL Condition)</p>
+<p><strong>Then we performed von Neumann analysis for stability</strong></p>
+</div>
+<div class="section" id="summary-of-stability">
+<h2><a class="toc-backref" href="#id3">1.5.1.3. Summary of Stability</a><a class="headerlink" href="#summary-of-stability" title="Permalink to this headline">¶</a></h2>
+<p>Schemes can have:</p>
+<ul class="simple">
+<li>Conditional Stability</li>
+<li>Unconditional Stability</li>
+<li>Unconditional Instability</li>
+</ul>
+<div class="section" id="implicit-and-explicit-schemes">
+<h3><a class="toc-backref" href="#id4">Implicit and Explicit Schemes</a><a class="headerlink" href="#implicit-and-explicit-schemes" title="Permalink to this headline">¶</a></h3>
+<p>Implicit schemes are generally unconditionally stable. Implicit methods have no such restriction on time step, but require more computation per timestep (you must solve a linear system of equations)</p>
+<p>Explicit schemes lead at best to conditional stability. Conditional stability puts a limit on the timestep - we cannot progress too rapidly in time with the numerical scheme - as it may nnot be able to &#8220;trasmit&#8221; the information in the solution</p>
+<p><strong>Convection:</strong> The limit on the time step can be a severe requirement, especially for convection dominated equations (c is large compared to other effects). For most explicit schemes:</p>
+<div class="math">
+\[{{c \Delta t} \over {\Delta x}} \le 1\]</div>
+<p><strong>Diffusion:</strong> For diffusion dominated equations, the restriction is less severe, i.e.</p>
+<div class="math">
+\[{{\nu \Delta t} / {\Delta x^2}} \le {1 \over 2}\]</div>
+</div>
+</div>
+<div class="section" id="physical-interpretation-of-the-cfl-condition">
+<h2><a class="toc-backref" href="#id5">1.5.1.4. Physical Interpretation of the CFL Condition</a><a class="headerlink" href="#physical-interpretation-of-the-cfl-condition" title="Permalink to this headline">¶</a></h2>
+<p>1st order upwind CFL condition (for most explicit schemes):</p>
+<div class="math">
+\[{{c \Delta t} \over {\Delta x}} \le 1\]</div>
+<p><strong>Physical Interpretation:</strong> The distance travelled by the solution in one timestep <span class="math">\(c \Delta t\)</span> must be less than the distance between two mesh points <span class="math">\(\Delta x\)</span></p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/domain_of_dependence.png"><img alt="../_images/domain_of_dependence.png" src="../_images/domain_of_dependence.png" style="width: 707.0px; height: 525.0px;" /></a>
+</div>
+<ul class="simple">
+<li>Hyperbolic PDEs (such as the one for linear convection) have characteristic lines along which the solution travels</li>
+<li>For upwinding (backward differencing in space) the domain of dependence at <cite>n</cite> is from <cite>i-1</cite> to <cite>i</cite>. This is suitable for a positive wave speed <cite>c</cite></li>
+<li>For forward differencing the domain of dependence at <cite>n</cite> is from <cite>i</cite> to <cite>i+1</cite>. This is suitable for a negative wave speed <cite>c</cite></li>
+<li><strong>The solution at the next timestep must be able to include all the physical information that influences the solution from the previous timestep</strong></li>
+<li>The CFL condition <span class="math">\(\sigma \lt 1\)</span> ensures that the domain of dependence of the governing equation is <strong>entirely</strong> contained in the domain of dependence of the numerical scheme</li>
+<li>Can extend this to more complex cases where deriving the stability condition is more difficult for more complex numerical schemes.</li>
+<li>Also demonstrates why backward differencing is unstable for a negative wave speed, i.e. if the wave move from right to left, the solution should depend on points <cite>i</cite> and <cite>i+1</cite> not <cite>i</cite> and <cite>i-1</cite></li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="ghost_cells.html">1.4.3. Ghost Cell Boundary Conditions</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="new_convection_schemes.html">1.5.2. Second Order Numerical Methods</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

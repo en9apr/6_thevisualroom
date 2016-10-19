@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>10. Software and Customisation &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="next" title="1. Linear Algebra for CFD Applications" href="../15_mathematics/linear_algebra.html" />
+    <link rel="prev" title="9. How to Use a Virtual Machine" href="../13_virtual_machines_use/virtual_machines_use.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>10. Software and Customisation</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../13_virtual_machines_use/virtual_machines_use.html">9. How to Use a Virtual Machine</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../15_mathematics/linear_algebra.html">1. Linear Algebra for CFD Applications</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="software-and-customisation">
+<h1>10. Software and Customisation<a class="headerlink" href="#software-and-customisation" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>This is a list of software I&#8217;ve installed so far on the VM, plus additional customisation.</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span># Guest Additions Installed
+
+ran autorun.sh on Guest Additions CD
+
+# OpenFOAM installed
+
+VERS=$(lsb_release -cs)
+sudo sh -c &quot;echo deb http://www.openfoam.org/download/ubuntu $VERS main &gt; /etc/apt/sources.list.d/openfoam.list&quot;
+sudo apt-get update
+sudo apt-get install openfoam231
+
+# paraview installed
+
+sudo apt-get install paraviewopenfoam410
+
+# gedit installed and edited .bashrc to run OpenFOAM
+
+sudo apt-get install gedit
+
+# edited .bashrc
+
+gedit ~/.bashrc
+Added: source /opt/openfoam231/etc/bashrc
+export FOAM_RUN=&#39;/home/andrew/OpenFOAM/andrew-2.3.1/run&#39;
+export WORK=&#39;/home/andrew/OpenFOAM/andrew-2.3.1/run/tutorials/incompressible/icoFoam/cavity&#39;
+export DOWNLOADS=&#39;/home/andrew/Downloads&#39;
+export SPHINX=&#39;/home/andrew/Sphinx/thevisualroom&#39;
+
+# sphinx
+sudo apt-get install python-sphinx
+
+# removed Pictures, Documents, Videos, Music, Templates, Public
+
+# git
+sudo apt-get install git
+sudo apt-get install gitk               # to view git history
+
+# filezilla
+sudo apt-get install filezilla
+
+# Anaconda
+Downloaded Anaconda: docs.continuum.io/anaconda/install.html
+Change to Downloads directory
+bash Anaconda-2.2.0-Linux-x86_4.sh
+Accept licence and install to /home/andrew/anaconda
+
+sudo apt-get update
+
+# latex:
+sudo apt-get install texlive-full
+sudo apt-get install texmaker
+
+# kate:
+sudo apt-get install kate
+
+# emacs:
+sudo apt-get install emacs
+
+# tree - for viewing directory structures
+sudo apt-get install tree
+
+# Inkscape - better than GIMP
+sudo apt-get install inkscape
+
+# unzip program:
+sudo apt-get install unzip
+
+# Fortran related:
+sudo apt-get install gfortran #fortran
+sudo apt-get install liblapack-dev #lapack and blas
+sudo apt-get install openmpi-bin #openmpi executables
+sudo apt-get install libopenmpi-dev #openmpi libraries
+sudo apt-get install gdb #debugger for gfortran
+</pre></div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../13_virtual_machines_use/virtual_machines_use.html">9. How to Use a Virtual Machine</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../15_mathematics/linear_algebra.html">1. Linear Algebra for CFD Applications</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

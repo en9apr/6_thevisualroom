@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.8.3. The Riemann Problem &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.8.4. Sod’s Test Problems: The Shock Tube Problem" href="sods_test_problem.html" />
+    <link rel="prev" title="1.8.2. Discretising the Euler Equations" href="discrete_euler.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.8.3. The Riemann Problem</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="discrete_euler.html">1.8.2. Discretising the Euler Equations</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="sods_test_problem.html">1.8.4. Sod&#8217;s Test Problems: The Shock Tube Problem</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="the-riemann-problem">
+<h1>1.8.3. The Riemann Problem<a class="headerlink" href="#the-riemann-problem" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>Riemann Problem</strong> is a family of problems, (which includes the 1D Euler Equations).</p>
+<p>There are two components for the Riemann problem:</p>
+<ol class="arabic simple">
+<li>A conservation law (e.g. the 1D Euler Equations)</li>
+<li>Piecewise constant initial data with a single jump discontinuity</li>
+</ol>
+<p>e.g. for Euler Equations:</p>
+<p>For <span class="math">\(x \lt x_0\)</span>  <span class="math">\(\quad \mathbf{U}(x, t_0) = \mathbf{U}_L\)</span></p>
+<p>For <span class="math">\(x \gt x_0\)</span>  <span class="math">\(\quad \mathbf{U}(x, t_0) = \mathbf{U}_R\)</span></p>
+<p><span class="math">\(\mathbf{U}_L\)</span> and <span class="math">\(\mathbf{U}_R\)</span> are constant vectors</p>
+<p>Take <span class="math">\(x_0 = 0\)</span> and <span class="math">\(t_0=0\)</span></p>
+<div class="section" id="usefulness-of-the-riemann-problem">
+<h2>1.8.3.1. Usefulness of the Riemann Problem<a class="headerlink" href="#usefulness-of-the-riemann-problem" title="Permalink to this headline">¶</a></h2>
+<p>It has an exact analytical solution for the Euler Equations (and any scalar conservation laws, or any linear system of equations)</p>
+</div>
+<div class="section" id="features-of-the-riemann-problem">
+<h2>1.8.3.2. Features of the Riemann Problem<a class="headerlink" href="#features-of-the-riemann-problem" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Solution is <strong>self-similar</strong> - solution stretches in space and time, but doesn&#8217;t change shape.</li>
+</ol>
+<ul class="simple">
+<li><span class="math">\(\mathbf{U}(x, t_1)\)</span> and <span class="math">\(\mathbf{U}(x, t_2)\)</span> are &#8220;similar&#8221;</li>
+<li>In other words, it really depends on a single variable <span class="math">\(x / t\)</span></li>
+<li>Or the solution is constant along a characteristic line <span class="math">\(x = ct\)</span> (c = constant) on x-t plane</li>
+<li>Generally, self-similarity means only <strong>one</strong> independent variable like: <span class="math">\(x / t\)</span> or <span class="math">\(t / \sqrt{x}\)</span>, similar to the Blasius solution from boundary layer theory.</li>
+</ul>
+<ol class="arabic simple" start="2">
+<li>There is an analytical solution <span class="math">\(\Rightarrow\)</span> Riemann problem useful to test numerical schemes</li>
+<li>Riemann problem appears as part of numerical formulation of several CFD methods, e.g. &#8220;wave capturing&#8221; methods <span class="math">\(\Rightarrow\)</span> &#8220;Riemann solvers&#8221; are at the heart of the method - may need to solve these multiple times - major cost of the solution</li>
+</ol>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="discrete_euler.html">1.8.2. Discretising the Euler Equations</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="sods_test_problem.html">1.8.4. Sod&#8217;s Test Problems: The Shock Tube Problem</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.5. Text and Document Formatting &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="6. LaTeX" href="latex.html" />
+    <link rel="next" title="6.6. Packages, Macros and Graphics" href="latex_packages_macros_graphics.html" />
+    <link rel="prev" title="6.4. Lists" href="latex_lists.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>6.5. Text and Document Formatting</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="latex_lists.html">6.4. Lists</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="latex_packages_macros_graphics.html">6.6. Packages, Macros and Graphics</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="text-and-document-formatting">
+<h1>6.5. Text and Document Formatting<a class="headerlink" href="#text-and-document-formatting" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#text-format" id="id1">Text format</a></li>
+<li><a class="reference internal" href="#text-size" id="id2">Text size</a></li>
+<li><a class="reference internal" href="#text-alignment" id="id3">Text alignment</a></li>
+<li><a class="reference internal" href="#title" id="id4">Title</a></li>
+<li><a class="reference internal" href="#sections" id="id5">Sections</a></li>
+<li><a class="reference internal" href="#table-of-contents" id="id6">Table of Contents</a></li>
+</ul>
+</div>
+<div class="section" id="text-format">
+<h2><a class="toc-backref" href="#id1">6.5.1. Text format</a><a class="headerlink" href="#text-format" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span>This will produce <span class="k">\textit</span><span class="nb">{</span>italicized<span class="nb">}</span> text.
+
+This will produce <span class="k">\textbf</span><span class="nb">{</span>bold-faced<span class="nb">}</span> text.
+
+This will produce <span class="k">\textsc</span><span class="nb">{</span>small caps<span class="nb">}</span> text.
+
+Please visit Mrs. Krummel&#39;s website at <span class="k">\texttt</span><span class="nb">{</span>http://mrskrummel.com<span class="nb">}</span>.
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Italicized text</li>
+<li>Bold faced text</li>
+<li>Small caps text</li>
+<li>Typewriter font</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="text-size">
+<h2><a class="toc-backref" href="#id2">6.5.2. Text size</a><a class="headerlink" href="#text-size" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span>Please excuse my <span class="k">\begin</span><span class="nb">{</span>tiny<span class="nb">}</span>dear Aunt Sally<span class="k">\end</span><span class="nb">{</span>tiny<span class="nb">}</span>.
+
+Please excuse my <span class="k">\begin</span><span class="nb">{</span>small<span class="nb">}</span>dear Aunt Sally<span class="k">\end</span><span class="nb">{</span>small<span class="nb">}</span>.
+
+Please excuse my dear Aunt Sally.
+
+Please excuse my <span class="k">\begin</span><span class="nb">{</span>large<span class="nb">}</span>dear Aunt Sally<span class="k">\end</span><span class="nb">{</span>large<span class="nb">}</span>.
+
+Please excuse my <span class="k">\begin</span><span class="nb">{</span>Large<span class="nb">}</span>dear Aunt Sally<span class="k">\end</span><span class="nb">{</span>Large<span class="nb">}</span>.
+
+Please excuse my <span class="k">\begin</span><span class="nb">{</span>huge<span class="nb">}</span>dear Aunt Sally<span class="k">\end</span><span class="nb">{</span>huge<span class="nb">}</span>.
+
+Please excuse my <span class="k">\begin</span><span class="nb">{</span>Huge<span class="nb">}</span>dear Aunt Sally<span class="k">\end</span><span class="nb">{</span>Huge<span class="nb">}</span>.
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>tiny</li>
+<li>small</li>
+<li>normal</li>
+<li>large</li>
+<li>Large</li>
+<li>huge</li>
+<li>Huge</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="text-alignment">
+<h2><a class="toc-backref" href="#id3">6.5.3. Text alignment</a><a class="headerlink" href="#text-alignment" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>center<span class="nb">}</span> This is centered <span class="k">\end</span><span class="nb">{</span>center<span class="nb">}</span>
+
+<span class="k">\begin</span><span class="nb">{</span>flushleft<span class="nb">}</span> This is left-justified. <span class="k">\end</span><span class="nb">{</span>flushleft<span class="nb">}</span>
+
+<span class="k">\begin</span><span class="nb">{</span>flushright<span class="nb">}</span> This is right-justified. <span class="k">\end</span><span class="nb">{</span>flushright<span class="nb">}</span>
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Centred</li>
+<li>Left</li>
+<li>Right</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="title">
+<h2><a class="toc-backref" href="#id4">6.5.4. Title</a><a class="headerlink" href="#title" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="k">\title</span><span class="nb">{</span>My Practice <span class="k">\LaTeX</span> <span class="k">\ </span>Document<span class="nb">}</span>
+<span class="k">\author</span><span class="nb">{</span>Andrew Roberts<span class="nb">}</span>
+<span class="k">\date</span><span class="nb">{</span><span class="k">\today</span><span class="nb">}</span>
+<span class="k">\maketitle</span>
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Title:<ul>
+<li>LaTeX has a special display style <code class="docutils literal"><span class="pre">\LaTeX</span></code></li>
+<li><code class="docutils literal"><span class="pre">\</span></code> is a space</li>
+</ul>
+</li>
+<li>Author</li>
+<li>Date (optional)</li>
+<li><code class="docutils literal"><span class="pre">\maketitle</span></code> actually creates the title</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="sections">
+<h2><a class="toc-backref" href="#id5">6.5.5. Sections</a><a class="headerlink" href="#sections" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="k">\section</span><span class="nb">{</span>Linear Functions<span class="nb">}</span>
+    <span class="k">\subsection</span><span class="nb">{</span>Slope-Intercept Form<span class="nb">}</span>
+    The slope-intercept form of a linear function is given by <span class="s">$</span><span class="nb">y</span><span class="o">=</span><span class="nb">ax</span><span class="o">+</span><span class="nb">b</span><span class="s">$</span>.
+    <span class="k">\subsection</span><span class="nb">{</span>Standard Form<span class="nb">}</span>
+    <span class="k">\subsection</span><span class="nb">{</span>Point-Slope Form<span class="nb">}</span>
+<span class="k">\section</span><span class="nb">{</span>Quadratic Functions<span class="nb">}</span>
+    <span class="k">\subsection</span><span class="nb">{</span>Vertex Form<span class="nb">}</span>
+    <span class="k">\subsection</span><span class="nb">{</span>Standard Form<span class="nb">}</span>
+    <span class="k">\subsection</span><span class="nb">{</span>Factored Form<span class="nb">}</span>
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Section 1</li>
+<li>Subsection 1.1</li>
+<li>Subsection 1.2</li>
+<li>Subsection 1.3</li>
+<li>Section 2</li>
+<li>Subsection 2.1</li>
+<li>Subsection 2.2</li>
+<li>Subsection 2.3</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="table-of-contents">
+<h2><a class="toc-backref" href="#id6">6.5.6. Table of Contents</a><a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="k">\tableofcontents</span>
+</pre></div>
+</div>
+</td>
+<td>Creates a table of contents. Note that you have to quick build twice in Texmaker to get this to work. One click will collect the information, the second click will actually create the table.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="latex_lists.html">6.4. Lists</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="latex_packages_macros_graphics.html">6.6. Packages, Macros and Graphics</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

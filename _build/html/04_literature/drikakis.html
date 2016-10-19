@@ -1,0 +1,863 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.4. Drikakis (2003) “Advances in Turbulent Flow Computations” &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="4. Literature" href="literature.html" />
+    <link rel="next" title="4.5. Fawehinmi et al. (2005) “Experimental and CFD Analysis of Drop Formation”" href="fawehinmi.html" />
+    <link rel="prev" title="4.3. Noakes et al. (2002) “Streak-line Defect Minimization”" href="noakes.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.4. Drikakis (2003) “Advances in Turbulent Flow Computations”</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="noakes.html">4.3. Noakes et al. (2002) &#8220;Streak-line Defect Minimization&#8221;</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="fawehinmi.html">4.5. Fawehinmi et al. (2005) &#8220;Experimental and CFD Analysis of Drop Formation&#8221;</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="drikakis-2003-advances-in-turbulent-flow-computations">
+<h1>4.4. Drikakis (2003) &#8220;Advances in Turbulent Flow Computations&#8221;<a class="headerlink" href="#drikakis-2003-advances-in-turbulent-flow-computations" title="Permalink to this headline">¶</a></h1>
+<p>Drikakis, D., &#8220;Advances in Turbulent Flow Computations using High Resolution Methods&#8221;, Progress in Aerospace Sciences, 39 (2003) pp 405 - 424</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#where-is-this-paper-placed-in-the-community" id="id2">Where is this paper placed in the community?</a></li>
+<li><a class="reference internal" href="#abstract" id="id3">Abstract</a></li>
+<li><a class="reference internal" href="#introduction" id="id4">Introduction</a><ul>
+<li><a class="reference internal" href="#what-is-the-state-of-the-art" id="id5">What is the state of the art?</a></li>
+<li><a class="reference internal" href="#why-is-turbulence-important" id="id6">Why is turbulence important?</a></li>
+<li><a class="reference internal" href="#what-are-the-methods-use-in-cfd" id="id7">What are the methods use in CFD?</a></li>
+<li><a class="reference internal" href="#dns-direct-numerical-simulation" id="id8">DNS - Direct Numerical Simulation</a></li>
+<li><a class="reference internal" href="#rans-reynolds-averaged-navier-stokes-equations" id="id9">RANS - Reynolds Averaged Navier Stokes Equations</a></li>
+<li><a class="reference internal" href="#les-large-eddy-simulation" id="id10">LES - Large Eddy Simulation</a></li>
+<li><a class="reference internal" href="#high-resolution-methods" id="id11">High Resolution Methods</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#fluid-flow-equations" id="id12">Fluid Flow Equations</a></li>
+<li><a class="reference internal" href="#id1" id="id13">High Resolution Methods</a><ul>
+<li><a class="reference internal" href="#properties-of-high-resolution-methods" id="id14">Properties of high-resolution methods</a><ul>
+<li><a class="reference internal" href="#total-variation" id="id15">Total Variation</a></li>
+<li><a class="reference internal" href="#monotonicity" id="id16">Monotonicity</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#limiters" id="id17">Limiters</a><ul>
+<li><a class="reference internal" href="#what-are-limiters" id="id18">What are limiters?</a></li>
+<li><a class="reference internal" href="#how-to-use-limiters" id="id19">How to use limiters?</a></li>
+<li><a class="reference internal" href="#what-do-limiters-produce" id="id20">What do limiters produce?</a></li>
+<li><a class="reference internal" href="#how-do-limiters-change-the-weak-solution" id="id21">How do limiters change the weak solution?</a></li>
+<li><a class="reference internal" href="#what-are-the-alternatives-to-harten-s-theorem" id="id22">What are the alternatives to Harten&#8217;s Theorem?</a></li>
+<li><a class="reference internal" href="#why-do-we-need-limiters" id="id23">Why do we need limiters?</a></li>
+<li><a class="reference internal" href="#les" id="id24">LES</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nature-of-algorithmic-components" id="id25">Nature of algorithmic components</a><ul>
+<li><a class="reference internal" href="#godunov-type-method" id="id26">Godunov-type method</a></li>
+<li><a class="reference internal" href="#tvd-method" id="id27">TVD method</a></li>
+<li><a class="reference internal" href="#flux-decomposition" id="id28">Flux decomposition</a></li>
+<li><a class="reference internal" href="#tvd-flux" id="id29">TVD flux</a></li>
+<li><a class="reference internal" href="#non-linear-truncation-error-analysis" id="id30">Non linear truncation error analysis</a></li>
+<li><a class="reference internal" href="#lax-wendroff-scheme" id="id31">Lax-Wendroff Scheme</a></li>
+<li><a class="reference internal" href="#burgers-equations" id="id32">Burgers&#8217; Equations</a></li>
+<li><a class="reference internal" href="#finite-difference-algorithms" id="id33">Finite Difference Algorithms</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#computational-evidence" id="id34">Computational Evidence</a><ul>
+<li><a class="reference internal" href="#burgers-turbulence" id="id35">Burgers&#8217; Turbulence</a></li>
+<li><a class="reference internal" href="#decaying-turbulence-of-a-homogeneous-incompressible-fluid" id="id36">Decaying turbulence of a homogeneous incompressible fluid</a></li>
+<li><a class="reference internal" href="#convective-planetary-boundary-layer" id="id37">Convective planetary boundary layer</a></li>
+<li><a class="reference internal" href="#compressible-open-cavity-flow" id="id38">Compressible Open Cavity Flow</a></li>
+<li><a class="reference internal" href="#shock-bubble-interaction" id="id39">Shock-bubble Interaction</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#relation-of-numerics-with-the-physics-of-turbulent-flow-and-it-s-models" id="id40">Relation of numerics with the physics of turbulent flow and it&#8217;s models</a><ul>
+<li><a class="reference internal" href="#kolmogorov-spectrum" id="id41">Kolmogorov spectrum</a></li>
+<li><a class="reference internal" href="#energy-transfer" id="id42">Energy transfer</a></li>
+<li><a class="reference internal" href="#shocks" id="id43">Shocks</a></li>
+<li><a class="reference internal" href="#use-of-high-resolution-methods-to-reproduce-energy-dissipation" id="id44">Use of high resolution methods to reproduce energy dissipation</a></li>
+<li><a class="reference internal" href="#use-of-the-entropy-condition-to-decide-physical-solutions" id="id45">Use of the entropy condition to decide physical solutions</a></li>
+<li><a class="reference internal" href="#similarity-between-artificial-viscosity-and-eddy-viscosity" id="id46">Similarity between artificial viscosity and eddy viscosity</a></li>
+<li><a class="reference internal" href="#similarity-between-les-subgrid-models-and-high-resolution-models" id="id47">Similarity between LES subgrid models and high resolution models</a></li>
+<li><a class="reference internal" href="#open-questions" id="id48">Open Questions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusions" id="id49">Conclusions</a><ul>
+<li><a class="reference internal" href="#two-competing-criteria" id="id50">Two competing criteria</a></li>
+<li><a class="reference internal" href="#two-key-questions" id="id51">Two key questions</a></li>
+<li><a class="reference internal" href="#from-1d-to-multi-dimensional" id="id52">From 1D to multi-dimensional</a></li>
+<li><a class="reference internal" href="#why-do-we-get-spurious-solutions" id="id53">Why do we get spurious solutions?</a></li>
+<li><a class="reference internal" href="#high-reynolds-number-near-wall-flows" id="id54">High Reynolds Number Near Wall Flows</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="where-is-this-paper-placed-in-the-community">
+<h2><a class="toc-backref" href="#id2">4.4.1. Where is this paper placed in the community?</a><a class="headerlink" href="#where-is-this-paper-placed-in-the-community" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>CFD modelling often involves attempts to reduce the effects of numerical dissipation and dispersion, but often this runs into problems with the number of grid points required and hence computing time.</li>
+<li>However this paper suggests that numerical dissipation and dispersion can be seen as analogous with physical dissipation and dispersion, by using the nonlinear truncation error analysis that arises from the discretisation</li>
+<li>This allows high resolution schemes, because instead of casting aside the numerical error, it is included in the solution.</li>
+<li>Although this is successful in 1D, the paper proceeds with caution about 2D or 3D solutions</li>
+<li>This paper seems to promote the link between physics and numerics, <strong>because physics and numerics are intertwined</strong> as Cavaleri et al (2007) also proposed</li>
+<li>It also promotes the use of numerical dissipation and dispersion depending on the conditions using limiters as Cavaleri at al (2007) suggested</li>
+<li>Subtle balancing of the truncation error was also something inline with Cavaleri et al (2007)</li>
+</ul>
+</div>
+<div class="section" id="abstract">
+<h2><a class="toc-backref" href="#id3">4.4.2. Abstract</a><a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>This is a review paper for high resolution methods in turbulent flow computations.</li>
+<li>High resolution methods successfully compute turbulent flows, without the need for an <strong>explicit</strong> turbulence model.</li>
+<li>This is a presentation of the basic properties of these methods and argues for their use as <strong>implicit</strong> turbulence models.</li>
+<li>Numerical issues that still need to be addressed:<ul>
+<li><strong>dissipation</strong> and <strong>dispersion</strong> properties, e.g. turbulence anisotropy</li>
+<li>validation of under-resolved simulations of near-wall turbulent attached and separated flows</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id4">4.4.3. Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-is-the-state-of-the-art">
+<h3><a class="toc-backref" href="#id5">4.4.3.1. What is the state of the art?</a><a class="headerlink" href="#what-is-the-state-of-the-art" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Many experimental and theoretical studies have helped to increase our physical understanding of turbulence.</li>
+<li>A predictive closed theory of turbulent flows has not yet been established and is unlikely to emerge in the future.</li>
+<li>Hope for a <strong>universal turbulence model</strong> has been slowly replaced by the realization that the formulation of an adequate theory will continue to require a greatly improved understanding of the <strong>physics of turbulent motion</strong>.</li>
+</ul>
+</div>
+<div class="section" id="why-is-turbulence-important">
+<h3><a class="toc-backref" href="#id6">4.4.3.2. Why is turbulence important?</a><a class="headerlink" href="#why-is-turbulence-important" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Lack of understanding of turbulence limits technological advancement of:<ul>
+<li>aircraft and car design</li>
+<li>turbomachinery and combustors</li>
+</ul>
+</li>
+<li>Also limits prediction of:<ul>
+<li>environmental and biological flows</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="what-are-the-methods-use-in-cfd">
+<h3><a class="toc-backref" href="#id7">4.4.3.3. What are the methods use in CFD?</a><a class="headerlink" href="#what-are-the-methods-use-in-cfd" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Reynolds Averaged Navier Stokes Equations (RANS)</li>
+<li>Large Eddy Simulation (LES)</li>
+<li>Direct Numerical Simulation (DNS)</li>
+</ul>
+</div>
+<div class="section" id="dns-direct-numerical-simulation">
+<h3><a class="toc-backref" href="#id8">4.4.3.4. DNS - Direct Numerical Simulation</a><a class="headerlink" href="#dns-direct-numerical-simulation" title="Permalink to this headline">¶</a></h3>
+<p>Uses:</p>
+<ul class="simple">
+<li>Good for turbulent flow structures at <strong>low Re</strong> and <strong>simple geometries</strong></li>
+</ul>
+<p>Limitations:</p>
+<ul class="simple">
+<li>Can&#8217;t resolve <strong>unsteady flows</strong> at <strong>high Re</strong>, as it&#8217;s beyond foreseeable computing power</li>
+<li>Not sure whether DNS does provide fully resolved results - as it depends on grid convergence, which may be impractical</li>
+</ul>
+<p><strong>RANS and LES are employed as alternatives to DNS</strong></p>
+</div>
+<div class="section" id="rans-reynolds-averaged-navier-stokes-equations">
+<h3><a class="toc-backref" href="#id9">4.4.3.5. RANS - Reynolds Averaged Navier Stokes Equations</a><a class="headerlink" href="#rans-reynolds-averaged-navier-stokes-equations" title="Permalink to this headline">¶</a></h3>
+<p>Equations are averaged over a time interval or across an ensemble of equivalent flows.</p>
+<p>Uses:</p>
+<ul class="simple">
+<li><strong>Steady state</strong> problems</li>
+</ul>
+<p>Limitations:</p>
+<ul class="simple">
+<li><strong>Unsteadiness</strong> introduces uncertainty.</li>
+<li>Requires <strong>timescale for unsteady motion to be larger than timescale of turbulent motion</strong> - limited to low frequency unsteady flows (which is a small number of turbulent flows).</li>
+<li>Closure of phase-averaged correlations is identical or very similar to conventional averaged correlations.</li>
+<li>Less universal than LES and DNS because of the use of experimental/DNS determination of <strong>unknown coefficients</strong>.</li>
+<li>Eddy-viscosity models can&#8217;t predict <strong>vorticity and separation</strong>.</li>
+<li>However, for shock boundary layer computations, accuracy of turbulence models also depends on <strong>discretisation of advection terms</strong>.</li>
+</ul>
+</div>
+<div class="section" id="les-large-eddy-simulation">
+<h3><a class="toc-backref" href="#id10">4.4.3.6. LES - Large Eddy Simulation</a><a class="headerlink" href="#les-large-eddy-simulation" title="Permalink to this headline">¶</a></h3>
+<p>Methodology:</p>
+<ul class="simple">
+<li>Convolve all dependent variables with a <strong>pre-defined filter</strong> to extract large scale components.</li>
+<li>All flow scales larger than filter are computed via a <strong>modified (filtered) set of the Navier-Stokes equations (LES Equations)</strong>.</li>
+<li>All flow scales smaller than filter scale (approximately the grid size) are modelled with <strong>Sub-Grid Scale models (SGS models)</strong>. The equations encompass unresolved correlations known as <strong>Sub-Grid Scale stresses (SGS stresses)</strong>.</li>
+</ul>
+<p>Sources of Error in LES:</p>
+<ul>
+<li><p class="first">The filter width can be constant or variable</p>
+<blockquote>
+<div><ul class="simple">
+<li>if constant additional pressure and viscous terms appear at the boundary</li>
+<li>if variable (large scale and small scale eddies) - BCs are satisfied, but LES equations now invalid - <strong>no method exists to deal with this trade off</strong></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Other sources of error:</p>
+<blockquote>
+<div><ul class="simple">
+<li>numerical discretisation (dissipation and dispersion term truncation error)</li>
+<li>aliasing (in spectral schemes - arising as numerical instabilities).</li>
+<li>SGS modelling (masking of SGS term by truncation error)</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="high-resolution-methods">
+<h3><a class="toc-backref" href="#id11">4.4.3.7. High Resolution Methods</a><a class="headerlink" href="#high-resolution-methods" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">High resolution methods can be used to achieve the properties of Sub-Grid models, a way of <strong>implicitly modelling turbulent flows</strong>, known as:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Monotonically Integrated LES (MILES)</li>
+<li>Implicit turbulence modelling</li>
+<li>Embedded turbulence modelling</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Advantages:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Characteristics implicit in these methods may mimic certain aspects of turbulence flow modelling</li>
+<li>Need high resolution methods to ensure stable computation in difficult physical circumstances</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Physical phenomena and their numerical solution are intertwined. Question is: &#8220;how do numerical methods contribute implicitly to turbulence modelling?&#8221;</strong> Otherwise we may double count the effect of turbulence through the explicit turbulence model as well as through the properties of the numerical method.</p>
+<p>Investigation of embedded turbulence modelling aspects of high-resolution methods may allow understanding of CFD methods and their application in multi-dimensional problems.</p>
+</div>
+</div>
+<div class="section" id="fluid-flow-equations">
+<h2><a class="toc-backref" href="#id12">4.4.4. Fluid Flow Equations</a><a class="headerlink" href="#fluid-flow-equations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Mass Conservation:</li>
+</ul>
+<div class="math" id="equation-mass">
+<span class="eqno">(1)</span>\[{\partial \rho \over \partial t} +
+        \nabla \cdot (\rho \mathbf u) = 0\]</div>
+<ul class="simple">
+<li>Momentum Conservation:</li>
+</ul>
+<div class="math" id="equation-momentum">
+<span class="eqno">(2)</span>\[{\partial (\rho \mathbf u) \over \partial t} +
+       \nabla \cdot {(\rho \mathbf u \mathbf u)} =
+       -\nabla \cdot \mathbf P\]</div>
+<ul class="simple">
+<li>Energy Conservation:</li>
+</ul>
+<div class="math" id="equation-energy">
+<span class="eqno">(3)</span>\[{\partial e \over \partial t} +
+       \nabla \cdot (e \mathbf u) =
+       -\nabla \cdot (\mathbf u \cdot \mathbf P) -
+       \nabla \cdot \mathbf q\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><span class="math">\(\mathbf u\)</span> = velocity components</li>
+<li><span class="math">\(\rho\)</span> = density</li>
+<li><span class="math">\(e\)</span> = total energy density per unit volume</li>
+<li><span class="math">\(\mathbf q\)</span> = heat flux</li>
+<li><span class="math">\(\mathbf P\)</span> = volume forces, e.g. inertial, gravitational or electromagnetic forces</li>
+</ul>
+<p>The tensor <span class="math">\(\mathbf P\)</span> is defined by:</p>
+<div class="math" id="equation-tensor">
+<span class="eqno">(4)</span>\[\mathbf P = p(\rho,T) \mathbf I + {2 \over 3} \mu (\nabla \cdot \mathbf u) \mathbf I - \mu [(\nabla \mathbf u) + (\nabla \mathbf v)^T]\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><span class="math">\(p(\rho, T)\)</span> = scalar pressure</li>
+<li><span class="math">\(\mathbf I\)</span> = unit diagonal tensor</li>
+<li><span class="math">\(T\)</span> = temperature</li>
+<li><span class="math">\(\mu\)</span> = dynamic viscosity</li>
+</ul>
+<p>The above system is completed by the equation of state given by:</p>
+<div class="math">
+\[p = \rho R T\]</div>
+<p>Irrespective of the approach employed to compute turbulent flows, the equations can be cast in the conservation laws form as follows:</p>
+<div class="math" id="equation-turbulence">
+<span class="eqno">(5)</span>\[{\partial \overline{\mathbf U} \over \partial t} +
+       {\partial \overline{\mathbf E} (\overline{\mathbf U}) \over \partial x} +
+       {\partial \overline{\mathbf F} (\overline{\mathbf U}) \over \partial y} +
+       {\partial \overline{\mathbf G} (\overline{\mathbf U}) \over \partial z} = \mathbf S(\overline{\mathbf U})\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><span class="math">\(\overline{\mathbf U}\)</span> = the array of flow variables</li>
+<li><span class="math">\(\overline{\mathbf E}(\overline{\mathbf U})\)</span>,  <span class="math">\(\overline{\mathbf F}(\overline{\mathbf U})\)</span>,  <span class="math">\(\overline{\mathbf G}(\overline{\mathbf U})\)</span> = fluxes in the x, y and z directions</li>
+<li>The bar denotes filtering and averaging for the LES and RANS approach respectively</li>
+<li>DNS has no bar over the terms</li>
+<li><span class="math">\(\mathbf S(\overline{\mathbf U})\)</span> = viscous terms as well as SGS and Reynolds stresses for the case of LES and RANS respectively</li>
+<li>For a zero RHS, we obtain a system of <strong>hyperbolic conservation laws</strong></li>
+<li>The nonlinear terms are contained in the fluxes on the LHS</li>
+</ul>
+<p>Applications of high resolution methods:</p>
+<ul class="simple">
+<li>During the last 4 decades, there have been intensive research efforts to develop accurate methods for <strong>solving hyperbolic conservation laws</strong>.</li>
+<li>The development of high-resolution methods for solving the <strong>inviscid</strong> equations for gas dynamics has received most of the attention.</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id13">4.4.5. High Resolution Methods</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Properties of high-resolution methods:</p>
+<ul class="simple">
+<li>Provide at least <strong>2nd order accuracy</strong> in smooth areas of the flow</li>
+<li>Produce numerical solutions (relatively) <strong>free from spurious oscillations</strong></li>
+<li>In the case of discontinuities, <strong>the number of grid points is smaller</strong> (in the transition zone containing the shock wave) in comparison with that of first-order monotone methods</li>
+</ul>
+<p>Our motivation for the development of high-resolution methods emerges from our effort to circumvent Godunov&#8217;s theorem, which states that:</p>
+<p><em>&#8220;There are no monotone, linear schemes for the linear advection equation of second or higher order of accuracy&#8221;</em></p>
+<p>In order words 2nd order accuracy and monotonicity are contradictory requirements.</p>
+<ul class="simple">
+<li>The key to circumvent Godunov&#8217;s theorem lies on the assumption made in the theorem that the schemes are linear</li>
+<li>Therefore if we want to design methods which provide at least <strong>second order accuracy</strong> and at the same time avoid spurious oscillations in the vicinity of large gradients, then we need to develop <strong>non-linear methods</strong>.</li>
+<li>This is done in <strong>1D</strong> due to a lack of adequate theory for multi-dimensions.</li>
+<li>Even though a scheme can be designed to be 2nd order in <strong>1D</strong>, it might not be 2nd order in 2D or 3D.</li>
+</ul>
+<div class="section" id="properties-of-high-resolution-methods">
+<h3><a class="toc-backref" href="#id14">4.4.5.1. Properties of high-resolution methods</a><a class="headerlink" href="#properties-of-high-resolution-methods" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="total-variation">
+<h4><a class="toc-backref" href="#id15">Total Variation</a><a class="headerlink" href="#total-variation" title="Permalink to this headline">¶</a></h4>
+<p>Consider the one-dimensional version of Equation <a href="#equation-turbulence">(5)</a> without source terms:</p>
+<div class="math" id="equation-solution">
+<span class="eqno">(6)</span>\[{\partial \mathbf U \over \partial t} +
+       {\partial {\mathbf E} ({\mathbf U}) \over \partial x} = 0\]</div>
+<p>Numerical approximations to weak solutions <span class="math">\(w_i\)</span> which can be obtained, for example, by <span class="math">\((2k+1)\)</span> point explicit schemes in conservation form:</p>
+<div class="math" id="equation-weak_solution">
+<span class="eqno">(7)</span>\[w_i^{n+1}=w_i^n-{\Delta t \over \Delta x}(\overline{\mathbf E}_{i+1/2}^n-\overline{\mathbf E}_{i-1/2}^n)\]</div>
+<p>where for the numerical flux <span class="math">\(\overline{\mathbf E}\)</span> yields:</p>
+<div class="math">
+\[\overline{\mathbf E}_{i+1/2}^n = \overline{\mathbf E}(w_{i-k+1}^n,...,w_{i+k}^n)\]</div>
+<p>and <span class="math">\(n\)</span> denotes the time level and <span class="math">\(i\)</span> is cell centered and <span class="math">\(i+1/2\)</span> is an intercell value</p>
+<p>The numerical flux should also be consistent with the flux <span class="math">\(\mathbf E\)</span> i.e.</p>
+<div class="math">
+\[\overline{\mathbf E}(\mathbf U,...,\mathbf U) = \mathbf E(\mathbf U)\]</div>
+<p>Weak solution <a href="#equation-weak_solution">(7)</a> converges to a solution of <a href="#equation-solution">(6)</a> when the following conditions are satisfied:</p>
+<ol class="arabic simple">
+<li>The <strong>total variation</strong> of the solution w.r.t <span class="math">\(x\)</span> is uniformly bounded w.r.t <span class="math">\(t, \Delta t\)</span> and <span class="math">\(\Delta x\)</span></li>
+<li>The scheme <a href="#equation-weak_solution">(7)</a> satisfies the entropy condition</li>
+<li>The entropy condition implies unique solution of the initial value problem</li>
+</ol>
+<p>Conditions 1. and 2. can be satisfied by the addition of <strong>artificial viscosity</strong> to the numerical scheme.</p>
+<ul class="simple">
+<li>This will provide non-oscillatory solutions</li>
+<li>Will lose physical information (thus losing accuracy)</li>
+</ul>
+<p>Total variation is defined as:</p>
+<div class="math">
+\[TV(u^n)=TV(u(t))= \sum_{i=-\infty}^{+\infty} \left \vert u_{i+1}^n-u_i^n \right \vert\]</div>
+<p>The function <span class="math">\(u\)</span> is assumed to be either 0 or constant as the index <span class="math">\(i\)</span> approaches infinity, in order to obtain finite total variation.</p>
+</div>
+<div class="section" id="monotonicity">
+<h4><a class="toc-backref" href="#id16">Monotonicity</a><a class="headerlink" href="#monotonicity" title="Permalink to this headline">¶</a></h4>
+<p>Monotonicity is defined for a scalar conservation law:</p>
+<div class="math" id="equation-monotonicity">
+<span class="eqno">(8)</span>\[{\partial (\rho u) \over \partial t} +
+       {\partial f(u) \over \partial x} =
+       {\partial u \over \partial t} +
+       \alpha (u){\partial u \over \partial x} = 0\]</div>
+<p>An important property of the weak solution of the scalar initial value problem is the <em>monotonicity property</em> according to which:</p>
+<ul class="simple">
+<li>No new local extrema in <span class="math">\(x\)</span> may be created</li>
+<li>The value of a local minimum increases, i.e. it is a nondecreasing function and the value of a local maximum decreases, i.e. it is a nonincreasing function.</li>
+</ul>
+<p><strong>This the total variation</strong> <span class="math">\(TV(u(t))\)</span> <strong>is a decreasing function of time</strong></p>
+<p>The explicit scheme of Equation <a href="#equation-weak_solution">(7)</a> can be written in a shorter form as:</p>
+<div class="math" id="equation-shorter">
+<span class="eqno">(9)</span>\[w_i^{n+1}=H(w_{i-k}^n,w_{i-k+1}^n,...,w_{i+k}^n) = L \cdot w_i^n\]</div>
+<p>where:</p>
+<p><span class="math">\(L\)</span> is an operator.</p>
+<p>We say that <a href="#equation-shorter">(9)</a> is <em>total variation nonincreasing</em> (TVNI) if for all <span class="math">\(w\)</span>:</p>
+<div class="math">
+\[TV(L \cdot w) \le TV(w)\]</div>
+<ul class="simple">
+<li>The scheme in <a href="#equation-shorter">(9)</a> is monotonicity preserving if the finite difference operator <span class="math">\(L\)</span> is monotonicity preserving, that is, if <span class="math">\(w\)</span> is a monotone mesh function, so is <span class="math">\(L \cdot w\)</span>.</li>
+<li>The scheme in <a href="#equation-shorter">(9)</a> is monotone if <span class="math">\(H\)</span> is a monotone increasing function of each of it&#8217;s <span class="math">\(2k+1\)</span> arguments.</li>
+</ul>
+<p>The hierarchy of these properties can be stated as follows: <strong>the set of monotone schemes is contained in the set of TVD schemes and this is in turn contained in the set of monotonicity preserving schemes</strong></p>
+<ul class="simple">
+<li>Monotone schemes can be constructed as upwind or central. TVD and Essentially Non-Oscillatory (ENO) schemes can also be designed to be monotone in 1D.</li>
+<li>However, the set of monotone schemes is the smallest set of schemes and is a subset of TVD schemes</li>
+</ul>
+<p>For a constant coefficient <span class="math">\(\alpha(u) = \alpha\)</span> we obtain the linear advection equation
+Well known schemes such as the <strong>Godunov 1st order upwind scheme</strong> and the <strong>Lax-Wendroff scheme</strong> among others can cast in the general form:</p>
+<div class="math">
+\[w_i^{n+1}=\sum_{l=-k_L}^{l=k_R} b_l w_{i_l}^n\]</div>
+<p>where:</p>
+<p><span class="math">\(k_L\)</span> and <span class="math">\(k_R\)</span> are two non-negative integers and <span class="math">\(b_l\)</span> are constant coefficients. Harten has shown that the linear finite difference approximation above is monotonicity preserving if the coefficients <span class="math">\(b_l\)</span> are non-negative.</p>
+<p><strong>Hence, any linear monotonicity preserving scheme is a monotone, first order accurate scheme</strong></p>
+</div>
+</div>
+<div class="section" id="limiters">
+<h3><a class="toc-backref" href="#id17">4.4.5.2. Limiters</a><a class="headerlink" href="#limiters" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="what-are-limiters">
+<h4><a class="toc-backref" href="#id18">What are limiters?</a><a class="headerlink" href="#what-are-limiters" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Limiters are the general non-linear mechanism that distinguish modern methods from classical linear schemes.</li>
+<li>They are also known as <strong>flux limiters</strong> or <strong>slope limiters</strong></li>
+<li>Limiters act as a nonlinear switch between more than one underlying linear method - thus <strong>adapting the choice of numerical method based upon the behaviour of the local solution</strong></li>
+</ul>
+</div>
+<div class="section" id="how-to-use-limiters">
+<h4><a class="toc-backref" href="#id19">How to use limiters?</a><a class="headerlink" href="#how-to-use-limiters" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Base the analysis of the nonlinear method on the linear analysis of the available methods to be chosen by the limiter</li>
+<li>The limiter can also be included in the analysis providing a nonlinear truncation error analysis even for linear equations in order to achieve 2nd order accuracy.</li>
+</ul>
+</div>
+<div class="section" id="what-do-limiters-produce">
+<h4><a class="toc-backref" href="#id20">What do limiters produce?</a><a class="headerlink" href="#what-do-limiters-produce" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><strong>Limiters result in nonlinear methods even for linear equations in order to achieve 2nd order accuracy simultaneously with monotonicity</strong></li>
+</ul>
+</div>
+<div class="section" id="how-do-limiters-change-the-weak-solution">
+<h4><a class="toc-backref" href="#id21">How do limiters change the weak solution?</a><a class="headerlink" href="#how-do-limiters-change-the-weak-solution" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>2nd order accurate 3 and 5 point nonlinear schemes of the form <a href="#equation-shorter">(9)</a> can be re-written in the form:</li>
+</ul>
+<div class="math">
+\[w_i^{n+1}=w_i^n-C_{i-1/2}\Delta w_{i-1/2}+D_{i+1/2}\Delta w_{i+1/2}\]</div>
+<ul class="simple">
+<li><em>Harten&#8217;s theorem</em> has proved that any scheme with positive values of <span class="math">\(C\)</span> and <span class="math">\(D\)</span> and with the summation of those values lying between 0 and 1 is a TVNI scheme.</li>
+</ul>
+</div>
+<div class="section" id="what-are-the-alternatives-to-harten-s-theorem">
+<h4><a class="toc-backref" href="#id22">What are the alternatives to Harten&#8217;s Theorem?</a><a class="headerlink" href="#what-are-the-alternatives-to-harten-s-theorem" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Data compatibility condition as proposed by Roe - circumvents Godunov&#8217;s theorem by constructing adaptive algorithms that would adjust themselves to the local nature of the solution</li>
+<li>The MUSCL approach also allows the construction of high resolution methods - nonlinear versions of these schemes that avoid spurious oscillations can be constructed by limiting the slopes in the original MUSCL scheme according to TVD constraints.</li>
+</ul>
+</div>
+<div class="section" id="why-do-we-need-limiters">
+<h4><a class="toc-backref" href="#id23">Why do we need limiters?</a><a class="headerlink" href="#why-do-we-need-limiters" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>The construction of limiters does make sense not only for compressible flows that encompass discontinuities, but also for incompressible flows where large gradients occur, e.g. due to the appearance of vortices and turbulence</li>
+<li>Limiters play an essential role in the effective dissipation of a scheme as well as acting as a trigger for a dynamic dissipative scheme.</li>
+</ul>
+</div>
+<div class="section" id="les">
+<h4><a class="toc-backref" href="#id24">LES</a><a class="headerlink" href="#les" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>In dynamic LES, viscosity is adjusted locally based on whether the flow exhibits a similar structure at adjacent length scales.</li>
+<li>There is an implicit correspondence between some limiter forms to the dynamic SGS models in LES.</li>
+<li>Limiters also provide additional utility to compare local estimates of a derivative  - if these are close enough in magnitude the flow is treated as resolved - allowing the method to detect laminar flow.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="nature-of-algorithmic-components">
+<h3><a class="toc-backref" href="#id25">4.4.5.3. Nature of algorithmic components</a><a class="headerlink" href="#nature-of-algorithmic-components" title="Permalink to this headline">¶</a></h3>
+<p><strong>We must assess the similarities between high resolution methods and turbulence models for LES</strong></p>
+<div class="section" id="godunov-type-method">
+<h4><a class="toc-backref" href="#id26">Godunov-type method</a><a class="headerlink" href="#godunov-type-method" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Focus on the numerical intercell flux <span class="math">\(\tilde{\mathbf{E}}_{i+1/2}\)</span> of a Godunov-type method:</li>
+</ul>
+<div class="math">
+\[\tilde{\mathbf{E}}_{i+1/2} = {1 \over 2}(\mathbf{E}_L + \mathbf{E}_R)-{1 \over 2} \vert \mathbf{A} \vert (\mathbf{U}_R - \mathbf{U}_L)\]</div>
+<ul class="simple">
+<li>This is a fairly generic and standard manner to introduce upwinding into a numerical method.</li>
+<li>The left and right edges can be accessed via interpolation from cell centres to edges</li>
+<li>This is the reconstruction step of the high resolution method</li>
+</ul>
+</div>
+<div class="section" id="tvd-method">
+<h4><a class="toc-backref" href="#id27">TVD method</a><a class="headerlink" href="#tvd-method" title="Permalink to this headline">¶</a></h4>
+<p>The intercell flux is given by:</p>
+<div class="math">
+\[\tilde{\mathbf{E}}_{i+1/2} = {1 \over 2}(\mathbf{E}_L + \mathbf{E}_R)-{1 \over 2} \vert \mathbf{A} (1-\psi) \vert (\mathbf{U}_R - \mathbf{U}_L)\]</div>
+<p>where <span class="math">\(\psi\)</span> is a limiter</p>
+<p>An alternative formulation:</p>
+<div class="math">
+\[\tilde{\mathbf{E}}_{i+1/2} = \tilde{\mathbf{E}}_{i+1/2}^{low} +
+\phi(\tilde{\mathbf{E}}_{i+1/2}^{high}-
+\tilde{\mathbf{E}}_{i+1/2}^{low})\]</div>
+<p>where <span class="math">\(\phi\)</span> is a limiter</p>
+<ul class="simple">
+<li>&#8220;low&#8221; refers to first order flux (e.g. Godunov or Lax-Friedrichs)</li>
+<li>&#8220;high&#8221; refers to second order flux (e.g. Lax-Wendroff flux)</li>
+</ul>
+</div>
+<div class="section" id="flux-decomposition">
+<h4><a class="toc-backref" href="#id28">Flux decomposition</a><a class="headerlink" href="#flux-decomposition" title="Permalink to this headline">¶</a></h4>
+<p>Flux can be decomposed into terms that are:</p>
+<ul class="simple">
+<li>hyperbolic - the portion that is the sum of the local contributions (the mean flux)</li>
+<li>dissipative - the portion that is the difference in the variables is dissipative, with a magnitude proportional to the coefficient of numerical viscosity</li>
+</ul>
+</div>
+<div class="section" id="tvd-flux">
+<h4><a class="toc-backref" href="#id29">TVD flux</a><a class="headerlink" href="#tvd-flux" title="Permalink to this headline">¶</a></h4>
+<p>The TVD flux can be viewed in a similar way:</p>
+<ul class="simple">
+<li>the flux is a 2nd order centred flux, with a dissipative term than yields 1st order upwinding that is triggered by a limiter</li>
+<li>Hence in TVD, the action of the high resolution scheme is entirely dependent on the limiter acting on the numerical viscosity.</li>
+</ul>
+</div>
+<div class="section" id="non-linear-truncation-error-analysis">
+<h4><a class="toc-backref" href="#id30">Non linear truncation error analysis</a><a class="headerlink" href="#non-linear-truncation-error-analysis" title="Permalink to this headline">¶</a></h4>
+<p>The relation of algorithmic components and flow physics can be obtained by nonlinear truncation error analysis:</p>
+<div class="math">
+\[{\partial {\mathbf U} \over \partial t} +
+{\partial {\mathbf E} ({\mathbf U}) \over \partial x} = 0\]</div>
+<div class="math">
+\[{\partial {\mathbf U} \over \partial t} +
+{\partial {\mathbf E} ({\mathbf U}) \over {\partial \mathbf U}}{{\partial \mathbf U} \over {\partial x}} = 0\]</div>
+<p>Using a 1st order upwind scheme including the leading order (spatial) truncation error, we obtain the modified equation:</p>
+<div class="math">
+\[{\partial \tilde{\mathbf U} \over \partial t} +
+\mathbf A (\tilde{\mathbf U}) {{\Delta \tilde{\mathbf U}} \over {\Delta x}} =
+{\Delta x \over 2} \left [
+\left \vert {\partial \hat{\mathbf E} (\hat{\mathbf U}) \over {\partial \hat{\mathbf U}}} \right \vert  {{\partial^2 \hat{\mathbf U}} \over {\partial x^2}} +
+sign \left ( {\partial \hat{\mathbf E} (\hat{\mathbf U}) \over {\partial \hat{\mathbf U}}} \right )
+{\partial^2 \hat{\mathbf E} (\hat{\mathbf U}) \over {\partial \hat{\mathbf U^2}}}
+\left ( {{\partial \hat{\mathbf U}} \over {\partial x}} \right )^2 \right ]\]</div>
+<p>where the LHS of the above equation contains the terms arising from the discretisation of the differential equation</p>
+<ul class="simple">
+<li>The first term on the RHS is the 2nd order dissipation</li>
+<li>The second term on the RHS primarily dispersive and produces oscillations near discontinuities <strong>like the Garden Sprinkler Effect?</strong></li>
+</ul>
+</div>
+<div class="section" id="lax-wendroff-scheme">
+<h4><a class="toc-backref" href="#id31">Lax-Wendroff Scheme</a><a class="headerlink" href="#lax-wendroff-scheme" title="Permalink to this headline">¶</a></h4>
+<div class="math">
+\[{\partial \tilde{\mathbf U} \over \partial t} +
+\mathbf A (\tilde{\mathbf U}) {{\Delta \tilde{\mathbf U}} \over {\Delta x}} =
+{\Delta x^2} \left [
+- {1 \over 6}{\partial \hat{\mathbf E} (\hat{\mathbf U}) \over {\partial \hat{\mathbf U}}}{{\partial^3 \hat{\mathbf U}} \over {\partial x^3}}
+- {1 \over 2}{\partial^2 \hat{\mathbf E} (\hat{\mathbf U}) \over {\partial \hat{\mathbf U^2}}}  {{\partial \hat{\mathbf U}} \over {\partial x}}  {{\partial^2 \hat{\mathbf U}} \over {\partial x^2}}
+- {1 \over 6}{\partial^3 \hat{\mathbf E} (\hat{\mathbf U}) \over {\partial \hat{\mathbf U^3}}} \left ( {{\partial \hat{\mathbf U}} \over {\partial x}} \right )^2 \right ]\]</div>
+<ul class="simple">
+<li>The terms on the RHS have mixed effect although it is largely dispersive</li>
+<li>By using a limiter to hybridize the upwind and Lax-Wendroff method we can accentuate the dissipative effects seen in leading order spatial truncation error</li>
+<li>Limiters will be seen to introduce eddy viscosity</li>
+<li>If the limiters are not active, the dissipative term vanishes and in the case of second order methods, a fourth order dissipation results</li>
+</ul>
+</div>
+<div class="section" id="burgers-equations">
+<h4><a class="toc-backref" href="#id32">Burgers&#8217; Equations</a><a class="headerlink" href="#burgers-equations" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Margolin and Rider used truncation error analysis with numerical experiments for the Burgers&#8217; equations to show that truncation error terms for high resolution schemes have physical significance</li>
+<li>For non-smooth flow (e.g. in turbulence) for which the fluid velocity is not smooth over particular length and time scales, they assumed the averaged velocity is smooth at least over theses scales</li>
+<li>Hence the same averaged equations govern laminar and turbulent flows</li>
+</ul>
+</div>
+<div class="section" id="finite-difference-algorithms">
+<h4><a class="toc-backref" href="#id33">Finite Difference Algorithms</a><a class="headerlink" href="#finite-difference-algorithms" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Hirt made the earliest attempt to give physical meaning to numerical error - i.e. the notion that even and odd order errors are associated with diffusion and dispersion processes respectfully</li>
+<li>This led to the proof of entropy satisfying solutions in connection with upstream differencing.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="computational-evidence">
+<h2><a class="toc-backref" href="#id34">4.4.6. Computational Evidence</a><a class="headerlink" href="#computational-evidence" title="Permalink to this headline">¶</a></h2>
+<p>The follow examples show that high resolution methods can be used without the need to resort to SGS models.</p>
+<div class="section" id="burgers-turbulence">
+<h3><a class="toc-backref" href="#id35">4.4.6.1. Burgers&#8217; Turbulence</a><a class="headerlink" href="#burgers-turbulence" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Burgers&#8217; equations are a 1D form of the Navier Stokes Equations</li>
+<li>The example used periodic boundary conditions and a random initial condition for the velocity</li>
+</ul>
+<p>The comparison showed:</p>
+<ul class="simple">
+<li>Modelling the unresolved scales through a SGS model does not always improve the results</li>
+<li>High resolution schemes designed to satisfy the TVD condition can significantly improve the predictions without even using an SGS.</li>
+<li>The TVD-CB scheme without an SGS model gives the closest agreement with the DNS solution</li>
+</ul>
+</div>
+<div class="section" id="decaying-turbulence-of-a-homogeneous-incompressible-fluid">
+<h3><a class="toc-backref" href="#id36">4.4.6.2. Decaying turbulence of a homogeneous incompressible fluid</a><a class="headerlink" href="#decaying-turbulence-of-a-homogeneous-incompressible-fluid" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>This is decaying turbulence in a triply-periodic cube</li>
+<li>The focus is on the nonlinearity of the convective derivatives in the momentum equation</li>
+<li>The simulations were carried out using the nonoscillatory forward in time (NFT) advection scheme MPDATA.</li>
+</ul>
+<p>The results showed:</p>
+<ul class="simple">
+<li>Excellent agreement of the MPDATA and pseudo-spectral calculations for DNS - MPDATA is at least as accurate as the pseudo-spectral model</li>
+<li>Without viscous dissipation, unlimited enstrophy growth is predicted</li>
+<li>After the collapse of the spectral model, MPDATA is stable but inaccurate - this divergence is due to the flow topology condition being enforced by the MPDATA scheme (e.g. an embedded SGS model develops) - enstrophy has increased to the point where velocity gradients are so large that the local derivatives should be limited to obtain stability of the computations - <strong>MPDATA results in an effective viscosity</strong></li>
+<li>High resolution schemes may be considered as producing the most stable LES result for an inviscid flow at a given computational resolution</li>
+</ul>
+</div>
+<div class="section" id="convective-planetary-boundary-layer">
+<h3><a class="toc-backref" href="#id37">4.4.6.3. Convective planetary boundary layer</a><a class="headerlink" href="#convective-planetary-boundary-layer" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Previous studies used an atmospheric code based on MPDATA to accurately produce (in agreement with field/lab data and benchmark computations) the structure of the <strong>convective planetary boundary layer</strong></li>
+<li>When an explicit turbulence model was implemented, MPDATA did not add unnecessary diffusion.</li>
+<li>When no explicit turbulence model was employed the high resolution model appeared to contain an effective SGS model.</li>
+<li>With an explicit turbulence model and when the eddy viscosity is reduced by some factor, MPDATA adds just enough dissipation.</li>
+<li><strong>These numerical experiments show the self-adaptive nature of the high-resolution methods and suggest the physically realistic character of it&#8217;s truncation error</strong></li>
+</ul>
+<p>Validation with LES with and without SGS</p>
+<ul class="simple">
+<li>The accuracy of the high resolution method in LES means a SGS model isn&#8217;t needed.</li>
+<li>In contrast to linear methods, the success of high resolution schemes is due to the <strong>self-adaptiveness</strong> of the scheme during the simulation:<ul>
+<li>with SGS included, the resolved flow is smooth and high resolution is off</li>
+<li>with no SGS, high-resolution scheme adapts the numerics assuring solutions that are as smooth as SGS</li>
+</ul>
+</li>
+</ul>
+<p><strong>The dissipation of high-resolution methods cannot be universally quantified since the advection scheme can be non-dissipative or dissipative, depending on the presence or absence of an explicit SGS model</strong></p>
+<ul class="simple">
+<li><strong>Open Question:</strong> &#8220;The limits of the embedded turbulence modelling approach in the context of under-resolved simulations for wall-bounded flows need to be further investigated&#8221;</li>
+<li><strong>Open Question:</strong> &#8220;In coursely resolved simulations, the presence of unresolved boundary layers in the flow may require explicit models to account for wall forcing&#8221;</li>
+</ul>
+</div>
+<div class="section" id="compressible-open-cavity-flow">
+<h3><a class="toc-backref" href="#id38">4.4.6.4. Compressible Open Cavity Flow</a><a class="headerlink" href="#compressible-open-cavity-flow" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The results in the preceding sections suggest that nothing really prevents implementation of high resolution methods for flows with wall boundaries (<strong>perhaps apart from the need for finer grid resolution in the vicinity of those boundaries</strong>).</li>
+<li>Use of <strong>high resolution methods</strong> can offer better stability and accuracy in coarsely resolved flows even with no turbulence model.</li>
+<li>Hybrid schemes have been used for open cavity flows - combining a Riemann solver and a flux splitting scheme</li>
+</ul>
+<p><strong>the most dissipative scheme carries more weight in the vicinity of discontinuities where more dissipation is required</strong></p>
+<p>At present in industry, under-resolved flows are used because of short turnaround times. In order to compute the compressible turbulent flow, we need to capture:</p>
+<ul class="simple">
+<li>large and small vortical structures</li>
+<li>free shear layers</li>
+<li>transitional flow</li>
+<li>flow separation</li>
+<li>flow re-laminarisation</li>
+<li>shock and rarefaction waves</li>
+</ul>
+<p>The induced oscillatory pressure field from the cavity depends on:</p>
+<ul class="simple">
+<li>geometry</li>
+<li>inflow boundary layer</li>
+<li>freestream velocity</li>
+</ul>
+<p>Previous work has used RANS (<span class="math">\(k-\epsilon\)</span> models) and DNS, but the averaging in RANS may cause concern because <strong>turbulent timescales are much smaller than convective timescales</strong>.</p>
+<p>Cavity flows are characterised by:</p>
+<ul class="simple">
+<li>unsteady boundary layer separation</li>
+<li>instabilities within the shear layer</li>
+<li>dominant acoustic flow oscillations</li>
+</ul>
+<p>An increase in the freestream Mach number also induces &#8220;switching&#8221; of modes, e.g. shear layer mode and wake mode (and is a function of Mach number)</p>
+<p>Shear layer mode occurs at the downstream cavity edge and is subjugated by a single frequency.</p>
+<p>When no explicit SGS is added, a high resolution method will not add unnecessary diffusion.</p>
+</div>
+<div class="section" id="shock-bubble-interaction">
+<h3><a class="toc-backref" href="#id39">4.4.6.5. Shock-bubble Interaction</a><a class="headerlink" href="#shock-bubble-interaction" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>In the case of the inviscid solution the shrinking/disappearance of the bubble material is due entirely to numerical diffusion - means it&#8217;s difficult to compare experiment and simulation</li>
+<li>The details of the simulated flow depending on the numerical scheme employed</li>
+<li>There are strong similarities between the solutions of certain methods</li>
+<li>Some schemes are less diffuse than others</li>
+</ul>
+</div>
+</div>
+<div class="section" id="relation-of-numerics-with-the-physics-of-turbulent-flow-and-it-s-models">
+<h2><a class="toc-backref" href="#id40">4.4.7. Relation of numerics with the physics of turbulent flow and it&#8217;s models</a><a class="headerlink" href="#relation-of-numerics-with-the-physics-of-turbulent-flow-and-it-s-models" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="kolmogorov-spectrum">
+<h3><a class="toc-backref" href="#id41">4.4.7.1. Kolmogorov spectrum</a><a class="headerlink" href="#kolmogorov-spectrum" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The <strong>Kolmogorov spectrum</strong> describes how the <strong>energy density</strong> of turbulent structures decreases rapidly with increasing wave number.</li>
+<li>The <strong>Kolmogorov scale</strong> is the scale at which the viscous dissipation dominates the inertial flow</li>
+<li>The <strong>turbulent cascade process</strong> is the downward transfer of energy from large to small scales. This stops at the Kolmogorov scale, where an eddy is so small it diffuses rapidly.</li>
+<li>Kolmogorov defined a dissipation of kinetic energy that was independent of the coefficient of viscosity in the limit of infinite Re.</li>
+<li>The <strong>average time rate of change of dissipation of kinetic energy</strong>, <span class="math">\(K\)</span> is given as:</li>
+</ul>
+<div class="math" id="equation-average">
+<span class="eqno">(10)</span>\[\langle K_t \rangle l = {5 \over 4} \langle (\Delta u)^3 \rangle\]</div>
+<ul class="simple">
+<li>In homogeneous, isotropic turbulence, this term is proportional to the average velocity difference at a length scale, <span class="math">\(l\)</span> cubed.</li>
+<li>Note that this theory is analytic and independent of viscosity</li>
+<li>This theory provides a basis for the functional form of nonlinear eddy viscosity.</li>
+</ul>
+</div>
+<div class="section" id="energy-transfer">
+<h3><a class="toc-backref" href="#id42">4.4.7.2. Energy transfer</a><a class="headerlink" href="#energy-transfer" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The physics of the <strong>turbulent cascade</strong> is controlled by <strong>the process of dissipation of this energy due to molecular viscosity at macroscopic scales</strong> (larger than the Kolmogorov scales)</li>
+<li>Energy transfer is by <strong>local eddy interactions</strong> - energy extraction happens between energy levels of an order of magnitude difference</li>
+</ul>
+</div>
+<div class="section" id="shocks">
+<h3><a class="toc-backref" href="#id43">4.4.7.3. Shocks</a><a class="headerlink" href="#shocks" title="Permalink to this headline">¶</a></h3>
+<p>Bethe derived the dissipation rate due to the passage of a shock:</p>
+<div class="math" id="equation-dissipation">
+<span class="eqno">(11)</span>\[T \Delta S = {{G \rho^3 c^2} \over 6} (\Delta V)^3\]</div>
+<p>For Burgers&#8217; equation, a similar result may be obtained:</p>
+<div class="math">
+\[\langle K_t \rangle \mathcal{L} = {1 \over 12} \langle (\Delta u)^3 \rangle\]</div>
+<ul class="simple">
+<li>This is an entropy condition for Burgers turbulence, describing the minimum integral amount of inviscid dissipation for a physically meaningful solution.</li>
+<li>This dissipation is produced at the shocks and is a consequence of and proportional to the jump in dependent variables.</li>
+</ul>
+<p>Eyink says that the dissipation of kinetic energy as defined by the Kolmogorov similarity is both <strong>local and integral</strong> - numerical methods can produce:</p>
+<ul class="simple">
+<li>a finite rate of dissipation independent of viscosity</li>
+<li>a local rate of dissipation</li>
+</ul>
+</div>
+<div class="section" id="use-of-high-resolution-methods-to-reproduce-energy-dissipation">
+<h3><a class="toc-backref" href="#id44">4.4.7.4. Use of high resolution methods to reproduce energy dissipation</a><a class="headerlink" href="#use-of-high-resolution-methods-to-reproduce-energy-dissipation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>High resolution methods for hyperbolic conservation laws have been developed to capture with high accuracy the variation of flow and thermodynamic variables occurring across:<ul>
+<li>shock waves</li>
+<li>other discontinuities</li>
+</ul>
+</li>
+<li>These methods aim to correctly reproduce <strong>shock dissipation</strong> <a href="#equation-dissipation">(11)</a></li>
+<li>On the basis of the similarity of Equation <a href="#equation-dissipation">(11)</a> and <a href="#equation-average">(10)</a> it could be argued that high resolution methods also capture <strong>Kolmogorov dissipation</strong> <a href="#equation-average">(10)</a></li>
+</ul>
+</div>
+<div class="section" id="use-of-the-entropy-condition-to-decide-physical-solutions">
+<h3><a class="toc-backref" href="#id45">4.4.7.5. Use of the entropy condition to decide physical solutions</a><a class="headerlink" href="#use-of-the-entropy-condition-to-decide-physical-solutions" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Lax-Wendroff scheme</strong> ensures exact local conservation with proper entropy production</li>
+<li>This states that if there is a method in discrete conservation form that converges, it converges to a <strong>weak solution</strong></li>
+<li>The <strong>entropy condition</strong> is necessary to choose the physically meaningful weak solution among the infinite set of possible weak solutions</li>
+</ul>
+</div>
+<div class="section" id="similarity-between-artificial-viscosity-and-eddy-viscosity">
+<h3><a class="toc-backref" href="#id46">4.4.7.6. Similarity between artificial viscosity and eddy viscosity</a><a class="headerlink" href="#similarity-between-artificial-viscosity-and-eddy-viscosity" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Eddy viscosity from Smagorinsky simplifies to von Neumann-Richtmyer artificial viscosity in one dimension</li>
+<li>The gradient of the von Neumann-Richtmyer artificial viscosity is:</li>
+</ul>
+<div class="math">
+\[{{\partial \sigma} \over {\partial x}} =
+{\partial \over {\partial x}}
+\left [
+-c(\Delta x)^2 {{\partial u} \over {\partial x}}
+\left \vert {{\partial u} \over {\partial x}}  \right \vert
+\right ]\]</div>
+<p>The Smagorinsky model for the SGS &#8220;stress&#8221; in one dimension leads to:</p>
+<div class="math">
+\[{{\partial \sigma} \over {\partial x}} =
+{\partial \over {\partial x}}
+\left [
+-c_s {{\partial u} \over {\partial x}}
+\left \vert {{\partial u} \over {\partial x}}  \right \vert
+\right ]\]</div>
+<p><strong>However, these terms differ in multiple dimensions</strong></p>
+<ul class="simple">
+<li>von Neumann viscosity can be extended to multiple dimensions, but the resulting non-linear viscosity is generally <strong>anisotropic</strong>, but isotropic models for artificial viscosity do exist.</li>
+<li>Other developments turn viscosity off should the flow field be considered to be resolved by numerical derivatives.</li>
+<li>There are also similarities between the Camassa-Holm equations (for dissipation) and entropy production</li>
+</ul>
+</div>
+<div class="section" id="similarity-between-les-subgrid-models-and-high-resolution-models">
+<h3><a class="toc-backref" href="#id47">4.4.7.7. Similarity between LES subgrid models and high resolution models</a><a class="headerlink" href="#similarity-between-les-subgrid-models-and-high-resolution-models" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>High resolution models have an effective subgrid model that is inherently local</li>
+<li>Algebraic form of high resolution models is similar to LES subgrid models with nonlinear eddy viscosity</li>
+</ul>
+</div>
+<div class="section" id="open-questions">
+<h3><a class="toc-backref" href="#id48">4.4.7.8. Open Questions</a><a class="headerlink" href="#open-questions" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The theory for hyperbolic conservation laws in 1D is quite well developed</li>
+<li>Open questions exist in 2D and 3D - e.g. are some well posed, i.e. stable?</li>
+<li>2D solutions involving a vortex sheet show a progression of greater and greater complexity as the mesh is refined.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="conclusions">
+<h2><a class="toc-backref" href="#id49">4.4.8. Conclusions</a><a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>High resolution methods are <strong>implicit</strong> and are motivated by the fact that almost all practical computations in engineering are <strong>under-resolved</strong>.</li>
+<li>Numerics also play a role in terms of accuracy and efficiency - e.g. <strong>numerical dissipation</strong> regularises the flow, allowing shock propagation to be captured realistically, even if not fully.</li>
+</ul>
+<div class="section" id="two-competing-criteria">
+<h3><a class="toc-backref" href="#id50">4.4.8.1. Two competing criteria</a><a class="headerlink" href="#two-competing-criteria" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>High accuracy</li>
+<li>Protection against catastrophic failure due to nonlinear wave steepening or unresolved features</li>
+</ul>
+<p>Methods:</p>
+<ul class="simple">
+<li>Nonlinear mechanisms (limiters) in high resolution methods guard from such catastrophic failures by triggering entropy production.</li>
+</ul>
+</div>
+<div class="section" id="two-key-questions">
+<h3><a class="toc-backref" href="#id51">4.4.8.2. Two key questions</a><a class="headerlink" href="#two-key-questions" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>What criteria should be used to design the nonlinear mechanism that triggers entropy production?</li>
+<li>To what extent numerical dissipation accounts for turbulent flow effects? <strong>Ideally we would like to quantify the numerical dissipation that is added to the computations</strong></li>
+</ul>
+</div>
+<div class="section" id="from-1d-to-multi-dimensional">
+<h3><a class="toc-backref" href="#id52">4.4.8.3. From 1D to multi-dimensional</a><a class="headerlink" href="#from-1d-to-multi-dimensional" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The theory of numerical methods for hyperbolic conservation laws has made significant progress in 1D.</li>
+<li>However, we need to further understand the nonlinear behaviour of numerical methods in multi-dimensional problems</li>
+<li>This non-linear behaviour is closely related to the numerical mechanisms underlying the formation of <strong>spurious solutions</strong> in under-resolved flows.</li>
+</ul>
+</div>
+<div class="section" id="why-do-we-get-spurious-solutions">
+<h3><a class="toc-backref" href="#id53">4.4.8.4. Why do we get spurious solutions?</a><a class="headerlink" href="#why-do-we-get-spurious-solutions" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Generation of spurious vorticities may depend solely on the advection scheme - how numerical dissipation is partitioned between terms in the advection scheme. <strong>However, the exact numerical mechanism is not understood. Why certain schemes show spurious solutions and others do not is an open question</strong></li>
+<li>The definition of the advective velocities in the equations can introduce a <strong>truncation error vorticity source</strong>. However, vorticity analysis of nonlinear approximations is difficult.</li>
+<li>Spurious solutions in under-resolved flows also depend on a <strong>delicate balance of truncation errors</strong> due to wave-speed dependent terms. This balance needs to be understood.</li>
+</ul>
+</div>
+<div class="section" id="high-reynolds-number-near-wall-flows">
+<h3><a class="toc-backref" href="#id54">4.4.8.5. High Reynolds Number Near Wall Flows</a><a class="headerlink" href="#high-reynolds-number-near-wall-flows" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Further validation for near wall flows is required for high resolution methods</li>
+<li>LES based on an explicit turbulence model poses challenges in high Re near wall flows, especially in the case of separation from a gently curved surface.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="noakes.html">4.3. Noakes et al. (2002) &#8220;Streak-line Defect Minimization&#8221;</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="fawehinmi.html">4.5. Fawehinmi et al. (2005) &#8220;Experimental and CFD Analysis of Drop Formation&#8221;</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.8.2. Discretising the Euler Equations &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.8.3. The Riemann Problem" href="the_riemann_problem.html" />
+    <link rel="prev" title="1.8.1. The Euler Equations in Vector Form" href="euler_equations_in_vector_form.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.8.2. Discretising the Euler Equations</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="euler_equations_in_vector_form.html">1.8.1. The Euler Equations in Vector Form</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="the_riemann_problem.html">1.8.3. The Riemann Problem</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="discretising-the-euler-equations">
+<h1>1.8.2. Discretising the Euler Equations<a class="headerlink" href="#discretising-the-euler-equations" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#lax-friedrichs" id="id1">Lax-Friedrichs</a></li>
+<li><a class="reference internal" href="#lax-wendroff" id="id2">Lax-Wendroff</a></li>
+<li><a class="reference internal" href="#richtmyer" id="id3">Richtmyer</a></li>
+<li><a class="reference internal" href="#maccormack" id="id4">MacCormack</a></li>
+</ul>
+</div>
+<p>Using a Central Difference formula for a <strong>vector</strong> function:</p>
+<div class="math">
+\[{{\partial \mathbf{F}(x_i)} \over \partial x}  =
+{{\mathbf{F}(x_{i+1}) - \mathbf{F}(x_{i-1})} \over 2 \Delta x} =
+{{\mathbf{F}_{i+1} - \mathbf{F}_{i-1}} \over 2 \Delta x}\]</div>
+<p>Simply replaced scalar u with vector <span class="math">\(\mathbf{F}\)</span></p>
+<p>In all our schemes, similarly replace the scalar derivative:</p>
+<div class="math">
+\[A = {{d F} \over {d u}}\]</div>
+<p>By the Jacobian matrix:</p>
+<div class="math">
+\[\mathbf{A} = {{d \mathbf{F}} \over {d \mathbf{U}}}\]</div>
+<div class="section" id="lax-friedrichs">
+<h2><a class="toc-backref" href="#id1">1.8.2.1. Lax-Friedrichs</a><a class="headerlink" href="#lax-friedrichs" title="Permalink to this headline">¶</a></h2>
+<p>FTCS n to n+1, with spatial average for u at n</p>
+<div class="math">
+\[\mathbf{U}_i^{n+1} = {1 \over 2}(\mathbf{U}_{i+1}^n + \mathbf{U}_{i-1}^n) +
+{\Delta t \over {2 \Delta x}} ({\mathbf{F}_{i+1}^n - \mathbf{F}_{i-1}^n})\]</div>
+</div>
+<div class="section" id="lax-wendroff">
+<h2><a class="toc-backref" href="#id2">1.8.2.2. Lax-Wendroff</a><a class="headerlink" href="#lax-wendroff" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Taylor at n+1,</p>
+</li>
+<li><p class="first">First derivative - replace du/dt with -dF/dx and then CS at i</p>
+</li>
+<li><dl class="first docutils">
+<dt>Second derivative - replace d/dt (du/dt) with d/dt(-dF/dx),</dt>
+<dd><ul class="first last simple">
+<li>then replace d/dx (-dF/dt) with d/dx(A dF/dx)</li>
+<li>then outer derivative is CS at i+0.5 and CS at i-0.5</li>
+<li>inner derivative is CS at i+0.5 and i-0.5</li>
+<li>Jacobian is average at i+0.5 and i-0.5</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="math">
+\[\mathbf{U}_i^{n+1} = \mathbf{U}_i^n - {\Delta t \over {2 \Delta x}}({\mathbf{F}_{i+1}^n - \mathbf{F}_{i-1}^n}) +
+{{\Delta t^2} \over {2 \Delta x^2}} \left[ {\mathbf{A}_{i+{1/2}}^n(\mathbf{F}_{i+1}^n - \mathbf{F}_i^n) -
+                                        \mathbf{A}_{i-{1/2}}^n(\mathbf{F}_i^n - \mathbf{F}_{i-1}^n)} \right]\]</div>
+<p>e.g.</p>
+<div class="math">
+\[\mathbf{A}_{i+{1/2}}^n = {1 \over 2}( \mathbf{A}_{i+1}^n + \mathbf{A}_i^n )\]</div>
+<div class="math">
+\[\mathbf{A}_{i-{1/2}}^n = {1 \over 2}( \mathbf{A}_i^n + \mathbf{A}_{i-1}^n )\]</div>
+<p>Note that <span class="math">\(\mathbf{A}\)</span> has 9 entries and so evaluating it is expensive</p>
+<p>Plus we have Matrix-Vector multiplication - thus this method is expensive.</p>
+</div>
+<div class="section" id="richtmyer">
+<h2><a class="toc-backref" href="#id3">1.8.2.3. Richtmyer</a><a class="headerlink" href="#richtmyer" title="Permalink to this headline">¶</a></h2>
+<p>Step 1: Predictor - Lax-Friedrichs: FTCS n to n+1/2, at i=i+1/2, with spatial average for u at n):</p>
+<div class="math">
+\[\mathbf{U}_{i+1/2}^{n+1/2} = {1 \over 2}(\mathbf{U}_{i+1}^n + \mathbf{U}_{i}^n) -
+{\Delta t \over {2 \Delta x}} ({\mathbf{F}_{i+1}^n - \mathbf{F}_{i}^n})\]</div>
+<p>Step 2 (Corrector - Leapfrog: FTCS n to n+1)</p>
+<div class="math">
+\[\mathbf{U}_{i}^{n+1} = \mathbf{U}_i^n - {\Delta t \over {\Delta x}}({\mathbf{F}_{i+1/2}^{n+1/2} - \mathbf{F}_{i-1/2}^{n+1/2}})\]</div>
+</div>
+<div class="section" id="maccormack">
+<h2><a class="toc-backref" href="#id4">1.8.2.4. MacCormack</a><a class="headerlink" href="#maccormack" title="Permalink to this headline">¶</a></h2>
+<p>Step 1 (Predictor - FTFS, n to n+1, with <span class="math">\(\Delta t\)</span>):</p>
+<div class="math">
+\[\mathbf{\tilde{U}}_i^{n+1} = \mathbf{U}_i^n - {{\Delta t} \over {\Delta x}}({\mathbf{F}_{i+1}^n - \mathbf{F}_i^n})\]</div>
+<p>Step 2 (Corrector - FTBS, n+1/2 to n+1, with <span class="math">\(\Delta t/2\)</span>):</p>
+<div class="math">
+\[\mathbf{U}_i^{n+1} = {1 \over 2} (\mathbf{\tilde{U}}_i^{n+1} + \mathbf{U}_i^n) -
+{{\Delta t} \over {2 \Delta x}}({\mathbf{\tilde{F}}_i^{n+1} - \mathbf{\tilde{F}}_{i-1}^{n+1}})\]</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="euler_equations_in_vector_form.html">1.8.1. The Euler Equations in Vector Form</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="the_riemann_problem.html">1.8.3. The Riemann Problem</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

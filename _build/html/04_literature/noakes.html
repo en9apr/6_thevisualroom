@@ -1,0 +1,549 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.3. Noakes et al. (2002) “Streak-line Defect Minimization” &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="4. Literature" href="literature.html" />
+    <link rel="next" title="4.4. Drikakis (2003) “Advances in Turbulent Flow Computations”" href="drikakis.html" />
+    <link rel="prev" title="4.2. Thompson et al. (2001) “Investigation of Rigid-Roll Coating”" href="thompson.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.3. Noakes et al. (2002) “Streak-line Defect Minimization”</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="thompson.html">4.2. Thompson et al. (2001) &#8220;Investigation of Rigid-Roll Coating&#8221;</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="drikakis.html">4.4. Drikakis (2003) &#8220;Advances in Turbulent Flow Computations&#8221;</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="noakes-et-al-2002-streak-line-defect-minimization">
+<h1>4.3. Noakes et al. (2002) &#8220;Streak-line Defect Minimization&#8221;<a class="headerlink" href="#noakes-et-al-2002-streak-line-defect-minimization" title="Permalink to this headline">¶</a></h1>
+<p>Noakes, C.J., Gaskell P.H., Thompson, H.M. and Ikin J.B. &#8220;Streak-line defect minimization in multi-layer slide coating systems&#8221;, Trans IChemE Part A, vol 80, 2002.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#abstract" id="id3">Abstract</a></li>
+<li><a class="reference internal" href="#introduction" id="id4">Introduction</a><ul>
+<li><a class="reference internal" href="#aims-of-current-study" id="id5">Aims of current study</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#experimental-methods" id="id6">Experimental Methods</a><ul>
+<li><a class="reference internal" href="#two-dimensional-flow-apparatus" id="id7">Two dimensional flow apparatus</a></li>
+<li><a class="reference internal" href="#cylindrical-flow-apparatus" id="id8">Cylindrical flow apparatus</a></li>
+<li><a class="reference internal" href="#method-for-visualising-specific-regions" id="id9">Method for visualising specific regions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mathematical-modelling" id="id10">Mathematical Modelling</a><ul>
+<li><a class="reference internal" href="#overall-equations-and-assumptions" id="id11">Overall equations and assumptions</a></li>
+<li><a class="reference internal" href="#single-layer-slot-exit-flow" id="id12">Single-layer slot exit flow</a></li>
+<li><a class="reference internal" href="#double-layer-slot-exit-flow" id="id13">Double-layer slot exit flow</a></li>
+<li><a class="reference internal" href="#bead-forming-flow" id="id14">Bead forming flow</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#results" id="id15">Results</a><ul>
+<li><a class="reference internal" href="#id1" id="id16">Single layer slot exit flow</a></li>
+<li><a class="reference internal" href="#slot-exit-flow-for-two-merging-layers" id="id17">Slot exit flow for two merging layers</a></li>
+<li><a class="reference internal" href="#id2" id="id18">Bead forming flow</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusions" id="id19">Conclusions</a><ul>
+<li><a class="reference internal" href="#in-slot-exit-region" id="id20">In slot exit region</a></li>
+<li><a class="reference internal" href="#in-bead-forming-region" id="id21">In bead forming region</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="abstract">
+<h2><a class="toc-backref" href="#id3">4.3.1. Abstract</a><a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h2>
+<p>This paper looks at the computational and experimental minimisation of <strong>streak-lines</strong> in <strong>slide coating</strong> systems.</p>
+<p>The Problem: Eddies occur in critical regions which cause streaklines</p>
+<p>The Solution: Minor geometrical adjustments and/or changes to wetting characteristics - especially in relation to static contact angles can:</p>
+<ul class="simple">
+<li>eliminate the occurrence of eddies</li>
+<li>reduce significantly associated surface deposit growth</li>
+<li>avoid formation of streak lines</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id4">4.3.2. Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Problem for coating - avoid defects in:</p>
+<ul class="simple">
+<li>Liquid preparation</li>
+<li>Deposition</li>
+<li>Drying</li>
+</ul>
+<p>The source of the defect:</p>
+<ul class="simple">
+<li>The bulk flow</li>
+<li>Instability - forced (uneven pumping) or self-excited (ribbing)</li>
+</ul>
+<p>Stable operating conditions <span class="math">\(\Rightarrow\)</span> deposit-generated defects</p>
+<p>Liquid layers are formed by:</p>
+<ol class="arabic simple">
+<li>Pumping liquid out of two feed slots down an inclined surface</li>
+<li>Liquid being transferred from the slide lip to a moving web/substrate, stabilized by a small suction pressure</li>
+</ol>
+<p>Avoid:</p>
+<ul class="simple">
+<li>Streak line defects</li>
+<li>Band defects</li>
+</ul>
+<p>Streak-lines caused by:</p>
+<ul class="simple">
+<li>Nicks/non-uniformities in the coating head</li>
+<li>Particles trapped in feed slots</li>
+<li>Build up of deposits</li>
+</ul>
+<p>Banding caused by:</p>
+<ul class="simple">
+<li>Uneven flow</li>
+<li>Poor web handling</li>
+<li>Presence of a wavy contact line</li>
+</ul>
+<p>Fluid dynamics reasons for streak-lines:</p>
+<ul class="simple">
+<li>Existence of eddies</li>
+</ul>
+<p>Eddies cause:</p>
+<ul class="simple">
+<li>Trapped foreign particles</li>
+<li>Bubbles</li>
+<li>Solid deposits</li>
+</ul>
+<p>Eddies occur in:</p>
+<ul class="simple">
+<li>Bead forming region</li>
+<li>In static contact line</li>
+</ul>
+<p>Eddies affected by:</p>
+<ul class="simple">
+<li>Slide inclination</li>
+<li>Magnitude of static contact angle</li>
+<li>Cleaning of the slide lip</li>
+<li>Lip&#8217;s radius of curvature</li>
+</ul>
+<p>Particle trapping caused by:</p>
+<ul class="simple">
+<li>Lack of interfacial tension</li>
+<li>Break off of solid deposits at upper exit slot</li>
+</ul>
+<p>Correlation exists between:</p>
+<ul class="simple">
+<li>Streak-line defects</li>
+<li>Surface deposits</li>
+<li>Flow structure in vicinity of exit slots</li>
+</ul>
+<div class="section" id="aims-of-current-study">
+<h3><a class="toc-backref" href="#id5">4.3.2.1. Aims of current study</a><a class="headerlink" href="#aims-of-current-study" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Link between deposit-generated streak-line defects and nature of associated underlying flow structure</li>
+<li>Provide data to assist in predicting whether defects will occur</li>
+</ol>
+<p>Physics Investigated:</p>
+<ul class="simple">
+<li>Single and multi-layer flows</li>
+<li>Effect of slot exit</li>
+<li>Slide lip geometry</li>
+<li>Phenomena of back-wetting caused by static contact line migration past the upper slot corner</li>
+</ul>
+</div>
+</div>
+<div class="section" id="experimental-methods">
+<h2><a class="toc-backref" href="#id6">4.3.3. Experimental Methods</a><a class="headerlink" href="#experimental-methods" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Single layer slot flow <span class="math">\(\Rightarrow\)</span> upper slot exit</li>
+</ul>
+<p>Experimental results:</p>
+<ol class="arabic simple">
+<li>Free surface profiles</li>
+<li>Visualization of streamlines</li>
+<li>Velocity distributions</li>
+</ol>
+<div class="section" id="two-dimensional-flow-apparatus">
+<h3><a class="toc-backref" href="#id7">4.3.3.1. Two dimensional flow apparatus</a><a class="headerlink" href="#two-dimensional-flow-apparatus" title="Permalink to this headline">¶</a></h3>
+<p>Geometry variation:</p>
+<ul class="simple">
+<li>Square edge</li>
+<li>Chamfered edge</li>
+</ul>
+<p>Method for visualization:</p>
+<ul class="simple">
+<li><strong>Hydrogen bubble technique</strong></li>
+<li>Local velocities measured by including a chopper in the illumination</li>
+<li>Deposit growth mimics by injecting a hardening agent into the flow</li>
+</ul>
+</div>
+<div class="section" id="cylindrical-flow-apparatus">
+<h3><a class="toc-backref" href="#id8">4.3.3.2. Cylindrical flow apparatus</a><a class="headerlink" href="#cylindrical-flow-apparatus" title="Permalink to this headline">¶</a></h3>
+<p>Variables:</p>
+<ul class="simple">
+<li>Surface finish</li>
+<li>Top corner profile</li>
+<li>Step height</li>
+</ul>
+</div>
+<div class="section" id="method-for-visualising-specific-regions">
+<h3><a class="toc-backref" href="#id9">4.3.3.3. Method for visualising specific regions</a><a class="headerlink" href="#method-for-visualising-specific-regions" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Bouncing probe method</strong> used to calculate surface profile at slot exit</li>
+<li>Upper meniscus: Same method used in bead forming region between lip and moving web</li>
+<li>Lower meniscus: Illumination with a sheet of light from a laser diode source</li>
+<li>Profile of interface was determined by casting a shadow of a surface bubble track (the lower layer scattered light, which helped)</li>
+<li>Streakline formation was assessed by: coating many rolls under known conditions and recording the average number of sharp streak-lines per unit width.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="mathematical-modelling">
+<h2><a class="toc-backref" href="#id10">4.3.4. Mathematical Modelling</a><a class="headerlink" href="#mathematical-modelling" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="overall-equations-and-assumptions">
+<h3><a class="toc-backref" href="#id11">4.3.4.1. Overall equations and assumptions</a><a class="headerlink" href="#overall-equations-and-assumptions" title="Permalink to this headline">¶</a></h3>
+<p>Assumptions:</p>
+<ul class="simple">
+<li>Steady</li>
+<li>Isothermal</li>
+<li>2D</li>
+<li>Incompressible</li>
+<li>Inelastic</li>
+<li>Coating liquids are often <strong>shear thinning</strong> however these effects are small - so assuming a Newtonian fluid is valid</li>
+</ul>
+<p>Equations:</p>
+<ul class="simple">
+<li>2D Navier-Stokes</li>
+<li>Continuity Equation</li>
+</ul>
+<p>Dimensionless Numbers:</p>
+<ul class="simple">
+<li>Reynolds Number</li>
+<li>Stokes Number</li>
+</ul>
+<p>Complications:</p>
+<ul class="simple">
+<li>Presence of free surfaces</li>
+<li>Internal interfaces</li>
+</ul>
+<p><strong>For multi-layer systems, only a double layer system is considered as it shows the key features, namely:</strong></p>
+<ul class="simple">
+<li>Upper and lower free surfaces</li>
+<li>One internal interface</li>
+<li>Presence of both static and dynamic contact lines</li>
+</ul>
+<p><strong>Approach is a Galerkin weighted residual formulation</strong></p>
+</div>
+<div class="section" id="single-layer-slot-exit-flow">
+<h3><a class="toc-backref" href="#id12">4.3.4.2. Single-layer slot exit flow</a><a class="headerlink" href="#single-layer-slot-exit-flow" title="Permalink to this headline">¶</a></h3>
+<p>Geometry:</p>
+<ul class="simple">
+<li>Chamfered downstream corner</li>
+<li>Raised back slot</li>
+<li>Modified slot exit channel</li>
+</ul>
+<p>Non-dimensional version of Navier-Stokes, length scale and velocity scale are:</p>
+<ul class="simple">
+<li>Slot width</li>
+<li>Flow rate per unit width / Slot width</li>
+</ul>
+<p>The velocity profile at the inlet is given by:</p>
+<ul class="simple">
+<li><strong>1D form of Navier-Stokes Equations</strong></li>
+</ul>
+<p>Outlet boundary obtained using:</p>
+<ul class="simple">
+<li>Stress evaluation method</li>
+</ul>
+<p>Two cases:</p>
+<ol class="arabic simple">
+<li>Static contact <strong>line</strong> is pinned at the corner, while static contact <strong>angle</strong> at slot exit is predicted</li>
+<li>Static contact <strong>angle</strong> is specified, while static contact <strong>line</strong> is predicted</li>
+</ol>
+</div>
+<div class="section" id="double-layer-slot-exit-flow">
+<h3><a class="toc-backref" href="#id13">4.3.4.3. Double-layer slot exit flow</a><a class="headerlink" href="#double-layer-slot-exit-flow" title="Permalink to this headline">¶</a></h3>
+<p>More complex than single-layer slot exit flow, it has:</p>
+<ul class="simple">
+<li>Internal interface - the nature of the boundary conditions which apply at an internal static contact line still remains a matter of debate</li>
+<li>Inter-layer diffusion occurs</li>
+</ul>
+<p>Assume:</p>
+<ul class="simple">
+<li>Diffusion process is negligible</li>
+<li>No interfacial tension - velocity is continuous, but pressure discontinuous</li>
+</ul>
+<p>Difficulty:</p>
+<ul class="simple">
+<li>Lack of interfacial tension results in an <strong>over-specified problem</strong> if the contact angle is imposed</li>
+</ul>
+<p>Solution 1:</p>
+<ul>
+<li><p class="first">If interfacial contact line is known to locate <strong>close to the corner</strong>, the preferred course of action is to pin it there</p>
+</li>
+<li><p class="first">If interfacial contact line locates away from the corner, solutions include:</p>
+<blockquote>
+<div><ul class="simple">
+<li>geometric extrapolation</li>
+<li>imposition of pressure continuity</li>
+<li>imposition of <strong>small interfacial tension</strong> which decays to zero within a short distance downstream, this enabling the specification of a <strong>contact angle</strong></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Macroscopic flow field is independent of the choice of method, however <strong>adding small interfacial tension was chosen</strong></p>
+<p>Boundary conditions:</p>
+<ul class="simple">
+<li>Velocity profile at slot inlet is obtained as for single layer case</li>
+<li>Outflow determined by using stress evaluation method for 2 layers</li>
+<li>Inflow at upper slot determined from solution of 1D Navier Stokes solution</li>
+</ul>
+</div>
+<div class="section" id="bead-forming-flow">
+<h3><a class="toc-backref" href="#id14">4.3.4.4. Bead forming flow</a><a class="headerlink" href="#bead-forming-flow" title="Permalink to this headline">¶</a></h3>
+<p>Boundary conditions:</p>
+<ul class="simple">
+<li>Inlet velocity profile obtained from 1D solution to Navier-Stokes equations</li>
+<li>Zero traction condition applied at outlet</li>
+</ul>
+<p>Physics:</p>
+<ul class="simple">
+<li>Simplification is possible via lack of internal contact line</li>
+<li>Lower free surface meets slide feed device at static contact line</li>
+<li>Lower free surface meets moving web at dynamic contact line</li>
+<li>Static contact line is rarely pinned to the tip of the slide feed device, so is computed</li>
+<li>Static contact angle is prescribed</li>
+</ul>
+<p>Difficulty:</p>
+<ul class="simple">
+<li>No slip hypothesis breaks down near dynamic contact angle</li>
+</ul>
+<p>Solution:</p>
+<ul class="simple">
+<li>Dynamic contact angle is prescribed</li>
+<li>This allows slip between the web and the liquid close to the dynamic contact line</li>
+</ul>
+</div>
+</div>
+<div class="section" id="results">
+<h2><a class="toc-backref" href="#id15">4.3.5. Results</a><a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3><a class="toc-backref" href="#id16">4.3.5.1. Single layer slot exit flow</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Eddy physics:</p>
+<ul class="simple">
+<li>The top, layer forming slot can be responsible for disturbances</li>
+<li>Flow near the static contact line would be recirculating in nature</li>
+<li>Agreement between theory and experiment is good</li>
+<li>A slow recirculation near the contact line is predicted when a high backstep is used</li>
+</ul>
+<p>Experimental proof of eddy presence causing streak lines:</p>
+<ul class="simple">
+<li>Gelatin containing hardening agent introduced into flow</li>
+<li>Hardened deposit found in eddy generating region</li>
+<li>Mechanism for generating streaklines was the gradual formation of brittle deposit due to long residence time associated with eddy presence.</li>
+<li>Deposits were dislodged by periodic cleaning to form minute fragments, which then produced streaklines</li>
+</ul>
+<p>Back wetting: <strong>migration of contact line upstream</strong>:</p>
+<ul class="simple">
+<li>Even a small increase in flowrate causes back wetting</li>
+</ul>
+<p>Implications of back wetting:</p>
+<ul class="simple">
+<li>Can cause the contact line to be other than straight</li>
+<li>Can cause recirculation near the static contact line</li>
+<li>Both of the above are potential for defect formation</li>
+</ul>
+<p>Axi-symmetric rig:</p>
+<ul class="simple">
+<li><strong>Question</strong> What are the maximum sustainable flow rates before back wetting occurs for three different slot exit designs?</li>
+</ul>
+<p><strong>Method 1</strong> in axi-symmetric rig:</p>
+<ul class="simple">
+<li>Cut back the top face to form a sharper edge</li>
+<li>Use a hydrophobic coating on the top face</li>
+</ul>
+<p>Advantages of this:</p>
+<ul class="simple">
+<li>Approximately double the maximum sustainable flow rate before back wetting occurs</li>
+</ul>
+<p>Disadvantages:</p>
+<ul class="simple">
+<li>Sharp top edge is impractical, due to hazard and difficult machining</li>
+</ul>
+<p><strong>Method 2</strong> in axi-symmetric rig:</p>
+<ul class="simple">
+<li>Height of slot is reduced</li>
+<li>Upstream of slide coated to prevent back wetting</li>
+</ul>
+<p>Advantages of this:</p>
+<ul class="simple">
+<li>Causes static contact angle to increase to about 90 degrees</li>
+<li>Substantial reduction in deposit growth</li>
+<li><strong>Question</strong> How is the flow structure affected by flow properties?</li>
+<li>Reducing viscosity increases eddy size near downstream slot exit</li>
+<li>Increasing flux also increases eddy size</li>
+</ul>
+<p>Operability diagram:</p>
+<ul class="simple">
+<li>Parameters: Reynolds Number and Capillary Number</li>
+<li>Indicates operability window for a particular slot geometry</li>
+<li>Desirable range: Low Re and Medium to High Ca</li>
+</ul>
+<p>Operability diagram <span class="math">\(\Rightarrow\)</span> to coat a low viscosity liquid, the slot geometry must be changed to enable eddy free regime</p>
+<p>Geometric changes:</p>
+<ol class="arabic simple">
+<li>Chamfered slot exit <span class="math">\(\Rightarrow\)</span> recirculations are going to be small</li>
+<li>Stepped slot:<ul>
+<li>Decrease in liquid velocity and its associated momentum due to widening the slot in turn leads to a reduction in size of eddies</li>
+<li>Widening slot on upstream side is better than widening slot on downstream side</li>
+<li>Sharp step may generate eddies <span class="math">\(Rightarrow\)</span> widening slot gradually or using chamfer is better</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="slot-exit-flow-for-two-merging-layers">
+<h3><a class="toc-backref" href="#id17">4.3.5.2. Slot exit flow for two merging layers</a><a class="headerlink" href="#slot-exit-flow-for-two-merging-layers" title="Permalink to this headline">¶</a></h3>
+<p>Comparison with numerical simulations and:</p>
+<ol class="arabic simple">
+<li>Two layer flow experiments for the case of a chamfered slot with identical layers of aqueous glycerine</li>
+<li>Free surface and internal interface profiles for flow out of a chamfered slot</li>
+</ol>
+<p>Good comparison.</p>
+<p>A parametric study showed that fluxes and viscosities have greatest influence on flow structure:</p>
+<ul class="simple">
+<li>When upper flux <span class="math">\(\lt\)</span> lower flux, then increases in upper flux cause minimal change</li>
+<li>When upper flux <span class="math">\(\lt\)</span> lower flux, then eddies occur upstream</li>
+</ul>
+<p>Geometric study:</p>
+<ul class="simple">
+<li>Small chamfer reduces size of downstream eddy</li>
+<li>Larger chamfers reduce size of upstream and downstream eddies to undetectable sizes</li>
+</ul>
+<p>Curved diffuser:</p>
+<ul class="simple">
+<li>Flow is free from eddies</li>
+<li>Layer thicknesses change smoothly without humps observed previously</li>
+</ul>
+<p><strong>Why don&#8217;t they use curved diffusers? Too expensive? Hard to clean/manufacture?</strong></p>
+<p><strong>Maybe it&#8217;s the sharp edge - could be a hazard?</strong></p>
+</div>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id18">4.3.5.3. Bead forming flow</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Validation of numerical model against:</p>
+<ul class="simple">
+<li>Experimental upper and lower free surface profiles</li>
+</ul>
+<p>Eddies can occur in bead forming region and are increased by:</p>
+<ul class="simple">
+<li>Coating gap increase</li>
+<li>Suction applied to lower meniscus is increased</li>
+</ul>
+<p>Eddies cause:</p>
+<ul class="simple">
+<li>Prolonged residence time of coating liquid within the recirculation region, resulting in deposits forming at the lip face</li>
+<li>The deposits become grazed and break off by the passage of the web splices</li>
+<li>This leads to sharp streak lines</li>
+</ul>
+<p>The model requires:</p>
+<ul class="simple">
+<li>Sufficiently refined computational mesh in the lower free surface region</li>
+</ul>
+<p>Physics:</p>
+<ul class="simple">
+<li>Correlation between primary eddy strength and number of sharp streaklines per metre width</li>
+</ul>
+<p>Affected by:</p>
+<ul class="simple">
+<li>Static contact angle</li>
+<li>Lip radius</li>
+</ul>
+<p>Practical advice:</p>
+<ul class="simple">
+<li>Maintain a lip free of mechanical imperfections</li>
+<li>Ensure the surface properties of the lip are such that a high static contact angle is possible</li>
+<li>Lip radius is also an important factor</li>
+</ul>
+</div>
+</div>
+<div class="section" id="conclusions">
+<h2><a class="toc-backref" href="#id19">4.3.6. Conclusions</a><a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Link between:</li>
+</ol>
+<ul class="simple">
+<li>surface deposit growth at both slot exits and the bead forming region</li>
+</ul>
+<p>and..</p>
+<ul class="simple">
+<li>streak line defects</li>
+</ul>
+<ol class="arabic simple" start="2">
+<li>Eddies close to the static contact lines are the cause of the deposit growth</li>
+<li>Two key parameters that determine flow structure:</li>
+</ol>
+<ul class="simple">
+<li>Liquid viscosity</li>
+<li>Flux</li>
+</ul>
+<div class="section" id="in-slot-exit-region">
+<h3><a class="toc-backref" href="#id20">4.3.6.1. In slot exit region</a><a class="headerlink" href="#in-slot-exit-region" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>To minimise/prevent eddies modify slot exit geometry using curvature, chamfers and/or a diffuser</li>
+</ul>
+</div>
+<div class="section" id="in-bead-forming-region">
+<h3><a class="toc-backref" href="#id21">4.3.6.2. In bead forming region</a><a class="headerlink" href="#in-bead-forming-region" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>An area close to static contact line at the junction of the lower free surface and underside of lip surface is where eddies form</li>
+<li>Eddies will exist near the static contact line if the static contact angle is less than 40 degrees <span class="math">\(\Rightarrow\)</span> regular cleaning of the surface of the underside lip region is needed to avoid solid deposition</li>
+<li>Or increase static contact angle with a pre-surface treatment, thus weakening eddy structure.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="thompson.html">4.2. Thompson et al. (2001) &#8220;Investigation of Rigid-Roll Coating&#8221;</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="drikakis.html">4.4. Drikakis (2003) &#8220;Advances in Turbulent Flow Computations&#8221;</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

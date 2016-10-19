@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.8.1. The Euler Equations in Vector Form &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.8.2. Discretising the Euler Equations" href="discrete_euler.html" />
+    <link rel="prev" title="1.7.1. Tri-Diagonal Matrix Algorithm" href="tri_diagonal_matrix.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.8.1. The Euler Equations in Vector Form</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="tri_diagonal_matrix.html">1.7.1. Tri-Diagonal Matrix Algorithm</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="discrete_euler.html">1.8.2. Discretising the Euler Equations</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="the-euler-equations-in-vector-form">
+<h1>1.8.1. The Euler Equations in Vector Form<a class="headerlink" href="#the-euler-equations-in-vector-form" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#euler-equations-in-strong-conservative-form-in-1d-scalar-notation" id="id1">Euler Equations in Strong Conservative Form in 1D (Scalar Notation)</a><ul>
+<li><a class="reference internal" href="#conservation-of-mass" id="id2">Conservation of Mass</a></li>
+<li><a class="reference internal" href="#conservation-of-momentum" id="id3">Conservation of Momentum</a></li>
+<li><a class="reference internal" href="#conservation-of-energy" id="id4">Conservation of Energy</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#euler-equations-in-strong-conservative-form-in-1d-vector-notation" id="id5">Euler Equations in Strong Conservative Form in 1D (Vector Notation)</a><ul>
+<li><a class="reference internal" href="#solution-vector" id="id6">Solution Vector <span class="math">\(\mathbf{U}\)</span></a></li>
+<li><a class="reference internal" href="#flux-vector" id="id7">Flux Vector <span class="math">\(\mathbf{F}\)</span></a></li>
+<li><a class="reference internal" href="#euler-equations-in-vector-notation" id="id8">Euler Equations in Vector Notation</a></li>
+<li><a class="reference internal" href="#the-jacobian-matrix-linearisation-of-the-system" id="id9">The Jacobian Matrix: Linearisation of the System</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="euler-equations-in-strong-conservative-form-in-1d-scalar-notation">
+<h2><a class="toc-backref" href="#id1">1.8.1.1. Euler Equations in Strong Conservative Form in 1D (Scalar Notation)</a><a class="headerlink" href="#euler-equations-in-strong-conservative-form-in-1d-scalar-notation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="conservation-of-mass">
+<h3><a class="toc-backref" href="#id2">Conservation of Mass</a><a class="headerlink" href="#conservation-of-mass" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[{\partial \rho \over \partial t} + {\partial \over \partial x}(\rho u) = 0\]</div>
+<p><span class="math">\(\rho u\)</span> is conserved across the shock</p>
+</div>
+<div class="section" id="conservation-of-momentum">
+<h3><a class="toc-backref" href="#id3">Conservation of Momentum</a><a class="headerlink" href="#conservation-of-momentum" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[{\partial \over \partial t}(\rho u) + {\partial \over \partial x}(\rho u^2 + p) = 0\]</div>
+<p><span class="math">\(u\)</span> is the transported quantity</p>
+<p><span class="math">\(\rho u\)</span> is conserved across the shock</p>
+<p><span class="math">\(\rho u^2 + p\)</span> is also conserved across the shock</p>
+</div>
+<div class="section" id="conservation-of-energy">
+<h3><a class="toc-backref" href="#id4">Conservation of Energy</a><a class="headerlink" href="#conservation-of-energy" title="Permalink to this headline">¶</a></h3>
+<p>We also need to work with the energy equation:</p>
+<div class="math">
+\[e_T(x,t) = e(x,t) + {u^2 \over 2}(x,t)\]</div>
+<p>where:</p>
+<p><span class="math">\(e_T\)</span> = specific total energy</p>
+<p><span class="math">\(e(x,t)\)</span> = internal energy = heat added <span class="math">\(q\)</span> - work done <span class="math">\(p \over \rho\)</span></p>
+<p><span class="math">\({u^2 \over 2}(x,t)\)</span> = kinetic energy</p>
+<p>Enthalpy change is the amount of heat content added to the system (by the shock) at constant pressure - <strong>is this valid if the pressure is not constant?</strong> - possibly, as we are computing total enthalpy:</p>
+<div class="math">
+\[h_T(x,t) = e_T + {p \over \rho} = h + {u^2 \over 2}\]</div>
+<p>where:</p>
+<p><span class="math">\(h_T\)</span> = specific total enthalpy</p>
+<p><span class="math">\(e_T\)</span> = specific total energy</p>
+<p><span class="math">\(h\)</span> = enthalpy <span class="math">\(h = e + {p \over \rho}\)</span></p>
+<div class="figure align-center">
+<img alt="../_images/enthalpy.png" src="../_images/enthalpy.png" />
+</div>
+<p>Giving the Conservation of Energy:</p>
+<div class="math">
+\[{\partial \over \partial t}(\rho e_T) + {\partial \over \partial x}(\rho u e_T + pu) =
+{\partial \over \partial t}(\rho e_T) + {\partial \over \partial x}(\rho u h_T) =  0\]</div>
+<p>Interpretation:</p>
+<ul class="simple">
+<li>Specific total energy <span class="math">\(e_T\)</span> is the transported quantity</li>
+<li>The terms <span class="math">\(\rho e_T\)</span> and <span class="math">\(\rho u e_T + pu\)</span> are conserved across the shock</li>
+<li><span class="math">\(\rho u h_T\)</span> is also conserved across the shock (by the definition of enthalpy) <strong>Question: do we solve for enthalpy or energy or both?</strong></li>
+</ul>
+<p>About the source term:</p>
+<ul class="simple">
+<li>We have included the source term with the convection term in <strong>strong conservative form</strong></li>
+<li>The source term is the net rate of work done by the pressure (simple thought - Pressure x Area x Velocity = Force x Distance / Time)</li>
+</ul>
+<p>In 1D the independent variable <span class="math">\(u\)</span> is a scalar i.e. it only has one value or component at one point.</p>
+</div>
+</div>
+<div class="section" id="euler-equations-in-strong-conservative-form-in-1d-vector-notation">
+<h2><a class="toc-backref" href="#id5">1.8.1.2. Euler Equations in Strong Conservative Form in 1D (Vector Notation)</a><a class="headerlink" href="#euler-equations-in-strong-conservative-form-in-1d-vector-notation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="solution-vector">
+<h3><a class="toc-backref" href="#id6">Solution Vector <span class="math">\(\mathbf{U}\)</span></a><a class="headerlink" href="#solution-vector" title="Permalink to this headline">¶</a></h3>
+<p>Define a column vector of conserved variables:</p>
+<div class="math">
+\[\begin{split}\mathbf{U} =
+\begin{bmatrix}
+\rho \\
+\rho u \\
+\rho e_T
+\end{bmatrix}\end{split}\]</div>
+</div>
+<div class="section" id="flux-vector">
+<h3><a class="toc-backref" href="#id7">Flux Vector <span class="math">\(\mathbf{F}\)</span></a><a class="headerlink" href="#flux-vector" title="Permalink to this headline">¶</a></h3>
+<p>We can also define a flux vector:</p>
+<div class="math">
+\[\begin{split}\mathbf{F} =
+\begin{bmatrix}
+\rho u \\
+\rho u^2 + p \\
+\rho u e_T + pu
+\end{bmatrix} =
+\begin{bmatrix}
+\rho u \\
+\rho u^2 + p \\
+\rho u h_T
+\end{bmatrix}\end{split}\]</div>
+<p>Refer to the components of <span class="math">\(\mathbf{F}\)</span> as <span class="math">\(F_1\)</span>, <span class="math">\(F_2\)</span> and <span class="math">\(F_3\)</span>, representing:</p>
+<p><span class="math">\(F_1 =  \rho u\)</span> = Mass Flux</p>
+<p><span class="math">\(F_2 = \rho u^2 + p\)</span> = Momentum Flux + Pressure Force</p>
+<p><span class="math">\(F_3 =  \rho u e_T + pu\)</span> = Total Energy Flux + Pressure Work</p>
+<p>We call <span class="math">\(\mathbf{F}\)</span> a flux vector, but it includes pressure effects</p>
+</div>
+<div class="section" id="euler-equations-in-vector-notation">
+<h3><a class="toc-backref" href="#id8">Euler Equations in Vector Notation</a><a class="headerlink" href="#euler-equations-in-vector-notation" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[{\partial \mathbf{U} \over \partial t} + {\partial \mathbf{F} \over \partial x} = 0\]</div>
+</div>
+<div class="section" id="the-jacobian-matrix-linearisation-of-the-system">
+<h3><a class="toc-backref" href="#id9">The Jacobian Matrix: Linearisation of the System</a><a class="headerlink" href="#the-jacobian-matrix-linearisation-of-the-system" title="Permalink to this headline">¶</a></h3>
+<p><span class="math">\(\mathbf{F}\)</span> can be written as a function of <span class="math">\(\mathbf{U}\)</span>:</p>
+<div class="math">
+\[{\partial \mathbf{F} \over \partial x} = {d \mathbf{F} \over d \mathbf{U}}
+{\partial \mathbf{U} \over \partial x}\]</div>
+<p><strong>Key step in the linearisation</strong>: It is assumed that <span class="math">\(\mathbf{F}\)</span> is only a function of <span class="math">\(\mathbf{U}\)</span>, so this is the ordinary derivative.</p>
+<p>However, <span class="math">\(\mathbf{F}\)</span> is not just a function of x and <span class="math">\(\mathbf{U}\)</span> is also not just a function of x, so these are both partial.</p>
+<p>Where The Jacobian Matrix is:</p>
+<div class="math">
+\[\begin{split}{d \mathbf{F} \over d \mathbf{U}} =  \begin{bmatrix}
+\partial \mathbf{F} \over \partial U_1 &amp; \partial \mathbf{F} \over \partial U_2 &amp;  \partial \mathbf{F} \over \partial U_3
+                                     \end{bmatrix} =
+                                     \begin{bmatrix}
+\partial F_1 \over \partial U_1 &amp; \partial F_1 \over \partial U_2 &amp;  \partial F_1 \over \partial U_3 \\
+\partial F_2 \over \partial U_1 &amp; \partial F_2 \over \partial U_2 &amp;  \partial F_2 \over \partial U_3 \\
+\partial F_3 \over \partial U_1 &amp; \partial F_3 \over \partial U_2 &amp;  \partial F_3 \over \partial U_3
+                                     \end{bmatrix} = \mathbf{A}\end{split}\]</div>
+<p>Can now write:</p>
+<div class="math">
+\[{\partial \mathbf{U} \over \partial t} + \mathbf{A} {\partial \mathbf{U} \over \partial x} = 0\]</div>
+<p>Can now more easily solve the equations using <strong>linear solvers</strong></p>
+<p>Note: If <span class="math">\(\mathbf{F} = F_1\)</span> (i.e. F is a scalar)</p>
+<p>Then the Jacobian Matrix is just a row vector:</p>
+<div class="math">
+\[{d \mathbf{F} \over d \mathbf{U}} =  \begin{bmatrix}
+\partial F_1 \over \partial U_1 &amp; \partial F_1 \over \partial U_2 &amp;  \partial F_1 \over \partial U_3
+                                     \end{bmatrix}\]</div>
+<p>In other words, the gradient of F, <span class="math">\(\nabla \mathbf{F}\)</span></p>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="tri_diagonal_matrix.html">1.7.1. Tri-Diagonal Matrix Algorithm</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="discrete_euler.html">1.8.2. Discretising the Euler Equations</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

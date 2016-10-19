@@ -1,0 +1,369 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.5.3. The Diffusion of Heaviside and Sinusoidal Input &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.5.4. Second Order Formulas" href="second_order_formulas.html" />
+    <link rel="prev" title="1.5.2. Second Order Numerical Methods" href="new_convection_schemes.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.5.3. The Diffusion of Heaviside and Sinusoidal Input</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="new_convection_schemes.html">1.5.2. Second Order Numerical Methods</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="second_order_formulas.html">1.5.4. Second Order Formulas</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="the-diffusion-of-heaviside-and-sinusoidal-input">
+<h1>1.5.3. The Diffusion of Heaviside and Sinusoidal Input<a class="headerlink" href="#the-diffusion-of-heaviside-and-sinusoidal-input" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#new-schemes-for-linear-convection" id="id10">New Schemes for Linear Convection</a></li>
+<li><a class="reference internal" href="#heaviside-function-input" id="id11">Heaviside Function Input</a><ul>
+<li><a class="reference internal" href="#upwind-differencing-with-and" id="id12">Upwind Differencing with <span class="math">\(\sigma = 1\)</span>, <span class="math">\(\sigma = 0.5\)</span> and <span class="math">\(\sigma = 0.25\)</span></a></li>
+<li><a class="reference internal" href="#lax-friedrichs-with" id="id13">Lax-Friedrichs with <span class="math">\(\sigma = 0.5\)</span></a></li>
+<li><a class="reference internal" href="#lax-wendroff-with" id="id14">Lax-Wendroff with <span class="math">\(\sigma = 0.5\)</span></a></li>
+<li><a class="reference internal" href="#leapfrog-with" id="id15">Leapfrog with <span class="math">\(\sigma = 0.5\)</span></a></li>
+<li><a class="reference internal" href="#results-of-test-1-heaviside-function" id="id16">Results of Test 1: Heaviside Function</a><ul>
+<li><a class="reference internal" href="#why-does-lax-friedrichs-show-step-changes-in-the-output" id="id17">Why does Lax-Friedrichs show step changes in the output?</a></li>
+<li><a class="reference internal" href="#why-does-lax-wendroff-show-good-comparison-with-the-analytical-solution" id="id18">Why does Lax-Wendroff show good comparison with the analytical solution?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sinusoidal-input" id="id19">Sinusoidal Input, <span class="math">\(k = 4 \pi\)</span></a><ul>
+<li><a class="reference internal" href="#upwind-differencing-with" id="id20">Upwind Differencing with <span class="math">\(\sigma = 0.5\)</span></a></li>
+<li><a class="reference internal" href="#id1" id="id21">Lax-Friedrichs with <span class="math">\(\sigma = 0.5\)</span></a></li>
+<li><a class="reference internal" href="#id2" id="id22">Lax-Wendroff with <span class="math">\(\sigma = 0.5\)</span></a></li>
+<li><a class="reference internal" href="#id3" id="id23">Leapfrog with <span class="math">\(\sigma = 0.5\)</span></a></li>
+<li><a class="reference internal" href="#results-of-test-2-sinusoidal-input" id="id24">Results of Test 2: Sinusoidal Input</a><ul>
+<li><a class="reference internal" href="#implications" id="id25">Implications</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4" id="id26">Sinusoidal Input, <span class="math">\(k = 10 \pi\)</span></a><ul>
+<li><a class="reference internal" href="#id5" id="id27">Upwind Differencing with <span class="math">\(\sigma = 0.5\)</span></a></li>
+<li><a class="reference internal" href="#id6" id="id28">Lax-Friedrichs with <span class="math">\(\sigma = 0.5\)</span></a></li>
+<li><a class="reference internal" href="#id7" id="id29">Lax-Wendroff with <span class="math">\(\sigma = 0.5\)</span></a></li>
+<li><a class="reference internal" href="#id8" id="id30">Leapfrog with <span class="math">\(\sigma = 0.5\)</span></a></li>
+<li><a class="reference internal" href="#results-of-test-3-high-frequency-sinusoidal-input" id="id31">Results of Test 3: High Frequency Sinusoidal Input</a><ul>
+<li><a class="reference internal" href="#id9" id="id32">Implications</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#summary" id="id33">Summary</a></li>
+</ul>
+</div>
+<div class="section" id="new-schemes-for-linear-convection">
+<h2><a class="toc-backref" href="#id10">1.5.3.1. New Schemes for Linear Convection</a><a class="headerlink" href="#new-schemes-for-linear-convection" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Lax-Friedrichs <span class="math">\(\Rightarrow\)</span> stabilizes CD, 1st order</li>
+<li>Lax-Wendroff <span class="math">\(\Rightarrow\)</span> stable CD with an additional dissipative term, 2nd order</li>
+<li>Leapfrod <span class="math">\(\Rightarrow\)</span> 2nd order, 3 level scheme (it is not self-starting)</li>
+</ul>
+</div>
+<div class="section" id="heaviside-function-input">
+<h2><a class="toc-backref" href="#id11">1.5.3.2. Heaviside Function Input</a><a class="headerlink" href="#heaviside-function-input" title="Permalink to this headline">¶</a></h2>
+<p>The Heaviside Function represents a <strong>shock wave</strong> in velocity and pressure for compressible flow. One of the great challenges in numerical methods is representing sharp gradients.</p>
+<ul class="simple">
+<li>The Wave Equation for these tests is described as follows:</li>
+</ul>
+<div class="math">
+\[{\partial u \over \partial t} + c {\partial u \over \partial x} = 0\]</div>
+<div class="section" id="upwind-differencing-with-and">
+<h3><a class="toc-backref" href="#id12">Upwind Differencing with <span class="math">\(\sigma = 1\)</span>, <span class="math">\(\sigma = 0.5\)</span> and <span class="math">\(\sigma = 0.25\)</span></a><a class="headerlink" href="#upwind-differencing-with-and" title="Permalink to this headline">¶</a></h3>
+<p><span class="math">\(\sigma = 1\)</span></p>
+<ul class="simple">
+<li>If the value of <span class="math">\(\sigma = 1\)</span> then the new velocity simply equals the old velocity.</li>
+<li>The phase angle is zero, so there is no diffusion or dispersion error</li>
+</ul>
+<p><span class="math">\(\sigma = 0.5\)</span></p>
+<ul class="simple">
+<li>The jump is diffused by the numerical diffusion arising from the first order truncation error</li>
+<li>The amount of diffusion is increasing as we move through time (as n increases)</li>
+<li>The numerical speed with which the solution moves through the domain is also reduced</li>
+</ul>
+<p><span class="math">\(\sigma = 0.25\)</span></p>
+<ul class="simple">
+<li>Clearly, the smaller Courant Number reduces the speed at which the solution travels through the domain</li>
+<li>At these very low frequencies, there is not much more added diffusion between <span class="math">\(\sigma = 0.50\)</span> and <span class="math">\(\sigma = 0.25\)</span></li>
+</ul>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-1.py">Source code</a>)</p>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-1_01_00.png">png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-1_01_00.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-1_01_00.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/heavy_side_and_sinusoidal_input-1_01_00.png" src="../_images/heavy_side_and_sinusoidal_input-1_01_00.png" />
+</div>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-2.py">Source code</a>)</p>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-2_01_00.png">png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-2_01_00.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-2_01_00.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/heavy_side_and_sinusoidal_input-2_01_00.png" src="../_images/heavy_side_and_sinusoidal_input-2_01_00.png" />
+</div>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-3.py">Source code</a>)</p>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-3_01_00.png">png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-3_01_00.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-3_01_00.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/heavy_side_and_sinusoidal_input-3_01_00.png" src="../_images/heavy_side_and_sinusoidal_input-3_01_00.png" />
+</div>
+</div>
+<div class="section" id="lax-friedrichs-with">
+<h3><a class="toc-backref" href="#id13">Lax-Friedrichs with <span class="math">\(\sigma = 0.5\)</span></a><a class="headerlink" href="#lax-friedrichs-with" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Numerical dissipation (more than upwind scheme) and odd-even decoupling</li>
+<li>Amount of diffusion is still increasing with increasing n</li>
+</ul>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-4.py">Source code</a>)</p>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-4_01_00.png">png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-4_01_00.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-4_01_00.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/heavy_side_and_sinusoidal_input-4_01_00.png" src="../_images/heavy_side_and_sinusoidal_input-4_01_00.png" />
+</div>
+</div>
+<div class="section" id="lax-wendroff-with">
+<h3><a class="toc-backref" href="#id14">Lax-Wendroff with <span class="math">\(\sigma = 0.5\)</span></a><a class="headerlink" href="#lax-wendroff-with" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>This more accurately represents the step change</li>
+<li>However, there is an oscillatory response</li>
+</ul>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-5.py">Source code</a>)</p>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-5_01_00.png">png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-5_01_00.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-5_01_00.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/heavy_side_and_sinusoidal_input-5_01_00.png" src="../_images/heavy_side_and_sinusoidal_input-5_01_00.png" />
+</div>
+</div>
+<div class="section" id="leapfrog-with">
+<h3><a class="toc-backref" href="#id15">Leapfrog with <span class="math">\(\sigma = 0.5\)</span></a><a class="headerlink" href="#leapfrog-with" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>More oscillatory than Lax-Wendroff, more accurate than Lax-Friedrichs</li>
+</ul>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-6.py">Source code</a>)</p>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-6_01_00.png">png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-6_01_00.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-6_01_00.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/heavy_side_and_sinusoidal_input-6_01_00.png" src="../_images/heavy_side_and_sinusoidal_input-6_01_00.png" />
+</div>
+</div>
+<div class="section" id="results-of-test-1-heaviside-function">
+<h3><a class="toc-backref" href="#id16">Results of Test 1: Heaviside Function</a><a class="headerlink" href="#results-of-test-1-heaviside-function" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\sigma = 0.5\]</div>
+<div class="math">
+\[\Delta x = 0.05\]</div>
+<div class="math">
+\[n_{steps} = 40\]</div>
+<div class="section" id="why-does-lax-friedrichs-show-step-changes-in-the-output">
+<h4><a class="toc-backref" href="#id17">Why does Lax-Friedrichs show step changes in the output?</a><a class="headerlink" href="#why-does-lax-friedrichs-show-step-changes-in-the-output" title="Permalink to this headline">¶</a></h4>
+<p>This is a double solution effect:</p>
+<ul class="simple">
+<li><span class="math">\(u_i^{n+1}\)</span> does  not depend on <span class="math">\(u_i^n\)</span></li>
+<li>Shifting the stencil by <span class="math">\(i\)</span> shows that <span class="math">\(u_i^{n+1}\)</span> and <span class="math">\(u_{i+1}^{n+1}\)</span> do not share a single mesh point of their stencils</li>
+<li>This is called &#8220;odd-even decoupling&#8221;</li>
+</ul>
+<p>Odd-Even Decoupling:
+* Solutions on the odd points and even points have different error levels and can&#8217;t communicate information
+* One solution sightly ahead/slightly behind</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/lax_friedrichs_2.png"><img alt="../_images/lax_friedrichs_2.png" src="../_images/lax_friedrichs_2.png" style="width: 600.0px; height: 250.0px;" /></a>
+</div>
+</div>
+<div class="section" id="why-does-lax-wendroff-show-good-comparison-with-the-analytical-solution">
+<h4><a class="toc-backref" href="#id18">Why does Lax-Wendroff show good comparison with the analytical solution?</a><a class="headerlink" href="#why-does-lax-wendroff-show-good-comparison-with-the-analytical-solution" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Lax-Wendroff is second order, so has reduced numerical diffusion</li>
+<li>However, numerical oscillations occur. More oscillations occur with Leapfrog than Lax-Wendroff</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="sinusoidal-input">
+<h2><a class="toc-backref" href="#id19">1.5.3.3. Sinusoidal Input, <span class="math">\(k = 4 \pi\)</span></a><a class="headerlink" href="#sinusoidal-input" title="Permalink to this headline">¶</a></h2>
+<p>Travelling sinusoidal wave, 2 periods in a distance of 1m. Corresponding wave number:</p>
+<div class="math">
+\[k = {{2 \pi} \over \lambda}  = 4 \pi\]</div>
+<p>This is the initial condition.</p>
+<div class="section" id="upwind-differencing-with">
+<h3><a class="toc-backref" href="#id20">Upwind Differencing with <span class="math">\(\sigma = 0.5\)</span></a><a class="headerlink" href="#upwind-differencing-with" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Amplitude is being diffused, effective numerical diffusion after a number of timesteps</li>
+<li>Damped by backward difference method</li>
+</ul>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-7.py">Source code</a>)</p>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-7_01_00.png">png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-7_01_00.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-7_01_00.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/heavy_side_and_sinusoidal_input-7_01_00.png" src="../_images/heavy_side_and_sinusoidal_input-7_01_00.png" />
+</div>
+</div>
+<div class="section" id="id1">
+<h3><a class="toc-backref" href="#id21">Lax-Friedrichs with <span class="math">\(\sigma = 0.5\)</span></a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Substantial numerical diffusion over time</li>
+</ul>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-8.py">Source code</a>)</p>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-8_01_00.png">png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-8_01_00.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-8_01_00.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/heavy_side_and_sinusoidal_input-8_01_00.png" src="../_images/heavy_side_and_sinusoidal_input-8_01_00.png" />
+</div>
+</div>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id22">Lax-Wendroff with <span class="math">\(\sigma = 0.5\)</span></a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Better representation of the wave</li>
+<li>Wiggles at the back of the wave, where there is a non-smooth slope</li>
+</ul>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-9.py">Source code</a>)</p>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-9_01_00.png">png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-9_01_00.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-9_01_00.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/heavy_side_and_sinusoidal_input-9_01_00.png" src="../_images/heavy_side_and_sinusoidal_input-9_01_00.png" />
+</div>
+</div>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id23">Leapfrog with <span class="math">\(\sigma = 0.5\)</span></a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Train of oscillations at the back</li>
+</ul>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-10.py">Source code</a>)</p>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-10_01_00.png">png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-10_01_00.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-10_01_00.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/heavy_side_and_sinusoidal_input-10_01_00.png" src="../_images/heavy_side_and_sinusoidal_input-10_01_00.png" />
+</div>
+</div>
+<div class="section" id="results-of-test-2-sinusoidal-input">
+<h3><a class="toc-backref" href="#id24">Results of Test 2: Sinusoidal Input</a><a class="headerlink" href="#results-of-test-2-sinusoidal-input" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\sigma = 0.5\]</div>
+<div class="math">
+\[\Delta x = 0.01\]</div>
+<div class="math">
+\[n_{steps} = 200\]</div>
+<div class="section" id="implications">
+<h4><a class="toc-backref" href="#id25">Implications</a><a class="headerlink" href="#implications" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Must avoid 1st order methods for the time propagation of a wave, i.e. Upwind and Lax-Friedrichs</li>
+<li>Lax-Wendroff and Leapfrog much better, discontinuity causes oscillations in wave</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id26">1.5.3.4. Sinusoidal Input, <span class="math">\(k = 10 \pi\)</span></a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>Travelling sinusoidal wave. Corresponding wave number:</p>
+<div class="math">
+\[k =  10 \pi\]</div>
+<p>This is the initial condition.</p>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id27">Upwind Differencing with <span class="math">\(\sigma = 0.5\)</span></a><a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-11.py">Source code</a>)</p>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-11_01_00.png">png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-11_01_00.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-11_01_00.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/heavy_side_and_sinusoidal_input-11_01_00.png" src="../_images/heavy_side_and_sinusoidal_input-11_01_00.png" />
+</div>
+</div>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#id28">Lax-Friedrichs with <span class="math">\(\sigma = 0.5\)</span></a><a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-12.py">Source code</a>)</p>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-12_01_00.png">png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-12_01_00.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-12_01_00.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/heavy_side_and_sinusoidal_input-12_01_00.png" src="../_images/heavy_side_and_sinusoidal_input-12_01_00.png" />
+</div>
+</div>
+<div class="section" id="id7">
+<h3><a class="toc-backref" href="#id29">Lax-Wendroff with <span class="math">\(\sigma = 0.5\)</span></a><a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-13.py">Source code</a>)</p>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-13_01_00.png">png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-13_01_00.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-13_01_00.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/heavy_side_and_sinusoidal_input-13_01_00.png" src="../_images/heavy_side_and_sinusoidal_input-13_01_00.png" />
+</div>
+</div>
+<div class="section" id="id8">
+<h3><a class="toc-backref" href="#id30">Leapfrog with <span class="math">\(\sigma = 0.5\)</span></a><a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-14.py">Source code</a>)</p>
+<p>(<a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-14_01_00.png">png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-14_01_00.hires.png">hires.png</a>, <a class="reference external" href="../01_barba_theory/heavy_side_and_sinusoidal_input-14_01_00.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/heavy_side_and_sinusoidal_input-14_01_00.png" src="../_images/heavy_side_and_sinusoidal_input-14_01_00.png" />
+</div>
+</div>
+<div class="section" id="results-of-test-3-high-frequency-sinusoidal-input">
+<h3><a class="toc-backref" href="#id31">Results of Test 3: High Frequency Sinusoidal Input</a><a class="headerlink" href="#results-of-test-3-high-frequency-sinusoidal-input" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[\sigma = 0.5\]</div>
+<div class="math">
+\[\Delta x = 0.01\]</div>
+<div class="math">
+\[n_{steps} = 200\]</div>
+<div class="section" id="id9">
+<h4><a class="toc-backref" href="#id32">Implications</a><a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Upwind and Lax Friedrichs are catastrophically dissipative</li>
+<li>Lax Wendroff shows some dissipation and a lag</li>
+<li>Leapfrog shows less dissipation, but more oscillations and still a lag</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="summary">
+<h2><a class="toc-backref" href="#id33">1.5.3.5. Summary</a><a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>1st order schemes:</p>
+<ul class="simple">
+<li>Have poor accuracy - gets even worse for solutions with higher frequency, damping is catastrophic</li>
+</ul>
+<p>2nd order schemes:</p>
+<ul class="simple">
+<li>Provide better accuracy</li>
+<li>Generate numerical oscillations - associated with locations where solution is not smooth. Oscillations are stronger with Leapfrog scheme</li>
+<li>Numerical errors are sensitive to the frequency content of the solution, i.e frequency content of initial condition</li>
+</ul>
+<p>We have obtained results from simple 1D models, however they are representative of real flow situations (2D, 3D etc)</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="new_convection_schemes.html">1.5.2. Second Order Numerical Methods</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="second_order_formulas.html">1.5.4. Second Order Formulas</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

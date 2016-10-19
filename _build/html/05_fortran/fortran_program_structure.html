@@ -1,0 +1,560 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.4. Program Structure &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Fortran Programming Language" href="fortran.html" />
+    <link rel="next" title="1.5. Intrinsic Procedures" href="fortran_procedures.html" />
+    <link rel="prev" title="1.3. Constructs" href="fortran_constructs.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.4. Program Structure</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="fortran_constructs.html">1.3. Constructs</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="fortran_procedures.html">1.5. Intrinsic Procedures</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="program-structure">
+<h1>1.4. Program Structure<a class="headerlink" href="#program-structure" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#modular-programming" id="id1">Modular Programming</a><ul>
+<li><a class="reference internal" href="#modules" id="id2">Modules</a></li>
+<li><a class="reference internal" href="#programs" id="id3">Programs</a></li>
+<li><a class="reference internal" href="#functions" id="id4">Functions</a></li>
+<li><a class="reference internal" href="#subroutines" id="id5">Subroutines</a></li>
+<li><a class="reference internal" href="#steps" id="id6">Steps</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#program" id="id7">Program</a><ul>
+<li><a class="reference internal" href="#use-explicit-imports-not-implicit-imports" id="id8">Use Explicit Imports, Not Implicit Imports</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module" id="id9">Module</a></li>
+<li><a class="reference internal" href="#subroutine" id="id10">Subroutine</a></li>
+<li><a class="reference internal" href="#function" id="id11">Function</a></li>
+<li><a class="reference internal" href="#interface" id="id12">Interface</a></li>
+</ul>
+</div>
+<div class="section" id="modular-programming">
+<h2><a class="toc-backref" href="#id1">1.4.1. Modular Programming</a><a class="headerlink" href="#modular-programming" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="modules">
+<h3><a class="toc-backref" href="#id2">1.4.1.1. Modules</a><a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Breaks up a task into <strong>small steps</strong></li>
+<li>Prevents code having to be <strong>re-written</strong>, if we are just using the same again in another program</li>
+<li>Modules usually contain variables, parameters, functions and subroutines that are for the same purpose, e.g. a module for integration might contain the midpoint rule, the trapezoid rule and simpson&#8217;s rule. This helps to add <strong>meaning</strong> to what is being programmed.</li>
+</ul>
+</div>
+<div class="section" id="programs">
+<h3><a class="toc-backref" href="#id3">1.4.1.2. Programs</a><a class="headerlink" href="#programs" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Usually used for <strong>testing</strong> the functions and subroutines of a module</li>
+<li>Programs are often used for <strong>input-output</strong> operations, e.g. read/write to/from files or screen</li>
+<li>The <strong>executable</strong> file (.exe) is usually given the same name as the program</li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h3><a class="toc-backref" href="#id4">1.4.1.3. Functions</a><a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Functions return only one value</li>
+<li>Functions can be passed as values to other functions or subroutines</li>
+</ul>
+</div>
+<div class="section" id="subroutines">
+<h3><a class="toc-backref" href="#id5">1.4.1.4. Subroutines</a><a class="headerlink" href="#subroutines" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Allow multiple returned values by modifying input arguments</li>
+<li>Can&#8217;t be passed as arguments to other functions or subroutines (although I haven&#8217;t tried this - I&#8217;m not sure what it would mean)</li>
+</ul>
+</div>
+<div class="section" id="steps">
+<h3><a class="toc-backref" href="#id6">1.4.1.5. Steps</a><a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h3>
+<p>There might be several steps as the program goes from simple to complex:</p>
+<ol class="arabic simple">
+<li>For <strong>internal</strong> subroutines/functions (for simple programs):</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Write a subroutine/function under <strong>contains</strong> as part of the main program.</li>
+<li>Use the internal subroutine/function e.g.<ul>
+<li>To use a function: <code class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">fun_quadratic(a,</span> <span class="pre">b)</span></code></li>
+<li>To use a subroutine:  <code class="docutils literal"><span class="pre">call</span> <span class="pre">sub_euler(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>For <strong>external</strong> subroutines/functions (for simple programs):</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Write an external subroutine/function under <strong>end program</strong> in the same file or in a different file to the main program (perhaps as the first step before writing a module)</li>
+<li>Declare a subroutine using the <strong>use</strong> statement within the main program, e.g. <code class="docutils literal"><span class="pre">use</span> <span class="pre">sub_euler</span></code></li>
+<li>Declare a function using the <strong>external</strong> attribute in the declaration in the main program, e.g. <code class="docutils literal"><span class="pre">real(kind=8),</span> <span class="pre">external</span> <span class="pre">::</span> <span class="pre">fun_quadratic</span></code></li>
+<li>Use the subroutine/function by name as if it were internal</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>To <strong>modularise</strong> a subroutine/function (for complex programs - e.g. to collect similar parts):</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Write a module which contains the subroutine/function</li>
+<li>Declare the subroutine/function&#8217;s <strong>use</strong> in the main program, e.g. <code class="docutils literal"><span class="pre">use</span> <span class="pre">sub_euler,</span> <span class="pre">only:</span> <span class="pre">first_order</span></code></li>
+<li>Use the subroutine/function by name as if it were internal</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><strong>Pass a function as an argument</strong> to a subroutine - this may allow the subroutine to be independent of the function passed to it, e.g. integration subroutines apply to all kinds of functions, e.g.</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Use <code class="docutils literal"><span class="pre">solve(fun_specific,</span> <span class="pre">x,</span> <span class="pre">y)</span></code> in the main program (i.e. send a specific function such as a quadratic)</li>
+<li>The subroutine the function is passed could declare a more general argument list, e.g.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">subroutine</span> <span class="pre">solve(fun_general,</span> <span class="pre">x,</span> <span class="pre">y)</span></code> (i.e. it can recieve any kind of function)</li>
+<li><code class="docutils literal"><span class="pre">real(kind=8),</span> <span class="pre">external</span> <span class="pre">::</span> <span class="pre">fun_general</span></code> (to declare that the function is external)</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<p>Probably can&#8217;t pass subroutines as arguments, as they usually aren&#8217;t single values.</p>
+</div>
+</div>
+<div class="section" id="program">
+<h2><a class="toc-backref" href="#id7">1.4.2. Program</a><a class="headerlink" href="#program" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">pro_integrate</span>
+
+    <span class="k">use </span><span class="n">mod_euler</span><span class="p">,</span> <span class="n">lname</span> <span class="o">=&gt;</span> <span class="n">mod_1</span>
+    <span class="k">use </span><span class="n">mod_runga_kutta</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">fun_quadratic</span><span class="p">,</span> <span class="n">fun_quartic</span>
+
+    <span class="k">implicit none</span>
+
+<span class="k">    interface</span>
+<span class="k">       </span><span class="kt">real </span><span class="k">function </span><span class="n">fun_cubic</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+           <span class="kt">real</span><span class="p">,</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span>
+       <span class="k">end function </span><span class="n">fun_cubic</span>
+    <span class="k">end interface</span>
+
+    <span class="c">! declaration and initialisation</span>
+    <span class="c">! program body statements</span>
+
+    <span class="k">stop</span> <span class="s1">&#39;message&#39;</span>
+
+<span class="k">contains</span>
+    <span class="c">! internal subroutines or functions</span>
+
+<span class="k">end program </span><span class="n">pro_integrate</span>
+</pre></div>
+</div>
+</td>
+<td><p class="first"><strong>Program Structure</strong></p>
+<ul class="last simple">
+<li><code class="docutils literal"><span class="pre">program</span> <span class="pre">pro_integrate</span></code> <span class="math">\(\Rightarrow\)</span> Start of program called <code class="docutils literal"><span class="pre">pro_integrate</span></code></li>
+<li><code class="docutils literal"><span class="pre">use</span> <span class="pre">mod_euler,</span> <span class="pre">lname</span> <span class="pre">=&gt;</span> <span class="pre">mod_1</span></code> <span class="math">\(\Rightarrow\)</span> Use external module with rename</li>
+<li><code class="docutils literal"><span class="pre">use</span> <span class="pre">mod_runga_kutta,</span> <span class="pre">only:</span> <span class="pre">fun_quadratic,</span> <span class="pre">fun_quartic</span></code> <span class="math">\(\Rightarrow\)</span> Selective use of <strong>external</strong> functions</li>
+<li><code class="docutils literal"><span class="pre">implicit</span> <span class="pre">none</span></code> <span class="math">\(\Rightarrow\)</span> Require variable declaration - use AFTER <code class="docutils literal"><span class="pre">use</span></code> statement OR after <code class="docutils literal"><span class="pre">program</span></code>, <code class="docutils literal"><span class="pre">module</span></code>, <code class="docutils literal"><span class="pre">subroutine</span></code>, <code class="docutils literal"><span class="pre">function</span></code> or <code class="docutils literal"><span class="pre">interface</span></code> declaration</li>
+<li><code class="docutils literal"><span class="pre">interface</span></code> <span class="math">\(\Rightarrow\)</span> This is similar to a <code class="docutils literal"><span class="pre">use</span></code> statement for functions contained in external modules (but also requiring variable types and intent)</li>
+<li><code class="docutils literal"><span class="pre">stop</span> <span class="pre">&quot;message&quot;</span></code> <span class="math">\(\Rightarrow\)</span> Stops the program cleanly with a message</li>
+<li><code class="docutils literal"><span class="pre">contains</span></code> <span class="math">\(\Rightarrow\)</span> <strong>internal</strong> subroutines or functions (i.e. used and contained within the same file) - no external use is expected.</li>
+<li><code class="docutils literal"><span class="pre">end</span> <span class="pre">program</span> <span class="pre">pro_integrate</span></code> <span class="math">\(\Rightarrow\)</span> End of program</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="use-explicit-imports-not-implicit-imports">
+<h3><a class="toc-backref" href="#id8">1.4.2.1. Use Explicit Imports, Not Implicit Imports</a><a class="headerlink" href="#use-explicit-imports-not-implicit-imports" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Avoid:</li>
+</ul>
+<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">use </span><span class="n">mod_integrator</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Instead say what you are using:</li>
+</ul>
+<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">use </span><span class="n">mod_integrator</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">midpoint</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="module">
+<h2><a class="toc-backref" href="#id9">1.4.3. Module</a><a class="headerlink" href="#module" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">mod_runge_kutta</span>
+
+    <span class="k">use </span><span class="n">mod_quadrature</span>
+
+    <span class="k">implicit none</span>
+
+<span class="k">    private</span>
+<span class="k">    public</span> <span class="kd">::</span> <span class="n">fun_quadratic</span><span class="p">,</span> <span class="n">fun_quartic</span>
+
+    <span class="k">interface</span>
+<span class="k">        </span><span class="kt">real </span><span class="k">function </span><span class="n">fun_cubic</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+            <span class="kt">real</span><span class="p">,</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span>
+        <span class="k">end function </span><span class="n">fun_cubic</span>
+    <span class="k">end interface</span>
+
+    <span class="c">! declaration and initialisation</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">pi</span>
+    <span class="k">contains</span>
+
+    <span class="c">! internal subroutines or functions</span>
+
+ <span class="k">end module </span><span class="n">mod_runge_kutta</span>
+</pre></div>
+</div>
+</td>
+<td><p class="first"><strong>Module Structure</strong> - Put <strong>external</strong> subroutines and functions (i.e. external to program) within modules. Then call them via <code class="docutils literal"><span class="pre">use</span></code> statements within program. Modules can also use other modules.</p>
+<ul class="last simple">
+<li><code class="docutils literal"><span class="pre">module</span> <span class="pre">mod_runge_kutta</span></code> <span class="math">\(\Rightarrow\)</span> Start of module called <code class="docutils literal"><span class="pre">mod_runge_kutta</span></code></li>
+<li><code class="docutils literal"><span class="pre">use</span> <span class="pre">mod_quadrature</span></code> <span class="math">\(\Rightarrow\)</span> Use external module</li>
+<li><code class="docutils literal"><span class="pre">implicit</span> <span class="pre">none</span></code> <span class="math">\(\Rightarrow\)</span> Require variable declaration</li>
+<li><code class="docutils literal"><span class="pre">public</span></code> <span class="math">\(\Rightarrow\)</span> Visible outside module</li>
+<li><code class="docutils literal"><span class="pre">private</span></code> <span class="math">\(\Rightarrow\)</span> Visible inside module - keeping this empty makes everything is private by default, you then only make public what you want to make public</li>
+<li><code class="docutils literal"><span class="pre">interface</span></code> <span class="math">\(\Rightarrow\)</span> This is similar to <code class="docutils literal"><span class="pre">use</span></code></li>
+<li><code class="docutils literal"><span class="pre">contains</span></code> <span class="math">\(\Rightarrow\)</span> <strong>Internal</strong> subroutines or functions - could be public or private</li>
+<li><code class="docutils literal"><span class="pre">end</span> <span class="pre">module</span> <span class="pre">runge_kutta</span></code> <span class="math">\(\Rightarrow\)</span> End of module</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><ul class="first last">
+<li><div class="first highlight-fortran"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">pro_pi</span>
+
+    <span class="k">use </span><span class="n">mod_declare</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">pi</span>
+    <span class="k">implicit none</span>
+
+<span class="k">    call </span><span class="n">sub_initialise</span><span class="p">()</span>
+    <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;pi = &quot;</span><span class="p">,</span> <span class="n">pi</span>
+
+<span class="k">end program </span><span class="n">pro_pi</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-fortran"><div class="highlight"><pre><span></span><span class="k">subroutine </span><span class="n">sub_initialise</span>
+
+    <span class="k">use </span><span class="n">mod_declare</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">pi</span>
+    <span class="k">implicit none</span>
+
+<span class="k">    </span><span class="n">pi</span> <span class="o">=</span> <span class="nb">acos</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="n">d0</span><span class="p">)</span>
+
+<span class="k">end subroutine </span><span class="n">sub_initialise</span>
+</pre></div>
+</div>
+</li>
+<li><div class="first highlight-fortran"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">mod_declare</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">pi</span>
+    <span class="k">save</span>
+
+    <span class="c">! use of pi in a formula</span>
+
+<span class="k">end module </span><span class="n">mod_declare</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</td>
+<td><p class="first"><strong>Module Variable</strong> - Declare a <strong>module variable</strong> in a module and initialise it in a subroutine. This allows the program to initialise the module variable only once.</p>
+<p>Modules that use a module variable must save the value from the initialisation (or it may revert to the default value, whatever that is).</p>
+<ul class="last simple">
+<li><code class="docutils literal"><span class="pre">save</span></code> <span class="math">\(\Rightarrow\)</span> The declared variable retains it&#8217;s value from the external initialisation</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="subroutine">
+<h2><a class="toc-backref" href="#id10">1.4.4. Subroutine</a><a class="headerlink" href="#subroutine" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">subroutine </span><span class="n">sub_momentum_equation</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">nu</span><span class="p">)</span>
+
+    <span class="k">implicit none</span>
+
+<span class="k">    </span><span class="kt">integer</span><span class="p">,</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">nx</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">allocatable</span><span class="p">,</span> <span class="k">dimension</span><span class="p">(:)</span> <span class="kd">::</span> <span class="n">x</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="kd">::</span> <span class="n">u</span>
+    <span class="kt">integer</span><span class="p">,</span> <span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span> <span class="kd">::</span> <span class="n">error</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">optional</span> <span class="kd">::</span> <span class="n">nu</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">nu</span><span class="p">))</span>
+        <span class="c">! block</span>
+        <span class="k">return</span>
+<span class="k">    else</span>
+        <span class="c">! block</span>
+        <span class="k">return</span>
+<span class="k">    end if</span>
+
+<span class="k">end subroutine </span><span class="n">sub_momentum_equation</span>
+</pre></div>
+</div>
+</td>
+<td><p class="first"><strong>Subroutine Structure</strong> - Subroutines differ from functions in that they are allowed to have more than one output. It does this by modifying it&#8217;s input values (it doesn&#8217;t actually return a new value). Subroutines may also have no output.</p>
+<ul class="last simple">
+<li><code class="docutils literal"><span class="pre">if(present(nu))</span></code> <span class="math">\(\Rightarrow\)</span> Detects whether optional variable <span class="math">\(\nu\)</span> is present</li>
+<li><code class="docutils literal"><span class="pre">return</span></code> <span class="math">\(\Rightarrow\)</span> Forced exit of subroutine (before end statement) - this is useful if no more of the code need</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="function">
+<h2><a class="toc-backref" href="#id11">1.4.5. Function</a><a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="k">function </span><span class="n">fun_quadratic</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">c</span> <span class="p">.</span><span class="n">ne</span><span class="p">.</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
+<span class="k">        </span><span class="n">fun_quadratic</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span>
+        <span class="k">return</span>
+<span class="k">    else</span>
+<span class="k">        </span><span class="n">fun_quadratic</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span>
+        <span class="k">return</span>
+<span class="k">    end if</span>
+
+<span class="k">end function </span><span class="n">fun_quadratic</span>
+</pre></div>
+</div>
+</td>
+<td><p class="first"><strong>Function Structure 1</strong> - Functions differ from subroutines, in that they can only have one output. Functions return a new value, not among the input arguments.</p>
+<ul class="last simple">
+<li><code class="docutils literal"><span class="pre">fun_quadratic</span></code> <span class="math">\(\Rightarrow\)</span> New variable to be returned by function</li>
+<li><code class="docutils literal"><span class="pre">return</span></code> <span class="math">\(\Rightarrow\)</span> Forced exit of function (before end statement)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">function </span><span class="n">fun_quadratic</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">fun_quadratic</span>
+
+    <span class="c">! block</span>
+
+<span class="k">end function </span><span class="n">fun_quadratic</span>
+</pre></div>
+</div>
+</td>
+<td><p class="first"><strong>Function Structure 2:</strong> Notice that the output variable is declared with other variables in this form. Intent is implicit.</p>
+<ul class="last simple">
+<li><code class="docutils literal"><span class="pre">fun_quadratic</span></code> <span class="math">\(\Rightarrow\)</span> New variable to be returned by function</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">recursive function </span><span class="n">fun_recursion</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">result</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">implicit none</span>
+<span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span> <span class="kd">::</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span>
+    <span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">y</span>
+
+    <span class="c">! block</span>
+
+<span class="k">end function </span><span class="n">fun_quadratic</span>
+</pre></div>
+</div>
+</td>
+<td><p class="first"><strong>Function Structure 3:</strong> &#8220;Recursive Function&#8221;</p>
+<ul class="last simple">
+<li><code class="docutils literal"><span class="pre">recursive</span></code> <span class="math">\(\Rightarrow\)</span> Recursion allowed</li>
+<li><code class="docutils literal"><span class="pre">result(y)</span></code> <span class="math">\(\Rightarrow\)</span> Renames the expected output from <code class="docutils literal"><span class="pre">fun_recursion</span></code> to <code class="docutils literal"><span class="pre">y</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="kt">integer</span> <span class="kd">::</span> <span class="n">fun_increment</span>
+<span class="kt">integer</span> <span class="kd">::</span> <span class="n">x</span>
+
+<span class="n">fun_increment</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</td>
+<td><p class="first"><strong>Function Structure 4:</strong> &#8220;Statement Function&#8221;</p>
+<ul class="last simple">
+<li><code class="docutils literal"><span class="pre">integer</span> <span class="pre">::</span> <span class="pre">fun_increment</span></code> <span class="math">\(\Rightarrow\)</span> Declaration of &#8220;statement function&#8221; type</li>
+<li><code class="docutils literal"><span class="pre">fun_increment(x)</span></code> <span class="math">\(\Rightarrow\)</span> Takes input of x and adds one to it, assigning the result to <code class="docutils literal"><span class="pre">fun_increment</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="interface">
+<h2><a class="toc-backref" href="#id12">1.4.6. Interface</a><a class="headerlink" href="#interface" title="Permalink to this headline">¶</a></h2>
+<p>I haven&#8217;t used interfaces, but here are some definitions.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">interface</span>
+
+    <span class="c">! external subroutine or functions</span>
+
+<span class="k">end interface</span>
+</pre></div>
+</div>
+</td>
+<td><strong>Interface Structure 1</strong> - These are found where a program or a module must use external subroutines or functions (similar to <code class="docutils literal"><span class="pre">use</span></code> statement)</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">interface</span>
+
+    <span class="c">! external subroutines or functions</span>
+
+    <span class="k">module procedure </span><span class="n">list</span>
+
+<span class="k">end interface</span>
+</pre></div>
+</div>
+</td>
+<td><p class="first"><strong>Interface Structure 2</strong></p>
+<ul class="last simple">
+<li><code class="docutils literal"><span class="pre">!</span> <span class="pre">external</span> <span class="pre">subroutines</span> <span class="pre">or</span> <span class="pre">functions</span></code> <span class="math">\(\Rightarrow\)</span> External subroutines or functions</li>
+<li><code class="docutils literal"><span class="pre">module</span> <span class="pre">procedure</span> <span class="pre">list</span></code> <span class="math">\(\Rightarrow\)</span> Internal subroutines or functions</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">interface </span><span class="n">operator</span> <span class="n">op</span>
+
+    <span class="c">! external subroutines or functions</span>
+
+    <span class="k">module procedure </span><span class="n">list</span>
+
+<span class="k">end interface</span>
+</pre></div>
+</div>
+</td>
+<td><p class="first"><strong>Interface Structure 3</strong></p>
+<ul class="last simple">
+<li><code class="docutils literal"><span class="pre">operator</span> <span class="pre">op</span></code> <span class="math">\(\Rightarrow\)</span> Operator interface</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">interface </span><span class="n">assignment</span> <span class="p">(</span><span class="o">=</span><span class="p">)</span>
+
+    <span class="c">! external subroutines or functions</span>
+
+    <span class="k">module procedure </span><span class="n">list</span>
+
+<span class="k">end interface</span>
+</pre></div>
+</div>
+</td>
+<td><p class="first"><strong>Interface Structure 4</strong></p>
+<ul class="last simple">
+<li><code class="docutils literal"><span class="pre">assignment</span> <span class="pre">(=)</span></code> <span class="math">\(\Rightarrow\)</span> Conversion interface</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="fortran_constructs.html">1.3. Constructs</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="fortran_procedures.html">1.5. Intrinsic Procedures</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

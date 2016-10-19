@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1. Linear Algebra for CFD Applications &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="next" title="Unicode" href="../16_links/unicode.html" />
+    <link rel="prev" title="7. Software and Customisation" href="../14_software/software.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1. Linear Algebra for CFD Applications</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../14_software/software.html">7. Software and Customisation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../16_links/unicode.html">Unicode</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="linear-algebra-for-cfd-applications">
+<h1>1. Linear Algebra for CFD Applications<a class="headerlink" href="#linear-algebra-for-cfd-applications" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#d-vector-notation" id="id1">2D Vector Notation</a><ul>
+<li><a class="reference internal" href="#continuity-equation" id="id2">Continuity Equation</a></li>
+<li><a class="reference internal" href="#momentum-equation" id="id3">Momentum Equation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="d-vector-notation">
+<h2><a class="toc-backref" href="#id1">1.1. 2D Vector Notation</a><a class="headerlink" href="#d-vector-notation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Divergence of a <strong>vector</strong> gives a scalar (via the scalar product)</li>
+<li>Divergence of a <strong>scalar</strong> doesn&#8217;t exist</li>
+<li>Gradient of a <strong>vector</strong> gives a vector</li>
+<li>Gradient of a <strong>scalar</strong> gives a scalar</li>
+</ul>
+<div class="section" id="continuity-equation">
+<h3><a class="toc-backref" href="#id2">1.1.1. Continuity Equation</a><a class="headerlink" href="#continuity-equation" title="Permalink to this headline">¶</a></h3>
+<p>The 2D Continuity Equation:</p>
+<hr class="docutils" />
+<div class="math" id="equation-one">
+<span class="eqno">(1)</span>\[\nabla \cdot \mathbf{u} = 0\]</div>
+<hr class="docutils" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Expression 1</th>
+<th class="head">Expression 2</th>
+<th class="head">Component 1a</th>
+<th class="head">Component 1b</th>
+<th class="head">Operation</th>
+<th class="head">Expansion</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="math">\(\nabla \cdot \mathbf{u}(x,y)\)</span></td>
+<td><span class="math">\(\text{div } \mathbf{u}\)</span></td>
+<td><span class="math">\(\begin{bmatrix} \mathbf{i} \  {\partial \over {\partial x}}  \\ \mathbf{j} \ {\partial \over {\partial y}} \end{bmatrix}\)</span></td>
+<td><span class="math">\(\begin{bmatrix} {u} \\ {v}  \end{bmatrix}\)</span></td>
+<td>Scalar Product</td>
+<td><span class="math">\({{\partial u} \over {\partial x}} + {{\partial v} \over {\partial y}}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="momentum-equation">
+<h3><a class="toc-backref" href="#id3">1.1.2. Momentum Equation</a><a class="headerlink" href="#momentum-equation" title="Permalink to this headline">¶</a></h3>
+<p>The 2D Momentum Equation:</p>
+<hr class="docutils" />
+<div class="math" id="equation-two">
+<span class="eqno">(2)</span>\[{{\partial \mathbf{u}} \over {\partial t}} + \mathbf{u} \cdot \nabla \mathbf{u} =
+       {-{1 \over \rho} \nabla p} + {\nu \nabla^2 \mathbf{u}}\]</div>
+<hr class="docutils" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="13%" />
+<col width="14%" />
+<col width="16%" />
+<col width="16%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Expression 1</th>
+<th class="head">Expression 2</th>
+<th class="head">Component 1a</th>
+<th class="head">Component 1b</th>
+<th class="head">Operation</th>
+<th class="head">Expansion-x</th>
+<th class="head">Expansion-y</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="math">\({\partial \mathbf{u}(x,y)} \over t\)</span></td>
+<td>N/A</td>
+<td><span class="math">\({\partial \over {\partial t}}\)</span></td>
+<td><span class="math">\(u\)</span> or <span class="math">\(v\)</span></td>
+<td>Time Derivative</td>
+<td><span class="math">\({\partial u} \over {\partial t}\)</span></td>
+<td><span class="math">\({\partial v} \over {\partial t}\)</span></td>
+</tr>
+<tr class="row-odd"><td><span class="math">\(\nabla \mathbf{u}(x,y)\)</span></td>
+<td><span class="math">\(\text{grad } \mathbf{u}\)</span></td>
+<td><span class="math">\(\begin{bmatrix}  \mathbf{i} \ {\partial \over {\partial x}} \\ \mathbf{j} \ {\partial \over {\partial y}} \end{bmatrix}\)</span></td>
+<td><span class="math">\({u}\)</span> or <span class="math">\({v}\)</span></td>
+<td>Vector Gradient</td>
+<td><span class="math">\(\begin{bmatrix} {{\partial u} \over {\partial x}} \mathbf{i} \\ {{\partial u} \over {\partial y}} \mathbf{j} \end{bmatrix}\)</span></td>
+<td><span class="math">\(\begin{bmatrix} {{\partial v} \over {\partial x}} \mathbf{i} \\ {{\partial v} \over {\partial y}} \mathbf{j} \end{bmatrix}\)</span></td>
+</tr>
+<tr class="row-even"><td><span class="math">\(\mathbf{u} \cdot \nabla \mathbf{u}(x,y)\)</span></td>
+<td><span class="math">\(\mathbf{u} \cdot \text{grad } \mathbf{u}\)</span></td>
+<td><span class="math">\(\begin{bmatrix}  {u} \\ {v} \end{bmatrix}\)</span></td>
+<td><span class="math">\(\begin{bmatrix} {{\partial u} \over {\partial x}} \mathbf{i} \\ {{\partial u} \over {\partial y}} \mathbf{j} \end{bmatrix}\)</span> or <span class="math">\(\begin{bmatrix} {{\partial v} \over {\partial x}} \mathbf{i} \\ {{\partial v} \over {\partial y}} \mathbf{j} \end{bmatrix}\)</span></td>
+<td>Scalar Product</td>
+<td><span class="math">\(u{{\partial u} \over {\partial x}} + v {{\partial u} \over {\partial y}}\)</span></td>
+<td><span class="math">\(u{{\partial v} \over {\partial x}} + v {{\partial v} \over {\partial y}}\)</span></td>
+</tr>
+<tr class="row-odd"><td><span class="math">\(\nabla p(x)\)</span> or <span class="math">\(\nabla p(y)\)</span></td>
+<td><span class="math">\(\text{grad } p\)</span></td>
+<td><span class="math">\({\partial \over {\partial x}}\)</span> or <span class="math">\({\partial \over {\partial y}}\)</span></td>
+<td><span class="math">\({p}\)</span></td>
+<td>Scalar Gradient</td>
+<td><span class="math">\({{\partial p} \over {\partial x}}\)</span></td>
+<td><span class="math">\({{\partial p} \over {\partial y}}\)</span></td>
+</tr>
+<tr class="row-even"><td><span class="math">\(\nabla^2 \mathbf{u}(x,y)\)</span></td>
+<td><span class="math">\(\nabla \cdot \nabla \mathbf{u}(x,y)\)</span></td>
+<td><span class="math">\(\begin{bmatrix}  \mathbf{i} {\partial \over {\partial x}} \\ \mathbf{j} {\partial \over {\partial y}} \end{bmatrix}\)</span></td>
+<td><span class="math">\(\begin{bmatrix} {{\partial u} \over {\partial x}} \mathbf{i} \\ {{\partial u} \over {\partial y}} \mathbf{j} \end{bmatrix}\)</span> or <span class="math">\(\begin{bmatrix} {{\partial v} \over {\partial x}} \mathbf{i} \\ {{\partial v} \over {\partial y}} \mathbf{j} \end{bmatrix}\)</span></td>
+<td>Laplacian</td>
+<td><span class="math">\({{\partial^2 u} \over {\partial x^2}} + {{\partial^2 u} \over {\partial y^2}}\)</span></td>
+<td><span class="math">\({{\partial^2 v} \over {\partial x^2}} + {{\partial^2 v} \over {\partial y^2}}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../14_software/software.html">7. Software and Customisation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../16_links/unicode.html">Unicode</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

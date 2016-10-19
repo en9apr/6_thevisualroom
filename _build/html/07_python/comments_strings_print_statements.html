@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3.2. Comments, Strings and Print Statements &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="3. Python Programming Language" href="python_language.html" />
+    <link rel="next" title="3.3. Arithmetic Expressions" href="arithmetic_expressions.html" />
+    <link rel="prev" title="3.1. Python Quick Reference" href="python.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>3.2. Comments, Strings and Print Statements</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="python.html">3.1. Python Quick Reference</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="arithmetic_expressions.html">3.3. Arithmetic Expressions</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="comments-strings-and-print-statements">
+<h1>3.2. Comments, Strings and Print Statements<a class="headerlink" href="#comments-strings-and-print-statements" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="comments">
+<h2>3.2.1. Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Non-computational parts of the program that textually describe the
+behaviour of the program.</li>
+<li>Comments begin with <code class="docutils literal"><span class="pre">#</span></code> everything to right of the hash is ignored
+by Python.</li>
+<li>Comments should be frequent so you and others can understand the
+code.</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Did you notice that these words are green? Any words after</span>
+<span class="c1"># a Hash Tag (#) on the same line are called comments.</span>
+
+<span class="c1"># Comments are lines of code that the computer does not</span>
+<span class="c1"># look at. These can be used to clarify the purpose of your</span>
+<span class="c1"># code and make it easier to read.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="strings">
+<h2>3.2.2. Strings<a class="headerlink" href="#strings" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Sequence of characters enclosed by a pair of single or double quotes</li>
+<li>Examples are &#8220;cats hate dogs&#8221; and &#8216;Strings are fun!&#8217;.</li>
+<li>Strings are one kind of data in Python. Their data type is denoted
+<code class="docutils literal"><span class="pre">str</span></code>.</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="s2">&quot;This is a string&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>This is a string
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="s1">&#39;This is also a string&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>This is also a string
+</pre></div>
+</div>
+</div>
+<div class="section" id="print-statements">
+<h2>3.2.3. Print Statements<a class="headerlink" href="#print-statements" title="Permalink to this headline">¶</a></h2>
+<p>To print these strings and other things to the box on the right, the
+word print is used.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="s2">&quot;Output Number One&quot;</span>
+<span class="nb">print</span> <span class="mf">5.069393</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>Output Number One
+5.069393
+</pre></div>
+</div>
+<div class="section" id="blank-lines">
+<h3>3.2.3.1. Blank Lines<a class="headerlink" href="#blank-lines" title="Permalink to this headline">¶</a></h3>
+<p>Print statements on their own can be used to print blank lines to the
+screen, which separates output and makes it easier to read.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span>
+<span class="nb">print</span> <span class="s2">&quot;Hello&quot;</span>
+<span class="nb">print</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">BLANKLINE</span><span class="o">&gt;</span>
+<span class="n">Hello</span>
+<span class="o">&lt;</span><span class="n">BLANKLINE</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="strings-on-the-same-line">
+<h3>3.2.3.2. Strings on the Same Line<a class="headerlink" href="#strings-on-the-same-line" title="Permalink to this headline">¶</a></h3>
+<p>Multiple strings can be printed on the same line by using commas to
+separate them. This automatically inserts a space in between the two
+strings.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="s2">&quot;One&quot;</span><span class="p">,</span> <span class="s2">&quot;Two&quot;</span>
+<span class="nb">print</span> <span class="s2">&quot;One&quot;</span><span class="p">,</span><span class="s2">&quot;Two&quot;</span><span class="p">,</span><span class="s2">&quot;Three&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>One Two
+One Two Three
+</pre></div>
+</div>
+</div>
+<div class="section" id="strings-within-strings">
+<h3>3.2.3.3. Strings within Strings<a class="headerlink" href="#strings-within-strings" title="Permalink to this headline">¶</a></h3>
+<p>If you want to include a quotation mark or apostrophe in your string,
+you need to make the symbols around the string be the opposite type.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="s2">&quot;&#39;You&#39;re awesome!&#39; he said&quot;</span>
+<span class="nb">print</span> <span class="s1">&#39;&quot;Thank you!&quot; I replied.&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>&#39;You&#39;re awesome!&#39; he said
+&quot;Thank you!&quot; I replied.
+</pre></div>
+</div>
+</div>
+<div class="section" id="errors-with-string-value">
+<h3>3.2.3.4. Errors with String Value<a class="headerlink" href="#errors-with-string-value" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>If you accidentally use the same ones, errors can occur.</li>
+<li>Notice that the words are not coloured in the following examples;
+that is a big clue that something is wrong.</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="s1">&#39;It&#39;</span><span class="n">s</span> <span class="n">mine</span><span class="s1">&#39;</span>
+<span class="nb">print</span> <span class="s2">&quot;I said &quot;</span><span class="n">hi</span><span class="s2">&quot; to him&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>  File &quot;&lt;ipython-input-15-a5c49eea454d&gt;&quot;, line 1
+    print &#39;It&#39;s mine&#39;
+              ^
+SyntaxError: invalid syntax
+</pre></div>
+</div>
+</div>
+<div class="section" id="errors-with-print-command">
+<h3>3.2.3.5. Errors with Print Command<a class="headerlink" href="#errors-with-print-command" title="Permalink to this headline">¶</a></h3>
+<p>You can also get an error by misspelling &#8216;print.&#8217; Notice that again,
+print shows up as a different colour than normal.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">prit</span> <span class="s2">&quot;Error&quot;</span>
+<span class="n">printer</span> <span class="s2">&quot;Error&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>  File &quot;&lt;ipython-input-16-abc799b605cb&gt;&quot;, line 1
+    prit &quot;Error&quot;
+               ^
+SyntaxError: invalid syntax
+</pre></div>
+</div>
+</div>
+<div class="section" id="concatenate-multiple-lines-on-print-command">
+<h3>3.2.3.6. Concatenate Multiple Lines on Print Command<a class="headerlink" href="#concatenate-multiple-lines-on-print-command" title="Permalink to this headline">¶</a></h3>
+<p>You can concatenate the output of a print command over multiple lines of
+code using the comma <cite>,</cite> and on the same line using the plus sign <cite>+</cite></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="s2">&quot;Something is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; and&quot;</span><span class="p">,</span>    <span class="c1"># Notice that the comma is used</span>
+<span class="nb">print</span> <span class="s2">&quot;Something else is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>Something is 42 and Something else is 60
+</pre></div>
+</div>
+<ul class="simple">
+<li>Note: <code class="docutils literal"><span class="pre">str</span></code> does not add a space before and after the string</li>
+<li>Commas within and between print statements do add a space</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="s2">&quot;something&quot;</span><span class="p">,</span>
+<span class="nb">print</span> <span class="s2">&quot;something else&quot;</span>
+<span class="nb">print</span> <span class="s2">&quot;--&quot;</span>
+<span class="nb">print</span> <span class="s2">&quot;this&quot;</span><span class="p">,</span><span class="s2">&quot;and&quot;</span><span class="p">,</span><span class="s2">&quot;that&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>something something else
+--
+this and that
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="python.html">3.1. Python Quick Reference</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="arithmetic_expressions.html">3.3. Arithmetic Expressions</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

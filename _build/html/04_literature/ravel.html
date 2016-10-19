@@ -1,0 +1,434 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.7. Ravel et al. (2009) “Numerical Simulation of Viscous Nonlinear Waves” &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="4. Literature" href="literature.html" />
+    <link rel="next" title="4.8. Feng at al. (2011) “Evaluation of Cloud Convection and Tracer Transport”" href="feng.html" />
+    <link rel="prev" title="4.6. Cavaleri et al. (2007) “Wave Modelling - The State of the Art”" href="cavaleri.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.7. Ravel et al. (2009) “Numerical Simulation of Viscous Nonlinear Waves”</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="cavaleri.html">4.6. Cavaleri et al. (2007) &#8220;Wave Modelling - The State of the Art&#8221;</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="feng.html">4.8. Feng at al. (2011) &#8220;Evaluation of Cloud Convection and Tracer Transport&#8221;</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="ravel-et-al-2009-numerical-simulation-of-viscous-nonlinear-waves">
+<h1>4.7. Ravel et al. (2009) &#8220;Numerical Simulation of Viscous Nonlinear Waves&#8221;<a class="headerlink" href="#ravel-et-al-2009-numerical-simulation-of-viscous-nonlinear-waves" title="Permalink to this headline">¶</a></h1>
+<p>Ravel, A., Wen, X., Smith, M.H., &#8220;Numerical Simulation of Viscous, Nonlinear and Progressive Water Waves&#8221;, Jounral of Fluid Mechanics, 637 (2009) pp 443 - 473</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#where-is-this-study-placed-within-the-wave-modelling-community" id="id1">Where is this study placed within the wave modelling community?</a></li>
+<li><a class="reference internal" href="#summary-of-findings" id="id2">Summary of Findings</a></li>
+<li><a class="reference internal" href="#literature-review" id="id3">Literature Review</a><ul>
+<li><a class="reference internal" href="#what-kind-of-numerical-methods-are-there" id="id4">What kind of numerical methods are there?</a></li>
+<li><a class="reference internal" href="#what-phenomena-are-we-testing-for" id="id5">What phenomena are we testing for?</a></li>
+<li><a class="reference internal" href="#do-we-need-vorticity" id="id6">Do we need vorticity?</a></li>
+<li><a class="reference internal" href="#questions-arising-from-literature-review" id="id7">Questions arising from literature review</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#method" id="id8">Method</a><ul>
+<li><a class="reference internal" href="#assumptions" id="id9">Assumptions</a></li>
+<li><a class="reference internal" href="#inputs" id="id10">Inputs</a></li>
+<li><a class="reference internal" href="#outputs" id="id11">Outputs</a></li>
+<li><a class="reference internal" href="#physics" id="id12">Physics</a></li>
+<li><a class="reference internal" href="#numerical-discretisation" id="id13">Numerical Discretisation</a></li>
+<li><a class="reference internal" href="#grid-discretisation" id="id14">Grid Discretisation</a></li>
+<li><a class="reference internal" href="#solver" id="id15">Solver</a></li>
+<li><a class="reference internal" href="#test-cases" id="id16">Test Cases</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#results" id="id17">Results</a><ul>
+<li><a class="reference internal" href="#energy-decay-rate" id="id18">Energy Decay Rate</a></li>
+<li><a class="reference internal" href="#free-surface-profiles" id="id19">Free Surface Profiles</a></li>
+<li><a class="reference internal" href="#velocity-field" id="id20">Velocity field</a></li>
+<li><a class="reference internal" href="#streamlines" id="id21">Streamlines</a></li>
+<li><a class="reference internal" href="#vorticity" id="id22">Vorticity</a></li>
+<li><a class="reference internal" href="#shear-stress" id="id23">Shear Stress</a></li>
+<li><a class="reference internal" href="#effect-of-wave-steepness" id="id24">Effect of Wave Steepness</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="where-is-this-study-placed-within-the-wave-modelling-community">
+<h2><a class="toc-backref" href="#id1">4.7.1. Where is this study placed within the wave modelling community?</a><a class="headerlink" href="#where-is-this-study-placed-within-the-wave-modelling-community" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>This study is in the category of models attempting to solve the problem of non-linear wave effects in shallow water.</li>
+<li>It takes the approach of deterministic (phase resolving) wave modelling in the time domain.</li>
+<li>It uses one phase per realisation, and seven realisations are performed (which may have been limited by the large computing time needed) but at different depths and frequencies.</li>
+<li>Unlike other models in this category, it also includes viscous effects, which allows energy decay rate to be observed, which is one of the open questions in this field.</li>
+<li>It also postulates various mechanisms for this decay rate, to try to explain the physics behind the energy decay rate difference between intermediate and deep water cases.</li>
+</ul>
+</div>
+<div class="section" id="summary-of-findings">
+<h2><a class="toc-backref" href="#id2">4.7.2. Summary of Findings</a><a class="headerlink" href="#summary-of-findings" title="Permalink to this headline">¶</a></h2>
+<p>Near the water surface:</p>
+<ol class="arabic simple">
+<li>Clockwise and anticlockwise rotation of the fluid at the trough and crest</li>
+<li>Thicker vorticity layers and larger magnitude of vorticity compared with:</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Inviscid, rotational flow (the Gerstner wave)</li>
+<li>Low Re viscous flow (from Kinsman (1965) and Lamb (1932))</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>Thick shear layer with larger shear stress (-ve and +ve shear stress below crest and troughs of the wave)</li>
+<li>Good comparison between wave energy decay rates (numerical, experimental and theoretical)</li>
+</ol>
+</div>
+<div class="section" id="literature-review">
+<h2><a class="toc-backref" href="#id3">4.7.3. Literature Review</a><a class="headerlink" href="#literature-review" title="Permalink to this headline">¶</a></h2>
+<p>3 categories of techniques:</p>
+<ol class="arabic simple">
+<li>Potential flow - inviscid, irrotational, no turbulence (analytical solution via Laplace equation for velocity potential plus boundary conditions):<ul>
+<li>Inaccurate for flows with a boundary layer (e.g. atmospheric boundary layer, bottom boundary layer)</li>
+<li>Vorticity is zero, so fluid loses it&#8217;s infinite degrees of freedom (so the fluid ceases to be a fluid in reality)</li>
+</ul>
+</li>
+<li>Inviscid rotational flow:<ul>
+<li>Gersther&#8217;s trochodial wave theory</li>
+<li>Boundary integral method - periodic and solitary waves with constant vorticity - limited due to special application of vorticity distribution</li>
+<li>Boundary integral method - interaction of small amplitude waves with bottom ripples</li>
+</ul>
+</li>
+<li>Viscous flow:<ul>
+<li>Kinsman and Lamb (low Re): No convection terms, which linearises the Navier Stokes Equations, such that an analytical solution can be found</li>
+<li>Behroozi: conservation of energy for fluid viscosity and decay relation</li>
+<li>Wang &amp; Joseph: viscous potential flow and viscous correction potential flow for decay of free gravity wave due to viscosity</li>
+<li>Dutykh &amp; Dias: Visco-potential free surface flow</li>
+</ul>
+</li>
+</ol>
+<div class="section" id="what-kind-of-numerical-methods-are-there">
+<h3><a class="toc-backref" href="#id4">4.7.3.1. What kind of numerical methods are there?</a><a class="headerlink" href="#what-kind-of-numerical-methods-are-there" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Front tracking method</li>
+<li>Boundary integral method</li>
+<li>Phase field method</li>
+<li>Second gradient method</li>
+<li>Level set method</li>
+<li>Marker and cell method</li>
+<li>Smooth particle hydrodynamics</li>
+<li>Finite analytic method and modified marker and cell method, using zero shear stress at the surface for velocity and energy decay rate</li>
+<li>Kinematic boundary condition at the surface - zero shear stress, zero pressure or total zero shear stress on water surface - no air considered only water</li>
+<li>Volume of fluid method - Hirt and Nichols (1981) for shape of free surface. Zwart, Burns and Galpin (2007) - VOF - define volume fraction of air and water separately with high resolution scheme for mass conservation in air and water, v, p and aw, af solved simultaneously in coupled system. Advantage of VOF = includes air and water to retain mass continuity and eliminates need to reconstruct the shape of the water surface during the calculation, like MAC, SPH and height function methods</li>
+</ol>
+</div>
+<div class="section" id="what-phenomena-are-we-testing-for">
+<h3><a class="toc-backref" href="#id5">4.7.3.2. What phenomena are we testing for?</a><a class="headerlink" href="#what-phenomena-are-we-testing-for" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Waves are transient, non-linear, rotational and viscous and often simplified to linear, irrotational and inviscid - this removes effect of vorticity and shear stress, which are strong indicators of rotational and viscous behaviour.</li>
+<li>Past vorticity work - velocity as a function of vorticity via Biot-Savart integral, eliminating pressure from the formulation. Zero shear stress - no wind at surface.</li>
+</ul>
+</div>
+<div class="section" id="do-we-need-vorticity">
+<h3><a class="toc-backref" href="#id6">4.7.3.3. Do we need vorticity?</a><a class="headerlink" href="#do-we-need-vorticity" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Yes - parasitic capillaries cause it - orbital vorticity below waves with wind - causes Langmuir circulations or turbulence balance - strong consequences. Vorticity is proportional to gradient of velocity - applicable for high Re flows. Action of viscous force shown in high vorticity and shear stress.</li>
+</ul>
+</div>
+<div class="section" id="questions-arising-from-literature-review">
+<h3><a class="toc-backref" href="#id7">4.7.3.4. Questions arising from literature review</a><a class="headerlink" href="#questions-arising-from-literature-review" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Is there vorticity and shear stress in a progressive wave without wind? (air following water)</li>
+<li>If so, what is the maximum value of vorticity and shear stress in the water? Are they symmetric under crest and trough?</li>
+<li>Is there an effect of water depth on vorticity and shear stress?</li>
+</ol>
+</div>
+</div>
+<div class="section" id="method">
+<h2><a class="toc-backref" href="#id8">4.7.4. Method</a><a class="headerlink" href="#method" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="assumptions">
+<h3><a class="toc-backref" href="#id9">4.7.4.1. Assumptions</a><a class="headerlink" href="#assumptions" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>2D</li>
+<li>Viscous fluid</li>
+<li>Non-linear</li>
+<li>Non-breaking</li>
+<li>Intermediate and deep water - with a slope</li>
+<li>Zero wind velocity - air follows wind</li>
+<li><strong>Laminar flow</strong></li>
+</ol>
+</div>
+<div class="section" id="inputs">
+<h3><a class="toc-backref" href="#id10">4.7.4.2. Inputs</a><a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><span class="math">\(L\)</span> = wavelength</li>
+<li><span class="math">\(T\)</span> = periodic time</li>
+<li><span class="math">\(a\)</span> = wave amplitude</li>
+<li><span class="math">\(k = 2 \pi / L\)</span> = wavenumber</li>
+<li><span class="math">\(\sigma = 2 \pi / T\)</span> = angular frequency</li>
+<li><span class="math">\(c = L / T = \sigma  / k\)</span> = angular frequency</li>
+<li><span class="math">\(2a / L\)</span> = wave steepness</li>
+<li><span class="math">\(h\)</span> = depth in water</li>
+<li><span class="math">\(h'\)</span> = depth in air</li>
+</ul>
+</div>
+<div class="section" id="outputs">
+<h3><a class="toc-backref" href="#id11">4.7.4.3. Outputs</a><a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Velocity field</li>
+<li>Streamlines</li>
+<li>Vorticity</li>
+<li>Shear stress</li>
+</ol>
+</div>
+<div class="section" id="physics">
+<h3><a class="toc-backref" href="#id12">4.7.4.4. Physics</a><a class="headerlink" href="#physics" title="Permalink to this headline">¶</a></h3>
+<p><strong>Boundary Conditions are:</strong></p>
+<ul class="simple">
+<li>Walls top and bottom</li>
+<li>Opening at inlet and outlet - non-linear, inviscid flow solution at inlet</li>
+<li>A 1:15 slope to dissipate the wave energy on the beech</li>
+</ul>
+<p><strong>2D Equations:</strong></p>
+<ul class="simple">
+<li>Continuity equation for water</li>
+<li>Continuity equation for air</li>
+<li>Momentum equation for mixture in x</li>
+<li>Momentum equation for mixture in y</li>
+<li>Pressure-velocity coupling in x</li>
+<li>Pressure-velocity coupling in y</li>
+</ul>
+<p><strong>Unknowns:</strong></p>
+<ul class="simple">
+<li>Volume fraction of water (scalar) (x,y) - by volume fraction constraint, we get the volume fraction of air (x,y)</li>
+<li>Velocity of water (x)</li>
+<li>Velocity of water (y)</li>
+<li>Velocity of air (x)</li>
+<li>Velocity of air (y)</li>
+<li>Pressure of mixture (scalar) (x,y)</li>
+</ul>
+<p><strong>Initial Conditions:</strong></p>
+<ul class="simple">
+<li>Non-linear potential flow solution</li>
+</ul>
+<p><strong>Correction for outward flow:</strong></p>
+<ul class="simple">
+<li>Asymmetry of flow means more flow moves under wave crest than out under trough</li>
+<li>Hence, slope is moved away at a velocity found by integrating the potential flow solution</li>
+</ul>
+</div>
+<div class="section" id="numerical-discretisation">
+<h3><a class="toc-backref" href="#id13">4.7.4.5. Numerical Discretisation</a><a class="headerlink" href="#numerical-discretisation" title="Permalink to this headline">¶</a></h3>
+<p>Continuity Equation:</p>
+<ul class="simple">
+<li>Second order backward Euler for transient term</li>
+<li>First/second order blended scheme for advection term</li>
+</ul>
+<p>Momentum Equation:</p>
+<ul class="simple">
+<li>Second order backward Euler for transient term</li>
+<li>Second order scheme for convection term, diffusion term and pressure gradient term</li>
+</ul>
+<p>Pressure-velocity coupling:</p>
+<ul class="simple">
+<li>Rhie-Chow interpolation</li>
+</ul>
+</div>
+<div class="section" id="grid-discretisation">
+<h3><a class="toc-backref" href="#id14">4.7.4.6. Grid Discretisation</a><a class="headerlink" href="#grid-discretisation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Structured mesh</li>
+<li>16 grid points over wave height</li>
+<li>100 grid points over wavelength</li>
+</ul>
+</div>
+<div class="section" id="solver">
+<h3><a class="toc-backref" href="#id15">4.7.4.7. Solver</a><a class="headerlink" href="#solver" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Algebraic multi-grid method</li>
+</ul>
+</div>
+<div class="section" id="test-cases">
+<h3><a class="toc-backref" href="#id16">4.7.4.8. Test Cases</a><a class="headerlink" href="#test-cases" title="Permalink to this headline">¶</a></h3>
+<p>All these waves are:</p>
+<ul class="simple">
+<li>Non-linear, i.e. <span class="math">\(ka &gt; 0.1\)</span></li>
+<li>Non-breaking, i.e. <span class="math">\(2a/L \le 0.08\)</span></li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="16%" />
+<col width="17%" />
+<col width="11%" />
+<col width="48%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Case</th>
+<th class="head">2a/L (steepness)</th>
+<th class="head">h/L (depth ratio)</th>
+<th class="head">T (period)</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1 (C1)</td>
+<td>0.04</td>
+<td>0.2</td>
+<td>0.7592</td>
+<td>not steep, intermediate depth</td>
+</tr>
+<tr class="row-odd"><td>2 (C2)</td>
+<td>0.04</td>
+<td>0.6</td>
+<td>0.6</td>
+<td>not steep, deep</td>
+</tr>
+<tr class="row-even"><td>3 (C3)</td>
+<td>0.06</td>
+<td>0.2</td>
+<td>0.7592</td>
+<td>steep, intermediate depth</td>
+</tr>
+<tr class="row-odd"><td>4 (C4)</td>
+<td>0.06</td>
+<td>0.6</td>
+<td>0.6</td>
+<td>steep, deep</td>
+</tr>
+<tr class="row-even"><td>5 (C5)</td>
+<td>0.08</td>
+<td>0.2</td>
+<td>0.7592</td>
+<td>very steep, intermediate depth</td>
+</tr>
+<tr class="row-odd"><td>6 (C6)</td>
+<td>0.08</td>
+<td>0.6</td>
+<td>0.6</td>
+<td>very steep, deep</td>
+</tr>
+<tr class="row-even"><td>7 (CEX)</td>
+<td>0.06</td>
+<td>0.44</td>
+<td>0.7</td>
+<td>for comparison with experiment and energy density</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="results">
+<h2><a class="toc-backref" href="#id17">4.7.5. Results</a><a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="energy-decay-rate">
+<h3><a class="toc-backref" href="#id18">4.7.5.1. Energy Decay Rate</a><a class="headerlink" href="#energy-decay-rate" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Determine Kinetic, Potential and Total Energy Decay Rate</li>
+<li>Compute decay rate <span class="math">\(\beta\)</span> by fitting this equation:</li>
+</ul>
+<div class="math">
+\[{\overline{E} \over \overline{E}_0} = \overline{\alpha}_T = \exp(-\beta x)\]</div>
+<ul class="simple">
+<li>Decay rate is higher for deep water case than for intermediate water case</li>
+</ul>
+<p><strong>The rest of the paper discusses why by deep water has a higher energy decay rate by attempting to describe the physics</strong></p>
+</div>
+<div class="section" id="free-surface-profiles">
+<h3><a class="toc-backref" href="#id19">4.7.5.2. Free Surface Profiles</a><a class="headerlink" href="#free-surface-profiles" title="Permalink to this headline">¶</a></h3>
+<p>Comparing the free surface profiles of:</p>
+<ul class="simple">
+<li>Deep water case</li>
+<li>Intermediate depth water case</li>
+<li>Nonlinear Stokes wave</li>
+</ul>
+<p>Shows:</p>
+<ul class="simple">
+<li>Deep water case is <strong>Symmetric</strong></li>
+<li>Intermediate depth water case is <strong>Asymmetric</strong></li>
+</ul>
+<p>Hence there is an effect of the bottom surface, forcing water to move towards the crest in intermediate depths</p>
+<p><strong>Why does the fluid move upwards towards the crest in the case of intermediate depth?</strong></p>
+</div>
+<div class="section" id="velocity-field">
+<h3><a class="toc-backref" href="#id20">4.7.5.3. Velocity field</a><a class="headerlink" href="#velocity-field" title="Permalink to this headline">¶</a></h3>
+<p>Intermediate water case shows higher peak velocity in the crest than the deep water case.</p>
+</div>
+<div class="section" id="streamlines">
+<h3><a class="toc-backref" href="#id21">4.7.5.4. Streamlines</a><a class="headerlink" href="#streamlines" title="Permalink to this headline">¶</a></h3>
+<p>Fluid moves to where it encounters least resistance, this point is higher for intermediate water than deep water.</p>
+</div>
+<div class="section" id="vorticity">
+<h3><a class="toc-backref" href="#id22">4.7.5.5. Vorticity</a><a class="headerlink" href="#vorticity" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Vorticity distribution is oscillatory with depth</li>
+<li>The oscillations are caused by viscosity</li>
+<li>The maximum vorticity is larger and has a thicker layer for intermediate compared with deep cases</li>
+<li>However, the deep depth has more oscillations in the vorticity field, because it is deeper</li>
+</ul>
+</div>
+<div class="section" id="shear-stress">
+<h3><a class="toc-backref" href="#id23">4.7.5.6. Shear Stress</a><a class="headerlink" href="#shear-stress" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Intermediate depth case also has larger shear stress than deep case, because the bottom boundary restricts motion of the water, providing larger velocity gradient, hence larger shear stress.</li>
+<li>The deep water case has a bottom boundary located deeper, so the fluid at the surface is less influenced by viscous effects</li>
+</ul>
+</div>
+<div class="section" id="effect-of-wave-steepness">
+<h3><a class="toc-backref" href="#id24">4.7.5.7. Effect of Wave Steepness</a><a class="headerlink" href="#effect-of-wave-steepness" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Wave steepness also increases vorticity and shear stress because the velocity gradients are higher.</li>
+</ul>
+<p><strong>The effect of the oscillatory vorticity field with depth seems to be a fundamental phenomenon and affects the shear stress and velocity field</strong></p>
+<p><strong>The interface between the air and water is the most critical region in the flow, due to the high viscous shear stress created there</strong></p>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="cavaleri.html">4.6. Cavaleri et al. (2007) &#8220;Wave Modelling - The State of the Art&#8221;</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="feng.html">4.8. Feng at al. (2011) &#8220;Evaluation of Cloud Convection and Tracer Transport&#8221;</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

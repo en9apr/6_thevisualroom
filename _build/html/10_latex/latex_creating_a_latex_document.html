@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.1. Creating a LaTeX Document &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="6. LaTeX" href="latex.html" />
+    <link rel="next" title="6.2. Common Math Notation" href="latex_common_math_notation.html" />
+    <link rel="prev" title="6. LaTeX" href="latex.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>6.1. Creating a LaTeX Document</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="latex.html">6. LaTeX</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="latex_common_math_notation.html">6.2. Common Math Notation</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="creating-a-latex-document">
+<h1>6.1. Creating a LaTeX Document<a class="headerlink" href="#creating-a-latex-document" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#basic-document-setup" id="id1">Basic Document Setup</a></li>
+<li><a class="reference internal" href="#files" id="id2">Files</a></li>
+<li><a class="reference internal" href="#templates" id="id3">Templates</a></li>
+</ul>
+</div>
+<div class="section" id="basic-document-setup">
+<h2><a class="toc-backref" href="#id1">6.1.1. Basic Document Setup</a><a class="headerlink" href="#basic-document-setup" title="Permalink to this headline">¶</a></h2>
+<p>The document is setup like this:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="k">\documentclass</span><span class="na">[11pt]</span><span class="nb">{</span>article<span class="nb">}</span>
+</pre></div>
+</div>
+</td>
+<td>The preamble</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+This is the body of the document
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+</div>
+</td>
+<td>Body of the document</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span>Inline maths <span class="s">$</span><span class="o">(</span><span class="nb">x</span><span class="o">+</span><span class="m">1</span><span class="o">)</span><span class="s">$</span>
+</pre></div>
+</div>
+</td>
+<td>Inline maths</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span>Display maths <span class="sb">$$</span><span class="o">(</span><span class="nb">x</span><span class="o">+</span><span class="m">1</span><span class="o">)</span><span class="s">$$</span>
+</pre></div>
+</div>
+</td>
+<td>Display (centred on it&#8217;s own line) maths</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-latex"><div class="highlight"><pre><span></span>Line 1. <span class="k">\\</span>
+Line 2.
+</pre></div>
+</div>
+</td>
+<td>New line</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="files">
+<h2><a class="toc-backref" href="#id2">6.1.2. Files</a><a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h2>
+<p>There are five files created, the two most important ones are in bold (.pdf and .tex)</p>
+<ul class="simple">
+<li>filename.aux</li>
+<li>filename.txt</li>
+<li><strong>filename.pdf</strong> (output)</li>
+<li>filename.synctex.gz</li>
+<li><strong>filename.tex</strong> (latex command file)</li>
+</ul>
+</div>
+<div class="section" id="templates">
+<h2><a class="toc-backref" href="#id3">6.1.3. Templates</a><a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h2>
+<p>Useful report template for LaTeX:</p>
+<p><a class="reference external" href="https://www.overleaf.com/latex/templates/sample-lab-report-for-u-of-r-phys-349/pgsyqngcyjxk#.VhQxeXpVhBd">Overleaf Sample Lab Report for PHYS 349 at the University of Redlands</a></p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="latex.html">6. LaTeX</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="latex_common_math_notation.html">6.2. Common Math Notation</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3.10. Modules &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="3. Python Programming Language" href="python_language.html" />
+    <link rel="next" title="3.11. Questions, Examples and Projects" href="practice.html" />
+    <link rel="prev" title="3.9. Functions" href="functions.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>3.10. Modules</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="functions.html">3.9. Functions</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="practice.html">3.11. Questions, Examples and Projects</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="modules">
+<h1>3.10. Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#semantics-of-modules" id="id1">Semantics of Modules</a></li>
+<li><a class="reference internal" href="#syntax-of-modules" id="id2">Syntax of Modules</a></li>
+<li><a class="reference internal" href="#math-module" id="id3">Math Module</a></li>
+<li><a class="reference internal" href="#numpy-module" id="id4">Numpy Module</a></li>
+<li><a class="reference internal" href="#random-module" id="id5">Random Module</a></li>
+</ul>
+</div>
+<div class="section" id="semantics-of-modules">
+<h2><a class="toc-backref" href="#id1">3.10.1. Semantics of Modules</a><a class="headerlink" href="#semantics-of-modules" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Modules are <strong>Abstract Classes</strong>, meaning they contain methods and
+constants, but cannot be instantiated.</li>
+<li>Modules are libraries that implement useful operations not included
+in the basic code</li>
+</ul>
+</div>
+<div class="section" id="syntax-of-modules">
+<h2><a class="toc-backref" href="#id2">3.10.2. Syntax of Modules</a><a class="headerlink" href="#syntax-of-modules" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Modules can be accessed via the <code class="docutils literal"><span class="pre">import</span></code> statement</li>
+<li>Examples of modules are <code class="docutils literal"><span class="pre">math</span></code> and <code class="docutils literal"><span class="pre">random</span></code></li>
+<li>Don&#8217;t use modules names as variable names</li>
+</ul>
+</div>
+<div class="section" id="math-module">
+<h2><a class="toc-backref" href="#id3">3.10.3. Math Module</a><a class="headerlink" href="#math-module" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="nb">print</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mf">5.6</span><span class="p">)</span> <span class="c1">#Round up</span>
+<span class="nb">print</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="mf">5.6</span><span class="p">)</span> <span class="c1">#Round down</span>
+
+<span class="nb">print</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="c1">#3 to the power of 4</span>
+
+<span class="nb">print</span> <span class="n">math</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span> <span class="c1">#absolute value</span>
+
+<span class="nb">print</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1">#square root</span>
+
+<span class="nb">print</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mi">180</span><span class="p">)</span> <span class="c1">#convert to radians</span>
+<span class="nb">print</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="mf">3.1415926</span><span class="p">)</span> <span class="c1"># convert to degrees</span>
+
+<span class="nb">print</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="c1">#pi</span>
+<span class="nb">print</span> <span class="n">math</span><span class="o">.</span><span class="n">e</span> <span class="c1"># e^1</span>
+<span class="nb">print</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#e^1</span>
+
+<span class="c1"># import only two using capitals for constants</span>
+
+<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">pi</span> <span class="k">as</span> <span class="n">PI</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">exp</span> <span class="k">as</span> <span class="n">exp</span>
+
+<span class="nb">print</span> <span class="n">PI</span>
+<span class="nb">print</span> <span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>6.0
+5.0
+81.0
+5.0
+2.0
+3.14159265359
+179.99999693
+3.14159265359
+2.71828182846
+2.71828182846
+3.14159265359
+2.71828182846
+</pre></div>
+</div>
+</div>
+<div class="section" id="numpy-module">
+<h2><a class="toc-backref" href="#id4">3.10.4. Numpy Module</a><a class="headerlink" href="#numpy-module" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">ones</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span> <span class="n">ones</span>
+<span class="n">zeros</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span> <span class="n">zeros</span>
+<span class="nb">print</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">ones</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>[[ 1.  1.  1.  1.  1.]
+[ 1.  1.  1.  1.  1.]
+[ 1.  1.  1.  1.  1.]
+[ 1.  1.  1.  1.  1.]
+[ 1.  1.  1.  1.  1.]]
+[[ 0.  0.  0.  0.  0.]
+[ 0.  0.  0.  0.  0.]
+[ 0.  0.  0.  0.  0.]
+[ 0.  0.  0.  0.  0.]
+[ 0.  0.  0.  0.  0.]]
+[[ 0.84147098  0.84147098  0.84147098  0.84147098  0.84147098]
+[ 0.84147098  0.84147098  0.84147098  0.84147098  0.84147098]
+[ 0.84147098  0.84147098  0.84147098  0.84147098  0.84147098]
+[ 0.84147098  0.84147098  0.84147098  0.84147098  0.84147098]
+[ 0.84147098  0.84147098  0.84147098  0.84147098  0.84147098]]
+[ 0.   0.5  1.   1.5  2. ]
+</pre></div>
+</div>
+</div>
+<div class="section" id="random-module">
+<h2><a class="toc-backref" href="#id5">3.10.5. Random Module</a><a class="headerlink" href="#random-module" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="nb">print</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span> <span class="c1">#Random choice from a list</span>
+<span class="nb">print</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="c1">#random integer from 0 to 10 (including 10)</span>
+<span class="nb">print</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="c1">#random integer from 0 to 10 (not including 10)</span>
+<span class="nb">print</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="c1">#random float from 0.0 to 1.0 (not including 1.0)</span>
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>1
+3
+2
+0.622180301476
+</pre></div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="functions.html">3.9. Functions</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="practice.html">3.11. Questions, Examples and Projects</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

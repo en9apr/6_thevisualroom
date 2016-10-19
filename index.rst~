@@ -1,0 +1,33 @@
+.. The Visual Room documentation master file, created by
+   sphinx-quickstart on Sat Nov 29 08:59:24 2014.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+=======================================
+Notes on CFD, Computing and Mathematics
+=======================================
+
+.. contents::
+   :local:
+
+Notes on CFD
+============
+
+These notes are based on "Computational Fluid Dynamics" by `Professor Lorena Barba <http://www.seas.gwu.edu/lorena-barba>`_ and "High Performance Scientific Computing" by `Professor Randall LeVeque <http://depts.washington.edu/amath/staff-members/randy-leveque/>`_. The rest of the notes are based on literature from variously quoted academic resources.
+
+Theory and Projects
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+   :numbered: 4
+   
+   barba_cfd_theory
+   barba_cfd_projects
+   leveque_hpsc
+   
+
+
+
+
+

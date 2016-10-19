@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.9.2. Conservative Discretisation &#8212; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation" href="finite_volume_method_3.html" />
+    <link rel="prev" title="1.9.1. Advantages of The Finite Volume Method" href="finite_volume_method_1.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.9.2. Conservative Discretisation</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="finite_volume_method_1.html">1.9.1. Advantages of The Finite Volume Method</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="finite_volume_method_3.html">1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="conservative-discretisation">
+<h1>1.9.2. Conservative Discretisation<a class="headerlink" href="#conservative-discretisation" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#definition-of-a-conservation-law" id="id3">Definition of a Conservation Law</a><ul>
+<li><a class="reference internal" href="#how-to-identify-fluxes" id="id4">How to Identify Fluxes</a></li>
+<li><a class="reference internal" href="#how-to-identify-sources" id="id5">How to Identify Sources</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#differential-discretisation" id="id6">Differential Discretisation</a></li>
+<li><a class="reference internal" href="#id1" id="id7">Conservative Discretisation</a><ul>
+<li><a class="reference internal" href="#general-form-of-a-conservation-law" id="id8">General Form of a Conservation Law</a></li>
+<li><a class="reference internal" href="#id2" id="id9">Conservative Discretisation</a></li>
+<li><a class="reference internal" href="#example-of-conservative-discretisation" id="id10">Example of Conservative Discretisation</a></li>
+<li><a class="reference internal" href="#example-of-non-conservative-discretisation" id="id11">Example of Non-Conservative Discretisation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="definition-of-a-conservation-law">
+<h2><a class="toc-backref" href="#id3">1.9.2.1. Definition of a Conservation Law</a><a class="headerlink" href="#definition-of-a-conservation-law" title="Permalink to this headline">¶</a></h2>
+<p>Recall - what is a conservation law?</p>
+<p>&#8220;Conservation means the <strong>variation</strong> of a conserved (intensive) flow quantity within a given volume is due to the <strong>net effect</strong> of some <strong>internal sources</strong> and the amount of that quantity which is <strong>crossing the boundary surface</strong>&#8220;</p>
+<p>Essentially we are looking at the net effect of:</p>
+<ul class="simple">
+<li>Sources</li>
+<li>Fluxes</li>
+</ul>
+<div class="section" id="how-to-identify-fluxes">
+<h3><a class="toc-backref" href="#id4">How to Identify Fluxes</a><a class="headerlink" href="#how-to-identify-fluxes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Fluxes appear exclusively under the <strong>gradient operator</strong> - the flux is the only spatial derivative that appears in the equation</li>
+<li>This is a way to recognise if flux is conserved - <strong>look at the gradient operator</strong> - can you group the spatial derivatives under a gradient operator, so that the fluxes have <strong>divergence</strong> - i.e. a measure of &#8220;outgoingness&#8221;?</li>
+<li>In conservative form, we usually have <strong>mass flux</strong>, <strong>momentum flux</strong> and <strong>total energy flux</strong></li>
+</ul>
+</div>
+<div class="section" id="how-to-identify-sources">
+<h3><a class="toc-backref" href="#id5">How to Identify Sources</a><a class="headerlink" href="#how-to-identify-sources" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Sources are usually scalars in one direction and don&#8217;t usually have divergence, e.g. <strong>gravity</strong>, <strong>pressure gradient</strong></li>
+</ul>
+</div>
+</div>
+<div class="section" id="differential-discretisation">
+<h2><a class="toc-backref" href="#id6">1.9.2.2. Differential Discretisation</a><a class="headerlink" href="#differential-discretisation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The differential form requires the fluxes to be <strong>differentiable</strong> - this is not always satisfied, this may introduce impossible solutions.</li>
+<li>Discontinuities introduce infinite gradient, e.g.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>shocks in the flow</li>
+<li>a free surface</li>
+<li>a slip line behind a trailing edge</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id7">1.9.2.3. Conservative Discretisation</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="general-form-of-a-conservation-law">
+<h3><a class="toc-backref" href="#id8">General Form of a Conservation Law</a><a class="headerlink" href="#general-form-of-a-conservation-law" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[{{\partial \over \partial t} \int_{\Omega} U d \Omega} + \oint_{S} \mathbf{F} \cdot d\mathbf{S} = \int_{\Omega} Q d \Omega\]</div>
+<p>where:</p>
+<p><span class="math">\(\Omega =\)</span> volume</p>
+<p><span class="math">\(S =\)</span> surface</p>
+<p><span class="math">\(U =\)</span> quantity</p>
+<p><span class="math">\(F =\)</span> flux vector</p>
+<p><span class="math">\(Q =\)</span> source</p>
+<p>i.e. the quantity <span class="math">\(U\)</span> only depends on the <strong>surface values</strong> of the fluxes</p>
+</div>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id9">Conservative Discretisation</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p><span class="math">\(\Omega\)</span> divided into <span class="math">\(\Omega_1\)</span>, <span class="math">\(\Omega_2\)</span> and <span class="math">\(\Omega_3\)</span>:</p>
+<p>For each subvolume:</p>
+<div class="math">
+\[{{\partial \over \partial t} \int_{\Omega_1} U d \Omega} + \oint_{ABCA} \mathbf{F} \cdot d\mathbf{S} = \int_{\Omega_1} Q d \Omega\]</div>
+<div class="math">
+\[{{\partial \over \partial t} \int_{\Omega_2} U d \Omega} + \oint_{DEBD} \mathbf{F} \cdot d\mathbf{S} = \int_{\Omega_2} Q d \Omega\]</div>
+<div class="math">
+\[{{\partial \over \partial t} \int_{\Omega_3} U d \Omega} + \oint_{AEDA} \mathbf{F} \cdot d\mathbf{S} = \int_{\Omega_3} Q d \Omega\]</div>
+<p>Notice that the contribution of the <strong>internal fluxes</strong>, cancel each other out when summated in each direction. Hence the numerical scheme is <strong>conservative</strong> in the way it treats the flux terms.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/finite_volume_fluxes.png"><img alt="../_images/finite_volume_fluxes.png" src="../_images/finite_volume_fluxes.png" style="width: 400.0px; height: 400.0px;" /></a>
+</div>
+</div>
+<div class="section" id="example-of-conservative-discretisation">
+<h3><a class="toc-backref" href="#id10">Example of Conservative Discretisation</a><a class="headerlink" href="#example-of-conservative-discretisation" title="Permalink to this headline">¶</a></h3>
+<p>Consider a 1D conservation law in conservative form:</p>
+<div class="math">
+\[{\partial u \over \partial t} + {\partial f \over \partial x} = q\]</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/1D_finite_volume.png"><img alt="../_images/1D_finite_volume.png" src="../_images/1D_finite_volume.png" style="width: 454.99999999999994px; height: 350.0px;" /></a>
+</div>
+<p>Associate a finite &#8220;cell&#8221; to each mesh point, e.g. cell (i) has two &#8220;cell faces&#8221; at the mid-points <span class="math">\(i-{1/2}\)</span> and <span class="math">\(i+{1/2}\)</span></p>
+<p>Using a CD scheme at point i:</p>
+<div class="math" id="equation-1">
+<span class="eqno">(1)</span>\[{\partial u_i \over \partial t} + {{f_{i+1/2} - f_{i-1/2}} \over \Delta x} = q_i\]</div>
+<p>Using a CD scheme at point i+1:</p>
+<div class="math" id="equation-2">
+<span class="eqno">(2)</span>\[{\partial u_{i+1} \over \partial t} + {{f_{i+3/2} - f_{i+1/2}} \over \Delta x} = q_{i+1}\]</div>
+<p>Using a CD scheme at point i-1:</p>
+<div class="math" id="equation-3">
+<span class="eqno">(3)</span>\[{\partial u_{i-1} \over \partial t} + {{f_{i-1/2} - f_{i-3/2}} \over \Delta x} = q_{i-1}\]</div>
+<p>Add <a href="#equation-1">(1)</a>, <a href="#equation-2">(2)</a> and <a href="#equation-3">(3)</a> and divide by 3 for a consistent discretisation of the conservation law for cell <span class="math">\(i-3/2\)</span> to <span class="math">\(i+3/2\)</span>:</p>
+<div class="math" id="equation-4">
+<span class="eqno">(4)</span>\[{\partial \over \partial t} \left( {u_i + u_{i+1} + u_{i-1}} \over 3  \right)  + {{f_{i+3/2} - f_{i-3/2}} \over {3 \Delta x}} = {{q_i + q_{i+1} + q_{i-1}} \over 3}\]</div>
+<p>A scheme applied directly to cell <span class="math">\(i-3/2\)</span> to <span class="math">\(i+3/2\)</span>:</p>
+<div class="math" id="equation-5">
+<span class="eqno">(5)</span>\[{\partial u_i \over \partial t}  + {{f_{i+3/2} - f_{i-3/2}} \over {3 \Delta x}} = {{q_i}}\]</div>
+<p>The flux of <a href="#equation-4">(4)</a> and <a href="#equation-5">(5)</a> are identical, but the difference is that the flow quantity and source terms are <strong>averaged over three mesh points</strong> in <a href="#equation-4">(4)</a></p>
+</div>
+<div class="section" id="example-of-non-conservative-discretisation">
+<h3><a class="toc-backref" href="#id11">Example of Non-Conservative Discretisation</a><a class="headerlink" href="#example-of-non-conservative-discretisation" title="Permalink to this headline">¶</a></h3>
+<p>Consider a 1D conservation law in conservative form:</p>
+<div class="math">
+\[{\partial u \over \partial t} + a(u){\partial u \over \partial x} = q\]</div>
+<p>where:</p>
+<p><span class="math">\(a(u)\)</span> is the Jacobian and <span class="math">\(a = \partial f / \partial u\)</span></p>
+<p>(e.g. Burgers <span class="math">\(a=u\)</span>, <span class="math">\(f=u^2 / 2\)</span>)</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/1D_finite_volume_non_conservative.png"><img alt="../_images/1D_finite_volume_non_conservative.png" src="../_images/1D_finite_volume_non_conservative.png" style="width: 454.99999999999994px; height: 350.0px;" /></a>
+</div>
+<p>Using a CD scheme at point i:</p>
+<div class="math" id="equation-6">
+<span class="eqno">(6)</span>\[{\partial u_i \over \partial t} + a_i{{u_{i+1/2} - u_{i-1/2}} \over \Delta x} = q_i\]</div>
+<p>Using a CD scheme at point i+1:</p>
+<div class="math" id="equation-7">
+<span class="eqno">(7)</span>\[{\partial u_{i+1} \over \partial t} + a_{i+1}{{u_{i+3/2} - u_{i+1/2}} \over \Delta x} = q_{i+1}\]</div>
+<p>Using a CD scheme at point i-1:</p>
+<div class="math" id="equation-8">
+<span class="eqno">(8)</span>\[{\partial u_{i-1} \over \partial t} + a_{i-1}{{u_{i-1/2} - u_{i-3/2}} \over \Delta x} = q_{i-1}\]</div>
+<p>Add <a href="#equation-6">(6)</a>, <a href="#equation-7">(7)</a> and <a href="#equation-8">(8)</a> and divide by 3 for an consistent discretisation of the conservation law for cell <span class="math">\(i-3/2\)</span> to <span class="math">\(i+3/2\)</span>:</p>
+<div class="math" id="equation-9">
+<span class="eqno">(9)</span>\[{\partial \over \partial t} \left( {u_i + u_{i+1} + u_{i-1}} \over 3  \right)  +
+  a_i{{u_{i+1/2} - u_{i-1/2}} \over {3 \Delta x}} +
+  a_{i+1}{{u_{i+3/2} - u_{i+1/2}} \over {3 \Delta x}} +
+  a_{i-1}{{u_{i-1/2} - u_{i-3/2}} \over {3 \Delta x}} =
+  {{q_i + q_{i+1} + q_{i-1}} \over 3} +\]</div>
+<p>Reconstruct what we would want on the LHS, and put the remainder on the RHS:</p>
+<div class="math" id="equation-10">
+<span class="eqno">(10)</span>\[\begin{split}{\partial \over \partial t} \left( {u_i + u_{i+1} + u_{i-1}} \over 3  \right)  +
+  a_i{{u_{i+3/2} - u_{i-3/2}} \over {3 \Delta x}} =
+  {{q_i + q_{i+1} + q_{i-1}} \over 3} \\ -
+  (a_{i+1}-a_i) {{u_{i+3/2} - u_{i+1/2}} \over {3 \Delta x}} +
+  (a_i -a_{i-1}){{u_{i-1/2} - u_{i-3/2}} \over {3 \Delta x}}\end{split}\]</div>
+<ul class="simple">
+<li>The extra terms on the RHS of <a href="#equation-10">(10)</a> result from the fact that the flux contributions at the <strong>internal</strong> points of the cell <span class="math">\(i-3/2\)</span> to <span class="math">\(i+3/2\)</span> <strong>do not</strong> cancel</li>
+<li>They appear as <strong>additional source terms</strong></li>
+<li>The discretisation of the non-conservative form of the equation leads to <strong>internal sources</strong></li>
+<li>The Conservative and Non-Conservative forms of the equations are <strong>mathematically equivalent</strong> for arbitrary non-linear fluxes</li>
+<li>But they are not <strong>numerically equivalent</strong></li>
+<li>The Taylor expansion of the source terms shows that they are like a 2nd order discretisation proportional to <span class="math">\(\Delta x^2(a_x u_x)_x\)</span> (same order as the truncation error)</li>
+<li>Numerical experiments show that the non-conservative form is less accurate than the conservative form, especially for discontinuous flows (e.g. shocks) where the gradient is very large, the numerical source terms can become important.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="finite_volume_method_1.html">1.9.1. Advantages of The Finite Volume Method</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="finite_volume_method_3.html">1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>
