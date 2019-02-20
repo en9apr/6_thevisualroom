@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.3. Arithmetic Expressions &#8212; The Visual Room</title>
+    <title>3.1.3. Arithmetic Expressions &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="3. Python Programming Language" href="python_language.html" />
-    <link rel="next" title="3.4. Logical Expressions" href="logical_expressions.html" />
-    <link rel="prev" title="3.2. Comments, Strings and Print Statements" href="comments_strings_print_statements.html" /> 
+    <link rel="up" title="3.1. Python Programming Language" href="python_language.html" />
+    <link rel="next" title="3.1.4. Logical Expressions" href="logical_expressions.html" />
+    <link rel="prev" title="3.1.2. Comments, Strings and Print Statements" href="comments_strings_print_statements.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>3.3. Arithmetic Expressions</span></h2>
+        <h2 class="heading"><span>3.1.3. Arithmetic Expressions</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="comments_strings_print_statements.html">3.2. Comments, Strings and Print Statements</a>
+        «&#160;&#160;<a href="comments_strings_print_statements.html">3.1.2. Comments, Strings and Print Statements</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="logical_expressions.html">3.4. Logical Expressions</a>&#160;&#160;»
+        <a href="logical_expressions.html">3.1.4. Logical Expressions</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,7 +49,7 @@
         
         
   <div class="section" id="arithmetic-expressions">
-<h1>3.3. Arithmetic Expressions<a class="headerlink" href="#arithmetic-expressions" title="Permalink to this headline">¶</a></h1>
+<h1>3.1.3. Arithmetic Expressions<a class="headerlink" href="#arithmetic-expressions" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#id1" id="id3">Arithmetic Expressions</a></li>
@@ -75,7 +75,7 @@
 </ul>
 </div>
 <div class="section" id="id1">
-<h2><a class="toc-backref" href="#id3">3.3.1. Arithmetic Expressions</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">3.1.3.1. Arithmetic Expressions</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Arithmetic Expressions are:</p>
 <ul class="simple">
 <li>A number</li>
@@ -98,27 +98,27 @@ of Division and Addition is the opposite of Subtraction.</p>
 <p>P E MD AS</p>
 </div>
 <div class="section" id="concatenate-expressions-on-multiple-lines">
-<h2><a class="toc-backref" href="#id4">3.3.2. Concatenate Expressions on Multiple Lines</a><a class="headerlink" href="#concatenate-expressions-on-multiple-lines" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">3.1.3.2. Concatenate Expressions on Multiple Lines</a><a class="headerlink" href="#concatenate-expressions-on-multiple-lines" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Use brackets <code class="docutils literal"><span class="pre">()</span></code> to implicitly concatenate over multiple lines -
 works for all operators</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">this_function</span><span class="p">():</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">this_function</span><span class="p">():</span>
      <span class="k">if</span><span class="p">(</span><span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span>
         <span class="mi">3</span> <span class="o">!=</span> <span class="mi">43</span><span class="p">):</span>
          <span class="k">return</span> <span class="p">(</span><span class="mi">0</span> <span class="o">+</span> <span class="mi">0</span> <span class="o">-</span> <span class="mi">0</span> <span class="o">*</span> <span class="mi">0</span> <span class="o">-</span> <span class="mi">0</span> <span class="o">/</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">0</span> <span class="o">**</span> <span class="mi">1</span> <span class="o">+</span>
              <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="nb">print</span> <span class="n">this_function</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">this_function</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>4
+<div class="highlight-none"><div class="highlight"><pre>4
 </pre></div>
 </div>
 <ul class="simple">
 <li>Or use backslash <code class="docutils literal"><span class="pre">\</span></code></li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">this_function_2</span><span class="p">():</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">this_function_2</span><span class="p">():</span>
      <span class="k">if</span><span class="p">(</span><span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span>
         <span class="mi">3</span> <span class="o">!=</span> <span class="mi">43</span><span class="p">):</span>
          <span class="n">logical_statement</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">or</span> \
@@ -126,71 +126,71 @@ works for all operators</li>
          <span class="k">return</span> <span class="mi">0</span> <span class="o">+</span> <span class="mi">0</span> <span class="o">-</span> <span class="mi">0</span> <span class="o">*</span> <span class="mi">0</span> <span class="o">-</span> <span class="mi">0</span> <span class="o">/</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">0</span> <span class="o">**</span> <span class="mi">1</span> <span class="o">+</span> \
              <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
 
-<span class="nb">print</span> <span class="n">this_function_2</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">this_function_2</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>4
+<div class="highlight-none"><div class="highlight"><pre>4
 </pre></div>
 </div>
 </div>
 <div class="section" id="number">
-<h2><a class="toc-backref" href="#id5">3.3.3. Number</a><a class="headerlink" href="#number" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">3.1.3.3. Number</a><a class="headerlink" href="#number" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="types-of-number">
-<h3><a class="toc-backref" href="#id6">3.3.3.1. Types of Number</a><a class="headerlink" href="#types-of-number" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id6">3.1.3.3.1. Types of Number</a><a class="headerlink" href="#types-of-number" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>An integer number - <code class="docutils literal"><span class="pre">int()</span></code></li>
 <li>A decimal number - <code class="docutils literal"><span class="pre">float()</span></code></li>
 <li>Use <code class="docutils literal"><span class="pre">type()</span></code> to determine the type of number</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="nb">type</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="mf">3.142</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="nb">type</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="mf">3.142</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>&lt;type &#39;int&#39;&gt; &lt;type &#39;float&#39;&gt;
+<div class="highlight-none"><div class="highlight"><pre>&lt;type &#39;int&#39;&gt; &lt;type &#39;float&#39;&gt;
 </pre></div>
 </div>
 </div>
 <div class="section" id="conversion-of-numbers">
-<h3><a class="toc-backref" href="#id7">3.3.3.2. Conversion of Numbers</a><a class="headerlink" href="#conversion-of-numbers" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id7">3.1.3.3.2. Conversion of Numbers</a><a class="headerlink" href="#conversion-of-numbers" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Convert from <code class="docutils literal"><span class="pre">float</span></code> to <code class="docutils literal"><span class="pre">int</span></code> using <code class="docutils literal"><span class="pre">int()</span></code> - <strong>takes whole
 part of decimal number</strong></li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="nb">int</span><span class="p">(</span><span class="mf">3.142</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="o">-</span><span class="mf">2.8</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="nb">int</span><span class="p">(</span><span class="mf">3.142</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="o">-</span><span class="mf">2.8</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>3 -2
+<div class="highlight-none"><div class="highlight"><pre>3 -2
 </pre></div>
 </div>
 <ul class="simple">
 <li>Convert from <code class="docutils literal"><span class="pre">int</span></code> to <code class="docutils literal"><span class="pre">float</span></code> using <code class="docutils literal"><span class="pre">float()</span></code> - <strong>adds decimal
 point</strong></li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="nb">float</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="nb">float</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>3.0 -1.0
+<div class="highlight-none"><div class="highlight"><pre>3.0 -1.0
 </pre></div>
 </div>
 </div>
 <div class="section" id="floating-point-error">
-<h3><a class="toc-backref" href="#id8">3.3.3.3. Floating Point Error</a><a class="headerlink" href="#floating-point-error" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id8">3.1.3.3.3. Floating Point Error</a><a class="headerlink" href="#floating-point-error" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Floating point numbers are an approximation to decimal numbers.</li>
 <li>Python floating point numbers can only display 12 decimal digits.</li>
 <li>This is called the &#8220;floating point error&#8221;</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="mf">3.1415926535897932384626433832795028841971</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="mf">3.1415926535897932384626433832795028841971</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>3.14159265359
+<div class="highlight-none"><div class="highlight"><pre>3.14159265359
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="arithmetic-operators">
-<h2><a class="toc-backref" href="#id9">3.3.4. Arithmetic Operators</a><a class="headerlink" href="#arithmetic-operators" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id9">3.1.3.4. Arithmetic Operators</a><a class="headerlink" href="#arithmetic-operators" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="types-of-arithmetic-operator">
-<h3><a class="toc-backref" href="#id10">3.3.4.1. Types of Arithmetic Operator</a><a class="headerlink" href="#types-of-arithmetic-operator" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id10">3.1.3.4.1. Types of Arithmetic Operator</a><a class="headerlink" href="#types-of-arithmetic-operator" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>addition <code class="docutils literal"><span class="pre">+</span></code></li>
 <li>subtraction <code class="docutils literal"><span class="pre">-</span></code></li>
@@ -198,38 +198,38 @@ point</strong></li>
 <li>division <code class="docutils literal"><span class="pre">/</span></code></li>
 <li>exponentiation <code class="docutils literal"><span class="pre">**</span></code></li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="o">-</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">5</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="o">-</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">5</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>3 -1 30 32
+<div class="highlight-none"><div class="highlight"><pre>3 -1 30 32
 </pre></div>
 </div>
 </div>
 <div class="section" id="division-in-python-2">
-<h3><a class="toc-backref" href="#id11">3.3.4.2. Division in Python 2</a><a class="headerlink" href="#division-in-python-2" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id11">3.1.3.4.2. Division in Python 2</a><a class="headerlink" href="#division-in-python-2" title="Permalink to this headline">¶</a></h3>
 <p>If one operand is a decimal (float), the answer is decimal</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">5.0</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span> <span class="o">/</span> <span class="mf">3.0</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">5.0</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span> <span class="o">/</span> <span class="mf">3.0</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>0.333333333333 2.5 -2.33333333333
+<div class="highlight-none"><div class="highlight"><pre>0.333333333333 2.5 -2.33333333333
 </pre></div>
 </div>
 <p>If both operands are ints, the answer is an int (next lowest integer
 after division). Postive integers round &#8220;down&#8221; negative integers round &#8220;up&#8221;</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span> <span class="o">/</span> <span class="mi">3</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span> <span class="o">/</span> <span class="mi">3</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>0 2 -3
+<div class="highlight-none"><div class="highlight"><pre>0 2 -3
 </pre></div>
 </div>
 </div>
 <div class="section" id="integer-division">
-<h3><a class="toc-backref" href="#id12">3.3.4.3. Integer Division</a><a class="headerlink" href="#integer-division" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id12">3.1.3.4.3. Integer Division</a><a class="headerlink" href="#integer-division" title="Permalink to this headline">¶</a></h3>
 <p>The integer division operator <code class="docutils literal"><span class="pre">//</span></code> returns the quotient of two numbers to get whole numbers from floats:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="mf">27.0</span><span class="o">//</span><span class="mf">6.0</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="mf">27.0</span><span class="o">//</span><span class="mf">6.0</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>4.0
+<div class="highlight-none"><div class="highlight"><pre>4.0
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">//</span></code> is always the same as <code class="docutils literal"><span class="pre">int()</span></code> for +ve but not for -ve numbers:</p>
@@ -237,79 +237,79 @@ after division). Postive integers round &#8220;down&#8221; negative integers rou
 <li>Integer division rounds toward -ve infinity for -ve numbers</li>
 <li>Converting float to integer rounds towards zero for -ve numbers</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="s2">&quot;Same:&quot;</span><span class="p">,</span> <span class="mf">6.0</span><span class="o">//</span><span class="mf">5.0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">6.0</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span>
-<span class="nb">print</span> <span class="s2">&quot;Different&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.0</span><span class="o">//</span><span class="mf">5.0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="o">-</span><span class="mf">6.0</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s2">&quot;Same:&quot;</span><span class="p">,</span> <span class="mf">6.0</span><span class="o">//</span><span class="mf">5.0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">6.0</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">&quot;Different&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.0</span><span class="o">//</span><span class="mf">5.0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="o">-</span><span class="mf">6.0</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>Same: 1.0 1
+<div class="highlight-none"><div class="highlight"><pre>Same: 1.0 1
 Different -2.0 -1
 </pre></div>
 </div>
 </div>
 <div class="section" id="division-by-zero">
-<h3><a class="toc-backref" href="#id13">3.3.4.4. Division by Zero</a><a class="headerlink" href="#division-by-zero" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id13">3.1.3.4.4. Division by Zero</a><a class="headerlink" href="#division-by-zero" title="Permalink to this headline">¶</a></h3>
 <p>Also, you should always check for division by zero, e.g.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">numerator</span> <span class="o">=</span> <span class="mi">4</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">numerator</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">denominator</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">-</span> <span class="mi">12</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="n">denominator</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
-    <span class="nb">print</span> <span class="s2">&quot;Error: Divide by zero&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;Error: Divide by zero&quot;</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
+    <span class="k">print</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>Error: Divide by zero
+<div class="highlight-none"><div class="highlight"><pre>Error: Divide by zero
 </pre></div>
 </div>
 </div>
 <div class="section" id="standard-long-division">
-<h3><a class="toc-backref" href="#id14">3.3.4.5. Standard Long Division</a><a class="headerlink" href="#standard-long-division" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id14">3.1.3.4.5. Standard Long Division</a><a class="headerlink" href="#standard-long-division" title="Permalink to this headline">¶</a></h3>
 <p>Standard long division yields a quotient and a remainder.</p>
 </div>
 <div class="section" id="id2">
-<h3><a class="toc-backref" href="#id15">3.3.4.6. Integer Division</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id15">3.1.3.4.6. Integer Division</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal"><span class="pre">//</span></code> Yields the quotient</p>
 </div>
 <div class="section" id="modulus">
-<h3><a class="toc-backref" href="#id16">3.3.4.7. Modulus</a><a class="headerlink" href="#modulus" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id16">3.1.3.4.7. Modulus</a><a class="headerlink" href="#modulus" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal"><span class="pre">%</span></code> Yields the remainder</p>
 </div>
 <div class="section" id="by-definition">
-<h3><a class="toc-backref" href="#id17">3.3.4.8. By Definition</a><a class="headerlink" href="#by-definition" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id17">3.1.3.4.8. By Definition</a><a class="headerlink" href="#by-definition" title="Permalink to this headline">¶</a></h3>
 <p>For any integers <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code></p>
 <p><code class="docutils literal"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">b</span> <span class="pre">*</span> <span class="pre">(a</span> <span class="pre">//</span> <span class="pre">b)</span> <span class="pre">+</span> <span class="pre">(a</span> <span class="pre">%</span> <span class="pre">b)</span></code></p>
 </div>
 <div class="section" id="use-of-modular-arithmetic">
-<h3><a class="toc-backref" href="#id18">3.3.4.9. Use of Modular Arithmetic</a><a class="headerlink" href="#use-of-modular-arithmetic" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id18">3.1.3.4.9. Use of Modular Arithmetic</a><a class="headerlink" href="#use-of-modular-arithmetic" title="Permalink to this headline">¶</a></h3>
 <p>In Python <code class="docutils literal"><span class="pre">a</span> <span class="pre">%</span> <span class="pre">b</span></code> always returns an answer between 0 and b (even if a
 and or b is negative)</p>
 <p>Remainders and modular arithmetic are very useful in games for the
 purpose of &#8220;wrapping&#8221; the canvas, i.e. causing objects that pass of one
 side of the canvas to reappear on the opposite side of the canvas.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># problem - get the ones digit of a number</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># problem - get the ones digit of a number</span>
 
 <span class="n">num</span> <span class="o">=</span> <span class="mi">49</span>
 <span class="n">tens</span> <span class="o">=</span> <span class="n">num</span> <span class="o">//</span> <span class="mi">10</span>
 <span class="n">ones</span> <span class="o">=</span> <span class="n">num</span> <span class="o">%</span> <span class="mi">10</span>
-<span class="nb">print</span> <span class="n">tens</span><span class="p">,</span> <span class="n">ones</span>
-<span class="nb">print</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">tens</span> <span class="o">+</span> <span class="n">ones</span>
+<span class="k">print</span> <span class="n">tens</span><span class="p">,</span> <span class="n">ones</span>
+<span class="k">print</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">tens</span> <span class="o">+</span> <span class="n">ones</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>4 9
+<div class="highlight-none"><div class="highlight"><pre>4 9
 49
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># application - 24 hour clock: what time is 8hrs after 20:00?</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># application - 24 hour clock: what time is 8hrs after 20:00?</span>
 
 <span class="n">hour</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">shift</span> <span class="o">=</span> <span class="mi">8</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">hour</span> <span class="o">+</span> <span class="n">shift</span><span class="p">)</span> <span class="o">%</span> <span class="mi">24</span> <span class="c1"># modulus has higher precedence than addition</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">hour</span> <span class="o">+</span> <span class="n">shift</span><span class="p">)</span> <span class="o">%</span> <span class="mi">24</span> <span class="c1"># modulus has higher precedence than addition</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>4
+<div class="highlight-none"><div class="highlight"><pre>4
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># application - screen wraparound: what is the position after it has moved through a width?</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># application - screen wraparound: what is the position after it has moved through a width?</span>
 
 <span class="n">width</span> <span class="o">=</span> <span class="mi">800</span>
 
@@ -317,7 +317,7 @@ side of the canvas to reappear on the opposite side of the canvas.</p>
 <span class="n">move</span> <span class="o">=</span> <span class="mi">5</span>
 
 <span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="n">position</span> <span class="o">+</span> <span class="n">move</span><span class="p">)</span> <span class="o">%</span> <span class="n">width</span> <span class="c1"># what is left after we divide be screen  width</span>
-<span class="nb">print</span> <span class="n">position</span>
+<span class="k">print</span> <span class="n">position</span>
 
 <span class="c1"># what happens if we moved backwards (move is negative)?</span>
 
@@ -325,61 +325,61 @@ side of the canvas to reappear on the opposite side of the canvas.</p>
 <span class="n">move</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span>
 
 <span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="n">position</span> <span class="o">+</span> <span class="n">move</span><span class="p">)</span> <span class="o">%</span> <span class="n">width</span> <span class="c1"># we get back a number in the range 0 to width</span>
-<span class="nb">print</span> <span class="n">position</span>
+<span class="k">print</span> <span class="n">position</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>2
+<div class="highlight-none"><div class="highlight"><pre>2
 797
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># how do we convert from int to hours?</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># how do we convert from int to hours?</span>
 
 <span class="n">hour</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">ones</span> <span class="o">=</span> <span class="n">hour</span> <span class="o">%</span> <span class="mi">10</span>
 <span class="n">tens</span> <span class="o">=</span> <span class="n">hour</span> <span class="o">//</span> <span class="mi">10</span>
-<span class="nb">print</span> <span class="n">tens</span><span class="p">,</span> <span class="n">ones</span><span class="p">,</span> <span class="s2">&quot;:00&quot;</span>
-<span class="nb">print</span> <span class="nb">str</span><span class="p">(</span><span class="n">tens</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">ones</span><span class="p">),</span> <span class="s2">&quot;:00&quot;</span> <span class="c1">#srt converts int into a string</span>
-<span class="nb">print</span> <span class="nb">str</span><span class="p">(</span><span class="n">tens</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ones</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;:00&quot;</span> <span class="c1">#string formatting</span>
+<span class="k">print</span> <span class="n">tens</span><span class="p">,</span> <span class="n">ones</span><span class="p">,</span> <span class="s2">&quot;:00&quot;</span>
+<span class="k">print</span> <span class="nb">str</span><span class="p">(</span><span class="n">tens</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">ones</span><span class="p">),</span> <span class="s2">&quot;:00&quot;</span> <span class="c1">#srt converts int into a string</span>
+<span class="k">print</span> <span class="nb">str</span><span class="p">(</span><span class="n">tens</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ones</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;:00&quot;</span> <span class="c1">#string formatting</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>0 3 :00
+<div class="highlight-none"><div class="highlight"><pre>0 3 :00
 0 3 :00
 03:00
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># division in python is not exact:</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># division in python is not exact:</span>
 
-<span class="nb">print</span> <span class="mf">0.9</span> <span class="o">%</span> <span class="mf">0.3</span>
+<span class="k">print</span> <span class="mf">0.9</span> <span class="o">%</span> <span class="mf">0.3</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>5.55111512313e-17
+<div class="highlight-none"><div class="highlight"><pre>5.55111512313e-17
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#modulus</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1">#modulus</span>
 
-<span class="nb">print</span> <span class="mi">4</span> <span class="o">%</span> <span class="mi">7</span> <span class="c1">#Returns quotient 4 (as 4/7 = 0 r4)</span>
-<span class="nb">print</span> <span class="mi">7</span> <span class="o">%</span> <span class="mi">7</span> <span class="c1">#Returns remainder 0 (as 7/7 = 1)</span>
-<span class="nb">print</span> <span class="mi">9</span> <span class="o">%</span> <span class="mi">7</span> <span class="c1">#Returns 2 (as 9/7 = 1 r2)</span>
+<span class="k">print</span> <span class="mi">4</span> <span class="o">%</span> <span class="mi">7</span> <span class="c1">#Returns quotient 4 (as 4/7 = 0 r4)</span>
+<span class="k">print</span> <span class="mi">7</span> <span class="o">%</span> <span class="mi">7</span> <span class="c1">#Returns remainder 0 (as 7/7 = 1)</span>
+<span class="k">print</span> <span class="mi">9</span> <span class="o">%</span> <span class="mi">7</span> <span class="c1">#Returns 2 (as 9/7 = 1 r2)</span>
 
 <span class="c1"># So the modulus will return 0 to 7 (not including 7) for any +ve number</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>4
+<div class="highlight-none"><div class="highlight"><pre>4
 0
 2
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Modulus with negative numbers:</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># Modulus with negative numbers:</span>
 <span class="c1"># First number - do we move in the +ve or -ve direction?</span>
 <span class="c1"># Second number - are we on the +ve or -ve number line?</span>
 
-<span class="nb">print</span> <span class="mi">5</span> <span class="o">%</span> <span class="mi">3</span>   <span class="c1"># a % b       returns values from 0 to 2</span>
-<span class="nb">print</span> <span class="o">-</span><span class="mi">5</span> <span class="o">%</span> <span class="mi">3</span>  <span class="c1"># b - (a % b) returns values from 2 to 0</span>
-<span class="nb">print</span> <span class="o">-</span><span class="mi">5</span> <span class="o">%</span> <span class="o">-</span><span class="mi">3</span> <span class="c1"># -(a % b)</span>
-<span class="nb">print</span> <span class="mi">5</span> <span class="o">%</span> <span class="o">-</span><span class="mi">3</span>  <span class="c1"># -(b - (a % b))</span>
+<span class="k">print</span> <span class="mi">5</span> <span class="o">%</span> <span class="mi">3</span>   <span class="c1"># a % b       returns values from 0 to 2</span>
+<span class="k">print</span> <span class="o">-</span><span class="mi">5</span> <span class="o">%</span> <span class="mi">3</span>  <span class="c1"># b - (a % b) returns values from 2 to 0</span>
+<span class="k">print</span> <span class="o">-</span><span class="mi">5</span> <span class="o">%</span> <span class="o">-</span><span class="mi">3</span> <span class="c1"># -(a % b)</span>
+<span class="k">print</span> <span class="mi">5</span> <span class="o">%</span> <span class="o">-</span><span class="mi">3</span>  <span class="c1"># -(b - (a % b))</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>2
+<div class="highlight-none"><div class="highlight"><pre>2
 1
 -2
 -1
@@ -394,17 +394,17 @@ side of the canvas to reappear on the opposite side of the canvas.</p>
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="comments_strings_print_statements.html">3.2. Comments, Strings and Print Statements</a>
+        «&#160;&#160;<a href="comments_strings_print_statements.html">3.1.2. Comments, Strings and Print Statements</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="logical_expressions.html">3.4. Logical Expressions</a>&#160;&#160;»
+        <a href="logical_expressions.html">3.1.4. Logical Expressions</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

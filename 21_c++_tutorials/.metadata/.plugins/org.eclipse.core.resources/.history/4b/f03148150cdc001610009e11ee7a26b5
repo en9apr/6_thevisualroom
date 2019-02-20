@@ -1,0 +1,54 @@
+/*
+File name: challenge_file_read.cpp
+Date: 14 Jan 2017
+Author: Andrew Roberts
+*/
+
+#include <iostream>
+#include <fstream> // reading, writing and creating files
+#include <iomanip> // setprecision
+#include <vector>
+#include <stdlib.h>
+#include <numeric>
+using namespace std;
+
+double column_1 = 0.0;
+double column_2 = 0.0;
+double column_1_total = 0.0;
+double column_2_total = 0.0;
+int count = 0;
+
+int error_code=666;
+
+int main()
+{
+	ifstream inputfile;
+	try
+	{
+		inputfile.open("numbers_3.txt", ios::in);
+		if(inputfile.fail())
+		{
+			throw error_code;
+		}
+	}
+	catch(int error_number)
+	{
+		if(error_number==error_code)
+		{
+			cout << "File reading error." << endl;
+			exit(1);
+		}
+	}
+
+	while(!inputfile.eof())
+	{
+		inputfile >> column_1;
+		column_1_total += column_1;
+		inputfile >> column_2;
+		column_2_total += column_2;
+		count++;
+	}
+
+	cout << "Average of column 1: " << column_1_total/count;
+	cout << "Average of column 2: " << column_2_total/count;
+

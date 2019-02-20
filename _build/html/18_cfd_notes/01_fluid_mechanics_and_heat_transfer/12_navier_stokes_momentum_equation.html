@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.1.12. Navier-Stokes Momentum Equation &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../../index.html" />
+    <link rel="up" title="4. Personal Notes on CFD" href="../cfd_notes.html" />
+    <link rel="next" title="4.1.13. Vorticity Transport Equation" href="13_vorticity_transport_equation.html" />
+    <link rel="prev" title="4.1.11. Euler Momentum Equation" href="11_euler_momentum_equation.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.1.12. Navier-Stokes Momentum Equation</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="11_euler_momentum_equation.html">4.1.11. Euler Momentum Equation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="13_vorticity_transport_equation.html">4.1.13. Vorticity Transport Equation</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="navier-stokes-momentum-equation">
+<h1>4.1.12. Navier-Stokes Momentum Equation<a class="headerlink" href="#navier-stokes-momentum-equation" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#what-is-the-relationship-between-dynamic-and-kinematic-viscosity-and-what-are-their-units" id="id1">What is the relationship between dynamic and kinematic viscosity and what are their units?</a></li>
+<li><a class="reference internal" href="#what-is-the-effect-of-the-incompressibility-constraint-on-the-navier-stokes-equations" id="id2">What is the effect of the incompressibility constraint on the Navier-Stokes equations?</a></li>
+<li><a class="reference internal" href="#what-are-the-assumptions-in-the-navier-stokes-equations" id="id3">What are the assumptions in the Navier-Stokes equations?</a></li>
+<li><a class="reference internal" href="#what-is-the-relationship-between-the-total-stress-tensor-normal-stress-and-deviatoric-stress" id="id4">What is the relationship between the total stress tensor, normal stress and deviatoric stress?</a></li>
+<li><a class="reference internal" href="#what-is-the-definition-of-the-total-stress-tensor-for-viscous-and-inviscid-flow" id="id5">What is the definition of the total stress tensor for viscous and inviscid flow?</a></li>
+<li><a class="reference internal" href="#how-is-the-total-stress-tensor-defined-for-the-navier-stokes-momentum-equation" id="id6">How is the total stress tensor defined for the Navier-Stokes momentum equation?</a></li>
+<li><a class="reference internal" href="#what-is-the-shear-strain-rate-tensor" id="id7">What is the shear strain rate tensor?</a></li>
+<li><a class="reference internal" href="#how-is-the-compressible-navier-stokes-momentum-equation-derived-from-the-cauchy-equation-using-the-shear-strain-rate-tensor" id="id8">How is the compressible Navier-Stokes momentum equation derived from the Cauchy equation using the shear strain rate tensor?</a></li>
+<li><a class="reference internal" href="#what-are-the-meaning-of-the-terms-in-the-fully-compressible-navier-stokes-equations" id="id9">What are the meaning of the terms in the fully compressible Navier-Stokes equations?</a></li>
+<li><a class="reference internal" href="#expand-the-terms-in-the-navier-stokes-equations-assuming" id="id10">Expand the terms in the Navier-Stokes equations assuming <span class="math">\(\nabla \cdot \vec{u} = 0\)</span></a></li>
+<li><a class="reference internal" href="#how-is-the-compressibility-term-expanded-in-the-navier-stokes-equations" id="id11">How is the compressibility term expanded in the Navier-Stokes equations?</a></li>
+<li><a class="reference internal" href="#what-is-the-skew-symmetric-form-of-the-total-derivative" id="id12">What is the skew symmetric form of the total derivative?</a></li>
+</ul>
+</div>
+<div class="section" id="what-is-the-relationship-between-dynamic-and-kinematic-viscosity-and-what-are-their-units">
+<h2><a class="toc-backref" href="#id1">4.1.12.1. What is the relationship between dynamic and kinematic viscosity and what are their units?</a><a class="headerlink" href="#what-is-the-relationship-between-dynamic-and-kinematic-viscosity-and-what-are-their-units" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\nu = {\mu \over \rho}\]</div>
+<p><strong>Mnemonic:</strong></p>
+<p>Kinematic viscosity <span class="math">\(\ll\)</span> Dynamic viscosity, as kinematics deals with smaller things than dynamics.</p>
+<p><strong>Units:</strong></p>
+<p><span class="math">\(\nu \ (m^2/s)\)</span></p>
+<p><span class="math">\(\mu \ (kg/m/s)\)</span></p>
+<p><span class="math">\(\rho \ (kg/m^3)\)</span></p>
+</div>
+<div class="section" id="what-is-the-effect-of-the-incompressibility-constraint-on-the-navier-stokes-equations">
+<h2><a class="toc-backref" href="#id2">4.1.12.2. What is the effect of the incompressibility constraint on the Navier-Stokes equations?</a><a class="headerlink" href="#what-is-the-effect-of-the-incompressibility-constraint-on-the-navier-stokes-equations" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><span class="math">\(\rho = \text{constant} \longrightarrow \nabla \cdot \vec{u} = 0\)</span> i.e. velocity field must be divergence free</li>
+<li><span class="math">\(\rho = \text{constant} \longrightarrow\)</span> pressure and density are decoupled, i.e. pressure is no longer a state variable, it is a constant <span class="math">\(\longrightarrow\)</span> require pressure-velocity coupling</li>
+</ol>
+</div>
+<div class="section" id="what-are-the-assumptions-in-the-navier-stokes-equations">
+<h2><a class="toc-backref" href="#id3">4.1.12.3. What are the assumptions in the Navier-Stokes equations?</a><a class="headerlink" href="#what-are-the-assumptions-in-the-navier-stokes-equations" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Continuum hypothesis <span class="math">\(\longrightarrow Kn \ll 1\)</span> and no mass-energy conversion</p>
+</li>
+<li><dl class="first docutils">
+<dt>Form of diffusive fluxes e.g.:</dt>
+<dd><ul class="first last simple">
+<li>Newtownian <span class="math">\(\tau_{ij} = \mu \gamma_{ij}\)</span></li>
+<li>Fourier&#8217;s Law <span class="math">\(\vec{q} = -k \nabla T\)</span></li>
+<li>Viscosity model <span class="math">\(\mu = \mu(T)\)</span> e.g. Sutherland&#8217;s Law</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Equation of state (but this concerns the solution)</dt>
+<dd><ul class="first last simple">
+<li>Stokes assumption <span class="math">\({2 \over 3} \mu + \lambda = 0\)</span></li>
+<li>Thermally perfect gas <span class="math">\(p=\rho RT\)</span></li>
+<li>Calorcally perfect gas <span class="math">\(e=C_v T\)</span></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="what-is-the-relationship-between-the-total-stress-tensor-normal-stress-and-deviatoric-stress">
+<h2><a class="toc-backref" href="#id4">4.1.12.4. What is the relationship between the total stress tensor, normal stress and deviatoric stress?</a><a class="headerlink" href="#what-is-the-relationship-between-the-total-stress-tensor-normal-stress-and-deviatoric-stress" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\text{Total stress tensor = Normal stress tensor + Deviatoric stress tensor}\]</div>
+<div class="math">
+\[\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} =
+-p \overset{\underset{\mathrm{\rightrightarrows}}{}}{I} +
+\overset{\underset{\mathrm{\rightrightarrows}}{}}{\tau}\]</div>
+<p>(Deviatoric stress tensor is also the shear stress tensor)</p>
+<p>where the identity matrix is:</p>
+<div class="math">
+\[\begin{split}\overset{\underset{\mathrm{\rightrightarrows}}{}}{I} =
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1
+\end{bmatrix}\end{split}\]</div>
+</div>
+<div class="section" id="what-is-the-definition-of-the-total-stress-tensor-for-viscous-and-inviscid-flow">
+<h2><a class="toc-backref" href="#id5">4.1.12.5. What is the definition of the total stress tensor for viscous and inviscid flow?</a><a class="headerlink" href="#what-is-the-definition-of-the-total-stress-tensor-for-viscous-and-inviscid-flow" title="Permalink to this headline">¶</a></h2>
+<p>Total stress tensor:</p>
+<ul class="simple">
+<li>Pressure tensor (normal stress tensor)</li>
+<li>Deviatoric stress tensor (shear stress tensor)</li>
+</ul>
+<p>Inviscid:</p>
+<ul class="simple">
+<li>Fluid only has normal force:</li>
+</ul>
+<div class="math">
+\[\overset{\underset{\mathrm{\rightrightarrows}}{}}{\tau} = 0\]</div>
+<ul class="simple">
+<li>Hence:</li>
+</ul>
+<div class="math">
+\[\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} = -p \overset{\underset{\mathrm{\rightrightarrows}}{}}{I}\]</div>
+<p>Viscous:</p>
+<ul class="simple">
+<li>Fluid has shear stress:</li>
+</ul>
+<div class="math">
+\[\overset{\underset{\mathrm{\rightrightarrows}}{}}{\tau} \ne 0\]</div>
+<ul class="simple">
+<li>Hence:</li>
+</ul>
+<div class="math">
+\[\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} = -p \overset{\underset{\mathrm{\rightrightarrows}}{}}{I} + \overset{\underset{\mathrm{\rightrightarrows}}{}}{\tau}\]</div>
+</div>
+<div class="section" id="how-is-the-total-stress-tensor-defined-for-the-navier-stokes-momentum-equation">
+<h2><a class="toc-backref" href="#id6">4.1.12.6. How is the total stress tensor defined for the Navier-Stokes momentum equation?</a><a class="headerlink" href="#how-is-the-total-stress-tensor-defined-for-the-navier-stokes-momentum-equation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Total stress tensor:</li>
+</ul>
+<div class="math">
+\[\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma}=-p \overset{\underset{\mathrm{\rightrightarrows}}{}}{I} + \overset{\underset{\mathrm{\rightrightarrows}}{}}{\tau}\]</div>
+<ul class="simple">
+<li>Shear stress tensor:</li>
+</ul>
+<div class="math">
+\[\overset{\underset{\mathrm{\rightrightarrows}}{}}{\tau}= \mu \overset{\underset{\mathrm{\rightrightarrows}}{}}{\gamma}\]</div>
+<ul class="simple">
+<li>Shear strain rate tensor:</li>
+</ul>
+<div class="math">
+\[\overset{\underset{\mathrm{\rightrightarrows}}{}}{\gamma}= 2 \left( \overset{\underset{\mathrm{\rightrightarrows}}{}}{e} - {1 \over 3} (\nabla \cdot \vec{u}) \overset{\underset{\mathrm{\rightrightarrows}}{}}{I} \right)\]</div>
+<ul class="simple">
+<li>Shear strain rate tensor:</li>
+</ul>
+<div class="math">
+\[\overset{\underset{\mathrm{\rightrightarrows}}{}}{e}= {1 \over 2} \left( \nabla \otimes \vec{u} + (\nabla \otimes \vec{u})^T \right)\]</div>
+<ul class="simple">
+<li>Hence:</li>
+</ul>
+<div class="math">
+\[\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma}=-p \overset{\underset{\mathrm{\rightrightarrows}}{}}{I} +
+\mu \left( \nabla \otimes \vec{u} + (\nabla \otimes \vec{u})^T - {2 \over 3} (\nabla \cdot \vec{u}) \overset{\underset{\mathrm{\rightrightarrows}}{}}{I} \right)\]</div>
+</div>
+<div class="section" id="what-is-the-shear-strain-rate-tensor">
+<h2><a class="toc-backref" href="#id7">4.1.12.7. What is the shear strain rate tensor?</a><a class="headerlink" href="#what-is-the-shear-strain-rate-tensor" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>In Einstein notation:</li>
+</ul>
+<div class="math">
+\[e_{ij} = {1 \over 2} \left( {{\partial u_j} \over {\partial x_i}} + {{\partial u_i} \over {\partial x_j}} \right)\]</div>
+<div class="math">
+\[\begin{split}e_{ij} =
+\begin{bmatrix}
+{{\partial u_1} \over {\partial x_1}} &amp;  {1 \over 2} \left( {{\partial u_2} \over {\partial x_1}} + {{\partial u_1} \over {\partial x_2}} \right) &amp; {1 \over 2} \left( {{\partial u_3} \over {\partial x_1}} + {{\partial u_1} \over {\partial x_3}} \right) \\
+{1 \over 2} \left( {{\partial u_1} \over {\partial x_2}} + {{\partial u_2} \over {\partial x_1}} \right) &amp;  {{\partial u_2} \over {\partial x_2}} &amp; {1 \over 2} \left( {{\partial u_3} \over {\partial x_2}} + {{\partial u_2} \over {\partial x_3}} \right) \\
+{1 \over 2} \left( {{\partial u_1} \over {\partial x_3}} + {{\partial u_3} \over {\partial x_1}} \right) &amp;  {1 \over 2} \left( {{\partial u_2} \over {\partial x_3}} + {{\partial u_3} \over {\partial x_2}} \right) &amp; {{\partial u_3} \over {\partial x_3}}
+\end{bmatrix}\end{split}\]</div>
+<ul class="simple">
+<li>In vector notation:</li>
+</ul>
+<div class="math">
+\[\overset{\underset{\mathrm{\rightrightarrows}}{}}{e}= {1 \over 2} \left( \nabla \otimes \vec{u} + (\nabla \otimes \vec{u})^T \right)\]</div>
+</div>
+<div class="section" id="how-is-the-compressible-navier-stokes-momentum-equation-derived-from-the-cauchy-equation-using-the-shear-strain-rate-tensor">
+<h2><a class="toc-backref" href="#id8">4.1.12.8. How is the compressible Navier-Stokes momentum equation derived from the Cauchy equation using the shear strain rate tensor?</a><a class="headerlink" href="#how-is-the-compressible-navier-stokes-momentum-equation-derived-from-the-cauchy-equation-using-the-shear-strain-rate-tensor" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Cauchy:</li>
+</ul>
+<div class="math">
+\[{D \over {Dt}} (\rho \vec{u}) = \nabla \cdot \overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} + \rho \vec{g}\]</div>
+<ul class="simple">
+<li>Total stress tensor:</li>
+</ul>
+<div class="math">
+\[\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} = -p \overset{\underset{\mathrm{\rightrightarrows}}{}}{I} +
+\mu \left( \nabla \otimes \vec{u} + (\nabla \otimes \vec{u})^T - {2 \over 3} (\nabla \cdot \vec{u}) \overset{\underset{\mathrm{\rightrightarrows}}{}}{I} \right)\]</div>
+<ul class="simple">
+<li>Taking the divergence of each part:</li>
+</ul>
+<div class="math">
+\[\nabla \cdot \overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} = \nabla \cdot (-p \overset{\underset{\mathrm{\rightrightarrows}}{}}{I}) +
+\mu \nabla \cdot \left( \nabla \otimes \vec{u} + (\nabla \otimes \vec{u})^T \right) -
+{2 \over 3} \mu \nabla \cdot ( (\nabla \cdot \vec{u}) \overset{\underset{\mathrm{\rightrightarrows}}{}}{I} )\]</div>
+<ul class="simple">
+<li>First part:</li>
+</ul>
+<div class="math">
+\[\nabla \cdot (-p \overset{\underset{\mathrm{\rightrightarrows}}{}}{I}) = -(\nabla \cdot \overset{\underset{\mathrm{\rightrightarrows}}{}}{I})p -
+(\overset{\underset{\mathrm{\rightrightarrows}}{}}{I} \cdot \nabla)p = -\nabla p\]</div>
+<ul class="simple">
+<li>Second part:</li>
+</ul>
+<div class="math">
+\[\mu \nabla \cdot \left( \nabla \otimes \vec{u} + (\nabla \otimes \vec{u})^T \right) =
+\mu \left(\nabla^2 \vec{u} + \nabla (\nabla \cdot \vec{u}) \right) =
+\mu \nabla^2 \vec{u} + \mu \nabla (\nabla \cdot \vec{u})\]</div>
+<ul class="simple">
+<li>Third part:</li>
+</ul>
+<div class="math">
+\[-{2 \over 3} \mu \nabla \cdot ( (\nabla \cdot \vec{u}) \overset{\underset{\mathrm{\rightrightarrows}}{}}{I} ) =
+-{2 \over 3} \mu \left( (\nabla \cdot \overset{\underset{\mathrm{\rightrightarrows}}{}}{I}) \nabla \cdot \vec{u} +
+(\overset{\underset{\mathrm{\rightrightarrows}}{}}{I} \cdot \nabla) \nabla \cdot \vec{u}   \right) =
+-{2 \over 3} \mu \nabla (\nabla \cdot \vec{u})\]</div>
+<p>where: <span class="math">\(\nabla \cdot \overset{\underset{\mathrm{\rightrightarrows}}{}}{I} = 0\)</span> and <span class="math">\(\overset{\underset{\mathrm{\rightrightarrows}}{}}{I} \cdot \nabla=\nabla\)</span></p>
+<ul class="simple">
+<li>Adding first, second and third parts (plus <span class="math">\(\rho \vec{g}\)</span>):</li>
+</ul>
+<div class="math">
+\[{D \over {Dt}} (\rho \vec{u}) = -\nabla p + \mu \nabla^2 \vec{u} + \mu \nabla (\nabla \cdot \vec{u}) -{2 \over 3} \mu \nabla (\nabla \cdot \vec{u}) + \rho \vec{g}\]</div>
+<ul class="simple">
+<li>Simplfiying:</li>
+</ul>
+<div class="math">
+\[{D \over {Dt}} (\rho \vec{u}) = -\nabla p + \mu \left( \nabla^2 \vec{u} + {1 \over 3} \nabla (\nabla \cdot \vec{u}) \right) + \rho \vec{g}\]</div>
+</div>
+<div class="section" id="what-are-the-meaning-of-the-terms-in-the-fully-compressible-navier-stokes-equations">
+<h2><a class="toc-backref" href="#id9">4.1.12.9. What are the meaning of the terms in the fully compressible Navier-Stokes equations?</a><a class="headerlink" href="#what-are-the-meaning-of-the-terms-in-the-fully-compressible-navier-stokes-equations" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[{\partial \over {\partial t}} (\rho \vec{u}) + \nabla \cdot (\rho \vec{u} \otimes \vec{u} ) = -\nabla p + \mu \left( \nabla^2 \vec{u} + {1 \over 3} \nabla (\nabla \cdot \vec{u}) \right) + \rho \vec{g}\]</div>
+<ul class="simple">
+<li>Unsteady momentum:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} (\rho \vec{u})\]</div>
+<ul class="simple">
+<li>Advective momentum:</li>
+</ul>
+<div class="math">
+\[\nabla \cdot (\rho \vec{u} \otimes \vec{u} )\]</div>
+<ul class="simple">
+<li>Pressure gradient:</li>
+</ul>
+<div class="math">
+\[- \nabla p\]</div>
+<ul class="simple">
+<li>Viscous or diffusive term:</li>
+</ul>
+<div class="math">
+\[\mu \nabla^2 \vec{u}\]</div>
+<ul class="simple">
+<li>Compressibility:</li>
+</ul>
+<div class="math">
+\[{1 \over 3} \mu \nabla (\nabla \cdot \vec{u})\]</div>
+<ul class="simple">
+<li>Body forces:</li>
+</ul>
+<div class="math">
+\[\rho \vec{g}\]</div>
+</div>
+<div class="section" id="expand-the-terms-in-the-navier-stokes-equations-assuming">
+<h2><a class="toc-backref" href="#id10">4.1.12.10. Expand the terms in the Navier-Stokes equations assuming <span class="math">\(\nabla \cdot \vec{u} = 0\)</span></a><a class="headerlink" href="#expand-the-terms-in-the-navier-stokes-equations-assuming" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Navier-Stokes:</li>
+</ul>
+<div class="math">
+\[{D \over {Dt}} (\rho \vec{u}) = {\partial \over {\partial t}} (\rho \vec{u}) + \nabla \cdot (\rho \vec{u} \otimes \vec{u} ) = -\nabla p + \mu \left( \nabla^2 \vec{u} + {1 \over 3} \nabla (\nabla \cdot \vec{u}) \right) + \rho \vec{g}\]</div>
+<ul class="simple">
+<li><span class="math">\(x\)</span>-direction as principal:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} (\rho u) +
+{\partial \over {\partial x}} (\rho u^2) +
+{\partial \over {\partial x}} (\rho uv) +
+{\partial \over {\partial x}} (\rho uw) =
+-{{\partial p} \over {\partial x}} +
+\mu \left( {{\partial^2 u} \over {\partial x^2}} +
+{{\partial^2 u} \over {\partial y^2}} +
+{{\partial^2 u} \over {\partial z^2}}  \right) +
+\rho g_x\]</div>
+<ul class="simple">
+<li><span class="math">\(y\)</span>-direction as principal:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} (\rho v) +
+{\partial \over {\partial x}} (\rho vu) +
+{\partial \over {\partial x}} (\rho v^2) +
+{\partial \over {\partial x}} (\rho vw) =
+-{{\partial p} \over {\partial y}} +
+\mu \left( {{\partial^2 v} \over {\partial x^2}} +
+{{\partial^2 v} \over {\partial y^2}} +
+{{\partial^2 v} \over {\partial z^2}}  \right) +
+\rho g_y\]</div>
+<ul class="simple">
+<li><span class="math">\(z\)</span>-direction as principal:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} (\rho w) +
+{\partial \over {\partial x}} (\rho wu) +
+{\partial \over {\partial x}} (\rho wv) +
+{\partial \over {\partial x}} (\rho x^2) =
+-{{\partial p} \over {\partial z}} +
+\mu \left( {{\partial^2 w} \over {\partial x^2}} +
+{{\partial^2 w} \over {\partial y^2}} +
+{{\partial^2 w} \over {\partial z^2}}  \right) +
+\rho g_z\]</div>
+</div>
+<div class="section" id="how-is-the-compressibility-term-expanded-in-the-navier-stokes-equations">
+<h2><a class="toc-backref" href="#id11">4.1.12.11. How is the compressibility term expanded in the Navier-Stokes equations?</a><a class="headerlink" href="#how-is-the-compressibility-term-expanded-in-the-navier-stokes-equations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Compressibility term:</li>
+</ul>
+<div class="math">
+\[{1 \over 3} \nabla (\nabla \cdot \vec{u})\]</div>
+<ul class="simple">
+<li><span class="math">\(x\)</span>-direction as principal:</li>
+</ul>
+<div class="math">
+\[{1 \over 3} {\partial \over {\partial x}} \left(
+{{\partial u} \over {\partial x}} +
+{{\partial v} \over {\partial y}} +
+{{\partial w} \over {\partial z}} \right)\]</div>
+<ul class="simple">
+<li><span class="math">\(y\)</span>-direction as principal:</li>
+</ul>
+<div class="math">
+\[{1 \over 3} {\partial \over {\partial y}} \left(
+{{\partial u} \over {\partial x}} +
+{{\partial v} \over {\partial y}} +
+{{\partial w} \over {\partial z}} \right)\]</div>
+<ul class="simple">
+<li><span class="math">\(z\)</span>-direction as principal:</li>
+</ul>
+<div class="math">
+\[{1 \over 3} {\partial \over {\partial z}} \left(
+{{\partial u} \over {\partial x}} +
+{{\partial v} \over {\partial y}} +
+{{\partial w} \over {\partial z}} \right)\]</div>
+</div>
+<div class="section" id="what-is-the-skew-symmetric-form-of-the-total-derivative">
+<h2><a class="toc-backref" href="#id12">4.1.12.12. What is the skew symmetric form of the total derivative?</a><a class="headerlink" href="#what-is-the-skew-symmetric-form-of-the-total-derivative" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[{D \over {Dt}} (\rho \vec{u}) = {{\partial \vec{u}} \over {\partial t}} + {1 \over 2} \left( (\vec{u} \cdot \nabla) \vec{u} + \nabla \cdot (\vec{u} \otimes \vec{u})  \right)\]</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="11_euler_momentum_equation.html">4.1.11. Euler Momentum Equation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="13_vorticity_transport_equation.html">4.1.13. Vorticity Transport Equation</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

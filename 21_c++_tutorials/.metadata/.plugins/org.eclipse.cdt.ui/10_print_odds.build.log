@@ -1,0 +1,15 @@
+22:47:39 **** Incremental Build of configuration Debug for project 10_print_odds ****
+make all 
+Building file: ../print_odds.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"print_odds.d" -MT"print_odds.d" -o "print_odds.o" "../print_odds.cpp"
+Finished building: ../print_odds.cpp
+ 
+Building target: 10_print_odds
+Invoking: GCC C++ Linker
+g++  -o "10_print_odds"  ./print_odds.o   
+Finished building target: 10_print_odds
+ 
+
+22:47:40 Build Finished (took 324ms)
+

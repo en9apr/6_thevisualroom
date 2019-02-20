@@ -1,0 +1,100 @@
+/*
+File name: challenge_file_read.cpp
+Date: 14 Jan 2017
+Author: Andrew Roberts
+*/
+
+#include <iostream>
+#include <fstream> // reading, writing and creating files
+#include <iomanip> // setprecision
+#include <vector>
+#include <stdlib.h>
+#include <numeric>
+using namespace std;
+
+int add_columns(vector<int>, vector<int>);
+vector<int> convert(vector<string>);
+double average_column(vector<int>);
+int error_code=666;
+
+int main()
+{
+	try
+	{
+		ifstream inputfile;
+		//declare an input file
+		inputfile.open("numbers_2.txt", ios::in);
+		if(inputfile.fail())
+		{
+			throw error_code;
+		}
+
+
+	char number_1[1];
+	char number_2[1];
+	vector<string> column_1_strings;
+	vector<string> column_2_strings;
+	int pos = 0;
+	//int column_2 = 1;
+
+	//read from the file until end of file (eof)
+	for(pos=0; pos<16; pos++)
+	{
+		inputfile.getline(number_1, 30, ',');
+		column_1_strings.push_back(number_1);
+		inputfile.getline(number_2, 30, ',');
+		column_2_strings.push_back(number_2);
+	}
+
+	vector<int> column_1_ints = convert(column_1_strings);
+	vector<int> column_2_ints = convert(column_2_strings);
+	for(pos=0; pos<16; pos++)
+	{
+		cout << "Column 1 Number " << pos+1 << ":" << column_1_ints[pos] << endl;
+		cout << "Column 2 Number " << pos+1 << ":" << column_2_ints[pos] << endl;
+		cout << " " << endl;
+	}
+	int total = add_columns(column_1_ints, column_2_ints);
+	cout << "Total: " << total << endl;
+
+	double average_1 = average_column(column_1_ints);
+	cout << "Average column 1: " << fixed << setprecision(2) << average_1 << endl;
+
+	double average_2 = average_column(column_2_ints);
+	cout << "Average column 2: " << fixed << setprecision(2) << average_2 << endl;
+
+	}
+	catch(int error_number)
+	{
+		if(error_number==error_code)
+		{
+			cout << "File reading error." << endl;
+			exit(1);
+		}
+	}
+}
+
+int add_columns(vector<int> column_1, vector<int> column_2)
+{
+	double total_1 = accumulate(column_1.begin(), column_1.end(), 0.0);
+	double total_2 = accumulate(column_2.begin(), column_2.end(), 0.0);
+	return total_1+total_2;
+}
+
+double average_column(vector<int> column_1)
+{
+	double average = accumulate(column_1.begin(), column_1.end(), 0.0)/column_1.size();
+	return average;
+}
+
+vector<int> convert(vector<string> input_string)
+{
+	int size = input_string.size();
+	vector<int> output_int;
+	for (int i=0; i<size; i++)
+	{
+		int num = atoi(input_string.at(i).c_str());
+		output_int.push_back(num);
+	}
+	return output_int;
+}

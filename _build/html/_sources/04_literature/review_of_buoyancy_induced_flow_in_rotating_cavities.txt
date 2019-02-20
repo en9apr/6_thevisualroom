@@ -1,0 +1,375 @@
+====================================================
+Review of Buoyancy-Induced Flow in Rotating Cavities
+====================================================
+
+J. Michael Owen and Christopher A. Long, J. Turbomach 137(11), Aug 12, 2015.
+
+.. contents::
+   :local:
+
+.. highlight:: latex
+
+Abstract
+========
+
+Where does buoyancy-induced flow occur?
+---------------------------------------
+
+In the cavity between two co-rotating compressor disks.
+
+How does the buoyancy-induced flow occur?
+-------------------------------------------
+
+* When the **temperature** of the disks and shroud is higher than that of the air inside the cavity. 
+* **Coriolis forces** in the rotating fluid create cyclonic and anti-cyclonic circulations inside the cavity
+
+Why is the heat transfer from the solid surface to air difficult to measure or compute?
+---------------------------------------------------------------------------------------
+
+* The flows are:
+    - 3D
+    - Unsteady
+    - Unstable - one flow structure can change quasi-randomly to another
+
+What do designers want to measure during engine accelerations and decelerations?
+--------------------------------------------------------------------------------
+
+* Transient temperature changes
+* Thermal stresses
+* Radial growth of the disks
+
+What kind of geometries can be considered?
+------------------------------------------
+
+* Closed rotating cavities
+* Open cavities
+
+What kind of flows can be considered?
+-------------------------------------
+
+* Axial throughflow
+* Radial inflow
+
+Introduction
+============
+
+What do we wish to calculate?
+-----------------------------
+
+The **transient and steady clearance between the blades and the casing** of a high pressure compressor in an aeroengine.
+
+What is needed in order to calculate this?
+------------------------------------------
+
+* **Radial growth** of the compressor disks
+* **Transient temperatures of the disk**
+* **Flow and heat transfer in the cavity** between the corotating disks
+
+Why is this difficult?
+----------------------
+
+* Buoyancy-induced flow is:
+    - Unsteady
+    - 3D
+    - Unstable
+
+What are the two regimes, between which transition must be predicted?
+---------------------------------------------------------------------
+
+* Axial flow is **hotter** than shroud
+    - Flow can be stably stratified
+    - Can occur in **acceleration and deceleration** of engine
+    - No buoyancy induced convection
+    - Heat transfer from disks is small
+* Axial flow is **cooler** than shroud
+    - For **steady state** conditions
+    - **Buoyancy induced convection** can occur
+    
+What types of problem are present?
+----------------------------------
+
+* **Inverse problem**:
+    - Determination of heat fluxes from temperature measurements
+    - Ill-posed - small uncertainties in temperature create large errors in fluxes
+* **Conjugate problem**:
+    - Buoyancy induced convection
+    - Temperature distribution on disks affects the flow in the cavity and vice versa
+    
+What are the important non-dimensional parameters?
+--------------------------------------------------
+
+* Rayleigh, :math:`Ra`
+* Rossby, :math:`Ro`
+* Axial Reynolds, :math:`Re_z`
+    
+What are the ranges of these non-dimensional parameters?
+--------------------------------------------------------
+
+* :math:`Ra \sim 10^{12}`
+* :math:`Ro \sim 10^{0}`    
+* :math:`Re_z \sim 10^{5}`
+
+Rayleigh Number
+---------------
+
+How is the Rayleigh Number defined?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. math::
+
+    Ra = Pr Gr
+    
+.. math::
+
+    Pr = {{\mu c_p} \over k}
+
+.. math::
+
+    Gr = {{\tilde{g} L^3 \beta \Delta T} \over {\nu^2}}  
+
+where: 
+
+* :math:`L = \text{characteristic length}`    
+* :math:`\beta = \text{volume expansion coefficient}`
+* :math:`k = \text{thermal conductivity of air}`
+* :math:`\tilde{g} = \text{charateristic acceleration}`        
+
+What does the Rayleigh Number mean?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* When :math:`Ra < Critical \rightarrow \text{conduction}`
+* When :math:`Ra > Critical \rightarrow \text{convection}`
+
+What does the Prandtl Number measure?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Momentum to thermal diffusivity
+
+What does the Grashof Number measure?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Buoyancy to viscosity
+
+Rossby Number 
+-------------
+
+How is the Rossby Number defined?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. math::
+
+    Ro = {W \over {\Omega L}}
+
+* :math:`W = \text{characteristic axial velocity}`    
+* :math:`\Omega = \text{angular speed of rotor}` 
+* :math:`L = \text{characteristic length}` 
+
+What does the Rossby Number measure?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Convection to Coriolis forces
+
+Axial Reynolds Number
+---------------------
+
+How is the Axial Reynolds Number defined?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. math::
+
+    Re_z = {W L \over {\nu}}
+    
+* :math:`W = \text{characteristic axial velocity}`    
+* :math:`L = \text{characteristic length}`
+
+What does the Reynolds Number measure?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Inertial to viscous forces
+
+
+Buoyancy-Induced Flow in Closed Cavities
+========================================
+
+Heat Transfer in Closed Stationary Cavities
+-------------------------------------------
+
+The Rayleigh number can be defined as:
+
+.. math::
+
+    Ra^{'} = {Pr \beta \Delta T} {{g d^3} \over \nu^3}
+
+where:
+
+* :math:`d` is the vertical distance between the plates
+* :math:`\Delta T = T_H - T_C` (:math:`H` = hot and :math:`C` = cold)
+
+What is the mechanism for Rayleigh-Benard convection?
+-----------------------------------------------------
+
+* When the lower surface is hotter than the upper surface, the flow becomes unstable 
+* At a critical Rayleigh number, it breaks down into a series of counter-rotating vortices
+* (When the upper surface is hotter, the fluid is thermally stratified and heat transfer is by conduction)
+
+What is the critical Rayleigh Number?
+-------------------------------------
+
+* :math:`Ra^{'}_{crit} = 1708`
+
+What is the Nusselt Number?
+---------------------------
+
+* :math:`Nu^{'} = {\text{average heat flow at the surface} \over \text{heat flow due to conduction through the fluid}}` 
+* :math:`Nu^{'}=1` :math:`\longrightarrow` :math:`\text{heat transfer is entirely by conduction}` 
+
+What empirical correlations are possible?
+-----------------------------------------
+
+King:
+
+.. math::
+
+    Nu^{'} = C_1 Ra^{'A} + C_2 Ra^{'B}
+
+Grossmann and Lohse (where :math:`1/4` exponent is laminar convection at low :math:`Ra^{'}` and the :math:`1/3` with turbulent at high :math:`Ra^{'}`):
+
+.. math::
+
+    Nu^{'} = 0.27 Ra^{'1/4} + 0.038 Ra^{'1/3}
+    
+Hollands (where :math:`Nu^{'} = 1` for :math:`Ra^{'} < Ra^{'}_{crit}`):
+
+.. math::
+
+    Nu^{'} = 1 + 1.44 max[1-1708/Ra^{'}, 0] + max[ (Ra^{'}/5830)^{1/3} - 1, 0]
+    
+    
+Coriolis Effects in Rotating Cavities
+=====================================
+
+What is radial convection in a rotating annulus **analogous** to?
+-----------------------------------------------------------------
+
+* Rayleigh-Benard convection that occurs in the air gap between two stationary horizontal plates
+* g is replaced by the centripetal acceleration
+
+What does the heat transfer depend on?
+--------------------------------------
+
+Whether the outer surface is hotter or colder than the inner one:
+
+* If the outer surface is hotter than the inner, the density gradient stablizies the flow and heat transfer is by conduction
+* If the outer surface is colder than the inner, the heat transfer is by convection
+
+What are the Coriolis accelerations?
+------------------------------------
+
+* :math:`\text{Radial acceleration} = -2 \Omega v`
+* :math:`\text{Tangential acceleration} = 2 \Omega u`
+
+where: 
+
+* :math:`u = \text{radial velocity}`
+* :math:`v = \text{tangential velocity}`
+
+These accelerations are associated with respective forces
+
+Why can an inviscid linear set of equations be considered?
+----------------------------------------------------------
+
+* :math:`u / \Omega r << 1`
+* :math:`v / \Omega r << 1`
+
+* The non-linear terms are much smaller than the linear Coriolis terms
+* The Navier-Stokes equations reduce to **inviscid linear equations**
+
+How can radial flow occur in such a case?
+-----------------------------------------
+
+* :math:`u=0` in an inviscid axisymmetric rotating fluid
+* For radial flow either:
+    - It is confined to the boundary layers (where the Coriolis forces are produced by shear stresses)
+    - Or the flow is non-axisymmetric
+    
+What are Ekman layers?
+----------------------
+
+* Circumferential shear stresses in the boundary layers on the two disks which create Coriolis forces
+
+What kind of radial flows are there?
+------------------------------------
+
+For unidirectional flows, such as source-sink flows, with a superposed radial outflow or inflow:
+
+* Isothermal radial outflow - radial flow is confined to Ekman layers, between which there is a core of inviscid fluid that rotates at an angular speed **slower** than the disks
+* Isothermal radial inflow - radial flow is confined to Ekman layers, between which there is a core of inviscid fluid that rotates at an angular speed **faster** than the disks
+
+How can the flow become non-axisymmetric and unsteady?
+------------------------------------------------------
+
+* Inner surface is hotter than outer surface
+* Rayleigh-Bernard convection occurs
+* Contra-rotating vortices are created
+* Cyclonic vortices create low pressure regions
+* Anti-cyclonic vortices create high pressure regions
+* Circumferential pressure gradients produce Coriolis forces for inflow and outflow of hot and cold fluids
+* These flows are nonaxisymmetric and unsteady
+
+What is the surprising phenonmenon at large rotation speeds?
+------------------------------------------------------------
+
+* At large rotation speeds :math:`\Omega^2 b \gg g`
+* :math:`Ra \propto \beta \Delta T Re_{\phi}^2`
+* A given fluidic Rayleigh number can be produced by an infinite combination of :math:`Re_{\phi}` and :math:`\beta \Delta T`
+* Coriolis acceleration is proportional to :math:`\Omega`
+* Higher values of :math:`Re_{\phi}` result in lower values of :math:`Nu`
+* A given Rayleigh number could be produced by a wide variety of Nusselt numbers
+* The value of Nusselt number could decrease as the Rayleigh number increases!
+
+Why is the critical Rayleigh number higher in a rotating cavity than a stationary one?
+--------------------------------------------------------------------------------------
+
+* Coriolis forces tend to attenuate velocity fluctuations
+
+How can Rayleigh-Benard convection occur?
+-----------------------------------------
+
+* Can only occur if initial axisymmetry is broken to allow radial flow
+* For an initially isothermal closed rotating cavity, the fluid will be in solid-body rotation
+* If shroud is heated, heat transfer must initially be by axisymmetric **conduction**
+* Only after axisymmetry is broken can **convection** begin
+* Critical Rayleigh number for Rayleigh-Benard convection could depend on whether the cavity is initially rotating ot stationary before the shroud is heated
+
+Heat Transfer in Closed Rotating Cavities
+=========================================
+
+What kind of heat transfer can happen in closed rotating cavities?
+------------------------------------------------------------------
+
+* Axial - from a hot disk to a cold one
+* Radial - from hot outer cylinder to cold inner one
+
+How does axial heat transfer occur?
+-----------------------------------
+
+* Radial inflow in boundary layer on a hot disk
+* Radial outflow in boundary layer on cold disk
+
+What are the Nusselt Numbers and Rayleigh Numbers in closed cavities?
+---------------------------------------------------------------------
+
+* Nusselt numbers are small
+* Convection is the same magnitude as radiation
+* Measured Nusselt numbers are less than :math:`10` when Rayleigh numbers are up to :math:`10^{11}`
+
+
+
+
+
+
+Glossary
+========
+
+**Shroud**: the surface defining the outer diameter of a turbomachine flow *annulus* (ring-shaped object).
+

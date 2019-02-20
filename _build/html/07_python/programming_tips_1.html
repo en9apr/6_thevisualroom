@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.12. Programming Tips 1 &#8212; The Visual Room</title>
+    <title>3.1.12. Programming Tips 1 &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="3. Python Programming Language" href="python_language.html" />
-    <link rel="next" title="4. How to Use Version Control" href="../08_version_control/git.html" />
-    <link rel="prev" title="3.11. Questions, Examples and Projects" href="practice.html" /> 
+    <link rel="up" title="3.1. Python Programming Language" href="python_language.html" />
+    <link rel="next" title="3.2. Python Example Scripts" href="../07_python_use/python_use.html" />
+    <link rel="prev" title="3.1.11. Questions, Examples and Projects" href="practice.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>3.12. Programming Tips 1</span></h2>
+        <h2 class="heading"><span>3.1.12. Programming Tips 1</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="practice.html">3.11. Questions, Examples and Projects</a>
+        «&#160;&#160;<a href="practice.html">3.1.11. Questions, Examples and Projects</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="../08_version_control/git.html">4. How to Use Version Control</a>&#160;&#160;»
+        <a href="../07_python_use/python_use.html">3.2. Python Example Scripts</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,7 +49,7 @@
         
         
   <div class="section" id="programming-tips-1">
-<h1>3.12. Programming Tips 1<a class="headerlink" href="#programming-tips-1" title="Permalink to this headline">¶</a></h1>
+<h1>3.1.12. Programming Tips 1<a class="headerlink" href="#programming-tips-1" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#docstrings" id="id1">Docstrings</a></li>
@@ -59,22 +59,22 @@
 </ul>
 </div>
 <div class="section" id="docstrings">
-<h2><a class="toc-backref" href="#id1">3.12.1. Docstrings</a><a class="headerlink" href="#docstrings" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">3.1.12.1. Docstrings</a><a class="headerlink" href="#docstrings" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Docstring tells you what the program does (interface) not how it does it.</li>
 <li>Docstring is surrounded by three quotes, before and after</li>
 </ul>
 </div>
 <div class="section" id="comments">
-<h2><a class="toc-backref" href="#id2">3.12.2. Comments</a><a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">3.1.12.2. Comments</a><a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Comments tells you how program does it (implementation)</li>
 <li>Comments are preceded by a hash tag</li>
 </ul>
 </div>
 <div class="section" id="example-of-docstring-and-comment">
-<h2><a class="toc-backref" href="#id3">3.12.3. Example of Docstring and Comment</a><a class="headerlink" href="#example-of-docstring-and-comment" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<h2><a class="toc-backref" href="#id3">3.1.12.3. Example of Docstring and Comment</a><a class="headerlink" href="#example-of-docstring-and-comment" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">math</span>
 
 <span class="k">def</span> <span class="nf">area_triangle_sss</span><span class="p">(</span><span class="n">side1</span><span class="p">,</span> <span class="n">side2</span><span class="p">,</span> <span class="n">side3</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -91,11 +91,11 @@
 </div>
 </div>
 <div class="section" id="example-of-always-giving-conditional-output">
-<h2><a class="toc-backref" href="#id4">3.12.4. Example of Always Giving Conditional Output</a><a class="headerlink" href="#example-of-always-giving-conditional-output" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">3.1.12.4. Example of Always Giving Conditional Output</a><a class="headerlink" href="#example-of-always-giving-conditional-output" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Conditional Output should always be given if no criteria are met, i.e. always use else</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">favourites</span><span class="p">(</span><span class="n">instructor</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">favourites</span><span class="p">(</span><span class="n">instructor</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the favourite thing of a given instructor</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -107,13 +107,13 @@
     <span class="k">elif</span> <span class="n">instructor</span> <span class="o">==</span> <span class="s2">&quot;John&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;outdoors&quot;</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span> <span class="s2">&quot;Program saw invalid input:&quot;</span><span class="p">,</span> <span class="n">instructor</span>
+        <span class="k">print</span> <span class="s2">&quot;Program saw invalid input:&quot;</span><span class="p">,</span> <span class="n">instructor</span>
 
-<span class="nb">print</span> <span class="n">favourites</span><span class="p">(</span><span class="s2">&quot;John&quot;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="n">favourites</span><span class="p">(</span><span class="s2">&quot;Jeannie&quot;</span><span class="p">)</span>  <span class="c1">#Returns None is there is no value</span>
+<span class="k">print</span> <span class="n">favourites</span><span class="p">(</span><span class="s2">&quot;John&quot;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">favourites</span><span class="p">(</span><span class="s2">&quot;Jeannie&quot;</span><span class="p">)</span>  <span class="c1">#Returns None is there is no value</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>outdoors
+<div class="highlight-none"><div class="highlight"><pre>outdoors
 Program saw invalid input: Jeannie
 None
 </pre></div>
@@ -126,17 +126,17 @@ None
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="practice.html">3.11. Questions, Examples and Projects</a>
+        «&#160;&#160;<a href="practice.html">3.1.11. Questions, Examples and Projects</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="../08_version_control/git.html">4. How to Use Version Control</a>&#160;&#160;»
+        <a href="../07_python_use/python_use.html">3.2. Python Example Scripts</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

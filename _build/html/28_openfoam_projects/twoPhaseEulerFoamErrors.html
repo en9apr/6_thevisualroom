@@ -1,0 +1,777 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.5.4. twoPhaseEulerFoamErrors &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1.5. OpenFOAM Projects (Password Protected)" href="openfoam_projects.html" />
+    <link rel="next" title="2. C++" href="../21_22_c++_landing_page/c++_landing_page.html" />
+    <link rel="prev" title="1.5.3. Swak4Foam" href="swak4foam.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.5.4. twoPhaseEulerFoamErrors</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="swak4foam.html">1.5.3. Swak4Foam</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../21_22_c++_landing_page/c++_landing_page.html">2. C++</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="twophaseeulerfoamerrors">
+<h1>1.5.4. twoPhaseEulerFoamErrors<a class="headerlink" href="#twophaseeulerfoamerrors" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#error-1-alpha-not-showing-at-t-0" id="id1">Error 1 - alpha not showing at t=0</a></li>
+<li><a class="reference internal" href="#error-2-floating-point-exception" id="id2">Error 2 - floating point exception</a></li>
+<li><a class="reference internal" href="#error-3-polymesh-folder-not-present-in-polymesh-case-conflict" id="id3">Error 3 - polyMesh folder not present in polymesh (Case Conflict)</a></li>
+<li><a class="reference internal" href="#error-4-cannot-find-phaseproperties" id="id4">Error 4 - cannot find phaseProperties</a></li>
+<li><a class="reference internal" href="#error-5-cannot-find-file" id="id5">Error 5 - cannot find file</a></li>
+<li><a class="reference internal" href="#error-5-zig-zag-results-that-are-bizzare" id="id6">Error 5 - zig-zag results that are bizzare</a></li>
+<li><a class="reference internal" href="#error-6-no-rule" id="id7">Error 6 - no rule</a></li>
+<li><a class="reference internal" href="#error-7-twophasesystem-h-no-such-file-or-directory" id="id8">Error 7 - twoPhaseSystem.H: No such file or directory</a></li>
+<li><a class="reference internal" href="#error-8-can-t-find-patch-type" id="id9">Error 8 - can&#8217;t find patch type</a></li>
+<li><a class="reference internal" href="#error-9-duplicate-entries" id="id10">Error 9 - duplicate entries</a></li>
+<li><a class="reference internal" href="#error-10-mpi-failure-at-end" id="id11">Error 10 - mpi failure at end</a></li>
+<li><a class="reference internal" href="#error-11-member-function-not-implemented" id="id12">Error 11 - member function not implemented</a></li>
+<li><a class="reference internal" href="#error-12-not-enough-arguments" id="id13">Error 12 - Not enough arguments</a></li>
+<li><a class="reference internal" href="#error-13-openfoam-version-5-0-cannot-open-case-directory" id="id14">Error 13 - OpenFOAM version 5.0 - cannot open case directory</a></li>
+<li><a class="reference internal" href="#error-14-crazy-zig-zag-results" id="id15">Error 14 - crazy zig-zag results</a></li>
+<li><a class="reference internal" href="#error-15-negative-initial-temperature" id="id16">Error 15 - negative initial temperature</a></li>
+<li><a class="reference internal" href="#error-16-cannot-find-file" id="id17">Error 16 - cannot find file</a></li>
+<li><a class="reference internal" href="#error-17-simulation-stopped-after-i-logged-out" id="id18">Error 17 - Simulation stopped after I logged out</a></li>
+</ul>
+</div>
+<div class="section" id="error-1-alpha-not-showing-at-t-0">
+<h2><a class="toc-backref" href="#id1">1.5.4.1. Error 1 - alpha not showing at t=0</a><a class="headerlink" href="#error-1-alpha-not-showing-at-t-0" title="Permalink to this headline">¶</a></h2>
+<p>If setFields does show alpha values at t=0, it is because you need to set the limits of setFields dictionary to exactly correspond with the limits in the model. If you renumberMesh, you must use -overwrite as well, otherwise it will stick the mesh in a funny place</p>
+<p>Adding cells with center within box (-0.04 0 0) (0.04 1 0.01)</p>
+</div>
+<div class="section" id="error-2-floating-point-exception">
+<h2><a class="toc-backref" href="#id2">1.5.4.2. Error 2 - floating point exception</a><a class="headerlink" href="#error-2-floating-point-exception" title="Permalink to this headline">¶</a></h2>
+<p>Granular pressure, pa, has gone to infinity (1.8e6) near the wall.</p>
+<p>Alpha has also gone above 0.65</p>
+<p>Need to plot everything in gnuplot: residuals, pa, Theta, nua</p>
+<div class="highlight-c++"><div class="highlight"><pre>Courant Number mean: 0.0693311 max: 3.65054
+Max Ur Courant Number = 62.5038
+Time = 0.041
+
+DILUPBiCG:  Solving for alpha, Initial residual = 0.0210031, Final residual = 4.16181e-11, No Iterations 9
+Dispersed phase volume fraction = 0.571186  Min(alpha) = -0.019327  Max(alpha) = 0.995556
+DILUPBiCG:  Solving for alpha, Initial residual = 0.0107219, Final residual = 3.03307e-11, No Iterations 10
+Dispersed phase volume fraction = 0.571186  Min(alpha) = -0.27625  Max(alpha) = 1.34132
+kinTheory: max(Theta) = 48.117
+kinTheory: min(nua) = 5.03589e-13, max(nua) = 0.0344828
+kinTheory: min(pa) = -7.09087e-10, max(pa) = 3.32578e+07
+[5] #0  Foam::error::printStack(Foam::Ostream&amp;) at ??:?
+[5] #1  Foam::sigFpe::sigHandler(int) at ??:?
+[5] #2   in &quot;/lib/x86_64-linux-gnu/libc.so.6&quot;
+[5] #3  Foam::GAMGSolver::scalingFactor(Foam::Field&lt;double&gt;&amp;, Foam::Field&lt;double&gt; const&amp;, Foam::Field&lt;double&gt; const&amp;, Foam::Field&lt;double&gt; const&amp;) const at ??:?
+[5] #4  Foam::GAMGSolver::scalingFactor(Foam::Field&lt;double&gt;&amp;, Foam::lduMatrix const&amp;, Foam::Field&lt;double&gt;&amp;, Foam::FieldField&lt;Foam::Field, double&gt; const&amp;, Foam::UPtrList&lt;Foam::lduInterfaceField const&gt; const&amp;, Foam::Field&lt;double&gt; const&amp;, unsigned char) const at ??:?
+[5] #5  Foam::GAMGSolver::Vcycle(Foam::PtrList&lt;Foam::lduMatrix::smoother&gt; const&amp;, Foam::Field&lt;double&gt;&amp;, Foam::Field&lt;double&gt; const&amp;, Foam::Field&lt;double&gt;&amp;, Foam::Field&lt;double&gt;&amp;, Foam::Field&lt;double&gt;&amp;, Foam::PtrList&lt;Foam::Field&lt;double&gt; &gt;&amp;, Foam::PtrList&lt;Foam::Field&lt;double&gt; &gt;&amp;, unsigned char) const at ??:?
+[5] #6  Foam::GAMGSolver::solve(Foam::Field&lt;double&gt;&amp;, Foam::Field&lt;double&gt; const&amp;, unsigned char) const at ??:?
+[5] #7  Foam::fvMatrix&lt;double&gt;::solve(Foam::dictionary const&amp;) at ??:?
+[5] #8
+[5]  at ??:?
+[5] #9  __libc_start_main in &quot;/lib/x86_64-linux-gnu/libc.so.6&quot;
+[5] #10
+[5]  at ??:?
+[emps-andrew:02679] *** Process received signal ***
+[emps-andrew:02679] Signal: Floating point exception (8)
+[emps-andrew:02679] Signal code:  (-6)
+[emps-andrew:02679] Failing at address: 0x3e800000a77
+[emps-andrew:02679] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x354b0)[0x7fbe424d84b0]
+[emps-andrew:02679] [ 1] /lib/x86_64-linux-gnu/libc.so.6(gsignal+0x38)[0x7fbe424d8428]
+[emps-andrew:02679] [ 2] /lib/x86_64-linux-gnu/libc.so.6(+0x354b0)[0x7fbe424d84b0]
+[emps-andrew:02679] [ 3] /home/apr207/OpenFOAM/OpenFOAM-2.1.0/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZNK4Foam10GAMGSolver13scalingFactorERNS_5FieldIdEERKS2_S5_S5_+0x64)[0x7fbe435c0934]
+[emps-andrew:02679] [ 4] /home/apr207/OpenFOAM/OpenFOAM-2.1.0/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZNK4Foam10GAMGSolver13scalingFactorERNS_5FieldIdEERKNS_9lduMatrixES3_RKNS_10FieldFieldIS1_dEERKNS_8UPtrListIKNS_17lduInterfaceFieldEEERKS2_h+0x9e)[0x7fbe435c0d0e]
+[emps-andrew:02679] [ 5] /home/apr207/OpenFOAM/OpenFOAM-2.1.0/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZNK4Foam10GAMGSolver6VcycleERKNS_7PtrListINS_9lduMatrix8smootherEEERNS_5FieldIdEERKS8_S9_S9_S9_RNS1_IS8_EESD_h+0x1023)[0x7fbe435c3353]
+[emps-andrew:02679] [ 6] /home/apr207/OpenFOAM/OpenFOAM-2.1.0/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZNK4Foam10GAMGSolver5solveERNS_5FieldIdEERKS2_h+0x38c)[0x7fbe435c42bc]
+[emps-andrew:02679] [ 7] /home/apr207/OpenFOAM/OpenFOAM-2.1.0/platforms/linux64GccDPOpt/lib/libfiniteVolume.so(_ZN4Foam8fvMatrixIdE5solveERKNS_10dictionaryE+0x10b)[0x7fbe44e3bcbb]
+[emps-andrew:02679] [ 8] twoPhaseEulerFoam[0x449c6a]
+[emps-andrew:02679] [ 9] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf0)[0x7fbe424c3830]
+[emps-andrew:02679] [10] twoPhaseEulerFoam[0x450859]
+[emps-andrew:02679] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 5 with PID 2679 on node emps-andrew exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+</pre></div>
+</div>
+</div>
+<div class="section" id="error-3-polymesh-folder-not-present-in-polymesh-case-conflict">
+<h2><a class="toc-backref" href="#id3">1.5.4.3. Error 3 - polyMesh folder not present in polymesh (Case Conflict)</a><a class="headerlink" href="#error-3-polymesh-folder-not-present-in-polymesh-case-conflict" title="Permalink to this headline">¶</a></h2>
+<p>processor7/constant/polymesh (Case Conflict)</p>
+<p>rename processor7/constant/polyMesh (Case Conflict) to processor7/constant/polyMesh</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="o">--&gt;</span> <span class="n">FOAM</span> <span class="n">FATAL</span> <span class="nl">ERROR</span><span class="p">:</span>
+<span class="n">Cannot</span> <span class="n">find</span> <span class="n">file</span> <span class="s">&quot;points&quot;</span> <span class="n">in</span> <span class="n">directory</span> <span class="s">&quot;polyMesh&quot;</span> <span class="n">in</span> <span class="n">times</span> <span class="mi">0</span> <span class="n">down</span> <span class="n">to</span> <span class="n">constant</span>
+
+    <span class="n">From</span> <span class="n">function</span> <span class="n">Time</span><span class="o">::</span><span class="n">findInstance</span><span class="p">(</span><span class="k">const</span> <span class="n">fileName</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">word</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">IOobject</span><span class="o">::</span><span class="n">readOption</span><span class="p">,</span> <span class="k">const</span> <span class="n">word</span><span class="o">&amp;</span><span class="p">)</span>
+    <span class="n">in</span> <span class="n">file</span> <span class="n">db</span><span class="o">/</span><span class="n">Time</span><span class="o">/</span><span class="n">findInstance</span><span class="p">.</span><span class="n">C</span> <span class="n">at</span> <span class="n">line</span> <span class="mf">203.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="error-4-cannot-find-phaseproperties">
+<h2><a class="toc-backref" href="#id4">1.5.4.4. Error 4 - cannot find phaseProperties</a><a class="headerlink" href="#error-4-cannot-find-phaseproperties" title="Permalink to this headline">¶</a></h2>
+<p>Because using the alias paraview4 invokes openfoam 2.4.0, so to run, you must use 2.2.2 again</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">--&gt;</span> <span class="n">FOAM</span> <span class="n">FATAL</span> <span class="n">IO</span> <span class="nl">ERROR</span><span class="p">:</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="n">cannot</span> <span class="n">open</span> <span class="n">file</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="nl">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">apr207</span><span class="o">-</span><span class="mf">2.1.0</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">eulerian_002_bin_discharge</span><span class="o">/</span><span class="n">processor0</span><span class="o">/</span><span class="n">constant</span><span class="o">/</span><span class="n">phaseProperties</span> <span class="n">at</span> <span class="n">line</span> <span class="mf">0.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="error-5-cannot-find-file">
+<h2><a class="toc-backref" href="#id5">1.5.4.5. Error 5 - cannot find file</a><a class="headerlink" href="#error-5-cannot-find-file" title="Permalink to this headline">¶</a></h2>
+<p>The sets folder is written when checkMesh employed</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">--&gt;</span> <span class="n">FOAM</span> <span class="n">FATAL</span> <span class="n">IO</span> <span class="nl">ERROR</span><span class="p">:</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">cannot</span> <span class="n">find</span> <span class="n">file</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nl">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">apr207</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">eulerian_011_analytical_equation</span><span class="o">/</span><span class="n">processor1</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">U1</span> <span class="n">at</span> <span class="n">line</span> <span class="mf">0.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="error-5-zig-zag-results-that-are-bizzare">
+<h2><a class="toc-backref" href="#id6">1.5.4.6. Error 5 - zig-zag results that are bizzare</a><a class="headerlink" href="#error-5-zig-zag-results-that-are-bizzare" title="Permalink to this headline">¶</a></h2>
+<p>Remove mean files from 0 folder</p>
+<p>If there are no mean results - re-run</p>
+</div>
+<div class="section" id="error-6-no-rule">
+<h2><a class="toc-backref" href="#id7">1.5.4.7. Error 6 - no rule</a><a class="headerlink" href="#error-6-no-rule" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c++"><div class="highlight"><pre><span class="p">.</span><span class="o">/</span><span class="n">Allwclean</span>
+<span class="p">.</span><span class="o">/</span><span class="n">Allwmake</span>
+</pre></div>
+</div>
+<p>Make sure that the files are defintely in the correct folder! If not, there will be an error like this:</p>
+<div class="highlight-c++"><div class="highlight"><pre>make: *** No rule to make target &#39;derivedFvPatchFields/JohnsonJacksonParticleSlip/JohnsonJacksonParticleSlipFvPatchVectorField.dep&#39;, needed by &#39;Make/linux64GccDPOpt/dependencies&#39;. Stop.
+</pre></div>
+</div>
+</div>
+<div class="section" id="error-7-twophasesystem-h-no-such-file-or-directory">
+<h2><a class="toc-backref" href="#id8">1.5.4.8. Error 7 - twoPhaseSystem.H: No such file or directory</a><a class="headerlink" href="#error-7-twophasesystem-h-no-such-file-or-directory" title="Permalink to this headline">¶</a></h2>
+<p>This error occurs because of renaming of variables and the way they are looked up in the dictinaries between 2.3.x and 2.2.2.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="p">.</span><span class="o">/</span><span class="n">Allwclean</span>
+<span class="p">.</span><span class="o">/</span><span class="n">Allwmake</span>
+</pre></div>
+</div>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">derivedFvPatchFields</span><span class="o">/</span><span class="n">JohnsonJacksonParticleSlip</span><span class="o">/</span><span class="n">JohnsonJacksonParticleSlipFvPatchVectorField</span><span class="p">.</span><span class="nl">C</span><span class="p">:</span><span class="mi">24</span><span class="o">:</span><span class="mi">28</span><span class="o">:</span> <span class="n">fatal</span> <span class="nl">error</span><span class="p">:</span> <span class="n">twoPhaseSystem</span><span class="p">.</span><span class="nl">H</span><span class="p">:</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="n">or</span> <span class="n">directory</span>
+</pre></div>
+</div>
+<p>Replace header files - twoPhaseSystem.H is used in 2.3.x to allow different names for the two phases, e.g. air and water, looked up in the phaseProperties dictionary.</p>
+<p>The equivalent in 2.2.2 is phaseModel.H, which looks up everything from transportProperties.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Old</th>
+<th class="head">New</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-c++"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&quot;twoPhaseSystem.H&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+</td>
+<td><div class="first last highlight-c++"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&quot;phaseModel.H&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>However, this requires that we change the rest of the code, in order to lookup everything from the new dictionary.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Old</th>
+<th class="head">New</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-c++"><div class="highlight"><pre><span class="kt">void</span> <span class="n">Foam</span><span class="o">::</span><span class="n">JohnsonJacksonParticleSlipFvPatchVectorField</span><span class="o">::</span><span class="n">updateCoeffs</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">updated</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// lookup the fluid model and the phase</span>
+    <span class="k">const</span> <span class="n">twoPhaseSystem</span><span class="o">&amp;</span> <span class="n">fluid</span> <span class="o">=</span> <span class="n">db</span><span class="p">().</span><span class="n">lookupObject</span><span class="o">&lt;</span><span class="n">twoPhaseSystem</span><span class="o">&gt;</span>
+    <span class="p">(</span>
+        <span class="s">&quot;phaseProperties&quot;</span>
+    <span class="p">);</span>
+
+    <span class="k">const</span> <span class="n">phaseModel</span><span class="o">&amp;</span> <span class="n">phased</span>
+    <span class="p">(</span>
+        <span class="n">fluid</span><span class="p">.</span><span class="n">phase1</span><span class="p">().</span><span class="n">name</span><span class="p">()</span> <span class="o">==</span> <span class="n">dimensionedInternalField</span><span class="p">().</span><span class="n">group</span><span class="p">()</span>
+    <span class="o">?</span> <span class="n">fluid</span><span class="p">.</span><span class="n">phase1</span><span class="p">()</span>
+    <span class="o">:</span> <span class="n">fluid</span><span class="p">.</span><span class="n">phase2</span><span class="p">()</span>
+    <span class="p">);</span>
+
+    <span class="c1">// lookup all the fields on this patch</span>
+    <span class="k">const</span> <span class="n">fvPatchScalarField</span><span class="o">&amp;</span> <span class="n">alpha</span>
+    <span class="p">(</span>
+        <span class="n">patch</span><span class="p">().</span><span class="n">lookupPatchField</span><span class="o">&lt;</span><span class="n">volScalarField</span><span class="p">,</span> <span class="n">scalar</span><span class="o">&gt;</span>
+        <span class="p">(</span>
+            <span class="n">phased</span><span class="p">.</span><span class="n">volScalarField</span><span class="o">::</span><span class="n">name</span><span class="p">()</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="k">const</span> <span class="n">fvPatchScalarField</span><span class="o">&amp;</span> <span class="n">gs0</span>
+    <span class="p">(</span>
+        <span class="n">patch</span><span class="p">().</span><span class="n">lookupPatchField</span><span class="o">&lt;</span><span class="n">volScalarField</span><span class="p">,</span> <span class="n">scalar</span><span class="o">&gt;</span>
+        <span class="p">(</span>
+            <span class="n">IOobject</span><span class="o">::</span><span class="n">groupName</span><span class="p">(</span><span class="s">&quot;gs0&quot;</span><span class="p">,</span> <span class="n">phased</span><span class="p">.</span><span class="n">name</span><span class="p">())</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="k">const</span> <span class="n">scalarField</span> <span class="nf">nu</span>
+    <span class="p">(</span>
+        <span class="n">patch</span><span class="p">().</span><span class="n">lookupPatchField</span><span class="o">&lt;</span><span class="n">volScalarField</span><span class="p">,</span> <span class="n">scalar</span><span class="o">&gt;</span>
+        <span class="p">(</span>
+            <span class="n">IOobject</span><span class="o">::</span><span class="n">groupName</span><span class="p">(</span><span class="s">&quot;nut&quot;</span><span class="p">,</span> <span class="n">phased</span><span class="p">.</span><span class="n">name</span><span class="p">())</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="n">word</span> <span class="nf">ThetaName</span><span class="p">(</span><span class="n">IOobject</span><span class="o">::</span><span class="n">groupName</span><span class="p">(</span><span class="s">&quot;Theta&quot;</span><span class="p">,</span> <span class="n">phased</span><span class="p">.</span><span class="n">name</span><span class="p">()));</span>
+
+    <span class="k">const</span> <span class="n">fvPatchScalarField</span><span class="o">&amp;</span> <span class="n">Theta</span>
+    <span class="p">(</span>
+        <span class="n">db</span><span class="p">().</span><span class="n">foundObject</span><span class="o">&lt;</span><span class="n">volScalarField</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ThetaName</span><span class="p">)</span>
+    <span class="o">?</span> <span class="n">patch</span><span class="p">().</span><span class="n">lookupPatchField</span><span class="o">&lt;</span><span class="n">volScalarField</span><span class="p">,</span> <span class="n">scalar</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ThetaName</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">alpha</span>
+    <span class="p">);</span>
+
+    <span class="c1">// lookup the packed volume fraction</span>
+    <span class="n">dimensionedScalar</span> <span class="nf">alphaMax</span>
+    <span class="p">(</span>
+        <span class="s">&quot;alphaMax&quot;</span><span class="p">,</span>
+        <span class="n">dimless</span><span class="p">,</span>
+        <span class="n">db</span><span class="p">()</span>
+    <span class="p">.</span><span class="n">lookupObject</span><span class="o">&lt;</span><span class="n">IOdictionary</span><span class="o">&gt;</span>
+        <span class="p">(</span>
+            <span class="n">IOobject</span><span class="o">::</span><span class="n">groupName</span><span class="p">(</span><span class="s">&quot;turbulenceProperties&quot;</span><span class="p">,</span> <span class="n">phased</span><span class="p">.</span><span class="n">name</span><span class="p">())</span>
+        <span class="p">)</span>
+    <span class="p">.</span><span class="n">subDict</span><span class="p">(</span><span class="s">&quot;RAS&quot;</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">subDict</span><span class="p">(</span><span class="s">&quot;kineticTheoryCoeffs&quot;</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">lookup</span><span class="p">(</span><span class="s">&quot;alphaMax&quot;</span><span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="c1">// calculate the slip value fraction</span>
+    <span class="n">scalarField</span> <span class="nf">c</span>
+    <span class="p">(</span>
+        <span class="n">constant</span><span class="o">::</span><span class="n">mathematical</span><span class="o">::</span><span class="n">pi</span>
+    <span class="o">*</span><span class="n">alpha</span>
+    <span class="o">*</span><span class="n">gs0</span>
+    <span class="o">*</span><span class="n">specularityCoefficient_</span><span class="p">.</span><span class="n">value</span><span class="p">()</span>
+    <span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.0</span><span class="o">*</span><span class="n">Theta</span><span class="p">)</span>
+    <span class="o">/</span><span class="n">max</span><span class="p">(</span><span class="mf">6.0</span><span class="o">*</span><span class="n">nu</span><span class="o">*</span><span class="n">alphaMax</span><span class="p">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">SMALL</span><span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">valueFraction</span><span class="p">()</span> <span class="o">=</span> <span class="n">c</span><span class="o">/</span><span class="p">(</span><span class="n">c</span> <span class="o">+</span> <span class="n">patch</span><span class="p">().</span><span class="n">deltaCoeffs</span><span class="p">());</span>
+
+    <span class="n">partialSlipFvPatchVectorField</span><span class="o">::</span><span class="n">updateCoeffs</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</td>
+<td><div class="first last highlight-c++"><div class="highlight"><pre><span class="kt">void</span> <span class="n">Foam</span><span class="o">::</span><span class="n">JohnsonJacksonParticleSlipFvPatchVectorField</span><span class="o">::</span><span class="n">updateCoeffs</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">updated</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">// lookup all the fields on this patch</span>
+    <span class="k">const</span> <span class="n">fvPatchScalarField</span><span class="o">&amp;</span> <span class="n">alpha</span> <span class="o">=</span>
+        <span class="n">patch</span><span class="p">().</span><span class="n">lookupPatchField</span><span class="o">&lt;</span><span class="n">volScalarField</span><span class="p">,</span> <span class="n">scalar</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;alpha1&quot;</span><span class="p">);</span>
+    <span class="k">const</span> <span class="n">fvPatchScalarField</span><span class="o">&amp;</span> <span class="n">nu</span> <span class="o">=</span>
+        <span class="n">patch</span><span class="p">().</span><span class="n">lookupPatchField</span><span class="o">&lt;</span><span class="n">volScalarField</span><span class="p">,</span> <span class="n">scalar</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;nuEff1&quot;</span><span class="p">);</span>
+    <span class="k">const</span> <span class="n">fvPatchScalarField</span><span class="o">&amp;</span> <span class="n">gs0</span> <span class="o">=</span>
+        <span class="n">patch</span><span class="p">().</span><span class="n">lookupPatchField</span><span class="o">&lt;</span><span class="n">volScalarField</span><span class="p">,</span> <span class="n">scalar</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;gs0&quot;</span><span class="p">);</span>
+    <span class="k">const</span> <span class="n">fvPatchScalarField</span><span class="o">&amp;</span> <span class="n">Theta</span> <span class="o">=</span>
+        <span class="n">patch</span><span class="p">().</span><span class="n">lookupPatchField</span><span class="o">&lt;</span><span class="n">volScalarField</span><span class="p">,</span> <span class="n">scalar</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Theta&quot;</span><span class="p">);</span>
+
+
+    <span class="k">const</span> <span class="n">dictionary</span><span class="o">&amp;</span> <span class="n">kineticTheoryProperties</span> <span class="o">=</span>
+        <span class="n">db</span><span class="p">()</span>
+    <span class="p">.</span><span class="n">lookupObject</span><span class="o">&lt;</span><span class="n">IOdictionary</span><span class="o">&gt;</span>
+        <span class="p">(</span>
+            <span class="s">&quot;kineticTheoryProperties&quot;</span>
+        <span class="p">);</span>
+
+    <span class="k">const</span> <span class="n">dimensionedScalar</span> <span class="nf">alphaMax</span><span class="p">(</span><span class="n">kineticTheoryProperties</span><span class="p">.</span><span class="n">lookup</span><span class="p">(</span><span class="s">&quot;alphaMax&quot;</span><span class="p">));</span>
+
+    <span class="c1">// calculate the slip value fraction</span>
+    <span class="n">scalarField</span> <span class="nf">c</span>
+    <span class="p">(</span>
+        <span class="n">constant</span><span class="o">::</span><span class="n">mathematical</span><span class="o">::</span><span class="n">pi</span>
+    <span class="o">*</span><span class="n">alpha</span>
+    <span class="o">*</span><span class="n">gs0</span>
+    <span class="o">*</span><span class="n">specularityCoefficient_</span><span class="p">.</span><span class="n">value</span><span class="p">()</span>
+    <span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.0</span><span class="o">*</span><span class="n">Theta</span><span class="p">)</span>
+    <span class="o">/</span><span class="n">max</span><span class="p">(</span><span class="mf">6.0</span><span class="o">*</span><span class="n">nu</span><span class="o">*</span><span class="n">alphaMax</span><span class="p">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">SMALL</span><span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">valueFraction</span><span class="p">()</span> <span class="o">=</span> <span class="n">c</span><span class="o">/</span><span class="p">(</span><span class="n">c</span> <span class="o">+</span> <span class="n">patch</span><span class="p">().</span><span class="n">deltaCoeffs</span><span class="p">());</span>
+
+    <span class="n">partialSlipFvPatchVectorField</span><span class="o">::</span><span class="n">updateCoeffs</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="error-8-can-t-find-patch-type">
+<h2><a class="toc-backref" href="#id9">1.5.4.9. Error 8 - can&#8217;t find patch type</a><a class="headerlink" href="#error-8-can-t-find-patch-type" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c++"><div class="highlight"><pre><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">--&gt;</span> <span class="n">FOAM</span> <span class="n">FATAL</span> <span class="n">IO</span> <span class="nl">ERROR</span><span class="p">:</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">Unknown</span> <span class="n">patchField</span> <span class="n">type</span> <span class="n">JohnsonJacksonParticleSlip</span> <span class="k">for</span> <span class="n">patch</span> <span class="n">type</span> <span class="n">wall</span>
+</pre></div>
+</div>
+<p>Add this to controlDict - when you have custom libraries, OpenFOAM needs to be given the name of the new library. However, if the solver has been compiled correctly, this should now be neccessary./</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">libs</span> <span class="p">(</span><span class="s">&quot;libkineticTheoryModelSrivastava.so&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="error-9-duplicate-entries">
+<h2><a class="toc-backref" href="#id10">1.5.4.10. Error 9 - duplicate entries</a><a class="headerlink" href="#error-9-duplicate-entries" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">Duplicate</span> <span class="n">entry</span> <span class="n">Gidaspow</span> <span class="n">in</span> <span class="n">runtime</span> <span class="n">selection</span> <span class="n">table</span> <span class="n">viscosityModel</span>
+<span class="n">Duplicate</span> <span class="n">entry</span> <span class="n">Syamlal</span> <span class="n">in</span> <span class="n">runtime</span> <span class="n">selection</span> <span class="n">table</span> <span class="n">viscosityModel</span>
+<span class="n">Duplicate</span> <span class="n">entry</span> <span class="n">HrenyaSinclair</span> <span class="n">in</span> <span class="n">runtime</span> <span class="n">selection</span> <span class="n">table</span> <span class="n">viscosityModel</span>
+<span class="n">Duplicate</span> <span class="n">entry</span> <span class="n">none</span> <span class="n">in</span> <span class="n">runtime</span> <span class="n">selection</span> <span class="n">table</span> <span class="n">viscosityModel</span>
+<span class="n">Duplicate</span> <span class="n">entry</span> <span class="n">Gidaspow</span> <span class="n">in</span> <span class="n">runtime</span> <span class="n">selection</span> <span class="n">table</span> <span class="n">conductivityModel</span>
+<span class="n">Duplicate</span> <span class="n">entry</span> <span class="n">CarnahanStarling</span> <span class="n">in</span> <span class="n">runtime</span> <span class="n">selection</span> <span class="n">table</span> <span class="n">radialModel</span>
+<span class="n">Duplicate</span> <span class="n">entry</span> <span class="n">LunSavage</span> <span class="n">in</span> <span class="n">runtime</span> <span class="n">selection</span> <span class="n">table</span> <span class="n">radialModel</span>
+<span class="n">Duplicate</span> <span class="n">entry</span> <span class="n">SinclairJackson</span> <span class="n">in</span> <span class="n">runtime</span> <span class="n">selection</span> <span class="n">table</span> <span class="n">radialModel</span>
+<span class="n">Duplicate</span> <span class="n">entry</span> <span class="n">Lun</span> <span class="n">in</span> <span class="n">runtime</span> <span class="n">selection</span> <span class="n">table</span> <span class="n">granularPressureModel</span>
+<span class="n">Duplicate</span> <span class="n">entry</span> <span class="n">SyamlalRogersOBrien</span> <span class="n">in</span> <span class="n">runtime</span> <span class="n">selection</span> <span class="n">table</span> <span class="n">granularPressureModel</span>
+<span class="n">Duplicate</span> <span class="n">entry</span> <span class="n">JohnsonJackson</span> <span class="n">in</span> <span class="n">runtime</span> <span class="n">selection</span> <span class="n">table</span> <span class="n">frictionalStressModel</span>
+<span class="n">Duplicate</span> <span class="n">entry</span> <span class="n">Schaeffer</span> <span class="n">in</span> <span class="n">runtime</span> <span class="n">selection</span> <span class="n">table</span> <span class="n">frictionalStressModel</span>
+</pre></div>
+</div>
+<p>This is because these two libraries duplicate the entries:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">apr207</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libkineticTheoryModel</span><span class="p">.</span><span class="n">so</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">apr207</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libkineticTheoryModelSrivastava</span><span class="p">.</span><span class="n">so</span>
+</pre></div>
+</div>
+<p>This is because you are running twoPhaseEulerFoam and calling the library twoPhaseEulerSrivastava in controlDict, so these two conflict!</p>
+</div>
+<div class="section" id="error-10-mpi-failure-at-end">
+<h2><a class="toc-backref" href="#id11">1.5.4.11. Error 10 - mpi failure at end</a><a class="headerlink" href="#error-10-mpi-failure-at-end" title="Permalink to this headline">¶</a></h2>
+<p>This was because you are running twoPhaseEulerFoam and not twoPhaseeulerSrivastava</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">fieldAverage</span> <span class="n">fieldAverage1</span> <span class="nl">output</span><span class="p">:</span>
+    <span class="n">Calculating</span> <span class="n">averages</span>
+    <span class="n">Writing</span> <span class="n">average</span> <span class="n">fields</span>
+
+<span class="n">End</span>
+
+<span class="n">Finalising</span> <span class="n">parallel</span> <span class="n">run</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">860</span><span class="p">]</span> <span class="o">***</span> <span class="n">Process</span> <span class="n">received</span> <span class="n">signal</span> <span class="o">***</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">860</span><span class="p">]</span> <span class="nl">Signal</span><span class="p">:</span> <span class="n">Aborted</span> <span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">860</span><span class="p">]</span> <span class="n">Signal</span> <span class="nl">code</span><span class="p">:</span>  <span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">)</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">860</span><span class="p">]</span> <span class="p">[</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x354b0</span><span class="p">)[</span><span class="mh">0x7f872ddda4b0</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">860</span><span class="p">]</span> <span class="p">[</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">gsignal</span><span class="o">+</span><span class="mh">0x38</span><span class="p">)[</span><span class="mh">0x7f872ddda428</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">860</span><span class="p">]</span> <span class="p">[</span> <span class="mi">2</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">abort</span><span class="o">+</span><span class="mh">0x16a</span><span class="p">)[</span><span class="mh">0x7f872dddc02a</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">860</span><span class="p">]</span> <span class="p">[</span> <span class="mi">3</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x777ea</span><span class="p">)[</span><span class="mh">0x7f872de1c7ea</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">860</span><span class="p">]</span> <span class="p">[</span> <span class="mi">4</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x80baf</span><span class="p">)[</span><span class="mh">0x7f872de25baf</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">860</span><span class="p">]</span> <span class="p">[</span> <span class="mi">5</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">cfree</span><span class="o">+</span><span class="mh">0x4c</span><span class="p">)[</span><span class="mh">0x7f872de2953c</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">860</span><span class="p">]</span> <span class="p">[</span> <span class="mi">6</span><span class="p">]</span> <span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">861</span><span class="p">]</span> <span class="o">***</span> <span class="n">Process</span> <span class="n">received</span> <span class="n">signal</span> <span class="o">***</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">861</span><span class="p">]</span> <span class="nl">Signal</span><span class="p">:</span> <span class="n">Aborted</span> <span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">861</span><span class="p">]</span> <span class="n">Signal</span> <span class="nl">code</span><span class="p">:</span>  <span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">)</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">861</span><span class="p">]</span> <span class="p">[</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x354b0</span><span class="p">)[</span><span class="mh">0x7f181f02b4b0</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">861</span><span class="p">]</span> <span class="p">[</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">gsignal</span><span class="o">+</span><span class="mh">0x38</span><span class="p">)[</span><span class="mh">0x7f181f02b428</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">861</span><span class="p">]</span> <span class="p">[</span> <span class="mi">2</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">abort</span><span class="o">+</span><span class="mh">0x16a</span><span class="p">)[</span><span class="mh">0x7f181f02d02a</span><span class="p">]</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam10dictionaryD1Ev</span><span class="o">+</span><span class="mh">0xdd</span><span class="p">)[</span><span class="mh">0x7f872eec55ad</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">860</span><span class="p">]</span> <span class="p">[</span> <span class="mi">7</span><span class="p">]</span> <span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">863</span><span class="p">]</span> <span class="o">***</span> <span class="n">Process</span> <span class="n">received</span> <span class="n">signal</span> <span class="o">***</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">863</span><span class="p">]</span> <span class="nl">Signal</span><span class="p">:</span> <span class="n">Aborted</span> <span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">863</span><span class="p">]</span> <span class="n">Signal</span> <span class="nl">code</span><span class="p">:</span>  <span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">)</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">863</span><span class="p">]</span> <span class="p">[</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x354b0</span><span class="p">)[</span><span class="mh">0x7efc67b424b0</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">863</span><span class="p">]</span> <span class="p">[</span> <span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">861</span><span class="p">]</span> <span class="p">[</span> <span class="mi">3</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">gsignal</span><span class="o">+</span><span class="mh">0x38</span><span class="p">)[</span><span class="mh">0x7efc67b42428</span><span class="p">]</span>
+<span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x777ea</span><span class="p">)[</span><span class="mh">0x7f181f06d7ea</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">861</span><span class="p">]</span> <span class="p">[</span> <span class="mi">4</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam15dictionaryEntryD0Ev</span><span class="o">+</span><span class="mh">0x2a</span><span class="p">)[</span><span class="mh">0x7f872eeda88a</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">860</span><span class="p">]</span> <span class="p">[</span> <span class="mi">8</span><span class="p">]</span> <span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">863</span><span class="p">]</span> <span class="p">[</span> <span class="mi">2</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x80c71</span><span class="p">)[</span><span class="mh">0x7f181f076c71</span><span class="p">]</span>
+<span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">abort</span><span class="o">+</span><span class="mh">0x16a</span><span class="p">)[</span><span class="mh">0x7efc67b4402a</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">863</span><span class="p">]</span> <span class="p">[</span> <span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">861</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x777ea</span><span class="p">)[</span><span class="mh">0x7efc67b847ea</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">863</span><span class="p">]</span> <span class="p">[</span> <span class="mi">4</span><span class="p">]</span> <span class="p">[</span> <span class="mi">5</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x80c71</span><span class="p">)[</span><span class="mh">0x7efc67b8dc71</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">863</span><span class="p">]</span> <span class="p">[</span> <span class="mi">5</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">cfree</span><span class="o">+</span><span class="mh">0x4c</span><span class="p">)[</span><span class="mh">0x7efc67b9153c</span><span class="p">]</span>
+<span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">cfree</span><span class="o">+</span><span class="mh">0x4c</span><span class="p">)[</span><span class="mh">0x7f181f07a53c</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">861</span><span class="p">]</span> <span class="p">[</span> <span class="mi">6</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x3a025</span><span class="p">)[</span><span class="mh">0x7f181f030025</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">861</span><span class="p">]</span> <span class="p">[</span> <span class="mi">7</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam10dictionaryD1Ev</span><span class="o">+</span><span class="mh">0xdd</span><span class="p">)[</span><span class="mh">0x7f872eec55ad</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">860</span><span class="p">]</span> <span class="p">[</span> <span class="mi">9</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x3a045</span><span class="p">)[</span><span class="mh">0x7f181f030045</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">861</span><span class="p">]</span> <span class="p">[</span> <span class="mi">8</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">openmpi</span><span class="o">-</span><span class="n">system</span><span class="o">/</span><span class="n">libPstream</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="o">+</span><span class="mh">0x476a</span><span class="p">)[</span><span class="mh">0x7f181edef76a</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">861</span><span class="p">]</span> <span class="p">[</span> <span class="mi">9</span><span class="p">]</span> <span class="n">twoPhaseEulerFoam</span><span class="p">[</span><span class="mh">0x44050a</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">861</span><span class="p">]</span> <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">863</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">__libc_start_main</span><span class="o">+</span><span class="mh">0xf0</span><span class="p">)[</span><span class="mh">0x7f181f016830</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">861</span><span class="p">]</span> <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="n">twoPhaseEulerFoam</span><span class="p">[</span><span class="mh">0x441eb9</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">861</span><span class="p">]</span> <span class="o">***</span> <span class="n">End</span> <span class="n">of</span> <span class="n">error</span> <span class="n">message</span> <span class="o">***</span>
+<span class="p">[</span> <span class="mi">6</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x3a025</span><span class="p">)[</span><span class="mh">0x7efc67b47025</span><span class="p">]</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam10dictionaryD0Ev</span><span class="o">+</span><span class="mh">0x9</span><span class="p">)[</span><span class="mh">0x7f872eec5719</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">860</span><span class="p">]</span> <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">863</span><span class="p">]</span> <span class="p">[</span> <span class="mi">7</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x3a045</span><span class="p">)[</span><span class="mh">0x7efc67b47045</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">863</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam5debug20deleteControlDictPtrD1Ev</span><span class="o">+</span><span class="mh">0x2b4</span><span class="p">)[</span><span class="mh">0x7f872ee1b134</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">860</span><span class="p">]</span> <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="p">[</span> <span class="mi">8</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">openmpi</span><span class="o">-</span><span class="n">system</span><span class="o">/</span><span class="n">libPstream</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="o">+</span><span class="mh">0x476a</span><span class="p">)[</span><span class="mh">0x7efc6790676a</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">863</span><span class="p">]</span> <span class="p">[</span> <span class="mi">9</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">__cxa_finalize</span><span class="o">+</span><span class="mh">0x9a</span><span class="p">)[</span><span class="mh">0x7f872dddf36a</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">860</span><span class="p">]</span> <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="n">twoPhaseEulerFoam</span><span class="p">[</span><span class="mh">0x44050a</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">863</span><span class="p">]</span> <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">__libc_start_main</span><span class="o">+</span><span class="mh">0xf0</span><span class="p">)[</span><span class="mh">0x7efc67b2d830</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">863</span><span class="p">]</span> <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="n">twoPhaseEulerFoam</span><span class="p">[</span><span class="mh">0x441eb9</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">863</span><span class="p">]</span> <span class="o">***</span> <span class="n">End</span> <span class="n">of</span> <span class="n">error</span> <span class="n">message</span> <span class="o">***</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="o">+</span><span class="mh">0x1fd623</span><span class="p">)[</span><span class="mh">0x7f872ee11623</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">860</span><span class="p">]</span> <span class="o">***</span> <span class="n">End</span> <span class="n">of</span> <span class="n">error</span> <span class="n">message</span> <span class="o">***</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">864</span><span class="p">]</span> <span class="o">***</span> <span class="n">Process</span> <span class="n">received</span> <span class="n">signal</span> <span class="o">***</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">864</span><span class="p">]</span> <span class="nl">Signal</span><span class="p">:</span> <span class="n">Aborted</span> <span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">864</span><span class="p">]</span> <span class="n">Signal</span> <span class="nl">code</span><span class="p">:</span>  <span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">)</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">864</span><span class="p">]</span> <span class="p">[</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x354b0</span><span class="p">)[</span><span class="mh">0x7f12485454b0</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">864</span><span class="p">]</span> <span class="p">[</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">gsignal</span><span class="o">+</span><span class="mh">0x38</span><span class="p">)[</span><span class="mh">0x7f1248545428</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">864</span><span class="p">]</span> <span class="p">[</span> <span class="mi">2</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">abort</span><span class="o">+</span><span class="mh">0x16a</span><span class="p">)[</span><span class="mh">0x7f124854702a</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">864</span><span class="p">]</span> <span class="p">[</span> <span class="mi">3</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x777ea</span><span class="p">)[</span><span class="mh">0x7f12485877ea</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">864</span><span class="p">]</span> <span class="p">[</span> <span class="mi">4</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x80c71</span><span class="p">)[</span><span class="mh">0x7f1248590c71</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">864</span><span class="p">]</span> <span class="p">[</span> <span class="mi">5</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">cfree</span><span class="o">+</span><span class="mh">0x4c</span><span class="p">)[</span><span class="mh">0x7f124859453c</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">864</span><span class="p">]</span> <span class="p">[</span> <span class="mi">6</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam10dictionaryD1Ev</span><span class="o">+</span><span class="mh">0xdd</span><span class="p">)[</span><span class="mh">0x7f12496305ad</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">864</span><span class="p">]</span> <span class="p">[</span> <span class="mi">7</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam15dictionaryEntryD0Ev</span><span class="o">+</span><span class="mh">0x2a</span><span class="p">)[</span><span class="mh">0x7f124964588a</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">864</span><span class="p">]</span> <span class="p">[</span> <span class="mi">8</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam10dictionaryD1Ev</span><span class="o">+</span><span class="mh">0xdd</span><span class="p">)[</span><span class="mh">0x7f12496305ad</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">864</span><span class="p">]</span> <span class="p">[</span> <span class="mi">9</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam10dictionaryD0Ev</span><span class="o">+</span><span class="mh">0x9</span><span class="p">)[</span><span class="mh">0x7f1249630719</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">864</span><span class="p">]</span> <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam5debug20deleteControlDictPtrD1Ev</span><span class="o">+</span><span class="mh">0x2b4</span><span class="p">)[</span><span class="mh">0x7f1249586134</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">864</span><span class="p">]</span> <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">__cxa_finalize</span><span class="o">+</span><span class="mh">0x9a</span><span class="p">)[</span><span class="mh">0x7f124854a36a</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">864</span><span class="p">]</span> <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="o">+</span><span class="mh">0x1fd623</span><span class="p">)[</span><span class="mh">0x7f124957c623</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">864</span><span class="p">]</span> <span class="o">***</span> <span class="n">End</span> <span class="n">of</span> <span class="n">error</span> <span class="n">message</span> <span class="o">***</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="o">***</span> <span class="n">Process</span> <span class="n">received</span> <span class="n">signal</span> <span class="o">***</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="nl">Signal</span><span class="p">:</span> <span class="n">Aborted</span> <span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="n">Signal</span> <span class="nl">code</span><span class="p">:</span>  <span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">)</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="p">[</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x354b0</span><span class="p">)[</span><span class="mh">0x7fdbfd0364b0</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="p">[</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">gsignal</span><span class="o">+</span><span class="mh">0x38</span><span class="p">)[</span><span class="mh">0x7fdbfd036428</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="p">[</span> <span class="mi">2</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">abort</span><span class="o">+</span><span class="mh">0x16a</span><span class="p">)[</span><span class="mh">0x7fdbfd03802a</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="p">[</span> <span class="mi">3</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x777ea</span><span class="p">)[</span><span class="mh">0x7fdbfd0787ea</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="p">[</span> <span class="mi">4</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x7e6ed</span><span class="p">)[</span><span class="mh">0x7fdbfd07f6ed</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="p">[</span> <span class="mi">5</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x80678</span><span class="p">)[</span><span class="mh">0x7fdbfd081678</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="p">[</span> <span class="mi">6</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">cfree</span><span class="o">+</span><span class="mh">0x4c</span><span class="p">)[</span><span class="mh">0x7fdbfd08553c</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="p">[</span> <span class="mi">7</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam10dictionaryD1Ev</span><span class="o">+</span><span class="mh">0xdd</span><span class="p">)[</span><span class="mh">0x7fdbfe1215ad</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="p">[</span> <span class="mi">8</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam15dictionaryEntryD0Ev</span><span class="o">+</span><span class="mh">0x2a</span><span class="p">)[</span><span class="mh">0x7fdbfe13688a</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="p">[</span> <span class="mi">9</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam10dictionaryD1Ev</span><span class="o">+</span><span class="mh">0xdd</span><span class="p">)[</span><span class="mh">0x7fdbfe1215ad</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam10dictionaryD0Ev</span><span class="o">+</span><span class="mh">0x9</span><span class="p">)[</span><span class="mh">0x7fdbfe121719</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam5debug20deleteControlDictPtrD1Ev</span><span class="o">+</span><span class="mh">0x2b4</span><span class="p">)[</span><span class="mh">0x7fdbfe077134</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">__cxa_finalize</span><span class="o">+</span><span class="mh">0x9a</span><span class="p">)[</span><span class="mh">0x7fdbfd03b36a</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="o">+</span><span class="mh">0x1fd623</span><span class="p">)[</span><span class="mh">0x7fdbfe06d623</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">865</span><span class="p">]</span> <span class="o">***</span> <span class="n">End</span> <span class="n">of</span> <span class="n">error</span> <span class="n">message</span> <span class="o">***</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">862</span><span class="p">]</span> <span class="o">***</span> <span class="n">Process</span> <span class="n">received</span> <span class="n">signal</span> <span class="o">***</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">862</span><span class="p">]</span> <span class="nl">Signal</span><span class="p">:</span> <span class="n">Aborted</span> <span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">862</span><span class="p">]</span> <span class="n">Signal</span> <span class="nl">code</span><span class="p">:</span>  <span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">)</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">862</span><span class="p">]</span> <span class="p">[</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x354b0</span><span class="p">)[</span><span class="mh">0x7f55f39fb4b0</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">862</span><span class="p">]</span> <span class="p">[</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">gsignal</span><span class="o">+</span><span class="mh">0x38</span><span class="p">)[</span><span class="mh">0x7f55f39fb428</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">862</span><span class="p">]</span> <span class="p">[</span> <span class="mi">2</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">abort</span><span class="o">+</span><span class="mh">0x16a</span><span class="p">)[</span><span class="mh">0x7f55f39fd02a</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">862</span><span class="p">]</span> <span class="p">[</span> <span class="mi">3</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x777ea</span><span class="p">)[</span><span class="mh">0x7f55f3a3d7ea</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">862</span><span class="p">]</span> <span class="p">[</span> <span class="mi">4</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="o">+</span><span class="mh">0x80c71</span><span class="p">)[</span><span class="mh">0x7f55f3a46c71</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">862</span><span class="p">]</span> <span class="p">[</span> <span class="mi">5</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">cfree</span><span class="o">+</span><span class="mh">0x4c</span><span class="p">)[</span><span class="mh">0x7f55f3a4a53c</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">862</span><span class="p">]</span> <span class="p">[</span> <span class="mi">6</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam10dictionaryD1Ev</span><span class="o">+</span><span class="mh">0xdd</span><span class="p">)[</span><span class="mh">0x7f55f4ae65ad</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">862</span><span class="p">]</span> <span class="p">[</span> <span class="mi">7</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam15dictionaryEntryD0Ev</span><span class="o">+</span><span class="mh">0x2a</span><span class="p">)[</span><span class="mh">0x7f55f4afb88a</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">862</span><span class="p">]</span> <span class="p">[</span> <span class="mi">8</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam10dictionaryD1Ev</span><span class="o">+</span><span class="mh">0xdd</span><span class="p">)[</span><span class="mh">0x7f55f4ae65ad</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">862</span><span class="p">]</span> <span class="p">[</span> <span class="mi">9</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam10dictionaryD0Ev</span><span class="o">+</span><span class="mh">0x9</span><span class="p">)[</span><span class="mh">0x7f55f4ae6719</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">862</span><span class="p">]</span> <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="n">_ZN4Foam5debug20deleteControlDictPtrD1Ev</span><span class="o">+</span><span class="mh">0x2b4</span><span class="p">)[</span><span class="mh">0x7f55f4a3c134</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">862</span><span class="p">]</span> <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="p">(</span><span class="n">__cxa_finalize</span><span class="o">+</span><span class="mh">0x9a</span><span class="p">)[</span><span class="mh">0x7f55f3a0036a</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">862</span><span class="p">]</span> <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">platforms</span><span class="o">/</span><span class="n">linux64GccDPOpt</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libOpenFOAM</span><span class="p">.</span><span class="n">so</span><span class="p">(</span><span class="o">+</span><span class="mh">0x1fd623</span><span class="p">)[</span><span class="mh">0x7f55f4a32623</span><span class="p">]</span>
+<span class="p">[</span><span class="n">emps</span><span class="o">-</span><span class="nl">andrew</span><span class="p">:</span><span class="mo">00</span><span class="mi">862</span><span class="p">]</span> <span class="o">***</span> <span class="n">End</span> <span class="n">of</span> <span class="n">error</span> <span class="n">message</span> <span class="o">***</span>
+<span class="o">--------------------------------------------------------------------------</span>
+<span class="n">mpirun</span> <span class="n">noticed</span> <span class="n">that</span> <span class="n">process</span> <span class="n">rank</span> <span class="mi">2</span> <span class="n">with</span> <span class="n">PID</span> <span class="mi">862</span> <span class="n">on</span> <span class="n">node</span> <span class="n">emps</span><span class="o">-</span><span class="n">andrew</span> <span class="n">exited</span> <span class="n">on</span> <span class="n">signal</span> <span class="mi">6</span> <span class="p">(</span><span class="n">Aborted</span><span class="p">).</span>
+<span class="o">--------------------------------------------------------------------------</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="error-11-member-function-not-implemented">
+<h2><a class="toc-backref" href="#id12">1.5.4.12. Error 11 - member function not implemented</a><a class="headerlink" href="#error-11-member-function-not-implemented" title="Permalink to this headline">¶</a></h2>
+<p>This was because you are running twoPhaseEulerFoam and not twoPhaseEulerSrivastava</p>
+<blockquote>
+<div><div class="highlight-c++"><div class="highlight"><pre>In file included from /home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/token.H:49:0,
+                from /home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/UILListIO.C:28,
+                from /home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/UILList.C:92,
+                from /home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/UILList.H:330,
+                from /home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/ILList.H:39,
+                from /home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/IDLList.H:35,
+                from /home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/entry.H:45,
+                from /home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/dictionary.H:53,
+                from lnInclude/frictionalStressModel.H:35,
+                from frictionalStressModel/JohnsonJacksonSchaeffer/JohnsonJacksonSchaefferFrictionalStress.H:36,
+                from frictionalStressModel/JohnsonJacksonSchaeffer/JohnsonJacksonSchaefferFrictionalStress.C:26:
+lnInclude/frictionalStressModel.H: In instantiation of ‘static Foam::autoPtr&lt;Foam::frictionalStressModel&gt; Foam::frictionalStressModel::adddictionaryConstructorToTable&lt;frictionalStressModelType&gt;::New(const Foam::dictionary&amp;) [with frictionalStressModelType = Foam::JohnsonJacksonSchaefferFrictionalStress]’:
+lnInclude/frictionalStressModel.H:73:5:   required from ‘Foam::frictionalStressModel::adddictionaryConstructorToTable&lt;frictionalStressModelType&gt;::adddictionaryConstructorToTable(const Foam::word&amp;) [with frictionalStressModelType = Foam::JohnsonJacksonSchaefferFrictionalStress]’
+frictionalStressModel/JohnsonJacksonSchaeffer/JohnsonJacksonSchaefferFrictionalStress.C:35:5:   required from here
+/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/runTimeSelectionTables.H:76:66: error: invalid new-expression of abstract class type ‘Foam::JohnsonJacksonSchaefferFrictionalStress’
+            return autoPtr&lt; baseType &gt;(new baseType##Type parList);           \
+                                                                ^
+lnInclude/frictionalStressModel.H:73:5: note: in expansion of macro ‘declareRunTimeSelectionTable’
+    declareRunTimeSelectionTable
+ ^
+</pre></div>
+</div>
+</div></blockquote>
+<div class="highlight-c++"><div class="highlight"><pre>In file included from frictionalStressModel/JohnsonJacksonSchaeffer/JohnsonJacksonSchaefferFrictionalStress.C:26:0:
+frictionalStressModel/JohnsonJacksonSchaeffer/JohnsonJacksonSchaefferFrictionalStress.H:47:7: note:   because the following virtual functions are pure within ‘Foam::JohnsonJacksonSchaefferFrictionalStress’:
+class JohnsonJacksonSchaefferFrictionalStress
+    ^
+</pre></div>
+</div>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">In</span> <span class="n">file</span> <span class="n">included</span> <span class="n">from</span> <span class="n">frictionalStressModel</span><span class="o">/</span><span class="n">JohnsonJacksonSchaeffer</span><span class="o">/</span><span class="n">JohnsonJacksonSchaefferFrictionalStress</span><span class="p">.</span><span class="nl">H</span><span class="p">:</span><span class="mi">36</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">from</span> <span class="n">frictionalStressModel</span><span class="o">/</span><span class="n">JohnsonJacksonSchaeffer</span><span class="o">/</span><span class="n">JohnsonJacksonSchaefferFrictionalStress</span><span class="p">.</span><span class="nl">C</span><span class="p">:</span><span class="mi">26</span><span class="o">:</span>
+<span class="n">lnInclude</span><span class="o">/</span><span class="n">frictionalStressModel</span><span class="p">.</span><span class="nl">H</span><span class="p">:</span><span class="mi">125</span><span class="o">:</span><span class="mi">37</span><span class="o">:</span> <span class="nl">note</span><span class="p">:</span>     <span class="k">virtual</span> <span class="n">Foam</span><span class="o">::</span><span class="n">tmp</span><span class="o">&lt;</span><span class="n">Foam</span><span class="o">::</span><span class="n">GeometricField</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">Foam</span><span class="o">::</span><span class="n">fvPatchField</span><span class="p">,</span> <span class="n">Foam</span><span class="o">::</span><span class="n">volMesh</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">Foam</span><span class="o">::</span><span class="n">frictionalStressModel</span><span class="o">::</span><span class="n">muf</span><span class="p">(</span><span class="k">const</span> <span class="n">volScalarField</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">dimensionedScalar</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">volScalarField</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">volSymmTensorField</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">dimensionedScalar</span><span class="o">&amp;</span><span class="p">)</span> <span class="k">const</span>
+        <span class="k">virtual</span> <span class="n">tmp</span><span class="o">&lt;</span><span class="n">volScalarField</span><span class="o">&gt;</span> <span class="n">muf</span>
+                                    <span class="o">^</span>
+</pre></div>
+</div>
+<p>There is nothing unclear about the error message. Your class Foam::JohnsonJacksonSchaefferFrictionalStress has at least one member that is not implemented, which means it is abstract. You cannot instantiate an abstract class.</p>
+<p>Where to look: frictionModel.H needs a new defintion for muf (and so do all the other friction models):</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">virtual</span> <span class="n">tmp</span><span class="o">&lt;</span><span class="n">volScalarField</span><span class="o">&gt;</span> <span class="n">muf</span>
+<span class="p">(</span>
+    <span class="k">const</span> <span class="n">volScalarField</span><span class="o">&amp;</span> <span class="n">alpha1</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">volScalarField</span><span class="o">&amp;</span> <span class="n">Theta</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">dimensionedScalar</span><span class="o">&amp;</span> <span class="n">alphaMinFriction</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">dimensionedScalar</span><span class="o">&amp;</span> <span class="n">alphaMax</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">volScalarField</span><span class="o">&amp;</span> <span class="n">pf</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">volSymmTensorField</span><span class="o">&amp;</span> <span class="n">D</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">dimensionedScalar</span><span class="o">&amp;</span> <span class="n">phi</span>
+<span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="error-12-not-enough-arguments">
+<h2><a class="toc-backref" href="#id13">1.5.4.13. Error 12 - Not enough arguments</a><a class="headerlink" href="#error-12-not-enough-arguments" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c++"><div class="highlight"><pre>In member function ‘void Foam::kineticTheoryModel::solve(const volTensorField&amp;)’:
+kineticTheoryModel/kineticTheoryModel.C:369:9: error: no matching function for call to ‘Foam::frictionalStressModel::muf(const volScalarField&amp;, const dimensionedScalar&amp;, Foam::volScalarField&amp;, Foam::volSymmTensorField&amp;, const dimensionedScalar&amp;)’
+        )
+        ^
+In file included from kineticTheoryModel/kineticTheoryModel.H:44:0,
+                from kineticTheoryModel/kineticTheoryModel.C:26:
+lnInclude/frictionalStressModel.H:125:37: note: candidate: virtual Foam::tmp&lt;Foam::GeometricField&lt;double, Foam::fvPatchField, Foam::volMesh&gt; &gt; Foam::frictionalStressModel::muf(const volScalarField&amp;, const volScalarField&amp;, const dimensionedScalar&amp;, const dimensionedScalar&amp;, const volScalarField&amp;, const volSymmTensorField&amp;, const dimensionedScalar&amp;) const
+        virtual tmp&lt;volScalarField&gt; muf
+                                    ^
+lnInclude/frictionalStressModel.H:125:37: note:   candidate expects 7 arguments, 5 provided
+</pre></div>
+</div>
+<p>Simply add more arguments to match the .H files:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="c1">// frictional shear stress, Eq. 3.30, p. 52</span>
+<span class="n">volScalarField</span> <span class="nf">muf</span>
+<span class="p">(</span>
+    <span class="n">frictionalStressModel_</span><span class="o">-&gt;</span><span class="n">muf</span>
+    <span class="p">(</span>
+        <span class="n">alpha1_</span><span class="p">,</span>
+        <span class="n">Theta_</span><span class="p">,</span>
+        <span class="n">alphaMinFriction_</span><span class="p">,</span>
+        <span class="n">alphaMax_</span><span class="p">,</span>
+        <span class="n">pf</span><span class="p">,</span>
+        <span class="n">D</span><span class="p">,</span>
+        <span class="n">phi_</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="error-13-openfoam-version-5-0-cannot-open-case-directory">
+<h2><a class="toc-backref" href="#id14">1.5.4.14. Error 13 - OpenFOAM version 5.0 - cannot open case directory</a><a class="headerlink" href="#error-13-openfoam-version-5-0-cannot-open-case-directory" title="Permalink to this headline">¶</a></h2>
+<p>blockMesh has not been run</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">--&gt;</span> <span class="n">FOAM</span> <span class="n">FATAL</span> <span class="nl">ERROR</span><span class="p">:</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="nl">twoPhaseEulerFoam</span><span class="p">:</span> <span class="n">cannot</span> <span class="n">open</span> <span class="k">case</span> <span class="n">directory</span> <span class="s">&quot;/home/apr207/OpenFOAM/apr207-5.0/run/fluidisedBed/processor0&quot;</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">FOAM</span> <span class="n">parallel</span> <span class="n">run</span> <span class="n">exiting</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="error-14-crazy-zig-zag-results">
+<h2><a class="toc-backref" href="#id15">1.5.4.15. Error 14 - crazy zig-zag results</a><a class="headerlink" href="#error-14-crazy-zig-zag-results" title="Permalink to this headline">¶</a></h2>
+<p>Parallization probably not working properly - changed run script to use run functions</p>
+<div class="highlight-c++"><div class="highlight"><pre># Run script for OpenFOAM 5.0
+
+. $WM_PROJECT_DIR/bin/tools/RunFunctions                                        # loads RunFunctions
+
+rm -rf log.*
+
+export NP=6                                                                     # number of processors
+
+# Mesh
+runApplication blockMesh
+
+# Check the mesh
+runApplication checkMesh
+
+# Decompose
+runApplication decomposePar
+
+# Run
+runParallel $(getApplication)
+
+# Reconstruct
+runApplication reconstructPar
+
+rm -r processor*
+
+echo
+echo &quot;Creating files for paraview post-processing&quot;
+echo
+touch foam.foam
+</pre></div>
+</div>
+</div>
+<div class="section" id="error-15-negative-initial-temperature">
+<h2><a class="toc-backref" href="#id16">1.5.4.16. Error 15 - negative initial temperature</a><a class="headerlink" href="#error-15-negative-initial-temperature" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c++"><div class="highlight"><pre><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">--&gt;</span> <span class="n">FOAM</span> <span class="n">FATAL</span> <span class="nl">ERROR</span><span class="p">:</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="n">Negative</span> <span class="n">initial</span> <span class="n">temperature</span> <span class="nl">T0</span><span class="p">:</span> <span class="o">-</span><span class="mf">730.68</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Turn off e:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="s">&quot;(h|e).*&quot;</span>
+<span class="p">{</span>
+    <span class="n">solver</span>          <span class="n">smoothSolver</span><span class="p">;</span>
+    <span class="n">smoother</span>        <span class="n">symGaussSeidel</span><span class="p">;</span>
+    <span class="n">tolerance</span>       <span class="mf">1e-6</span><span class="p">;</span>
+    <span class="n">relTol</span>          <span class="mi">0</span><span class="p">;</span>
+    <span class="n">minIter</span>         <span class="mi">0</span><span class="p">;</span>  <span class="c1">// APR changed from 1 to 0</span>
+    <span class="n">maxIter</span>         <span class="mi">0</span><span class="p">;</span>  <span class="c1">// APR added</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Change air properties:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">thermoType</span>
+<span class="p">{</span>
+    <span class="n">type</span>            <span class="n">heRhoThermo</span><span class="p">;</span>
+    <span class="n">mixture</span>         <span class="n">pureMixture</span><span class="p">;</span>
+    <span class="n">transport</span>       <span class="k">const</span><span class="p">;</span>
+    <span class="n">thermo</span>          <span class="n">hConst</span><span class="p">;</span>
+    <span class="n">equationOfState</span> <span class="n">rhoConst</span><span class="p">;</span> <span class="c1">// APR changed from perfectGas to rhoConst</span>
+    <span class="n">specie</span>          <span class="n">specie</span><span class="p">;</span>
+    <span class="n">energy</span>          <span class="n">sensibleInternalEnergy</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">mixture</span>
+<span class="p">{</span>
+    <span class="n">specie</span>
+    <span class="p">{</span>
+        <span class="n">molWeight</span>   <span class="mf">28.9</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">equationOfState</span>             <span class="c1">// APR added equationOfState</span>
+    <span class="p">{</span>
+        <span class="n">rho</span>         <span class="mf">1.2</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">thermodynamics</span>
+    <span class="p">{</span>
+        <span class="n">Cp</span>          <span class="mi">1007</span><span class="p">;</span>
+        <span class="n">Hf</span>          <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">transport</span>
+    <span class="p">{</span>
+        <span class="n">mu</span>          <span class="mf">1.84e-05</span><span class="p">;</span>
+        <span class="n">Pr</span>          <span class="mf">0.7</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="error-16-cannot-find-file">
+<h2><a class="toc-backref" href="#id17">1.5.4.17. Error 16 - cannot find file</a><a class="headerlink" href="#error-16-cannot-find-file" title="Permalink to this headline">¶</a></h2>
+<p>Remove mean files</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="o">--&gt;</span> <span class="n">FOAM</span> <span class="n">FATAL</span> <span class="n">IO</span> <span class="nl">ERROR</span><span class="p">:</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">cannot</span> <span class="n">find</span> <span class="n">file</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="nl">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">apr207</span><span class="o">/</span><span class="n">OpenFOAM</span><span class="o">/</span><span class="n">apr207</span><span class="o">-</span><span class="mf">2.2.2</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">eulerian_043_walls_johnson_jackson_schaeffer</span><span class="o">/</span><span class="n">processor2</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="n">U1</span> <span class="n">at</span> <span class="n">line</span> <span class="mf">0.</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span>     <span class="n">From</span> <span class="n">function</span> <span class="n">regIOobject</span><span class="o">::</span><span class="n">readStream</span><span class="p">()</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span>     <span class="n">in</span> <span class="n">file</span> <span class="n">db</span><span class="o">/</span><span class="n">regIOobject</span><span class="o">/</span><span class="n">regIOobjectRead</span><span class="p">.</span><span class="n">C</span> <span class="n">at</span> <span class="n">line</span> <span class="mf">73.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="error-17-simulation-stopped-after-i-logged-out">
+<h2><a class="toc-backref" href="#id18">1.5.4.18. Error 17 - Simulation stopped after I logged out</a><a class="headerlink" href="#error-17-simulation-stopped-after-i-logged-out" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">nohup</span> <span class="n">sh</span> <span class="n">run_script</span><span class="p">.</span><span class="n">sh</span> <span class="o">&amp;</span>
+</pre></div>
+</div>
+<p>Or to direct it to a log file:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">nohup</span> <span class="n">sh</span> <span class="n">run_script</span><span class="p">.</span><span class="n">sh</span> <span class="o">&gt;</span> <span class="n">log</span> <span class="o">&amp;</span>
+</pre></div>
+</div>
+<div class="highlight-c++"><div class="highlight"><pre><span class="cp"># Run script for OpenFOAM 5.0</span>
+
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">log</span><span class="p">.</span><span class="o">*</span>
+
+<span class="cp"># Check the mesh</span>
+<span class="n">checkMesh</span>
+
+<span class="cp"># Set fields</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="mi">0</span><span class="o">/</span><span class="n">alpha</span><span class="p">.</span><span class="n">particles</span>
+<span class="n">cp</span> <span class="mi">0</span><span class="o">/</span><span class="n">alpha</span><span class="p">.</span><span class="n">particles</span><span class="p">.</span><span class="n">orig</span> <span class="mi">0</span><span class="o">/</span><span class="n">alpha</span><span class="p">.</span><span class="n">particles</span>
+<span class="n">setFields</span>
+
+<span class="cp"># Decompose</span>
+<span class="n">decomposePar</span>
+
+<span class="cp"># Renumber</span>
+<span class="n">renumberMesh</span> <span class="o">-</span><span class="n">overwrite</span>
+
+<span class="cp"># Run</span>
+<span class="n">nohup</span> <span class="n">nice</span> <span class="o">-</span><span class="mi">19</span> <span class="n">mpirun</span> <span class="o">-</span><span class="n">np</span> <span class="mi">6</span> <span class="n">twoPhaseEulerFoam</span> <span class="o">-</span><span class="n">parallel</span> <span class="o">&gt;</span> <span class="n">log</span> <span class="mi">2</span><span class="o">&gt;&amp;</span><span class="mi">1</span>
+
+<span class="cp"># Reconstruct</span>
+<span class="n">reconstructPar</span>
+
+<span class="n">rm</span> <span class="o">-</span><span class="n">r</span> <span class="n">processor</span><span class="o">*</span>
+
+<span class="n">echo</span> <span class="s">&quot;Creating files for paraview post-processing&quot;</span>
+<span class="n">touch</span> <span class="n">foam</span><span class="p">.</span><span class="n">foam</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="swak4foam.html">1.5.3. Swak4Foam</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../21_22_c++_landing_page/c++_landing_page.html">2. C++</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

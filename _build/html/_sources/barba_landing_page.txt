@@ -1,0 +1,9 @@
+===========================================
+Computational Fluid Dynamics (Lorena Barba)
+===========================================
+
+.. toctree::
+   :maxdepth: 1
+
+   01_barba_theory/barba_cfd_theory
+   02_barba_projects/barba_cfd_projects

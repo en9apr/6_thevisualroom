@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.1.4. ODEs and PDEs &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../../index.html" />
+    <link rel="up" title="4. Personal Notes on CFD" href="../cfd_notes.html" />
+    <link rel="next" title="4.1.5. Pressure, Streamlines and Streaklines" href="05_pressure_streamlines_and_streaklines.html" />
+    <link rel="prev" title="4.1.3. Vector and Tensor Calculus" href="03_vector_and_tensor_calculus.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.1.4. ODEs and PDEs</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="03_vector_and_tensor_calculus.html">4.1.3. Vector and Tensor Calculus</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="05_pressure_streamlines_and_streaklines.html">4.1.5. Pressure, Streamlines and Streaklines</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="odes-and-pdes">
+<h1>4.1.4. ODEs and PDEs<a class="headerlink" href="#odes-and-pdes" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#how-to-decide-if-a-pde-is-elliptic-hyperbolic-or-parabolic" id="id1">How to decide if a PDE is elliptic, hyperbolic or parabolic?</a></li>
+<li><a class="reference internal" href="#what-common-flow-conditions-are-hyperbolic-elliptic-and-parabolic" id="id2">What common flow conditions are hyperbolic, elliptic and parabolic?</a></li>
+<li><a class="reference internal" href="#what-are-some-examples-of-hyperbolic-elliptic-and-parabolic-pdes" id="id3">What are some examples of hyperbolic, elliptic and parabolic PDEs?</a></li>
+</ul>
+</div>
+<div class="section" id="how-to-decide-if-a-pde-is-elliptic-hyperbolic-or-parabolic">
+<h2><a class="toc-backref" href="#id1">4.1.4.1. How to decide if a PDE is elliptic, hyperbolic or parabolic?</a><a class="headerlink" href="#how-to-decide-if-a-pde-is-elliptic-hyperbolic-or-parabolic" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[a {{\partial^2 u} \over {\partial x^2}} +
+b {{\partial^2 u} \over {\partial x \partial y}} +
+c {{\partial^2 u} \over {\partial y^2}} =
+g(x, y)\]</div>
+<p>or for a <span class="math">\(n \times n\)</span> system:</p>
+<div class="math">
+\[{\partial \vec{U} \over \partial t} + \vec{A} {{\partial \vec{U}} \over {\partial x}}=0\]</div>
+<p>The type depends on the determinant:</p>
+<ul class="simple">
+<li><span class="math">\(b^2-4ac&gt;0 \longrightarrow\)</span> all n eigenvalues are <strong>real</strong> <span class="math">\(\longrightarrow\)</span> <strong>Hyperbolic</strong></li>
+<li><span class="math">\(b^2-4ac=0 \longrightarrow\)</span> all n eigenvalues are <strong>real and identical</strong> <span class="math">\(\longrightarrow\)</span> <strong>Parabolic</strong></li>
+<li><span class="math">\(b^2-4ac&lt;0 \longrightarrow\)</span> all n eigenvalues are <strong>complex</strong> <span class="math">\(\longrightarrow\)</span> <strong>Elliptic</strong></li>
+</ul>
+</div>
+<div class="section" id="what-common-flow-conditions-are-hyperbolic-elliptic-and-parabolic">
+<h2><a class="toc-backref" href="#id2">4.1.4.2. What common flow conditions are hyperbolic, elliptic and parabolic?</a><a class="headerlink" href="#what-common-flow-conditions-are-hyperbolic-elliptic-and-parabolic" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Hyperbolic</strong> <span class="math">\(\longrightarrow\)</span>  (Steady <span class="math">\(\lor\)</span> Unsteady) <span class="math">\(\land\)</span> <strong>Compressible</strong> <span class="math">\(\land\)</span> <strong>Inviscid</strong> <span class="math">\(\land\)</span>  <strong>Supersonic</strong></li>
+<li><strong>Parabolic</strong> <span class="math">\(\longrightarrow\)</span> (Compressible <span class="math">\(\lor\)</span> Incompressible) <span class="math">\(\land\)</span> <strong>Viscous Boundary Layer</strong></li>
+<li><strong>Elliptic</strong> <span class="math">\(\longrightarrow\)</span> (Compressible <span class="math">\(\lor\)</span> Incompressible) <span class="math">\(\land\)</span> <strong>Inviscid</strong> <span class="math">\(\land\)</span> <strong>Steady</strong> <span class="math">\(\land\)</span> <strong>Subsonic</strong></li>
+<li><strong>Mixed</strong> (most cases are mixed) <span class="math">\(\longrightarrow\)</span> There is a parabolic boundary layer, but parts of the domain away from the boundary are hyperbolic or elliptic</li>
+</ul>
+</div>
+<div class="section" id="what-are-some-examples-of-hyperbolic-elliptic-and-parabolic-pdes">
+<h2><a class="toc-backref" href="#id3">4.1.4.3. What are some examples of hyperbolic, elliptic and parabolic PDEs?</a><a class="headerlink" href="#what-are-some-examples-of-hyperbolic-elliptic-and-parabolic-pdes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Wave Equation <span class="math">\(\longrightarrow\)</span> <strong>Hyperbolic</strong> <span class="math">\(\longrightarrow\)</span> <span class="math">\({\partial u \over \partial t} + a {{\partial u} \over {\partial x}}=0\)</span></li>
+<li>Laplace Equation <span class="math">\(\longrightarrow\)</span> <strong>Elliptic</strong> <span class="math">\(\longrightarrow\)</span>  <span class="math">\({\partial^2 u \over \partial x^2} + {{\partial^2 u} \over {\partial y^2}}=0\)</span></li>
+<li>Poisson Equation <span class="math">\(\longrightarrow\)</span> <strong>Elliptic</strong> <span class="math">\(\longrightarrow\)</span>  <span class="math">\({\partial^2 p \over \partial x^2} + {{\partial^2 p} \over {\partial y^2}}=f(u)\)</span></li>
+<li>Stokes Flow <span class="math">\(\longrightarrow\)</span> <strong>Parabolic</strong> <span class="math">\(\longrightarrow\)</span> <span class="math">\({\partial p \over \partial x} = \mu {\partial^2 u \over \partial x^2}\)</span></li>
+<li>Heat Conduction <span class="math">\(\longrightarrow\)</span> <strong>Parabolic</strong> <span class="math">\(\longrightarrow\)</span> <span class="math">\({\partial T \over \partial t} = \alpha {\partial^2 T \over \partial x^2}\)</span></li>
+<li>Boundary Layer <span class="math">\(\longrightarrow\)</span> <strong>Parabolic</strong> <span class="math">\(\longrightarrow\)</span> <span class="math">\(\rho \left( {u {\partial u \over \partial x} + v {\partial u \over \partial y}} \right) = \mu {\partial^2 u \over \partial y^2}\)</span></li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="03_vector_and_tensor_calculus.html">4.1.3. Vector and Tensor Calculus</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="05_pressure_streamlines_and_streaklines.html">4.1.5. Pressure, Streamlines and Streaklines</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

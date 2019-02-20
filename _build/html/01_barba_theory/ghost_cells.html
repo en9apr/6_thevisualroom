@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.4.3. Ghost Cell Boundary Conditions &#8212; The Visual Room</title>
+    <title>1.1.4.3. Ghost Cell Boundary Conditions &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
-    <link rel="next" title="1.5.1. The Courant-Friedrichs-Lewy Condition" href="courant_number.html" />
-    <link rel="prev" title="1.4.2. The Marker and Cell Method" href="marker_and_cell_method.html" /> 
+    <link rel="up" title="1.1. Computational Fluid Dynamics Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.1.5.1. The Courant-Friedrichs-Lewy Condition" href="courant_number.html" />
+    <link rel="prev" title="1.1.4.2. The Marker and Cell Method" href="marker_and_cell_method.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>1.4.3. Ghost Cell Boundary Conditions</span></h2>
+        <h2 class="heading"><span>1.1.4.3. Ghost Cell Boundary Conditions</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="marker_and_cell_method.html">1.4.2. The Marker and Cell Method</a>
+        «&#160;&#160;<a href="marker_and_cell_method.html">1.1.4.2. The Marker and Cell Method</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="courant_number.html">1.5.1. The Courant-Friedrichs-Lewy Condition</a>&#160;&#160;»
+        <a href="courant_number.html">1.1.5.1. The Courant-Friedrichs-Lewy Condition</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,7 +49,7 @@
         
         
   <div class="section" id="ghost-cell-boundary-conditions">
-<h1>1.4.3. Ghost Cell Boundary Conditions<a class="headerlink" href="#ghost-cell-boundary-conditions" title="Permalink to this headline">¶</a></h1>
+<h1>1.1.4.3. Ghost Cell Boundary Conditions<a class="headerlink" href="#ghost-cell-boundary-conditions" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#boundary-conditions-for-incompressible-navier-stokes" id="id1">Boundary Conditions for Incompressible Navier Stokes</a></li>
@@ -71,7 +71,7 @@
 </ul>
 </div>
 <div class="section" id="boundary-conditions-for-incompressible-navier-stokes">
-<h2><a class="toc-backref" href="#id1">1.4.3.1. Boundary Conditions for Incompressible Navier Stokes</a><a class="headerlink" href="#boundary-conditions-for-incompressible-navier-stokes" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">1.1.4.3.1. Boundary Conditions for Incompressible Navier Stokes</a><a class="headerlink" href="#boundary-conditions-for-incompressible-navier-stokes" title="Permalink to this headline">¶</a></h2>
 <p>In dimensionless form, the Navier-Stokes Equations are:</p>
 <div class="math" id="equation-1">
 <span class="eqno">(1)</span>\[\nabla \cdot \mathbf{u} = 0\]</div>
@@ -108,9 +108,9 @@
 <p>Still don&#8217;t know BCs for pressure, we have replaced the Continuity Equation (<a href="#equation-1">(1)</a>) with the Poisson Equation (<a href="#equation-6">(6)</a>), so we have increased the order of the equations by one, which means we would need an additional boundary condition, which we don&#8217;t have.</p>
 </div>
 <div class="section" id="fractional-step-method-or-projection-method">
-<h2><a class="toc-backref" href="#id2">1.4.3.2. Fractional Step Method or Projection Method</a><a class="headerlink" href="#fractional-step-method-or-projection-method" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">1.1.4.3.2. Fractional Step Method or Projection Method</a><a class="headerlink" href="#fractional-step-method-or-projection-method" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="method-used-by-rempfer-2006">
-<h3><a class="toc-backref" href="#id3">Method used by Rempfer (2006)</a><a class="headerlink" href="#method-used-by-rempfer-2006" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id3">1.1.4.3.2.1. Method used by Rempfer (2006)</a><a class="headerlink" href="#method-used-by-rempfer-2006" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><strong>Step 1:</strong> Omit pressure term in NS and find intermediate velocity - for explicit formulation (we could use implicit):</li>
 </ul>
@@ -153,7 +153,7 @@
 <p><strong>Highly controversial issue</strong></p>
 </div>
 <div class="section" id="method-by-gresho-and-sani-1987">
-<h3><a class="toc-backref" href="#id4">Method by Gresho and Sani (1987)</a><a class="headerlink" href="#method-by-gresho-and-sani-1987" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id4">1.1.4.3.2.2. Method by Gresho and Sani (1987)</a><a class="headerlink" href="#method-by-gresho-and-sani-1987" title="Permalink to this headline">¶</a></h3>
 <p>Another paper has an alternate method - take the normal of the momentum equation at the boundary to set pressure normal to boundary, everywhere else use Poisson Equation, Continuity Equation and ordinary Momentum Equation, i.e.</p>
 <div class="math">
 \[{\partial u \over \partial t} + \nabla P = \nu \nabla^2 u - u \cdot \nabla u = f\]</div>
@@ -170,14 +170,14 @@
 <p>It looks like one method says that the velocity should be normal to the boundary and the other that pressure should be normal to the boundary.</p>
 </div>
 <div class="section" id="method-by-kim-and-moin">
-<h3><a class="toc-backref" href="#id5">Method by Kim and Moin</a><a class="headerlink" href="#method-by-kim-and-moin" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id5">1.1.4.3.2.3. Method by Kim and Moin</a><a class="headerlink" href="#method-by-kim-and-moin" title="Permalink to this headline">¶</a></h3>
 <p>Say that pressure boundary conditions are not important because of the use of a staggered grid - <strong>could be naive</strong></p>
 </div>
 </div>
 <div class="section" id="ghost-cells">
-<h2><a class="toc-backref" href="#id6">1.4.3.3. Ghost Cells</a><a class="headerlink" href="#ghost-cells" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">1.1.4.3.3. Ghost Cells</a><a class="headerlink" href="#ghost-cells" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="method-by-harlow-and-welsh">
-<h3><a class="toc-backref" href="#id7">Method by Harlow and Welsh</a><a class="headerlink" href="#method-by-harlow-and-welsh" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id7">1.1.4.3.3.1. Method by Harlow and Welsh</a><a class="headerlink" href="#method-by-harlow-and-welsh" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Use of &#8220;Ghost Cells&#8221; - for reflection of field variables near a wall.</li>
 <li>Normal pressure is not a condition set directly at the wall, but implied by the values either side of the wall.</li>
@@ -186,7 +186,7 @@
 <p>Hence, in this scheme there is no difference between the opinions of Rempfer (2006) and Gresho and Sani (1987), although the opinion of Kim and Moin (1984) is clearly slightly misleading.</p>
 </div>
 <div class="section" id="boundary-conditions-at-rigid-walls">
-<h3><a class="toc-backref" href="#id8">Boundary Conditions at Rigid Walls</a><a class="headerlink" href="#boundary-conditions-at-rigid-walls" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id8">1.1.4.3.3.2. Boundary Conditions at Rigid Walls</a><a class="headerlink" href="#boundary-conditions-at-rigid-walls" title="Permalink to this headline">¶</a></h3>
 <p>Rigid walls may be of two types:</p>
 <ul class="simple">
 <li>No-slip</li>
@@ -255,17 +255,17 @@
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="marker_and_cell_method.html">1.4.2. The Marker and Cell Method</a>
+        «&#160;&#160;<a href="marker_and_cell_method.html">1.1.4.2. The Marker and Cell Method</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="courant_number.html">1.5.1. The Courant-Friedrichs-Lewy Condition</a>&#160;&#160;»
+        <a href="courant_number.html">1.1.5.1. The Courant-Friedrichs-Lewy Condition</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

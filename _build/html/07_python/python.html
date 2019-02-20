@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.1. Python Quick Reference &#8212; The Visual Room</title>
+    <title>3.1.1. Python Quick Reference &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="3. Python Programming Language" href="python_language.html" />
-    <link rel="next" title="3.2. Comments, Strings and Print Statements" href="comments_strings_print_statements.html" />
-    <link rel="prev" title="3. Python Programming Language" href="python_language.html" /> 
+    <link rel="up" title="3.1. Python Programming Language" href="python_language.html" />
+    <link rel="next" title="3.1.2. Comments, Strings and Print Statements" href="comments_strings_print_statements.html" />
+    <link rel="prev" title="3.1. Python Programming Language" href="python_language.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>3.1. Python Quick Reference</span></h2>
+        <h2 class="heading"><span>3.1.1. Python Quick Reference</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="python_language.html">3. Python Programming Language</a>
+        «&#160;&#160;<a href="python_language.html">3.1. Python Programming Language</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="comments_strings_print_statements.html">3.2. Comments, Strings and Print Statements</a>&#160;&#160;»
+        <a href="comments_strings_print_statements.html">3.1.2. Comments, Strings and Print Statements</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,7 +49,7 @@
         
         
   <div class="section" id="python-quick-reference">
-<h1>3.1. Python Quick Reference<a class="headerlink" href="#python-quick-reference" title="Permalink to this headline">¶</a></h1>
+<h1>3.1.1. Python Quick Reference<a class="headerlink" href="#python-quick-reference" title="Permalink to this headline">¶</a></h1>
 <p>Python is a high-level open-source language. This page is written with the <strong>use</strong> of Python in mind, as opposed to computer science definitions. iPython is used here because:</p>
 <ul class="simple">
 <li>print statement can be avoided (you can just type the variable and get output)</li>
@@ -94,14 +94,14 @@
 </ul>
 </div>
 <div class="section" id="modules">
-<h2><a class="toc-backref" href="#id3">3.1.1. Modules</a><a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">3.1.1.1. Modules</a><a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="definition">
-<h3><a class="toc-backref" href="#id4">3.1.1.1. Definition</a><a class="headerlink" href="#definition" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id4">3.1.1.1.1. Definition</a><a class="headerlink" href="#definition" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Modules provide useful functions, such as array operations, plotting and much more.</li>
 <li>We can import the module to allow access to the functions</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="c1"># comments in python are denoted by the hash tag</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="c1"># comments in python are denoted by the hash tag</span>
 
 <span class="gp">In [2]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span> <span class="c1"># for matrix operations</span>
 
@@ -137,11 +137,11 @@
 </ul>
 </div>
 <div class="section" id="use">
-<h3><a class="toc-backref" href="#id5">3.1.1.2. Use</a><a class="headerlink" href="#use" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id5">3.1.1.1.2. Use</a><a class="headerlink" href="#use" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>This allows reference to the modules via the alias, e.g.</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">myarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [4]: </span><span class="n">myarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="gp">In [5]: </span><span class="n">myarray</span>
 <span class="gh">Out[5]: </span><span class="go"></span>
@@ -157,11 +157,11 @@
 </div>
 </div>
 <div class="section" id="variables">
-<h2><a class="toc-backref" href="#id6">3.1.2. Variables</a><a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">3.1.1.2. Variables</a><a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id1">
-<h3><a class="toc-backref" href="#id7">3.1.2.1. Definition</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id7">3.1.1.2.1. Definition</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Python doesn&#8217;t require explicitly declared variable types like C and Fortran.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># a is an integer 5</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [6]: </span><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># a is an integer 5</span>
 
 <span class="gp">In [7]: </span><span class="n">b</span> <span class="o">=</span> <span class="s1">&#39;five&#39;</span> <span class="c1"># b is a string of the word &#39;five&#39;</span>
 
@@ -170,99 +170,107 @@
 </div>
 </div>
 <div class="section" id="id2">
-<h3><a class="toc-backref" href="#id8">3.1.2.2. Use</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id8">3.1.1.2.2. Use</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Use <cite>type</cite> to determine the type of variable:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [9]: </span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="gh">Out[9]: </span><span class="go">int</span>
 
 <span class="gp">In [10]: </span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<span class="go">            Out[10]: str</span>
+<span class="gh">Out[10]: </span><span class="go">str</span>
 
 <span class="gp">In [11]: </span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-<span class="go">                         Out[11]: float</span>
+<span class="gh">Out[11]: </span><span class="go">float</span>
 </pre></div>
 </div>
 <p>Division using integers is in two ways:</p>
 <ul class="simple">
 <li>Integer / Integer = Integer</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="mi">14</span> <span class="o">/</span> <span class="mi">3</span>
-<span class="gh">Out[12]: </span><span class="go">4.666666666666667</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [12]: </span><span class="mi">14</span> <span class="o">/</span> <span class="mi">3</span>
+<span class="gh">Out[12]: </span><span class="go">4</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>Integer / Float = Float</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="mi">14</span> <span class="o">/</span> <span class="mf">3.0</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [13]: </span><span class="mi">14</span> <span class="o">/</span> <span class="mf">3.0</span>
 <span class="gh">Out[13]: </span><span class="go">4.666666666666667</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="whitespace-in-python">
-<h2><a class="toc-backref" href="#id9">3.1.3. Whitespace in Python</a><a class="headerlink" href="#whitespace-in-python" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id9">3.1.1.3. Whitespace in Python</a><a class="headerlink" href="#whitespace-in-python" title="Permalink to this headline">¶</a></h2>
 <p>Python uses indents and whitespaces to group statements together. To write a loop in C you might use:</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">,</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<div class="highlight-c"><div class="highlight"><pre><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">,</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hi! </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Or in Fortran:</p>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span>
     <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Hi!&quot;</span>
     <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot; &quot;</span>
 <span class="n">enddo</span>
 </pre></div>
 </div>
 <p>Python doesn&#8217;t use curly braces like C or the enddo like Fortran. The Python equivalent is:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
     <span class="k">print</span> <span class="s2">&quot;Hi! </span><span class="se">\n</span><span class="s2">&quot;</span>
 </pre></div>
 </div>
 <p>If you have nested for-loops, there is a further indent for the inner loop:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [14]: </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
 <span class="gp">   ....: </span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
 <span class="gp">   ....: </span>       <span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>
 <span class="gp">   ....: </span>    <span class="k">print</span> <span class="s2">&quot;This statement is within the i-loop but not the j-loop&quot;</span>
 <span class="gp">   ....: </span>
-<span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-14-bf224d58b727&gt;&quot;</span><span class="gt">, line </span><span class="mi">3</span>
-    <span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>
-          <span class="o">^</span>
-<span class="ne">SyntaxError</span>: Missing parentheses in call to &#39;print&#39;
+<span class="go">0 0</span>
+<span class="go">0 1</span>
+<span class="go">0 2</span>
+<span class="go">This statement is within the i-loop but not the j-loop</span>
+<span class="go">1 0</span>
+<span class="go">1 1</span>
+<span class="go">1 2</span>
+<span class="go">This statement is within the i-loop but not the j-loop</span>
+<span class="go">2 0</span>
+<span class="go">2 1</span>
+<span class="go">2 2</span>
+<span class="go">This statement is within the i-loop but not the j-loop</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="arrays">
-<h2><a class="toc-backref" href="#id10">3.1.4. Arrays</a><a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id10">3.1.1.4. Arrays</a><a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="creation-of-arrays">
-<h3><a class="toc-backref" href="#id11">3.1.4.1. Creation of Arrays</a><a class="headerlink" href="#creation-of-arrays" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id11">3.1.1.4.1. Creation of Arrays</a><a class="headerlink" href="#creation-of-arrays" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>NumPy arrays are created from lists</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">myvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [15]: </span><span class="n">myvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
 
 <span class="gp">In [16]: </span><span class="n">myvals</span>
 <span class="gh">Out[16]: </span><span class="go">array([1, 2, 3, 4, 5])</span>
 
 <span class="gp">In [17]: </span><span class="nb">type</span><span class="p">(</span><span class="n">myvals</span><span class="p">)</span>
-<span class="go">                                Out[17]: numpy.ndarray</span>
+<span class="gh">Out[17]: </span><span class="go">numpy.ndarray</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>Or using linspace:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">myvals2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [18]: </span><span class="n">myvals2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
 
 <span class="gp">In [19]: </span><span class="n">myvals2</span>
 <span class="gh">Out[19]: </span><span class="go">array([ 1.,  2.,  3.,  4.,  5.])</span>
 
 <span class="gp">In [20]: </span><span class="nb">type</span><span class="p">(</span><span class="n">myvals2</span><span class="p">)</span>
-<span class="go">                                          Out[20]: numpy.ndarray</span>
+<span class="gh">Out[20]: </span><span class="go">numpy.ndarray</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="index">
-<h3><a class="toc-backref" href="#id12">3.1.4.2. Index</a><a class="headerlink" href="#index" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id12">3.1.1.4.2. Index</a><a class="headerlink" href="#index" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Python uses a <strong>zero-based index</strong>:<ul>
 <li>The first element is <cite>0</cite></li>
@@ -270,131 +278,131 @@
 </ul>
 </li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">myvals</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">myvals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [21]: </span><span class="n">myvals</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">myvals</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
 <span class="gh">Out[21]: </span><span class="go">(1, 5)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="slicing-arrays">
-<h3><a class="toc-backref" href="#id13">3.1.4.3. Slicing Arrays</a><a class="headerlink" href="#slicing-arrays" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id13">3.1.1.4.3. Slicing Arrays</a><a class="headerlink" href="#slicing-arrays" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>The slice is inclusive on the front end and exclusive on the back, so the following command gives us the values of <cite>myvals[0]</cite>, <cite>myvals[1]</cite> and <cite>myvals[2]</cite></li>
 <li><cite>myvals[3]</cite> is excluded</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">myvals</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [22]: </span><span class="n">myvals</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
 <span class="gh">Out[22]: </span><span class="go">array([1, 2, 3])</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>For a[start:end] THE INDEX DENOTES THE POSITION OF THE SLICE - NOT THE ELEMENT:</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1">#                  +------+------+---   ---+------+------+</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1">#                  +------+------+---   ---+------+------+</span>
 <span class="c1">#                  |  11  |  22  |   33    |  44  |  55  |</span>
 <span class="c1">#                  +------+------+---   ---+------+------+</span>
 <span class="c1"># Long version:    0      1      2      nx-2   nx-1     nx</span>
 <span class="c1"># Short version:                          -2     -1</span>
 </pre></div>
 </div>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">hello</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">55</span><span class="p">])</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [23]: </span><span class="n">hello</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">11</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">55</span><span class="p">])</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>So now test it:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">hello</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [24]: </span><span class="n">hello</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="gh">Out[24]: </span><span class="go">array([11, 22, 33, 44])</span>
 
 <span class="gp">In [25]: </span><span class="n">hello</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
-<span class="go">                                 Out[25]: array([22, 33])</span>
+<span class="gh">Out[25]: </span><span class="go">array([22, 33])</span>
 
 <span class="gp">In [26]: </span><span class="n">hello</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="go">                                                          Out[26]: array([11, 22, 33, 44])</span>
+<span class="gh">Out[26]: </span><span class="go">array([11, 22, 33, 44])</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="slicing-arrays-short-notation">
-<h3><a class="toc-backref" href="#id14">3.1.4.4. Slicing Arrays (Short Notation)</a><a class="headerlink" href="#slicing-arrays-short-notation" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="n">alpha</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">]</span>
+<h3><a class="toc-backref" href="#id14">3.1.1.4.4. Slicing Arrays (Short Notation)</a><a class="headerlink" href="#slicing-arrays-short-notation" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [27]: </span><span class="n">alpha</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 <div class="section" id="indexing">
-<h4><a class="toc-backref" href="#id15">Indexing</a><a class="headerlink" href="#indexing" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id15">3.1.1.4.4.1. Indexing</a><a class="headerlink" href="#indexing" title="Permalink to this headline">¶</a></h4>
 <p>Index notation occurs when only one character appears in the square brackets</p>
 <ul class="simple">
 <li>The first value:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">alpha</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [28]: </span><span class="n">alpha</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gh">Out[28]: </span><span class="go">&#39;a&#39;</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>The last value:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">alpha</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [29]: </span><span class="n">alpha</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="gh">Out[29]: </span><span class="go">&#39;f&#39;</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>All the values</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">alpha</span><span class="p">[:]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [30]: </span><span class="n">alpha</span><span class="p">[:]</span>
 <span class="gh">Out[30]: </span><span class="go">[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="slicing">
-<h4><a class="toc-backref" href="#id16">Slicing</a><a class="headerlink" href="#slicing" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id16">3.1.1.4.4.2. Slicing</a><a class="headerlink" href="#slicing" title="Permalink to this headline">¶</a></h4>
 <p>The slice notation occurs with a number included to the left or right of the colon</p>
 <ul class="simple">
 <li>From the second value onwards:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="n">alpha</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [31]: </span><span class="n">alpha</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 <span class="gh">Out[31]: </span><span class="go">[&#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;]</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>From the third value onwards:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">alpha</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [32]: </span><span class="n">alpha</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
 <span class="gh">Out[32]: </span><span class="go">[&#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;]</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>All the values except the last value:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="n">alpha</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [33]: </span><span class="n">alpha</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="gh">Out[33]: </span><span class="go">[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]</span>
 
 <span class="gp">In [34]: </span><span class="n">alpha</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="go">                                   Out[34]: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]</span>
+<span class="gh">Out[34]: </span><span class="go">[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>All the values except the last two values:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">alpha</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [35]: </span><span class="n">alpha</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
 <span class="gh">Out[35]: </span><span class="go">[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]</span>
 
 <span class="gp">In [36]: </span><span class="n">alpha</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
-<span class="go">                              Out[36]: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]</span>
+<span class="gh">Out[36]: </span><span class="go">[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>From the second value to the second to last value:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [37]: </span><span class="n">alpha</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [37]: </span><span class="n">alpha</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="gh">Out[37]: </span><span class="go">[&#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="assigning-array-variables">
-<h3><a class="toc-backref" href="#id17">3.1.4.5. Assigning Array Variables</a><a class="headerlink" href="#assigning-array-variables" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id17">3.1.1.4.5. Assigning Array Variables</a><a class="headerlink" href="#assigning-array-variables" title="Permalink to this headline">¶</a></h3>
 <p>One of the strange little quirks/features in Python that often confuses people comes up when assigning and comparing arrays of values.</p>
 <ul class="simple">
 <li>Create 1D array called <cite>a</cite>:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [38]: </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [38]: </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
 
 <span class="gp">In [39]: </span><span class="n">a</span>
 <span class="gh">Out[39]: </span><span class="go">array([ 1.,  2.,  3.,  4.,  5.])</span>
@@ -403,7 +411,7 @@
 <ul class="simple">
 <li>Make a copy of <cite>a</cite> and call it <cite>b</cite> (this is actually assignment by reference)</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [40]: </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
 
 <span class="gp">In [41]: </span><span class="n">b</span>
 <span class="gh">Out[41]: </span><span class="go">array([ 1.,  2.,  3.,  4.,  5.])</span>
@@ -412,7 +420,7 @@
 <ul class="simple">
 <li>Now try changing the values in <cite>a</cite>:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [42]: </span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">17</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [42]: </span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">17</span>
 
 <span class="gp">In [43]: </span><span class="n">a</span>
 <span class="gh">Out[43]: </span><span class="go">array([  1.,   2.,  17.,   4.,   5.])</span>
@@ -421,19 +429,19 @@
 <ul class="simple">
 <li>But this also changed <cite>b</cite>!</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [44]: </span><span class="n">b</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [44]: </span><span class="n">b</span>
 <span class="gh">Out[44]: </span><span class="go">array([  1.,   2.,  17.,   4.,   5.])</span>
 </pre></div>
 </div>
 <p><strong>Explanation:</strong> Python created a pointer called <cite>b</cite> that tells us to route it to <cite>a</cite>. This is called <strong>assignment by reference</strong>.</p>
 </div>
 <div class="section" id="copying-arrays">
-<h3><a class="toc-backref" href="#id18">3.1.4.6. Copying Arrays</a><a class="headerlink" href="#copying-arrays" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id18">3.1.1.4.6. Copying Arrays</a><a class="headerlink" href="#copying-arrays" title="Permalink to this headline">¶</a></h3>
 <p>If you want to make a true copy of the array you have to tell Python to copy every element of <cite>a</cite> into a new array:</p>
 <ul class="simple">
 <li>Create an empty array <cite>c</cite> the same length as <cite>a</cite>:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [45]: </span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
 <span class="gp">In [46]: </span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1"># tells us how long c is</span>
 <span class="gh">Out[46]: </span><span class="go">5</span>
@@ -442,7 +450,7 @@
 <ul class="simple">
 <li>Copy the values from <cite>a</cite> to <cite>c</cite>:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [47]: </span><span class="n">c</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [47]: </span><span class="n">c</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:]</span>
 
 <span class="gp">In [48]: </span><span class="n">c</span>
 <span class="gh">Out[48]: </span><span class="go">array([  1.,   2.,  17.,   4.,   5.])</span>
@@ -451,57 +459,57 @@
 <ul class="simple">
 <li>Now change a value in <cite>a</cite>, which doesn&#8217;t change <cite>c</cite>:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [49]: </span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [49]: </span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span>
 
 <span class="gp">In [50]: </span><span class="n">a</span>
 <span class="gh">Out[50]: </span><span class="go">array([ 200.,    2.,   17.,    4.,    5.])</span>
 
 <span class="gp">In [51]: </span><span class="n">c</span>
-<span class="go">                                                    Out[51]: array([  1.,   2.,  17.,   4.,   5.])</span>
+<span class="gh">Out[51]: </span><span class="go">array([  1.,   2.,  17.,   4.,   5.])</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="array-operations">
-<h3><a class="toc-backref" href="#id19">3.1.4.7. Array Operations</a><a class="headerlink" href="#array-operations" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id19">3.1.1.4.7. Array Operations</a><a class="headerlink" href="#array-operations" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="operators">
-<h4><a class="toc-backref" href="#id20">Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id20">3.1.1.4.7.1. Operators</a><a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h4>
 <p>Addition on a list is concatenation:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [52]: </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [52]: </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
 
 <span class="gp">In [53]: </span><span class="n">a</span> <span class="o">+</span> <span class="n">a</span>
 <span class="gh">Out[53]: </span><span class="go">[1, 2, 3, 1, 2, 3]</span>
 </pre></div>
 </div>
 <p>Arithmetic operations on an array are element-wise:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [54]: </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [54]: </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 
 <span class="gp">In [55]: </span><span class="n">b</span> <span class="o">+</span> <span class="n">b</span> <span class="c1"># element-wise addition</span>
 <span class="gh">Out[55]: </span><span class="go">array([2, 4, 6])</span>
 
 <span class="gp">In [56]: </span><span class="n">b</span> <span class="o">-</span> <span class="n">b</span> <span class="c1"># element-wise subtract</span>
-<span class="go">                          Out[56]: array([0, 0, 0])</span>
+<span class="gh">Out[56]: </span><span class="go">array([0, 0, 0])</span>
 
 <span class="gp">In [57]: </span><span class="n">b</span> <span class="o">/</span> <span class="n">b</span> <span class="c1"># element-wise divide</span>
-<span class="go">                                                    Out[57]: array([ 1.,  1.,  1.])</span>
+<span class="gh">Out[57]: </span><span class="go">array([1, 1, 1])</span>
 
 <span class="gp">In [58]: </span><span class="n">b</span> <span class="o">*</span> <span class="n">b</span> <span class="c1"># element-wise muliply</span>
-<span class="go">                                                                                    Out[58]: array([1, 4, 9])</span>
+<span class="gh">Out[58]: </span><span class="go">array([1, 4, 9])</span>
 
 <span class="gp">In [59]: </span><span class="n">b</span> <span class="o">**</span> <span class="mi">2</span> <span class="c1"># element-wise power</span>
-<span class="go">                                                                                                              Out[59]: array([1, 4, 9])</span>
+<span class="gh">Out[59]: </span><span class="go">array([1, 4, 9])</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="functions">
-<h4><a class="toc-backref" href="#id21">Functions</a><a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id21">3.1.1.4.7.2. Functions</a><a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h4>
 <p>Functions on arrays are element-wise:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [60]: </span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1"># element-wise sin - use np.sin for this operation not math.sin</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [60]: </span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1"># element-wise sin - use np.sin for this operation not math.sin</span>
 <span class="gh">Out[60]: </span><span class="go">array([ 0.84147098,  0.90929743,  0.14112001])</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="dot-product">
-<h4><a class="toc-backref" href="#id22">Dot Product</a><a class="headerlink" href="#dot-product" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id22">3.1.1.4.7.3. Dot Product</a><a class="headerlink" href="#dot-product" title="Permalink to this headline">¶</a></h4>
 <div class="math">
 \[\begin{split}\begin{bmatrix}
 1 &amp; 2 &amp; 3 \\
@@ -517,7 +525,7 @@
 49 &amp; 64
 \end{bmatrix}\end{split}\]</div>
 <p>Dot product on an array:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [61]: </span><span class="n">horz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [61]: </span><span class="n">horz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>
 
 <span class="gp">In [62]: </span><span class="n">vert</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>
 
@@ -529,33 +537,33 @@
 </div>
 </div>
 <div class="section" id="array-creation">
-<h4><a class="toc-backref" href="#id23">Array Creation</a><a class="headerlink" href="#array-creation" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id23">3.1.1.4.7.4. Array Creation</a><a class="headerlink" href="#array-creation" title="Permalink to this headline">¶</a></h4>
 <p>Lists can be created using <cite>range</cite>:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [64]: </span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="gh">Out[64]: </span><span class="go">range(0, 5)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [64]: </span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gh">Out[64]: </span><span class="go">[0, 1, 2, 3, 4]</span>
 </pre></div>
 </div>
 <p>Arrays can be created using <cite>arange</cite> or <cite>linspace</cite>:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [65]: </span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [65]: </span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="gh">Out[65]: </span><span class="go">array([0, 1, 2, 3, 4])</span>
 
 <span class="gp">In [66]: </span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-<span class="go">                                Out[66]: array([ 0.,  1.,  2.,  3.,  4.])</span>
+<span class="gh">Out[66]: </span><span class="go">array([ 0.,  1.,  2.,  3.,  4.])</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="list-comprehension">
-<h4><a class="toc-backref" href="#id24">List Comprehension</a><a class="headerlink" href="#list-comprehension" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id24">3.1.1.4.7.5. List Comprehension</a><a class="headerlink" href="#list-comprehension" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>Imagine a list of three numbers:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [67]: </span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [67]: </span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>The list comprehension:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [68]: </span><span class="n">cc</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">+</span><span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">c</span><span class="p">)]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [68]: </span><span class="n">cc</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">+</span><span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">c</span><span class="p">)]</span>
 
 <span class="gp">In [69]: </span><span class="n">cc</span>
 <span class="gh">Out[69]: </span><span class="go">[2, 4, 6]</span>
@@ -564,14 +572,14 @@
 <ul class="simple">
 <li>Where <cite>zip</cite> returns a list of tuples, i.e.</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [70]: </span><span class="nb">zip</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
-<span class="gh">Out[70]: </span><span class="go">&lt;zip at 0x7f0d6814a6c8&gt;</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [70]: </span><span class="nb">zip</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+<span class="gh">Out[70]: </span><span class="go">[(1, 1), (2, 2), (3, 3)]</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>The list comprehension is equivalent to:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [71]: </span><span class="n">dd</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [71]: </span><span class="n">dd</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="gp">In [72]: </span><span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
 <span class="gp">   ....: </span>   <span class="n">dd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span>
@@ -584,7 +592,7 @@
 <ul class="simple">
 <li>Or:</li>
 </ul>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [74]: </span><span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [74]: </span><span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 
 <span class="gp">In [75]: </span><span class="n">ee</span> <span class="o">=</span> <span class="n">e</span> <span class="o">+</span> <span class="n">e</span>
 
@@ -595,23 +603,22 @@
 </div>
 </div>
 <div class="section" id="which-is-faster-lists-or-arrays">
-<h3><a class="toc-backref" href="#id25">3.1.4.8. Which is Faster: Lists or Arrays?</a><a class="headerlink" href="#which-is-faster-lists-or-arrays" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id25">3.1.1.4.8. Which is Faster: Lists or Arrays?</a><a class="headerlink" href="#which-is-faster-lists-or-arrays" title="Permalink to this headline">¶</a></h3>
 <p>Create a list and time a list comprehension:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [77]: </span><span class="n">f</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [77]: </span><span class="n">f</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
 
 <span class="gp">In [78]: </span><span class="n">timeit</span> <span class="n">ff</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">f</span><span class="p">)]</span>
-<span class="go">1000 loops, best of 3: 1.13 ms per loop</span>
+<span class="go">1000 loops, best of 3: 610 us per loop</span>
 </pre></div>
 </div>
 <p>Create a NumPy array and time the addition:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [79]: </span><span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [79]: </span><span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="gp">In [80]: </span><span class="n">timeit</span> <span class="n">gg</span> <span class="o">=</span> <span class="n">g</span> <span class="o">+</span> <span class="n">g</span>
-<span class="go">The slowest run took 4.15 times longer than the fastest. This could mean that an intermediate result is being cached.</span>
-<span class="go">100000 loops, best of 3: 5.2 us per loop</span>
+<span class="go">100000 loops, best of 3: 3.29 us per loop</span>
 
 <span class="gp">In [81]: </span><span class="n">timeit</span> <span class="n">hh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">g</span><span class="p">)</span>
-<span class="go">                                                                                                                                                               100000 loops, best of 3: 5.53 us per loop</span>
+<span class="go">100000 loops, best of 3: 3.38 us per loop</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -628,17 +635,17 @@
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="python_language.html">3. Python Programming Language</a>
+        «&#160;&#160;<a href="python_language.html">3.1. Python Programming Language</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="comments_strings_print_statements.html">3.2. Comments, Strings and Print Statements</a>&#160;&#160;»
+        <a href="comments_strings_print_statements.html">3.1.2. Comments, Strings and Print Statements</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

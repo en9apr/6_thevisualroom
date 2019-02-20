@@ -1,0 +1,3159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.5.2. Powder Notes &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1.5. OpenFOAM Projects (Password Protected)" href="openfoam_projects.html" />
+    <link rel="next" title="1.5.3. Swak4Foam" href="swak4foam.html" />
+    <link rel="prev" title="1.5.1. Porous Medium Notes" href="porous_notes.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.5.2. Powder Notes</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="porous_notes.html">1.5.1. Porous Medium Notes</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="swak4foam.html">1.5.3. Swak4Foam</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="powder-notes">
+<h1>1.5.2. Powder Notes<a class="headerlink" href="#powder-notes" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#tutorial-on-twophaseeulerfoam" id="id6">Tutorial on twoPhaseEulerFoam</a><ul>
+<li><a class="reference internal" href="#mesh" id="id7">Mesh</a></li>
+<li><a class="reference internal" href="#boundary-and-initial-conditions" id="id8">Boundary and initial conditions</a><ul>
+<li><a class="reference internal" href="#initial-conditions" id="id9">Initial conditions</a></li>
+<li><a class="reference internal" href="#boundary-conditions" id="id10">Boundary conditions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#physical-properties" id="id11">Physical Properties</a><ul>
+<li><a class="reference internal" href="#particle-diameter" id="id12">Particle diameter</a></li>
+<li><a class="reference internal" href="#drag-model" id="id13">Drag Model</a></li>
+<li><a class="reference internal" href="#thermophysical-properties" id="id14">Thermophysical properties</a></li>
+<li><a class="reference internal" href="#turbulence-properties" id="id15">Turbulence properties</a></li>
+<li><a class="reference internal" href="#gravity-properties" id="id16">Gravity properties</a></li>
+<li><a class="reference internal" href="#set-the-endtime-to-20s" id="id17">Set the endTime to 20s</a></li>
+<li><a class="reference internal" href="#parallel-processing" id="id18">Parallel processing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#run-the-case" id="id19">Run the case</a></li>
+<li><a class="reference internal" href="#reconstruct-the-case" id="id20">Reconstruct the case</a></li>
+<li><a class="reference internal" href="#created-another-mesh-in-pointwise" id="id21">Created another mesh in Pointwise</a><ul>
+<li><a class="reference internal" href="#set-the-endtime-to-2s" id="id22">Set the endTime to 2s</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1" id="id23">Run the case</a><ul>
+<li><a class="reference internal" href="#try-blockmesh" id="id24">Try blockMesh</a></li>
+<li><a class="reference internal" href="#modify-blockmesh" id="id25">Modify blockMesh</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tutorial-on-non-newtonain-fluid" id="id26">Tutorial on Non-Newtonain fluid</a><ul>
+<li><a class="reference internal" href="#test-the-solver" id="id27">Test the solver</a></li>
+<li><a class="reference internal" href="#increase-the-mesh-density-near-the-wall-newtonian" id="id28">Increase the mesh density near the wall - Newtonian</a></li>
+<li><a class="reference internal" href="#increase-the-mesh-density-near-the-wall-casson" id="id29">Increase the mesh density near the wall - Casson</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#additional-modifications-to-non-newtonian-fluid-model" id="id30">Additional Modifications to Non-Newtonian fluid model</a><ul>
+<li><a class="reference internal" href="#add-da-cruz-non-newtonian-model" id="id31">Add da Cruz non-Newtonian model</a></li>
+<li><a class="reference internal" href="#id2" id="id32">Test the solver</a></li>
+<li><a class="reference internal" href="#add-linear-dacruz-model-linearfriction" id="id33">Add linear daCruz model - LinearFriction</a></li>
+<li><a class="reference internal" href="#id3" id="id34">Test the solver</a></li>
+<li><a class="reference internal" href="#add-non-linear-jop-model-nonlinearfriction" id="id35">Add non-linear Jop model - NonLinearFriction</a></li>
+<li><a class="reference internal" href="#id4" id="id36">Test the solver</a></li>
+<li><a class="reference internal" href="#non-newtonian-010-plates-non-linear-pressure" id="id37">non_newtonian_010_plates_non_linear_pressure</a></li>
+<li><a class="reference internal" href="#non-newtonian-011-plates-linear-pressure" id="id38">non_newtonian_011_plates_linear_pressure</a></li>
+<li><a class="reference internal" href="#non-newtonian-012-plates-casson-pressure" id="id39">non_newtonian_012_plates_casson_pressure</a></li>
+<li><a class="reference internal" href="#non-newtonian-013-plates-newtonian-pressure" id="id40">non_newtonian_013_plates_newtonian_pressure</a></li>
+<li><a class="reference internal" href="#non-newtonian-014-plates-linear-new-coefficients" id="id41">non_newtonian_014_plates_linear_new_coefficients</a></li>
+<li><a class="reference internal" href="#new-viscosity-model-linearfrictionsaturated" id="id42">New Viscosity Model - LinearFrictionSaturated</a></li>
+<li><a class="reference internal" href="#non-newtonian-015-plates-linear-saturated" id="id43">non_newtonian_015_plates_linear_saturated</a></li>
+<li><a class="reference internal" href="#introduce-diameter-into-inertial-number-in-non-linear-friction-model" id="id44">Introduce diameter into Inertial Number in Non Linear Friction Model</a></li>
+<li><a class="reference internal" href="#non-newtonian-016-plates-non-linear-diameter" id="id45">non_newtonian_016_plates_non_linear_diameter</a></li>
+<li><a class="reference internal" href="#declare-variables-separately-for-easy-readability" id="id46">Declare variables separately for easy readability</a></li>
+<li><a class="reference internal" href="#non-newtonian-017-plates-nonlinear-diameter-declare" id="id47">non_newtonian_017_plates_nonlinear_diameter_declare</a></li>
+<li><a class="reference internal" href="#id5" id="id48">Declare variables separately for easy readability</a></li>
+<li><a class="reference internal" href="#non-newtonian-018-plates-linear-diameter-declare" id="id49">non_newtonian_018_plates_linear_diameter_declare</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#twophaseeulerfoam-modifications" id="id50">twoPhaseEulerFoam Modifications</a><ul>
+<li><a class="reference internal" href="#copy-twophaseeulerfoam-to-check-if-2-2-2-is-installed-correctly" id="id51">Copy twoPhaseEulerFoam to check if 2.2.2 is installed correctly</a></li>
+<li><a class="reference internal" href="#corrected-2-1-0-case-and-solver-to-2-2-2" id="id52">Corrected 2.1.0 case and solver to 2.2.2</a></li>
+<li><a class="reference internal" href="#adding-new-boundary-condition-to-twophaseeulerfoam" id="id53">Adding New Boundary Condition to twoPhaseEulerFoam</a><ul>
+<li><a class="reference internal" href="#create-new-solver" id="id54">Create new solver</a></li>
+<li><a class="reference internal" href="#copy-johnsonjacksonparticleslip-from-2-3-x-to-2-2-2" id="id55">Copy JohnsonJacksonParticleSlip from 2.3.x to 2.2.2</a></li>
+<li><a class="reference internal" href="#correct-make-and-options-files" id="id56">Correct Make and options files</a><ul>
+<li><a class="reference internal" href="#twophaseeulersrivastava" id="id57">twoPhaseEulerSrivastava</a></li>
+<li><a class="reference internal" href="#interfacial-model" id="id58">Interfacial Model</a></li>
+<li><a class="reference internal" href="#kinetic-theory-model" id="id59">Kinetic Theory Model</a></li>
+<li><a class="reference internal" href="#phase-model" id="id60">Phase Model</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#test-if-case-works" id="id61">Test if case works</a></li>
+<li><a class="reference internal" href="#is-the-partial-slip-condition-being-applied-correctly" id="id62">Is the partial slip condition being applied correctly?</a></li>
+<li><a class="reference internal" href="#consider-comparing-johnsonjackson-with-johnsonjacksonschaeffer" id="id63">Consider comparing JohnsonJackson with JohnsonJacksonSchaeffer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#openfoam-version-5-0" id="id64">OpenFOAM version 5.0</a><ul>
+<li><a class="reference internal" href="#openfoam-version-5-0-run-script" id="id65">OpenFOAM version 5.0 run script</a></li>
+<li><a class="reference internal" href="#rename-surfaces" id="id66">Rename surfaces</a></li>
+<li><a class="reference internal" href="#set-fields-dictionary" id="id67">Set fields dictionary</a></li>
+<li><a class="reference internal" href="#turn-off-energy-equation" id="id68">Turn off energy equation</a></li>
+<li><a class="reference internal" href="#make-air-density-constant" id="id69">Make air density constant</a></li>
+<li><a class="reference internal" href="#phase-properties" id="id70">Phase properties</a></li>
+<li><a class="reference internal" href="#thermophysicalproperties-air" id="id71">thermophysicalProperties.air</a></li>
+<li><a class="reference internal" href="#create-location-for-version-5-solver" id="id72">Create location for version 5 solver</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="tutorial-on-twophaseeulerfoam">
+<h2><a class="toc-backref" href="#id6">1.5.2.1. Tutorial on twoPhaseEulerFoam</a><a class="headerlink" href="#tutorial-on-twophaseeulerfoam" title="Permalink to this headline">¶</a></h2>
+<p>Drag models: Schiller-Naumann, Wen-Yu and Syamlal-O&#8217;Brien</p>
+<p>Change to run directory:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd $FOAM_RUN
+</pre></div>
+</div>
+<p>Copy tutorial files from tutorial directory to new directory:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cp -r $FOAM_TUTORIALS/multiphase/twoPhaseEulerFoam/RAS/fluidisedBed $FOAM_RUN
+</pre></div>
+</div>
+<p>Rename directory:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ mv fluidisedBed eulerian_001_fluidised_bed
+</pre></div>
+</div>
+<p>Change directory:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd eulerian_001_fluidised_bed
+</pre></div>
+</div>
+<div class="section" id="mesh">
+<h3><a class="toc-backref" href="#id7">1.5.2.1.1. Mesh</a><a class="headerlink" href="#mesh" title="Permalink to this headline">¶</a></h3>
+<p>Cell size is 30 times particle diameter of solid phase. Cell size cannot be smaller than particle diameter - if it were, this would mean the particle fills the volume and no particle-particle interactions would be possible. This would also violate the maximum solid packing fraction, intended to be 62%. If this limit is exceeded, the probability of collisions between particles would go to infinity.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/polyMesh/blockMeshDict
+
+        vertices
+        (
+                (0 0 0)
+                (0.28 0 0)
+                (0.28 1 0)
+                (0 1 0)
+                (0 0 0.025)
+                (0.28 0 0.025)
+                (0.28 1 0.025)
+                (0 1 0.025)
+        );
+
+        blocks
+        (
+                hex (0 1 2 3 4 5 6 7) (28 100 1) simpleGrading (1 1 1)
+        );
+</pre></div>
+</div>
+<p>Run blockMesh:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ blockMesh
+</pre></div>
+</div>
+</div>
+<div class="section" id="boundary-and-initial-conditions">
+<h3><a class="toc-backref" href="#id8">1.5.2.1.2. Boundary and initial conditions</a><a class="headerlink" href="#boundary-and-initial-conditions" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="initial-conditions">
+<h4><a class="toc-backref" href="#id9">1.5.2.1.2.1. Initial conditions</a><a class="headerlink" href="#initial-conditions" title="Permalink to this headline">¶</a></h4>
+<p>Create initial volume fraction of particles up to 0.4m</p>
+<div class="highlight-python"><div class="highlight"><pre>$ system/setFieldsDict
+
+        defaultFieldValues
+        (
+                volScalarFieldValue alpha.air 1
+                volScalarFieldValue alpha.particles 0
+        );
+
+        regions
+        (
+                boxToCell
+                {
+                        box ( 0 0 0 ) ( 0.28 0.4 0.025 );
+                        fieldValues
+                        (
+                            volScalarFieldValue alpha.air 0.60
+                            volScalarFieldValue alpha.particles 0.40
+                        );
+                }
+        );
+</pre></div>
+</div>
+<p>Copy original files (with internalField = 0), as if the (internalField != 0) has not been set.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cp 0/alpha.air.org 0/alpha.air
+$ cp 0/alpha.particles.org 0/alpha.particles
+</pre></div>
+</div>
+<p>Run setFields in order to set the internalField:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ setFields
+</pre></div>
+</div>
+</div>
+<div class="section" id="boundary-conditions">
+<h4><a class="toc-backref" href="#id10">1.5.2.1.2.2. Boundary conditions</a><a class="headerlink" href="#boundary-conditions" title="Permalink to this headline">¶</a></h4>
+<p>Set the superficial gas velocity to 0.46m/s in 0/U.air:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano 0/U.air
+
+        internalField   uniform (0 0.46 0);
+
+        boundaryField
+        {
+                inlet
+                {
+                        type               interstitialInletVelocity;
+                        inletVelocity      uniform (0 0.46 0);
+                        alpha              alpha.air;
+                        value              $internalField;
+                }
+
+                ...
+
+        }
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="physical-properties">
+<h3><a class="toc-backref" href="#id11">1.5.2.1.3. Physical Properties</a><a class="headerlink" href="#physical-properties" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="particle-diameter">
+<h4><a class="toc-backref" href="#id12">1.5.2.1.3.1. Particle diameter</a><a class="headerlink" href="#particle-diameter" title="Permalink to this headline">¶</a></h4>
+<p>Change the particle diameter and the maximum solid packing fraction:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/phaseProperties
+
+        phases (particles air);
+
+        particles
+        {
+                diameterModel constant;
+                constantCoeffs
+                {
+                        d               275e-6;
+                }
+
+                alphaMax 0.62;
+        }
+</pre></div>
+</div>
+</div>
+<div class="section" id="drag-model">
+<h4><a class="toc-backref" href="#id13">1.5.2.1.3.2. Drag Model</a><a class="headerlink" href="#drag-model" title="Permalink to this headline">¶</a></h4>
+<p>Specify drag model (SyamlalOBrien):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/phaseProperties
+
+        drag
+        (
+                (particles in air)
+                {
+                        type            SyamlalOBrien;
+                        residualAlpha   1e-6;
+                        residualRe      1e-3;
+                        swarmCorrection
+                        {
+                            type        none;
+                        }
+                }
+        );
+</pre></div>
+</div>
+</div>
+<div class="section" id="thermophysical-properties">
+<h4><a class="toc-backref" href="#id14">1.5.2.1.3.3. Thermophysical properties</a><a class="headerlink" href="#thermophysical-properties" title="Permalink to this headline">¶</a></h4>
+<p>Set particle density</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/thermophysicalProperties.particles
+
+        equationOfState
+                {
+                        rho         2500;
+                }
+</pre></div>
+</div>
+</div>
+<div class="section" id="turbulence-properties">
+<h4><a class="toc-backref" href="#id15">1.5.2.1.3.4. Turbulence properties</a><a class="headerlink" href="#turbulence-properties" title="Permalink to this headline">¶</a></h4>
+<p>Set turbulence properties</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/turbulenceProperties.particles
+$ nano constant/turbulenceProperties.air
+</pre></div>
+</div>
+</div>
+<div class="section" id="gravity-properties">
+<h4><a class="toc-backref" href="#id16">1.5.2.1.3.5. Gravity properties</a><a class="headerlink" href="#gravity-properties" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/g
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-the-endtime-to-20s">
+<h4><a class="toc-backref" href="#id17">1.5.2.1.3.6. Set the endTime to 20s</a><a class="headerlink" href="#set-the-endtime-to-20s" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/controlDict
+
+        endTime         20;
+</pre></div>
+</div>
+</div>
+<div class="section" id="parallel-processing">
+<h4><a class="toc-backref" href="#id18">1.5.2.1.3.7. Parallel processing</a><a class="headerlink" href="#parallel-processing" title="Permalink to this headline">¶</a></h4>
+<p>Create dictionary for parallel processing (scotch - no user input, will minimise the number of processor boundaries)</p>
+<div class="highlight-python"><div class="highlight"><pre>numberOfSubdomains 8;
+
+method          scotch;
+
+simpleCoeffs
+{
+        n               ( 2 1 1 );
+        delta           0.0001;
+}
+
+hierarchicalCoeffs
+{
+        n               ( 2 1 1 );
+        delta           0.001;
+        order           xyz;
+}
+
+manualCoeffs
+{
+        dataFile        &quot;cellDecomposition&quot;;
+}
+</pre></div>
+</div>
+<p>Decompose the case:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ decomposePar
+</pre></div>
+</div>
+<p>Run the case:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ mpirun -np 8 twoPhaseEulerFoam -parallel &gt; log &amp;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="run-the-case">
+<h3><a class="toc-backref" href="#id19">1.5.2.1.4. Run the case</a><a class="headerlink" href="#run-the-case" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ twoPhaseEulerFoam &gt;&amp; log &amp;
+</pre></div>
+</div>
+<p>Monitor the run</p>
+<div class="highlight-python"><div class="highlight"><pre>$ tail -f log
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ rm -rf processor* 0.* [1-9]* postProcessing *.foam
+</pre></div>
+</div>
+</div>
+<div class="section" id="reconstruct-the-case">
+<h3><a class="toc-backref" href="#id20">1.5.2.1.5. Reconstruct the case</a><a class="headerlink" href="#reconstruct-the-case" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ reconstructPar
+</pre></div>
+</div>
+</div>
+<div class="section" id="created-another-mesh-in-pointwise">
+<h3><a class="toc-backref" href="#id21">1.5.2.1.6. Created another mesh in Pointwise</a><a class="headerlink" href="#created-another-mesh-in-pointwise" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ $HOME/Pointwise_User/eulerian_002_bin_discharge/pointwise -b script10.glf
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ mkdir eulerian_002_bin_discharge
+</pre></div>
+</div>
+<p>Copied files from $HOME/Pointwise_User/eulerian_002_bin_discharge/mesh/ to current directory</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd $FOAM_RUN/eulerian_002_bin_discharge/eulerian_002_bin_discharge
+</pre></div>
+</div>
+<p>Ran check mesh</p>
+<div class="highlight-python"><div class="highlight"><pre>$ checkMesh
+</pre></div>
+</div>
+<p>In the dictionaries:</p>
+<blockquote>
+<div><p>epsilon.air, k.air, p, T.air, Theta.particles, U.air :</p>
+<p>inlet=outlet
+outlet=inlet</p>
+<p>All files:</p>
+<p>frontAndBackPlanes=symmetry
+walls=wall</p>
+<p>sed -i s/frontAndBackPlanes/symmetry/g alpha.air.org
+sed -i s/frontAndBackPlanes/symmetry/g alpha.particles.org
+sed -i s/frontAndBackPlanes/symmetry/g epsilon.air
+sed -i s/frontAndBackPlanes/symmetry/g k.air
+sed -i s/frontAndBackPlanes/symmetry/g nut.air
+sed -i s/frontAndBackPlanes/symmetry/g nut.particles
+sed -i s/frontAndBackPlanes/symmetry/g p
+sed -i s/frontAndBackPlanes/symmetry/g T.air
+sed -i s/frontAndBackPlanes/symmetry/g T.particles
+sed -i s/frontAndBackPlanes/symmetry/g Theta.particles
+sed -i s/frontAndBackPlanes/symmetry/g U.air
+sed -i s/frontAndBackPlanes/symmetry/g U.particles</p>
+<p>sed -i s/walls/wall/g alpha.air.org
+sed -i s/walls/wall/g alpha.particles.org
+sed -i s/walls/wall/g epsilon.air
+sed -i s/walls/wall/g k.air
+sed -i s/walls/wall/g nut.air
+sed -i s/walls/wall/g nut.particles
+sed -i s/walls/wall/g p
+sed -i s/walls/wall/g T.air
+sed -i s/walls/wall/g T.particles
+sed -i s/walls/wall/g Theta.particles
+sed -i s/walls/wall/g U.air
+sed -i s/walls/wall/g U.particles</p>
+</div></blockquote>
+<p>Copy original files (with internalField = 0), as if the (internalField != 0) has not been set.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cp 0/alpha.air.org 0/alpha.air
+$ cp 0/alpha.particles.org 0/alpha.particles
+</pre></div>
+</div>
+<p>Run setFields in order to set the internalField:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ setFields
+</pre></div>
+</div>
+<div class="section" id="set-the-endtime-to-2s">
+<h4><a class="toc-backref" href="#id22">1.5.2.1.6.1. Set the endTime to 2s</a><a class="headerlink" href="#set-the-endtime-to-2s" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/controlDict
+
+        endTime         2;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3><a class="toc-backref" href="#id23">1.5.2.1.7. Run the case</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ twoPhaseEulerFoam &gt; log &amp;
+</pre></div>
+</div>
+<p>#0  Foam::error::printStack(Foam::Ostream&amp;) at ??:?
+#1  Foam::sigFpe::sigHandler(int) at ??:?
+#2  ? in &#8220;/lib/x86_64-linux-gnu/libc.so.6&#8221;
+#3  Foam::symGaussSeidelSmoother::smooth(Foam::word const&amp;, Foam::Field&lt;double&gt;&amp;, Foam::lduMatrix const&amp;, Foam::Field&lt;double&gt; const&amp;, Foam::FieldField&lt;Foam::Field, double&gt; const&amp;, Foam::UPtrList&lt;Foam::lduInterfaceField const&gt; const&amp;, unsigned char, int) at ??:?
+#4  Foam::symGaussSeidelSmoother::smooth(Foam::Field&lt;double&gt;&amp;, Foam::Field&lt;double&gt; const&amp;, unsigned char, int) const at ??:?
+#5  Foam::smoothSolver::solve(Foam::Field&lt;double&gt;&amp;, Foam::Field&lt;double&gt; const&amp;, unsigned char) const at ??:?
+#6  Foam::fvMatrix&lt;double&gt;::solveSegregated(Foam::dictionary const&amp;) at ??:?
+#7  Foam::fvMatrix&lt;double&gt;::solve(Foam::dictionary const&amp;) at ??:?
+#8  Foam::fvMatrix&lt;double&gt;::solve() at ??:?
+#9  ? at ??:?
+#10  __libc_start_main in &#8220;/lib/x86_64-linux-gnu/libc.so.6&#8221;
+#11  ? at ??:?
+Floating point exception (core dumped)</p>
+<p>Divide diameter by 10</p>
+<div class="highlight-python"><div class="highlight"><pre>$ constant/phaseProperties
+
+    particles
+    {
+        diameterModel constant;
+        constantCoeffs
+        {
+            d               27.5e-6;
+        }
+
+        alphaMax 0.62;
+    }
+</pre></div>
+</div>
+<p>Still the same - revert. Possible problem with the setFields - wrong dimensions</p>
+<div class="section" id="try-blockmesh">
+<h4><a class="toc-backref" href="#id24">1.5.2.1.7.1. Try blockMesh</a><a class="headerlink" href="#try-blockmesh" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre>$ rm -rf processor* 0.* [1-9]* postProcessing *.foam
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ cp 0/alpha.air.org 0/alpha.air
+$ cp 0/alpha.particles.org 0/alpha.particles
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ setFields
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ twoPhaseEulerFoam &gt; log &amp;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ decomposePar
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ mpirun -np 8 twoPhaseEulerFoam -parallel &gt; log &amp;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ kill -9 PID
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ pkill twoPhaseEulerFo
+</pre></div>
+</div>
+<p>Run for only 0.5 seconds</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/controlDict
+
+        endTime         0.5;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ reconstructPar
+</pre></div>
+</div>
+</div>
+<div class="section" id="modify-blockmesh">
+<h4><a class="toc-backref" href="#id25">1.5.2.1.7.2. Modify blockMesh</a><a class="headerlink" href="#modify-blockmesh" title="Permalink to this headline">¶</a></h4>
+<p>&#8211;&gt; FOAM FATAL ERROR:
+face 0 in patch 1 does not have neighbour cell face: 4(11 15 14 10)</p>
+</div>
+</div>
+</div>
+<div class="section" id="tutorial-on-non-newtonain-fluid">
+<h2><a class="toc-backref" href="#id26">1.5.2.2. Tutorial on Non-Newtonain fluid</a><a class="headerlink" href="#tutorial-on-non-newtonain-fluid" title="Permalink to this headline">¶</a></h2>
+<p>fluentMeshToFoam needs a system directory and a controlDict:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ two
+$ mkdir system
+$ nano system/controlDict
+
+        application     nonNewtonianIcoFoam;
+
+        startFrom       startTime;
+
+        startTime       0;
+
+        stopAt          endTime;
+
+        endTime         5;
+
+        deltaT          0.0025;
+
+        writeControl    runTime;
+
+        writeInterval   0.05;
+
+        purgeWrite      0;
+
+        writeFormat     ascii;
+
+        writePrecision  6;
+
+        writeCompression off;
+
+        timeFormat      general;
+
+        timePrecision   6;
+
+        runTimeModifiable true;
+</pre></div>
+</div>
+<p>Writes the output to constant/polyMesh</p>
+<div class="highlight-python"><div class="highlight"><pre>$ fluentMeshToFoam fluent.msh
+</pre></div>
+</div>
+<p>Create a folder for boundary conditions:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ mkdir 0
+$ nano 0/p
+
+        FoamFile
+        {
+                version     2.0;
+                format      ascii;
+                class       volScalarField;
+                object      p;
+        }
+
+        dimensions      [0 2 -2 0 0 0 0];
+
+        internalField   uniform 0;
+
+        boundaryField
+        {
+                INLET
+                {
+                        type            zeroGradient;
+                }
+
+                OUTLET
+                {
+                        type            fixedValue;
+                        value           uniform 0;
+                }
+
+
+                FIXED_WALLS
+                {
+                        type            zeroGradient;
+                }
+
+
+                FRONT_AND_BACK
+                {
+                        type            empty;
+                }
+
+        }
+
+$ nano 0/U
+
+        FoamFile
+        {
+                version     2.0;
+                format      ascii;
+                class       volVectorField;
+                object      U;
+        }
+
+        dimensions      [0 1 -1 0 0 0 0];
+
+        internalField   uniform (0 0 0);
+
+        boundaryField
+        {
+                INLET
+                {
+                        type            fixedValue;
+                        value           uniform (1 0 0);
+                }
+
+                OUTLET
+                {
+                        type            zeroGradient;
+                }
+
+
+                FIXED_WALLS
+                {
+                        type            fixedValue;
+                        value           uniform (0 0 0);
+                }
+
+
+                FRONT_AND_BACK
+                {
+                        type            empty;
+                }
+
+        }
+</pre></div>
+</div>
+<p>Copy BirdCarreau into directory:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd $WM_PROJECT_DIR
+$ cp -r --parents src/transportModels/incompressible/viscosityModels/BirdCarreau/ $WM_PROJECT_USER_DIR/
+$ cd $WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+$ mv BirdCarreau Casson
+$ cd Casson
+$ mv BirdCarreau.C Casson.C
+$ mv BirdCarreau.H Casson.H
+$ sed -i s/BirdCarreau/Casson/g Casson.C
+$ sed –i s/BirdCarreau/Casson/g Casson.H                        (may not work, so find and replace in file)
+</pre></div>
+</div>
+<p>Create make files:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ mkdir Make
+$ nano Make/files
+
+        Casson.C
+
+        LIB = $(FOAM_USER_LIBBIN)/libCasson
+
+$ nano Make/options
+
+        EXE_INC = \
+                -I$(LIB_SRC)/transportModels/incompressible/lnInclude \
+                -I$(LIB_SRC)/finiteVolume/lnInclude
+        LIB_LIBS = \
+                -lfiniteVolume
+</pre></div>
+</div>
+<p>Add formula for Casson plot:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano Casson.C
+
+        // * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * * //
+
+        Foam::tmp&lt;Foam::volScalarField&gt;
+        Foam::viscosityModels::Casson::calcNu() const
+        {
+// ADDED:
+        return max
+                (
+                        nuMin_, min( nuMax_,pow(pow(tau0_/max(strainRate(),dimensionedScalar(&quot;VSMALL&quot;, dimless/dimTime,VSMALL)),0.5)+pow(m_,0.5),scalar(2.0)))
+                );
+
+        }
+</pre></div>
+</div>
+<p>Add new coefficients:</p>
+<div class="highlight-python"><div class="highlight"><pre>// * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
+
+Foam::viscosityModels::Casson::Casson
+(
+        const word&amp; name,
+        const dictionary&amp; viscosityProperties,
+        const volVectorField&amp; U,
+        const surfaceScalarField&amp; phi
+)
+:
+        viscosityModel(name, viscosityProperties, U, phi),
+        CassonCoeffs_(viscosityProperties.subDict(typeName + &quot;Coeffs&quot;)),
+m_(CassonCoeffs_.lookup(&quot;m&quot;)),            // ADDED
+tau0_(CassonCoeffs_.lookup(&quot;tau0&quot;)),      // ADDED
+nuMin_(CassonCoeffs_.lookup(&quot;nuMin&quot;)),    // ADDED
+nuMax_(CassonCoeffs_.lookup(&quot;nuMax&quot;)),    // ADDED
+        nu_
+        (
+            IOobject
+            (
+                &quot;nu&quot;,
+                U_.time().timeName(),
+                U_.db(),
+                IOobject::NO_READ,
+                IOobject::AUTO_WRITE
+            ),
+            calcNu()
+        )
+{}
+</pre></div>
+</div>
+<p>Add read coefficients:</p>
+<div class="highlight-python"><div class="highlight"><pre>// * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * * //
+
+bool Foam::viscosityModels::Casson::read
+(
+        const dictionary&amp; viscosityProperties
+)
+{
+        viscosityModel::read(viscosityProperties);
+
+        CassonCoeffs_ = viscosityProperties.subDict(typeName + &quot;Coeffs&quot;);
+
+        CassonCoeffs_.lookup(&quot;nu0&quot;) &gt;&gt; nu0_;             // ADDED
+        CassonCoeffs_.lookup(&quot;nuInf&quot;) &gt;&gt; nuInf_;         // ADDED
+        CassonCoeffs_.lookup(&quot;k&quot;) &gt;&gt; k_;                 // ADDED
+        CassonCoeffs_.lookup(&quot;n&quot;) &gt;&gt; n_;                 // ADDED
+</pre></div>
+</div>
+<p>Add coefficients in header file:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano Casson.H
+
+dimensionedScalar m_;
+dimensionedScalar tau0_;
+dimensionedScalar nuMin_;
+dimensionedScalar nuMax_;
+</pre></div>
+</div>
+<p>Compile in the main folder:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wmake libso
+</pre></div>
+</div>
+<div class="section" id="test-the-solver">
+<h3><a class="toc-backref" href="#id27">1.5.2.2.1. Test the solver</a><a class="headerlink" href="#test-the-solver" title="Permalink to this headline">¶</a></h3>
+<p>In constant/transportProperties</p>
+<div class="highlight-python"><div class="highlight"><pre>transportModel  Casson;
+
+CassonCoeffs
+{
+        m             m [ 0 2 -1 0 0 0 0 ] 0.00414;
+        tau0          tau0 [0 2 -2 0 0 0 0] 0.0038;
+        nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+        nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+}
+</pre></div>
+</div>
+<p>In system/controlDict</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">libs</span>
+<span class="p">(</span>
+        <span class="s2">&quot;libCasson.so&quot;</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoam
+</pre></div>
+</div>
+<p>Calculate the velocity magnitude:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the velocity profile:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ./system/sampleDict
+
+        /*--------------------------------*- C++ -*----------------------------------*\
+        | =========                 |                                                 |
+        | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+        |  \\    /   O peration     | Version:  2.4.0                                 |
+        |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+        |    \\/     M anipulation  |                                                 |
+        \*---------------------------------------------------------------------------*/
+        FoamFile
+        {
+                version     2.0;
+                format      ascii;
+                class       dictionary;
+                location    &quot;system&quot;;
+                object      sampleDict;
+        }
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+        interpolationScheme cellPoint;
+
+        setFormat       raw;
+
+        sets
+        (
+                data
+                {
+                        type    uniform;
+                        axis    y;
+                        start   (10 0 0);
+                        end     (10 1 0);
+                        nPoints 10;
+                }
+        );
+
+        fields          (magU);
+
+        // ************************************************************************* //
+</pre></div>
+</div>
+<p>Sample the data:</p>
+<blockquote>
+<div>$ sample</div></blockquote>
+<p>Run the non-Newtonian case</p>
+<p>Remove the data:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ rm -rf 0.* [1-9]* postProcessing *.foam
+</pre></div>
+</div>
+<p>In constant/transportProperties</p>
+<div class="highlight-python"><div class="highlight"><pre>transportModel  Newtonian;
+
+nu              nu [ 0 2 -1 0 0 0 0 ] 1;
+</pre></div>
+</div>
+<p>In constant/controlDict remove the library:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">libs</span>
+<span class="p">(</span>
+            <span class="s2">&quot;libCasson.so&quot;</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoam
+</pre></div>
+</div>
+<p>Calculate the velocity magnitude:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the data:</p>
+<blockquote>
+<div>$ sample</div></blockquote>
+<p>Plot in Python:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">math</span> <span class="kn">as</span> <span class="nn">mt</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s1">&#39;postProcessing/sets/5/data_magU.xy&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;magU&#39;</span><span class="p">])</span>
+<span class="n">data2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s1">&#39;../non_newtonian_002_plates_test_casson/postProcessing/sets/5/data_magU.xy&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x2&#39;</span><span class="p">,</span><span class="s1">&#39;magU2&#39;</span><span class="p">])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+<span class="n">magU</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;magU&#39;</span><span class="p">]</span>
+
+<span class="n">x2</span> <span class="o">=</span> <span class="n">data2</span><span class="p">[</span><span class="s1">&#39;x2&#39;</span><span class="p">]</span>
+<span class="n">magU2</span> <span class="o">=</span> <span class="n">data2</span><span class="p">[</span><span class="s1">&#39;magU2&#39;</span><span class="p">]</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">)</span>
+
+<span class="n">line3</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;magU&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Newtonian&#39;</span><span class="p">)</span>
+<span class="n">line4</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data2</span><span class="p">[</span><span class="s1">&#39;x2&#39;</span><span class="p">],</span> <span class="n">data2</span><span class="p">[</span><span class="s1">&#39;magU2&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Non-Newtonian&#39;</span><span class="p">)</span>
+
+<span class="n">lines</span> <span class="o">=</span> <span class="n">line3</span><span class="o">+</span><span class="n">line4</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+<span class="n">legend</span><span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;medium&#39;</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">r&#39;Distance, x \textit{(m)}&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">r&#39;Velocity Magnitude \textit{(m/s)}&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;compare_velocity_profiles&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="increase-the-mesh-density-near-the-wall-newtonian">
+<h3><a class="toc-backref" href="#id28">1.5.2.2.2. Increase the mesh density near the wall - Newtonian</a><a class="headerlink" href="#increase-the-mesh-density-near-the-wall-newtonian" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ cp -rf non_newtonian_003_plates_test_newtonian non_newtonian_004_plates_test_newtonian_dense
+$ cd non_newtonian_004_plates_test_newtonian_dense
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+</pre></div>
+</div>
+<p>Increase mesh density</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/polyMesh/blockMeshDict
+
+    blocks
+    (
+        hex (0 1 2 3 4 5 6 7) porosity (120 20 1)
+        simpleGrading
+        (
+            1       // x-direction expansion
+            (
+                    (0.2 0.3 4)
+                    (0.6 0.4 1)
+                    (0.2 0.3 0.25)
+            )
+            1       // z-direction expansion
+        )
+    );
+</pre></div>
+</div>
+<p>Re-run the nonNewtonian case:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoam
+</pre></div>
+</div>
+<p>Calculate the velocity magnitude:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the velocity profile:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ./system/sampleDict
+
+        /*--------------------------------*- C++ -*----------------------------------*\
+        | =========                 |                                                 |
+        | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+        |  \\    /   O peration     | Version:  2.4.0                                 |
+        |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+        |    \\/     M anipulation  |                                                 |
+        \*---------------------------------------------------------------------------*/
+        FoamFile
+        {
+                version     2.0;
+                format      ascii;
+                class       dictionary;
+                location    &quot;system&quot;;
+                object      sampleDict;
+        }
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+        interpolationScheme cellPoint;
+
+        setFormat       raw;
+
+        sets
+        (
+                data
+                {
+                        type    uniform;
+                        axis    y;
+                        start   (10 0 0);
+                        end     (10 1 0);
+                        nPoints 1000;
+                }
+        );
+
+        fields          (magU);
+
+        // ************************************************************************* //
+</pre></div>
+</div>
+<p>Sample the data:</p>
+<blockquote>
+<div>$ sample</div></blockquote>
+<p>Plot in Python:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python plot.py
+</pre></div>
+</div>
+</div>
+<div class="section" id="increase-the-mesh-density-near-the-wall-casson">
+<h3><a class="toc-backref" href="#id29">1.5.2.2.3. Increase the mesh density near the wall - Casson</a><a class="headerlink" href="#increase-the-mesh-density-near-the-wall-casson" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ cp -rf non_newtonian_002_plates_test_casson non_newtonian_005_plates_test_casson_dense
+$ cp -rf non_newtonian_004_plates_test_newtonian_dense/constant/polyMesh/blockMeshDict non_newtonian_005_plates_test_casson_dense/constant/polyMesh/blockMeshDict
+$ cd non_newtonian_005_plates_test_casson_dense
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+</pre></div>
+</div>
+<p>Re-run the nonNewtonian case:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoam
+</pre></div>
+</div>
+<p>Sample the velocity profile:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ./system/sampleDict
+
+        /*--------------------------------*- C++ -*----------------------------------*\
+        | =========                 |                                                 |
+        | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+        |  \\    /   O peration     | Version:  2.4.0                                 |
+        |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+        |    \\/     M anipulation  |                                                 |
+        \*---------------------------------------------------------------------------*/
+        FoamFile
+        {
+                version     2.0;
+                format      ascii;
+                class       dictionary;
+                location    &quot;system&quot;;
+                object      sampleDict;
+        }
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+        interpolationScheme cellPoint;
+
+        setFormat       raw;
+
+        sets
+        (
+                data
+                {
+                        type    uniform;
+                        axis    y;
+                        start   (10 0 0);
+                        end     (10 1 0);
+                        nPoints 1000;
+                }
+        );
+
+        fields          (magU);
+
+        // ************************************************************************* //
+</pre></div>
+</div>
+<p>Sample the data:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+<p>Change the python script:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd ../non_newtonian_004_plates_test_newtonian_dense
+$ nano plot.py
+    data2 = np.genfromtxt(&#39;../non_newtonian_005_plates_test_casson_dense/postProcessing/sets/5/data_magU.xy&#39;, delimiter=&#39; &#39;, skip_hea$
+$ python plot.py
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="additional-modifications-to-non-newtonian-fluid-model">
+<h2><a class="toc-backref" href="#id30">1.5.2.3. Additional Modifications to Non-Newtonian fluid model</a><a class="headerlink" href="#additional-modifications-to-non-newtonian-fluid-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="add-da-cruz-non-newtonian-model">
+<h3><a class="toc-backref" href="#id31">1.5.2.3.1. Add da Cruz non-Newtonian model</a><a class="headerlink" href="#add-da-cruz-non-newtonian-model" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Add pressure as volScalarField (like temperature dependent viscosity)</li>
+<li>Set constant effective friction and nu = mu p / gamma</li>
+<li>Set linear effective friction</li>
+</ul>
+<p>ConstantFriction</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd $WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+$ cp -rf Casson ConstantFriction
+$ cd ConstantFriction
+</pre></div>
+</div>
+<p>Remove everything except .C and .H files:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ rm *.dep *.C.save
+$ mv Casson.C ConstantFriction.C
+$ mv Casson.H ConstantFriction.H
+$ sed -i s/Casson/ConstantFriction/g ConstantFriction.C
+$ sed -i s/Casson/ConstantFriction/g ConstantFriction.H
+</pre></div>
+</div>
+<p>Create make files:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano Make/files
+
+        ConstantFriction.C
+
+        LIB = $(FOAM_USER_LIBBIN)/libConstantFriction
+
+$ nano Make/options
+
+        EXE_INC = \
+                -I$(LIB_SRC)/transportModels/incompressible/lnInclude \
+                -I$(LIB_SRC)/finiteVolume/lnInclude
+        LIB_LIBS = \
+                -lfiniteVolume
+</pre></div>
+</div>
+<p>Add formula for ConstantFriction plot:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ConstantFriction.C
+
+// * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * * //
+
+Foam::tmp&lt;Foam::volScalarField&gt;
+Foam::viscosityModels::ConstantFriction::calcNu() const
+{
+    const volScalarField&amp; p = U_.mesh().lookupObject&lt;volScalarField&gt;(&quot;p&quot;);
+
+    return max
+    (
+        nuMin_,
+        min
+        (
+            nuMax_,
+            (muStar_*p)/
+            max
+            (
+                strainRate(),
+                dimensionedScalar(&quot;VSMALL&quot;, dimless/dimTime, VSMALL)
+            )
+        )
+    );
+}
+</pre></div>
+</div>
+<p>Add new coefficients:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ConstantFriction.C
+
+    // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
+
+Foam::viscosityModels::ConstantFriction::ConstantFriction
+(
+    const word&amp; name,
+    const dictionary&amp; viscosityProperties,
+    const volVectorField&amp; U,
+    const surfaceScalarField&amp; phi
+)
+:
+    viscosityModel(name, viscosityProperties, U, phi),
+    ConstantFrictionCoeffs_(viscosityProperties.subDict(typeName + &quot;Coeffs&quot;)),
+    muStar_(ConstantFrictionCoeffs_.lookup(&quot;muStar&quot;)),
+    nuMin_(ConstantFrictionCoeffs_.lookup(&quot;nuMin&quot;)),
+    nuMax_(ConstantFrictionCoeffs_.lookup(&quot;nuMax&quot;)),
+    nu_
+    (
+        IOobject
+        (
+            &quot;nu&quot;,
+            U_.time().timeName(),
+            U_.db(),
+            IOobject::NO_READ,
+            IOobject::AUTO_WRITE
+        ),
+        calcNu()
+    )
+{}
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ConstantFriction.C
+
+// * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * * //
+
+bool Foam::viscosityModels::ConstantFriction::read
+(
+    const dictionary&amp; viscosityProperties
+)
+{
+    viscosityModel::read(viscosityProperties);
+
+    ConstantFrictionCoeffs_ = viscosityProperties.subDict(typeName + &quot;Coeffs&quot;);
+
+    ConstantFrictionCoeffs_.lookup(&quot;muStar&quot;) &gt;&gt; muStar_;
+    ConstantFrictionCoeffs_.lookup(&quot;nuMin&quot;) &gt;&gt; nuMin_;
+    ConstantFrictionCoeffs_.lookup(&quot;nuMax&quot;) &gt;&gt; nuMax_;
+
+
+    return true;
+}
+
+
+// ************************************************************************* //
+</pre></div>
+</div>
+<p>Add coefficients in header file:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ConstantFriction.H
+
+    dimensionedScalar muStar_;
+    dimensionedScalar nuMin_;
+    dimensionedScalar nuMax_;
+</pre></div>
+</div>
+<p>Compile in the main folder (creates .dep):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wmake libso
+</pre></div>
+</div>
+<p>If a mistake is made, clean using</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wclean libso
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id32">1.5.2.3.2. Test the solver</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ cp -rf non_newtonian_005_plates_test_casson_dense non_newtonian_006_plates_test_constant_friction_dense
+$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+</pre></div>
+</div>
+<p>In constant/transportProperties</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/transportProperties
+
+    transportModel  ConstantFriction;
+
+    ConstantFrictionCoeffs
+    {
+            muStar        muStar [ 0 0 0 0 0 0 0 ] 0.11;
+            nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+            nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+    }
+</pre></div>
+</div>
+<p>In system/controlDict</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/controlDict
+
+    libs
+    (
+            &quot;libConstantFriction.so&quot;
+    );
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoam
+</pre></div>
+</div>
+<p>Calculate the velocity magnitude:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the data:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+<p>Copy python</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cp ../non_newtonian_004_plates_test_newtonian_dense/plot.py .
+</pre></div>
+</div>
+<p>Change the python script:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd ../non_newtonian_004_plates_test_newtonian_dense
+$ nano plot.py
+    data2 = np.genfromtxt(&#39;../non_newtonian_005_plates_test_casson_dense/postProcessing/sets/5/data_magU.xy&#39;, delimiter=&#39; &#39;, skip_hea$
+$ python plot.py
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-linear-dacruz-model-linearfriction">
+<h3><a class="toc-backref" href="#id33">1.5.2.3.3. Add linear daCruz model - LinearFriction</a><a class="headerlink" href="#add-linear-dacruz-model-linearfriction" title="Permalink to this headline">¶</a></h3>
+<p>LinearFriction</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd $WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+$ cp -rf ConstantFriction LinearFriction
+$ cd LinearFriction
+</pre></div>
+</div>
+<p>Remove everything except .C and .H files:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wclean libso
+$ mv ConstantFriction.C LinearFriction.C
+$ mv ConstantFriction.H LinearFriction.H
+$ sed -i s/ConstantFriction/LinearFriction/g LinearFriction.C
+$ sed -i s/ConstantFriction/LinearFriction/g LinearFriction.H
+</pre></div>
+</div>
+<p>Create make files:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano Make/files
+
+        LinearFriction.C
+
+        LIB = $(FOAM_USER_LIBBIN)/libLinearFriction
+
+$ nano Make/options
+
+        EXE_INC = \
+                -I$(LIB_SRC)/transportModels/incompressible/lnInclude \
+                -I$(LIB_SRC)/finiteVolume/lnInclude
+        LIB_LIBS = \
+                -lfiniteVolume
+</pre></div>
+</div>
+<p>Add Linear Friction model:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano LinearFriction.C
+
+
+    / * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * * //
+
+    Foam::tmp&lt;Foam::volScalarField&gt;
+    Foam::viscosityModels::LinearFriction::calcNu() const
+    {
+        const volScalarField&amp; p = U_.mesh().lookupObject&lt;volScalarField&gt;(&quot;p&quot;);
+        const volScalarField&amp; muStar = muStar1_ + muStar2_ * (strainRate() /
+                            pow
+                            (
+                                max
+                                (
+                                    p,
+                                    dimensionedScalar(&quot;VSMALL&quot;, p.dimensions(), VSMALL)
+                                ),
+                                0.5
+                            )
+                        );
+
+
+        return max
+        (
+            nuMin_,
+            min
+            (
+                nuMax_,
+                (muStar*p)/
+                max
+                (
+                    strainRate(),
+                    dimensionedScalar(&quot;VSMALL&quot;, dimless/dimTime, VSMALL)
+                )
+            )
+        );
+
+    }
+</pre></div>
+</div>
+<p>Add new coefficients:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano LinearFriction.C
+
+    // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
+
+Foam::viscosityModels::LinearFriction::LinearFriction
+(
+    const word&amp; name,
+    const dictionary&amp; viscosityProperties,
+    const volVectorField&amp; U,
+    const surfaceScalarField&amp; phi
+)
+:
+    viscosityModel(name, viscosityProperties, U, phi),
+    LinearFrictionCoeffs_(viscosityProperties.subDict(typeName + &quot;Coeffs&quot;)),
+    muStar1_(LinearFrictionCoeffs_.lookup(&quot;muStar1&quot;)),
+    muStar2_(LinearFrictionCoeffs_.lookup(&quot;muStar2&quot;)),
+    nuMin_(LinearFrictionCoeffs_.lookup(&quot;nuMin&quot;)),
+    nuMax_(LinearFrictionCoeffs_.lookup(&quot;nuMax&quot;)),
+    nu_
+    (
+        IOobject
+        (
+            &quot;nu&quot;,
+            U_.time().timeName(),
+            U_.db(),
+            IOobject::NO_READ,
+            IOobject::AUTO_WRITE
+        ),
+        calcNu()
+    )
+{}
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>       $ nano ConstantFriction.C
+
+       // * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * * //
+
+       bool Foam::viscosityModels::ConstantFriction::read
+       (
+           const dictionary&amp; viscosityProperties
+       )
+       {
+           viscosityModel::read(viscosityProperties);
+
+           ConstantFrictionCoeffs_ = viscosityProperties.subDict(typeName + &quot;Coeffs&quot;);
+
+           ConstantFrictionCoeffs_.lookup(&quot;muStar1&quot;) &gt;&gt; muStar1_;
+           ConstantFrictionCoeffs_.lookup(&quot;muStar2&quot;) &gt;&gt; muStar2_;
+           ConstantFrictionCoeffs_.lookup(&quot;nuMin&quot;) &gt;&gt; nuMin_;
+           ConstantFrictionCoeffs_.lookup(&quot;nuMax&quot;) &gt;&gt; nuMax_;
+
+
+           return true;
+       }
+
+
+       // ************************************************************************* //
+
+
+Add coefficients in header file:
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano LinearFriction.H
+
+    dimensionedScalar muStar1_;
+    dimensionedScalar muStar2_;
+    dimensionedScalar nuMin_;
+    dimensionedScalar nuMax_;
+</pre></div>
+</div>
+<p>Compile in the main folder (creates .dep):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wmake libso
+</pre></div>
+</div>
+<p>If a mistake is made, clean using</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wclean libso
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id34">1.5.2.3.4. Test the solver</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ cp -rf non_newtonian_006_plates_test_constant_friction_dense non_newtonian_007_plates_test_linear_friction_dense
+$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+</pre></div>
+</div>
+<p>In constant/transportProperties</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/transportProperties
+
+    transportModel  LinearFriction;
+
+    LinearFrictionCoeffs
+    {
+        muStar1       muStar1 [ 0 0 0 0 0 0 0 ] 0.11;
+        muStar2       muStar2 [ 0 1 0 0 0 0 0 ] 1.62;
+        nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+        nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+    }
+</pre></div>
+</div>
+<p>In system/controlDict</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/controlDict
+
+    libs
+    (
+            &quot;libLinearFriction.so&quot;
+    );
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoam
+</pre></div>
+</div>
+<p>Calculate the velocity magnitude:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the data:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+<p>Copy python</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cp ../non_newtonian_004_plates_test_newtonian_dense/plot.py .
+</pre></div>
+</div>
+<p>Change the python script:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd ../non_newtonian_004_plates_test_newtonian_dense
+$ nano plot.py
+    data2 = np.genfromtxt(&#39;../non_newtonian_005_plates_test_casson_dense/postProcessing/sets/5/data_magU.xy&#39;, delimiter=&#39; &#39;, skip_hea$
+$ python plot.py
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Selecting incompressible transport model LinearFriction
+new cannot satisfy memory request.
+This does not necessarily mean you have run out of virtual memory.
+It could be due to a stack violation caused by e.g. bad use of pointers or an out of date shared library
+Aborted (core dumped)
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano LinearFriction.C
+
+
+    / * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * * //
+
+    Foam::tmp&lt;Foam::volScalarField&gt;
+    Foam::viscosityModels::LinearFriction::calcNu() const
+    {
+        const volScalarField&amp; p = U_.mesh().lookupObject&lt;volScalarField&gt;(&quot;p&quot;);
+
+        return max
+        (
+            nuMin_,
+            min
+            (
+                nuMax_,
+                (( muStar1_ + muStar2_ * (strainRate() / pow (max(p,dimensionedScalar(&quot;VSMALL&quot;, p.dimensions(), VSMALL)),0.5)))*p) /
+                max
+                (
+                    strainRate(),
+                    dimensionedScalar(&quot;VSMALL&quot;, dimless/dimTime, VSMALL)
+                )
+            )
+        );
+
+    }
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-non-linear-jop-model-nonlinearfriction">
+<h3><a class="toc-backref" href="#id35">1.5.2.3.5. Add non-linear Jop model - NonLinearFriction</a><a class="headerlink" href="#add-non-linear-jop-model-nonlinearfriction" title="Permalink to this headline">¶</a></h3>
+<p>NonLinearFriction</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd $WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+$ cp -rf LinearFriction NonLinearFriction
+$ cd NonLinearFriction
+</pre></div>
+</div>
+<p>Remove everything except .C and .H files:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ two
+$ wclean libso
+$ mv LinearFriction.C NonLinearFriction.C
+$ mv LinearFriction.H NonLinearFriction.H
+$ sed -i s/LinearFriction/NonLinearFriction/g NonLinearFriction.C
+$ sed -i s/LinearFriction/NonLinearFriction/g NonLinearFriction.H
+</pre></div>
+</div>
+<p>Create make files:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano Make/files
+
+        NonLinearFriction.C
+
+        LIB = $(FOAM_USER_LIBBIN)/libNonLinearFriction
+
+$ nano Make/options
+
+        EXE_INC = \
+                -I$(LIB_SRC)/transportModels/incompressible/lnInclude \
+                -I$(LIB_SRC)/finiteVolume/lnInclude
+        LIB_LIBS = \
+                -lfiniteVolume
+</pre></div>
+</div>
+<p>Add NonLinear Friction model:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano NonLinearFriction.C
+
+
+    // * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * * //
+
+            Foam::tmp&lt;Foam::volScalarField&gt;
+            Foam::viscosityModels::NonLinearFriction::calcNu() const
+            {
+                    const volScalarField&amp; p = U_.mesh().lookupObject&lt;volScalarField&gt;(&quot;p&quot;);
+
+                    return max
+                    (
+                            nuMin_,
+                            min
+                            (
+                                nuMax_,
+                                (( muStar1_ + ( muStar2_ - muStar1_ ) / ( iZero_ / (max(strainRate(),dimensionedScalar(&quot;VSMALL&quot;, dimless/dimTime, VSMALL)) / pow (max(p,dimensionedScalar(&quot;VSMALL&quot;, p.dimensions(), VSMALL)),0.5)) + 1 ) )*p)/
+                                max
+                                (
+                                    strainRate(),
+                                    dimensionedScalar(&quot;VSMALL&quot;, dimless/dimTime, VSMALL)
+                                )
+                            )
+                    );
+
+            }
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano LinearFriction.C
+
+    // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
+
+    Foam::viscosityModels::NonLinearFriction::NonLinearFriction
+    (
+        const word&amp; name,
+        const dictionary&amp; viscosityProperties,
+        const volVectorField&amp; U,
+        const surfaceScalarField&amp; phi
+    )
+    :
+        viscosityModel(name, viscosityProperties, U, phi),
+        NonLinearFrictionCoeffs_(viscosityProperties.subDict(typeName + &quot;Coeffs&quot;)),
+        iZero_(NonLinearFrictionCoeffs_.lookup(&quot;iZero&quot;)),
+        muStar1_(NonLinearFrictionCoeffs_.lookup(&quot;muStar1&quot;)),
+        muStar2_(NonLinearFrictionCoeffs_.lookup(&quot;muStar2&quot;)),
+        nuMin_(NonLinearFrictionCoeffs_.lookup(&quot;nuMin&quot;)),
+        nuMax_(NonLinearFrictionCoeffs_.lookup(&quot;nuMax&quot;)),
+        nu_
+        (
+            IOobject
+            (
+                &quot;nu&quot;,
+                U_.time().timeName(),
+                U_.db(),
+                IOobject::NO_READ,
+                IOobject::AUTO_WRITE
+            ),
+            calcNu()
+        )
+    {}
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>// * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * * //
+
+bool Foam::viscosityModels::NonLinearFriction::read
+(
+    const dictionary&amp; viscosityProperties
+)
+{
+    viscosityModel::read(viscosityProperties);
+
+    NonLinearFrictionCoeffs_ = viscosityProperties.subDict(typeName + &quot;Coeffs&quot;);
+
+    NonLinearFrictionCoeffs_.lookup(&quot;iZero&quot;) &gt;&gt; iZero_;
+    NonLinearFrictionCoeffs_.lookup(&quot;muStar1&quot;) &gt;&gt; muStar1_;
+    NonLinearFrictionCoeffs_.lookup(&quot;muStar2&quot;) &gt;&gt; muStar2_;
+    NonLinearFrictionCoeffs_.lookup(&quot;nuMin&quot;) &gt;&gt; nuMin_;
+    NonLinearFrictionCoeffs_.lookup(&quot;nuMax&quot;) &gt;&gt; nuMax_;
+
+
+    return true;
+}
+</pre></div>
+</div>
+<p>Add coefficients in header file:</p>
+<div class="highlight-python"><div class="highlight"><pre>   $ nano NonLinearFriction.H
+
+       dimensionedScalar iZero_;
+       dimensionedScalar muStar1_;
+       dimensionedScalar muStar2_;
+       dimensionedScalar nuMin_;
+       dimensionedScalar nuMax_;
+
+Compile in the main folder (creates .dep):
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ wmake libso
+</pre></div>
+</div>
+<p>If a mistake is made, clean using</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wclean libso
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id36">1.5.2.3.6. Test the solver</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ cp -rf non_newtonian_007_plates_test_linear_friction_dense non_newtonian_008_plates_test_non_linear_friction_dense
+$ cd non_newtonian_008_plates_test_non_linear_friction_dense
+$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+</pre></div>
+</div>
+<p>In constant/transportProperties</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/transportProperties
+
+    transportModel  NonLinearFriction;
+
+    NonLinearFrictionCoeffs
+    {
+        iZero         iZero [ 0 -1 0 0 0 0 0 ] 0.279;
+        muStar1       muStar1 [ 0 0 0 0 0 0 0 ] 0.382;
+        muStar2       muStar2 [ 0 0 0 0 0 0 0 ] 0.643;
+        nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+        nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+    }
+</pre></div>
+</div>
+<p>In system/controlDict</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/controlDict
+
+    libs
+    (
+            &quot;libNonLinearFriction.so&quot;
+    );
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoam
+</pre></div>
+</div>
+<p>Calculate the velocity magnitude:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the data:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Floating point exception (core dumped)
+</pre></div>
+</div>
+<p>Made sure everything was positive</p>
+<p>Now there is some distrubance - increase the length of the pipe to see if it is fully developed</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/polyMesh/blockMeshDict
+
+    // The vertices can be defined using variables Lx, Ly, Lz. It saves time to modify the size of the domain
+
+    Lx 20;
+    Ly 1;
+    Lz 0.1;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/sampleDict
+
+    start   (20 0 0);
+    end     (20 1 0);
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+</pre></div>
+</div>
+<p>Create the new mesh:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ blockMesh
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoam
+</pre></div>
+</div>
+<p>Calculate the velocity magnitude:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the data:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+<p>The inertial number is possibly too small. so that the regime being tested is not the dense regime.
+So export the local strain rate to see what the inertial number is</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano NonLinearFriction.C
+
+nu_
+(
+    IOobject
+    (
+        &quot;nu&quot;,
+        U_.time().timeName(),
+        U_.db(),
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    calcNu()
+),
+strainRate_
+(
+    IOobject
+    (
+        &quot;strainRate&quot;,
+        U_.time().timeName(),
+        U_.db(),
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    strainRate()
+)
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano NonLinearFriction.H
+
+    volScalarField strainRate_;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ cp -rf  non_newtonian_008_plates_test_non_linear_friction_dense non_newtonian_009_plates_test_non_linear_friction_dense_strain
+$ cd non_newtonian_009_plates_test_non_linear_friction_dense_strain
+$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoam
+</pre></div>
+</div>
+<p>Calculate the velocity magnitude:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the data:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+<p>Strain rate can&#8217;t be zero, so output strain rate from a Functions</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano NonLinearFriction.C
+
+    Foam::tmp&lt;Foam::volScalarField&gt;
+    Foam::viscosityModels::NonLinearFriction::calcStrainRate() const
+    {
+
+        return max
+        (
+            strainRate(),
+            dimensionedScalar(&quot;VSMALL&quot;, dimless/dimTime, VSMALL)
+
+        );
+
+    }
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano NonLinearFriction.H
+
+    //- Calculate and return the strain rate
+    tmp&lt;volScalarField&gt; calcStrainRate() const;
+</pre></div>
+</div>
+<p>Strain rate is zero for most of the channel</p>
+<p>So what is the friction?</p>
+<div class="highlight-python"><div class="highlight"><pre>Foam::tmp&lt;Foam::volScalarField&gt;
+Foam::viscosityModels::NonLinearFriction::calcMu() const
+{
+
+    return
+    ( muStar1_ + ( muStar2_ - muStar1_ ) / ( iZero_ / (max(strainRate(),dimensionedScalar(&quot;VSMALL&quot;, dimless/dimTime, VSMALL)) / pow (max(p,dimensionedScalar(&quot;VSMALL&quot;, p.dimensions(), VSMALL)),0.5)) + 1 ) );
+
+}
+
+mu_
+(
+    IOobject
+    (
+        &quot;mu&quot;,
+        U_.time().timeName(),
+        U_.db(),
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    calcMu()
+)
+</pre></div>
+</div>
+<p>Viscosity is out of range because pressure is extremely high.</p>
+<p>set pressure = 100 at inlet</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cp -rf  non_newtonian_009_plates_test_non_linear_friction_dense_strain non_newtonian_010_plates_non_linear_pressure
+$ cd non_newtonian_010_plates_non_linear_pressure
+$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>       $ mkdir 0
+       $ nano 0/p
+
+           FoamFile
+           {
+               version     2.0;
+               format      ascii;
+               class       volScalarField;
+               object      p;
+           }
+           // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+           dimensions      [0 2 -2 0 0 0 0];
+
+           internalField   uniform 0;
+
+           boundaryField
+           {
+               inlet
+               {
+                   type            fixedValue;
+                   value           uniform 101.325;
+               }
+
+               outlet
+               {
+                   type            fixedValue;
+                   value           uniform 0;
+               }
+
+
+               walls
+               {
+                   type            zeroGradient;
+               }
+
+
+               frontAndBack
+               {
+                   type            empty;
+               }
+
+           }
+
+
+       $ nano 0/U
+
+           FoamFile
+           {
+               version     2.0;
+               format      ascii;
+               class       volVectorField;
+               object      U;
+           }
+           // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+           dimensions      [0 1 -1 0 0 0 0];
+
+           internalField   uniform (0 0 0);
+
+           boundaryField
+           {
+               inlet
+               {
+                   type            zeroGradient;
+               }
+
+               outlet
+               {
+                   type            zeroGradient;
+               }
+
+
+               walls
+               {
+                   type            fixedValue;
+                   value           uniform (0 0 0);
+               }
+
+
+               frontAndBack
+               {
+                   type            empty;
+               }
+
+           }
+
+::
+
+   $ nonNewtonianIcoFoam
+</pre></div>
+</div>
+<p>Calculate the velocity magnitude:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the data:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+<p>Reduce pressure at inlet:</p>
+<div class="highlight-python"><div class="highlight"><pre>inlet
+{
+    type            fixedValue;
+    value           uniform 10;
+}
+</pre></div>
+</div>
+<p>Output in solver  not constructor for updated values</p>
+<p>$ cp -r $FOAM_APP/solvers/incompressible/nonNewtonianIcoFoam nonNewtonianIcoFoamGranular</p>
+<p>Once the laplacianFoam solver has been copied into the user directory, we rename the main file and edit the Make/files</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd nonNewtonianIcoFoamGranular
+$ mv nonNewtonianIcoFoam.C nonNewtonianIcoFoamGranular.C
+$ wclean
+$ gedit Make/files
+</pre></div>
+</div>
+<p>Change files</p>
+<div class="highlight-python"><div class="highlight"><pre>nonNewtonianIcoFoamGranular.C
+
+EXE = $(FOAM_USER_APPBIN)/nonNewtonianIcoFoamGranular
+</pre></div>
+</div>
+<p>We can now clean the previous compilation with wclean and compile this new program with wmake.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wclean
+$ wmake
+</pre></div>
+</div>
+<p>Add this to NonLinearFriction.H</p>
+<div class="highlight-python"><div class="highlight"><pre>//- Correct the laminar viscosity
+void correct()
+{
+    nu_ = calcNu();
+    strainRate_ = calcStrainRate();
+    mu_ = calcMu();
+    Info &lt;&lt; &quot;max(nu): &quot; &lt;&lt; max(calcNu()).value() &lt;&lt; &quot; min(nu): &quot; &lt;&lt; min(calcNu()).value() &lt;&lt; endl;
+    Info &lt;&lt; &quot;max(sr): &quot; &lt;&lt; max(calcStrainRate()).value() &lt;&lt; &quot; min(sr): &quot; &lt;&lt; min(calcStrainRate()).value() &lt;&lt; endl;
+    Info &lt;&lt; &quot;max(mu): &quot; &lt;&lt; max(calcMu()).value() &lt;&lt; &quot; min(mu): &quot; &lt;&lt; min(calcMu()).value() &lt;&lt; endl;
+}
+</pre></div>
+</div>
+<p>It&#8217;s unclear why the maximum value of calcstrainRate() as output from correct() is different from the value in paraview</p>
+<p>before PISO loop:</p>
+<p>max(calcStrainRate()).value() = 0.103329</p>
+<p>after PISO loop:</p>
+<p>max(calcStrainRate()).value()  = 0.0752414</p>
+<dl class="docutils">
+<dt>Paraview: max strainrate (volumes) = 0.0629</dt>
+<dd>(points) = 0.0833</dd>
+</dl>
+<p>May depend on the way the maximum is computed, using points or volumes</p>
+<p>Choose to define inertia number based on global values</p>
+<p>Repeat with Newtonian ,  linear and Casson (Poiseulle)</p>
+</div>
+<div class="section" id="non-newtonian-010-plates-non-linear-pressure">
+<h3><a class="toc-backref" href="#id37">1.5.2.3.7. non_newtonian_010_plates_non_linear_pressure</a><a class="headerlink" href="#non-newtonian-010-plates-non-linear-pressure" title="Permalink to this headline">¶</a></h3>
+<p>In system/controlDict</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/controlDict
+
+    application nonNewtonianIcoFoamGranular
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoamGranular
+</pre></div>
+</div>
+<p>Calculate the velocity magnitude:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the data:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+</div>
+<div class="section" id="non-newtonian-011-plates-linear-pressure">
+<h3><a class="toc-backref" href="#id38">1.5.2.3.8. non_newtonian_011_plates_linear_pressure</a><a class="headerlink" href="#non-newtonian-011-plates-linear-pressure" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ cp -rf non_newtonian_010_plates_non_linear_pressure non_newtonian_011_plates_linear_pressure
+$ cd non_newtonian_011_plates_linear_pressure
+$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+</pre></div>
+</div>
+<p>In system/controlDict</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/controlDict
+
+
+    application nonNewtonianIcoFoamGranular
+
+    libs
+    (
+            &quot;libLinearFriction.so&quot;
+    );
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/transportProperties
+
+transportModel  LinearFriction;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoamGranular
+</pre></div>
+</div>
+<p>Calculate the velocity magnitude:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the data:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+</div>
+<div class="section" id="non-newtonian-012-plates-casson-pressure">
+<h3><a class="toc-backref" href="#id39">1.5.2.3.9. non_newtonian_012_plates_casson_pressure</a><a class="headerlink" href="#non-newtonian-012-plates-casson-pressure" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ cp -rf non_newtonian_011_plates_linear_pressure non_newtonian_012_plates_casson_pressure
+$ cd non_newtonian_012_plates_casson_pressure
+$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+</pre></div>
+</div>
+<p>In system/controlDict</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/controlDict
+
+    libs
+    (
+            &quot;libCasson.so&quot;
+    );
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/transportProperties
+
+transportModel  Casson;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoam
+</pre></div>
+</div>
+</div>
+<div class="section" id="non-newtonian-013-plates-newtonian-pressure">
+<h3><a class="toc-backref" href="#id40">1.5.2.3.10. non_newtonian_013_plates_newtonian_pressure</a><a class="headerlink" href="#non-newtonian-013-plates-newtonian-pressure" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ cp -rf non_newtonian_012_plates_casson_pressure non_newtonian_013_plates_newtonian_pressure
+$ cd non_newtonian_013_plates_newtonian_pressure
+$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/controlDict
+
+  //  libs
+  //  (
+  //         &quot;libCasson.so&quot;
+  //  );
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/transportProperties
+
+transportModel  Newtonian;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoam
+</pre></div>
+</div>
+</div>
+<div class="section" id="non-newtonian-014-plates-linear-new-coefficients">
+<h3><a class="toc-backref" href="#id41">1.5.2.3.11. non_newtonian_014_plates_linear_new_coefficients</a><a class="headerlink" href="#non-newtonian-014-plates-linear-new-coefficients" title="Permalink to this headline">¶</a></h3>
+<p>Use coefficients from daCruz 2008</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cp -rf non_newtonian_011_plates_linear_pressure non_newtonian_014_plates_linear_new_coefficients
+$ cd non_newtonian_014_plates_linear_new_coefficients
+$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+</pre></div>
+</div>
+<p>In system/controlDict</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/controlDict
+
+
+    LinearFrictionCoeffs
+    {
+        muStar1       muStar1 [ 0 0 0 0 0 0 0 ] 0.22;
+        muStar2       muStar2 [ 0 1 0 0 0 0 0 ] 1.00;
+        nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+        nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+    }
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoamGranular
+</pre></div>
+</div>
+<p>Calculate the velocity magnitude:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the data:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+<p>mu is becoming very large = 7.81189e+148, this is no -physical</p>
+<p>Introduce satruation for mu</p>
+</div>
+<div class="section" id="new-viscosity-model-linearfrictionsaturated">
+<h3><a class="toc-backref" href="#id42">1.5.2.3.12. New Viscosity Model - LinearFrictionSaturated</a><a class="headerlink" href="#new-viscosity-model-linearfrictionsaturated" title="Permalink to this headline">¶</a></h3>
+<p>LinearFrictionSaturated</p>
+<div class="highlight-python"><div class="highlight"><pre>$ two
+$ cd $WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+$ cp -rf LinearFriction LinearFrictionSaturated
+$ cd LinearFrictionSaturated
+</pre></div>
+</div>
+<p>Remove everything except .C and .H files:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wclean libso
+$ mv LinearFriction.C LinearFrictionSaturated.C
+$ mv LinearFriction.H LinearFrictionSaturated.H
+$ sed -i s/LinearFriction/LinearFrictionSaturated/g LinearFrictionSaturated.C
+$ sed -i s/LinearFriction/LinearFrictionSaturated/g LinearFrictionSaturated.H
+$ sed -i s/LinearFriction/LinearFrictionSaturated/g Make/files
+</pre></div>
+</div>
+<p>Add Linear Friction model:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano LinearFrictionSaturated.C
+
+    Foam::tmp&lt;Foam::volScalarField&gt;
+    Foam::viscosityModels::LinearFrictionSaturated::calcNu() const
+    {
+        const volScalarField&amp; p = U_.mesh().lookupObject&lt;volScalarField&gt;(&quot;p&quot;);
+
+        return max
+        (
+            nuMin_,
+            min
+            (
+                nuMax_,
+                ((min
+                (
+                    muMax_,
+                    muStar1_ + muStar2_ * ((strainRate() * diameter_) / pow (max(p,dimensionedScalar(&quot;VSMALL&quot;, p.dimensions(), VSMALL)),0.5))
+                ))*p)/
+                max
+                (
+                    strainRate(),
+                    dimensionedScalar(&quot;VSMALL&quot;, dimless/dimTime, VSMALL)
+                )
+            )
+        );
+
+    }
+
+
+    Foam::tmp&lt;Foam::volScalarField&gt;
+    Foam::viscosityModels::LinearFrictionSaturated::calcMu() const
+    {
+        const volScalarField&amp; p = U_.mesh().lookupObject&lt;volScalarField&gt;(&quot;p&quot;);
+
+        return min
+        (
+            muMax_,
+            muStar1_ + muStar2_ * ((strainRate() * diameter_) / pow (max(p,dimensionedScalar(&quot;VSMALL&quot;, p.dimensions(), VSMALL)),0.5))
+        );
+
+    }
+
+
+    muMax_(LinearFrictionSaturatedCoeffs_.lookup(&quot;muMax&quot;)),
+    diameter_(LinearFrictionSaturatedCoeffs_.lookup(&quot;diameter&quot;)),
+
+    LinearFrictionSaturatedCoeffs_.lookup(&quot;muMax&quot;) &gt;&gt; muMax_;
+    LinearFrictionSaturatedCoeffs_.lookup(&quot;diameter&quot;) &gt;&gt; diameter_;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano LinearFrictionSaturated.H
+
+    dimensionedScalar muMax_;
+    dimensionedScalar diameter_;
+</pre></div>
+</div>
+<p>Compile in the main folder (creates .dep):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wmake libso
+</pre></div>
+</div>
+<p>If a mistake is made, clean using</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wclean libso
+</pre></div>
+</div>
+</div>
+<div class="section" id="non-newtonian-015-plates-linear-saturated">
+<h3><a class="toc-backref" href="#id43">1.5.2.3.13. non_newtonian_015_plates_linear_saturated</a><a class="headerlink" href="#non-newtonian-015-plates-linear-saturated" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ cd $FOAM_RUN
+$ cp -rf non_newtonian_014_plates_linear_new_coefficients non_newtonian_015_plates_linear_saturated
+$ cd non_newtonian_015_plates_linear_saturated
+$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/transportProperties
+
+
+    LinearFrictionSaturatedCoeffs
+    {
+        muStar1       muStar1 [ 0 0 0 0 0 0 0 ] 0.22;
+        muStar2       muStar2 [ 0 1 0 0 0 0 0 ] 1.00;
+        muMax         muMax [ 0 0 0 0 0 0 0 ] 0.44;
+        nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+        nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+        diameter      diameter [ 0 1 0 0 0 0 0 ] 1;
+    }
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/controlDict
+
+    libs
+    (
+            &quot;libLinearFrictionSaturated.so&quot;
+    );
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoamGranular
+</pre></div>
+</div>
+<p>Calculate the velocity magnitude:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the data:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+</div>
+<div class="section" id="introduce-diameter-into-inertial-number-in-non-linear-friction-model">
+<h3><a class="toc-backref" href="#id44">1.5.2.3.14. Introduce diameter into Inertial Number in Non Linear Friction Model</a><a class="headerlink" href="#introduce-diameter-into-inertial-number-in-non-linear-friction-model" title="Permalink to this headline">¶</a></h3>
+<p>NonLinearFrictionDiameter</p>
+<div class="highlight-python"><div class="highlight"><pre>$ two
+$ cd $WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+$ cp -rf NonLinearFriction NonLinearFrictionDiameter
+$ cd NonLinearFrictionDiameter
+</pre></div>
+</div>
+<p>Remove everything except .C and .H files:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wclean libso
+$ mv NonLinearFriction.C NonLinearFrictionDiameter.C
+$ mv NonLinearFriction.H NonLinearFrictionDiameter.H
+$ sed -i s/NonLinearFriction/NonLinearFrictionDiameter/g NonLinearFrictionDiameter.C
+$ sed -i s/NonLinearFriction/NonLinearFrictionDiameter/g NonLinearFrictionDiameter.H
+$ sed -i s/NonLinearFriction/NonLinearFrictionDiameter/g Make/files
+</pre></div>
+</div>
+<p>Add Linear Friction model:</p>
+<div class="highlight-python"><div class="highlight"><pre>Foam::tmp&lt;Foam::volScalarField&gt;
+Foam::viscosityModels::NonLinearFrictionDiameter::calcNu() const
+{
+    const volScalarField&amp; p = U_.mesh().lookupObject&lt;volScalarField&gt;(&quot;p&quot;);
+    //volScalarField sR(&quot;StrainRate&quot;, strainRate());
+    //Info &lt;&lt; &quot;Max volSR = &quot; &lt;&lt; max(sR) &lt;&lt; &quot;; min volSR = &quot; &lt;&lt; min(sR) &lt;&lt; endl;
+    //Info &lt;&lt; &quot;max(strainRate): &quot; &lt;&lt; max(strainRate()).value() &lt;&lt; &quot; min(strainRate): &quot; &lt;&lt; min(strainRate()).value() &lt;&lt; endl;
+
+    return max
+    (
+        nuMin_,
+        min
+        (
+            nuMax_,
+            (( muStar1_ + ( muStar2_ - muStar1_ ) / ( iZero_ / ( ((max(strainRate(),dimensionedScalar(&quot;VSMALL&quot;, dimless/dimTime, VSMALL)) * diameter_) / pow (max(p,dimensionedScalar(&quot;VSMALL&quot;, p.dimensions(), VSMALL)),0.5)) + 1 ) ) )*p)/
+            max
+            (
+                strainRate(),
+                dimensionedScalar(&quot;VSMALL&quot;, dimless/dimTime, VSMALL)
+            )
+        )
+    );
+
+}
+
+
+Foam::tmp&lt;Foam::volScalarField&gt;
+Foam::viscosityModels::NonLinearFrictionDiameter::calcMu() const
+{
+    const volScalarField&amp; p = U_.mesh().lookupObject&lt;volScalarField&gt;(&quot;p&quot;);
+
+    return
+    ( muStar1_ + ( muStar2_ - muStar1_ ) / ( iZero_ / ( ((max(strainRate(),dimensionedScalar(&quot;VSMALL&quot;, dimless/dimTime, VSMALL)) * diameter_) / pow (max(p,dimensionedScalar(&quot;VSMALL&quot;, p.dimensions(), VSMALL)),0.5)) + 1 ) ) );
+
+}
+
+diameter_(NonLinearFrictionDiameterCoeffs_.lookup(&quot;diameter&quot;)),
+NonLinearFrictionDiameterCoeffs_.lookup(&quot;diameter&quot;) &gt;&gt; diameter_;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano LinearFrictionSaturated.H
+
+    dimensionedScalar diameter_;
+</pre></div>
+</div>
+<p>Compile in the main folder (creates .dep):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wmake libso
+</pre></div>
+</div>
+<p>If a mistake is made, clean using</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wclean libso
+</pre></div>
+</div>
+</div>
+<div class="section" id="non-newtonian-016-plates-non-linear-diameter">
+<h3><a class="toc-backref" href="#id45">1.5.2.3.15. non_newtonian_016_plates_non_linear_diameter</a><a class="headerlink" href="#non-newtonian-016-plates-non-linear-diameter" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ cd $FOAM_RUN
+$ cp -rf non_newtonian_015_plates_linear_saturated non_newtonian_016_plates_linear_diameter
+$ cd non_newtonian_016_plates_linear_diameter
+$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/transportProperties
+
+
+    NonLinearFrictionDiameterCoeffs
+    {
+                    iZero         iZero [ 0 0 0 0 0 0 0 ] 0.279;
+                    muStar1       muStar1 [ 0 0 0 0 0 0 0 ] 0.382;
+                    muStar2       muStar2 [ 0 0 0 0 0 0 0 ] 0.643;
+                    nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+                    nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+                    diameter      diameter [ 0 1 0 0 0 0 0 ] 1;
+    }
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/controlDict
+
+    libs
+    (
+            &quot;libNonLinearFrictionDiameter.so&quot;
+    );
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoamGranular
+</pre></div>
+</div>
+<p>Calculate the velocity magnitude:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the data:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+</div>
+<div class="section" id="declare-variables-separately-for-easy-readability">
+<h3><a class="toc-backref" href="#id46">1.5.2.3.16. Declare variables separately for easy readability</a><a class="headerlink" href="#declare-variables-separately-for-easy-readability" title="Permalink to this headline">¶</a></h3>
+<p>NonLinearFrictionDiameterDeclare</p>
+<div class="highlight-python"><div class="highlight"><pre>$ two
+$ cd $WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+$ cp -rf NonLinearFrictionDiameter NonLinearFrictionDiameterDeclare
+$ cd NonLinearFrictionDiameterDeclare
+</pre></div>
+</div>
+<p>Remove everything except .C and .H files:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wclean libso
+$ mv NonLinearFrictionDiameter.C NonLinearFrictionDiameterDeclare.C
+$ mv NonLinearFrictionDiameter.H NonLinearFrictionDiameterDeclare.H
+$ sed -i s/NonLinearFrictionDiameter/NonLinearFrictionDiameterDeclare/g NonLinearFrictionDiameterDeclare.C
+$ sed -i s/NonLinearFrictionDiameter/NonLinearFrictionDiameterDeclare/g NonLinearFrictionDiameterDeclare.H
+$ sed -i s/NonLinearFrictionDiameter/NonLinearFrictionDiameterDeclare/g Make/files
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>// * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * * //
+
+Foam::tmp&lt;Foam::volScalarField&gt;
+Foam::viscosityModels::NonLinearFrictionDiameterDeclare::calcNu() const
+{
+        const volScalarField&amp; p = U_.mesh().lookupObject&lt;volScalarField&gt;(&quot;p&quot;);
+
+        const volScalarField strainRate_
+        (
+            max(strainRate(), dimensionedScalar(&quot;VSMALL&quot;, dimless/dimTime, VSMALL))     // Zero strainRate -&gt; Divide by zero in return statement
+        );
+
+        return max
+        (
+            nuMin_, min ( nuMax_, (calcMu()*p)/strainRate_ )
+        );
+
+}
+
+
+Foam::tmp&lt;Foam::volScalarField&gt;
+Foam::viscosityModels::NonLinearFrictionDiameterDeclare::calcMu() const
+{
+        const volScalarField&amp; p = U_.mesh().lookupObject&lt;volScalarField&gt;(&quot;p&quot;);
+
+        // VSMALL = 1.0e-37
+
+        const volScalarField strainRate_
+        (
+            max(strainRate(), dimensionedScalar(&quot;VSMALL&quot;, dimless/dimTime, VSMALL))     // Zero strainRate -&gt; Zero iNumber_ -&gt; Divide by zero in return statement
+        );
+
+        const volScalarField pressure_
+        (
+            max(p, dimensionedScalar(&quot;VSMALL&quot;, p.dimensions(), VSMALL))                 // Zero pressure -&gt; Sqrt of negative number in iNumber_
+        );
+
+        const volScalarField iNumber_
+        (
+            (strainRate_ * diameter_) / pow (pressure_, 0.5)
+        );
+
+        return ( muStar1_ + ( muStar2_ - muStar1_ ) / ( (iZero_ / iNumber_) + 1 ) );
+
+}
+</pre></div>
+</div>
+<p>Compile in the main folder (creates .dep):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wmake libso
+</pre></div>
+</div>
+<p>If a mistake is made, clean using</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wclean libso
+</pre></div>
+</div>
+</div>
+<div class="section" id="non-newtonian-017-plates-nonlinear-diameter-declare">
+<h3><a class="toc-backref" href="#id47">1.5.2.3.17. non_newtonian_017_plates_nonlinear_diameter_declare</a><a class="headerlink" href="#non-newtonian-017-plates-nonlinear-diameter-declare" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ cd $FOAM_RUN
+$ cp -rf non_newtonian_016_plates_nonlinear_diameter non_newtonian_017_plates_nonlinear_diameter_declare
+$ cd non_newtonian_017_plates_nonlinear_diameter_declare
+$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/transportProperties
+
+
+    NonLinearFrictionDiameterDeclareCoeffs
+    {
+                    iZero         iZero [ 0 0 0 0 0 0 0 ] 0.279;
+                    muStar1       muStar1 [ 0 0 0 0 0 0 0 ] 0.382;
+                    muStar2       muStar2 [ 0 0 0 0 0 0 0 ] 0.643;
+                    nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+                    nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+                    diameter      diameter [ 0 1 0 0 0 0 0 ] 1;
+    }
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/controlDict
+
+    libs
+    (
+            &quot;libNonLinearFrictionDiameterDeclare.so&quot;
+    );
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoamGranular
+</pre></div>
+</div>
+<p>Calculate the velocity magnitude:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the data:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id48">1.5.2.3.18. Declare variables separately for easy readability</a><a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>LinearFrictionDiameterDeclare</p>
+<div class="highlight-python"><div class="highlight"><pre>$ two
+$ cd $WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+$ cp -rf LinearFrictionSaturated LinearFrictionDiameterDeclare
+$ cd LinearFrictionDiameterDeclare
+</pre></div>
+</div>
+<p>Remove everything except .C and .H files:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ mv LinearFrictionSaturated.C LinearFrictionDiameterDeclare.C
+$ mv LinearFrictionSaturated.H LinearFrictionDiameterDeclare.H
+$ sed -i s/LinearFrictionSaturated/LinearFrictionDiameterDeclare/g LinearFrictionDiameterDeclare.C
+$ sed -i s/LinearFrictionSaturated/LinearFrictionDiameterDeclare/g LinearFrictionDiameterDeclare.H
+$ sed -i s/LinearFrictionSaturated/LinearFrictionDiameterDeclare/g Make/files
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>Foam::tmp&lt;Foam::volScalarField&gt;
+Foam::viscosityModels::LinearFrictionDiameterDeclare::calcNu() const
+{
+        const volScalarField&amp; p = U_.mesh().lookupObject&lt;volScalarField&gt;(&quot;p&quot;);
+
+        const volScalarField strainRate_
+        (
+            max(strainRate(), dimensionedScalar(&quot;VSMALL&quot;, dimless/dimTime, VSMALL))     // Zero strainRate -&gt; Divide by zero in return statement
+        );
+
+        return max
+        (
+            nuMin_, min ( nuMax_, (calcMu()*p)/strainRate_ )
+        );
+
+}
+
+
+Foam::tmp&lt;Foam::volScalarField&gt;
+Foam::viscosityModels::LinearFrictionDiameterDeclare::calcMu() const
+{
+        const volScalarField&amp; p = U_.mesh().lookupObject&lt;volScalarField&gt;(&quot;p&quot;);
+
+        const volScalarField pressure_
+        (
+            max(p, dimensionedScalar(&quot;VSMALL&quot;, p.dimensions(), VSMALL))                 // Zero pressure -&gt; Sqrt of negative number in iNumber_
+        );
+
+        const volScalarField iNumber_
+        (
+            (strainRate() * diameter_) / pow (pressure_, 0.5)
+        );
+
+
+        return min
+        (
+            muMax_, ( muStar1_ + muStar2_ * iNumber_ )
+        );
+
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="non-newtonian-018-plates-linear-diameter-declare">
+<h3><a class="toc-backref" href="#id49">1.5.2.3.19. non_newtonian_018_plates_linear_diameter_declare</a><a class="headerlink" href="#non-newtonian-018-plates-linear-diameter-declare" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ cd $FOAM_RUN
+$ cp -rf non_newtonian_017_plates_nonlinear_diameter non_newtonian_018_plates_linear_diameter_declare
+$ cd non_newtonian_018_plates_linear_diameter_declare
+$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/transportProperties
+
+
+            LinearFrictionDiameterDeclareCoeffs
+            {
+                    muStar1       muStar1 [ 0 0 0 0 0 0 0 ] 0.22;
+                    muStar2       muStar2 [ 0 0 0 0 0 0 0 ] 1.00;
+                    muMax         muMax [ 0 0 0 0 0 0 0 ] 0.44;
+                    nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+                    nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+                    diameter      diameter [ 0 1 0 0 0 0 0 ] 1.0;
+            }
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/controlDict
+
+    libs
+    (
+            &quot;libLinearFrictionDiameterDeclare.so&quot;
+    );
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoamGranular
+</pre></div>
+</div>
+<p>Calculate the velocity magnitude:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the data:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="twophaseeulerfoam-modifications">
+<h2><a class="toc-backref" href="#id50">1.5.2.4. twoPhaseEulerFoam Modifications</a><a class="headerlink" href="#twophaseeulerfoam-modifications" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>$ cp -rf /home/apr207/OpenFOAM/OpenFOAM-2.4.0/tutorials/multiphase/twoPhaseEulerFoam/laminar .
+</pre></div>
+</div>
+<p>Laminar air flow, turbulent particle flow</p>
+<p>Altered geometry so that the width is only 8cm (from 15cm)</p>
+<p>Also added alpha.air to initial conditions so that setFields will work correctly</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd ~/OpenFOAM/apr207-2.4.0/run/eulerian_006_fluidisedBed_geometry/
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ ./script_run
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ gnuplot -persist plot_residuals_live
+</pre></div>
+</div>
+<p>control + c will quit this window</p>
+<p>Wall clock time = 315 seconds (5 min)</p>
+<div class="section" id="copy-twophaseeulerfoam-to-check-if-2-2-2-is-installed-correctly">
+<h3><a class="toc-backref" href="#id51">1.5.2.4.1. Copy twoPhaseEulerFoam to check if 2.2.2 is installed correctly</a><a class="headerlink" href="#copy-twophaseeulerfoam-to-check-if-2-2-2-is-installed-correctly" title="Permalink to this headline">¶</a></h3>
+<p>Copy the code from source</p>
+<div class="highlight-python"><div class="highlight"><pre>cd $WM_PROJECT_USER_DIR/applications/solvers
+cp -rf $FOAM_APP/solvers/multiphase/twoPhaseEulerFoam/ .
+mv twoPhaseEulerFoam twoPhaseEulerFoamNew
+cd twoPhaseEulerFoamNew
+mv twoPhaseEulerFoam.C twoPhaseEulerFoamNew.C
+sed -i s/twoPhaseEulerFoam/twoPhaseEulerFoamNew/g twoPhaseEulerFoamNew.C
+sed -i s/twoPhaseEulerFoam/twoPhaseEulerFoamNew/g Make/files
+wclean
+wmake
+
+In file included from twoPhaseEulerFoamNew.C:64:0:
+/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/finiteVolume/lnInclude/readTimeControls.H: In function ‘int main(int, char**)’:
+/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/finiteVolume/lnInclude/readTimeControls.H:38:8: warning: unused variable ‘maxDeltaT’ [-Wunused-variable]
+ scalar maxDeltaT =
+</pre></div>
+</div>
+<p>Run the case:</p>
+<div class="highlight-python"><div class="highlight"><pre>run
+cp -rf $FOAM_TUTORIALS/multiphase/twoPhaseEulerFoam/bed2/ .
+cd bed2
+sed -i s/twoPhaseEulerFoam/twoPhaseEulerFoamNew/g system/controlDict
+blockMesh
+</pre></div>
+</div>
+</div>
+<div class="section" id="corrected-2-1-0-case-and-solver-to-2-2-2">
+<h3><a class="toc-backref" href="#id52">1.5.2.4.2. Corrected 2.1.0 case and solver to 2.2.2</a><a class="headerlink" href="#corrected-2-1-0-case-and-solver-to-2-2-2" title="Permalink to this headline">¶</a></h3>
+<p>Run the case:</p>
+<div class="highlight-python"><div class="highlight"><pre>run
+cd twoPhaseEulerSource
+blockMesh
+cp 0/alpha1.org 0/alpha1
+setFields
+decomposePar
+mpirun -np 8 twoPhaseEulerSource -parallel &gt; log &amp;
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-new-boundary-condition-to-twophaseeulerfoam">
+<h3><a class="toc-backref" href="#id53">1.5.2.4.3. Adding New Boundary Condition to twoPhaseEulerFoam</a><a class="headerlink" href="#adding-new-boundary-condition-to-twophaseeulerfoam" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="create-new-solver">
+<h4><a class="toc-backref" href="#id54">1.5.2.4.3.1. Create new solver</a><a class="headerlink" href="#create-new-solver" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre>cd $WM_PROJECT_USER_DIR/applications/solvers/multiphase
+cp -rf twoPhaseEulerFoamNew twoPhaseEulerSrivastava
+cd twoPhaseEulerSrivastava
+mv twoPhaseEulerFoamNew.C twoPhaseEulerSrivastava.C
+sed -i s/twoPhaseEulerFoamNew/twoPhaseEulerSrivastava/g twoPhaseEulerSrivastava.C
+sed -i s/twoPhaseEulerFoamNew/twoPhaseEulerSrivastava/g Make/files
+wclean
+wmake
+</pre></div>
+</div>
+</div>
+<div class="section" id="copy-johnsonjacksonparticleslip-from-2-3-x-to-2-2-2">
+<h4><a class="toc-backref" href="#id55">1.5.2.4.3.2. Copy JohnsonJacksonParticleSlip from 2.3.x to 2.2.2</a><a class="headerlink" href="#copy-johnsonjacksonparticleslip-from-2-3-x-to-2-2-2" title="Permalink to this headline">¶</a></h4>
+<p>OpenFOAM-2.3.x/applications/solvers/multiphase/twoPhaseEulerFoam/phaseCompressibleTurbulenceModels/kineticTheoryModels/derivedFvPatchFields/JohnsonJacksonParticleSlip/</p>
+<p>into folder</p>
+<p>~/OpenFOAM/apr207-2.2.2/applications/solvers/multiphase/twoPhaseEulerSrivastava/kineticTheoryModels/derivedFvPatchFields/JohnsonJacksonParticleSlip/</p>
+<p>Added .C file to kineticTheoryModels/Make</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">derivedFvPatchFields</span><span class="o">/</span><span class="n">JohnsonJacksonParticleSlip</span><span class="o">/</span><span class="n">JohnsonJacksonParticleSlipFvPatchVectorField</span><span class="o">.</span><span class="n">C</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="correct-make-and-options-files">
+<h4><a class="toc-backref" href="#id56">1.5.2.4.3.3. Correct Make and options files</a><a class="headerlink" href="#correct-make-and-options-files" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="twophaseeulersrivastava">
+<h5><a class="toc-backref" href="#id57">twoPhaseEulerSrivastava</a><a class="headerlink" href="#twophaseeulersrivastava" title="Permalink to this headline">¶</a></h5>
+<p>nano Make/files (altered) - location and name of executable has changed</p>
+<p>The first line means the .C file to compile is located one directory above the Make folder.</p>
+<p>The second line means put the executable in the directory $FOAM_USER_APPBIN</p>
+<div class="highlight-python"><div class="highlight"><pre>twoPhaseEulerSrivastava.C
+
+EXE = $(FOAM_USER_APPBIN)/twoPhaseEulerSrivastava
+</pre></div>
+</div>
+<p><a class="reference external" href="https://cfd.direct/openfoam/user-guide/compiling-applications/">https://cfd.direct/openfoam/user-guide/compiling-applications/</a></p>
+<p>nano Make/options (altered):</p>
+<ul class="simple">
+<li>EXE_INC is the path to the libraries</li>
+<li>EXE_LIBS is the library names (these have been altered). The library path must also be given, the user location.</li>
+<li>The actual library files to be linked must be specified using the -l option and removing the lib prefix and .so extension from the library file name, e.g.  libnew.so is included with the flag -lnew</li>
+</ul>
+<p>Why is -L specified only once? Possibly because -L adds an additional path to the default path ($FOAM_LIBBIN)</p>
+<div class="highlight-python"><div class="highlight"><pre>EXE_INC = \
+    -I$(LIB_SRC)/finiteVolume/lnInclude \
+    -I$(LIB_SRC)/transportModels/incompressible/lnInclude \
+    -IturbulenceModel \
+    -I$(WM_PROJECT_USER_DIR)/applications/solvers/multiphase/twoPhaseEulerSrivastava/kineticTheoryModels/lnInclude \
+    -I$(WM_PROJECT_USER_DIR)/applications/solvers/multiphase/twoPhaseEulerSrivastava/interfacialModels/lnInclude \
+    -I$(WM_PROJECT_USER_DIR)/applications/solvers/multiphase/twoPhaseEulerSrivastava/phaseModel/lnInclude \
+    -Iaveraging
+
+EXE_LIBS = \
+    -L$(FOAM_USER_LIBBIN) \
+    -lEulerianInterfacialModelsSrivastava \
+    -lfiniteVolume \
+    -lmeshTools \
+    -lincompressibleTransportModels \
+    -lphaseModelSrivastava \
+    -lkineticTheoryModelSrivastava
+</pre></div>
+</div>
+<p>The result:</p>
+<div class="highlight-python"><div class="highlight"><pre>+ wmake
+SOURCE=twoPhaseEulerSrivastava.C ;
+-I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/finiteVolume/lnInclude
+-I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/transportModels/incompressible/lnInclude
+-IturbulenceModel
+-I/home/apr207/OpenFOAM/apr207-2.2.2/applications/solvers/multiphase/twoPhaseEulerSrivastava/kineticTheoryModels/lnInclude
+-I/home/apr207/OpenFOAM/apr207-2.2.2/applications/solvers/multiphase/twoPhaseEulerSrivastava/interfacialModels/lnInclude
+-I/home/apr207/OpenFOAM/apr207-2.2.2/applications/solvers/multiphase/twoPhaseEulerSrivastava/phaseModel/lnInclude
+-Iaveraging
+
+-L/home/apr207/OpenFOAM/apr207-2.2.2/platforms/linux64GccDPOpt/lib
+-lEulerianInterfacialModelsSrivastava
+-lfiniteVolume
+-lmeshTools
+-lincompressibleTransportModels
+-lphaseModelSrivastava
+-lkineticTheoryModelSrivastava
+</pre></div>
+</div>
+</div>
+<div class="section" id="interfacial-model">
+<h5><a class="toc-backref" href="#id58">Interfacial Model</a><a class="headerlink" href="#interfacial-model" title="Permalink to this headline">¶</a></h5>
+<p>The location of the nine .C files to compile is the same relative to the Make folder.</p>
+<p>nano interfacialModels/Make/files (altered):</p>
+<ul class="simple">
+<li>The location and name of the EulerianInterfacialModels library has changed</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>dragModels/dragModel/dragModel.C
+dragModels/dragModel/newDragModel.C
+dragModels/Ergun/Ergun.C
+dragModels/GidaspowErgunWenYu/GidaspowErgunWenYu.C
+dragModels/GidaspowSchillerNaumann/GidaspowSchillerNaumann.C
+dragModels/SchillerNaumann/SchillerNaumann.C
+dragModels/Gibilaro/Gibilaro.C
+dragModels/WenYu/WenYu.C
+dragModels/SyamlalOBrien/SyamlalOBrien.C
+
+LIB = $(FOAM_USER_LIBBIN)/libEulerianInterfacialModelsSrivastava
+</pre></div>
+</div>
+<p>nano interfacialModels/Make/options (altered):</p>
+<ul class="simple">
+<li>The name and location of the phaseModel library has changed</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>EXE_INC = \
+    -I$(LIB_SRC)/finiteVolume/lnInclude \
+    -I$(WM_PROJECT_USER_DIR)/applications/solvers/multiphase/twoPhaseEulerSrivastava/phaseModel/lnInclude
+
+LIB_LIBS = \
+    -L$(FOAM_USER_LIBBIN) \
+    -lphaseModelSrivastava
+</pre></div>
+</div>
+<p>The result (just the bits that correspond with the above) - library <cite>lphaseModelSrivastava</cite> can&#8217;t be seen - for some unknown reason.</p>
+<div class="highlight-python"><div class="highlight"><pre>+ wmake libso interfacialModels
+SOURCE=dragModels/dragModel/dragModel.C ;
+-I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/finiteVolume/lnInclude
+-I/home/apr207/OpenFOAM/apr207-2.2.2/applications/solvers/multiphase/twoPhaseEulerSrivastava/phaseModel/lnInclude
+-I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude
+-I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OSspecific/POSIX/lnInclude
+SOURCE=dragModels/dragModel/newDragModel.C ;
+...
+SOURCE=dragModels/Ergun/Ergun.C ;
+...
+SOURCE=dragModels/GidaspowErgunWenYu/GidaspowErgunWenYu.C ;
+...
+SOURCE=dragModels/GidaspowSchillerNaumann/GidaspowSchillerNaumann.C ;
+...
+SOURCE=dragModels/SchillerNaumann/SchillerNaumann.C ;
+...
+SOURCE=dragModels/WenYu/WenYu.C ;
+...
+SOURCE=dragModels/Gibilaro/Gibilaro.C ;
+...
+SOURCE=dragModels/SyamlalOBrien/SyamlalOBrien.C ;
+...
+&#39;/home/apr207/OpenFOAM/apr207-2.2.2/platforms/linux64GccDPOpt/lib/libEulerianInterfacialModelsSrivastava.so&#39; is up to date.
+</pre></div>
+</div>
+</div>
+<div class="section" id="kinetic-theory-model">
+<h5><a class="toc-backref" href="#id59">Kinetic Theory Model</a><a class="headerlink" href="#kinetic-theory-model" title="Permalink to this headline">¶</a></h5>
+<p>nano kineticTheoryModel/Make/files (altered):</p>
+<ul class="simple">
+<li>The location and name of the kineticTheoryModel library has changed</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>kineticTheoryModel/kineticTheoryModel.C
+
+viscosityModel/viscosityModel/viscosityModel.C
+viscosityModel/viscosityModel/newViscosityModel.C
+viscosityModel/Gidaspow/GidaspowViscosity.C
+viscosityModel/Syamlal/SyamlalViscosity.C
+viscosityModel/HrenyaSinclair/HrenyaSinclairViscosity.C
+viscosityModel/none/noneViscosity.C
+
+conductivityModel/conductivityModel/conductivityModel.C
+conductivityModel/conductivityModel/newConductivityModel.C
+conductivityModel/Gidaspow/GidaspowConductivity.C
+conductivityModel/Syamlal/SyamlalConductivity.C
+conductivityModel/HrenyaSinclair/HrenyaSinclairConductivity.C
+
+radialModel/radialModel/radialModel.C
+radialModel/radialModel/newRadialModel.C
+radialModel/CarnahanStarling/CarnahanStarlingRadial.C
+radialModel/LunSavage/LunSavageRadial.C
+radialModel/SinclairJackson/SinclairJacksonRadial.C
+
+granularPressureModel/granularPressureModel/granularPressureModel.C
+granularPressureModel/granularPressureModel/newGranularPressureModel.C
+granularPressureModel/Lun/LunPressure.C
+granularPressureModel/SyamlalRogersOBrien/SyamlalRogersOBrienPressure.C
+
+frictionalStressModel/frictionalStressModel/frictionalStressModel.C
+frictionalStressModel/frictionalStressModel/newFrictionalStressModel.C
+frictionalStressModel/JohnsonJackson/JohnsonJacksonFrictionalStress.C
+frictionalStressModel/Schaeffer/SchaefferFrictionalStress.C
+
+derivedFvPatchFields/JohnsonJacksonParticleSlip/JohnsonJacksonParticleSlipFvPatchVectorField.C
+
+LIB = $(FOAM_USER_LIBBIN)/libkineticTheoryModelSrivastava
+</pre></div>
+</div>
+<p>nano kineticTheoryModel/Make/options (altered):</p>
+<div class="highlight-python"><div class="highlight"><pre>EXE_INC = \
+    -I$(LIB_SRC)/foam/lnInclude \
+    -I$(LIB_SRC)/finiteVolume/lnInclude \
+    -I$(WM_PROJECT_USER_DIR)/applications/solvers/multiphase/twoPhaseEulerSrivastava/phaseModel/lnInclude \
+    -I$(WM_PROJECT_USER_DIR)/applications/solvers/multiphase/twoPhaseEulerSrivastava/interfacialModels/lnInclude
+</pre></div>
+</div>
+<p>The result (I miss out the repeating block and any extra bits):</p>
+<div class="highlight-python"><div class="highlight"><pre>+ wmake libso kineticTheoryModels
+
+SOURCE=kineticTheoryModel/kineticTheoryModel.C
+
+-I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/foam/lnInclude -I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/finiteVolume/lnInclude
+-I/home/apr207/OpenFOAM/apr207-2.2.2/applications/solvers/multiphase/twoPhaseEulerSrivastava/phaseModel/lnInclude
+-I/home/apr207/OpenFOAM/apr207-2.2.2/applications/solvers/multiphase/twoPhaseEulerSrivastava/interfacialModels/lnInclude
+-I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude
+-I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OSspecific/POSIX/lnInclude
+
+SOURCE=viscosityModel/viscosityModel/viscosityModel.C
+SOURCE=viscosityModel/viscosityModel/newViscosityModel.C
+SOURCE=viscosityModel/Gidaspow/GidaspowViscosity.C ;
+SOURCE=viscosityModel/Syamlal/SyamlalViscosity.C ;
+SOURCE=viscosityModel/HrenyaSinclair/HrenyaSinclairViscosity.C ;
+SOURCE=conductivityModel/conductivityModel/conductivityModel.C ;
+SOURCE=viscosityModel/none/noneViscosity.C ;
+SOURCE=conductivityModel/conductivityModel/newConductivityModel.C ;
+SOURCE=conductivityModel/Gidaspow/GidaspowConductivity.C ;
+SOURCE=conductivityModel/Syamlal/SyamlalConductivity.C ;
+SOURCE=conductivityModel/HrenyaSinclair/HrenyaSinclairConductivity.C ;
+SOURCE=radialModel/radialModel/radialModel.C ;
+SOURCE=radialModel/radialModel/newRadialModel.C ;
+SOURCE=radialModel/CarnahanStarling/CarnahanStarlingRadial.C ;
+SOURCE=radialModel/LunSavage/LunSavageRadial.C ;
+SOURCE=radialModel/SinclairJackson/SinclairJacksonRadial.C ;
+SOURCE=granularPressureModel/granularPressureModel/granularPressureModel.C ;
+SOURCE=granularPressureModel/granularPressureModel/newGranularPressureModel.C ;
+SOURCE=granularPressureModel/Lun/LunPressure.C ;
+SOURCE=granularPressureModel/SyamlalRogersOBrien/SyamlalRogersOBrienPressure.C ;
+SOURCE=frictionalStressModel/frictionalStressModel/frictionalStressModel.C ;
+SOURCE=frictionalStressModel/frictionalStressModel/newFrictionalStressModel.C ;
+SOURCE=frictionalStressModel/JohnsonJackson/JohnsonJacksonFrictionalStress.C ;
+SOURCE=frictionalStressModel/Schaeffer/SchaefferFrictionalStress.C ;
+SOURCE=derivedFvPatchFields/JohnsonJacksonParticleSlip/JohnsonJacksonParticleSlipFvPatchVectorField.C ;
+&#39;/home/apr207/OpenFOAM/apr207-2.2.2/platforms/linux64GccDPOpt/lib/libkineticTheoryModelSrivastava.so&#39; is up to date.
+</pre></div>
+</div>
+</div>
+<div class="section" id="phase-model">
+<h5><a class="toc-backref" href="#id60">Phase Model</a><a class="headerlink" href="#phase-model" title="Permalink to this headline">¶</a></h5>
+<p>nano phaseModel/Make/files (altered)</p>
+<ul class="simple">
+<li>The location and name of the library has changed</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>LIB = $(FOAM_USER_LIBBIN)/libphaseModelSrivastava
+</pre></div>
+</div>
+<p>nano phaseModel/Make/options (unaltered)</p>
+<div class="highlight-python"><div class="highlight"><pre>EXE_INC = \
+    -I$(LIB_SRC)/finiteVolume/lnInclude \
+    -I$(LIB_SRC)/transportModels/incompressible/lnInclude
+
+LIB_LIBS = \
+    -lincompressibleTransportModels
+</pre></div>
+</div>
+<p>The result (just the bits that correspond with the above) - library <cite>lincompressibleTransportModels</cite> can&#8217;t be seen:</p>
+<div class="highlight-python"><div class="highlight"><pre>+ wmake libso phaseModel
+SOURCE=phaseModel/phaseModel.C
+-I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/finiteVolume/lnInclude
+-I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/transportModels/incompressible/lnInclude
+&#39;/home/apr207/OpenFOAM/apr207-2.2.2/platforms/linux64GccDPOpt/lib/libphaseModelSrivastava.so&#39; is up to date.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="test-if-case-works">
+<h4><a class="toc-backref" href="#id61">1.5.2.4.3.4. Test if case works</a><a class="headerlink" href="#test-if-case-works" title="Permalink to this headline">¶</a></h4>
+<p>Run the case:</p>
+<div class="highlight-python"><div class="highlight"><pre>run
+cp -rf $FOAM_TUTORIALS/multiphase/twoPhaseEulerFoam/bed2/ .
+cd bed2
+sed -i s/twoPhaseEulerFoam/twoPhaseEulerSrivastava/g system/controlDict
+blockMesh
+twoPhaseEulerSrivastava
+</pre></div>
+</div>
+</div>
+<div class="section" id="is-the-partial-slip-condition-being-applied-correctly">
+<h4><a class="toc-backref" href="#id62">1.5.2.4.3.5. Is the partial slip condition being applied correctly?</a><a class="headerlink" href="#is-the-partial-slip-condition-being-applied-correctly" title="Permalink to this headline">¶</a></h4>
+<p>Yes, it is being applied correctly, although it ignores friction</p>
+</div>
+<div class="section" id="consider-comparing-johnsonjackson-with-johnsonjacksonschaeffer">
+<h4><a class="toc-backref" href="#id63">1.5.2.4.3.6. Consider comparing JohnsonJackson with JohnsonJacksonSchaeffer</a><a class="headerlink" href="#consider-comparing-johnsonjackson-with-johnsonjacksonschaeffer" title="Permalink to this headline">¶</a></h4>
+<p>Look to twophaseeulersedfoam for example from 2.1.0</p>
+</div>
+</div>
+</div>
+<div class="section" id="openfoam-version-5-0">
+<h2><a class="toc-backref" href="#id64">1.5.2.5. OpenFOAM version 5.0</a><a class="headerlink" href="#openfoam-version-5-0" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="openfoam-version-5-0-run-script">
+<h3><a class="toc-backref" href="#id65">1.5.2.5.1. OpenFOAM version 5.0 run script</a><a class="headerlink" href="#openfoam-version-5-0-run-script" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre># Run script for OpenFOAM 5.0
+
+. $WM_PROJECT_DIR/bin/tools/RunFunctions                                        # loads RunFunctions
+
+rm -rf log.*
+
+export NP=6                                                                     # number of processors
+
+# Mesh
+runApplication blockMesh
+
+# Check the mesh
+runApplication checkMesh
+
+# Decompose
+runApplication decomposePar
+
+# Run
+runParallel $(getApplication)
+
+# Reconstruct
+runApplication reconstructPar
+
+rm -r processor*
+</pre></div>
+</div>
+</div>
+<div class="section" id="rename-surfaces">
+<h3><a class="toc-backref" href="#id66">1.5.2.5.2. Rename surfaces</a><a class="headerlink" href="#rename-surfaces" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>sed -i s/frontAndBackPlanes/frontAndBack/g alpha.particles
+sed -i s/frontAndBackPlanes/frontAndBack/g alpha.particles.orig
+sed -i s/frontAndBackPlanes/frontAndBack/g alphat.particles
+sed -i s/frontAndBackPlanes/frontAndBack/g epsilon.air
+sed -i s/frontAndBackPlanes/frontAndBack/g k.air
+sed -i s/frontAndBackPlanes/frontAndBack/g nut.air
+sed -i s/frontAndBackPlanes/frontAndBack/g nut.particles
+sed -i s/frontAndBackPlanes/frontAndBack/g p
+sed -i s/frontAndBackPlanes/frontAndBack/g p_rgh
+sed -i s/frontAndBackPlanes/frontAndBack/g T.air
+sed -i s/frontAndBackPlanes/frontAndBack/g T.particles
+sed -i s/frontAndBackPlanes/frontAndBack/g Theta.particles
+sed -i s/frontAndBackPlanes/frontAndBack/g U.air
+sed -i s/frontAndBackPlanes/frontAndBack/g U.particles
+</pre></div>
+</div>
+<p>See if case run</p>
+</div>
+<div class="section" id="set-fields-dictionary">
+<h3><a class="toc-backref" href="#id67">1.5.2.5.3. Set fields dictionary</a><a class="headerlink" href="#set-fields-dictionary" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>defaultFieldValues
+(
+    volScalarFieldValue alpha.air 1
+    volScalarFieldValue alpha.particles 0
+);
+
+regions
+(
+    boxToCell
+    {
+        box ( -0.04 0.0 0.0 ) ( 0.04 0.5 0.01 );
+        fieldValues
+        (
+            volScalarFieldValue alpha.air 0.40
+            volScalarFieldValue alpha.particles 0.60
+        );
+    }
+);
+</pre></div>
+</div>
+</div>
+<div class="section" id="turn-off-energy-equation">
+<h3><a class="toc-backref" href="#id68">1.5.2.5.4. Turn off energy equation</a><a class="headerlink" href="#turn-off-energy-equation" title="Permalink to this headline">¶</a></h3>
+<p>Turn off e:</p>
+<div class="highlight-python"><div class="highlight"><pre>&quot;(h|e).*&quot;
+{
+    solver          smoothSolver;
+    smoother        symGaussSeidel;
+    tolerance       1e-6;
+    relTol          0;
+    minIter         0;  // APR changed from 1 to 0
+    maxIter         0;  // APR added
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="make-air-density-constant">
+<h3><a class="toc-backref" href="#id69">1.5.2.5.5. Make air density constant</a><a class="headerlink" href="#make-air-density-constant" title="Permalink to this headline">¶</a></h3>
+<p>Change air properties:</p>
+<div class="highlight-python"><div class="highlight"><pre>thermoType
+{
+    type            heRhoThermo;
+    mixture         pureMixture;
+    transport       const;
+    thermo          hConst;
+    equationOfState rhoConst; // APR changed from perfectGas to rhoConst
+    specie          specie;
+    energy          sensibleInternalEnergy;
+}
+
+mixture
+{
+    specie
+    {
+        molWeight   28.9;
+    }
+    equationOfState             // APR added equationOfState
+    {
+        rho         1.2;
+    }
+    thermodynamics
+    {
+        Cp          1007;
+        Hf          0;
+    }
+    transport
+    {
+        mu          1.84e-05;
+        Pr          0.7;
+    }
+}
+</pre></div>
+</div>
+<p>Execution time = 1631.89 seconds = 27 minutes</p>
+</div>
+<div class="section" id="phase-properties">
+<h3><a class="toc-backref" href="#id70">1.5.2.5.6. Phase properties</a><a class="headerlink" href="#phase-properties" title="Permalink to this headline">¶</a></h3>
+<p>residualAlpha is the residual phase-fraction for a given phase. It is used to stabilize the phase momentum as the phase-fraction -&gt; 0</p>
+<p>blending method is for blended drag models &#8220;none&#8221; is a valid selection</p>
+<p>sigma keyword is surface tension</p>
+<dl class="docutils">
+<dt>The drag models offer swarm correction of the drag force, since it is observed that swarms of bubbles behave</dt>
+<dd>different from single bubbles. none indicates there is no correction (unity multiplies the drag coefficient). &#8220;none&#8221; is a valid selection.</dd>
+</dl>
+<p>No virtual mass</p>
+<p>There has to be a heat transfer model - there is no option &#8220;none&#8221;. &#8220;RanzMarshall&#8221; is a valid selection</p>
+<div class="highlight-python"><div class="highlight"><pre>particles
+{
+    diameterModel constant;
+    constantCoeffs
+    {
+        d               100e-6;
+    }
+
+    alphaMax        0.65;
+    residualAlpha   1e-6;
+}
+
+
+drag
+(
+    (particles in air)
+    {
+        type            WenYu;
+        residualRe      1e-3;
+        swarmCorrection
+        {
+            type        none;
+        }
+    }
+);
+
+virtualMass
+(
+    (solids in gas)
+    {
+        type            none;       // APR changed from constantCoefficient
+        //Cvm             0;        // APR changed from 0.5 to 0
+    }
+);
+</pre></div>
+</div>
+</div>
+<div class="section" id="thermophysicalproperties-air">
+<h3><a class="toc-backref" href="#id71">1.5.2.5.7. thermophysicalProperties.air</a><a class="headerlink" href="#thermophysicalproperties-air" title="Permalink to this headline">¶</a></h3>
+<p>The thermophysicalProperties dictionary is read by any solver that uses the thermophysical model library</p>
+<p>heRhoThermo: for solvers that construct rhoThermo, such as twoPhaseEulerFoam</p>
+<p>thermophysical models without reactions is pureMixture, which represents a mixture with fixed composition. When pureMixture is specified, the thermophysical models coefficients are specified within a sub-dictionary called mixture.</p>
+<ul class="simple">
+<li>transport model: const assumes a constant dynamic viscosity (mu) and Prandtl number (Pr)</li>
+<li>thermo model: assumes a constant specific heat capacity (Cp) and a heat of fusion (Hf)</li>
+<li>There is currently only one option for the specie model which specifies the composition of each constituent</li>
+<li>sensibleInternalEnergy is the form of the energy equation</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>thermoType
+{
+    type            heRhoThermo;
+    mixture         pureMixture;
+    transport       const;
+    thermo          hConst;
+    equationOfState rhoConst; // APR changed from perfectGas to rhoConst
+    specie          specie;
+    energy          sensibleInternalEnergy;
+}
+
+mixture
+{
+    transport
+    {
+        mu          1.84e-05;
+        Pr          0.7;
+    }
+    thermodynamics
+    {
+        Cp          1007;
+        Hf          0;
+    }
+    equationOfState             // APR added equationOfState
+    {
+        rho         1.2;
+    }
+    specie
+    {
+        molWeight   28.9;
+    }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-location-for-version-5-solver">
+<h3><a class="toc-backref" href="#id72">1.5.2.5.8. Create location for version 5 solver</a><a class="headerlink" href="#create-location-for-version-5-solver" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mkdir</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="porous_notes.html">1.5.1. Porous Medium Notes</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="swak4foam.html">1.5.3. Swak4Foam</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

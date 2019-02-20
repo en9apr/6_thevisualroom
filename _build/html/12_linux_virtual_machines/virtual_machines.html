@@ -1,0 +1,526 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.3. How to Create a Virtual Machine &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. Linux" href="../11_linux_landing_page/linux_landing_page.html" />
+    <link rel="next" title="1.4. How to Use a Virtual Machine" href="../13_linux_virtual_machines_use/virtual_machines_use.html" />
+    <link rel="prev" title="1.2. Installation History" href="../11_linux/installation_history.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.3. How to Create a Virtual Machine</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../11_linux/installation_history.html">1.2. Installation History</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../13_linux_virtual_machines_use/virtual_machines_use.html">1.4. How to Use a Virtual Machine</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="how-to-create-a-virtual-machine">
+<h1>1.3. How to Create a Virtual Machine<a class="headerlink" href="#how-to-create-a-virtual-machine" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#why-create-a-vm" id="id2">Why create a VM?</a><ul>
+<li><a class="reference internal" href="#advantages" id="id3">Advantages</a></li>
+<li><a class="reference internal" href="#disadvantages" id="id4">Disadvantages</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#process-of-creating-a-vm" id="id5">Process of Creating a VM</a><ul>
+<li><a class="reference internal" href="#download-disk-image" id="id6">Download Disk Image</a></li>
+<li><a class="reference internal" href="#create-a-new-virtualbox" id="id7">Create a New VirtualBox</a></li>
+<li><a class="reference internal" href="#create-virtual-hard-drive" id="id8">Create Virtual Hard Drive</a></li>
+<li><a class="reference internal" href="#install-operating-system-ubuntu" id="id9">Install Operating System - Ubuntu</a></li>
+<li><a class="reference internal" href="#install-operating-system-centos" id="id10">Install Operating System - CentOS</a></li>
+<li><a class="reference internal" href="#change-the-settings-of-the-virtual-machine" id="id11">Change the Settings of the Virtual Machine</a></li>
+<li><a class="reference internal" href="#run-updates-for-xubuntu" id="id12">Run Updates for Xubuntu</a></li>
+<li><a class="reference internal" href="#install-dkms" id="id13">Install DKMS</a></li>
+<li><a class="reference internal" href="#install-virtualbox-guest-additions" id="id14">Install VirtualBox Guest Additions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pass-through-folder" id="id15">Pass Through Folder</a></li>
+<li><a class="reference internal" href="#how-to-fix-host-guest-copy-paste-issues" id="id16">How to Fix Host/Guest Copy Paste Issues</a></li>
+<li><a class="reference internal" href="#snapshot-management" id="id17">Snapshot Management</a></li>
+<li><a class="reference internal" href="#how-to-clone-vms" id="id18">How to Clone VMs</a></li>
+<li><a class="reference internal" href="#adjust-network-adapter" id="id19">Adjust Network Adapter</a></li>
+<li><a class="reference internal" href="#types-of-storage" id="id20">Types of Storage</a></li>
+<li><a class="reference internal" href="#how-to-copy-vdi-files" id="id21">How to Copy vdi files</a></li>
+<li><a class="reference internal" href="#software-and-customisation" id="id22">Software and Customisation</a></li>
+</ul>
+</div>
+<div class="section" id="why-create-a-vm">
+<h2><a class="toc-backref" href="#id2">1.3.1. Why create a VM?</a><a class="headerlink" href="#why-create-a-vm" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="advantages">
+<h3><a class="toc-backref" href="#id3">1.3.1.1. Advantages</a><a class="headerlink" href="#advantages" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Can test software installations in a sandbox before use, can revert changes if it doesn&#8217;t work</li>
+<li>Can give the virtual machine with the software to the client (so they don&#8217;t have to install anything to run the program)</li>
+</ul>
+</div>
+<div class="section" id="disadvantages">
+<h3><a class="toc-backref" href="#id4">1.3.1.2. Disadvantages</a><a class="headerlink" href="#disadvantages" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Need enough RAM: need twice the amount of memory of the VMs</li>
+<li>Have to have enough disk space</li>
+<li>Have to have 64-bit CPU with virtualisation extensions</li>
+</ul>
+</div>
+</div>
+<div class="section" id="process-of-creating-a-vm">
+<h2><a class="toc-backref" href="#id5">1.3.2. Process of Creating a VM</a><a class="headerlink" href="#process-of-creating-a-vm" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.tecmint.com/centos-7-installation/">Process of Creating the VM for CentOS</a></p>
+<div class="section" id="download-disk-image">
+<h3><a class="toc-backref" href="#id6">1.3.2.1. Download Disk Image</a><a class="headerlink" href="#download-disk-image" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Download the .iso file (64 bit) e.g. xubuntu-14.04.2-desktop-amd64.iso</li>
+</ul>
+<p><a class="reference external" href="http://cdimages.ubuntu.com/xubuntu/releases/14.04/release/">Xubuntu Desktop</a></p>
+<ul class="simple">
+<li>Why Xubuntu:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>It&#8217;s very lightweight (maybe not as lightweight as I thought... as it has package manager)</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Why not CentOS?</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>It doesn&#8217;t have package manager</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Download CentOS (minimal - if you know what you are doing... this will not install any software, even if you select it in the installation):</li>
+</ul>
+<p><a class="reference external" href="http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1503-01.iso">Minimal CentOS</a></p>
+<p>I used version 7 (although others use 6.6). The mirror I used to download it was this (the iso is called: CentOS-7-x86_64-Minimal-1503-01.iso)</p>
+<p><a class="reference external" href="http://www.mirrorservice.org/sites/mirror.centos.org/7/isos/x86_64/CentOS-7-x86_64-Minimal-1503-01.iso">Minimal Centos Mirror</a></p>
+<ul class="simple">
+<li>Download CentOS DVD:</li>
+</ul>
+<p><a class="reference external" href="http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1503-01.iso">DVD Centos</a></p>
+<p>I used version 7 (although others use 6.6). The mirror I used to download it was this (the iso is called: CentOS-7-x86_64-DVD-1503-01.iso )</p>
+<p><a class="reference external" href="http://mirrors.coreix.net/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1503-01.iso">DVD Centos Mirror</a></p>
+</div>
+<div class="section" id="create-a-new-virtualbox">
+<h3><a class="toc-backref" href="#id7">1.3.2.2. Create a New VirtualBox</a><a class="headerlink" href="#create-a-new-virtualbox" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Download and Install Oracle VirtualBox:</li>
+</ul>
+<p><a class="reference external" href="https://www.virtualbox.org/wiki/Downloads">Oracle VirtualBox</a></p>
+<ul class="simple">
+<li>Startup VirtualBox and create a new VM e.g.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Name: Xubuntu 14.04.2 LTS 20GB</li>
+<li>Type: Linux</li>
+<li>Version: Xubuntu 64 bit</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Or:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>CentOS-7-x86_64-DVD-1503-01</li>
+<li>Type: Linux</li>
+<li>Version: Red Hat (64-bit)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="create-virtual-hard-drive">
+<h3><a class="toc-backref" href="#id8">1.3.2.3. Create Virtual Hard Drive</a><a class="headerlink" href="#create-virtual-hard-drive" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Memory size (half of what is installed): 6GB</li>
+<li>Select option: Create a virtual harddrive now</li>
+<li>Select option: VirtualBox Disk Image (experience is that the other options don&#8217;t work any better)</li>
+<li>Select option: Fixed size 20GB (so that we have enough space for Xubuntu and other updates) ... Actually I think 50GB is better for having space to do things.</li>
+<li>Hit &#8220;Create&#8221; (might take about 10 minutes or so... will take 30min if it&#8217;s 50GB)</li>
+</ul>
+<p>You now have a virtual harddrive</p>
+</div>
+<div class="section" id="install-operating-system-ubuntu">
+<h3><a class="toc-backref" href="#id9">1.3.2.4. Install Operating System - Ubuntu</a><a class="headerlink" href="#install-operating-system-ubuntu" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>In VirtualBox &gt; Settings &gt; Storage &gt; IDE (Empty)<ul>
+<li>Controller: IDE</li>
+<li>Choose ISO Image</li>
+</ul>
+</li>
+<li>In VirtualBox &gt; Start</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Select: Install Ubuntu</li>
+<li>Don&#8217;t Select: Download updates while installing</li>
+<li>Gave username and password</li>
+<li>Select: Continue</li>
+<li>Select: Install Now</li>
+<li>Where are you? UK</li>
+<li>Detect Keyboard</li>
+<li>Continue</li>
+<li>Yes to password protect login</li>
+<li>When installation is complete:<ul>
+<li>Select: Restart Now (it restarts and removes the CD automatically)</li>
+<li>It asks whether the CD is removed - ensure CD is removed: Press Enter</li>
+<li>It should restart</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<p><strong>Snapshot taken at this point</strong></p>
+</div>
+<div class="section" id="install-operating-system-centos">
+<h3><a class="toc-backref" href="#id10">1.3.2.5. Install Operating System - CentOS</a><a class="headerlink" href="#install-operating-system-centos" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>In VirtualBox &gt; Settings &gt; Storage &gt; IDE (Empty)<ul>
+<li>Controller: IDE</li>
+<li>Choose ISO Image</li>
+</ul>
+</li>
+<li>In VirtualBox &gt; Start</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Select: Install CentOS 7</li>
+<li>Select: English (United Kingdom) - Continue</li>
+<li>Select the Partitioning</li>
+<li>I will configure partitioning</li>
+<li>Done</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>New CentOS mount points (there won&#8217;t be any existing ones). Create:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Swap partition (double the RAM we allocated for the VM - i.e. 12GB)</li>
+<li>Root partition - 20GB (I think this is where software goes)</li>
+<li>Home partition - the rest of the space i.e. 18GB (for files)</li>
+<li>For some reason when I entered these numbers, I got 11.18GB, 18.63GB and 16.76GB for swap, root and home respectively. Although the centos volume said 4096kB free. They are all standard partitions.</li>
+<li>Press Done</li>
+<li>Accept changes</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Software installation</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>GNOME Applications</li>
+<li>Internet Applications</li>
+<li>Legacy X Window System Compatibility</li>
+<li>Office Suite and Productivity</li>
+<li>Compatibility Libraries</li>
+<li>Development Tools</li>
+<li>Security Tools</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Kdump:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Un-enable kdump</li>
+<li>Done</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Network and hostname:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>I don&#8217;t think I have a static IP, so I just turned the ethernet on</li>
+<li>Done</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Begin installation</li>
+<li>Root Password is set to something</li>
+<li>User is an administrator and has the same password</li>
+<li>Finish configuration</li>
+<li>Reboot the system</li>
+<li>When it rebooted, I selected English and English(UK)</li>
+</ul>
+<p><strong>Snapshot taken at this point</strong></p>
+</div>
+<div class="section" id="change-the-settings-of-the-virtual-machine">
+<h3><a class="toc-backref" href="#id11">1.3.2.6. Change the Settings of the Virtual Machine</a><a class="headerlink" href="#change-the-settings-of-the-virtual-machine" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>In VirtualBox &gt; Settings &gt; Display<ul>
+<li>128MB Video Memory for increased speed</li>
+<li>3D acceleration</li>
+</ul>
+</li>
+<li>In VirtualBox &gt; Settings &gt; System<ul>
+<li>Processor: change to 4 (needs virtualisation extensions)</li>
+<li>Execution Cap: 100%</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="run-updates-for-xubuntu">
+<h3><a class="toc-backref" href="#id12">1.3.2.7. Run Updates for Xubuntu</a><a class="headerlink" href="#run-updates-for-xubuntu" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>In VirtualBox &gt; Start</li>
+<li>Run updates for Ubuntu</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>$ sudo apt-get update
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-dkms">
+<h3><a class="toc-backref" href="#id13">1.3.2.8. Install DKMS</a><a class="headerlink" href="#install-dkms" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Install Dynamic Kernel Module Support – otherwise everytime you update the kernel, you&#8217;ll have to update Guest Additions</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>$ sudo apt-get install dkms
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-virtualbox-guest-additions">
+<h3><a class="toc-backref" href="#id14">1.3.2.9. Install VirtualBox Guest Additions</a><a class="headerlink" href="#install-virtualbox-guest-additions" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Install Guest Additions, which gives enhanced mouse pointer and video control and installs Vbox Service.</li>
+<li>In the VirtualBox environment: Devices &gt; Install Guest Additions (this opens a window, if not double click the CD mounted on the dekstop)</li>
+<li>Double click autorun.sh and enter user&#8217;s password (this then installs Guest Additions)</li>
+<li>Right click the CD on the desktop and eject the volume</li>
+<li>Shut down the VM and restart it for Guest Additions to be installed</li>
+</ul>
+<p><strong>Snapshot taken at this point</strong></p>
+</div>
+</div>
+<div class="section" id="pass-through-folder">
+<h2><a class="toc-backref" href="#id15">1.3.3. Pass Through Folder</a><a class="headerlink" href="#pass-through-folder" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>I haven&#8217;t tried this, but there are loads of tutorials on this, the best one is this:</li>
+</ul>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=1iUafW6g5o8">Pass Through Folder</a></p>
+<ul class="simple">
+<li>Obtain the name of the Ubuntu Box:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>sudo nano /etc/hosts
+</pre></div>
+</div>
+<p>(Could be VMUbuntu)</p>
+<ul class="simple">
+<li>In Xubuntu Guest Machine</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>$ sudo apt-get update
+$ sudo apt-get samba
+</pre></div>
+</div>
+<ul class="simple">
+<li>In File Manager: Right click folder &gt; Share Folder (will install Samba)</li>
+<li>Restart session</li>
+<li>In Ubuntu Guest Machine</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>$ sudo gedit /etc/samba/smb.conf &amp;
+</pre></div>
+</div>
+<ul class="simple">
+<li>In that file add a line:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>[global]
+
+workgroup = WORKGROUP
+force user = username (this is the username in Ubuntu VM)
+</pre></div>
+</div>
+<ul class="simple">
+<li>Restart Samba:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>$ sudo restart smbd
+</pre></div>
+</div>
+<ul class="simple">
+<li>Right click folder &gt; Share Folder (Allow others to create and delete files).</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Create share</li>
+<li>Create a file in Ubuntu to share</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>In Windows Search:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>\\VMUbuntu\Public
+</pre></div>
+</div>
+<ul class="simple">
+<li>In Windows Explorer &gt; Network (May need to turn on share and discovery)</li>
+</ul>
+</div>
+<div class="section" id="how-to-fix-host-guest-copy-paste-issues">
+<h2><a class="toc-backref" href="#id16">1.3.4. How to Fix Host/Guest Copy Paste Issues</a><a class="headerlink" href="#how-to-fix-host-guest-copy-paste-issues" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">In Virtual Box:</p>
+<ul>
+<li><p class="first">Settings &gt; General &gt; Advanced</p>
+<blockquote>
+<div><ul class="simple">
+<li>Shared Clipboard: Bidirectional</li>
+<li>Drag n&#8217; Drop: Bidirectional</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p class="first">If the version of Virtual Box is not up-to-date with respect to the Xubuntu version, this can sometimes not work, if not just update Virtual Box.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="snapshot-management">
+<h2><a class="toc-backref" href="#id17">1.3.5. Snapshot Management</a><a class="headerlink" href="#snapshot-management" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Useful for trial software installation. Remember: just running an operating system creates changes. We can&#8217;t restore while the machine is powered on.</li>
+<li>In VirtualBox &gt; Snapshots:<ul>
+<li>Right click &gt; Take snapshop</li>
+<li>Right click &gt; Restore snapshot</li>
+<li>Right click &gt; Delete snapshot (to remove large files)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="how-to-clone-vms">
+<h2><a class="toc-backref" href="#id18">1.3.6. How to Clone VMs</a><a class="headerlink" href="#how-to-clone-vms" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>How to give other people the VM? <strong>Clone it</strong> Can&#8217;t give just snapshot</li>
+<li>Clone snapshot: Right click &gt; Clone</li>
+</ul>
+<p><strong>If you are going to be using the clone on the same network as the virtual machine check reinitilise the MAC address of all network cards – otherwise you will have multiple machines with the same MAC address and this will confuse the network.</strong></p>
+<ul class="simple">
+<li>Select: Full clone – so other people can use it</li>
+<li>Select: Clone everything</li>
+</ul>
+<p>Can now give other people the .vdi file (the harddisk) and the .vbox. They can launch this directly in their copy of virtual box.</p>
+</div>
+<div class="section" id="adjust-network-adapter">
+<h2><a class="toc-backref" href="#id19">1.3.7. Adjust Network Adapter</a><a class="headerlink" href="#adjust-network-adapter" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Use: NAT (allows Guest to use Internet)</li>
+<li>Adapter Type: PCnet-Fast III (Am79C973)</li>
+<li>Can randomise MAC address. 08002731A607 (if other VMs are somehow using the same address)</li>
+</ul>
+</div>
+<div class="section" id="types-of-storage">
+<h2><a class="toc-backref" href="#id20">1.3.8. Types of Storage</a><a class="headerlink" href="#types-of-storage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>In VirtualBox: Settings &gt; Storage</li>
+<li>Ubuntu uses SATA, CD uses IDE.</li>
+</ul>
+</div>
+<div class="section" id="how-to-copy-vdi-files">
+<h2><a class="toc-backref" href="#id21">1.3.9. How to Copy vdi files</a><a class="headerlink" href="#how-to-copy-vdi-files" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>File &gt; Virtual Media Manager</li>
+<li>Differencing files are roughly equivalent to snapshots</li>
+<li>.vdi files have unique identifiers – can&#8217;t just copy and paste</li>
+<li><strong>If you want to copy a snapshot – you must use clone (as above)</strong></li>
+<li>If you want to copy a VM (that isn&#8217;t a snapshot), you can use: File &gt; Virtual Media Manager &gt; Copy &gt; Next &gt; Next &gt; Next &gt; Give it a name &gt; Copy</li>
+<li>To test the copy, you must add the .vdi file as a <strong>harddrive to a virtual machine</strong> (not just in the virtual machine manager)</li>
+</ul>
+</div>
+<div class="section" id="software-and-customisation">
+<h2><a class="toc-backref" href="#id22">1.3.10. Software and Customisation</a><a class="headerlink" href="#software-and-customisation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>This is a list of software I&#8217;ve installed so far on the VM, plus additional customisation.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre># Guest Additions Installed
+
+ran autorun.sh on Guest Additions CD
+
+#OpenFOAM installed
+
+VERS=$(lsb_release -cs)
+sudo sh -c &quot;echo deb http://www.openfoam.org/download/ubuntu $VERS main &gt; /etc/apt/sources.list.d/openfoam.list&quot;
+sudo apt-get update
+sudo apt-get install openfoam231
+
+# paraview installed
+
+sudo apt-get install paraviewopenfoam410
+
+# gedit installed and edited .bashrc to run OpenFOAM
+
+sudo apt-get install gedit
+
+# edited .bashrc
+
+gedit ~/.bashrc
+Added: source /opt/openfoam231/etc/bashrc
+export FOAM_RUN=&#39;/home/andrew/OpenFOAM/andrew-2.3.1/run&#39;
+export WORK=&#39;/home/andrew/OpenFOAM/andrew-2.3.1/run/tutorials/incompressible/icoFoam/cavity&#39;
+export DOWNLOADS=&#39;/home/andrew/Downloads&#39;
+export SPHINX=&#39;/home/andrew/Sphinx/thevisualroom&#39;
+
+# sphinx
+sudo apt-get install python-sphinx
+
+# removed Pictures, Documents, Videos, Music, Templates, Public
+
+# git
+sudo apt-get install git
+sudo apt-get install gitk               # to view git history
+
+# filezilla
+sudo apt-get install filezilla
+</pre></div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../11_linux/installation_history.html">1.2. Installation History</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../13_linux_virtual_machines_use/virtual_machines_use.html">1.4. How to Use a Virtual Machine</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

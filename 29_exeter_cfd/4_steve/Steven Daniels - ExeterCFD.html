@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)https://wiki.emps.ex.ac.uk/cfd/Steven_Daniels -->
+<html lang="en" dir="ltr" class="client-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Steven Daniels - ExeterCFD</title>
+<meta name="generator" content="MediaWiki 1.25.1">
+<link rel="shortcut icon" href="https://wiki.emps.ex.ac.uk/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="https://wiki.emps.ex.ac.uk/cfd/opensearch_desc.php" title="ExeterCFD (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.emps.ex.ac.uk/cfd/api.php?action=rsd">
+<link rel="alternate" hreflang="x-default" href="https://wiki.emps.ex.ac.uk/cfd/Steven_Daniels">
+<link rel="alternate" type="application/atom+xml" title="ExeterCFD Atom feed" href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Special:RecentChanges&amp;feed=atom">
+<link rel="stylesheet" href="./Steven Daniels - ExeterCFD_files/load.php">
+<style>
+.mw-collapsible-toggle{float:right;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none}  .mw-content-ltr .mw-collapsible-toggle,.mw-content-rtl .mw-content-ltr .mw-collapsible-toggle{float:right} .mw-content-rtl .mw-collapsible-toggle,.mw-content-ltr .mw-content-rtl .mw-collapsible-toggle{float:left}.mw-customtoggle,.mw-collapsible-toggle{cursor:pointer} caption .mw-collapsible-toggle,.mw-content-ltr caption .mw-collapsible-toggle,.mw-content-rtl caption .mw-collapsible-toggle,.mw-content-rtl .mw-content-ltr caption .mw-collapsible-toggle,.mw-content-ltr .mw-content-rtl caption .mw-collapsible-toggle{float:none} li .mw-collapsible-toggle,.mw-content-ltr li .mw-collapsible-toggle,.mw-content-rtl li .mw-collapsible-toggle,.mw-content-rtl .mw-content-ltr li .mw-collapsible-toggle,.mw-content-ltr .mw-content-rtl li .mw-collapsible-toggle{float:none} .mw-collapsible-toggle-li{list-style:none}
+/* cache key: cfd:resourceloader:filter:minify-css:7:e1ffd603cbaaa5f1a36e0d13fe843535 */
+.suggestions{overflow:hidden;position:absolute;top:0;left:0;width:0;border:none;z-index:1099;padding:0;margin:-1px 0 0 0}.suggestions-special{position:relative;background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0;margin-top:-2px;display:none;padding:0.25em 0.25em;line-height:1.25em}.suggestions-results{background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0}.suggestions-result{color:black;margin:0;line-height:1.5em;padding:0.01em 0.25em;text-align:left; overflow:hidden;-o-text-overflow:ellipsis; text-overflow:ellipsis;white-space:nowrap}.suggestions-result-current{background-color:#4C59A6;color:white}.suggestions-special .special-label{color:gray;text-align:left}.suggestions-special .special-query{color:black;font-style:italic;text-align:left}.suggestions-special .special-hover{background-color:silver}.suggestions-result-current .special-label,.suggestions-result-current .special-query{color:white}.highlight{font-weight:bold}
+/* cache key: cfd:resourceloader:filter:minify-css:7:f8d0c6895ce3ae14434c16b8fca59432 */
+.postedit-container{margin:0 auto;position:fixed;top:0;height:0;left:50%;z-index:1000;font-size:13px}.postedit-container:hover{cursor:pointer}.postedit{position:relative;top:0.6em;left:-50%;padding:.6em 3.6em .6em 1.1em;line-height:1.5625em;color:#626465;background-color:#f4f4f4;border:1px solid #dcd9d9;text-shadow:0 0.0625em 0 rgba(255,255,255,0.5);border-radius:5px;box-shadow:0 2px 5px 0 #ccc;-webkit-transition:all 0.25s ease-in-out;-moz-transition:all 0.25s ease-in-out;-ms-transition:all 0.25s ease-in-out;-o-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out}.skin-monobook .postedit{top:6em !important}.postedit-faded{opacity:0}.postedit-icon{padding-left:41px;  line-height:25px;background-repeat:no-repeat;background-position:8px 50%}.postedit-icon-checkmark{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABblBMVEUAAAD///////9PfTf///80aRdTgjn///9Feij///////////9Rfzf///////////9PfjZRgDh1o1xOfTb///////+bwYqLtnj///////9PfTa82K////9WhT6YxIL///9QgDdTgzr////////j7uDl7eLq8efi693k7OH///////9UhjuBr2rp9uRUhjr///9YljVKgir///9WiTlYjT3////9/v57vFlbkT5PjC9dlD/5/fhuq09stUTs9uhxuElctCpfnT1huDFloEZloUZmpENmvDZpvDxpvTxqvjxrvT5rvT9rwTxsqktswD5uwkBvuUdxw0NztFBztU9ztVBzwkp0tlJ1xkd2t1R3uVR4w1F4xk54x014yE15uVZ5v1R5xVB6v1R7yFJ8wVh9xVl9yFR9yVd9ylN+xVh+yFd/x1l/yFeAylmEx1+Ny2uY0Hqe04Wj1Ymv3Ze33qLD47TJ5L3O6cPU7Mrq9eb2+/Q4j37OAAAAQHRSTlMAAQIEBAUFBQwPFB4fJCUoKiosQEhJS01RUlZZXmdydXaChYuSlJSWmJmoq6uur8LExcvM19fg5ejt8fX2+Pr7SljgewAAAKpJREFUGBkFwQNCAwAAAMDLtl3LtrG4rWXbtvX77gAgZ6grFwC0bhwNVgKgdPZx8b0dgLi+s7Wn0VoAqpfOI9+BNADZI7fLrz2pSEwGHZuH+78lSK8ZLkLezF3ooyUG3VPXq2USei9WngeyoG195yBYWDF3E/2pAhl1e9Gr8bGT+bfOFCC2fnvh4X7rcqIAQNNu+HT6sxkAjceTL/2ZAIhv+PorBwBJxfkA//dFHSCBy/UTAAAAAElFTkSuQmCC);background-image:url(https://wiki.emps.ex.ac.uk/cfd/resources/src/mediawiki.action/images/green-checkmark.png?2015-05-25T21:00:00Z)!ie;background-position:left}.postedit-close{position:absolute;padding:0 .8em;right:0;top:0;font-size:1.25em;font-weight:bold;line-height:2.3em;color:black;text-shadow:0 0.0625em 0 white;text-decoration:none;opacity:0.2;filter:alpha(opacity=20)}.postedit-close:hover{color:black;text-decoration:none;opacity:0.4;filter:alpha(opacity=40)}
+/* cache key: cfd:resourceloader:filter:minify-css:7:2af8c3508bea88881a5e98ffb04cf98f */</style><style>
+.suggestions a.mw-searchSuggest-link,.suggestions a.mw-searchSuggest-link:hover,.suggestions a.mw-searchSuggest-link:active,.suggestions a.mw-searchSuggest-link:focus{color:black;text-decoration:none}.suggestions-result-current a.mw-searchSuggest-link,.suggestions-result-current a.mw-searchSuggest-link:hover,.suggestions-result-current a.mw-searchSuggest-link:active,.suggestions-result-current a.mw-searchSuggest-link:focus{color:white}.suggestions a.mw-searchSuggest-link .special-query{ overflow:hidden;-o-text-overflow:ellipsis; text-overflow:ellipsis;white-space:nowrap}
+/* cache key: cfd:resourceloader:filter:minify-css:7:ae3fa4570b5ac0c6cf7b3776c8ae4d6f */</style><meta name="ResourceLoaderDynamicStyles" content="">
+<style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: cfd:resourceloader:filter:minify-css:7:233b1d30d100a8079eac2e505f2781bf */</style>
+<script src="./Steven Daniels - ExeterCFD_files/load(1).php"></script><script src="./Steven Daniels - ExeterCFD_files/load(2).php"></script>
+<script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Steven_Daniels","wgTitle":"Steven Daniels","wgCurRevisionId":642,"wgRevisionId":642,"wgArticleId":219,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Steven_Daniels","wgRelevantArticleId":219,"wgIsProbablyEditable":false,"wgRestrictionEdit":[],"wgRestrictionMove":[]});
+}</script><script>if(window.mw){
+mw.loader.implement("user.options",function($,jQuery){mw.user.options.set({"variant":"en"});});mw.loader.implement("user.tokens",function($,jQuery){mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\"});});
+/* cache key: cfd:resourceloader:filter:minify-js:7:a5c52c063dc436c1ca7c9f456936a5e9 */
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","mediawiki.legacy.ajax","skins.vector.js"]);
+}</script><script src="./Steven Daniels - ExeterCFD_files/load(3).php"></script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/cfd/skins/Vector/csshover.min.htc")}</style><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Steven_Daniels skin-vector action-view">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+						<div class="mw-indicators">
+</div>
+			<h1 id="firstHeading" class="firstHeading" lang="en">Steven Daniels</h1>
+						<div id="bodyContent" class="mw-body-content">
+									<div id="siteSub">From ExeterCFD</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="https://wiki.emps.ex.ac.uk/cfd/Steven_Daniels#mw-head">navigation</a>, 					<a href="https://wiki.emps.ex.ac.uk/cfd/Steven_Daniels#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><div class="floatright"><a href="https://wiki.emps.ex.ac.uk/cfd/File:Me_Steve.jpg" class="image" title="Steven Daniels"><img alt="Steven Daniels" src="./Steven Daniels - ExeterCFD_files/240px-Me_Steve.jpg" width="240" height="240" srcset="/cfd/images/f/fc/Me_Steve.jpg 1.5x, /cfd/images/f/fc/Me_Steve.jpg 2x"></a></div>
+<div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2><span class="toctoggle">&nbsp;[<a href="https://wiki.emps.ex.ac.uk/cfd/Steven_Daniels#" id="togglelink">hide</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="https://wiki.emps.ex.ac.uk/cfd/Steven_Daniels#Contact_information"><span class="tocnumber">1</span> <span class="toctext">Contact information</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="https://wiki.emps.ex.ac.uk/cfd/Steven_Daniels#Project_description"><span class="tocnumber">2</span> <span class="toctext">Project description</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="https://wiki.emps.ex.ac.uk/cfd/Steven_Daniels#Data-Driven_Surrogate-Assisted_Evolutionary_Fluid_Dynamic_Optimisation"><span class="tocnumber">2.1</span> <span class="toctext">Data-Driven Surrogate-Assisted Evolutionary Fluid Dynamic Optimisation</span></a>
+<ul>
+<li class="toclevel-3 tocsection-4"><a href="https://wiki.emps.ex.ac.uk/cfd/Steven_Daniels#Shape_optimisation_using_Evolutionary_Algorithms"><span class="tocnumber">2.1.1</span> <span class="toctext">Shape optimisation using Evolutionary Algorithms</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-5"><a href="https://wiki.emps.ex.ac.uk/cfd/Steven_Daniels#ToDo_list"><span class="tocnumber">3</span> <span class="toctext">ToDo list</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="https://wiki.emps.ex.ac.uk/cfd/Steven_Daniels#Notes"><span class="tocnumber">4</span> <span class="toctext">Notes</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="https://wiki.emps.ex.ac.uk/cfd/Steven_Daniels#Useful_reading_material"><span class="tocnumber">5</span> <span class="toctext">Useful reading material</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="https://wiki.emps.ex.ac.uk/cfd/Steven_Daniels#Collaborations"><span class="tocnumber">6</span> <span class="toctext">Collaborations</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Contact_information">Contact information</span></h2>
+<ul><li> Email address: <a rel="nofollow" class="external text" href="mailto:S.Daniels@exeter.ac.uk">S.Daniels@exeter.ac.uk</a></li>
+<li> Phone number: </li>
+<li> Skype: volScalarField</li></ul>
+<h2><span class="mw-headline" id="Project_description">Project description</span></h2>
+<h3><span class="mw-headline" id="Data-Driven_Surrogate-Assisted_Evolutionary_Fluid_Dynamic_Optimisation">Data-Driven Surrogate-Assisted Evolutionary Fluid Dynamic Optimisation</span></h3>
+<div class="thumb tright"><div class="thumbinner" style="width:302px;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:Contour.png" class="image"><img alt="" src="./Steven Daniels - ExeterCFD_files/300px-Contour.png" width="300" height="260" class="thumbimage" srcset="/cfd/images/thumb/a/ae/Contour.png/450px-Contour.png 1.5x, /cfd/images/thumb/a/ae/Contour.png/600px-Contour.png 2x"></a>  <div class="thumbcaption"><div class="magnify"><a href="https://wiki.emps.ex.ac.uk/cfd/File:Contour.png" class="internal" title="Enlarge"></a></div>Shape optimisation procedure of the pitzDaily tutorial case.</div></div></div>
+<div class="thumb tright"><div class="thumbinner" style="width:552px;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:Pitg.png" class="image"><img alt="" src="./Steven Daniels - ExeterCFD_files/550px-Pitg.png" width="550" height="220" class="thumbimage" srcset="/cfd/images/thumb/4/4d/Pitg.png/825px-Pitg.png 1.5x, /cfd/images/thumb/4/4d/Pitg.png/1100px-Pitg.png 2x"></a>  <div class="thumbcaption"><div class="magnify"><a href="https://wiki.emps.ex.ac.uk/cfd/File:Pitg.png" class="internal" title="Enlarge"></a></div>Single-Objective Optimisation of the PitzDaily tutorial case in reducing the pressure drop.</div></div></div>
+<p>Optimisation of designs using Computational Fluid Dynamics (CFD) are frequently performed across many fields of
+research, such as the optimisation of an aircraft wing to reduce drag, or to increase the efficiency of a heat exchanger.
+General optimisation strategies involves altering design variables with a view to improve appropriate objective function(s).
+Often the objective function(s) are non-linear and multi-modal, and thus polynomial time algorithms for solving such
+problems may not be available. In such cases, applying Evolutionary Algorithms (EAs - a class of stochastic global
+optimisation techniques inspired from natural evolution) may locate good solutions within a practical time frame. The
+traditional CFD design optimisation process is often based on a ‘trial-and-error type approach. Starting from an initial
+geometry, Computational Aided Design changes are introduced manually based on results from a limited number of
+design iterations and CFD analyses. The process is usually complex, time-consuming and relies heavily on engineering
+experience, thus making the overall design procedure inconsistent, i.e. different ‘best’ solutions are obtained from different
+designers.
+</p>
+<h4><span class="mw-headline" id="Shape_optimisation_using_Evolutionary_Algorithms">Shape optimisation using Evolutionary Algorithms</span></h4>
+<p>From the limitations of optimisation by-hand, using EAs and CFD simulations may be an attractive alternative. There
+have been other attempts to combine EAs and CFD simulation to optimise designs, see for example [1]. Although EAs
+do not guarantee locating the optimal solution, they may achieve good solutions consistently. In this present work, an
+automated framework combining python’s EA library DEAP with OpenFOAM 2.3.1 was used. The communication of
+the python libraries with OpenFOAM was achieved using the pyFoam. PyFoam was used as an interface to control the
+OpenFOAM case set-ups for each proposed solution from the EA code and to post-process the data generated after each
+CFD calculation.
+</p><p>While the aim of this project is to focus on a complex (potentially multi-objective) case, for the purpose of this abstract,
+a single-objective optimisation of the PitzDaily tutorial in OpenFOAM was used to demonstrate the performance of the
+proposed procedure. The chosen cost function for this case was to minimise the pressure-drop between the inflow and
+outflow boundary conditions, i.e.
+</p><p>f1 = min(Pi - Po); 
+</p><p>where both pressures were obtained by averaging over the boundary condition faces. Figure 1 (top-to-bottom) shows
+the procedure in which the shape is altered after each evaluation. To change the geometry, sub-division curves were
+generated to form a new wall. The fixed points of the spline (indicated in orange squares) were placed across bottom
+boundary condition (‘lowerWall’). The squares in pink indicate the control points that ma be altered by the EA, and thus
+change the curvature of the spline. After the new positions of the pink squares is proposed by the EA, a Stereolithography
+(STL) file is generated and passed to OpenFOAM. Using this file, the meshing utility snappyHexMesh was used to cut the
+domain away (and if required re-mesh the altered region). Subsequently, the case was run using the steady-state solver
+simpleFoam. After this, the cost function was obtained and the EA determines a new position for the coordinates of the
+pink squares.
+</p><p>A single-objective optimisation run of the PitzDaily tutorial was performed with a basic real valued Genetic Algorithm
+([2]). For the CFD calculation, the residual tolerances for the SIMPLE algorithm for velocity and pressure was set to
+10e-5 and 10e-6 respectively. The pressure drop calculated from the original (base) case was measured as Δp = 5.22Pa.
+Figure 2 (left) shows the optimised shape of the PitzDaily geometry. The resulting pressure drop was calculated as
+Δp = 4.7e-6Pa. The schematic diagrams above the contour diagram of velocity magnitude indicate the position of the
+control points, and the outer boundary region (in red) in which they must not exceed. The GA maintains a population of
+solutions: Figure 2 shows the maximum (worst), the average and the minimum (best) pressure drop across the population
+with each generation. The grey-dashed line indicates the pressure drop for the original PitzDaily geometry. It can be seen
+that the reduction of the best pressure difference between the inflow and the outflow is reached relatively quickly after 15
+generations, and an improvement of the pressure-difference from the original case is achieved sooner than this.
+Preliminary results of a recently proposed automated framework are presented here. While at present the representation
+of the new geometry is achieved by snappyHexMesh, other methods are currently under investigation for comparison.
+Furthermore, in the future, to allow for a comprehensive investigation into the performance of EAs in shape optimisation,
+we plan to investigate a number of test problems similar to those commonly observed in industry, such as airflow ducts
+and heat exchangers.
+</p><p><br>
+[1] A. Caputo, P. Pelagagge, and P. Salini, Heat exchanger design based on economic optimisation. Applied Thermal
+Engineering, 2008, vol. 28, pp. 1151–1159.
+</p><p>[2] T. Back, D. B. Fogel, and Z. Michalewicz, Evolutionary computation 1: Basic algorithms and operators. CRC
+Press, 2000, vol. 1.
+</p><p><br>
+</p>
+<h2><span class="mw-headline" id="ToDo_list">ToDo list</span></h2>
+<ul><li> Clean up current solver
+<ul><li> Sort out currently hard coded bits and put them into member functions inside <i><b>liquidSolution</b></i> class</li>
+<li> Derive <i><b>liquidSolution</b></i> class from <i><b>IOdictionary</b></i> or from <i><b>basicMultiComponentMixture</b></i></li></ul></li></ul>
+<ul><li> Try and implement dynamic reaction object creation into the <i><b>liquidSolution</b></i> class
+<ul><li> Butcher existing reaction libraries and figure out how it is done in there</li></ul></li></ul>
+<ul><li> Dig out some of the Arrhenius parameters for struvite reaction that are still fudged in the solver</li></ul>
+<ul><li> Poster for <b>STREAM IDC</b> challenge week</li></ul>
+<h2><span class="mw-headline" id="Notes">Notes</span></h2>
+<h2><span class="mw-headline" id="Useful_reading_material">Useful reading material</span></h2>
+<h2><span class="mw-headline" id="Collaborations">Collaborations</span></h2>
+<p>This work was supported by a UK Engineering and Physical Sciences Research Council (EPSRC) grant (reference number: EP/M017915/1) for the University of Exeter's College of Engineering, Mathematics, and Physical Sciences.
+</p><p>This work forms a collaboration with the <b>Faculty of Engineering and Physical Sciences (FEPS)</b>, <b>University of Surrey</b> in the topics of aerospace. 
+</p><p>Topics covered throughout this project are also proposed by <b>Hydro International</b>, <b>Ricardo</b>, and the <b>Aerospace Technology Institute</b>.
+</p>
+<ul class="gallery mw-gallery-packed-hover">
+		<li class="gallerybox" style="width: 454px;"><div style="width: 454px;">
+			<div class="thumb" style="width: 453px;"><div style="margin:0px auto;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:EPSRC.jpg" class="image"><img alt="" src="./Steven Daniels - ExeterCFD_files/452px-EPSRC.jpg" width="453" height="180" srcset="/cfd/images/a/a8/EPSRC.jpg 1.5x, /cfd/images/a/a8/EPSRC.jpg 2x"></a></div></div>
+			<div class="gallerytextwrapper" style="width: 433px;"><div class="gallerytext">
+<p><i><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=70px&amp;action=edit&amp;redlink=1" class="new" title="70px (page does not exist)">link=https://www.epsrc.ac.uk/|EPSRC</a></i> (Engineering and Physical Sciences Research Council)
+</p>
+			</div></div>
+		</div></li>
+		<li class="gallerybox" style="width: 275px;"><div style="width: 275px;">
+			<div class="thumb" style="width: 273px;"><div style="margin:0px auto;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:Ricardo.png" class="image"><img alt="" src="./Steven Daniels - ExeterCFD_files/273px-Ricardo.png" width="273" height="180" srcset="/cfd/images/thumb/6/6c/Ricardo.png/409px-Ricardo.png 1.5x, /cfd/images/thumb/6/6c/Ricardo.png/546px-Ricardo.png 2x"></a></div></div>
+			<div class="gallerytextwrapper" style="width: 253px;"><div class="gallerytext">
+<p><i><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=75px&amp;action=edit&amp;redlink=1" class="new" title="75px (page does not exist)">link=http://www.ricardo.com/|Ricardo</a></i> (Ricardo)
+</p>
+			</div></div>
+		</div></li>
+		<li class="gallerybox" style="width: 386.958px;"><div style="width: 386.958px;">
+			<div class="thumb" style="width: 384.958px;"><div style="margin:0px auto;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:ATI.png" class="image"><img alt="" src="./Steven Daniels - ExeterCFD_files/ATI.png" width="384" height="140"></a></div></div>
+			<div class="gallerytextwrapper" style="width: 364.958px;"><div class="gallerytext">
+<p><i><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=100px&amp;action=edit&amp;redlink=1" class="new" title="100px (page does not exist)">link=http://www.ati.org.uk/|Aerospace Technology Institute</a></i> (Aerospace Technology Institute)
+</p>
+			</div></div>
+		</div></li>
+		<li class="gallerybox" style="width: 401.042px;"><div style="width: 401.042px;">
+			<div class="thumb" style="width: 399.042px;"><div style="margin:0px auto;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:HydroInt.jpg" class="image"><img alt="" src="./Steven Daniels - ExeterCFD_files/510px-HydroInt.jpg" width="399" height="140" srcset="/cfd/images/thumb/a/a2/HydroInt.jpg/765px-HydroInt.jpg 1.5x, /cfd/images/thumb/a/a2/HydroInt.jpg/1019px-HydroInt.jpg 2x"></a></div></div>
+			<div class="gallerytextwrapper" style="width: 379.042px;"><div class="gallerytext">
+<p><i><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=100px&amp;action=edit&amp;redlink=1" class="new" title="100px (page does not exist)">link=http://www.hydro-int.com/|Hydro International</a></i> (Hydro-International)
+</p>
+			</div></div>
+		</div></li>
+</ul>
+
+<!-- 
+NewPP limit report
+CPU time usage: 0.077 seconds
+Real time usage: 0.081 seconds
+Preprocessor visited node count: 38/1000000
+Preprocessor generated node count: 72/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 - -total
+-->
+
+<!-- Saved in parser cache with key cfd:pcache:idhash:219-0!*!0!!en!5!* and timestamp 20180806180506 and revision id 642
+ -->
+</div>									<div class="printfooter">
+						Retrieved from "<a dir="ltr" href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Steven_Daniels&amp;oldid=642">https://wiki.emps.ex.ac.uk/cfd/index.php?title=Steven_Daniels&amp;oldid=642</a>"					</div>
+													<div id="catlinks" class="catlinks catlinks-allhidden"></div>												<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+							<li id="pt-createaccount"><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Special:UserLogin&amp;returnto=Steven+Daniels&amp;type=signup" title="You are encouraged to create an account and log in; however, it is not mandatory">Create account</a></li><li id="pt-login"><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Special:UserLogin&amp;returnto=Steven+Daniels" title="You are encouraged to log in; however, it is not mandatory [alt-shift-o]" accesskey="o">Log in</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+															<li id="ca-nstab-main" class="selected"><span><a href="https://wiki.emps.ex.ac.uk/cfd/Steven_Daniels" title="View the content page [alt-shift-c]" accesskey="c">Page</a></span></li>
+															<li id="ca-talk" class="new"><span><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Talk:Steven_Daniels&amp;action=edit&amp;redlink=1" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></span></li>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label" tabindex="0"><span>Variants</span><a href="https://wiki.emps.ex.ac.uk/cfd/Steven_Daniels#" tabindex="-1"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Views</h3>
+						<ul>
+															<li id="ca-view" class="selected"><span><a href="https://wiki.emps.ex.ac.uk/cfd/Steven_Daniels">Read</a></span></li>
+															<li id="ca-viewsource"><span><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Steven_Daniels&amp;action=edit" title="This page is protected.
+You can view its source [alt-shift-e]" accesskey="e">View source</a></span></li>
+															<li id="ca-history" class="collapsible"><span><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Steven_Daniels&amp;action=history" title="Past revisions of this page [alt-shift-h]" accesskey="h">View history</a></span></li>
+													</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label" style="">
+						<h3 id="p-cactions-label" tabindex="0"><span>More</span><a href="https://wiki.emps.ex.ac.uk/cfd/Steven_Daniels#" tabindex="-1"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Search</label>
+						</h3>
+
+						<form action="https://wiki.emps.ex.ac.uk/cfd/index.php" id="searchform">
+														<div id="simpleSearch">
+															<input type="search" name="search" placeholder="Search" title="Search ExeterCFD [alt-shift-f]" accesskey="f" id="searchInput" tabindex="1" autocomplete="off"><input type="hidden" value="Special:Search" name="title"><input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchButton" class="searchButton">								</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="https://wiki.emps.ex.ac.uk/cfd/Main_Page" title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id="p-navigation" aria-labelledby="p-navigation-label">
+			<h3 id="p-navigation-label">Navigation</h3>
+
+			<div class="body">
+									<ul>
+													<li id="n-Home"><a href="https://wiki.emps.ex.ac.uk/cfd/Home">Home</a></li>
+													<li id="n-recentchanges"><a href="https://wiki.emps.ex.ac.uk/cfd/Special:RecentChanges" title="A list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li>
+													<li id="n-randompage"><a href="https://wiki.emps.ex.ac.uk/cfd/Special:Random" title="Load a random page [alt-shift-x]" accesskey="x">Random page</a></li>
+													<li id="n-help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" title="The place to find out">Help</a></li>
+											</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-tb" aria-labelledby="p-tb-label">
+			<h3 id="p-tb-label">Tools</h3>
+
+			<div class="body">
+									<ul>
+													<li id="t-whatlinkshere"><a href="https://wiki.emps.ex.ac.uk/cfd/Special:WhatLinksHere/Steven_Daniels" title="A list of all wiki pages that link here [alt-shift-j]" accesskey="j">What links here</a></li>
+													<li id="t-recentchangeslinked"><a href="https://wiki.emps.ex.ac.uk/cfd/Special:RecentChangesLinked/Steven_Daniels" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+													<li id="t-specialpages"><a href="https://wiki.emps.ex.ac.uk/cfd/Special:SpecialPages" title="A list of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+													<li id="t-print"><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Steven_Daniels&amp;printable=yes" rel="alternate" title="Printable version of this page [alt-shift-p]" accesskey="p">Printable version</a></li>
+													<li id="t-permalink"><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Steven_Daniels&amp;oldid=642" title="Permanent link to this revision of the page">Permanent link</a></li>
+													<li id="t-info"><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Steven_Daniels&amp;action=info" title="More information about this page">Page information</a></li>
+											</ul>
+							</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 26 October 2016, at 17:08.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="https://wiki.emps.ex.ac.uk/cfd/ExeterCFD:Privacy_policy" title="ExeterCFD:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="https://wiki.emps.ex.ac.uk/cfd/ExeterCFD:About" title="ExeterCFD:About">About ExeterCFD</a></li>
+											<li id="footer-places-disclaimer"><a href="https://wiki.emps.ex.ac.uk/cfd/ExeterCFD:General_disclaimer" title="ExeterCFD:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-poweredbyico">
+															<a href="https://www.mediawiki.org/"><img src="./Steven Daniels - ExeterCFD_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/cfd/resources/assets/poweredby_mediawiki_132x47.png 1.5x, /cfd/resources/assets/poweredby_mediawiki_176x62.png 2x" width="88" height="31"></a>
+													</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>if(window.jQuery)jQuery.ready();</script><script>if(window.mw){
+mw.loader.state({"site":"ready","user":"ready","user.groups":"ready"});
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.page.gallery","mediawiki.toc","mediawiki.action.view.postEdit","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest"],null,true);
+}</script>
+<script>if(window.mw){
+mw.config.set({"wgBackendResponseTime":312});
+}</script>
+	
+
+<div class="suggestions" style="display: none; font-size: 13px;"><div class="suggestions-results"></div><div class="suggestions-special"></div></div></body></html>

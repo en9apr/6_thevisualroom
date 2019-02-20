@@ -1,0 +1,1 @@
+vectors.d: ../vectors.cpp

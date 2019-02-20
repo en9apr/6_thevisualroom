@@ -1,0 +1,433 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.2.1. Thompson et al. (2001) “Investigation of Rigid-Roll Coating” &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="4. Literature" href="literature.html" />
+    <link rel="next" title="4.2.2. Noakes et al. (2002) “Streak-line Defect Minimization”" href="noakes.html" />
+    <link rel="prev" title="4.1.7. Wen and Mobbs (2014) “Numerical Simulations of Laminar Air-Water Flow”" href="wen_mobbs.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.2.1. Thompson et al. (2001) “Investigation of Rigid-Roll Coating”</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="wen_mobbs.html">4.1.7. Wen and Mobbs (2014) &#8220;Numerical Simulations of Laminar Air-Water Flow&#8221;</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="noakes.html">4.2.2. Noakes et al. (2002) &#8220;Streak-line Defect Minimization&#8221;</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="thompson-et-al-2001-investigation-of-rigid-roll-coating">
+<h1>4.2.1. Thompson et al. (2001) &#8220;Investigation of Rigid-Roll Coating&#8221;<a class="headerlink" href="#thompson-et-al-2001-investigation-of-rigid-roll-coating" title="Permalink to this headline">¶</a></h1>
+<p>Thompson, H.M., Kapur, N., Gaskell, P.H., Summers, J.L. and Abbott, S.J. &#8220;A theoretical and experimental investigation of reservoir-fed rigid-roll coating&#8221;, Chemical Engineering Science, vol 56, 2001.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#abstract" id="id1">Abstract</a></li>
+<li><a class="reference internal" href="#introduction" id="id2">Introduction</a><ul>
+<li><a class="reference internal" href="#aim-of-this-paper" id="id3">Aim of this paper</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#experimental-method" id="id4">Experimental Method</a><ul>
+<li><a class="reference internal" href="#flux-and-wetting-line-location-measurements" id="id5">Flux and wetting line location measurements</a></li>
+<li><a class="reference internal" href="#flow-visualisation" id="id6">Flow visualisation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mathematical-models" id="id7">Mathematical Models</a><ul>
+<li><a class="reference internal" href="#lubrication-analysis" id="id8">Lubrication Analysis</a><ul>
+<li><a class="reference internal" href="#boundary-conditions" id="id9">Boundary Conditions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#finite-element-solutions" id="id10">Finite Element Solutions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#results" id="id11">Results</a></li>
+<li><a class="reference internal" href="#conclusions" id="id12">Conclusions</a></li>
+</ul>
+</div>
+<div class="section" id="abstract">
+<h2><a class="toc-backref" href="#id1">4.2.1.1. Abstract</a><a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h2>
+<p>A variant of reverse roll coating is studied via:</p>
+<ul class="simple">
+<li>Experimental</li>
+<li>Analytical (lubrication)</li>
+<li>Computational (finite element)</li>
+</ul>
+<p>Experimental results:</p>
+<ul class="simple">
+<li>Flow rate and wetting line position over range of roll speed ratios and capillary numbers</li>
+<li>Provided the wetting line is sufficiently far from the nib, the flow rate depends linearly on reservoir level</li>
+</ul>
+<p>What is unique about this study:</p>
+<ul class="simple">
+<li>Variation of dynamic contact angle with metering roll speed has been accounted for</li>
+</ul>
+<p>Lubrication model boundary conditions:</p>
+<ul class="simple">
+<li>Free surface</li>
+<li>Surface tension</li>
+<li>Wetting line effects</li>
+</ul>
+<p>Physics:</p>
+<ul class="simple">
+<li>The effect of gravity is influential</li>
+<li>Flow in the reservoir is recirculating in nature</li>
+<li>The size and number of recirculations depends on reservoir geometry</li>
+</ul>
+<p>Good agreement between models and experimental data</p>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id2">4.2.1.2. Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Rigid-roll coating systems operating in reverse mode are used for applying thin liquid films, in the production of:</p>
+<ul class="simple">
+<li>Magnetic media</li>
+<li>Adhesive tapes</li>
+<li>Films</li>
+<li>Foils</li>
+</ul>
+<p>Types of rigid-roll coating systems:</p>
+<ul class="simple">
+<li>Pan-fed</li>
+<li>Direct-fed</li>
+</ul>
+<p>Physics:</p>
+<ul class="simple">
+<li>Flow in the <strong>positive metering gap</strong> between the co-rotating applicator and metering rolls plays a crucial role in determining the <strong>final wet film thickness transferred to the substrate</strong></li>
+</ul>
+<p>Discrepancy between FE model and experiment:</p>
+<ul class="simple">
+<li>Neglect of gravity</li>
+<li>Absence of dynamic wetting line</li>
+</ul>
+<p>Discrepancy between lubrication model and experiment:</p>
+<ul class="simple">
+<li>At high speed ratio and capillary number</li>
+<li>Importance of the position of the dynamic wetting line relative to the nip - w.r.t onset of cascade instability</li>
+</ul>
+<p>Other effects:</p>
+<ul class="simple">
+<li>Effect of feed condition on the flow structure</li>
+</ul>
+<p>Direct-fed reverse roll coating is investigated. The web thickness is determined by:</p>
+<ul class="simple">
+<li>Competition between metering action of the reverse roll configuration</li>
+<li>Influence of gravity in the form of hydrostatic head provided by the reservoir</li>
+</ul>
+<div class="section" id="aim-of-this-paper">
+<h3><a class="toc-backref" href="#id3">4.2.1.2.1. Aim of this paper</a><a class="headerlink" href="#aim-of-this-paper" title="Permalink to this headline">¶</a></h3>
+<p>Quantify the effect of the reservoir on:</p>
+<ul class="simple">
+<li>The coated film thickness</li>
+<li>Dynamic wetting line position</li>
+</ul>
+</div>
+</div>
+<div class="section" id="experimental-method">
+<h2><a class="toc-backref" href="#id4">4.2.1.3. Experimental Method</a><a class="headerlink" href="#experimental-method" title="Permalink to this headline">¶</a></h2>
+<p>A rig was designed to:</p>
+<ul class="simple">
+<li>Retain the important features of the industrial model</li>
+<li>Be flexible in operation</li>
+<li>Allow optical access</li>
+</ul>
+<p>Conditions:</p>
+<ul class="simple">
+<li>Large bank of liquid ensured that ambient temperature changes did not affect liquid properties</li>
+<li>0.5kg weight was applied to the hosing of the tank to seat it on the rolls</li>
+<li>Doctor blade used to remove any residue</li>
+</ul>
+<p>Fluid:</p>
+<ul class="simple">
+<li>Newtonian mineral oil</li>
+<li>Surface tension measured with a torsion balance</li>
+<li>Viscosity measured with a viscometer</li>
+<li>Density measured by measuring the mass of a known volume of fluid</li>
+</ul>
+<p>Visualisation:</p>
+<ul class="simple">
+<li>Liquid illuminated</li>
+<li>Illumination of nip region achieved using a mirror</li>
+<li>Flow patterns recorded on a video system via a microscope and CCD camera</li>
+</ul>
+<div class="section" id="flux-and-wetting-line-location-measurements">
+<h3><a class="toc-backref" href="#id5">4.2.1.3.1. Flux and wetting line location measurements</a><a class="headerlink" href="#flux-and-wetting-line-location-measurements" title="Permalink to this headline">¶</a></h3>
+<p>Non-contacting methods for measuring film thickness:</p>
+<ul class="simple">
+<li>Infra-red absorption</li>
+<li>Microwave absorption</li>
+<li>X-ray fluorescence</li>
+<li>Capacitance probes</li>
+</ul>
+<p>Problem with non-contacting methods:</p>
+<ul class="simple">
+<li>Not possible to deduce an exact flux due to variations in velocity through the film</li>
+</ul>
+<p>Solution:</p>
+<ul class="simple">
+<li>Web was scraped clean of liquid using a twin scraper blade</li>
+<li>A mass of liquid was collected over a known time interval, hence flux determined</li>
+</ul>
+<p>Wetting line:</p>
+<ul class="simple">
+<li>Position of wetting line measured using microscope fitted with a cross hair graticule</li>
+</ul>
+</div>
+<div class="section" id="flow-visualisation">
+<h3><a class="toc-backref" href="#id6">4.2.1.3.2. Flow visualisation</a><a class="headerlink" href="#flow-visualisation" title="Permalink to this headline">¶</a></h3>
+<p>Purpose:</p>
+<ul class="simple">
+<li>Highlight flow patterns near dynamic wetting line</li>
+<li>Show how the flow patterns depend on operating parameters</li>
+</ul>
+<p>Hydrogen bubble technique impractical due to:</p>
+<ul class="simple">
+<li>buoyancy effects</li>
+<li>long residence times</li>
+<li>difficulty of constraining a bubble stream to a narrow planar section</li>
+</ul>
+<p>Used dye injection method instead (a laser was not needed)</p>
+<p>Flow in reservoir was visualised by:</p>
+<ul class="simple">
+<li>discharging dye continuously by traversing flow field at stagnation points</li>
+<li>dye was not confined to a single streamline</li>
+</ul>
+<p>Flow in nip region was visualised by:</p>
+<ul class="simple">
+<li>releasing a pulse of tracer liquid onto metering roll just upstream of dynamic wetting line</li>
+</ul>
+</div>
+</div>
+<div class="section" id="mathematical-models">
+<h2><a class="toc-backref" href="#id7">4.2.1.4. Mathematical Models</a><a class="headerlink" href="#mathematical-models" title="Permalink to this headline">¶</a></h2>
+<p>Assumptions:</p>
+<ul class="simple">
+<li>Isothermal</li>
+<li>2D</li>
+<li>Newtonian</li>
+<li>Incompressible</li>
+<li>Governed by the Navier Stokes Equations</li>
+</ul>
+<p>Two approaches:</p>
+<ol class="arabic simple">
+<li>Lubrication model:</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>A new approach - where variation of contact angle will roll speed is predicted rather than prescribed</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Numerical model:</li>
+</ol>
+<ul class="simple">
+<li>Finite element method for full non-linear problem</li>
+<li>Algebraic mesh generation algorithm</li>
+</ul>
+<div class="section" id="lubrication-analysis">
+<h3><a class="toc-backref" href="#id8">4.2.1.4.1. Lubrication Analysis</a><a class="headerlink" href="#lubrication-analysis" title="Permalink to this headline">¶</a></h3>
+<p>Assumptions:</p>
+<ul class="simple">
+<li>Uni-directional</li>
+<li>Away from free surface</li>
+<li>One-dimensional</li>
+</ul>
+<p>Physics:</p>
+<ul class="simple">
+<li>Used non-dimensional scaling</li>
+<li>In the past the influence of wetting lines has been ignored in previous free surface models</li>
+<li>Lubrication theory is inapplicable in the vicinity of the downstream free surface and the solution domain is terminated by introducing appropriate boundary conditions</li>
+</ul>
+<div class="section" id="boundary-conditions">
+<h4><a class="toc-backref" href="#id9">Boundary Conditions</a><a class="headerlink" href="#boundary-conditions" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>At the free surface, the pressure is equal to the capillary pressure due to surface tension</li>
+<li>We assume that the free surface forms an arc of a circle, so it is a function of the dynamic wetting line angle</li>
+<li>Previous studies didn&#8217;t model the idea that the dynamic wetting line angle varies with metered roll speed, however <strong>the nature of the flow near the dynamic wetting line is still a matter of debate</strong></li>
+<li>The variation is accounted for using a hydrodynamic asymptotic model for wetting</li>
+<li>The asymptotic model is based on the assumption that the free surface is planar near the wetting line and requires the velocity of the fluid in the liquid-gas interface to be a function of the dynamic wetting line angle</li>
+<li>A calibration procedure is adopted in order to estimate the variables in the above in terms of a single adjustable parameter - the interfacial thickness. <strong>Further experimental data is needed to verify the accuracy of the estimates for the parameters</strong></li>
+<li>The calibration results in two equations in terms of Bond Number (which measures the relative importance of gravitational to surface tension force) and Capillary Number</li>
+<li>A third equation is derived to relate the flux to the radius of curvature of the meniscus at the wetting line</li>
+<li>Newtonian iteration is used to solve the three equations</li>
+</ul>
+<p>Limitation:</p>
+<p><strong>Lubrication theory is inapplicable near the meniscus where the flow is 2D and often recirculating</strong></p>
+<p>This requires fully non-linear 2D finite element simulation</p>
+</div>
+</div>
+<div class="section" id="finite-element-solutions">
+<h3><a class="toc-backref" href="#id10">4.2.1.4.2. Finite Element Solutions</a><a class="headerlink" href="#finite-element-solutions" title="Permalink to this headline">¶</a></h3>
+<p>Flow in the reservoir is solved using FE method (due to it&#8217;s topological flexibility)</p>
+<p>Models:</p>
+<ol class="arabic simple">
+<li>Extends from top of the reservoir into the nip region</li>
+<li>Extends from the nip region to the downstream free surface</li>
+</ol>
+<p>Solution method:</p>
+<ul class="simple">
+<li>The governing equations are non-dimensionalised w.r.t. velocity, length and pressure</li>
+<li>Solved using Bubnov-Galerkin weighted residual FE formulation</li>
+</ul>
+<p>Problems:</p>
+<ul class="simple">
+<li>Obtaining FE solutions in the reservoir region is straightforward since the geometry is fixed.</li>
+<li>Flow in the downstream region is more complex because of the existence of the meniscus and the associated wetting line</li>
+</ul>
+<p><strong>Downstream Model</strong></p>
+<p>Solution to boundary conditions for downstream model:</p>
+<ul class="simple">
+<li>Boundary conforming mesh based on spine approach</li>
+<li><strong>Conditions at the wetting line are controversial</strong></li>
+</ul>
+<p>Solution:</p>
+<ul class="simple">
+<li>Dynamic wetting angle is predicted and fluid is allowed to slip on the roll surface for those nodes adjacent to the wetting line</li>
+</ul>
+<p><strong>Reservoir Model</strong></p>
+<ul class="simple">
+<li>Velocity profile at nip is the same as that specified in the downstream model</li>
+<li>Reservoir surface set to atmospheric pressure</li>
+<li>Parabolic velocity profile set at the surface to ensure mass conservation</li>
+</ul>
+<p><strong>Solution</strong></p>
+<ul class="simple">
+<li>Frontal Method</li>
+<li>Newton iteration</li>
+<li>Leading to second order convergence</li>
+</ul>
+<p>Grid refinement was also completed</p>
+</div>
+</div>
+<div class="section" id="results">
+<h2><a class="toc-backref" href="#id11">4.2.1.5. Results</a><a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<p>Variables of interest:</p>
+<ul class="simple">
+<li>Flow rate</li>
+<li>Wetting line position is useful w.r.t cascade instability when it migrates upstream of the nip</li>
+</ul>
+<p>Two experiments:</p>
+<ol class="arabic simple">
+<li>Peripheral speed of the applicator <strong>fixed</strong> and metering roll speed <strong>varied</strong>. Three different reservoir levels. Capillary number <strong>fixed</strong>, speed ratio <strong>varied</strong></li>
+<li>Peripheral speed of metering roll <strong>fixed</strong> and applicator roll speed <strong>varied</strong>. Capillary number <strong>varied</strong> and speed ratio <strong>varied</strong></li>
+</ol>
+<p>In both sets of experiments Bond Number is <strong>fixed</strong></p>
+<ol class="arabic simple">
+<li>Experiment 1</li>
+</ol>
+<ul class="simple">
+<li>Shows q decreasing as S increases until a critical value is reached, beyond which q increases. This is caused by the wetting line moving upstream of the nip, which increases the effective gap at the meniscus.</li>
+<li>Effect of reservoir level depends on position of wetting line w.r.t. nip - i.e. whether it&#8217;s upstream or downstream of the nip</li>
+</ul>
+<ol class="arabic simple" start="2">
+<li>Experiment 2</li>
+</ol>
+<ul class="simple">
+<li>Shows q increases as Ca increases</li>
+<li>Wetting line is located downstream of the nip for Ca &gt; 0.2</li>
+</ul>
+<p><strong>Validation of model:</strong></p>
+<ul class="simple">
+<li>q and wetting line position are validated with good agreement</li>
+</ul>
+<p>Results also show the sensitivity of the wetting line position to dynamic wetting line angle</p>
+<p><strong>Problem</strong> we are unable to predict wetting line positions at the higher Ca numbers - possibly due to Bretherton condition
+<strong>Suggesting</strong> flow rate insensitive to this condition, whereas wetting line position is more sensitive.
+<strong>Reasoning</strong> Circle assumption is not a good representation of the free surface shape for higher Ca numbers - it&#8217;s probably more parabolic</p>
+<p>Effect of head:</p>
+<ul class="simple">
+<li>linear dependence between q and head - where wetting line is safely downstream of the nip</li>
+</ul>
+<p>Flow inside the reservoir:</p>
+<ul class="simple">
+<li>Recirculations can cause difficulties for the lubrication model because the rectilinear assumption is violated in such regions</li>
+</ul>
+</div>
+<div class="section" id="conclusions">
+<h2><a class="toc-backref" href="#id12">4.2.1.6. Conclusions</a><a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>This is a study of the equilibrium flow in a variant of reverse roll coating, where the metering gap sits beneath a large reservoir</li>
+<li>Experimental data shows:</li>
+</ol>
+<ul class="simple">
+<li>If wetting line is sufficiently far downstream of the nip: flow rate increases <strong>linearly</strong> with reservoir level</li>
+<li>If wetting line is close to the nip: effect of level on flow rate is <strong>non-linear</strong> and influences the onset of the <strong>cascade instability</strong></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li>Hydrodynamic model:</li>
+</ol>
+<ul class="simple">
+<li>Dynamic contact angle with metering roll speed is incorporated using a hydrodynamic model for wetting.</li>
+<li>However, data is lacking for the hydrodynamic model, so a calibration method is proposed, in terms of the interfacial layer thickness.</li>
+<li>This interfacial layer thickness is calibrated by matching the prediction against theory for one data point only.</li>
+</ul>
+<ol class="arabic simple" start="4">
+<li>FE solutions can predict accurately:</li>
+</ol>
+<ul class="simple">
+<li>Flow rate</li>
+<li>Wetting line positions (even at high Capillary Numbers)</li>
+</ul>
+<ol class="arabic simple" start="5">
+<li>Lubrication model predicts the flow rate over a range of Capillary Numbers, however:</li>
+</ol>
+<ul class="simple">
+<li>Wetting line prediction is sensitive to the way the free surface is represented</li>
+<li>Free surface profile should be represented by a parabolic rather than a circular arc</li>
+<li>But the lubrication prediction demonstrates the benefit of incorporating the effects of free surface, surface tension and the wetting line - especially the ability to predict the flow rate minimum caused by wetting line migration through the nip</li>
+</ul>
+<ol class="arabic simple" start="6">
+<li>Experimental results vs FE solutions show good comparison</li>
+<li>Flow in reservoir should not be overlooked - given the possibility of recirculations there</li>
+</ol>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="wen_mobbs.html">4.1.7. Wen and Mobbs (2014) &#8220;Numerical Simulations of Laminar Air-Water Flow&#8221;</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="noakes.html">4.2.2. Noakes et al. (2002) &#8220;Streak-line Defect Minimization&#8221;</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<!-- saved from url=(0070)https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OpenFOAM_IDE_setup -->
+<html lang="en" dir="ltr" class="client-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Bernardas Jankauskas/OpenFOAM IDE setup - ExeterCFD</title>
+<meta name="generator" content="MediaWiki 1.25.1">
+<link rel="shortcut icon" href="https://wiki.emps.ex.ac.uk/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="https://wiki.emps.ex.ac.uk/cfd/opensearch_desc.php" title="ExeterCFD (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.emps.ex.ac.uk/cfd/api.php?action=rsd">
+<link rel="alternate" hreflang="x-default" href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OpenFOAM_IDE_setup">
+<link rel="alternate" type="application/atom+xml" title="ExeterCFD Atom feed" href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Special:RecentChanges&amp;feed=atom">
+<link rel="stylesheet" href="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/load.php">
+<style>
+.mw-collapsible-toggle{float:right;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none}  .mw-content-ltr .mw-collapsible-toggle,.mw-content-rtl .mw-content-ltr .mw-collapsible-toggle{float:right} .mw-content-rtl .mw-collapsible-toggle,.mw-content-ltr .mw-content-rtl .mw-collapsible-toggle{float:left}.mw-customtoggle,.mw-collapsible-toggle{cursor:pointer} caption .mw-collapsible-toggle,.mw-content-ltr caption .mw-collapsible-toggle,.mw-content-rtl caption .mw-collapsible-toggle,.mw-content-rtl .mw-content-ltr caption .mw-collapsible-toggle,.mw-content-ltr .mw-content-rtl caption .mw-collapsible-toggle{float:none} li .mw-collapsible-toggle,.mw-content-ltr li .mw-collapsible-toggle,.mw-content-rtl li .mw-collapsible-toggle,.mw-content-rtl .mw-content-ltr li .mw-collapsible-toggle,.mw-content-ltr .mw-content-rtl li .mw-collapsible-toggle{float:none} .mw-collapsible-toggle-li{list-style:none}
+/* cache key: cfd:resourceloader:filter:minify-css:7:e1ffd603cbaaa5f1a36e0d13fe843535 */
+.suggestions{overflow:hidden;position:absolute;top:0;left:0;width:0;border:none;z-index:1099;padding:0;margin:-1px 0 0 0}.suggestions-special{position:relative;background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0;margin-top:-2px;display:none;padding:0.25em 0.25em;line-height:1.25em}.suggestions-results{background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0}.suggestions-result{color:black;margin:0;line-height:1.5em;padding:0.01em 0.25em;text-align:left; overflow:hidden;-o-text-overflow:ellipsis; text-overflow:ellipsis;white-space:nowrap}.suggestions-result-current{background-color:#4C59A6;color:white}.suggestions-special .special-label{color:gray;text-align:left}.suggestions-special .special-query{color:black;font-style:italic;text-align:left}.suggestions-special .special-hover{background-color:silver}.suggestions-result-current .special-label,.suggestions-result-current .special-query{color:white}.highlight{font-weight:bold}
+/* cache key: cfd:resourceloader:filter:minify-css:7:f8d0c6895ce3ae14434c16b8fca59432 */
+.postedit-container{margin:0 auto;position:fixed;top:0;height:0;left:50%;z-index:1000;font-size:13px}.postedit-container:hover{cursor:pointer}.postedit{position:relative;top:0.6em;left:-50%;padding:.6em 3.6em .6em 1.1em;line-height:1.5625em;color:#626465;background-color:#f4f4f4;border:1px solid #dcd9d9;text-shadow:0 0.0625em 0 rgba(255,255,255,0.5);border-radius:5px;box-shadow:0 2px 5px 0 #ccc;-webkit-transition:all 0.25s ease-in-out;-moz-transition:all 0.25s ease-in-out;-ms-transition:all 0.25s ease-in-out;-o-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out}.skin-monobook .postedit{top:6em !important}.postedit-faded{opacity:0}.postedit-icon{padding-left:41px;  line-height:25px;background-repeat:no-repeat;background-position:8px 50%}.postedit-icon-checkmark{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABblBMVEUAAAD///////9PfTf///80aRdTgjn///9Feij///////////9Rfzf///////////9PfjZRgDh1o1xOfTb///////+bwYqLtnj///////9PfTa82K////9WhT6YxIL///9QgDdTgzr////////j7uDl7eLq8efi693k7OH///////9UhjuBr2rp9uRUhjr///9YljVKgir///9WiTlYjT3////9/v57vFlbkT5PjC9dlD/5/fhuq09stUTs9uhxuElctCpfnT1huDFloEZloUZmpENmvDZpvDxpvTxqvjxrvT5rvT9rwTxsqktswD5uwkBvuUdxw0NztFBztU9ztVBzwkp0tlJ1xkd2t1R3uVR4w1F4xk54x014yE15uVZ5v1R5xVB6v1R7yFJ8wVh9xVl9yFR9yVd9ylN+xVh+yFd/x1l/yFeAylmEx1+Ny2uY0Hqe04Wj1Ymv3Ze33qLD47TJ5L3O6cPU7Mrq9eb2+/Q4j37OAAAAQHRSTlMAAQIEBAUFBQwPFB4fJCUoKiosQEhJS01RUlZZXmdydXaChYuSlJSWmJmoq6uur8LExcvM19fg5ejt8fX2+Pr7SljgewAAAKpJREFUGBkFwQNCAwAAAMDLtl3LtrG4rWXbtvX77gAgZ6grFwC0bhwNVgKgdPZx8b0dgLi+s7Wn0VoAqpfOI9+BNADZI7fLrz2pSEwGHZuH+78lSK8ZLkLezF3ooyUG3VPXq2USei9WngeyoG195yBYWDF3E/2pAhl1e9Gr8bGT+bfOFCC2fnvh4X7rcqIAQNNu+HT6sxkAjceTL/2ZAIhv+PorBwBJxfkA//dFHSCBy/UTAAAAAElFTkSuQmCC);background-image:url(https://wiki.emps.ex.ac.uk/cfd/resources/src/mediawiki.action/images/green-checkmark.png?2015-05-25T21:00:00Z)!ie;background-position:left}.postedit-close{position:absolute;padding:0 .8em;right:0;top:0;font-size:1.25em;font-weight:bold;line-height:2.3em;color:black;text-shadow:0 0.0625em 0 white;text-decoration:none;opacity:0.2;filter:alpha(opacity=20)}.postedit-close:hover{color:black;text-decoration:none;opacity:0.4;filter:alpha(opacity=40)}
+/* cache key: cfd:resourceloader:filter:minify-css:7:2af8c3508bea88881a5e98ffb04cf98f */</style><style>
+.suggestions a.mw-searchSuggest-link,.suggestions a.mw-searchSuggest-link:hover,.suggestions a.mw-searchSuggest-link:active,.suggestions a.mw-searchSuggest-link:focus{color:black;text-decoration:none}.suggestions-result-current a.mw-searchSuggest-link,.suggestions-result-current a.mw-searchSuggest-link:hover,.suggestions-result-current a.mw-searchSuggest-link:active,.suggestions-result-current a.mw-searchSuggest-link:focus{color:white}.suggestions a.mw-searchSuggest-link .special-query{ overflow:hidden;-o-text-overflow:ellipsis; text-overflow:ellipsis;white-space:nowrap}
+/* cache key: cfd:resourceloader:filter:minify-css:7:ae3fa4570b5ac0c6cf7b3776c8ae4d6f */</style><meta name="ResourceLoaderDynamicStyles" content="">
+<style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: cfd:resourceloader:filter:minify-css:7:233b1d30d100a8079eac2e505f2781bf */</style>
+<script src="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/load(1).php"></script><script src="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/load(2).php"></script>
+<script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Bernardas_Jankauskas/OpenFOAM_IDE_setup","wgTitle":"Bernardas Jankauskas/OpenFOAM IDE setup","wgCurRevisionId":774,"wgRevisionId":774,"wgArticleId":311,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Bernardas_Jankauskas/OpenFOAM_IDE_setup","wgRelevantArticleId":311,"wgIsProbablyEditable":false,"wgRestrictionEdit":[],"wgRestrictionMove":[]});
+}</script><script>if(window.mw){
+mw.loader.implement("user.options",function($,jQuery){mw.user.options.set({"variant":"en"});});mw.loader.implement("user.tokens",function($,jQuery){mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\"});});
+/* cache key: cfd:resourceloader:filter:minify-js:7:a5c52c063dc436c1ca7c9f456936a5e9 */
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","mediawiki.legacy.ajax","skins.vector.js"]);
+}</script><script src="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/load(3).php"></script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/cfd/skins/Vector/csshover.min.htc")}</style><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Bernardas_Jankauskas_OpenFOAM_IDE_setup skin-vector action-view">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+						<div class="mw-indicators">
+</div>
+			<h1 id="firstHeading" class="firstHeading" lang="en">Bernardas Jankauskas/OpenFOAM IDE setup</h1>
+						<div id="bodyContent" class="mw-body-content">
+									<div id="siteSub">From ExeterCFD</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OpenFOAM_IDE_setup#mw-head">navigation</a>, 					<a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OpenFOAM_IDE_setup#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2><span class="toctoggle">&nbsp;[<a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OpenFOAM_IDE_setup#" id="togglelink">hide</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OpenFOAM_IDE_setup#OpenFOAM_and_IDE.27s"><span class="tocnumber">1</span> <span class="toctext">OpenFOAM and IDE's</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OpenFOAM_IDE_setup#Eclipse"><span class="tocnumber">1.1</span> <span class="toctext"><b>Eclipse</b></span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OpenFOAM_IDE_setup#QtCreator"><span class="tocnumber">1.2</span> <span class="toctext"><b>QtCreator </b></span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OpenFOAM_IDE_setup#tmux_.2B_Vim"><span class="tocnumber">1.3</span> <span class="toctext"><b>tmux + Vim</b></span></a>
+<ul>
+<li class="toclevel-3 tocsection-5"><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OpenFOAM_IDE_setup#Terminal_multiplexer"><span class="tocnumber">1.3.1</span> <span class="toctext">Terminal multiplexer</span></a></li>
+<li class="toclevel-3 tocsection-6"><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OpenFOAM_IDE_setup#Vim"><span class="tocnumber">1.3.2</span> <span class="toctext">Vim</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h3><span class="mw-headline" id="OpenFOAM_and_IDE.27s">OpenFOAM and IDE's</span></h3>
+<p>IDE stands for integrated development environment. Often programmers use these tools to help optimise their workflow and make overall programming experience slightly less consuming. IDE usually has useful properties such as autocompletion, tree structure of the code, indexing of the code that helps navigating the code, higlighting, etc. All of these benefits pose an obvious question - can we use an IDE program to help us write OpenFOAM code? With some caveats, the answer is YES. 
+</p><p>There are various different programs that can be used to achieve IDE experience. I personally have tried using <i>Eclipse IDK</i>, <i>QtCreator</i> and eventually settled with <i>Tmux + Vim</i>. Below there will be a quick setup guide for these three environments, but as with almost every solution in programming it is not the only and one might find that some different setup works for them better.
+</p>
+<h4><span class="mw-headline" id="Eclipse"><b>Eclipse</b></span></h4>
+<p>Eclipse out of all of three environments, probably has the most features. Unfortunately, it comes with a slight caveat: I personally have found that it is quite taxing on your computer resources. so, for instance, it can be come very noticeable on a slower laptop. Nonetheless it is possible to fully integrate OpenFOAM code development inside Eclipse and have:
+</p>
+<ul><li> Highlighting</li>
+<li> Function indexing which gives autocompletion as well as ability quickly open the *.H/*.C file where the function is defined (highly useful for newcomers).</li>
+<li> Compilation window</li>
+<li> Debugging/Profiling tools</li>
+<li> Tree structure of the code folder</li></ul>
+<p><br>
+<i> "OK, OK, Ben you sold it to me. How do I start working with it?" </i>
+</p><p>First things first - download it from: <a rel="nofollow" class="external free" href="https://www.eclipse.org/downloads/">https://www.eclipse.org/downloads/</a> 
+</p><p>Then, my recommendation would be to run through OpenFOAM wiki guides on how to integrate FOAM code to eclipse:
+</p>
+<ul><li><a rel="nofollow" class="external text" href="https://openfoamwiki.net/index.php/HowTo_Use_OpenFOAM_with_Eclipse">How to use OpenFOAM with Eclipse</a></li>
+<li><a rel="nofollow" class="external text" href="https://openfoamwiki.net/index.php/HowTo_Use_OpenFOAM_with_Eclipse/Fool_the_indexer">How To Use OpenFOAM with Eclipse/Fool the indexer</a></li></ul>
+<p>As well as check out this Youtube tutorial:
+</p>
+<ul><li> <a rel="nofollow" class="external text" href="https://www.youtube.com/watch?v=yT9Ia8ESVoY">How to use Eclipse as IDE for extending OpenFOAM® - 1 Basic Setup</a></li></ul>
+<p>These should be sufficient to get everything working. My setup was slightly different so I have written my steps down.
+</p><p><i>Eclipse setup by Ben</i>
+</p>
+<ol><li> Install current Eclipse version</li>
+<li> Upon opening eclipse choose a workspace folder (eg. <i>$HOME/workspace/</i> ). Below a text box, tick a checkbox to set this workspace as a default.</li>
+<li> In Eclipse-Neon a welcome page pops up, close it to get to project view. 
+<ul><li> Right click in 'Project Explorer' space and choose 'Import'. </li>
+<li> Under C/C++ choose 'Existing Code as Makefile Project' and click 'Next'. </li>
+<li> In the next window click browse and select OpenFOAM folder. As I wanted to have a whole OpenFOAM source code shown in tree view. To do that I have imported all of OpenFOAM-3.0 directory. This helps to avoid step describing lnInclude specification that is described in OF Wiki guide. The downside of this approach is that indexer takes additional computer resources.</li>
+<li> Right click on the project in the project explorer section. Select Properties.</li>
+<li> Under 'C/C++ General'-&gt;'Indexer', click 'Enable project specific settings'.
+<ul><li> In the same window 'Indexer options' section is now editable. Select 'Index unused headers as C++ files' and 'Index all header variants'.</li></ul></li></ul></li></ol>
+<p>I decided not to bother with Debugger/Profiler/Compiler setup as terminal is still sufficient for this purpose.
+</p><p>If you've done all of these steps then everything should be working! And you can enjoy IDE experience with all of it's benefits.
+</p><p>N.B.: Eclipse supports different plugins so one could add some additional functionality (such as less eye straining color schemes, or additional highlighting options). Everything is done through eclipse marketplace (accessible through Help-&gt;Marketplace); setup procedures can be found online.
+</p>
+<ul class="gallery mw-gallery-traditional" style="max-width: 858px;_width: 858px;">
+		<li class="gallerybox" style="width: 135px"><div style="width: 135px">
+			<div class="thumb" style="width: 130px;"><div style="margin:35px auto;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:EclipseProjectView.png" class="image"><img alt="" src="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/100px-EclipseProjectView.png" width="100" height="60" srcset="/cfd/images/thumb/6/6d/EclipseProjectView.png/150px-EclipseProjectView.png 1.5x, /cfd/images/thumb/6/6d/EclipseProjectView.png/200px-EclipseProjectView.png 2x"></a></div></div>
+			<div class="gallerytext">
+<p>Empty project window
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 135px"><div style="width: 135px">
+			<div class="thumb" style="width: 130px;"><div style="margin:15px auto;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:EclipseImportProject1.png" class="image"><img alt="" src="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/92px-EclipseImportProject1.png" width="92" height="100" srcset="/cfd/images/thumb/f/f0/EclipseImportProject1.png/138px-EclipseImportProject1.png 1.5x, /cfd/images/thumb/f/f0/EclipseImportProject1.png/184px-EclipseImportProject1.png 2x"></a></div></div>
+			<div class="gallerytext">
+<p>Importing project - select C/C++ As makefile project
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 135px"><div style="width: 135px">
+			<div class="thumb" style="width: 130px;"><div style="margin:15px auto;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:EclipseImportProject2.png" class="image"><img alt="" src="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/72px-EclipseImportProject2.png" width="72" height="100" srcset="/cfd/images/thumb/9/98/EclipseImportProject2.png/109px-EclipseImportProject2.png 1.5x, /cfd/images/thumb/9/98/EclipseImportProject2.png/145px-EclipseImportProject2.png 2x"></a></div></div>
+			<div class="gallerytext">
+<p>Importing project - select OpenFOAM folder
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 135px"><div style="width: 135px">
+			<div class="thumb" style="width: 130px;"><div style="margin:23.5px auto;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:EclipseProjectProperties.png" class="image"><img alt="" src="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/100px-EclipseProjectProperties.png" width="100" height="83" srcset="/cfd/images/thumb/a/a9/EclipseProjectProperties.png/150px-EclipseProjectProperties.png 1.5x, /cfd/images/thumb/a/a9/EclipseProjectProperties.png/200px-EclipseProjectProperties.png 2x"></a></div></div>
+			<div class="gallerytext">
+<p>Project properties -&gt; Indexer
+</p>
+			</div>
+		</div></li>
+</ul>
+<p><br>
+</p>
+<h4><span class="mw-headline" id="QtCreator"><b>QtCreator </b></span></h4>
+<p>As mentioned before, from my experience Eclipse tends to be slightly too taxing on my laptop. To avoid that, an alternative can be used - QtCreator. This IDE might not be as feature rich (or at least not that I know of) as Eclipse, but the speed increase was noticeable.
+</p><p>Setup guide:
+</p>
+<ol><li> Download: <a rel="nofollow" class="external free" href="https://www.qt.io/download-open-source/">https://www.qt.io/download-open-source/</a></li>
+<li> Install
+<ul><li> Change permissions on downloaded file with chmod 755 $FILENAME.run and run the executable</li>
+<li> In the installation wizard I have selected the latest version of Qt</li></ul></li>
+<li> Upon opening QtCreator click 'New Project'</li>
+<li> Under 'Projects' select 'Import Project', then in the following section select 'Import Existing Project' and click 'Next'</li>
+<li> In the following window browse OpenFOAM install location and choose project name and click 'Next'</li>
+<li> In the following under 'Show files matching:' add '*.C; *.H'
+<ul><li> In the section below tick all of the file checkboxes</li>
+<li> Click next  </li></ul></li>
+<li> In the following window click 'Finish'</li>
+<li> Go to 'Tools-&gt;Options-&gt;C++-&gt;File Naming' and select suffixes as 'H' and 'C'</li></ol>
+<p>After a few minutes the IDE should finish indexing the code and you can use the magical F2 key to pull up definitions of functions and data types.
+Additional bonuses such as highlighting and less eye straining colorschemes can be adjusted in the options menu. Info on how to do that can be found online.
+</p>
+<ul class="gallery mw-gallery-traditional" style="max-width: 858px;_width: 858px;">
+		<li class="gallerybox" style="width: 135px"><div style="width: 135px">
+			<div class="thumb" style="width: 130px;"><div style="margin:35px auto;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:QtProjectView.png" class="image"><img alt="" src="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/100px-QtProjectView.png" width="100" height="60" srcset="/cfd/images/thumb/0/0c/QtProjectView.png/150px-QtProjectView.png 1.5x, /cfd/images/thumb/0/0c/QtProjectView.png/200px-QtProjectView.png 2x"></a></div></div>
+			<div class="gallerytext">
+<p>Empty project window
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 135px"><div style="width: 135px">
+			<div class="thumb" style="width: 130px;"><div style="margin:34.5px auto;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:QtImportProject1.png" class="image"><img alt="" src="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/100px-QtImportProject1.png" width="100" height="61" srcset="/cfd/images/thumb/2/29/QtImportProject1.png/150px-QtImportProject1.png 1.5x, /cfd/images/thumb/2/29/QtImportProject1.png/200px-QtImportProject1.png 2x"></a></div></div>
+			<div class="gallerytext">
+<p>Importing project - Import existing project
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 135px"><div style="width: 135px">
+			<div class="thumb" style="width: 130px;"><div style="margin:27px auto;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:QtImportProject2.png" class="image"><img alt="" src="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/100px-QtImportProject2.png" width="100" height="76" srcset="/cfd/images/thumb/1/17/QtImportProject2.png/150px-QtImportProject2.png 1.5x, /cfd/images/thumb/1/17/QtImportProject2.png/200px-QtImportProject2.png 2x"></a></div></div>
+			<div class="gallerytext">
+<p>Importing project - Choose OpenFOAM install location
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 135px"><div style="width: 135px">
+			<div class="thumb" style="width: 130px;"><div style="margin:16.5px auto;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:QtImportProject3.png" class="image"><img alt="" src="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/100px-QtImportProject3.png" width="100" height="97" srcset="/cfd/images/thumb/6/64/QtImportProject3.png/150px-QtImportProject3.png 1.5x, /cfd/images/thumb/6/64/QtImportProject3.png/200px-QtImportProject3.png 2x"></a></div></div>
+			<div class="gallerytext">
+<p>Importing project - selecting files to be added to project view
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 135px"><div style="width: 135px">
+			<div class="thumb" style="width: 130px;"><div style="margin:17px auto;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:QtImportProject4.png" class="image"><img alt="" src="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/100px-QtImportProject4.png" width="100" height="96" srcset="/cfd/images/thumb/2/27/QtImportProject4.png/150px-QtImportProject4.png 1.5x, /cfd/images/thumb/2/27/QtImportProject4.png/200px-QtImportProject4.png 2x"></a></div></div>
+			<div class="gallerytext">
+<p>Importing project - Final window (version control options (git))
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 135px"><div style="width: 135px">
+			<div class="thumb" style="width: 130px;"><div style="margin:37px auto;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:QtOptionsMenu.png" class="image"><img alt="" src="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/100px-QtOptionsMenu.png" width="100" height="56" srcset="/cfd/images/thumb/0/07/QtOptionsMenu.png/150px-QtOptionsMenu.png 1.5x, /cfd/images/thumb/0/07/QtOptionsMenu.png/200px-QtOptionsMenu.png 2x"></a></div></div>
+			<div class="gallerytext">
+<p>Options menu
+</p>
+			</div>
+		</div></li>
+</ul>
+<h4><span class="mw-headline" id="tmux_.2B_Vim"><b>tmux + Vim</b></span></h4>
+<p><i>"The Gods of Vim and tmux have spoken to me and shown me the way."</i> - Unknown source.
+</p><p>This is the IDE setup that I have settled down with. It uses a combination of what is called a terminal multiplexer and vim. 
+</p>
+<h5><span class="mw-headline" id="Terminal_multiplexer">Terminal multiplexer</span></h5>
+<p><b>What is a terminal multiplexer?</b> It lets you switch easily between several programs in one terminal, detach them (they keep running in the background) and reattach them to a different terminal.
+In addition to having multiple detachable sessions running at the same time these applications often offer window splitting functionality which greatly helps to organise the workspace and avoid a bunch of floating windows hiding from you.
+</p><p>Couple of examples of such apps are: GNU Screen, Terminator, tmux. Personally I have settled with tmux.
+</p>
+<ol><li> Installing tmux on Ubuntu: <a rel="nofollow" class="external free" href="https://raw.githubusercontent.com/tmux/tmux/master/README">https://raw.githubusercontent.com/tmux/tmux/master/README</a></li>
+<li> Installing tmux on Scientific Linux machine (no root access): 
+<ul><li> Ask Rob to install it for you (tmux + all necessary libraries)</li>
+<li> Alternatively, a slightly more involved option is to use the script that someone has written: <a rel="nofollow" class="external free" href="https://gist.github.com/ryin/3106801">https://gist.github.com/ryin/3106801</a>
+<ul><li> Note that it has been written in 2012, so you might need to change version numbers used in the script to the latest ones available right now.</li></ul></li></ul></li></ol>
+<p>Now that tmux is installed test it and see if it runs: type 'tmux' in terminal window and click (<i>Ctrl+b, "</i>) this should do a horizontal pane split.
+</p><p><b>Configuration</b>
+</p>
+<ol><li> As with most of terminal based applications configurations are stored in dotfiles (eg. .bashrc). Luckily there are a lot of examples uploaded online, but to give you a head start I have my tmux configuration files on bitbucket so feel free to steal it (which I did myself as well): <a rel="nofollow" class="external free" href="http://bit.ly/2m3WBAt">http://bit.ly/2m3WBAt</a></li></ol>
+<ol><li> Copy <b>.tmux.conf.symlink</b> to <b>$HOME/.tmux.conf</b>. In order to use the theme file you can copy theme.sh wherever you like and edit tmux conf file at the bottom of it to point to that theme file.</li></ol>
+<h5><span class="mw-headline" id="Vim">Vim</span></h5>
+<p>It turns out that this little text editor can be change to work almost as anything. Using different plugins we can make Vim work and behave almost the same as Eclipse and Qt does, but with almost no strain on your computer.
+</p><p>Everything can be done with help of <b>Vundle</b> - a plugin manager to vim. To install it follow the instructions on: <a rel="nofollow" class="external free" href="https://github.com/VundleVim/Vundle.vim">https://github.com/VundleVim/Vundle.vim</a>
+</p><p>Plugins are then specified in <b>.vimrc</b>. In order to achieve IDE like functionality I use the following plugins:
+</p>
+<ol><li> AutoCompletion (<a rel="nofollow" class="external free" href="https://goo.gl/6WpE23">https://goo.gl/6WpE23</a>) - YouCompleteMe</li>
+<li> OpenFOAM Highlighting (<a rel="nofollow" class="external free" href="https://bitbucket.org/shor-ty/vimextensionopenfoam)-">https://bitbucket.org/shor-ty/vimextensionopenfoam)-</a> vimextentionopenfoam</li>
+<li> File tree browser (<a rel="nofollow" class="external free" href="https://goo.gl/KtrJCk">https://goo.gl/KtrJCk</a>) - NerdTree</li>
+<li> File searcher (<a rel="nofollow" class="external free" href="https://goo.gl/zhc5hA">https://goo.gl/zhc5hA</a>) - LustyExplorer
+<ul><li> As it exists in Vundle repo, just add <b>Plugin 'LustyExplorer' </b> to your .vimrc</li></ul></li>
+<li> Grep function in vim (<a rel="nofollow" class="external free" href="https://goo.gl/pbb66f">https://goo.gl/pbb66f</a>) - ack.vim
+<ul><li> As it exists in Vundle repo, just add <b>Plugin 'ack.vim' </b> to your .vimrc</li>
+<li> Terminal prerequisite <b>ack-grep</b>&nbsp;: In terminal run <b> sudo apt install ack-grep </b></li>
+<li> Terminal prerequisite <b>vim-nox</b> (as far as I understand it's vim ruby support): In terminal run <b> sudo apt install vim-nox </b></li></ul></li></ol>
+<p>Again, feel free to grab my .vimrc from the bitbucket ( <a rel="nofollow" class="external free" href="http://bit.ly/2m3WBAt">http://bit.ly/2m3WBAt</a>).
+</p><p><b>Finalising the IDE</b>
+</p>
+<ol><li> To get the plugins added to your vim. Open vim and run ':PluginInstall'.</li>
+<li> To get the autocompletion follow the guidelines in <a rel="nofollow" class="external free" href="https://goo.gl/6WpE23">https://goo.gl/6WpE23</a>
+<ul><li> For Ubuntu users:
+<ol><li> sudo apt-get install build-essential cmake</li>
+<li> sudo apt-get install python-dev python3-dev</li>
+<li> cd ~/.vim/bundle/YouCompleteMe </li>
+<li> ./install.py --clang-completer</li></ol></li>
+<li> For scientific linux users:
+<ol><li> Will need to go and speak with Rob. I was not able to do it myself.</li></ol></li></ul></li></ol>
+<p>And that is it. tmux+Vim now should work as good as does Eclipse and Qt.
+</p>
+<ul class="gallery mw-gallery-traditional" style="max-width: 858px;_width: 858px;">
+		<li class="gallerybox" style="width: 135px"><div style="width: 135px">
+			<div class="thumb" style="width: 130px;"><div style="margin:34px auto;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:TmuxEmptySession.png" class="image"><img alt="" src="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/100px-TmuxEmptySession.png" width="100" height="62" srcset="/cfd/images/thumb/e/e3/TmuxEmptySession.png/150px-TmuxEmptySession.png 1.5x, /cfd/images/thumb/e/e3/TmuxEmptySession.png/200px-TmuxEmptySession.png 2x"></a></div></div>
+			<div class="gallerytext">
+<p>Tmux empty session + vertical split
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 135px"><div style="width: 135px">
+			<div class="thumb" style="width: 130px;"><div style="margin:37.5px auto;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:TmuxProjectView.png" class="image"><img alt="" src="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/100px-TmuxProjectView.png" width="100" height="55" srcset="/cfd/images/thumb/9/92/TmuxProjectView.png/150px-TmuxProjectView.png 1.5x, /cfd/images/thumb/9/92/TmuxProjectView.png/200px-TmuxProjectView.png 2x"></a></div></div>
+			<div class="gallerytext">
+<p>Project view example
+</p>
+			</div>
+		</div></li>
+		<li class="gallerybox" style="width: 135px"><div style="width: 135px">
+			<div class="thumb" style="width: 130px;"><div style="margin:34.5px auto;"><a href="https://wiki.emps.ex.ac.uk/cfd/File:TmuxCaseView.png" class="image"><img alt="" src="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/100px-TmuxCaseView.png" width="100" height="61" srcset="/cfd/images/thumb/a/a0/TmuxCaseView.png/150px-TmuxCaseView.png 1.5x, /cfd/images/thumb/a/a0/TmuxCaseView.png/200px-TmuxCaseView.png 2x"></a></div></div>
+			<div class="gallerytext">
+<p>Case view example
+</p>
+			</div>
+		</div></li>
+</ul>
+
+<!-- 
+NewPP limit report
+CPU time usage: 0.086 seconds
+Real time usage: 0.093 seconds
+Preprocessor visited node count: 56/1000000
+Preprocessor generated node count: 140/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 - -total
+-->
+
+<!-- Saved in parser cache with key cfd:pcache:idhash:311-0!*!*!!en!*!* and timestamp 20180806153245 and revision id 774
+ -->
+</div>									<div class="printfooter">
+						Retrieved from "<a dir="ltr" href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Bernardas_Jankauskas/OpenFOAM_IDE_setup&amp;oldid=774">https://wiki.emps.ex.ac.uk/cfd/index.php?title=Bernardas_Jankauskas/OpenFOAM_IDE_setup&amp;oldid=774</a>"					</div>
+													<div id="catlinks" class="catlinks catlinks-allhidden"></div>												<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+							<li id="pt-createaccount"><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Special:UserLogin&amp;returnto=Bernardas+Jankauskas%2FOpenFOAM+IDE+setup&amp;type=signup" title="You are encouraged to create an account and log in; however, it is not mandatory">Create account</a></li><li id="pt-login"><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Special:UserLogin&amp;returnto=Bernardas+Jankauskas%2FOpenFOAM+IDE+setup" title="You are encouraged to log in; however, it is not mandatory [alt-shift-o]" accesskey="o">Log in</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+															<li id="ca-nstab-main" class="selected"><span><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OpenFOAM_IDE_setup" title="View the content page [alt-shift-c]" accesskey="c">Page</a></span></li>
+															<li id="ca-talk" class="new"><span><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Talk:Bernardas_Jankauskas/OpenFOAM_IDE_setup&amp;action=edit&amp;redlink=1" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></span></li>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label" tabindex="0"><span>Variants</span><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OpenFOAM_IDE_setup#" tabindex="-1"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Views</h3>
+						<ul>
+															<li id="ca-view" class="selected"><span><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OpenFOAM_IDE_setup">Read</a></span></li>
+															<li id="ca-viewsource"><span><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Bernardas_Jankauskas/OpenFOAM_IDE_setup&amp;action=edit" title="This page is protected.
+You can view its source [alt-shift-e]" accesskey="e">View source</a></span></li>
+															<li id="ca-history" class="collapsible"><span><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Bernardas_Jankauskas/OpenFOAM_IDE_setup&amp;action=history" title="Past revisions of this page [alt-shift-h]" accesskey="h">View history</a></span></li>
+													</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label" style="">
+						<h3 id="p-cactions-label" tabindex="0"><span>More</span><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OpenFOAM_IDE_setup#" tabindex="-1"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Search</label>
+						</h3>
+
+						<form action="https://wiki.emps.ex.ac.uk/cfd/index.php" id="searchform">
+														<div id="simpleSearch">
+															<input type="search" name="search" placeholder="Search" title="Search ExeterCFD [alt-shift-f]" accesskey="f" id="searchInput" tabindex="1" autocomplete="off"><input type="hidden" value="Special:Search" name="title"><input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchButton" class="searchButton">								</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="https://wiki.emps.ex.ac.uk/cfd/Main_Page" title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id="p-navigation" aria-labelledby="p-navigation-label">
+			<h3 id="p-navigation-label">Navigation</h3>
+
+			<div class="body">
+									<ul>
+													<li id="n-Home"><a href="https://wiki.emps.ex.ac.uk/cfd/Home">Home</a></li>
+													<li id="n-recentchanges"><a href="https://wiki.emps.ex.ac.uk/cfd/Special:RecentChanges" title="A list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li>
+													<li id="n-randompage"><a href="https://wiki.emps.ex.ac.uk/cfd/Special:Random" title="Load a random page [alt-shift-x]" accesskey="x">Random page</a></li>
+													<li id="n-help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" title="The place to find out">Help</a></li>
+											</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-tb" aria-labelledby="p-tb-label">
+			<h3 id="p-tb-label">Tools</h3>
+
+			<div class="body">
+									<ul>
+													<li id="t-whatlinkshere"><a href="https://wiki.emps.ex.ac.uk/cfd/Special:WhatLinksHere/Bernardas_Jankauskas/OpenFOAM_IDE_setup" title="A list of all wiki pages that link here [alt-shift-j]" accesskey="j">What links here</a></li>
+													<li id="t-recentchangeslinked"><a href="https://wiki.emps.ex.ac.uk/cfd/Special:RecentChangesLinked/Bernardas_Jankauskas/OpenFOAM_IDE_setup" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+													<li id="t-specialpages"><a href="https://wiki.emps.ex.ac.uk/cfd/Special:SpecialPages" title="A list of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+													<li id="t-print"><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Bernardas_Jankauskas/OpenFOAM_IDE_setup&amp;printable=yes" rel="alternate" title="Printable version of this page [alt-shift-p]" accesskey="p">Printable version</a></li>
+													<li id="t-permalink"><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Bernardas_Jankauskas/OpenFOAM_IDE_setup&amp;oldid=774" title="Permanent link to this revision of the page">Permanent link</a></li>
+													<li id="t-info"><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Bernardas_Jankauskas/OpenFOAM_IDE_setup&amp;action=info" title="More information about this page">Page information</a></li>
+											</ul>
+							</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 20 February 2017, at 14:24.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="https://wiki.emps.ex.ac.uk/cfd/ExeterCFD:Privacy_policy" title="ExeterCFD:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="https://wiki.emps.ex.ac.uk/cfd/ExeterCFD:About" title="ExeterCFD:About">About ExeterCFD</a></li>
+											<li id="footer-places-disclaimer"><a href="https://wiki.emps.ex.ac.uk/cfd/ExeterCFD:General_disclaimer" title="ExeterCFD:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-poweredbyico">
+															<a href="https://www.mediawiki.org/"><img src="./Bernardas Jankauskas_OpenFOAM IDE setup - ExeterCFD_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/cfd/resources/assets/poweredby_mediawiki_132x47.png 1.5x, /cfd/resources/assets/poweredby_mediawiki_176x62.png 2x" width="88" height="31"></a>
+													</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>if(window.jQuery)jQuery.ready();</script><script>if(window.mw){
+mw.loader.state({"site":"ready","user":"ready","user.groups":"ready"});
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.toc","mediawiki.action.view.postEdit","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest"],null,true);
+}</script>
+<script>if(window.mw){
+mw.config.set({"wgBackendResponseTime":308});
+}</script>
+	
+
+<div class="suggestions" style="display: none; font-size: 13px;"><div class="suggestions-results"></div><div class="suggestions-special"></div></div></body></html>

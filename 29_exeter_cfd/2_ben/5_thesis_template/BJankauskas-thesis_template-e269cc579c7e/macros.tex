@@ -1,0 +1,113 @@
+\makeatletter
+
+%% redefine chapter definition so short title appears only on page headers
+%% and long title appears in table of contents
+\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+                        \refstepcounter{chapter}%
+                        \typeout{\@chapapp\space\thechapter.}%
+                        \addcontentsline{toc}{chapter}%
+                                  {\protect\numberline{\thechapter}#2}%this #2 is changed from #1 in the report class file
+                   \else
+                     \addcontentsline{toc}{chapter}{#2}%
+                   \fi
+                   \chaptermark{#1}%
+                   \addtocontents{lof}{\protect\addvspace{10\p@}}%
+                   \addtocontents{lot}{\protect\addvspace{10\p@}}%
+                   \if@twocolumn
+                     \@topnewpage[\@makechapterhead{#2}]%
+                   \else
+                     \@makechapterhead{#2}%
+                     \@afterheading
+                   \fi}
+
+%% set Acknowledgements to be a chapter with no number 
+%% and with centralised heading `Acknowledgements'
+\newcommand\ackname{Acknowledgements}
+\newenvironment{acknowledgements}
+     {\chapter*{\ackname
+%        \@mkboth{\MakeUppercase\ackname}{\MakeUppercase\ackname}
+}}    
+
+%% change abstract to continue page numbering from title 
+%% and to start abstract with plain numbering
+\renewenvironment{abstract}{%
+    \thispagestyle{plain}
+  \if@twocolumn
+    \section*{\abstractname}%
+  \else
+    \small
+    \begin{center}%
+      {\bfseries \abstractname\vspace{-.5em}\vspace{\z@}}%
+    \end{center}%
+%  \quotation
+  \fi}
+{\if@twocolumn\else\endquotation\fi}
+%end of abstract renew
+
+\renewenvironment{abstract}
+     {\chapter*{\abstractname
+%        \@mkboth{\MakeUppercase\abstractname}{\MakeUppercase\abstractname}
+}}
+
+\makeatother
+
+\renewcommand{\theequation}{\thechapter.\arabic{equation}}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+
+\newcount\eqnno   %number of equation
+\newcount\secno   %number of section
+\newcount\chapno  %number of chapter
+\newcount\subno   %number of subsection
+\newcount\figno   %number of figure
+\newcount\refno   %number of reference
+\newcounter{pagno}
+
+\newcount\coleheat
+
+\figno=0
+\refno=0
+
+\def\sen{\thechapter}
+
+\def\eqn#1{\eqnno=\arabic{equation}
+           \global\advance\eqnno by 1
+           \eqno(\sen.\the\eqnno)
+           \expandafter \xdef\csname #1\endcsname
+           {\sen.\the\eqnno}\relax %}
+	   \setcounter{equation}{\the\eqnno} }
+\def\eqnp#1#2{\eqnno=\arabic{equation}
+	   \global\advance\eqnno by 1
+           \eqno(\sen.\the\eqnno\hbox{#2})
+           \expandafter \xdef\csname #1\endcsname
+           {\sen.\the\eqnno}\relax %}
+	   \setcounter{equation}{\the\eqnno} }
+\def\eqnpr#1{\eqnno=\arabic{equation}
+           \eqno(\sen.\the\eqnno\hbox{#1})%}
+          \setcounter{equation}{\the\eqnno}}
+
+%\def\fgn#1{\global\advance\figno by 1
+%           \the\figno
+%           \expandafter \xdef\csname #1\endcsname
+%           {\the\figno}\relax }
+
+\def\rfn#1{\global\advance\refno by 1
+           \the\refno
+           \expandafter \xdef\csname #1\endcsname
+           {\the\refno}\relax }
+
+%\def\section#1
+%   {\vskip0pt plus.1\vsize\penalty-250
+%    \vskip0pt plus-.1\vsize\vskip18pt plus9pt minus6pt
+%    \subno=0 \eqnno=0 
+%    \global\advance\secno by 1
+%    \leftline{\bf\the\secno. #1}
+%    \medskip}
+
+%\def\subsection#1
+%   {\vskip-\lastskip
+%        \vskip15pt plus4pt minus4pt
+%    \bigbreak
+%    \global\advance\subno by 1
+%    \centerline{\it \the\secno.\the\subno. #1}\smallskip}
+%    \leftline{\it \the\chapno.\the\subno. #1}\smallskip}

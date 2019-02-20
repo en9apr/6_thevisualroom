@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.1.2. Continuum Model &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../../index.html" />
+    <link rel="up" title="4. Personal Notes on CFD" href="../cfd_notes.html" />
+    <link rel="next" title="4.1.3. Vector and Tensor Calculus" href="03_vector_and_tensor_calculus.html" />
+    <link rel="prev" title="4.1.1. CFD" href="01_cfd.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.1.2. Continuum Model</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="01_cfd.html">4.1.1. CFD</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="03_vector_and_tensor_calculus.html">4.1.3. Vector and Tensor Calculus</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="continuum-model">
+<h1>4.1.2. Continuum Model<a class="headerlink" href="#continuum-model" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#what-is-the-continuum-model" id="id1">What is the Continuum Model?</a></li>
+<li><a class="reference internal" href="#why-is-the-continuum-model-used" id="id2">Why is the Continuum Model used?</a></li>
+<li><a class="reference internal" href="#what-does-the-continuum-model-enable" id="id3">What does the Continuum Model enable?</a></li>
+<li><a class="reference internal" href="#where-can-the-continuum-model-be-applied" id="id4">Where can the Continuum Model be applied?</a></li>
+<li><a class="reference internal" href="#what-is-the-knudsen-number" id="id5">What is the Knudsen number?</a></li>
+<li><a class="reference internal" href="#what-is-the-mean-free-path" id="id6">What is the Mean Free Path?</a></li>
+<li><a class="reference internal" href="#what-are-the-limitations-of-the-continuum-model" id="id7">What are the limitations of the Continuum Model?</a></li>
+<li><a class="reference internal" href="#what-does-the-continuum-model-not-permit" id="id8">What does the Continuum Model not permit?</a></li>
+</ul>
+</div>
+<div class="section" id="what-is-the-continuum-model">
+<h2><a class="toc-backref" href="#id1">4.1.2.1. What is the Continuum Model?</a><a class="headerlink" href="#what-is-the-continuum-model" title="Permalink to this headline">¶</a></h2>
+<p>Discontinuous molecular collisions are replaced with continuous statistically averaged values, e.g.</p>
+<ul class="simple">
+<li>Pressure = Average collision force per unit area.</li>
+</ul>
+</div>
+<div class="section" id="why-is-the-continuum-model-used">
+<h2><a class="toc-backref" href="#id2">4.1.2.2. Why is the Continuum Model used?</a><a class="headerlink" href="#why-is-the-continuum-model-used" title="Permalink to this headline">¶</a></h2>
+<p>Average fluid properties in the Continuum model are used because:</p>
+<ul class="simple">
+<li>Molecular density of fluid is large with respect to characteristic length.</li>
+<li>Interaction forces (potentials) are now known.</li>
+</ul>
+</div>
+<div class="section" id="what-does-the-continuum-model-enable">
+<h2><a class="toc-backref" href="#id3">4.1.2.3. What does the Continuum Model enable?</a><a class="headerlink" href="#what-does-the-continuum-model-enable" title="Permalink to this headline">¶</a></h2>
+<p>Enables the conservation laws:</p>
+<ul class="simple">
+<li>Mass</li>
+<li>Momentum</li>
+<li>Energy</li>
+</ul>
+</div>
+<div class="section" id="where-can-the-continuum-model-be-applied">
+<h2><a class="toc-backref" href="#id4">4.1.2.4. Where can the Continuum Model be applied?</a><a class="headerlink" href="#where-can-the-continuum-model-be-applied" title="Permalink to this headline">¶</a></h2>
+<p>Can be applied to:</p>
+<ul class="simple">
+<li>Finite volume element</li>
+<li>Infinitesimal differential element</li>
+</ul>
+</div>
+<div class="section" id="what-is-the-knudsen-number">
+<h2><a class="toc-backref" href="#id5">4.1.2.5. What is the Knudsen number?</a><a class="headerlink" href="#what-is-the-knudsen-number" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[{Kn = {\lambda \over L}}\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><span class="math">\(\lambda\)</span> = mean free path</li>
+<li><span class="math">\(L\)</span> = characteristic length (e.g. pipe diameter, boundary layer thickness, shockwave thickness)</li>
+</ul>
+</div>
+<div class="section" id="what-is-the-mean-free-path">
+<h2><a class="toc-backref" href="#id6">4.1.2.6. What is the Mean Free Path?</a><a class="headerlink" href="#what-is-the-mean-free-path" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[{\lambda = {1 \over {\sqrt{2} n S}}}\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><span class="math">\(n\)</span> = number of particles per <span class="math">\(m^3\)</span> from the Boltzmann equation (<span class="math">\(p=nk_bT\)</span>)</li>
+<li><span class="math">\(S\)</span> = surface area of a spherical molecule = <span class="math">\(\pi d^2\)</span></li>
+<li><span class="math">\(d\)</span> = molecular diameter or collision diameter</li>
+</ul>
+</div>
+<div class="section" id="what-are-the-limitations-of-the-continuum-model">
+<h2><a class="toc-backref" href="#id7">4.1.2.7. What are the limitations of the Continuum Model?</a><a class="headerlink" href="#what-are-the-limitations-of-the-continuum-model" title="Permalink to this headline">¶</a></h2>
+<p>The Continuum Model is valid for Knudsen Numbers <span class="math">\(\ll 1\)</span> i.e.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Knudsen Number</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="math">\(Kn &gt; 1\)</span></td>
+<td>Molecular dynamics (e.g. gas in nano flow)</td>
+</tr>
+<tr class="row-odd"><td><span class="math">\(0.1 &lt; Kn &lt; 1\)</span></td>
+<td>Transition/continuum mechanics</td>
+</tr>
+<tr class="row-even"><td><span class="math">\(Kn \sim 0.01\)</span></td>
+<td>Continuum (NS) + slip boundary</td>
+</tr>
+<tr class="row-odd"><td><span class="math">\(Kn \ll 1\)</span></td>
+<td>Continuum (NS)</td>
+</tr>
+<tr class="row-even"><td><span class="math">\(Kn \to 0\)</span></td>
+<td>Continuum (Euler)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-does-the-continuum-model-not-permit">
+<h2><a class="toc-backref" href="#id8">4.1.2.8. What does the Continuum Model not permit?</a><a class="headerlink" href="#what-does-the-continuum-model-not-permit" title="Permalink to this headline">¶</a></h2>
+<p>Mass-energy conversion e.g.</p>
+<ul class="simple">
+<li>Nuclear reactions</li>
+<li>Relativity</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="01_cfd.html">4.1.1. CFD</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="03_vector_and_tensor_calculus.html">4.1.3. Vector and Tensor Calculus</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.9.4. 2D Finite Volume Method: Non-Cartesian Grids &#8212; The Visual Room</title>
+    <title>1.1.9.4. 2D Finite Volume Method: Non-Cartesian Grids &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
-    <link rel="next" title="1.9.5. Evaluating Fluxes and Derivatives of Fluxes in 2D" href="finite_volume_method_5.html" />
-    <link rel="prev" title="1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation" href="finite_volume_method_3.html" /> 
+    <link rel="up" title="1.1. Computational Fluid Dynamics Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.1.9.5. Evaluating Fluxes and Derivatives of Fluxes in 2D" href="finite_volume_method_5.html" />
+    <link rel="prev" title="1.1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation" href="finite_volume_method_3.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>1.9.4. 2D Finite Volume Method: Non-Cartesian Grids</span></h2>
+        <h2 class="heading"><span>1.1.9.4. 2D Finite Volume Method: Non-Cartesian Grids</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="finite_volume_method_3.html">1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation</a>
+        «&#160;&#160;<a href="finite_volume_method_3.html">1.1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="finite_volume_method_5.html">1.9.5. Evaluating Fluxes and Derivatives of Fluxes in 2D</a>&#160;&#160;»
+        <a href="finite_volume_method_5.html">1.1.9.5. Evaluating Fluxes and Derivatives of Fluxes in 2D</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,7 +49,7 @@
         
         
   <div class="section" id="d-finite-volume-method-non-cartesian-grids">
-<h1>1.9.4. 2D Finite Volume Method: Non-Cartesian Grids<a class="headerlink" href="#d-finite-volume-method-non-cartesian-grids" title="Permalink to this headline">¶</a></h1>
+<h1>1.1.9.4. 2D Finite Volume Method: Non-Cartesian Grids<a class="headerlink" href="#d-finite-volume-method-non-cartesian-grids" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#summary" id="id1">Summary</a></li>
@@ -66,7 +66,7 @@
 </ul>
 </div>
 <div class="section" id="summary">
-<h2><a class="toc-backref" href="#id1">1.9.4.1. Summary</a><a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">1.1.9.4.1. Summary</a><a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>The cross product is used to compute the volume</li>
 <li>The midpoint rule is used to compute the flow quantity and the source term</li>
@@ -75,7 +75,7 @@
 </ul>
 </div>
 <div class="section" id="non-cartesian-grid">
-<h2><a class="toc-backref" href="#id2">1.9.4.2. Non-Cartesian Grid</a><a class="headerlink" href="#non-cartesian-grid" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">1.1.9.4.2. Non-Cartesian Grid</a><a class="headerlink" href="#non-cartesian-grid" title="Permalink to this headline">¶</a></h2>
 <p>Non-Cartesian, although shown as Cartesian, but we will not assume we know the volume of the cell ABCD</p>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/centred_scheme_2.png"><img alt="../_images/centred_scheme_2.png" src="../_images/centred_scheme_2.png" style="width: 420.0px; height: 420.0px;" /></a>
@@ -91,19 +91,19 @@
 \[\mathbf{S}_{AB} = \Delta y_{AB} \mathbf{i} - \Delta x_{AB} \mathbf{j} = (y_B - y_A) \mathbf{i} - (x_B - x_A) \mathbf{j}\]</div>
 </div>
 <div class="section" id="evaluation-of-the-flow-quantity-terms">
-<h2><a class="toc-backref" href="#id3">1.9.4.3. Evaluation of the Flow Quantity Terms</a><a class="headerlink" href="#evaluation-of-the-flow-quantity-terms" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">1.1.9.4.3. Evaluation of the Flow Quantity Terms</a><a class="headerlink" href="#evaluation-of-the-flow-quantity-terms" title="Permalink to this headline">¶</a></h2>
 <p>Can use <strong>midpoint rule</strong> which approximates a volume integral by the product of the centre value and the CV:</p>
 <div class="math">
 \[U_{i,j} = \int_{\Omega_{i,j}} U d \Omega = U_{i,j} \Delta \Omega_{i,j}\]</div>
 </div>
 <div class="section" id="evaluation-of-the-source-terms">
-<h2><a class="toc-backref" href="#id4">1.9.4.4. Evaluation of the Source Terms</a><a class="headerlink" href="#evaluation-of-the-source-terms" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">1.1.9.4.4. Evaluation of the Source Terms</a><a class="headerlink" href="#evaluation-of-the-source-terms" title="Permalink to this headline">¶</a></h2>
 <p>Can use <strong>midpoint rule</strong> which approximates a volume integral by the product of the centre value and the CV:</p>
 <div class="math">
 \[Q_{i,j} = \int_{\Omega_{i,j}} Q d \Omega = Q_{i,j} \Delta \Omega_{i,j}\]</div>
 </div>
 <div class="section" id="evaluation-of-the-volumes">
-<h2><a class="toc-backref" href="#id5">1.9.4.5. Evaluation of the Volumes</a><a class="headerlink" href="#evaluation-of-the-volumes" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">1.1.9.4.5. Evaluation of the Volumes</a><a class="headerlink" href="#evaluation-of-the-volumes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>The vector product is the area of a parallelogram</li>
 <li>Take the absolute value to ensure the value is positive (<span class="math">\(\Delta x\)</span> and <span class="math">\(\Delta y\)</span> can be negative)</li>
@@ -128,11 +128,11 @@
 </div>
 </div>
 <div class="section" id="evaluation-of-the-fluxes">
-<h2><a class="toc-backref" href="#id6">1.9.4.6. Evaluation of the Fluxes</a><a class="headerlink" href="#evaluation-of-the-fluxes" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">1.1.9.4.6. Evaluation of the Fluxes</a><a class="headerlink" href="#evaluation-of-the-fluxes" title="Permalink to this headline">¶</a></h2>
 <p>The evaluation of fluxes determines the difference between a variety of schemes, e.g. cell vertex or cell centered</p>
 <p>It depends on the location of the flow variables w.r.t. the mesh and selected scheme</p>
 <div class="section" id="central-scheme-and-cell-centered-fvm">
-<h3><a class="toc-backref" href="#id7">Central Scheme and Cell Centered FVM</a><a class="headerlink" href="#central-scheme-and-cell-centered-fvm" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id7">1.1.9.4.6.1. Central Scheme and Cell Centered FVM</a><a class="headerlink" href="#central-scheme-and-cell-centered-fvm" title="Permalink to this headline">¶</a></h3>
 <p>We know the values at the black dots, we don&#8217;t know the values in red</p>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/centred_scheme_3.png"><img alt="../_images/centred_scheme_3.png" src="../_images/centred_scheme_3.png" style="width: 420.0px; height: 420.0px;" /></a>
@@ -166,7 +166,7 @@
 <p>Can also use Simpson&#8217;s Rule, cubic polynomials for this type of rule</p>
 </div>
 <div class="section" id="central-scheme-and-cell-vertex-fvm">
-<h3><a class="toc-backref" href="#id8">Central scheme and Cell Vertex FVM</a><a class="headerlink" href="#central-scheme-and-cell-vertex-fvm" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id8">1.1.9.4.6.2. Central scheme and Cell Vertex FVM</a><a class="headerlink" href="#central-scheme-and-cell-vertex-fvm" title="Permalink to this headline">¶</a></h3>
 <p>We know the values at the black dots, we don&#8217;t know the values in red - remember flux is not at a point, it&#8217;s <strong>through a face</strong> by integration.</p>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/vertex_scheme_4.png"><img alt="../_images/vertex_scheme_4.png" src="../_images/vertex_scheme_4.png" style="width: 420.0px; height: 420.0px;" /></a>
@@ -202,7 +202,7 @@
 </div>
 </div>
 <div class="section" id="d-example-fvm-reduces-to-fd">
-<h2><a class="toc-backref" href="#id9">1.9.4.7. 2D Example - FVM Reduces to FD</a><a class="headerlink" href="#d-example-fvm-reduces-to-fd" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id9">1.1.9.4.7. 2D Example - FVM Reduces to FD</a><a class="headerlink" href="#d-example-fvm-reduces-to-fd" title="Permalink to this headline">¶</a></h2>
 <p>This is a generic example - we could use cell centered or cell vertex here (but just showing cell centered):</p>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/centred_scheme_6.png"><img alt="../_images/centred_scheme_6.png" src="../_images/centred_scheme_6.png" style="width: 315.0px; height: 315.0px;" /></a>
@@ -246,17 +246,17 @@ q_{i,j}\]</div>
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="finite_volume_method_3.html">1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation</a>
+        «&#160;&#160;<a href="finite_volume_method_3.html">1.1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="finite_volume_method_5.html">1.9.5. Evaluating Fluxes and Derivatives of Fluxes in 2D</a>&#160;&#160;»
+        <a href="finite_volume_method_5.html">1.1.9.5. Evaluating Fluxes and Derivatives of Fluxes in 2D</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

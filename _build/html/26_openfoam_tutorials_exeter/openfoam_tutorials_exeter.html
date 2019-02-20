@@ -1,0 +1,2420 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.3. OpenFOAM Tutorials - University of Exeter (Password Protected) &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. OpenFOAM" href="../24_25_26_27_openfoam_landing_page/openfoam_landing_page.html" />
+    <link rel="next" title="1.4. OpenFOAM Tutorials - OpenCFD" href="../27_openfoam_tutorials_opencfd/openfoam_tutorials_opencfd.html" />
+    <link rel="prev" title="1.2. OpenFOAM Use" href="../25_openfoam_use/openfoam_use.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.3. OpenFOAM Tutorials - University of Exeter (Password Protected)</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../25_openfoam_use/openfoam_use.html">1.2. OpenFOAM Use</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../27_openfoam_tutorials_opencfd/openfoam_tutorials_opencfd.html">1.4. OpenFOAM Tutorials - OpenCFD</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="openfoam-tutorials-university-of-exeter-password-protected">
+<h1>1.3. OpenFOAM Tutorials - University of Exeter (Password Protected)<a class="headerlink" href="#openfoam-tutorials-university-of-exeter-password-protected" title="Permalink to this headline">¶</a></h1>
+<p>This page contains OpenFOAM tutorials for version 2.4.0 from <a class="reference external" href="http://emps.exeter.ac.uk/engineering/staff/grtabor">Professor Gavin Tabor</a> at the University of Exeter.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#tutorial-1-basics" id="id6">Tutorial 1: Basics</a><ul>
+<li><a class="reference internal" href="#cavity-case" id="id7">Cavity case</a><ul>
+<li><a class="reference internal" href="#q-i-1-using-parafoam-generate-plots-of-pressure-velocity-magnitude-and-velocity-vectors-on-the-mid-plane-of-the-simulation" id="id8">Q.I.1 Using paraFoam generate plots of pressure, velocity magnitude and velocity vectors on the mid-plane of the simulation</a></li>
+<li><a class="reference internal" href="#qi-2-sample-dictionary-to-find-pressure-along-lid-and-across-mid-line" id="id9">QI.2 Sample dictionary to find pressure along lid and across mid-line</a></li>
+<li><a class="reference internal" href="#qi-3-what-is-re" id="id10">QI.3 What is Re?</a></li>
+<li><a class="reference internal" href="#qi-4-re-run-for-re-10000" id="id11">QI.4 Re-run for Re=10000</a></li>
+<li><a class="reference internal" href="#how-have-the-results-changed-go-back-to-q-i-1-and-q-i-2" id="id12">How have the results changed - go back to Q.I.1 and Q.I.2</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cylinder-case" id="id13">Cylinder case</a><ul>
+<li><a class="reference internal" href="#q-i-5-generate-plots-go-back-to-q-i-1" id="id14">Q.I.5 Generate plots - go back to Q.I.1</a></li>
+<li><a class="reference internal" href="#q-i-6-generate-pressure-along-midline" id="id15">Q.I.6 Generate pressure along midline</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tutorial-2-snappyhexmesh" id="id16">Tutorial 2: SnappyHexMesh</a></li>
+<li><a class="reference internal" href="#tutorial-3-backward-facing-step" id="id17">Tutorial 3: Backward Facing Step</a><ul>
+<li><a class="reference internal" href="#preparation" id="id18">Preparation</a></li>
+<li><a class="reference internal" href="#starting-point-kepsilon-model-four-mistakes" id="id19">Starting Point - kEpsilon model - four mistakes</a></li>
+<li><a class="reference internal" href="#better-starting-point" id="id20">Better starting point</a></li>
+<li><a class="reference internal" href="#kepsilon-rng" id="id21">kEpsilon RNG</a></li>
+<li><a class="reference internal" href="#komega" id="id22">kOmega</a></li>
+<li><a class="reference internal" href="#lrr-reynolds-stress-start-from-stratch" id="id23">LRR Reynolds Stress - start from stratch</a></li>
+<li><a class="reference internal" href="#lrr-reynolds-stress-start-from-kepsilon" id="id24">LRR Reynolds Stress - start from kEpsilon</a></li>
+<li><a class="reference internal" href="#plot-wallgradu-x" id="id25">Plot wallGradU_X</a></li>
+<li><a class="reference internal" href="#save-state-and-load-in-kepsilon" id="id26">Save state and load in kEpsilon</a></li>
+<li><a class="reference internal" href="#plot-velocity-profile-around-0-4" id="id27">Plot velocity profile around 0.4</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tutorial-4-pointwise" id="id28">Tutorial 4: Pointwise</a><ul>
+<li><a class="reference internal" href="#id1" id="id29">Preparation</a></li>
+<li><a class="reference internal" href="#download-openfoam-case-from-ele" id="id30">Download OpenFOAM case from ele</a></li>
+<li><a class="reference internal" href="#mesh-generation-gavin-tutorial" id="id31">Mesh generation - Gavin tutorial</a><ul>
+<li><a class="reference internal" href="#mesh-for-pipe-flow-use-pointwise-tutorial" id="id32">Mesh for Pipe Flow - Use Pointwise Tutorial</a><ul>
+<li><a class="reference internal" href="#create-a-circle-with-diameter-1" id="id33">Create a circle with diameter 1</a></li>
+<li><a class="reference internal" href="#split-the-circle-into-four" id="id34">Split the circle into four</a></li>
+<li><a class="reference internal" href="#create-domain" id="id35">Create domain</a></li>
+<li><a class="reference internal" href="#examine-domain" id="id36">Examine domain</a></li>
+<li><a class="reference internal" href="#create-curves" id="id37">Create curves</a></li>
+<li><a class="reference internal" href="#id2" id="id38">Examine domain</a></li>
+<li><a class="reference internal" href="#solver" id="id39">Solver</a></li>
+<li><a class="reference internal" href="#id3" id="id40">Examine domain</a></li>
+<li><a class="reference internal" href="#extrude-domain" id="id41">Extrude domain</a></li>
+<li><a class="reference internal" href="#boundary-conditions" id="id42">Boundary conditions</a></li>
+<li><a class="reference internal" href="#save" id="id43">Save</a></li>
+<li><a class="reference internal" href="#export" id="id44">Export</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tutorial-5-free-surface-flow" id="id45">Tutorial 5 - Free Surface Flow</a></li>
+<li><a class="reference internal" href="#tutorial-6-heat-transfer" id="id46">Tutorial 6 - Heat Transfer</a><ul>
+<li><a class="reference internal" href="#user-directory" id="id47">User directory</a><ul>
+<li><a class="reference internal" href="#what-are-applications" id="id48">What are applications?</a></li>
+<li><a class="reference internal" href="#what-are-libraries" id="id49">What are libraries?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#compilation" id="id50">Compilation</a><ul>
+<li><a class="reference internal" href="#what-is-wclean" id="id51">What is wclean?</a></li>
+<li><a class="reference internal" href="#what-is-wmake" id="id52">What is wmake?</a></li>
+<li><a class="reference internal" href="#what-does-wmake-do" id="id53">What does wmake do?</a></li>
+<li><a class="reference internal" href="#how-is-wmake-run" id="id54">How is wmake run?</a></li>
+<li><a class="reference internal" href="#what-is-rehash" id="id55">What is rehash?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#files-and-options" id="id56">Files and options</a><ul>
+<li><a class="reference internal" href="#what-is-the-make-files-file" id="id57">What is the Make/files file?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#download-from-ele" id="id58">Download from ELE</a></li>
+<li><a class="reference internal" href="#edit-createfields-h" id="id59">Edit createFields.H</a></li>
+<li><a class="reference internal" href="#edit-icofoam-c" id="id60">Edit icoFoam.C</a></li>
+<li><a class="reference internal" href="#where-to-add-the-temperature-equation" id="id61">Where to add the temperature equation?</a></li>
+<li><a class="reference internal" href="#compile" id="id62">Compile</a></li>
+<li><a class="reference internal" href="#create-the-mesh" id="id63">Create the mesh</a></li>
+<li><a class="reference internal" href="#create-the-dictionaries" id="id64">Create the dictionaries</a></li>
+<li><a class="reference internal" href="#run-the-solver" id="id65">Run the solver</a></li>
+<li><a class="reference internal" href="#evaluate-re-pr-and-nu" id="id66">Evaluate Re, Pr and Nu</a></li>
+<li><a class="reference internal" href="#plot-contours-of-temp-and-velocity" id="id67">Plot Contours of Temp and Velocity</a></li>
+<li><a class="reference internal" href="#plotting-outlet-temperature" id="id68">Plotting outlet temperature</a></li>
+<li><a class="reference internal" href="#create-average-temperature-field" id="id69">Create Average Temperature Field</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#project-2-casson-model" id="id70">Project 2 - Casson Model</a><ul>
+<li><a class="reference internal" href="#mesh-for-parallel-plates-modify-bfstep" id="id71">Mesh for parallel plates = modify bfStep</a><ul>
+<li><a class="reference internal" href="#hydraulic-diameter" id="id72">Hydraulic Diameter</a></li>
+<li><a class="reference internal" href="#reynolds-number-for-laminar-flow-say-500" id="id73">Reynolds Number for laminar flow, say 500</a></li>
+<li><a class="reference internal" href="#development-length" id="id74">Development length</a></li>
+<li><a class="reference internal" href="#copy-across-case-from-offsetcylinder" id="id75">Copy across case from offSetCylinder</a></li>
+<li><a class="reference internal" href="#mesh-for-plates-use-bfstep" id="id76">Mesh for Plates - Use bfStep</a></li>
+<li><a class="reference internal" href="#id4" id="id77">Boundary Conditions</a></li>
+<li><a class="reference internal" href="#kinematic-viscosity" id="id78">Kinematic viscosity</a></li>
+<li><a class="reference internal" href="#can-increase-timestep-by-factor-of-10" id="id79">Can increase timestep by factor of 10</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mesh-for-cylinder-modify-example-on-openfoamwiki" id="id80">Mesh for cylinder = modify example on openfoamwiki</a><ul>
+<li><a class="reference internal" href="#id5" id="id81">Boundary Conditions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hardcoding-in-the-icofoam-solver-cassonfoam" id="id82">Hardcoding in the icoFoam Solver - cassonFoam</a></li>
+<li><a class="reference internal" href="#runtime-selectable-viscosity-model-cassongavin" id="id83">Runtime selectable viscosity model - CassonGavin</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="tutorial-1-basics">
+<h2><a class="toc-backref" href="#id6">1.3.1. Tutorial 1: Basics</a><a class="headerlink" href="#tutorial-1-basics" title="Permalink to this headline">¶</a></h2>
+<p>Download tutorial1.zip case file from VLE and save to run directory:</p>
+<div class="highlight-python"><div class="highlight"><pre>http://vle.exeter.ac.uk/course/view.php?id=4781
+Click case files next to Tutorial 1  (introduction) - case files
+Open with Archive Manager
+Extract to /home/links/apr207/OpenFOAM/apr207-2.4.0/run
+</pre></div>
+</div>
+<div class="section" id="cavity-case">
+<h3><a class="toc-backref" href="#id7">1.3.1.1. Cavity case</a><a class="headerlink" href="#cavity-case" title="Permalink to this headline">¶</a></h3>
+<p>Load 2.4 and go to the tutorial1 directory and run blockMesh:</p>
+<div class="highlight-python"><div class="highlight"><pre>of24
+run
+cd tutorial1/cavity
+blockMesh
+</pre></div>
+</div>
+<p>Run icoFoam and foamCalc mag U to generate the magnitude of velocity at each timestep:</p>
+<div class="highlight-python"><div class="highlight"><pre>icoFoam
+foamCalc mag U
+</pre></div>
+</div>
+<div class="section" id="q-i-1-using-parafoam-generate-plots-of-pressure-velocity-magnitude-and-velocity-vectors-on-the-mid-plane-of-the-simulation">
+<h4><a class="toc-backref" href="#id8">1.3.1.1.1. Q.I.1 Using paraFoam generate plots of pressure, velocity magnitude and velocity vectors on the mid-plane of the simulation</a><a class="headerlink" href="#q-i-1-using-parafoam-generate-plots-of-pressure-velocity-magnitude-and-velocity-vectors-on-the-mid-plane-of-the-simulation" title="Permalink to this headline">¶</a></h4>
+<p>Open the file:</p>
+<div class="highlight-python"><div class="highlight"><pre>paraFoam
+Click Open icon
+Select cavity.OpenFOAM and press OK
+Press Apply
+Press right arrow to switch to 0.5 seconds
+Change view to 2D
+</pre></div>
+</div>
+<p>Create slice:</p>
+<div class="highlight-python"><div class="highlight"><pre>Filters &gt; Search &gt; Slice
+Origin: 0.05 0.05 0.005
+Normal: 0 0 1
+</pre></div>
+</div>
+<ol class="loweralpha simple">
+<li>Contour plot of pressure:</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre>Select color by interpolated p (dot next to p), other one is cell values
+Tools &gt; Lock View Size Custom &gt; 1000, 500
+Rescale to custom range -5 to 5
+Orientation Axes Visibility &gt; Click the X
+Choose preset &gt; Blue to Red Rainbow &gt; Apply
+Edit color legend &gt; Title &gt; Pressure (m^2/s^2), Label format: %.1f &gt; ok, Font = 9
+Click on cavity.OpenFOAM to remove border round slice
+File &gt; Save Screenshot &gt; pressure
+</pre></div>
+</div>
+<ol class="loweralpha simple" start="2">
+<li>Contour plot of velocity magnitude</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre>Click slice
+Switch to interpolated magU
+Edit color legend &gt; Title &gt; Velocity  Magnitude (m/s), Label format: %.1f &gt; ok, Font = 9
+Choose preset &gt; Blue to Red Rainbow &gt; Apply
+Click on cavity.OpenFOAM to remove border round slice
+File &gt; Save Screenshot &gt; velocity
+</pre></div>
+</div>
+<ol class="loweralpha simple" start="3">
+<li>Vector plot of velocity</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre>Hide slice
+Show cavity.OpenFOAM
+Filters &gt; Search &gt; Cell Centers &gt; Apply
+Filters &gt; Search &gt; Glyph &gt; Apply
+Hide Cell Centers
+Glyph type &gt; 2D Glyph
+Coloring &gt; magU
+Scale factor: 0.005
+Turn on foam.foam &gt; Representation &gt; Outline
+Coloring &gt; Solid Color &gt; Edit &gt; Black
+Rescale to custom range 0 to 1
+Edit color legend &gt; Title &gt; Velocity  Magnitude (m/s), Label format: %.1f &gt; ok
+File &gt; Save Screenshot &gt; vectors
+</pre></div>
+</div>
+<ol class="loweralpha simple" start="4">
+<li>Save State</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre>File &gt; Save State &gt; Contours_and_Vectors.pvsm
+</pre></div>
+</div>
+</div>
+<div class="section" id="qi-2-sample-dictionary-to-find-pressure-along-lid-and-across-mid-line">
+<h4><a class="toc-backref" href="#id9">1.3.1.1.2. QI.2 Sample dictionary to find pressure along lid and across mid-line</a><a class="headerlink" href="#qi-2-sample-dictionary-to-find-pressure-along-lid-and-across-mid-line" title="Permalink to this headline">¶</a></h4>
+<ol class="loweralpha simple">
+<li>Run sample</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre>gedit system/sampleDict
+
+setFormat raw;
+
+surfaceFormat vtk;
+
+interpolationScheme cellPoint;
+
+fields
+(
+    p
+);
+
+sets
+(
+    lineX1
+    {
+        type        uniform;
+        axis        distance;
+
+        start       (0.0 0.1 0.005);
+        end         (0.1 0.1 0.005);
+        nPoints     100;
+    }
+
+    lineX2
+    {
+        type        uniform;
+        axis        distance;
+
+        start       (0.0 0.05 0.005);
+        end         (0.1 0.05 0.005);
+        nPoints     100;
+    }
+
+);
+
+sample
+</pre></div>
+</div>
+<ol class="loweralpha simple" start="2">
+<li>Plot in xmgrace</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre>xmgrace
+Data &gt; Import &gt; ASCII &gt; lineX1_p.xy &gt; OK lineX2_p.xy &gt; OK
+Close
+Plot &gt; Axes Properties &gt; Xaxis &gt; x (m) &gt; Apply
+                         Yaxis &gt; p (Pa) &gt; Apply
+Plot &gt; Set Appearance &gt; String: y = 0.1m
+                        String y = 0.05m
+
+File &gt; Save as &gt; plot &gt; pressure.agr
+
+File &gt; Print setup &gt; png
+
+File &gt; Print
+</pre></div>
+</div>
+</div>
+<div class="section" id="qi-3-what-is-re">
+<h4><a class="toc-backref" href="#id10">1.3.1.1.3. QI.3 What is Re?</a><a class="headerlink" href="#qi-3-what-is-re" title="Permalink to this headline">¶</a></h4>
+<p>Re = U*L/nu = 1*0.1/0.01 = 10</p>
+</div>
+<div class="section" id="qi-4-re-run-for-re-10000">
+<h4><a class="toc-backref" href="#id11">1.3.1.1.4. QI.4 Re-run for Re=10000</a><a class="headerlink" href="#qi-4-re-run-for-re-10000" title="Permalink to this headline">¶</a></h4>
+<ol class="loweralpha simple">
+<li>Copy case to new name turbCavity</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre>cd ..
+cp -rf cavity turbCavity
+cd turbCavity
+rm -rf *.*
+</pre></div>
+</div>
+<ol class="loweralpha simple" start="2">
+<li>Change U to 1000 or nu to 0.00001, nu needs to be 1000 times less for 1000 times the Re</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre>nano constant/transportProperties
+
+transportModel  Newtonian;
+nu              nu [0 2 -1 0 0 0 0] 1e-05;
+</pre></div>
+</div>
+<ol class="loweralpha simple" start="3">
+<li>Turn on turbulence</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre>nano constant/RASProperties
+
+RASModel        kEpsilon;
+
+turbulence      on;
+
+printCoeffs     on;
+</pre></div>
+</div>
+<p>Run with pisoFoam</p>
+<div class="highlight-python"><div class="highlight"><pre>nano system/controlDict
+
+application pisoFoam;
+</pre></div>
+</div>
+<p>Run pisoFoam and foamCalc mag U to generate the magnitude of velocity at each timestep:</p>
+<div class="highlight-python"><div class="highlight"><pre>pisoFoam
+foamCalc mag U
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-have-the-results-changed-go-back-to-q-i-1-and-q-i-2">
+<h4><a class="toc-backref" href="#id12">1.3.1.1.5. How have the results changed - go back to Q.I.1 and Q.I.2</a><a class="headerlink" href="#how-have-the-results-changed-go-back-to-q-i-1-and-q-i-2" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="cylinder-case">
+<h3><a class="toc-backref" href="#id13">1.3.1.2. Cylinder case</a><a class="headerlink" href="#cylinder-case" title="Permalink to this headline">¶</a></h3>
+<p>Go to the tutorial1 directory and run blockMesh:</p>
+<div class="highlight-python"><div class="highlight"><pre>cd ../cylinder
+fluentMeshToFoam cylinder.msh
+</pre></div>
+</div>
+<p>Change inlet velocity to 0.5m/s</p>
+<div class="highlight-python"><div class="highlight"><pre>nano 0/U
+
+inlet
+{
+    type            fixedValue;
+    value           uniform (0.5 0 0);
+}
+</pre></div>
+</div>
+<p>k from formula</p>
+<div class="math">
+\[k = {3 \over 2} (U_{ref} T_i)^2 = {3 \over 2} (0.5 \times 0.5)^2 = 0.09375 m^2/s^2\]</div>
+<div class="highlight-python"><div class="highlight"><pre>nano 0/k
+
+inlet
+{
+    type            fixedValue;
+    value           uniform 0.09375;
+}
+</pre></div>
+</div>
+<p>Epsilon from formula</p>
+<div class="math">
+\[\ell = 0.07L = 0.07 \times 5 = 0.35 m\]</div>
+<div class="math">
+\[\varepsilon = C_{\mu}^{3/4} {{k^{3/2}} \over \ell} = 0.09^{3/4} {{0.09375^{3/2}} \over 0.35} = 0.01348 m^2/s^3\]</div>
+<div class="highlight-python"><div class="highlight"><pre>nano 0/epsilon
+
+inlet
+{
+    type            fixedValue;
+    value           uniform 0.01348;
+}
+</pre></div>
+</div>
+<p>Boundary names are in constant/polyMesh/boundary</p>
+<p>Check BCS change symmetryPlane to symmetry (symmetryPlane is for orthogonal planes, these planes are non-planar):</p>
+<div class="highlight-python"><div class="highlight"><pre>nano 0/U
+nano 0/p
+nano 0/epsilon
+nano 0/k
+nano 0/nut
+
+    sides
+    {
+        type            symmetry;
+    }
+</pre></div>
+</div>
+<p>Change frontAndBackPlanes in 0/U and 0/p</p>
+<div class="highlight-python"><div class="highlight"><pre>frontAndBackPlanes
+{
+    type            empty;
+}
+</pre></div>
+</div>
+<p>Change schemes to bounded:</p>
+<div class="highlight-python"><div class="highlight"><pre>nano system/fvSchemes
+
+divSchemes
+{
+    default         none;
+    div(phi,U)      bounded Gauss upwind;
+    div(phi,k)      bounded Gauss upwind;
+    div(phi,epsilon) bounded Gauss upwind;
+    div(phi,R)      bounded Gauss upwind;
+    div(R)          bounded Gauss linear;
+    div(phi,nuTilda) bounded Gauss upwind;
+    div((nuEff*dev(T(grad(U))))) Gauss linear;
+}
+</pre></div>
+</div>
+<p>Run using simpleFoam</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">simpleFoam</span>
+</pre></div>
+</div>
+<div class="section" id="q-i-5-generate-plots-go-back-to-q-i-1">
+<h4><a class="toc-backref" href="#id14">1.3.1.2.1. Q.I.5 Generate plots - go back to Q.I.1</a><a class="headerlink" href="#q-i-5-generate-plots-go-back-to-q-i-1" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="q-i-6-generate-pressure-along-midline">
+<h4><a class="toc-backref" href="#id15">1.3.1.2.2. Q.I.6 Generate pressure along midline</a><a class="headerlink" href="#q-i-6-generate-pressure-along-midline" title="Permalink to this headline">¶</a></h4>
+<ol class="loweralpha simple">
+<li>CheckMesh to find domain size:</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre>checkMesh
+
+Overall domain bounding box (0 0 -0.206155) (20 5 0.206155)
+</pre></div>
+</div>
+<ol class="loweralpha simple">
+<li>Run sample</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre>nano system/sampleDict
+
+setFormat raw;
+
+interpolationScheme cellPoint;
+
+surfaceFormat vtk;
+
+fields
+(
+    p
+);
+
+sets
+(
+    lineX1
+    {
+        type        uniform;
+        axis        distance;
+
+        start       (0.0 2.5 0);
+        end         (5.0 2.5 0);
+        nPoints     1000;
+    }
+
+    lineX2
+    {
+        type        uniform;
+        axis        distance;
+
+        start       (5.0 2.5 0);
+        end         (20.0 2.5 0);
+        nPoints     1000;
+    }
+
+);
+
+sample
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tutorial-2-snappyhexmesh">
+<h2><a class="toc-backref" href="#id16">1.3.2. Tutorial 2: SnappyHexMesh</a><a class="headerlink" href="#tutorial-2-snappyhexmesh" title="Permalink to this headline">¶</a></h2>
+<p>Download from VLE (ECMM148):</p>
+<div class="highlight-python"><div class="highlight"><pre>http://vle.exeter.ac.uk/course/view.php?id=4781
+Click case files next to Tutorial 2  (snappyhexmesh) - case files
+Open with Archive Manager
+Extract to /home/links/apr207/OpenFOAM/apr207-2.4.0/run
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>    of24
+cd shuttleSnappy
+blockMesh
+paraFoam
+File &gt; Open &gt; constant/triSurface/StarTrekShuttle3d.stl &gt; Apply
+Exit paraview
+</pre></div>
+</div>
+<p>Run snappyHexMesh</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">snappyHexMesh</span>
+<span class="n">checkMesh</span>
+</pre></div>
+</div>
+<p>It will say there is an error</p>
+<p>Max skewness = 4.694484, 2 highly skew faces detected which may impair the quality of the results</p>
+<div class="highlight-python"><div class="highlight"><pre>foamToVTK -faceSet skewFaces -time 3
+</pre></div>
+</div>
+<p>Open Paraview and view the skewed faces:</p>
+<div class="highlight-python"><div class="highlight"><pre>File &gt; Open VTK/skewFaces
+Color them red
+</pre></div>
+</div>
+<p>Correct the problem with skew faces:</p>
+<p>Max refinement surfaces from 4 to 5</p>
+<div class="highlight-python"><div class="highlight"><pre>refinementSurfaces
+{
+    starTrekShuttle
+    {
+        // Surface-wise min and max refinement level
+        level (2 5);
+    }
+}
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>rm -rf 1 2 3
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">snappyHexMesh</span>
+<span class="n">checkMesh</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>paraFoam
+Move to time = 3
+Click on Clip
+Apply
+Surface with edges
+Filters &gt; Alphabetical &gt; Extract Cells by Region &gt; Apply
+Filters &gt; Alphabetical &gt; Extract Block
+
+Show only ExtractBlock1
+Show internalMesh and zoom in to view
+</pre></div>
+</div>
+<p>Mesh is ok
+Delete polyMesh folder in shuttleSmall
+Copy folder 3/polyMesh to shuttleSmall/constant/polyMesh</p>
+<p>From the over directory:</p>
+<div class="highlight-python"><div class="highlight"><pre>rm -rf shuttleSmall/constant/polyMesh
+cp -rf shuttleSnappy/3/polyMesh shuttleSmall/constant
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>checkMesh
+transformPoints -scale &quot;(0.01 0.01 0.01)&quot;
+checkMesh
+</pre></div>
+</div>
+<p>Change constant/polyMesh/boundary starTrekShuttle to starTrekShuttle_AutoCAD</p>
+<div class="highlight-python"><div class="highlight"><pre>gedit 0/* constant/polyMesh/bundary
+rm -rf shuttleSmall/0
+cp -rf shuttleSmall/0.orig shuttleSmall/0
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">starTrekShuttle_AutoCAD</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>cp -rf 0.orig/* 0
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">potentialFoam</span>
+</pre></div>
+</div>
+<p>&#8211;&gt; FOAM FATAL IO ERROR:
+keyword laplacian(1,Phi) is undefined in dictionary &#8220;/home/apr207/OpenFOAM/apr207-2.4.0/run/tutorial2/shuttleSmall/system/fvSchemes.laplacianSchemes&#8221;</p>
+<div class="highlight-python"><div class="highlight"><pre>gedit system/fvSchemes
+laplacian(1,Phi) Gauss linear corrected;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">potentialFoam</span>
+</pre></div>
+</div>
+<p>&#8211;&gt; FOAM FATAL IO ERROR:
+keyword Phi is undefined in dictionary &#8220;/home/apr207/OpenFOAM/apr207-2.4.0/run/tutorial2/shuttleSmall/system/fvSolution.solvers&#8221;</p>
+<p>Copy the solver for p to Phi</p>
+<div class="highlight-python"><div class="highlight"><pre>Phi
+{
+    solver          PCG;
+    preconditioner  DIC;
+    tolerance       1e-06;
+    relTol          0;
+    minIter         0;
+    maxIter         1000;
+}
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">potentialFoam</span>
+</pre></div>
+</div>
+<p>&#8211;&gt; FOAM FATAL ERROR : flux requested but Phi not specified in the fluxRequired sub-dictionary of fvSchemes.</p>
+<div class="highlight-python"><div class="highlight"><pre>fluxRequired
+{
+    default         no;
+    p;
+    Phi;
+}
+</pre></div>
+</div>
+<p>Run simpleFoam - need to remove calcForces so that the post processing works.</p>
+<div class="highlight-python"><div class="highlight"><pre>rm -rf calcForces
+simpleFoam &gt;&amp; log &amp;
+tail -f log
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>foamLog log
+</pre></div>
+</div>
+<p>Can plot .xy in xmgrace for UxFinalRes_0, UyFinalRes_0, UzFinalRes_0, epsilonFinalRes_0, kFinalRes_0, pFinalRes_1</p>
+<p>Can load in Excel foamCalc forces, use spaces and use ((())) as delimiters.</p>
+<p>Servers:</p>
+<div class="highlight-python"><div class="highlight"><pre>scp -r shuttleSnappy apr207@emps-ugeng1:
+ssh userID@emps-ugeng1
+nohup nice -19 timeout 1h simpleFoam &gt; log &amp;
+</pre></div>
+</div>
+<p>To find out the load on the servers:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">uptime</span>
+</pre></div>
+</div>
+<p>example result:
+13:51:55 up 77 days,  3:20,  3 users,  load average: 0.07, 0.06, 0.05
+The first number after &#8220;load average&#8221; is the most relevant. An average of 1 represents 1 core running at 100%. So if it reaches 28 the server is running at full capacity.</p>
+<p>Blue or purple room:</p>
+<div class="highlight-python"><div class="highlight"><pre>nohup nice -19 simpleFoam &gt; log &amp;
+logout
+</pre></div>
+</div>
+</div>
+<div class="section" id="tutorial-3-backward-facing-step">
+<h2><a class="toc-backref" href="#id17">1.3.3. Tutorial 3: Backward Facing Step</a><a class="headerlink" href="#tutorial-3-backward-facing-step" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="preparation">
+<h3><a class="toc-backref" href="#id18">1.3.3.1. Preparation</a><a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h3>
+<p>Changed inlet height to 2H from H - changes total height of domain to 3:</p>
+<p>Origin is located at base of step</p>
+<div class="highlight-python"><div class="highlight"><pre>of24
+run
+cd bfStep
+nano constant/polyMesh/blockMeshDict
+
+vertices
+(
+    (0 0 0)
+    (10 0 0)
+    (10 1 0)
+    (0 1 0)
+    (0 0 0.1)
+    (10 0 0.1)
+    (10 1 0.1)
+    (0 1 0.1)
+
+    (10 3 0)
+    (0 3 0)
+    (10 3 0.1)
+    (0 3 0.1)
+
+    (-2 1 0)
+    (-2 3 0)
+    (-2 1 0.1)
+    (-2 3 0.1)
+);
+</pre></div>
+</div>
+<p>Blocks 2 and 3 have doubled in height, so double number of cells</p>
+<div class="highlight-python"><div class="highlight"><pre>blocks
+(
+    hex (0 1 2 3 4 5 6 7) (40 10 1) simpleGrading (1 1 1)
+    hex (3 2 8 9 7 6 10 11) (40 20 1) simpleGrading (1 1 1)
+    hex (12 3 9 13 14 7 11 15) (8 20 1) simpleGrading (1 1 1)
+);
+</pre></div>
+</div>
+<p>Run blockMesh</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">blockMesh</span>
+</pre></div>
+</div>
+<p>Run checkMesh</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">checkMesh</span>
+</pre></div>
+</div>
+<p>Modified fluid viscosity to achievve Re = 44,000 = U 2H / nu, nu = 5 x 2 x 0.1 / 44000 = 2.27e-5</p>
+<div class="highlight-python"><div class="highlight"><pre>nano constant/transportProperties
+
+transportModel  Newtonian;
+
+nu              nu [0 2 -1 0 0 0 0] 2.27e-05;
+</pre></div>
+</div>
+<p>Modified k and epsilon according to an inlet length scale of 2H (0.2) and an inlet turbulent intensity of 5% (0.05). k = 0.09375 m^2/s^2. epsilon = 0.337.</p>
+<div class="highlight-python"><div class="highlight"><pre>nano 0/k
+
+internalField   uniform 0.09375;
+
+boundaryField
+{
+    top
+    {
+        type            kqRWallFunction;
+        value           uniform 0.09375;
+    }
+    step
+    {
+        type            kqRWallFunction;
+        value           uniform 0.09375;
+    }
+    base
+    {
+        type            kqRWallFunction;
+        value           uniform 0.09375;
+    }
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 0.09375;
+    }
+    outlet
+    {
+        type            zeroGradient;
+    }
+    frontAndBack
+    {
+        type            empty;
+    }
+}
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>nano 0/epsilon
+
+internalField   uniform 0.337;
+
+boundaryField
+{
+    top
+    {
+        type            epsilonWallFunction;
+        Cmu             0.09;
+        kappa           0.41;
+        E               9.8;
+        value           uniform 0.337;
+    }
+    step
+    {
+        type            epsilonWallFunction;
+        Cmu             0.09;
+        kappa           0.41;
+        E               9.8;
+        value           uniform 0.337;
+    }
+    base
+    {
+        type            epsilonWallFunction;
+        Cmu             0.09;
+        kappa           0.41;
+        E               9.8;
+        value           uniform 0.337;
+    }
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 0.337;
+    }
+    outlet
+    {
+        type            zeroGradient;
+    }
+    frontAndBack
+    {
+        type            empty;
+    }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="starting-point-kepsilon-model-four-mistakes">
+<h3><a class="toc-backref" href="#id19">1.3.3.2. Starting Point - kEpsilon model - four mistakes</a><a class="headerlink" href="#starting-point-kepsilon-model-four-mistakes" title="Permalink to this headline">¶</a></h3>
+<p>Change a mistake (although it runs) in system/fvSolution - remove PBiCG from k entry</p>
+<div class="highlight-python"><div class="highlight"><pre>nano system/fvSolution
+
+k
+{
+    solver           PBiCG;
+    preconditioner   DILU;
+    tolerance        1e-05;
+    relTol           0.1;
+};
+</pre></div>
+</div>
+<p>Another mistake: change turbulenceModel kEpsilon; to simulationType RASModel;</p>
+<div class="highlight-python"><div class="highlight"><pre>nano constant/turbulenceProperties
+simulationType RASModel;
+</pre></div>
+</div>
+<p>Another mistake: Remove UyFinal from system  folder</p>
+<div class="highlight-python"><div class="highlight"><pre>rm -rf system/UyFinal
+</pre></div>
+</div>
+<p>Another mistake in control Dict, turbFoam isn&#8217;t an application</p>
+<div class="highlight-python"><div class="highlight"><pre>nano system/controlDict
+application     simpleFoam;
+</pre></div>
+</div>
+</div>
+<div class="section" id="better-starting-point">
+<h3><a class="toc-backref" href="#id20">1.3.3.3. Better starting point</a><a class="headerlink" href="#better-starting-point" title="Permalink to this headline">¶</a></h3>
+<p>Copy bfStep to kEpsilon and run simpleFoam on kEpsilon model</p>
+<div class="highlight-python"><div class="highlight"><pre>cp -rf bfStep kEpsilon
+cd kEpsilon
+simpleFoam &gt; log 2&gt;&amp;1 &amp;
+</pre></div>
+</div>
+<p>View the log file using less</p>
+<div class="highlight-python"><div class="highlight"><pre>less log
+</pre></div>
+</div>
+<p>Go to the end of the log file:</p>
+<div class="highlight-python"><div class="highlight"><pre>Shift G
+</pre></div>
+</div>
+<p>Show that Initial residual for p didn&#8217;t converge until 160 iterations</p>
+<p>Quit the log file</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">q</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="kepsilon-rng">
+<h3><a class="toc-backref" href="#id21">1.3.3.4. kEpsilon RNG</a><a class="headerlink" href="#kepsilon-rng" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>cd ..
+cp -rf bfStep RNGkEpsilon
+cd RNGkEpsilon
+</pre></div>
+</div>
+<p>Change turbulence model to RNGkEpsilon</p>
+<div class="highlight-python"><div class="highlight"><pre>nano constant/RASProperties
+turbulenceModel RNGkEpsilon;
+</pre></div>
+</div>
+<p>Run simpleFoam</p>
+<div class="highlight-python"><div class="highlight"><pre>simpleFoam &gt; log 2&gt;&amp;1 &amp;
+</pre></div>
+</div>
+<p>Use less</p>
+<div class="highlight-python"><div class="highlight"><pre>less log
+</pre></div>
+</div>
+<p>Go to end:</p>
+<div class="highlight-python"><div class="highlight"><pre>shift g
+</pre></div>
+</div>
+<p>Go to start:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">g</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="komega">
+<h3><a class="toc-backref" href="#id22">1.3.3.5. kOmega</a><a class="headerlink" href="#komega" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>cd ..
+cp -rf bfStep kOmega
+cd kOmega
+</pre></div>
+</div>
+<p>Change turbulence model to kOmega</p>
+<div class="highlight-python"><div class="highlight"><pre>nano constant/RASProperties
+RASModel        kOmegaSST;
+</pre></div>
+</div>
+<p>Create omega file</p>
+<div class="highlight-python"><div class="highlight"><pre>cp -rf 0/epsilon 0/omega
+nano 0/omega
+</pre></div>
+</div>
+<p>Omega = epsilon/k = 0.337 / 0.09375 = 3.594</p>
+<p>Units = m^2/s^2 / m^2/s^3 = s^-1</p>
+<div class="highlight-python"><div class="highlight"><pre>dimensions      [0 0 -1 0 0 0 0];
+
+internalField   uniform 3.594;
+
+boundaryField
+{
+    top
+    {
+        type            omegaWallFunction;
+        Cmu             0.09;
+        kappa           0.41;
+        E               9.8;
+        value           uniform 3.594;
+    }
+    step
+    {
+        type            omegaWallFunction;
+        Cmu             0.09;
+        kappa           0.41;
+        E               9.8;
+        value           uniform 3.594;
+    }
+    base
+    {
+        type            omegaWallFunction;
+        Cmu             0.09;
+        kappa           0.41;
+        E               9.8;
+        value           uniform 3.594;
+    }
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 3.594;
+    }
+    outlet
+    {
+        type            zeroGradient;
+    }
+    frontAndBack
+    {
+        type            empty;
+    }
+}
+</pre></div>
+</div>
+<p>open fvSchemes to copy divSchemes and laplacianSchemes for omega:</p>
+<div class="highlight-python"><div class="highlight"><pre>nano system/fvSchemes
+
+divSchemes
+{
+    div(phi,omega) Gauss upwind;
+}
+
+laplacianSchemes
+{
+    laplacian(DomegaEff,omega) Gauss linear corrected;
+}
+</pre></div>
+</div>
+<p>open system/fvSolution</p>
+<div class="highlight-python"><div class="highlight"><pre>nano system/fvSolution
+
+omega
+{
+    solver           PBiCG;
+    preconditioner   DILU;
+    tolerance        1e-05;
+    relTol           0.1;
+};
+
+relaxationFactors
+{
+    omega           0.7;
+}
+</pre></div>
+</div>
+<p>Run simpleFoam</p>
+<div class="highlight-python"><div class="highlight"><pre>simpleFoam &gt; log 2&gt;&amp;1 &amp;
+</pre></div>
+</div>
+</div>
+<div class="section" id="lrr-reynolds-stress-start-from-stratch">
+<h3><a class="toc-backref" href="#id23">1.3.3.6. LRR Reynolds Stress - start from stratch</a><a class="headerlink" href="#lrr-reynolds-stress-start-from-stratch" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>cd ..
+cp -rf bfStep LRR
+cd LRR
+</pre></div>
+</div>
+<p>Run R utility</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">R</span>
+</pre></div>
+</div>
+<p>Change turbulence model</p>
+<div class="highlight-python"><div class="highlight"><pre>nano constant/RASProperties
+
+RASModel LRR;
+</pre></div>
+</div>
+<p>Run simpleFoam</p>
+<div class="highlight-python"><div class="highlight"><pre>simpleFoam &gt; log 2&gt;&amp;1 &amp;
+</pre></div>
+</div>
+</div>
+<div class="section" id="lrr-reynolds-stress-start-from-kepsilon">
+<h3><a class="toc-backref" href="#id24">1.3.3.7. LRR Reynolds Stress - start from kEpsilon</a><a class="headerlink" href="#lrr-reynolds-stress-start-from-kepsilon" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>cd ..
+cp -rf kEpsilon LRR2
+cd LRR2
+</pre></div>
+</div>
+<p>Run R utility</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">R</span>
+</pre></div>
+</div>
+<p>Change turbulence model</p>
+<div class="highlight-python"><div class="highlight"><pre>nano constant/RASProperties
+
+RASModel LRR;
+</pre></div>
+</div>
+<p>Start from latest time:</p>
+<div class="highlight-python"><div class="highlight"><pre>nano system/controlDict
+
+startFrom       latestTime;
+</pre></div>
+</div>
+<p>Run simpleFoam</p>
+<div class="highlight-python"><div class="highlight"><pre>simpleFoam &gt; log 2&gt;&amp;1 &amp;
+</pre></div>
+</div>
+<p>Run wallGradU utility</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">wallGradU</span>
+</pre></div>
+</div>
+<p>Plot streamlines using SurfaceLIC</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">paraFoam</span>
+</pre></div>
+</div>
+<p>Tools &gt; Manage Plugins &gt; SurfaceLIC &gt; AutoLoad</p>
+<p>File &gt; Exit</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">paraFoam</span>
+</pre></div>
+</div>
+<p>Change to last time</p>
+<p>Change to U</p>
+<p>Change to SurfaceLIC</p>
+</div>
+<div class="section" id="plot-wallgradu-x">
+<h3><a class="toc-backref" href="#id25">1.3.3.8. Plot wallGradU_X</a><a class="headerlink" href="#plot-wallgradu-x" title="Permalink to this headline">¶</a></h3>
+<p>Select header and select all elements &gt; Apply</p>
+<p>Filter &gt; Extract Block &gt; select base &gt; Apply</p>
+<p>Show header again</p>
+<p>Switch back to ExtractBlock1</p>
+<p>Filters &gt; Plot Data</p>
+<p>Select wallGradU_X or wallGradU(0)</p>
+<p>Check with a visual, switch to header and select streamline screen</p>
+<p>Filters &gt;  Plot over line</p>
+<p>Enter:</p>
+<p>0.43 0 0
+0.43 0 0</p>
+</div>
+<div class="section" id="save-state-and-load-in-kepsilon">
+<h3><a class="toc-backref" href="#id26">1.3.3.9. Save state and load in kEpsilon</a><a class="headerlink" href="#save-state-and-load-in-kepsilon" title="Permalink to this headline">¶</a></h3>
+<p>File &gt; Save State &gt; state</p>
+<p>Close paraview</p>
+<div class="highlight-python"><div class="highlight"><pre>cd ..
+
+cp -rf LRR2/state.pvsm kEpsilon/state.pvsm
+
+cd kEpsilon
+
+wallGradU
+</pre></div>
+</div>
+<p>paraview</p>
+<p>File &gt; Load State</p>
+<p>Select state</p>
+<p>Change .OpenFOAM file location to kEpsilon</p>
+<p>Refresh (if needed)</p>
+</div>
+<div class="section" id="plot-velocity-profile-around-0-4">
+<h3><a class="toc-backref" href="#id27">1.3.3.10. Plot velocity profile around 0.4</a><a class="headerlink" href="#plot-velocity-profile-around-0-4" title="Permalink to this headline">¶</a></h3>
+<p>Filters &gt; Plot Over Line</p>
+<p>0.4 0.0 0.005
+0.4 0.3 0.005</p>
+<p>Deselect everything except U_X</p>
+<p>Find point were there is no reversed flow (negative velocity)</p>
+<p>Move to 0.425 (shows -ve velocity)</p>
+<p>Move to 0.426 (shows no -ve velocity)</p>
+</div>
+</div>
+<div class="section" id="tutorial-4-pointwise">
+<h2><a class="toc-backref" href="#id28">1.3.4. Tutorial 4: Pointwise</a><a class="headerlink" href="#tutorial-4-pointwise" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3><a class="toc-backref" href="#id29">1.3.4.1. Preparation</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Download NACA6412.igs geometry from VLE</p>
+<p>Open pointwise</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pointwise</span>
+</pre></div>
+</div>
+<p>File &gt; Import &gt; Database</p>
+<p>Select NACA6412.igs from browser &gt; Open &gt; OK</p>
+<p>Defaults &gt; Dimension = 75</p>
+<p>List &gt; Database &gt; Select all four database entries &gt; Click &#8220;Connectors on Database Entries&#8221; in toolbar</p>
+<p>List &gt; Connectors &gt; Select all connectors &gt; Points on</p>
+<p>Uncheck the database mask (to put database in grey</p>
+<p>Zoom in to trailing edges and select both</p>
+<p>Grid &gt; Dimension &gt; Average delta s = 0.0005 &gt; Dimension &gt; OK</p>
+<p>Click &#8220;All Masks On/Off&#8221;</p>
+<p>Check the Spacing Constaints Mask</p>
+<p>Select spacing constraints on upper and lower surfaces of the aerofoil at the trailing edge</p>
+<p>Click spacing on the toolbar and enter 0.0005</p>
+<p>Select spacing constaints on the upper and lower surace of the aerofoil at the leading edge</p>
+<p>Spacing = 0.005</p>
+<p>Click Connectors mask and select all connectors</p>
+<p>Create &gt; Extrude &gt; Normal &gt; Done</p>
+<p>Attributes tab &gt; Step Size frame &gt; Initial delta s = 0.0001</p>
+<blockquote>
+<div>&gt; Orientation frame &gt; Flip</div></blockquote>
+<p>Run tab &gt; 91 steps &gt; Run &gt; OK</p>
+<p>Click Save on toolbar &gt; aerofoil_after_pointwise_tutorial.pw</p>
+</div>
+<div class="section" id="download-openfoam-case-from-ele">
+<h3><a class="toc-backref" href="#id30">1.3.4.2. Download OpenFOAM case from ele</a><a class="headerlink" href="#download-openfoam-case-from-ele" title="Permalink to this headline">¶</a></h3>
+<p>Download Tutorial 4</p>
+</div>
+<div class="section" id="mesh-generation-gavin-tutorial">
+<h3><a class="toc-backref" href="#id31">1.3.4.3. Mesh generation - Gavin tutorial</a><a class="headerlink" href="#mesh-generation-gavin-tutorial" title="Permalink to this headline">¶</a></h3>
+<p>&#8212;</p>
+<p><strong>Create a 3D block</strong></p>
+<p>Open aerofoil.pw</p>
+<p>CAE &gt; Select Solver &gt; OpenFOAM</p>
+<p>Click &#8220;All Masks On/Off&#8221; to mask all entities and unmask domains</p>
+<p>Select dom-1</p>
+<p>Create &gt; Extrude &gt; Translate</p>
+<p>Steps = 1</p>
+<p>Direction = 0.0 0.0 1.0</p>
+<p>Distance = 0.25</p>
+<p>Run</p>
+<p>OK</p>
+<p>&#8212;</p>
+<p>CAE &gt; Set boundary conditions</p>
+<p>New &gt; Name = farfield &gt; CAE Type = patch</p>
+<p>View &gt; Set view type &gt; Perspective</p>
+<p>Control + Right mouse = rotate view</p>
+<p>Select the inlet &gt; click the tick</p>
+<p>Click off into the blue</p>
+<p>New &gt; Name = frontAndBackPlanes &gt; CAE Type = empty</p>
+<p>Select the front and back planes &gt; click the tick</p>
+<p>New &gt; Name = airfoil &gt; CAE Type = wall</p>
+<p>Click on boundary 0 &gt; click Add to Selection</p>
+<p>Close</p>
+<p>&#8212;</p>
+<p>File &gt; Save</p>
+<p>Click &#8220;All Masks On/Off&#8221;</p>
+<p>Select blocks blk-1</p>
+<p>File &gt; Export &gt; CAE &gt; Navigate to tutorial4/NACA6412/constant/ Create polyMesh folder &gt; Select it &gt; Choose</p>
+<p>Navigate to the case NACA6412 directory and run paraFoam to check mesh</p>
+<p>&#8212;</p>
+<p>Renumber mesh to enchance diagonal dominance:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">renumberMesh</span> <span class="o">-</span><span class="n">overwrite</span>
+</pre></div>
+</div>
+<p>It will complain that the type of front and back planes are not defined:</p>
+<div class="highlight-python"><div class="highlight"><pre>frontAndBackPlanes
+{
+    type empty;
+}
+</pre></div>
+</div>
+<p>Add this to controlDict:</p>
+<div class="highlight-python"><div class="highlight"><pre>writeInterval   10;
+
+
+functions
+{
+    calcForces
+    {
+        type                forces;
+        functionObjectLibs  ( &quot;libforces.so&quot; );
+        enabled             true;
+        outputControl       outputTime;
+        pName               p;
+        UName               U;
+        rhoName             rhoInf;
+        rhoInf              1.2;
+        CofR                (0.25 0 0);
+        patches
+        (
+            airfoil
+        );
+    }
+}
+</pre></div>
+</div>
+<p>Run simpleFoam</p>
+<div class="highlight-python"><div class="highlight"><pre>rm -rf forces
+simpleFoam &gt; log 2&gt;&amp;1 &amp;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>foamLog log
+</pre></div>
+</div>
+<div class="section" id="mesh-for-pipe-flow-use-pointwise-tutorial">
+<h4><a class="toc-backref" href="#id32">1.3.4.3.1. Mesh for Pipe Flow - Use Pointwise Tutorial</a><a class="headerlink" href="#mesh-for-pipe-flow-use-pointwise-tutorial" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="http://www.pointwise.com/DIY/Butterfly-Topology.shtml">http://www.pointwise.com/DIY/Butterfly-Topology.shtml</a></p>
+<div class="section" id="create-a-circle-with-diameter-1">
+<h5><a class="toc-backref" href="#id33">1.3.4.3.1.1. Create a circle with diameter 1</a><a class="headerlink" href="#create-a-circle-with-diameter-1" title="Permalink to this headline">¶</a></h5>
+<p>Script &gt; Begin journaling &gt; script.glf</p>
+<p>Create &gt; Draw Curves &gt; Circle &gt; Entity type = database &gt; Segment type = Circle</p>
+<p>&gt; XYZ = 0 0 0 &gt; Press enter</p>
+<p>&gt; XYZ = 1 0 0 &gt; Press enter</p>
+<p>2 Points and angle &gt; Angle = 360.0 &gt; Press enter &gt; OK</p>
+</div>
+<div class="section" id="split-the-circle-into-four">
+<h5><a class="toc-backref" href="#id34">1.3.4.3.1.2. Split the circle into four</a><a class="headerlink" href="#split-the-circle-into-four" title="Permalink to this headline">¶</a></h5>
+<p>Select the circle</p>
+<p>Edit &gt; Split &gt; Persent of Length = 50 &gt; Press enter &gt; OK (Repeat creating four segments)</p>
+<p>Defaults &gt; Dimension = 20 &gt; Press enter</p>
+</div>
+<div class="section" id="create-domain">
+<h5><a class="toc-backref" href="#id35">1.3.4.3.1.3. Create domain</a><a class="headerlink" href="#create-domain" title="Permalink to this headline">¶</a></h5>
+<p>Select all databases &gt; Connectors on Database Entities</p>
+<p>Select all connectors &gt; Assemble Domains</p>
+</div>
+<div class="section" id="examine-domain">
+<h5><a class="toc-backref" href="#id36">1.3.4.3.1.4. Examine domain</a><a class="headerlink" href="#examine-domain" title="Permalink to this headline">¶</a></h5>
+<p>Examine &gt; Maximum included angle (shows 175 degree angle)</p>
+<p>Select domain &gt; Press delete key</p>
+</div>
+<div class="section" id="create-curves">
+<h5><a class="toc-backref" href="#id37">1.3.4.3.1.5. Create curves</a><a class="headerlink" href="#create-curves" title="Permalink to this headline">¶</a></h5>
+<p>Create &gt; 2 Point curves</p>
+<p>Click top and bottom points</p>
+<p>Click left and right points</p>
+<p>Select horizontal connector &gt; Edit &gt; Split &gt; Percent of Length = 50 &gt; Press enter &gt; OK (Repeat for vertical connector and radii)</p>
+<p>Create &gt; 2 Point curves (Create central box)</p>
+<p>Remove interior lines within box</p>
+<p>Select all connectors &gt; Dimension = 20</p>
+<p>Select quadrants &gt; Assemble domains</p>
+</div>
+<div class="section" id="id2">
+<h5><a class="toc-backref" href="#id38">1.3.4.3.1.6. Examine domain</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h5>
+<p>Examine &gt; Maximum included angle (shows 135 degree angle)</p>
+<p>Select domain &gt; Press delete key</p>
+</div>
+<div class="section" id="solver">
+<h5><a class="toc-backref" href="#id39">1.3.4.3.1.7. Solver</a><a class="headerlink" href="#solver" title="Permalink to this headline">¶</a></h5>
+<p>Select domains &gt; Grid &gt; solve</p>
+<p>Edge Attributes &gt; Select all interior edges (twice) by clicking a box select (left click) over the connectors</p>
+<p>Boundary Conditions &gt; Floating &gt; Apply</p>
+<p>Solve &gt; Run &gt; Iterations = 100 &gt; OK</p>
+</div>
+<div class="section" id="id3">
+<h5><a class="toc-backref" href="#id40">1.3.4.3.1.8. Examine domain</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h5>
+<p>Examine &gt; Maximum included angle (shows 122 degree angle)</p>
+</div>
+<div class="section" id="extrude-domain">
+<h5><a class="toc-backref" href="#id41">1.3.4.3.1.9. Extrude domain</a><a class="headerlink" href="#extrude-domain" title="Permalink to this headline">¶</a></h5>
+<p>CAE &gt; Select Solver &gt; OpenFOAM</p>
+<p>Select all domains</p>
+<p>Create &gt; Extrude &gt; Translate &gt; Done</p>
+<p>Steps = 100</p>
+<p>Direction = 0.0 0.0 1.0</p>
+<p>Distance = 10</p>
+<p>(Creates a domain with 200,000 cells)</p>
+</div>
+<div class="section" id="boundary-conditions">
+<h5><a class="toc-backref" href="#id42">1.3.4.3.1.10. Boundary conditions</a><a class="headerlink" href="#boundary-conditions" title="Permalink to this headline">¶</a></h5>
+<p>CAE &gt; Set boundary conditions</p>
+<p>New &gt; Name = inlet &gt; CAE Type = patch</p>
+<p>Select the inlet &gt; click the tick</p>
+<p>Click off into the blue</p>
+<p>New &gt; Name = outlet &gt; CAE Type = patch</p>
+<p>Select the outlet &gt; click the tick</p>
+<p>New &gt; Name = wall &gt; CAE Type = wall</p>
+<p>Click on boundary 0 &gt; click Add to Selection</p>
+<p>Close</p>
+</div>
+<div class="section" id="save">
+<h5><a class="toc-backref" href="#id43">1.3.4.3.1.11. Save</a><a class="headerlink" href="#save" title="Permalink to this headline">¶</a></h5>
+<p>File &gt; Save</p>
+<p>Script &gt; End journaling</p>
+</div>
+<div class="section" id="export">
+<h5><a class="toc-backref" href="#id44">1.3.4.3.1.12. Export</a><a class="headerlink" href="#export" title="Permalink to this headline">¶</a></h5>
+<p>Click “All Masks On/Off”</p>
+<p>Select blocks blk-1</p>
+<p>File &gt; Export &gt; CAE &gt; Navigate to case_directory/constant/ Create polyMesh folder &gt; Select it &gt; Choose</p>
+<p>Navigate to the case directory and run checkMesh and paraFoam to check mesh</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tutorial-5-free-surface-flow">
+<h2><a class="toc-backref" href="#id45">1.3.5. Tutorial 5 - Free Surface Flow</a><a class="headerlink" href="#tutorial-5-free-surface-flow" title="Permalink to this headline">¶</a></h2>
+<p>Download case to andrew-2.4.0/run/</p>
+<p>Test swak4Foam is installed:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">two</span>
+<span class="n">funkySetFields</span>
+</pre></div>
+</div>
+<p>Change to weir case directory and run blockMesh</p>
+<div class="highlight-python"><div class="highlight"><pre>cd weir
+blockMesh
+</pre></div>
+</div>
+<p>interFoam factors out the hydrostatic pressure: <span class="math">\(p^* = p - \rho g y\)</span></p>
+</div>
+<div class="section" id="tutorial-6-heat-transfer">
+<h2><a class="toc-backref" href="#id46">1.3.6. Tutorial 6 - Heat Transfer</a><a class="headerlink" href="#tutorial-6-heat-transfer" title="Permalink to this headline">¶</a></h2>
+<p>Download case to apr-2.4.0/run/</p>
+<p>If you use the solver, then:</p>
+<p>/home/andrew/OpenFOAM/OpenFOAM-2.4.0/src/finiteVolume/lnInclude/cyclicAMIFvPatch.H:39:35: fatal error: cyclicAMILduInterface.H: No such file or directory
+compilation terminated.</p>
+<div class="section" id="user-directory">
+<h3><a class="toc-backref" href="#id47">1.3.6.1. User directory</a><a class="headerlink" href="#user-directory" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="what-are-applications">
+<h4><a class="toc-backref" href="#id48">1.3.6.1.1. What are applications?</a><a class="headerlink" href="#what-are-applications" title="Permalink to this headline">¶</a></h4>
+<p>Executables - has a main() function.</p>
+<p>For applications (executables), e.g. solvers, the user location is:</p>
+<div class="highlight-python"><div class="highlight"><pre>$WM_PROJECT_USER_DIR/applications/solvers
+</pre></div>
+</div>
+</div>
+<div class="section" id="what-are-libraries">
+<h4><a class="toc-backref" href="#id49">1.3.6.1.2. What are libraries?</a><a class="headerlink" href="#what-are-libraries" title="Permalink to this headline">¶</a></h4>
+<p>Run-time selectable classes - doesn&#8217;t have a main() function.</p>
+<p>For library source (e.g. viscosity models):</p>
+<div class="highlight-python"><div class="highlight"><pre>$WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="compilation">
+<h3><a class="toc-backref" href="#id50">1.3.6.2. Compilation</a><a class="headerlink" href="#compilation" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="what-is-wclean">
+<h4><a class="toc-backref" href="#id51">1.3.6.2.1. What is wclean?</a><a class="headerlink" href="#what-is-wclean" title="Permalink to this headline">¶</a></h4>
+<p>Cleans directory of dependency files (run before wmake)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">wclean</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="what-is-wmake">
+<h4><a class="toc-backref" href="#id52">1.3.6.2.2. What is wmake?</a><a class="headerlink" href="#what-is-wmake" title="Permalink to this headline">¶</a></h4>
+<p>Compilation script based on make.</p>
+</div>
+<div class="section" id="what-does-wmake-do">
+<h4><a class="toc-backref" href="#id53">1.3.6.2.3. What does wmake do?</a><a class="headerlink" href="#what-does-wmake-do" title="Permalink to this headline">¶</a></h4>
+<p>It compiles OpenFOAM code in the source code directory.</p>
+</div>
+<div class="section" id="how-is-wmake-run">
+<h4><a class="toc-backref" href="#id54">1.3.6.2.4. How is wmake run?</a><a class="headerlink" href="#how-is-wmake-run" title="Permalink to this headline">¶</a></h4>
+<p>In the source code directory (which can be placed anywhere), although usually in the <strong>user directory</strong>. Contains at least:</p>
+<ul class="simple">
+<li>solver.C file</li>
+<li>Make directory containing files and options files</li>
+</ul>
+<p>Run using:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">wmake</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="what-is-rehash">
+<h4><a class="toc-backref" href="#id55">1.3.6.2.5. What is rehash?</a><a class="headerlink" href="#what-is-rehash" title="Permalink to this headline">¶</a></h4>
+<p>Informs compiler that something has been updated (run after wmake). Makes the executable available. NOT USED ANYMORE!</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">rehash</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="files-and-options">
+<h3><a class="toc-backref" href="#id56">1.3.6.3. Files and options</a><a class="headerlink" href="#files-and-options" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="what-is-the-make-files-file">
+<h4><a class="toc-backref" href="#id57">1.3.6.3.1. What is the Make/files file?</a><a class="headerlink" href="#what-is-the-make-files-file" title="Permalink to this headline">¶</a></h4>
+<p>Specifies:</p>
+<ul class="simple">
+<li>Which files need to be complied (cassonFoam.C)</li>
+<li>Where the resulting executable will be placed and what it&#8217;s name is (EXE = $(FOAM_USER_APPBIN)/cassonFoam)</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>cassonFoam.C
+
+EXE = $(FOAM_USER_APPBIN)/cassonFoam
+</pre></div>
+</div>
+<ul class="simple">
+<li>Shouldn&#8217;t write to FOAM_APPBIN (installation direcctory), instead write to FOAM_USER_APPBIN (user directory)</li>
+<li>File name need not be the same at the executable name</li>
+<li>File name need not be unique</li>
+<li>Exectuable name has to be unique</li>
+</ul>
+</div>
+</div>
+<div class="section" id="download-from-ele">
+<h3><a class="toc-backref" href="#id58">1.3.6.4. Download from ELE</a><a class="headerlink" href="#download-from-ele" title="Permalink to this headline">¶</a></h3>
+<p>Extract to andrew-2.4.0/run/Project/</p>
+<p>Copy boussinesqFoam to andrew-2.4.0/applications/solvers</p>
+<div class="highlight-python"><div class="highlight"><pre>mv boussinesqFoam/ $WM_PROJECT_USER_DIR/applications/solvers/
+</pre></div>
+</div>
+</div>
+<div class="section" id="edit-createfields-h">
+<h3><a class="toc-backref" href="#id59">1.3.6.5. Edit createFields.H</a><a class="headerlink" href="#edit-createfields-h" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Read additional properties</li>
+<li>Add a field for theta</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>Info&lt;&lt; &quot;Reading field theta\n&quot; &lt;&lt; endl;
+volScalarField theta
+(
+    IOobject
+    (
+        &quot;theta&quot;,
+        runTime.timeName(),
+        mesh,
+        IOobject::MUST_READ,
+        IOobject::AUTO_WRITE
+    ),
+    mesh
+);
+
+dimensionedScalar kappa
+(
+    transportProperties.lookup(&quot;kappa&quot;)
+);
+
+dimensionedScalar rho0
+(
+    transportProperties.lookup(&quot;rho0&quot;)
+);
+
+dimensionedScalar Cv
+(
+    transportProperties.lookup(&quot;Cv&quot;)
+);
+
+dimensionedScalar theta0
+(
+    transportProperties.lookup(&quot;theta0&quot;)
+);
+
+dimensionedScalar beta
+(
+    transportProperties.lookup(&quot;beta&quot;)
+);
+
+dimensionedScalar hCoeff = kappa/(rho0*Cv);
+
+dimensionedVector g
+(
+    transportProperties.lookup(&quot;g&quot;)
+);
+</pre></div>
+</div>
+</div>
+<div class="section" id="edit-icofoam-c">
+<h3><a class="toc-backref" href="#id60">1.3.6.6. Edit icoFoam.C</a><a class="headerlink" href="#edit-icofoam-c" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Add source term to momentum equation</li>
+<li>Add temperature equation</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>fvVectorMatrix UEqn
+(
+    fvm::ddt(U)
+    + fvm::div(phi, U)
+    - fvm::laplacian(nu, U)
+    + beta*g*(theta0-theta)
+);
+
+solve(UEqn == -fvc::grad(p));
+</pre></div>
+</div>
+</div>
+<div class="section" id="where-to-add-the-temperature-equation">
+<h3><a class="toc-backref" href="#id61">1.3.6.7. Where to add the temperature equation?</a><a class="headerlink" href="#where-to-add-the-temperature-equation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Coupling from momentum to temperature equation due to convection</li>
+<li>No coupling from temperature to momentum equation</li>
+<li>Temperature equation can be added at the end of each timestep</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>fvScalarMatrix tempEqn
+(
+    fvm::ddt(theta)
+    + fvm::div(phi, theta)
+    - fvm::laplacian(hCoeff, theta)
+);
+
+tempEqn.solve();
+
+runTime.write();
+</pre></div>
+</div>
+</div>
+<div class="section" id="compile">
+<h3><a class="toc-backref" href="#id62">1.3.6.8. Compile</a><a class="headerlink" href="#compile" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">wclean</span>
+<span class="n">wmake</span>
+</pre></div>
+</div>
+<p>/home/andrew/OpenFOAM/OpenFOAM-2.4.0/src/finiteVolume/lnInclude/cyclicAMIFvPatch.H:39:35: fatal error: cyclicAMILduInterface.H: No such file or directory
+compilation terminated.</p>
+<p>Add meshTools:</p>
+<div class="highlight-python"><div class="highlight"><pre>EXE_INC = \
+    -I$(LIB_SRC)/finiteVolume/lnInclude \
+    -I$(LIB_SRC)/meshTools/lnInclude
+
+EXE_LIBS = \
+    -lfiniteVolume \
+    -lmeshTools
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>icoFoam.C:74:19: error: ‘ddtPhiCorr’ is not a member of ‘Foam::fvc’</dt>
+<dd><ul class="first last simple">
+<li>fvc::ddtPhiCorr(rAU, U, phi);</li>
+</ul>
+</dd>
+</dl>
+<p>PISO Loop has completely changed in 2.4.0</p>
+<div class="highlight-python"><div class="highlight"><pre>// --- PISO loop
+
+for (int corr=0; corr&lt;nCorr; corr++)
+{
+    volScalarField rAU(1.0/UEqn.A());
+
+    volVectorField HbyA(&quot;HbyA&quot;, U);
+    HbyA = rAU*UEqn.H();
+    surfaceScalarField phiHbyA
+    (
+        &quot;phiHbyA&quot;,
+        (fvc::interpolate(HbyA) &amp; mesh.Sf())
+        + fvc::interpolate(rAU)*fvc::ddtCorr(U, phi)
+    );
+
+    adjustPhi(phiHbyA, U, p);
+
+    for (int nonOrth=0; nonOrth&lt;=nNonOrthCorr; nonOrth++)
+    {
+        fvScalarMatrix pEqn
+        (
+            fvm::laplacian(rAU, p) == fvc::div(phiHbyA)
+        );
+
+        pEqn.setReference(pRefCell, pRefValue);
+        pEqn.solve();
+
+        if (nonOrth == nNonOrthCorr)
+        {
+            phi = phiHbyA - pEqn.flux();
+        }
+    }
+
+    #include &quot;continuityErrs.H&quot;
+
+    U = HbyA - rAU*fvc::grad(p);
+    U.correctBoundaryConditions();
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-the-mesh">
+<h3><a class="toc-backref" href="#id63">1.3.6.9. Create the mesh</a><a class="headerlink" href="#create-the-mesh" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>/OpenFOAM/andrew-2.4.0/run/Project/tutorial6/bendHeat
+blockMesh
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-the-dictionaries">
+<h3><a class="toc-backref" href="#id64">1.3.6.10. Create the dictionaries</a><a class="headerlink" href="#create-the-dictionaries" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>cp -rf 0/U 0/theta
+nano theta
+    FoamFile
+    {
+        version     2.0;
+        format      ascii;
+        class       volScalarField;
+        object      theta;
+    }
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+    dimensions       [0 0 0 1 0 0 0];
+
+    internalField    uniform 300;
+
+    boundaryField
+    {
+        inlet
+        {
+            type                fixedValue;
+            value               uniform 300;
+        }
+
+        outlet
+        {
+            type                zeroGradient;
+        }
+
+        walls
+        {
+            type                fixedValue;
+            value               uniform 350;
+        }
+
+        frontAndBack
+        {
+            type                empty;
+        }
+    }
+</pre></div>
+</div>
+<p>Check transportProperties</p>
+<div class="highlight-python"><div class="highlight"><pre>nano constant/transportProperties
+
+    // Water values
+    nu              nu [0 2 -1 0 0 0 0] 1.0e-6;
+
+    Cv              Cv [0 2 -2 -1 0 0 0] 4182;
+
+    rho0            rho0 [1 -3 0 0 0 0 0] 998;
+
+    kappa           kappa [1 1 -3 -1 0 0 0] 0.6;
+
+    beta            beta [0 0 0 -1 0 0 0] 0.00021;
+
+    theta0          theta0 [0 0 0 1 0 0 0] 300;
+
+    g               g [0 1 -2 0 0 0 0] (0.0 -9.81 0.0);
+</pre></div>
+</div>
+<p>Check fvSchemes</p>
+<div class="highlight-python"><div class="highlight"><pre>nano system/fvSchemes
+
+ddtSchemes
+{
+    default Euler;
+}
+
+gradSchemes
+{
+    default         Gauss linear;
+    grad(p)         Gauss linear;
+//    grad(theta)         Gauss linear;
+}
+
+divSchemes
+{
+    default         none;
+    div(phi,U)      Gauss linear;
+    div(phi,theta)  Gauss linear;
+}
+
+laplacianSchemes
+{
+    default         Gauss linear corrected;
+    laplacian(nu,U) Gauss linear corrected;
+    laplacian((1|A(U)),p) Gauss linear corrected;
+//    laplacian(kappa/(rho0*Cv),theta) Gauss linear corrected;
+}
+
+interpolationSchemes
+{
+    default         linear;
+    interpolate(HbyA) linear;
+}
+
+snGradSchemes
+{
+    default         corrected;
+}
+
+fluxRequired
+{
+    default         no;
+    p;
+}
+</pre></div>
+</div>
+<p>Check fvSolution</p>
+<div class="highlight-python"><div class="highlight"><pre>nano system/fvSolution
+
+solvers
+{
+    p
+    {
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-06;
+        relTol          0;
+    }
+
+    U
+    {
+        solver          PBiCG;
+        preconditioner  DILU;
+        tolerance       1e-05;
+        relTol          0;
+    }
+
+    theta
+    {
+        solver          PBiCG;
+        preconditioner  DILU;
+        tolerance       1e-05;
+        relTol          0;
+    }
+}
+
+PISO
+{
+    nCorrectors     2;
+    nNonOrthogonalCorrectors 0;
+    pRefCell        0;
+    pRefValue       0;
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-the-solver">
+<h3><a class="toc-backref" href="#id65">1.3.6.11. Run the solver</a><a class="headerlink" href="#run-the-solver" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">boussinesqFoam</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="evaluate-re-pr-and-nu">
+<h3><a class="toc-backref" href="#id66">1.3.6.12. Evaluate Re, Pr and Nu</a><a class="headerlink" href="#evaluate-re-pr-and-nu" title="Permalink to this headline">¶</a></h3>
+<div class="math">
+\[Re = {{U D} \over \nu} = {{0.01 \times 0.01} \over {1.0 \times 10^{-6} }} = 100\]</div>
+<div class="math">
+\[Pr = {{c_p \mu} \over k} = {{c_p \nu \rho} \over k} = {{4182 \times 1.0 \times 10^{-6} \times 998} \over 0.6} = 7\]</div>
+<div class="math">
+\[Nu = {{h L} \over k} = {{{k \over { \rho c_v}} L} \over k} = {L \over { \rho c_v}} = {0.01 \over {998 \times 4182}} = 2 \times 10^{-9}\]</div>
+</div>
+<div class="section" id="plot-contours-of-temp-and-velocity">
+<h3><a class="toc-backref" href="#id67">1.3.6.13. Plot Contours of Temp and Velocity</a><a class="headerlink" href="#plot-contours-of-temp-and-velocity" title="Permalink to this headline">¶</a></h3>
+<p>Shows that simulation is transient and has not reached steady state.</p>
+</div>
+<div class="section" id="plotting-outlet-temperature">
+<h3><a class="toc-backref" href="#id68">1.3.6.14. Plotting outlet temperature</a><a class="headerlink" href="#plotting-outlet-temperature" title="Permalink to this headline">¶</a></h3>
+<p>Shows that it is changing</p>
+</div>
+<div class="section" id="create-average-temperature-field">
+<h3><a class="toc-backref" href="#id69">1.3.6.15. Create Average Temperature Field</a><a class="headerlink" href="#create-average-temperature-field" title="Permalink to this headline">¶</a></h3>
+<p>In icoFoam.C</p>
+<div class="highlight-python"><div class="highlight"><pre>double n = 0;
+while (runTime.loop())
+{
+    .
+    .
+    .
+    tempEqn.solve();
+    thetaAv = (n / (n+1.0))*thetaAv+(1.0/(n+1.0))*theta;
+    runTime.write();
+
+    Info&lt;&lt; &quot;ExecutionTime = &quot; &lt;&lt; runTime.elapsedCpuTime() &lt;&lt; &quot; s&quot;
+        &lt;&lt; &quot;  ClockTime = &quot; &lt;&lt; runTime.elapsedClockTime() &lt;&lt; &quot; s&quot;
+        &lt;&lt; &quot;  Timesteps = &quot; &lt;&lt; n &lt;&lt; &quot; -&quot;
+        &lt;&lt; nl &lt;&lt; endl;
+    n = n+1.0;
+}
+</pre></div>
+</div>
+<p>In createFields.H</p>
+<div class="highlight-python"><div class="highlight"><pre>Info&lt;&lt; &quot;Reading field theta average\n&quot; &lt;&lt; endl;
+volScalarField thetaAv
+(
+    IOobject
+    (
+        &quot;thetaAv&quot;,
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    mesh,
+    dimensionedScalar(&quot;thetaAv&quot;, dimensionSet(0,0,0,1,0,0,0), scalar(1.0))
+);
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="project-2-casson-model">
+<h2><a class="toc-backref" href="#id70">1.3.7. Project 2 - Casson Model</a><a class="headerlink" href="#project-2-casson-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mesh-for-parallel-plates-modify-bfstep">
+<h3><a class="toc-backref" href="#id71">1.3.7.1. Mesh for parallel plates = modify bfStep</a><a class="headerlink" href="#mesh-for-parallel-plates-modify-bfstep" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="hydraulic-diameter">
+<h4><a class="toc-backref" href="#id72">1.3.7.1.1. Hydraulic Diameter</a><a class="headerlink" href="#hydraulic-diameter" title="Permalink to this headline">¶</a></h4>
+<p>H = 1, so D_h = 2H = 2m</p>
+</div>
+<div class="section" id="reynolds-number-for-laminar-flow-say-500">
+<h4><a class="toc-backref" href="#id73">1.3.7.1.2. Reynolds Number for laminar flow, say 500</a><a class="headerlink" href="#reynolds-number-for-laminar-flow-say-500" title="Permalink to this headline">¶</a></h4>
+<p>Re = U D_h / nu</p>
+<p>U = 1</p>
+<p>nu = (U D_h)/Re = (1 * 2)/500 = 0.004</p>
+</div>
+<div class="section" id="development-length">
+<h4><a class="toc-backref" href="#id74">1.3.7.1.3. Development length</a><a class="headerlink" href="#development-length" title="Permalink to this headline">¶</a></h4>
+<p>Schlichting:</p>
+<p>L = 0.16 (H/2) * (U * (H/2) / nu) = 10</p>
+<p>Choose 20</p>
+</div>
+<div class="section" id="copy-across-case-from-offsetcylinder">
+<h4><a class="toc-backref" href="#id75">1.3.7.1.4. Copy across case from offSetCylinder</a><a class="headerlink" href="#copy-across-case-from-offsetcylinder" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Change to case directory</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>cd $WM_PROJECT_USER_DIR/run/Project/
+</pre></div>
+</div>
+<ul class="simple">
+<li>Copy files</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>cp -rf $FOAM_TUTORIALS/incompressible/nonNewtonianIcoFoam/offsetCylinder/ 002_plates_nonNewtonianIcoFoam
+</pre></div>
+</div>
+</div>
+<div class="section" id="mesh-for-plates-use-bfstep">
+<h4><a class="toc-backref" href="#id76">1.3.7.1.5. Mesh for Plates - Use bfStep</a><a class="headerlink" href="#mesh-for-plates-use-bfstep" title="Permalink to this headline">¶</a></h4>
+<p>Can use this tool to check for a cell-to-cell expansion ratio of 1.2 - must specify overall expansion ratio</p>
+<p><a class="reference external" href="http://openfoamwiki.net/index.php/Scripts/blockMesh_grading_calculation">http://openfoamwiki.net/index.php/Scripts/blockMesh_grading_calculation</a></p>
+<p>hex blocks:</p>
+<ul class="simple">
+<li>x1 direction is vertex 0 to 1</li>
+<li>x2 direction is vertex 1 to 2</li>
+<li>x3 plane defined by vertices 0 1 2 3</li>
+</ul>
+<p>Right hand rule for defining</p>
+<div class="highlight-python"><div class="highlight"><pre>convertToMeters 1;
+
+// The vertices can be defined using variables Lx, Ly, Lz. It saves time to modify the size of the domain
+
+Lx 20;
+Ly 1;
+Lz 0.1;
+
+vertices
+(
+    (0 0 0)
+    ($Lx 0 0)       // First vertex in x1 direction
+    ($Lx $Ly 0)     // Second vertex in x2 direction
+    (0 $Ly 0)       // Third vertex completes plane
+    (0 0 $Lz)
+    ($Lx 0 $Lz)
+    ($Lx $Ly $Lz)
+    (0 $Ly $Lz)
+);
+
+// Mesh definition (homogeneous grid with a single cell in the y and z axis since the simulation is 1D)
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) (200 20 1)
+    simpleGrading
+    (
+        1   // x-direction expansion
+        (
+                (0.2 0.3 2.5)             // 20% y-dir, 30% cells (6 cells), expansion = 2.5
+                (0.6 0.4 1)             // 60% y-dir, 40% cells (8 cells), expansion = 1
+                (0.2 0.3 0.4)          // 20% y-dir, 30% cells (6 cells), expansion = 0.4 (1/2.5)
+        )
+        1       // z-direction expansion
+    )
+);
+
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+                        (0 4 7 3)
+        );
+    }
+    outlet
+    {
+        type patch;
+        faces
+        (
+                        (2 6 5 1)
+        );
+    }
+
+        // Faces orthogonal to y and z axis are defined as «empty» to specify that the simulation is 1D
+
+    walls
+    {
+        type wall;
+        faces
+        (
+            (3 7 6 2)
+            (0 1 5 4)
+        );
+    }
+
+    frontAndBack
+    {
+        type empty;
+        faces
+        (
+            (0 3 2 1)
+            (4 5 6 7)
+        );
+    }
+);
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h4><a class="toc-backref" href="#id77">1.3.7.1.6. Boundary Conditions</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<p>Change names of boundary conditions and remove irrelevant ones (left is inlet, right is outlet, cylinder is walls, defaultFaces is frontAndBack)</p>
+<div class="highlight-python"><div class="highlight"><pre>nano 0/p
+
+    dimensions      [0 2 -2 0 0 0 0];
+
+    internalField   uniform 0;
+
+    boundaryField
+    {
+        inlet
+        {
+            type            zeroGradient;
+        }
+
+        outlet
+        {
+            type            fixedValue;
+            value           uniform 0;
+        }
+
+        frontAndBack
+        {
+            type            empty;
+        }
+    }
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>nano 0/U
+
+    dimensions      [0 1 -1 0 0 0 0];
+
+    internalField   uniform (0 0 0);
+
+    boundaryField
+    {
+        inlet
+        {
+            type            fixedValue;
+            value           uniform (1 0 0);
+        }
+
+        outlet
+        {
+            type            zeroGradient;
+        }
+
+        walls
+        {
+            type            fixedValue;
+            value           uniform (0 0 0);
+        }
+
+        frontAndBack
+        {
+            type            empty;
+        }
+    }
+</pre></div>
+</div>
+</div>
+<div class="section" id="kinematic-viscosity">
+<h4><a class="toc-backref" href="#id78">1.3.7.1.7. Kinematic viscosity</a><a class="headerlink" href="#kinematic-viscosity" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre>nano constant/transportProperties
+
+    transportModel  Newtonian;
+
+    nu              nu [ 0 2 -1 0 0 0 0 ] 0.004;
+</pre></div>
+</div>
+</div>
+<div class="section" id="can-increase-timestep-by-factor-of-10">
+<h4><a class="toc-backref" href="#id79">1.3.7.1.8. Can increase timestep by factor of 10</a><a class="headerlink" href="#can-increase-timestep-by-factor-of-10" title="Permalink to this headline">¶</a></h4>
+<p>As Courant number order of 0.03, can increase timestep:</p>
+<div class="highlight-python"><div class="highlight"><pre>deltaT          0.025;
+</pre></div>
+</div>
+<p>Also need to increase time to 20 seconds to get profile similar to analytical</p>
+<div class="highlight-python"><div class="highlight"><pre>endTime         20;
+</pre></div>
+</div>
+<p>Takes around 3 seconds (4,000 cells)</p>
+</div>
+</div>
+<div class="section" id="mesh-for-cylinder-modify-example-on-openfoamwiki">
+<h3><a class="toc-backref" href="#id80">1.3.7.2. Mesh for cylinder = modify example on openfoamwiki</a><a class="headerlink" href="#mesh-for-cylinder-modify-example-on-openfoamwiki" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://openfoamwiki.net/index.php/Main_ContribExamples/AxiSymmetric">https://openfoamwiki.net/index.php/Main_ContribExamples/AxiSymmetric</a></p>
+<div class="highlight-python"><div class="highlight"><pre>convertToMeters 1;
+
+Lz 20;
+Lx 0.999;
+Ly 0.044;
+Ly2 -0.044;
+
+vertices
+(
+    (0 0 0)
+    ($Lx $Ly 0)
+    ($Lx $Ly $Lz)
+    (0 0 $Lz)
+    ($Lx $Ly2 0)
+    ($Lx $Ly2 $Lz)
+);
+
+blocks
+(
+hex (0 4 1 0 3 5 2 3) (20 1 200) simpleGrading (0.03125 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    front
+    {
+        type wedge;
+        faces
+        (
+            (0 1 2 3)
+        );
+    }
+    back
+    {
+        type wedge;
+        faces
+        (
+            (0 3 5 4)
+        );
+    }
+    pipeWall
+    {
+        type wall;
+        faces
+        (
+            (1 4 5 2)
+        );
+    }
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (0 4 1 0)
+        );
+    }
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (3 5 2 3)
+        );
+    }
+    axis
+    {
+        type empty;
+        faces
+        (
+            (0 3 3 0)
+        );
+    }
+);
+</pre></div>
+</div>
+<div class="section" id="id5">
+<h4><a class="toc-backref" href="#id81">1.3.7.2.1. Boundary Conditions</a><a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<p>Add front, back and axis.</p>
+<p>Change velocity direction</p>
+<div class="highlight-python"><div class="highlight"><pre>nano 0/p
+
+    dimensions      [0 2 -2 0 0 0 0];
+
+    internalField   uniform 0;
+
+    boundaryField
+    {
+        inlet
+        {
+            type            zeroGradient;
+        }
+
+        outlet
+        {
+            type            fixedValue;
+            value           uniform 0;
+        }
+
+        frontAndBack
+        {
+            type            empty;
+        }
+        front
+        {
+            type            wedge;
+        }
+
+        back
+        {
+            type            wedge;
+        }
+
+        axis
+        {
+            type            empty;
+        }
+    }
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>nano 0/U
+
+    dimensions      [0 1 -1 0 0 0 0];
+
+    internalField   uniform (0 0 0);
+
+    boundaryField
+    {
+        inlet
+        {
+            type            fixedValue;
+            value           uniform (0 0 1);
+        }
+
+        outlet
+        {
+            type            zeroGradient;
+        }
+
+        walls
+        {
+            type            fixedValue;
+            value           uniform (0 0 0);
+        }
+        front
+        {
+            type            wedge;
+        }
+
+        back
+        {
+            type            wedge;
+        }
+
+        axis
+        {
+            type            empty;
+        }
+    }
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="hardcoding-in-the-icofoam-solver-cassonfoam">
+<h3><a class="toc-backref" href="#id82">1.3.7.3. Hardcoding in the icoFoam Solver - cassonFoam</a><a class="headerlink" href="#hardcoding-in-the-icofoam-solver-cassonfoam" title="Permalink to this headline">¶</a></h3>
+<p>Copy icoFoam solver to apr207-2.4.0/applications/solvers/cassonFoam</p>
+<div class="highlight-python"><div class="highlight"><pre>cd $WM_PROJECT_USER_DIR/applications/solvers
+cp -rf $FOAM_APP/solvers/incompressible/icoFoam cassonFoam
+mv icoFoam.C cassonFoam.C
+nano Make/files
+
+    cassonFoam.C
+
+    EXE = $(FOAM_USER_APPBIN)/cassonFoam
+wclean
+wmake
+</pre></div>
+</div>
+<p>Edit createFields.H</p>
+<div class="highlight-python"><div class="highlight"><pre>// ADDED
+
+Info  &lt;&lt; &quot;Reading field nu&quot; &lt;&lt; nl &lt;&lt; endl;
+volScalarField  nu
+(
+    IOobject
+    (
+        &quot;nu&quot;,
+        runTime.timeName(),
+        mesh,
+        IOobject::NO_READ,
+        IOobject::AUTO_WRITE
+    ),
+    mesh,
+    dimensionedScalar(&quot;nu&quot;, dimensionSet(0,2,-1,0,0,0,0), scalar(1.0))
+);
+
+dimensionedScalar eta
+(
+    transportProperties.lookup(&quot;eta&quot;)
+);
+
+dimensionedScalar tau_y
+(
+    transportProperties.lookup(&quot;tau_y&quot;)
+);
+
+dimensionedScalar rho
+(
+    transportProperties.lookup(&quot;rho&quot;)
+);
+
+// ADDED
+</pre></div>
+</div>
+<p>Edit cassonFoam.C - after the PISO loop has finished:</p>
+<div class="highlight-python"><div class="highlight"><pre>// --- PISO loop
+
+for (int corr=0; corr&lt;nCorr; corr++)
+{
+.
+.
+.
+U = HbyA - rAU*fvc::grad(p);
+U.correctBoundaryConditions();
+}
+
+volScalarField  J2 = 0.5* magSqr(symm(fvc::grad(U))) + dimensionedScalar(&quot;tiny&quot;,dimensionSet (0,0,-2,0,0,0,0),0.0001);   // ADDED
+nu = sqr(pow(sqr(eta)*J2 ,0.25) + pow(tau_y /2 ,0.5))/( rho*sqrt(J2));                                                   // ADDED
+
+runTime.write();
+
+Info&lt;&lt; &quot;ExecutionTime = &quot; &lt;&lt; runTime.elapsedCpuTime() &lt;&lt; &quot; s&quot;
+    &lt;&lt; &quot;  ClockTime = &quot; &lt;&lt; runTime.elapsedClockTime() &lt;&lt; &quot; s&quot;
+    &lt;&lt; nl &lt;&lt; endl;
+</pre></div>
+</div>
+<p>transportProperties</p>
+<div class="highlight-python"><div class="highlight"><pre>eta        eta [ 1 -1 -1 0 0 0 0 ] 4.86;
+tau_y     tau_y [ 1 -1 -2 0 0 0 0 ] 14.38;
+rho        rho [1  -3 0 0 0 0 0]  1200;
+</pre></div>
+</div>
+<p>Run cassonIcoFoam</p>
+<div class="highlight-python"><div class="highlight"><pre>cassonFoam
+foamCalc mag U
+sample
+</pre></div>
+</div>
+</div>
+<div class="section" id="runtime-selectable-viscosity-model-cassongavin">
+<h3><a class="toc-backref" href="#id83">1.3.7.4. Runtime selectable viscosity model - CassonGavin</a><a class="headerlink" href="#runtime-selectable-viscosity-model-cassongavin" title="Permalink to this headline">¶</a></h3>
+<p>Copy BirdCarreau into directory:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd $WM_PROJECT_DIR
+$ cp -r --parents src/transportModels/incompressible/viscosityModels/BirdCarreau/ $WM_PROJECT_USER_DIR/
+$ cd $WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+$ mv BirdCarreau CassonGavin
+$ cd CassonGavin
+$ mv BirdCarreau.C CassonGavin.C
+$ mv BirdCarreau.H CassonGavin.H
+$ sed -i s/BirdCarreau/CassonGavin/g CassonGavin.C
+$ sed -i s/BirdCarreau/CassonGavin/g CassonGavin.H
+$ sed -i s/BirdCarreau/CassonGavin/g Make/files
+</pre></div>
+</div>
+<p>Add formula for CassonGavin plot - private member variables denoted by underscore e.g. $U_$</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano CassonGavin.C
+
+#include &quot;CassonGavin.H&quot;
+#include &quot;addToRunTimeSelectionTable.H&quot;
+#include &quot;surfaceFields.H&quot;
+#include &quot;fvcGrad.H&quot;                        //ADDED
+// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
+
+namespace Foam
+{
+namespace viscosityModels
+{
+    defineTypeNameAndDebug(CassonGavin, 0);
+    addToRunTimeSelectionTable
+    (
+        viscosityModel,
+        CassonGavin,
+        dictionary
+    );
+}
+}
+
+    // * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * * //
+
+    Foam::tmp&lt;Foam::volScalarField&gt;
+    Foam::viscosityModels::CassonGavin::calcNu() const
+    {
+
+        volScalarField  J2 = 0.5* magSqr(symm(fvc::grad(U_))) + dimensionedScalar(&quot;tiny&quot;,dimensionSet (0,0,-2,0,0,0,0),0.0001);   // ADDED
+        return (sqr(pow(sqr(eta_)*J2 ,0.25) + pow(tau_y_ /2 ,0.5))/( rho_*sqrt(J2)));                                           // ADDED
+
+    }
+</pre></div>
+</div>
+<p>Add new coefficients:</p>
+<div class="highlight-python"><div class="highlight"><pre>// * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
+
+Foam::viscosityModels::CassonGavin::CassonGavin
+(
+        const word&amp; name,
+        const dictionary&amp; viscosityProperties,
+        const volVectorField&amp; U,
+        const surfaceScalarField&amp; phi
+)
+:
+        viscosityModel(name, viscosityProperties, U, phi),
+        CassonGavinCoeffs_(viscosityProperties.subDict(typeName + &quot;Coeffs&quot;)),
+        eta_(CassonGavinCoeffs_.lookup(&quot;eta&quot;)),         // ADDED
+        tau_y_(CassonGavinCoeffs_.lookup(&quot;tau_y&quot;)),     // ADDED
+        rho_(CassonGavinCoeffs_.lookup(&quot;rho&quot;)),         // ADDED
+        nu_
+        (
+            IOobject
+            (
+                &quot;nu&quot;,
+                U_.time().timeName(),
+                U_.db(),
+                IOobject::NO_READ,
+                IOobject::AUTO_WRITE
+            ),
+            calcNu()
+        )
+{}
+</pre></div>
+</div>
+<p>Add read coefficients:</p>
+<div class="highlight-python"><div class="highlight"><pre>// * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * * //
+
+bool Foam::viscosityModels::CassonGavin::read
+(
+        const dictionary&amp; viscosityProperties
+)
+{
+        viscosityModel::read(viscosityProperties);
+
+        CassonGavinCoeffs_ = viscosityProperties.subDict(typeName + &quot;Coeffs&quot;);
+        CassonGavinCoeffs_.lookup(&quot;eta&quot;) &gt;&gt; eta_;                       // ADDED
+        CassonGavinCoeffs_.lookup(&quot;tau_y&quot;) &gt;&gt; tau_y_;                   // ADDED
+        CassonGavinCoeffs_.lookup(&quot;rho&quot;) &gt;&gt; rho_;                       // ADDED
+</pre></div>
+</div>
+<p>Add coefficients in header file:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano CassonGavin.H
+
+    dimensionedScalar eta_;      // ADDED
+    dimensionedScalar tau_y_;    // ADDED
+    dimensionedScalar rho_;      // ADDED
+</pre></div>
+</div>
+<p>Compile in the main folder:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ wclean libso
+$ wmake libso
+</pre></div>
+</div>
+<p>In constant/transportProperties</p>
+<div class="highlight-python"><div class="highlight"><pre>transportModel  CassonGavin;
+
+CassonGavinCoeffs
+{
+    eta        eta [ 1 -1 -1 0 0 0 0 ] 4.86;
+    tau_y     tau_y [ 1 -1 -2 0 0 0 0 ] 14.38;
+    rho        rho [1  -3 0 0 0 0 0]  1200;
+}
+</pre></div>
+</div>
+<p>In system/controlDict</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">libs</span>
+<span class="p">(</span>
+        <span class="s2">&quot;libCassonGavin.so&quot;</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nonNewtonianIcoFoam
+</pre></div>
+</div>
+<p>Calculate the velocity magnitude:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the velocity profile:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../25_openfoam_use/openfoam_use.html">1.2. OpenFOAM Use</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../27_openfoam_tutorials_opencfd/openfoam_tutorials_opencfd.html">1.4. OpenFOAM Tutorials - OpenCFD</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

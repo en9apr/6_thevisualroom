@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3.2. Python Example Scripts &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="3. Python" href="../07_python_landing_page/python_landing_page.html" />
+    <link rel="next" title="4. Fortran" href="../05_06_fortran_landing_page/fortran_landing_page.html" />
+    <link rel="prev" title="3.1.12. Programming Tips 1" href="../07_python/programming_tips_1.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>3.2. Python Example Scripts</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../07_python/programming_tips_1.html">3.1.12. Programming Tips 1</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../05_06_fortran_landing_page/fortran_landing_page.html">4. Fortran</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="python-example-scripts">
+<h1>3.2. Python Example Scripts<a class="headerlink" href="#python-example-scripts" title="Permalink to this headline">¶</a></h1>
+<p>Here I provide some example scripts using Python.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#line-plot" id="id1">Line Plot</a><ul>
+<li><a class="reference internal" href="#inputs" id="id2">Inputs</a><ul>
+<li><a class="reference internal" href="#massflow1-csv" id="id3">massflow1.csv</a></li>
+<li><a class="reference internal" href="#massflow2-csv" id="id4">massflow2.csv</a></li>
+<li><a class="reference internal" href="#srivastava-csv" id="id5">srivastava.csv</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#script" id="id6">Script</a></li>
+<li><a class="reference internal" href="#output" id="id7">Output</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="line-plot">
+<h2><a class="toc-backref" href="#id1">3.2.1. Line Plot</a><a class="headerlink" href="#line-plot" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="inputs">
+<h3><a class="toc-backref" href="#id2">3.2.1.1. Inputs</a><a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h3>
+<p>Only 10 lines of input are shown</p>
+<div class="section" id="massflow1-csv">
+<h4><a class="toc-backref" href="#id3">3.2.1.1.1. massflow1.csv</a><a class="headerlink" href="#massflow1-csv" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-csv"><div class="highlight"><pre>&quot;massflow&quot;,&quot;Normals:0&quot;,&quot;Normals:1&quot;,&quot;Normals:2&quot;,&quot;Theta&quot;,&quot;U1:0&quot;,&quot;U1:1&quot;,&quot;U1:2&quot;,&quot;U1Mean:0&quot;,&quot;U1Mean:1&quot;,&quot;U1Mean:2&quot;,&quot;U2:0&quot;,&quot;U2:1&quot;,&quot;U2:2&quot;,&quot;U2Mean:0&quot;,&quot;U2Mean:1&quot;,&quot;U2Mean:2&quot;,&quot;alpha0&quot;,&quot;alpha1&quot;,&quot;alpha1Mean&quot;,&quot;epsilon&quot;,&quot;k&quot;,&quot;magU1Mean&quot;,&quot;p&quot;,&quot;vtkValidPointMask&quot;,&quot;Time&quot;,&quot;Point Coordinates:0&quot;,&quot;Point Coordinates:1&quot;,&quot;Point Coordinates:2&quot;
+23.471,0,-0.0008,0,8e-08,0,0,0,-3.4155e-08,-2.2434e-05,0,0,0,0,-1.8658e-07,-6.1171e-05,0,0,0.00024,0.0002543,0.008,0.0008,3.7648e-05,0,1,0,5.294e-19,0,0.005
+7.6373,-2.9382e-09,-2.4731e-05,0,,,,,-1.3166e-09,-7.0585e-05,0,-5.8777e-10,-7.4743e-06,0,-2.3408e-09,-4.0143e-05,0,,,0.00026004,0.00024876,0.008,0.0008,0.034008,1,0.02,5.294e-19,0,0.005
+14.953,-5.5675e-10,-4.6299e-05,0,,,,,-1.5894e-09,-0.00011494,0,-1.1204e-09,-1.2638e-05,0,8.2655e-10,-8.4733e-05,0,,,0.00027811,0.00025941,0.008,0.0008,0.035725,1,0.04,5.294e-19,0,0.005
+22.234,5.4956e-08,-6.5742e-05,0,,,,,-1.0427e-08,-0.00014026,0,1.4776e-08,-1.7105e-05,0,2.5515e-08,-0.00012841,0,,,0.00029972,0.00026896,0.008,0.0008,0.042165,1,0.06,5.294e-19,0,0.005
+31.129,7.4337e-07,-8.4379e-05,0,,,,,1.9414e-07,-0.00014846,0,2.0474e-09,-2.2277e-05,0,8.6743e-07,-0.0001617,0,,,0.00032257,0.00027944,0.008,0.0008,0.046177,1,0.08,5.294e-19,0,0.005
+40.001,-3.0353e-06,-9.8115e-05,0,,,,,-1.1508e-06,-0.00015053,0,-1.102e-07,-2.7266e-05,0,-3.1698e-06,-0.00019721,0,,,0.00035049,0.00029096,0.008,0.0008,0.048939,1,0.1,5.294e-19,0,0.005
+48.841,-9.34e-06,-0.00011092,0,,,,,-4.3873e-06,-0.00015469,0,-4.7848e-07,-3.2011e-05,0,-9.3202e-06,-0.00022395,0,,,0.00036497,0.00030223,0.008,0.0008,0.050248,1,0.12,5.294e-19,0,0.005
+57.111,-1.777e-05,-0.00012178,0,,,,,-9.1128e-06,-0.00016643,0,-1.3679e-06,-3.6296e-05,0,-1.8235e-05,-0.00025455,0,,,0.00037201,0.00031172,0.008,0.0008,0.050722,1,0.14,5.294e-19,0,0.005
+64.661,-6.4353e-06,-0.00013085,0,,,,,-1.1019e-05,-0.00017432,0,-2.5499e-06,-4.0137e-05,0,-4.5394e-06,-0.00027862,0,,,0.00037102,0.00031931,0.008,0.0008,0.051038,1,0.16,5.294e-19,0,0.005
+</pre></div>
+</div>
+</div>
+<div class="section" id="massflow2-csv">
+<h4><a class="toc-backref" href="#id4">3.2.1.1.2. massflow2.csv</a><a class="headerlink" href="#massflow2-csv" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-csv"><div class="highlight"><pre>&quot;massflow&quot;,&quot;Normals:0&quot;,&quot;Normals:1&quot;,&quot;Normals:2&quot;,&quot;Theta&quot;,&quot;U1:0&quot;,&quot;U1:1&quot;,&quot;U1:2&quot;,&quot;U1Mean:0&quot;,&quot;U1Mean:1&quot;,&quot;U1Mean:2&quot;,&quot;U2:0&quot;,&quot;U2:1&quot;,&quot;U2:2&quot;,&quot;U2Mean:0&quot;,&quot;U2Mean:1&quot;,&quot;U2Mean:2&quot;,&quot;alpha0&quot;,&quot;alpha1&quot;,&quot;alpha1Mean&quot;,&quot;epsilon&quot;,&quot;k&quot;,&quot;magU1Mean&quot;,&quot;p&quot;,&quot;vtkValidPointMask&quot;,&quot;Time&quot;,&quot;Point Coordinates:0&quot;,&quot;Point Coordinates:1&quot;,&quot;Point Coordinates:2&quot;
+23.471,0,-0.0008,0,8e-08,0,0,0,-3.4155e-08,-2.2434e-05,0,0,0,0,-1.8658e-07,-6.1171e-05,0,0,0.00024,0.0002543,0.008,0.0008,3.7648e-05,0,1,0,5.294e-19,0,0.005
+5.0304,-5.2566e-10,-2.5085e-05,0,,,,,1.1786e-09,-7.1071e-05,0,4.0284e-10,-5.375e-06,0,-1.246e-09,-4.0451e-05,0,,,0.00025214,0.00024453,0.008,0.0008,0.033502,1,0.02,5.294e-19,0,0.005
+12.332,1.1858e-08,-4.9224e-05,0,,,,,4.7837e-09,-0.00012561,0,1.0725e-09,-1.1807e-05,0,1.3984e-08,-8.2887e-05,0,,,0.00026734,0.00025244,0.008,0.0008,0.034008,1,0.04,5.294e-19,0,0.005
+18.906,9.8395e-09,-6.6946e-05,0,,,,,2.7294e-09,-0.00016077,0,1.7992e-09,-1.6603e-05,0,1.5413e-08,-0.00012798,0,,,0.00028996,0.00026044,0.008,0.0008,0.037965,1,0.06,5.294e-19,0,0.005
+28.454,-1.2262e-08,-8.4569e-05,0,,,,,-2.8898e-09,-0.00019156,0,1.431e-09,-2.2228e-05,0,-1.0381e-08,-0.00016924,0,,,0.00031363,0.00027132,0.008,0.0008,0.046039,1,0.08,5.294e-19,0,0.005
+38.63,-5.3488e-09,-0.00010009,0,,,,,-5.3095e-09,-0.00020789,0,2.7513e-10,-2.8042e-05,0,-2.8409e-09,-0.00019444,0,,,0.00032849,0.00028147,0.008,0.0008,0.04602,1,0.1,5.294e-19,0,0.005
+48.74,-1.0939e-08,-0.0001135,0,,,,,-1.1615e-08,-0.0002241,0,-1.0548e-09,-3.3661e-05,0,-8.3342e-09,-0.00022206,0,,,0.00033478,0.00028984,0.008,0.0008,0.047049,1,0.12,5.294e-19,0,0.005
+58.405,-1.2923e-08,-0.00012526,0,,,,,-1.8964e-08,-0.00023707,0,-3.0465e-09,-3.8872e-05,0,-7.6447e-09,-0.0002494,0,,,0.00033791,0.00029653,0.008,0.0008,0.047184,1,0.14,5.294e-19,0,0.005
+67.368,-5.3623e-08,-0.00013555,0,,,,,-3.6884e-08,-0.00024664,0,-5.7236e-09,-4.3564e-05,0,-4.8501e-08,-0.00027319,0,,,0.00033866,0.00030173,0.008,0.0008,0.048159,1,0.16,5.294e-19,0,0.005
+</pre></div>
+</div>
+</div>
+<div class="section" id="srivastava-csv">
+<h4><a class="toc-backref" href="#id5">3.2.1.1.3. srivastava.csv</a><a class="headerlink" href="#srivastava-csv" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-csv"><div class="highlight"><pre>Default Dataset,
+X,Y
+0.007734806629834279,0
+0.007734806629834279,70.82683307332292
+0.015469613259668558,71.45085803432139
+0.015469613259668558,125.11700468018721
+0.015469613259668558,115.13260530421218
+0.023204419889502836,95.16380655226209
+0.023204419889502836,87.05148205928236
+0.04640883977900556,82.68330733229328
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="script">
+<h3><a class="toc-backref" href="#id6">3.2.1.2. Script</a><a class="headerlink" href="#script" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="n">exp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s1">&#39;srivastava.csv&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;exp_time&#39;</span><span class="p">,</span><span class="s1">&#39;exp_massflow&#39;</span><span class="p">])</span>
+
+<span class="n">cfd1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s1">&#39;massflow1.csv&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;massflow&quot;</span><span class="p">,</span><span class="s2">&quot;Normals:0&quot;</span><span class="p">,</span><span class="s2">&quot;Normals:1&quot;</span><span class="p">,</span><span class="s2">&quot;Normals:2&quot;</span><span class="p">,</span><span class="s2">&quot;Theta&quot;</span><span class="p">,</span><span class="s2">&quot;U1:0&quot;</span><span class="p">,</span><span class="s2">&quot;U1:1&quot;</span><span class="p">,</span><span class="s2">&quot;U1:2&quot;</span><span class="p">,</span><span class="s2">&quot;U1Mean:0&quot;</span><span class="p">,</span><span class="s2">&quot;U1Mean:1&quot;</span><span class="p">,</span><span class="s2">&quot;U1Mean:2&quot;</span><span class="p">,</span><span class="s2">&quot;U2:0&quot;</span><span class="p">,</span><span class="s2">&quot;U2:1&quot;</span><span class="p">,</span><span class="s2">&quot;U2:2&quot;</span><span class="p">,</span><span class="s2">&quot;U2Mean:0&quot;</span><span class="p">,</span><span class="s2">&quot;U2Mean:1&quot;</span><span class="p">,</span><span class="s2">&quot;U2Mean:2&quot;</span><span class="p">,</span><span class="s2">&quot;alpha0&quot;</span><span class="p">,</span><span class="s2">&quot;alpha1&quot;</span><span class="p">,</span><span class="s2">&quot;alpha1Mean&quot;</span><span class="p">,</span><span class="s2">&quot;epsilon&quot;</span><span class="p">,</span><span class="s2">&quot;k&quot;</span><span class="p">,</span><span class="s2">&quot;magU1Mean&quot;</span><span class="p">,</span><span class="s2">&quot;p&quot;</span><span class="p">,</span><span class="s2">&quot;vtkValidPointMask&quot;</span><span class="p">,</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span><span class="s2">&quot;Point Coordinates:0&quot;</span><span class="p">,</span><span class="s2">&quot;Point Coordinates:1&quot;</span><span class="p">,</span><span class="s2">&quot;Point Coordinates:2&quot;</span><span class="p">])</span>
+
+<span class="n">cfd2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s1">&#39;massflow2.csv&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;massflow&quot;</span><span class="p">,</span><span class="s2">&quot;Normals:0&quot;</span><span class="p">,</span><span class="s2">&quot;Normals:1&quot;</span><span class="p">,</span><span class="s2">&quot;Normals:2&quot;</span><span class="p">,</span><span class="s2">&quot;Theta&quot;</span><span class="p">,</span><span class="s2">&quot;U1:0&quot;</span><span class="p">,</span><span class="s2">&quot;U1:1&quot;</span><span class="p">,</span><span class="s2">&quot;U1:2&quot;</span><span class="p">,</span><span class="s2">&quot;U1Mean:0&quot;</span><span class="p">,</span><span class="s2">&quot;U1Mean:1&quot;</span><span class="p">,</span><span class="s2">&quot;U1Mean:2&quot;</span><span class="p">,</span><span class="s2">&quot;U2:0&quot;</span><span class="p">,</span><span class="s2">&quot;U2:1&quot;</span><span class="p">,</span><span class="s2">&quot;U2:2&quot;</span><span class="p">,</span><span class="s2">&quot;U2Mean:0&quot;</span><span class="p">,</span><span class="s2">&quot;U2Mean:1&quot;</span><span class="p">,</span><span class="s2">&quot;U2Mean:2&quot;</span><span class="p">,</span><span class="s2">&quot;alpha0&quot;</span><span class="p">,</span><span class="s2">&quot;alpha1&quot;</span><span class="p">,</span><span class="s2">&quot;alpha1Mean&quot;</span><span class="p">,</span><span class="s2">&quot;epsilon&quot;</span><span class="p">,</span><span class="s2">&quot;k&quot;</span><span class="p">,</span><span class="s2">&quot;magU1Mean&quot;</span><span class="p">,</span><span class="s2">&quot;p&quot;</span><span class="p">,</span><span class="s2">&quot;vtkValidPointMask&quot;</span><span class="p">,</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span><span class="s2">&quot;Point Coordinates:0&quot;</span><span class="p">,</span><span class="s2">&quot;Point Coordinates:1&quot;</span><span class="p">,</span><span class="s2">&quot;Point Coordinates:2&quot;</span><span class="p">])</span>
+
+<span class="n">exp_time</span> <span class="o">=</span> <span class="n">exp</span><span class="p">[</span><span class="s1">&#39;exp_time&#39;</span><span class="p">]</span>
+<span class="n">exp_massflow</span> <span class="o">=</span> <span class="n">exp</span><span class="p">[</span><span class="s1">&#39;exp_massflow&#39;</span><span class="p">]</span>
+
+<span class="n">cfd_time1</span> <span class="o">=</span> <span class="n">cfd1</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">]</span>
+<span class="n">cfd_massflow1</span> <span class="o">=</span> <span class="n">cfd1</span><span class="p">[</span><span class="s2">&quot;massflow&quot;</span><span class="p">]</span>
+
+<span class="n">cfd_time2</span> <span class="o">=</span> <span class="n">cfd2</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">]</span>
+<span class="n">cfd_massflow2</span> <span class="o">=</span> <span class="n">cfd2</span><span class="p">[</span><span class="s2">&quot;massflow&quot;</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">font</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;family&#39;</span> <span class="p">:</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;weight&#39;</span> <span class="p">:</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;size&#39;</span>   <span class="p">:</span> <span class="mi">14</span><span class="p">}</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">font</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">)</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">)</span>
+
+<span class="n">line1</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">exp_time</span><span class="p">,</span> <span class="n">exp_massflow</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mf">7.5</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;$Srivastava \ et \ al. \ 2003$&#39;</span><span class="p">)</span>
+<span class="n">line2</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cfd_time1</span><span class="p">,</span> <span class="n">cfd_massflow1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mf">7.5</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\Theta \ Transport \ Equation, \ Slip \ Walls$&#39;</span><span class="p">)</span>
+<span class="n">line3</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cfd_time2</span><span class="p">,</span> <span class="n">cfd_massflow2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mf">7.5</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\Theta \ Algebraic \ Equation, \ Slip \ Walls$&#39;</span><span class="p">)</span>
+
+<span class="n">lines</span> <span class="o">=</span> <span class="n">line1</span><span class="o">+</span><span class="n">line2</span><span class="o">+</span><span class="n">line3</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+<span class="n">legend</span><span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;medium&#39;</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">r&#39;\textit{$Time, \  t \  (s)$}&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">r&#39;\textit{$Mass \ flow \ rate, \ \dot{m} \ (g/s)$}&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;massflow&#39;</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="output">
+<h3><a class="toc-backref" href="#id7">3.2.1.3. Output</a><a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
+<div class="figure">
+<img alt="../_images/massflow.png" src="../_images/massflow.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../07_python/programming_tips_1.html">3.1.12. Programming Tips 1</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../05_06_fortran_landing_page/fortran_landing_page.html">4. Fortran</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

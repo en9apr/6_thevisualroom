@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.5.2. Second Order Numerical Methods &#8212; The Visual Room</title>
+    <title>1.1.5.2. Second Order Numerical Methods &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
-    <link rel="next" title="1.5.3. The Diffusion of Heaviside and Sinusoidal Input" href="heavy_side_and_sinusoidal_input.html" />
-    <link rel="prev" title="1.5.1. The Courant-Friedrichs-Lewy Condition" href="courant_number.html" /> 
+    <link rel="up" title="1.1. Computational Fluid Dynamics Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.1.5.3. The Diffusion of Heaviside and Sinusoidal Input" href="heavy_side_and_sinusoidal_input.html" />
+    <link rel="prev" title="1.1.5.1. The Courant-Friedrichs-Lewy Condition" href="courant_number.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>1.5.2. Second Order Numerical Methods</span></h2>
+        <h2 class="heading"><span>1.1.5.2. Second Order Numerical Methods</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="courant_number.html">1.5.1. The Courant-Friedrichs-Lewy Condition</a>
+        «&#160;&#160;<a href="courant_number.html">1.1.5.1. The Courant-Friedrichs-Lewy Condition</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="heavy_side_and_sinusoidal_input.html">1.5.3. The Diffusion of Heaviside and Sinusoidal Input</a>&#160;&#160;»
+        <a href="heavy_side_and_sinusoidal_input.html">1.1.5.3. The Diffusion of Heaviside and Sinusoidal Input</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,7 +49,7 @@
         
         
   <div class="section" id="second-order-numerical-methods">
-<h1>1.5.2. Second Order Numerical Methods<a class="headerlink" href="#second-order-numerical-methods" title="Permalink to this headline">¶</a></h1>
+<h1>1.1.5.2. Second Order Numerical Methods<a class="headerlink" href="#second-order-numerical-methods" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#leapfrog-scheme" id="id5">Leapfrog Scheme</a><ul>
@@ -71,9 +71,9 @@
 </ul>
 </div>
 <div class="section" id="leapfrog-scheme">
-<h2><a class="toc-backref" href="#id5">1.5.2.1. Leapfrog Scheme</a><a class="headerlink" href="#leapfrog-scheme" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">1.1.5.2.1. Leapfrog Scheme</a><a class="headerlink" href="#leapfrog-scheme" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="equations">
-<h3><a class="toc-backref" href="#id6">Equations</a><a class="headerlink" href="#equations" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id6">1.1.5.2.1.1. Equations</a><a class="headerlink" href="#equations" title="Permalink to this headline">¶</a></h3>
 <p><strong>For linear convection</strong> the schemes we have considered so far are:</p>
 <ul class="simple">
 <li>Unconditionally unstable (1st order FD in time, <strong>2nd order CD in space</strong>)</li>
@@ -110,7 +110,7 @@
 </ul>
 </div>
 <div class="section" id="von-neumann-analysis">
-<h3><a class="toc-backref" href="#id7">von Neumann analysis</a><a class="headerlink" href="#von-neumann-analysis" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id7">1.1.5.2.1.2. von Neumann analysis</a><a class="headerlink" href="#von-neumann-analysis" title="Permalink to this headline">¶</a></h3>
 <div class="math">
 \[V^{n+1} = V^{n-1} - \sigma V^n(e^{I \phi} - e^{-I \phi})\]</div>
 <p>As G is independent of n, write:</p>
@@ -133,7 +133,7 @@
 </div>
 </div>
 <div class="section" id="lax-friedrichs-scheme">
-<h2><a class="toc-backref" href="#id8">1.5.2.2. Lax-Friedrichs Scheme</a><a class="headerlink" href="#lax-friedrichs-scheme" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id8">1.1.5.2.2. Lax-Friedrichs Scheme</a><a class="headerlink" href="#lax-friedrichs-scheme" title="Permalink to this headline">¶</a></h2>
 <p>Introduced in the paper:</p>
 <p>Lax P.D. &#8220;Weak Solutions of Nonlinear Hyperbolic Equations and Their Numerical Computation&#8221;, Communications on Pure and Applied Mathematics (1954)</p>
 <p>History:</p>
@@ -141,7 +141,7 @@
 <li>Peter Lax laid the foundations for the modern theory of non-linear hyperbolic equations and shock wave theory. In 2005 he won the Abel Prize for mathematics.</li>
 </ul>
 <div class="section" id="id1">
-<h3><a class="toc-backref" href="#id9">Equations</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id9">1.1.5.2.2.1. Equations</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>The idea of the Lax-Friedrichs scheme is to replace <span class="math">\(u_i^n\)</span> in <a href="#equation-FTCS">(1)</a> by the average:</p>
 <div class="math">
 \[u_i^n = {1 \over 2} (u_{i-1}^n + u_{i+1}^n)\]</div>
@@ -155,7 +155,7 @@
 <p><span class="math">\(u_i^{n+1}\)</span> does not depend on <span class="math">\(u_i^n\)</span></p>
 </div>
 <div class="section" id="id2">
-<h3><a class="toc-backref" href="#id10">von Neumann analysis</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id10">1.1.5.2.2.2. von Neumann analysis</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Insert the following into discretized equation:</p>
 <div class="math">
 \[{V^n} {e^{I \phi}}\]</div>
@@ -171,14 +171,14 @@
 </div>
 </div>
 <div class="section" id="lax-wendroff-scheme">
-<h2><a class="toc-backref" href="#id11">1.5.2.3. Lax-Wendroff Scheme</a><a class="headerlink" href="#lax-wendroff-scheme" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id11">1.1.5.2.3. Lax-Wendroff Scheme</a><a class="headerlink" href="#lax-wendroff-scheme" title="Permalink to this headline">¶</a></h2>
 <p>Introduced in the paper:</p>
 <p>Lax, P. and Wendroff, B. &#8220;System of Conservation Laws&#8221;, Communications on Pure and Applied Mathematics (1960)</p>
 <p>The Lax-Friedrichs scheme stabilized FTCS scheme, but introduced an error that was too large, i.e. <strong>unacceptable 1st order error</strong>.</p>
 <p><strong>The Lax-Wendroff scheme was the first scheme introduced that was 2nd order in space and time - with only TWO time levels (unlike the Leapfrog scheme which has THREE)</strong></p>
 <p><strong>History:</strong> This is a landmark scheme in the history of CFD and was used in aeronautical applications from the 1960s - 1980s</p>
 <div class="section" id="id3">
-<h3><a class="toc-backref" href="#id12">Equations</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id12">1.1.5.2.3.1. Equations</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p><strong>Procedure</strong></p>
 <ul class="simple">
 <li>Taylor expansion in time:</li>
@@ -211,7 +211,7 @@
 </div>
 </div>
 <div class="section" id="notes-on-lax-wendroff-scheme">
-<h3><a class="toc-backref" href="#id13">Notes on Lax-Wendroff Scheme</a><a class="headerlink" href="#notes-on-lax-wendroff-scheme" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id13">1.1.5.2.3.2. Notes on Lax-Wendroff Scheme</a><a class="headerlink" href="#notes-on-lax-wendroff-scheme" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Looking back at the Modified Differential Equation for FTCS</li>
 <li>LW scheme is the discretisation of a modified convection equation obtained by adding the lowest order truncation error term:</li>
@@ -225,7 +225,7 @@
 \[\bar{u}_t + c \bar{u}_x + {{\Delta t} \over 2} c^2 \bar{u}_{xx} = {{c \Delta x^2} \over 6} \bar{u}_{xxx} + O(\Delta t^2, \Delta x^4)\]</div>
 </div>
 <div class="section" id="id4">
-<h3><a class="toc-backref" href="#id14">von Neumann analysis</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id14">1.1.5.2.3.3. von Neumann analysis</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>The result is the following amplification factor:</p>
 <div class="math">
 \[G = 1 - {\sigma \over 2} (e^{I \phi} - e^{-I \phi}) + {\sigma^2 \over 2} (e^{I \phi} - 2 + e^{-I \phi})
@@ -249,17 +249,17 @@
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="courant_number.html">1.5.1. The Courant-Friedrichs-Lewy Condition</a>
+        «&#160;&#160;<a href="courant_number.html">1.1.5.1. The Courant-Friedrichs-Lewy Condition</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="heavy_side_and_sinusoidal_input.html">1.5.3. The Diffusion of Heaviside and Sinusoidal Input</a>&#160;&#160;»
+        <a href="heavy_side_and_sinusoidal_input.html">1.1.5.3. The Diffusion of Heaviside and Sinusoidal Input</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

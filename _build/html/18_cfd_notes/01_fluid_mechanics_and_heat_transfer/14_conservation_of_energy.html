@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.1.14. Conservation of Energy &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../../index.html" />
+    <link rel="up" title="4. Personal Notes on CFD" href="../cfd_notes.html" />
+    <link rel="next" title="4.1.15. Thermodynamics" href="15_thermodynamics.html" />
+    <link rel="prev" title="4.1.13. Vorticity Transport Equation" href="13_vorticity_transport_equation.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.1.14. Conservation of Energy</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="13_vorticity_transport_equation.html">4.1.13. Vorticity Transport Equation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="15_thermodynamics.html">4.1.15. Thermodynamics</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="conservation-of-energy">
+<h1>4.1.14. Conservation of Energy<a class="headerlink" href="#conservation-of-energy" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#what-is-the-conservation-of-total-energy-in-integral-form" id="id1">What is the conservation of total energy in integral form?</a></li>
+<li><a class="reference internal" href="#what-is-the-conservation-of-total-energy-in-differential-form" id="id2">What is the conservation of total energy in differential form?</a></li>
+<li><a class="reference internal" href="#what-is-the-kinetic-energy-equation-in-integral-form" id="id3">What is the kinetic energy equation in integral form?</a></li>
+<li><a class="reference internal" href="#what-is-the-kinetic-energy-equation-in-differential-form" id="id4">What is the kinetic energy equation in differential form?</a></li>
+<li><a class="reference internal" href="#how-is-the-internal-energy-equation-derived-from-the-total-energy-equation-and-the-kinetic-energy-equation" id="id5">How is the internal energy equation derived from the total energy equation and the kinetic energy equation?</a></li>
+<li><a class="reference internal" href="#what-is-the-viscous-dissipation-function" id="id6">What is the viscous dissipation function?</a></li>
+<li><a class="reference internal" href="#what-is-fourier-s-law" id="id7">What is Fourier&#8217;s Law?</a></li>
+<li><a class="reference internal" href="#what-is-thermal-conductivity" id="id8">What is thermal conductivity?</a></li>
+<li><a class="reference internal" href="#how-is-the-heat-transport-equation-derived-from-the-internal-energy-equation-for-an-inviscid-incompressible-flow" id="id9">How is the heat transport equation derived from the internal energy equation for an inviscid incompressible flow?</a></li>
+<li><a class="reference internal" href="#how-is-the-entropy-production-equation-derived-from-the-internal-energy-equation-for-incompressible-flow" id="id10">How is the entropy production equation derived from the internal energy equation for incompressible flow?</a></li>
+<li><a class="reference internal" href="#what-is-the-cause-of-entropy-production" id="id11">What is the cause of entropy production?</a></li>
+</ul>
+</div>
+<div class="section" id="what-is-the-conservation-of-total-energy-in-integral-form">
+<h2><a class="toc-backref" href="#id1">4.1.14.1. What is the conservation of total energy in integral form?</a><a class="headerlink" href="#what-is-the-conservation-of-total-energy-in-integral-form" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Rate of change of total energy:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} \int_V \rho E dV\]</div>
+<ul class="simple">
+<li>Flux of total energy:</li>
+</ul>
+<div class="math">
+\[\int_S \rho E (\vec{u} \cdot \vec{n}) dS\]</div>
+<ul class="simple">
+<li>Work done <strong>by</strong> fluid by surface forces (work is done in the positive direction of <span class="math">\(\vec{n}\)</span>):</li>
+</ul>
+<div class="math">
+\[\int_S \overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} \cdot \vec{u} \cdot \vec{n} dS\]</div>
+<ul class="simple">
+<li>Heat added <strong>to</strong> fluid by surface forces (heat is added in the negative direction of <span class="math">\(\vec{n}\)</span>):</li>
+</ul>
+<div class="math">
+\[-\int_S \vec{q} \cdot \vec{n} dS\]</div>
+<ul class="simple">
+<li>Conservation of energy (neglecting gravity):</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} \int_V \rho E dV +
+\int_S \rho E (\vec{u} \cdot \vec{n}) dS =
+- \int_S \vec{q} \cdot \vec{n} dS +
+\int_S \overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} \cdot \vec{u} \cdot \vec{n} dS\]</div>
+</div>
+<div class="section" id="what-is-the-conservation-of-total-energy-in-differential-form">
+<h2><a class="toc-backref" href="#id2">4.1.14.2. What is the conservation of total energy in differential form?</a><a class="headerlink" href="#what-is-the-conservation-of-total-energy-in-differential-form" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Gauss divergence theorem:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} \int_V \rho E dV +
+\int_V \nabla \cdot (\rho E \vec{u}) dV =
+- \int_V \nabla \cdot \vec{q} dV +
+\int_V \nabla \cdot (\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} \cdot \vec{n}) dV\]</div>
+<ul class="simple">
+<li>Volume fixed and arbitary gives:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} (\rho E) +
+\nabla \cdot (\rho E \vec{u}) =
+- \nabla \cdot \vec{q} +
+\nabla \cdot (\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} \cdot \vec{n})\]</div>
+<ul class="simple">
+<li>Hence:</li>
+</ul>
+<div class="math">
+\[{D \over {D t}} (\rho E) =
+- \nabla \cdot \vec{q} +
+\nabla \cdot (\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} \cdot \vec{n})\]</div>
+</div>
+<div class="section" id="what-is-the-kinetic-energy-equation-in-integral-form">
+<h2><a class="toc-backref" href="#id3">4.1.14.3. What is the kinetic energy equation in integral form?</a><a class="headerlink" href="#what-is-the-kinetic-energy-equation-in-integral-form" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Rate of change of kinetic energy:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} \int_V \rho E_k dV\]</div>
+<ul class="simple">
+<li>Flux of kinetic energy:</li>
+</ul>
+<div class="math">
+\[\int_S \rho E_k (\vec{u} \cdot \vec{n}) dS\]</div>
+<ul class="simple">
+<li>Work done <strong>by</strong> fluid by surface forces (work is done in the positive direction of <span class="math">\(\vec{n}\)</span>):</li>
+</ul>
+<div class="math">
+\[\int_S \overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} \cdot \vec{u} \cdot \vec{n} dS\]</div>
+<ul class="simple">
+<li>Work done <strong>by</strong> fluid by volumetric forces (work is done in the positive direction of <span class="math">\(\vec{n}\)</span>):</li>
+</ul>
+<div class="math">
+\[\int_V p \nabla \cdot \vec{u} dV\]</div>
+<ul class="simple">
+<li>Work done <strong>on</strong> fluid by friction (work is done in the negative direction of <span class="math">\(\vec{n}\)</span>):</li>
+</ul>
+<div class="math">
+\[- \int_V \Phi dV\]</div>
+<ul class="simple">
+<li>Kinetic energy equation:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} \int_V \rho E_k dV +
+\int_S \rho E_k (\vec{u} \cdot \vec{n}) dS =
+\int_S \overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} \cdot \vec{u} \cdot \vec{n} dS +
+\int_V p \nabla \cdot \vec{u} dV -
+\int_V \Phi dV\]</div>
+</div>
+<div class="section" id="what-is-the-kinetic-energy-equation-in-differential-form">
+<h2><a class="toc-backref" href="#id4">4.1.14.4. What is the kinetic energy equation in differential form?</a><a class="headerlink" href="#what-is-the-kinetic-energy-equation-in-differential-form" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Gauss divergence theorem:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} \int_V \rho E_k dV +
+\int_V \nabla \cdot (\rho E_k \vec{u}) dV =
+\int_V \nabla \cdot (\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} \cdot \vec{n}) dV +
+\int_V p \nabla \cdot \vec{u} dV -
+\int_V \Phi dV\]</div>
+<ul class="simple">
+<li>Volume fixed and arbitary gives:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} (\rho E_k) +
+\nabla \cdot (\rho E_k \vec{u}) =
+\nabla \cdot (\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} \cdot \vec{n}) +
+p \nabla \cdot \vec{u} -
+\Phi\]</div>
+<ul class="simple">
+<li>Hence:</li>
+</ul>
+<div class="math">
+\[{D \over {D t}} (\rho E_k) =
+\nabla \cdot (\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} \cdot \vec{n}) +
+p \nabla \cdot \vec{u} -
+\Phi\]</div>
+</div>
+<div class="section" id="how-is-the-internal-energy-equation-derived-from-the-total-energy-equation-and-the-kinetic-energy-equation">
+<h2><a class="toc-backref" href="#id5">4.1.14.5. How is the internal energy equation derived from the total energy equation and the kinetic energy equation?</a><a class="headerlink" href="#how-is-the-internal-energy-equation-derived-from-the-total-energy-equation-and-the-kinetic-energy-equation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>By definition:</li>
+</ul>
+<div class="math">
+\[{{D} \over {Dt}} (\rho e) = {{D} \over {Dt}} (\rho E) - {{D } \over {Dt}} (\rho E_k)\]</div>
+<ul class="simple">
+<li>By substitution:</li>
+</ul>
+<div class="math">
+\[{{\partial } \over {\partial t}} (\rho e) + \nabla \cdot (\rho e \vec{u}) =
+- \nabla \cdot \vec{q} +
+\nabla \cdot (\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} \cdot \vec{n}) -
+(\nabla \cdot (\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} \cdot \vec{n}) +
+p \nabla \cdot \vec{u} -
+\Phi)\]</div>
+<ul class="simple">
+<li>By cancellation of shear stress:</li>
+</ul>
+<div class="math">
+\[{{\partial } \over {\partial t}} (\rho e) + \nabla \cdot (\rho e \vec{u}) =
+- \nabla \cdot \vec{q} +
+- p \nabla \cdot \vec{u} +
+\Phi\]</div>
+<ul class="simple">
+<li>where: <span class="math">\(\Phi\)</span> = viscous dissipation function</li>
+</ul>
+</div>
+<div class="section" id="what-is-the-viscous-dissipation-function">
+<h2><a class="toc-backref" href="#id6">4.1.14.6. What is the viscous dissipation function?</a><a class="headerlink" href="#what-is-the-viscous-dissipation-function" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>This is the viscous work put into fluid element deformation and is irreversible.</li>
+<li>It represents the irreversible conversion of mechanical energy to thermal energy through the action of viscosity.</li>
+</ul>
+<div class="math">
+\[\Phi = 2 \mu \left( e_{ij} - {1 \over 3} \delta_{ij} {{\partial u_j} \over {\partial x_j}} \right)^2\]</div>
+<ul class="simple">
+<li>By expansion:</li>
+</ul>
+<div class="math">
+\[\Phi = 2 \mu \left[ \left( {{\partial u_1} \over {\partial x_1}} \right)^2 +
+                    \left( {{\partial u_2} \over {\partial x_2}} \right)^2 +
+                    \left( {{\partial u_3} \over {\partial x_3}} \right)^2 +
+                    {1 \over 2} \left( {{\partial u_2} \over {\partial x_1}} + {{\partial u_1} \over {\partial x_2}} \right)^2 +
+                    {1 \over 2} \left( {{\partial u_3} \over {\partial x_2}} + {{\partial u_2} \over {\partial x_3}} \right)^2 +
+                    {1 \over 2} \left( {{\partial u_1} \over {\partial x_3}} + {{\partial u_3} \over {\partial x_1}} \right)^2
+                    \right]\]</div>
+<ul class="simple">
+<li>where:</li>
+</ul>
+<p><span class="math">\(\Phi\)</span> = viscous dissipation function = <span class="math">\({1 \over 2} \mu \gamma^2\)</span></p>
+<p><span class="math">\(e_{ij}\)</span> = strain rate tensor = <span class="math">\({1 \over 2} \left( {{\partial u_j} \over {\partial x_i}} + {{\partial u_i} \over {\partial x_j}}   \right)\)</span></p>
+<p><span class="math">\({1 \over 3} \delta_{ij} {{\partial u_j} \over {\partial x_j}}\)</span> = compressibility term</p>
+</div>
+<div class="section" id="what-is-fourier-s-law">
+<h2><a class="toc-backref" href="#id7">4.1.14.7. What is Fourier&#8217;s Law?</a><a class="headerlink" href="#what-is-fourier-s-law" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\vec{q} = -k \nabla T\]</div>
+<p>where:</p>
+<p><span class="math">\(q\)</span> = heat flux per unit area <span class="math">\((W/m^2)\)</span></p>
+<p><span class="math">\(k\)</span> = thermal conductivity <span class="math">\((W/mK)\)</span></p>
+<p><span class="math">\(\nabla T\)</span> = temperature gradient <span class="math">\(K/m\)</span></p>
+<ul class="simple">
+<li>Used in the Navier-Stokes equations to reduce the vector <span class="math">\(vec{q}\)</span> of three unknowns to one unknown, temperature <span class="math">\(T\)</span></li>
+<li>This applies to fluids and solids</li>
+</ul>
+</div>
+<div class="section" id="what-is-thermal-conductivity">
+<h2><a class="toc-backref" href="#id8">4.1.14.8. What is thermal conductivity?</a><a class="headerlink" href="#what-is-thermal-conductivity" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Thermal conductivity is the property of a material to conduct heat</li>
+<li>For water it&#8217;s a fifth order polynomial</li>
+</ul>
+</div>
+<div class="section" id="how-is-the-heat-transport-equation-derived-from-the-internal-energy-equation-for-an-inviscid-incompressible-flow">
+<h2><a class="toc-backref" href="#id9">4.1.14.9. How is the heat transport equation derived from the internal energy equation for an inviscid incompressible flow?</a><a class="headerlink" href="#how-is-the-heat-transport-equation-derived-from-the-internal-energy-equation-for-an-inviscid-incompressible-flow" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>From the internal energy equation:</li>
+</ul>
+<div class="math">
+\[{{\partial } \over {\partial t}} (\rho e) + \nabla \cdot (\rho e \vec{u}) =
+- \nabla \cdot \vec{q} +
+- p \nabla \cdot \vec{u} +
+\Phi\]</div>
+<p>where:</p>
+<div class="math">
+\[e = C_v T\]</div>
+<p>and</p>
+<div class="math">
+\[\vec{q} = -k \nabla T\]</div>
+<ul class="simple">
+<li>For an incompressible, inviscid flow: <span class="math">\(\nabla \vec{u} = 0\)</span>, <span class="math">\(\Phi = 0\)</span></li>
+</ul>
+<div class="math">
+\[{D \over {Dt}} (T) = {k \over {\rho C_v}} \nabla^2 T = \alpha \nabla^2 T\]</div>
+<ul class="simple">
+<li>Thermal diffusivity <span class="math">\(\alpha\)</span> plays the role of viscosity for temperature:</li>
+</ul>
+<div class="math">
+\[\alpha = {k \over {\rho C_v}}\]</div>
+<p>or:</p>
+<div class="math">
+\[\alpha = {k \over {\rho C_p}}\]</div>
+<p>(as <span class="math">\(C_v = C_p\)</span> for incompressible flow)</p>
+</div>
+<div class="section" id="how-is-the-entropy-production-equation-derived-from-the-internal-energy-equation-for-incompressible-flow">
+<h2><a class="toc-backref" href="#id10">4.1.14.10. How is the entropy production equation derived from the internal energy equation for incompressible flow?</a><a class="headerlink" href="#how-is-the-entropy-production-equation-derived-from-the-internal-energy-equation-for-incompressible-flow" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>From the internal energy equation:</li>
+</ul>
+<div class="math">
+\[{{\partial } \over {\partial t}} (\rho e) + \nabla \cdot (\rho e \vec{u}) =
+- \nabla \cdot \vec{q} +
+- p \nabla \cdot \vec{u} +
+\Phi\]</div>
+<ul class="simple">
+<li>For a reversible process:</li>
+</ul>
+<div class="math">
+\[T ds = de + pdv\]</div>
+<ul class="simple">
+<li>For incompressible flow:</li>
+</ul>
+<div class="math">
+\[dv = 0\]</div>
+<div class="math">
+\[\rho = \text{constant}\]</div>
+<div class="math">
+\[\nabla \cdot \vec{u} = 0\]</div>
+<ul class="simple">
+<li>Hence:</li>
+</ul>
+<div class="math">
+\[\rho {{De} \over {Dt}} = \rho T {{Ds} \over {Dt}} = -\nabla \cdot \vec{q} + \Phi\]</div>
+<ul class="simple">
+<li>Hence:</li>
+</ul>
+<div class="math">
+\[\rho {{Ds} \over {Dt}} = - {{\nabla \cdot \vec{q}} \over T} + {\Phi \over T}\]</div>
+</div>
+<div class="section" id="what-is-the-cause-of-entropy-production">
+<h2><a class="toc-backref" href="#id11">4.1.14.11. What is the cause of entropy production?</a><a class="headerlink" href="#what-is-the-cause-of-entropy-production" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Heat conduction (heat added <strong>to</strong> the fluid)</li>
+<li>Viscous dissipation (work done <strong>by</strong> the fluid)</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="13_vorticity_transport_equation.html">4.1.13. Vorticity Transport Equation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="15_thermodynamics.html">4.1.15. Thermodynamics</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

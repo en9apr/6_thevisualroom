@@ -1,0 +1,121 @@
+/*
+File name: challenge_lunch_menu.cpp
+Date: 24 Dec 2016
+Author: Andrew Roberts
+*/
+
+#include <iostream>
+#include <string>
+//#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+//int findNumber(string array[], int size, string target);
+
+bool search(string[], int, string);
+
+int main()
+{
+	// array declaration:
+	string menu[] = {"hotdog", "hamburger", "french fries", "salad", "exit"};
+	//vector <string> menu(5);
+//	std::vector<int>::iterator it;
+//	double prices[] = {1.20, 3.34, 0.99, 1.11, 0.00};
+	string choices[4];
+	int quantities[4];
+	bool positions[4];
+	int arraysize = sizeof(menu) / sizeof(int);
+//	double cost[4];
+/*
+	menu.push_back("hotdog");
+	menu.push_back("hamburger");
+	menu.push_back("french fries");
+	menu.push_back("salad");
+	menu.push_back("exit");
+*/
+	for(int i=0; i<4; i++)
+	{
+		cout << "Please enter choice number " << i+1 << " (hotdog, hamburger, french fries, salad or exit)." << endl;
+		getline(cin, choices[i]);
+
+		cout << "Please enter quantity of " << choices[i] << endl;
+		cin >> quantities[i];
+		cin.ignore();
+	}
+
+	cout << "These are your choices:" << endl;
+	for(int i=0; i<4; i++)
+	{
+		cout << choices[i] << endl;
+	}
+	cout << "These are the positions in the menu:" << endl;
+	for(int i=0; i<4; i++)
+	{
+		positions[i] = search(menu, 4, choices[i]);
+	}
+	for(int i=0; i<4; i++)
+	{
+		cout << positions[i] << endl;
+	}
+/*}
+	for(int i=0; i==3; i++)
+	it = find(menu.begin(), menu.end(), choices[i]);
+
+	if (it != menu.end())
+	    cout << "Element found in menu: " << *it << '\n';
+	else
+	    cout << "Element not found in menu\n";
+	}
+*/
+	return 0;
+
+}
+
+
+bool search(string numbers[], int size, string value)
+{
+	//to use a binary search, the array must
+	//already be in sorted order
+	bool found = false;
+	int low = 0;
+	int high = size - 1;
+	int pos = 0;
+	while(low <= high && !found)
+	{
+		pos = (low + high)/2;
+		if(numbers[pos] == value)
+		{
+			found = true;
+		}
+		else if(numbers[pos] < value)
+			{
+				low = pos+1;
+			}
+			else
+			{
+				high = pos - 1;
+			}
+	}
+	return found;
+}
+
+
+/*
+
+int findNumber(string array[], int size, string target)
+{
+	for(int counter = 0;counter<size;counter++)
+	{
+		if(array[counter] == target)
+		{
+			return counter;
+			//break;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+}
+*/

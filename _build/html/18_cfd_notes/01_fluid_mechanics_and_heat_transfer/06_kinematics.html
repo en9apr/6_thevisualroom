@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.1.6. Kinematics &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../../index.html" />
+    <link rel="up" title="4. Personal Notes on CFD" href="../cfd_notes.html" />
+    <link rel="next" title="4.1.7. Euler and Lagrange" href="07_euler_and_lagrange.html" />
+    <link rel="prev" title="4.1.5. Pressure, Streamlines and Streaklines" href="05_pressure_streamlines_and_streaklines.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.1.6. Kinematics</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="05_pressure_streamlines_and_streaklines.html">4.1.5. Pressure, Streamlines and Streaklines</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="07_euler_and_lagrange.html">4.1.7. Euler and Lagrange</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="kinematics">
+<h1>4.1.6. Kinematics<a class="headerlink" href="#kinematics" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#what-is-the-main-difference-between-kinematics-and-dynamics" id="id1">What is the main difference between kinematics and dynamics?</a></li>
+<li><a class="reference internal" href="#what-are-the-different-types-of-motion-exhibited-by-fluid-elements" id="id2">What are the different types of motion exhibited by fluid elements?</a></li>
+<li><a class="reference internal" href="#how-can-fluid-flow-be-decomposed-into-translation-deformation-and-rotation" id="id3">How can fluid flow be decomposed into translation, deformation and rotation?</a></li>
+<li><a class="reference internal" href="#how-to-decompose-the-velocity-gradient-tensor-into-symmetric-and-anti-symmetric-parts" id="id4">How to decompose the velocity gradient tensor into symmetric and anti-symmetric parts?</a></li>
+<li><a class="reference internal" href="#what-is-the-rate-of-strain-tensor-or-deformation-tensor" id="id5">What is the rate of strain tensor or deformation tensor?</a></li>
+<li><a class="reference internal" href="#what-is-the-vorticity-tensor" id="id6">What is the vorticity tensor?</a></li>
+<li><a class="reference internal" href="#what-is-represented-by-the-symmetric-and-anti-symmetric-parts-of-the-velocity-gradient-tensor" id="id7">What is represented by the symmetric and anti-symmetric parts of the velocity gradient tensor?</a></li>
+</ul>
+</div>
+<div class="section" id="what-is-the-main-difference-between-kinematics-and-dynamics">
+<h2><a class="toc-backref" href="#id1">4.1.6.1. What is the main difference between kinematics and dynamics?</a><a class="headerlink" href="#what-is-the-main-difference-between-kinematics-and-dynamics" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Kinematics:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>Quantities involving space and time only, e.g.</dt>
+<dd><ul class="first last simple">
+<li>Position</li>
+<li>Velocity</li>
+<li>Acceleration</li>
+<li>Deformation</li>
+<li>Rotation</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">i.e. the geometry of fluid motion</p>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Dynamics:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Refers to the stresses and forces that cause fluid motion</li>
+<li>i.e. the conservation laws</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="what-are-the-different-types-of-motion-exhibited-by-fluid-elements">
+<h2><a class="toc-backref" href="#id2">4.1.6.2. What are the different types of motion exhibited by fluid elements?</a><a class="headerlink" href="#what-are-the-different-types-of-motion-exhibited-by-fluid-elements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Translation <span class="math">\(\vec{u}\)</span></li>
+<li>Rotation <span class="math">\({1 \over 2} (\nabla \times \vec{u}) \times d\vec{r}\)</span></li>
+<li>Angular deformation or linear deformation <span class="math">\(\vec{s} \cdot d\vec{r}\)</span></li>
+</ul>
+<div class="math">
+\[\vec{u} + {1 \over 2} (\nabla \times \vec{u}) \times d\vec{r} + \vec{s} \cdot d \vec{r}\]</div>
+</div>
+<div class="section" id="how-can-fluid-flow-be-decomposed-into-translation-deformation-and-rotation">
+<h2><a class="toc-backref" href="#id3">4.1.6.3. How can fluid flow be decomposed into translation, deformation and rotation?</a><a class="headerlink" href="#how-can-fluid-flow-be-decomposed-into-translation-deformation-and-rotation" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\vec{u} = \vec{u} +
+\overset{\underset{\mathrm{\rightrightarrows}}{}}{e} \cdot d\vec{c} +
+\overset{\underset{\mathrm{\rightrightarrows}}{}}{\omega} \times d\vec{c}
+= translation + deformation + rotation\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><span class="math">\(\vec{u}\)</span> = velocity vector</li>
+<li><span class="math">\(\overset{\underset{\mathrm{\rightrightarrows}}{}}{e}\)</span> = strain rate tensor</li>
+<li><span class="math">\(\vec{c}\)</span> = line element vector</li>
+<li><span class="math">\(\overset{\underset{\mathrm{\rightrightarrows}}{}}{\omega}\)</span> = vorticity tensor</li>
+</ul>
+</div>
+<div class="section" id="how-to-decompose-the-velocity-gradient-tensor-into-symmetric-and-anti-symmetric-parts">
+<h2><a class="toc-backref" href="#id4">4.1.6.4. How to decompose the velocity gradient tensor into symmetric and anti-symmetric parts?</a><a class="headerlink" href="#how-to-decompose-the-velocity-gradient-tensor-into-symmetric-and-anti-symmetric-parts" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[{{\partial u_j} \over {\partial x_i}} =
+{1 \over 2} \left( {{\partial u_j} \over {\partial x_i}} + {{\partial u_i} \over {\partial x_j}} \right) +
+{1 \over 2} \left( {{\partial u_j} \over {\partial x_i}} - {{\partial u_i} \over {\partial x_j}} \right) =
+e_{ij} + \omega_{ij} = symmetric \ tensor + antisymmetric \ tensor\]</div>
+<p><span class="math">\({{\partial u_j} \over {\partial x_i}}\)</span> appears in the Navier-Stokes equations (shear strain rate tensor).</p>
+<div class="math">
+\[e_{ij} = {1 \over 2} \left( {{\partial u_j} \over {\partial x_i}} + {{\partial u_i} \over {\partial x_j}} \right)\]</div>
+<p>(eventually this becomes the shear stress)</p>
+</div>
+<div class="section" id="what-is-the-rate-of-strain-tensor-or-deformation-tensor">
+<h2><a class="toc-backref" href="#id5">4.1.6.5. What is the rate of strain tensor or deformation tensor?</a><a class="headerlink" href="#what-is-the-rate-of-strain-tensor-or-deformation-tensor" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\begin{split}\overset{\underset{\mathrm{\rightrightarrows}}{}}{e} =
+{1 \over 2} \left( \nabla \otimes \vec{u} + (\nabla \otimes \vec{u})^T \right) =
+{1 \over 2} \left( \nabla_i u_j + \nabla_j u_i \right) =
+\begin{bmatrix}
+{\partial u \over \partial x} &amp; {1 \over 2}\left( {\partial v \over \partial x} + {\partial u \over \partial y} \right)  &amp; {1 \over 2}\left( {\partial w \over \partial x} + {\partial u \over \partial z} \right)  \\
+{1 \over 2}\left( {\partial u \over \partial y} + {\partial v \over \partial x} \right) &amp; {\partial v \over \partial y} &amp; {1 \over 2}\left( {\partial w \over \partial y} + {\partial v \over \partial z} \right) \\
+{1 \over 2}\left( {\partial u \over \partial z} + {\partial w \over \partial x} \right) &amp; {1 \over 2}\left( {\partial v \over \partial z} + {\partial w \over \partial y} \right) &amp; {\partial w \over \partial z}
+\end{bmatrix}\end{split}\]</div>
+</div>
+<div class="section" id="what-is-the-vorticity-tensor">
+<h2><a class="toc-backref" href="#id6">4.1.6.6. What is the vorticity tensor?</a><a class="headerlink" href="#what-is-the-vorticity-tensor" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\begin{split}\overset{\underset{\mathrm{\rightrightarrows}}{}}{\omega} =
+{1 \over 2} \left( \nabla \otimes \vec{u} - (\nabla \otimes \vec{u})^T \right) =
+{1 \over 2} \left( \nabla_i u_j - \nabla_j u_i \right) =
+\begin{bmatrix}
+0 &amp; {1 \over 2}\left( {\partial v \over \partial x} - {\partial u \over \partial y} \right)  &amp; {1 \over 2}\left( {\partial w \over \partial x} - {\partial u \over \partial z} \right)  \\
+{1 \over 2}\left( {\partial u \over \partial y} - {\partial v \over \partial x} \right) &amp; 0 &amp; {1 \over 2}\left( {\partial w \over \partial y} - {\partial v \over \partial z} \right) \\
+{1 \over 2}\left( {\partial u \over \partial z} - {\partial w \over \partial x} \right) &amp; {1 \over 2}\left( {\partial v \over \partial z} - {\partial w \over \partial y} \right) &amp; 0
+\end{bmatrix}\end{split}\]</div>
+</div>
+<div class="section" id="what-is-represented-by-the-symmetric-and-anti-symmetric-parts-of-the-velocity-gradient-tensor">
+<h2><a class="toc-backref" href="#id7">4.1.6.7. What is represented by the symmetric and anti-symmetric parts of the velocity gradient tensor?</a><a class="headerlink" href="#what-is-represented-by-the-symmetric-and-anti-symmetric-parts-of-the-velocity-gradient-tensor" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>symmetric part <span class="math">\(\longrightarrow\)</span> angular deformation <span class="math">\(\longrightarrow\)</span> shear</li>
+<li>anti-symmetric part <span class="math">\(\longrightarrow\)</span> rotation <span class="math">\(\longrightarrow\)</span> vorticity</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="05_pressure_streamlines_and_streaklines.html">4.1.5. Pressure, Streamlines and Streaklines</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="07_euler_and_lagrange.html">4.1.7. Euler and Lagrange</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+=================================================
+Modelling an Additive Manufactured Heat Exchanger
+=================================================
+
+Whilst it is technically possible to simulate the individual microchannels, and even small groups, simulating an array of 100+ tubes would be highly costly, computationally; certainly out of the range of a desktop machine or small cluster, whilst the results would not justify a full HPC treatment. Instead we introduce a meso-scale model for the whole unit, in which the individual tubes are represented by a porous region in the CFD model, porosity coefficients being determined by empirical and analytical relationships from the microstructure. This provides for an efficient model of the component as a whole which can be optimised for efficiency through one of a number of approaches (adjoint, genetic, topological etc).
+
+`Draft Report 3rd January 2018 (Password Protected) <https://www.dropbox.com/s/ww26gcu2qtha2s2/porous_medium_two_equation_do_not_delete.pdf?dl=0>`_
+
+
+
+
+

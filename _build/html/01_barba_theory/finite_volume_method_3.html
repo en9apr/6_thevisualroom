@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation &#8212; The Visual Room</title>
+    <title>1.1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
-    <link rel="next" title="1.9.4. 2D Finite Volume Method: Non-Cartesian Grids" href="finite_volume_method_4.html" />
-    <link rel="prev" title="1.9.2. Conservative Discretisation" href="finite_volume_method_2.html" /> 
+    <link rel="up" title="1.1. Computational Fluid Dynamics Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.1.9.4. 2D Finite Volume Method: Non-Cartesian Grids" href="finite_volume_method_4.html" />
+    <link rel="prev" title="1.1.9.2. Conservative Discretisation" href="finite_volume_method_2.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation</span></h2>
+        <h2 class="heading"><span>1.1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="finite_volume_method_2.html">1.9.2. Conservative Discretisation</a>
+        «&#160;&#160;<a href="finite_volume_method_2.html">1.1.9.2. Conservative Discretisation</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="finite_volume_method_4.html">1.9.4. 2D Finite Volume Method: Non-Cartesian Grids</a>&#160;&#160;»
+        <a href="finite_volume_method_4.html">1.1.9.4. 2D Finite Volume Method: Non-Cartesian Grids</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,7 +49,7 @@
         
         
   <div class="section" id="d-finite-volume-method-spatial-and-numerical-discretisation">
-<h1>1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation<a class="headerlink" href="#d-finite-volume-method-spatial-and-numerical-discretisation" title="Permalink to this headline">¶</a></h1>
+<h1>1.1.9.3. 2D Finite Volume Method: Spatial and Numerical Discretisation<a class="headerlink" href="#d-finite-volume-method-spatial-and-numerical-discretisation" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#spatial-discretisation" id="id1">Spatial Discretisation</a><ul>
@@ -67,9 +67,9 @@
 </ul>
 </div>
 <div class="section" id="spatial-discretisation">
-<h2><a class="toc-backref" href="#id1">1.9.3.1. Spatial Discretisation</a><a class="headerlink" href="#spatial-discretisation" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">1.1.9.3.1. Spatial Discretisation</a><a class="headerlink" href="#spatial-discretisation" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="types-of-spatial-discretisation">
-<h3><a class="toc-backref" href="#id2">Types of Spatial Discretisation</a><a class="headerlink" href="#types-of-spatial-discretisation" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id2">1.1.9.3.1.1. Types of Spatial Discretisation</a><a class="headerlink" href="#types-of-spatial-discretisation" title="Permalink to this headline">¶</a></h3>
 <p>The FVM can handle any type of spatial discretisation</p>
 <p>For the same mesh we can have different definitions of the control volumes:</p>
 <div class="section" id="cell-centred-scheme">
@@ -107,7 +107,7 @@
 </div>
 </div>
 <div class="section" id="for-a-consistent-scheme">
-<h3><a class="toc-backref" href="#id7">For a Consistent Scheme</a><a class="headerlink" href="#for-a-consistent-scheme" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id7">1.1.9.3.1.2. For a Consistent Scheme</a><a class="headerlink" href="#for-a-consistent-scheme" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li>The sum of all CVs should cover the entire domain</li>
 <li>The sub-domains <span class="math">\(\Omega_J\)</span> are allowed to overlap, as long as each portion of the surface <span class="math">\(S_J\)</span> have to appear as a part of an <strong>even</strong> number of different surfaces - so that the fluxes cancel out, e.g. 2 surfaces, 4 surfaces etc.</li>
@@ -116,7 +116,7 @@
 </div>
 </div>
 <div class="section" id="numerical-discretisation">
-<h2><a class="toc-backref" href="#id8">1.9.3.2. Numerical Discretisation</a><a class="headerlink" href="#numerical-discretisation" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id8">1.1.9.3.2. Numerical Discretisation</a><a class="headerlink" href="#numerical-discretisation" title="Permalink to this headline">¶</a></h2>
 <p>Apply integral conservation law to subvolumes (<span class="math">\(\Omega_J\)</span> = sub-volume, <span class="math">\(S_J\)</span> = sub-surface)</p>
 <div class="math" id="equation-1">
 <span class="eqno">(1)</span>\[{\partial \over \partial t} \int_{\Omega_J} U d \Omega +
@@ -165,17 +165,17 @@
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="finite_volume_method_2.html">1.9.2. Conservative Discretisation</a>
+        «&#160;&#160;<a href="finite_volume_method_2.html">1.1.9.2. Conservative Discretisation</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="finite_volume_method_4.html">1.9.4. 2D Finite Volume Method: Non-Cartesian Grids</a>&#160;&#160;»
+        <a href="finite_volume_method_4.html">1.1.9.4. 2D Finite Volume Method: Non-Cartesian Grids</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

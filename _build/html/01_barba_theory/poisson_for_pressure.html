@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.4.1. Poisson Equation for Pressure &#8212; The Visual Room</title>
+    <title>1.1.4.1. Poisson Equation for Pressure &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
-    <link rel="next" title="1.4.2. The Marker and Cell Method" href="marker_and_cell_method.html" />
-    <link rel="prev" title="1.3.4. von Neumann Stability Analysis" href="von_neumann_stability_analysis.html" /> 
+    <link rel="up" title="1.1. Computational Fluid Dynamics Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.1.4.2. The Marker and Cell Method" href="marker_and_cell_method.html" />
+    <link rel="prev" title="1.1.3.4. von Neumann Stability Analysis" href="von_neumann_stability_analysis.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>1.4.1. Poisson Equation for Pressure</span></h2>
+        <h2 class="heading"><span>1.1.4.1. Poisson Equation for Pressure</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="von_neumann_stability_analysis.html">1.3.4. von Neumann Stability Analysis</a>
+        «&#160;&#160;<a href="von_neumann_stability_analysis.html">1.1.3.4. von Neumann Stability Analysis</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="marker_and_cell_method.html">1.4.2. The Marker and Cell Method</a>&#160;&#160;»
+        <a href="marker_and_cell_method.html">1.1.4.2. The Marker and Cell Method</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,13 +49,13 @@
         
         
   <div class="section" id="poisson-equation-for-pressure">
-<h1>1.4.1. Poisson Equation for Pressure<a class="headerlink" href="#poisson-equation-for-pressure" title="Permalink to this headline">¶</a></h1>
+<h1>1.1.4.1. Poisson Equation for Pressure<a class="headerlink" href="#poisson-equation-for-pressure" title="Permalink to this headline">¶</a></h1>
 <p>For compressible flow, pressure and velocity can be coupled with the Equation of State. <strong>But for incompressible flow, there is no obvious way to couple pressure and velocity.</strong></p>
 <p>So, take the divergence of the momentum equation and use the continuity equation to get a Poisson equation for pressure.</p>
 <div class="section" id="poisson-s-equation-in-continuous-domain">
-<h2>1.4.1.1. Poisson&#8217;s Equation in Continuous Domain<a class="headerlink" href="#poisson-s-equation-in-continuous-domain" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.4.1.1. Poisson&#8217;s Equation in Continuous Domain<a class="headerlink" href="#poisson-s-equation-in-continuous-domain" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="navier-stokes-equations-in-vector-notation">
-<h3>Navier Stokes Equations in Vector Notation<a class="headerlink" href="#navier-stokes-equations-in-vector-notation" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.4.1.1.1. Navier Stokes Equations in Vector Notation<a class="headerlink" href="#navier-stokes-equations-in-vector-notation" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="the-continuity-equation-for-an-incompressible-fluid">
 <h4>The Continuity Equation for an <strong>incompressible fluid</strong>:<a class="headerlink" href="#the-continuity-equation-for-an-incompressible-fluid" title="Permalink to this headline">¶</a></h4>
 <p>Using the divergence operator (div):</p>
@@ -98,7 +98,7 @@
 </div>
 </div>
 <div class="section" id="the-divergence-of-the-momentum-equation-in-partial-notation">
-<h3>The Divergence of the Momentum Equation in Partial Notation<a class="headerlink" href="#the-divergence-of-the-momentum-equation-in-partial-notation" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.4.1.1.2. The Divergence of the Momentum Equation in Partial Notation<a class="headerlink" href="#the-divergence-of-the-momentum-equation-in-partial-notation" title="Permalink to this headline">¶</a></h3>
 <p>Now take the divergence of the momentum equations, if <span class="math">\(\mathbf{M}\)</span> is the &#8220;vector&#8221; of momentum equations, the divergence is:</p>
 <div class="math">
 \[\nabla \cdot \mathbf{M} = {\partial \over {\partial x}} M_x + {\partial \over {\partial y}} M_y\]</div>
@@ -164,7 +164,7 @@ v {\partial \over {\partial y}} \left( {{\partial u} \over {\partial x}} +
 </div>
 </div>
 <div class="section" id="the-poisson-equation-in-vector-notation">
-<h3>The Poisson Equation in Vector Notation<a class="headerlink" href="#the-poisson-equation-in-vector-notation" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.4.1.1.3. The Poisson Equation in Vector Notation<a class="headerlink" href="#the-poisson-equation-in-vector-notation" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="equate-lhs-and-rhs">
 <h4>Equate LHS and RHS<a class="headerlink" href="#equate-lhs-and-rhs" title="Permalink to this headline">¶</a></h4>
 <div class="math">
@@ -185,10 +185,10 @@ v {\partial \over {\partial y}} \left( {{\partial u} \over {\partial x}} +
 </div>
 </div>
 <div class="section" id="poisson-s-equation-in-numerical-domain">
-<h2>1.4.1.2. Poisson&#8217;s Equation in Numerical Domain<a class="headerlink" href="#poisson-s-equation-in-numerical-domain" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.4.1.2. Poisson&#8217;s Equation in Numerical Domain<a class="headerlink" href="#poisson-s-equation-in-numerical-domain" title="Permalink to this headline">¶</a></h2>
 <p>We have shown that the Poisson&#8217;s Equation is valid in the continuous domain, but in the numerical domain, we use discretisation</p>
 <div class="section" id="momentum-equations-in-vector-form">
-<h3>Momentum Equations in Vector Form<a class="headerlink" href="#momentum-equations-in-vector-form" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.4.1.2.1. Momentum Equations in Vector Form<a class="headerlink" href="#momentum-equations-in-vector-form" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="id1">
 <h4>The Momentum Equation for an <strong>incompressible fluid</strong>:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <div class="math">
@@ -197,13 +197,13 @@ v {\partial \over {\partial y}} \left( {{\partial u} \over {\partial x}} +
 </div>
 </div>
 <div class="section" id="discretised-momentum-equations-in-vector-form">
-<h3>Discretised Momentum Equations in Vector Form<a class="headerlink" href="#discretised-momentum-equations-in-vector-form" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.4.1.2.2. Discretised Momentum Equations in Vector Form<a class="headerlink" href="#discretised-momentum-equations-in-vector-form" title="Permalink to this headline">¶</a></h3>
 <p>Discretise in time: FD in time, with pressure at time <span class="math">\(n+1\)</span> (the pressure that corresponds with the velocity at <span class="math">\(n+1\)</span>)</p>
 <div class="math">
 \[\mathbf{u}^{n+1} = \mathbf{u}^n + \Delta t \left(-\mathbf{u}^n \cdot \nabla \mathbf{u}^n - {1 \over \rho} \nabla p^{n+1} + \nu \nabla^2 \mathbf{u}^n \right)\]</div>
 </div>
 <div class="section" id="the-divergence-of-the-momentum-equations-in-vector-form">
-<h3>The Divergence of the Momentum Equations in Vector Form<a class="headerlink" href="#the-divergence-of-the-momentum-equations-in-vector-form" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.4.1.2.3. The Divergence of the Momentum Equations in Vector Form<a class="headerlink" href="#the-divergence-of-the-momentum-equations-in-vector-form" title="Permalink to this headline">¶</a></h3>
 <p>Now take the divergence of the momentum equations, if <span class="math">\(\mathbf{M}\)</span> is the &#8220;vector&#8221; of momentum equations, the divergence is:</p>
 <div class="math">
 \[\nabla \cdot \mathbf{u}^{n+1} = \nabla \cdot \mathbf{u}^n +
@@ -223,7 +223,7 @@ v {\partial \over {\partial y}} \left( {{\partial u} \over {\partial x}} +
 </ul>
 </div>
 <div class="section" id="id2">
-<h3>The Poisson Equation in Vector Notation<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.4.1.2.4. The Poisson Equation in Vector Notation<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Poisson Equation for <span class="math">\(p\)</span> at time <span class="math">\(n+1\)</span> and forcing <span class="math">\(\nabla \cdot \mathbf{u}^{n+1} = 0\)</span></p>
 <div class="math">
 \[\nabla^2 p^{n+1} = \rho {{\nabla \cdot \mathbf{u}^n} \over {\Delta t}}-
@@ -244,17 +244,17 @@ v {\partial \over {\partial y}} \left( {{\partial u} \over {\partial x}} +
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="von_neumann_stability_analysis.html">1.3.4. von Neumann Stability Analysis</a>
+        «&#160;&#160;<a href="von_neumann_stability_analysis.html">1.1.3.4. von Neumann Stability Analysis</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="marker_and_cell_method.html">1.4.2. The Marker and Cell Method</a>&#160;&#160;»
+        <a href="marker_and_cell_method.html">1.1.4.2. The Marker and Cell Method</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

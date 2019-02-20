@@ -1,0 +1,3597 @@
+============
+Powder Notes
+============
+
+.. contents::
+   :local:
+
+Tutorial on twoPhaseEulerFoam
+=============================
+
+Drag models: Schiller-Naumann, Wen-Yu and Syamlal-O'Brien
+
+Change to run directory:
+
+::
+
+	$ cd $FOAM_RUN
+
+Copy tutorial files from tutorial directory to new directory:
+
+::
+
+	$ cp -r $FOAM_TUTORIALS/multiphase/twoPhaseEulerFoam/RAS/fluidisedBed $FOAM_RUN
+
+
+Rename directory:
+
+::
+
+	$ mv fluidisedBed eulerian_001_fluidised_bed
+
+Change directory:
+
+::
+
+	$ cd eulerian_001_fluidised_bed
+
+Mesh
+----
+
+Cell size is 30 times particle diameter of solid phase. Cell size cannot be smaller than particle diameter - if it were, this would mean the particle fills the volume and no particle-particle interactions would be possible. This would also violate the maximum solid packing fraction, intended to be 62%. If this limit is exceeded, the probability of collisions between particles would go to infinity.  
+
+
+::
+
+	$ nano constant/polyMesh/blockMeshDict
+
+		vertices
+		(
+			(0 0 0)
+			(0.28 0 0)
+			(0.28 1 0)
+			(0 1 0)
+			(0 0 0.025)
+			(0.28 0 0.025)
+			(0.28 1 0.025)
+			(0 1 0.025)
+		);
+
+		blocks
+		(
+			hex (0 1 2 3 4 5 6 7) (28 100 1) simpleGrading (1 1 1)
+		);
+
+
+Run blockMesh:
+
+::
+
+	$ blockMesh
+
+Boundary and initial conditions
+-------------------------------
+
+Initial conditions
+~~~~~~~~~~~~~~~~~~
+
+Create initial volume fraction of particles up to 0.4m
+
+::
+
+	$ system/setFieldsDict
+
+		defaultFieldValues
+		(
+			volScalarFieldValue alpha.air 1
+			volScalarFieldValue alpha.particles 0
+		);
+
+		regions
+		(
+			boxToCell
+			{
+				box ( 0 0 0 ) ( 0.28 0.4 0.025 );
+				fieldValues
+				(
+				    volScalarFieldValue alpha.air 0.60
+				    volScalarFieldValue alpha.particles 0.40
+				);
+			}
+		);
+
+Copy original files (with internalField = 0), as if the (internalField != 0) has not been set.
+
+::
+
+	$ cp 0/alpha.air.org 0/alpha.air
+	$ cp 0/alpha.particles.org 0/alpha.particles
+
+Run setFields in order to set the internalField:
+
+::
+
+	$ setFields
+
+
+Boundary conditions
+~~~~~~~~~~~~~~~~~~~
+
+Set the superficial gas velocity to 0.46m/s in 0/U.air:
+
+::
+
+	$ nano 0/U.air
+
+		internalField   uniform (0 0.46 0);
+
+		boundaryField
+		{
+			inlet
+			{
+				type               interstitialInletVelocity;
+				inletVelocity      uniform (0 0.46 0);
+				alpha              alpha.air;
+				value              $internalField;
+			}
+
+			...
+
+		}
+
+
+Physical Properties
+-------------------
+
+Particle diameter
+~~~~~~~~~~~~~~~~~
+
+Change the particle diameter and the maximum solid packing fraction:
+
+::
+
+	$ nano constant/phaseProperties
+
+		phases (particles air);
+
+		particles
+		{
+			diameterModel constant;
+			constantCoeffs
+			{
+				d               275e-6;
+			}
+
+			alphaMax 0.62;
+		}
+
+
+Drag Model
+~~~~~~~~~~
+
+Specify drag model (SyamlalOBrien):
+
+::
+
+	$ nano constant/phaseProperties
+
+		drag
+		(
+			(particles in air)
+			{
+				type            SyamlalOBrien;
+				residualAlpha   1e-6;
+				residualRe      1e-3;
+				swarmCorrection
+				{
+				    type        none;
+				}
+			}
+		);
+
+Thermophysical properties
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Set particle density
+
+::
+
+	$ nano constant/thermophysicalProperties.particles
+
+		equationOfState
+			{
+				rho         2500;
+			}
+
+Turbulence properties
+~~~~~~~~~~~~~~~~~~~~~
+
+Set turbulence properties
+
+::
+
+	$ nano constant/turbulenceProperties.particles
+	$ nano constant/turbulenceProperties.air
+
+
+Gravity properties
+~~~~~~~~~~~~~~~~~~
+
+::
+
+	$ nano constant/g
+
+Set the endTime to 20s
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	$ nano system/controlDict
+
+		endTime         20;
+
+Parallel processing
+~~~~~~~~~~~~~~~~~~~
+
+Create dictionary for parallel processing (scotch - no user input, will minimise the number of processor boundaries) 
+
+::
+
+	numberOfSubdomains 8;
+
+	method          scotch;
+
+	simpleCoeffs
+	{
+		n               ( 2 1 1 );
+		delta           0.0001;
+	}
+
+	hierarchicalCoeffs
+	{
+		n               ( 2 1 1 );
+		delta           0.001;
+		order           xyz;
+	}
+
+	manualCoeffs
+	{
+		dataFile        "cellDecomposition";
+	}
+
+Decompose the case:
+
+::
+
+	$ decomposePar
+
+Run the case:
+
+::
+
+	$ mpirun -np 8 twoPhaseEulerFoam -parallel > log &
+
+
+Run the case
+------------
+
+::
+
+	$ twoPhaseEulerFoam >& log &
+
+Monitor the run
+
+::
+
+	$ tail -f log
+
+::
+
+	$ rm -rf processor* 0.* [1-9]* postProcessing *.foam
+
+
+Reconstruct the case
+--------------------
+
+::
+
+	$ reconstructPar
+
+
+
+Created another mesh in Pointwise
+---------------------------------
+::
+
+    $ $HOME/Pointwise_User/eulerian_002_bin_discharge/pointwise -b script10.glf
+
+::
+
+    $ mkdir eulerian_002_bin_discharge
+    
+Copied files from $HOME/Pointwise_User/eulerian_002_bin_discharge/mesh/ to current directory
+
+::
+
+    $ cd $FOAM_RUN/eulerian_002_bin_discharge/eulerian_002_bin_discharge
+
+
+Ran check mesh
+
+::
+
+    $ checkMesh
+
+
+In the dictionaries:
+
+    epsilon.air, k.air, p, T.air, Theta.particles, U.air :
+
+    inlet=outlet
+    outlet=inlet
+
+
+    All files:
+
+    frontAndBackPlanes=symmetry
+    walls=wall
+
+
+    sed -i s/frontAndBackPlanes/symmetry/g alpha.air.org
+    sed -i s/frontAndBackPlanes/symmetry/g alpha.particles.org
+    sed -i s/frontAndBackPlanes/symmetry/g epsilon.air
+    sed -i s/frontAndBackPlanes/symmetry/g k.air
+    sed -i s/frontAndBackPlanes/symmetry/g nut.air
+    sed -i s/frontAndBackPlanes/symmetry/g nut.particles
+    sed -i s/frontAndBackPlanes/symmetry/g p
+    sed -i s/frontAndBackPlanes/symmetry/g T.air
+    sed -i s/frontAndBackPlanes/symmetry/g T.particles
+    sed -i s/frontAndBackPlanes/symmetry/g Theta.particles
+    sed -i s/frontAndBackPlanes/symmetry/g U.air
+    sed -i s/frontAndBackPlanes/symmetry/g U.particles
+
+    sed -i s/walls/wall/g alpha.air.org
+    sed -i s/walls/wall/g alpha.particles.org
+    sed -i s/walls/wall/g epsilon.air
+    sed -i s/walls/wall/g k.air
+    sed -i s/walls/wall/g nut.air
+    sed -i s/walls/wall/g nut.particles
+    sed -i s/walls/wall/g p
+    sed -i s/walls/wall/g T.air
+    sed -i s/walls/wall/g T.particles
+    sed -i s/walls/wall/g Theta.particles
+    sed -i s/walls/wall/g U.air
+    sed -i s/walls/wall/g U.particles
+
+
+Copy original files (with internalField = 0), as if the (internalField != 0) has not been set.
+
+::
+
+	$ cp 0/alpha.air.org 0/alpha.air
+	$ cp 0/alpha.particles.org 0/alpha.particles
+
+Run setFields in order to set the internalField:
+
+::
+
+	$ setFields
+
+Set the endTime to 2s
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+	$ nano system/controlDict
+
+		endTime         2;
+
+
+Run the case
+------------
+
+::
+
+	$ twoPhaseEulerFoam > log &
+
+
+
+
+#0  Foam::error::printStack(Foam::Ostream&) at ??:?
+#1  Foam::sigFpe::sigHandler(int) at ??:?
+#2  ? in "/lib/x86_64-linux-gnu/libc.so.6"
+#3  Foam::symGaussSeidelSmoother::smooth(Foam::word const&, Foam::Field<double>&, Foam::lduMatrix const&, Foam::Field<double> const&, Foam::FieldField<Foam::Field, double> const&, Foam::UPtrList<Foam::lduInterfaceField const> const&, unsigned char, int) at ??:?
+#4  Foam::symGaussSeidelSmoother::smooth(Foam::Field<double>&, Foam::Field<double> const&, unsigned char, int) const at ??:?
+#5  Foam::smoothSolver::solve(Foam::Field<double>&, Foam::Field<double> const&, unsigned char) const at ??:?
+#6  Foam::fvMatrix<double>::solveSegregated(Foam::dictionary const&) at ??:?
+#7  Foam::fvMatrix<double>::solve(Foam::dictionary const&) at ??:?
+#8  Foam::fvMatrix<double>::solve() at ??:?
+#9  ? at ??:?
+#10  __libc_start_main in "/lib/x86_64-linux-gnu/libc.so.6"
+#11  ? at ??:?
+Floating point exception (core dumped)
+
+
+Divide diameter by 10
+
+
+::
+
+    $ constant/phaseProperties
+
+        particles
+        {
+            diameterModel constant;
+            constantCoeffs
+            {
+                d               27.5e-6;
+            }
+
+            alphaMax 0.62;
+        }
+
+
+Still the same - revert. Possible problem with the setFields - wrong dimensions
+
+
+Try blockMesh
+~~~~~~~~~~~~~
+
+::
+
+	$ rm -rf processor* 0.* [1-9]* postProcessing *.foam
+
+::
+
+	$ cp 0/alpha.air.org 0/alpha.air
+	$ cp 0/alpha.particles.org 0/alpha.particles
+
+
+::
+
+	$ setFields
+
+::
+
+	$ twoPhaseEulerFoam > log &
+
+::
+
+	$ decomposePar
+
+::
+
+	$ mpirun -np 8 twoPhaseEulerFoam -parallel > log &
+
+
+::
+
+	$ kill -9 PID
+
+::
+
+	$ pkill twoPhaseEulerFo
+
+
+Run for only 0.5 seconds
+
+::
+
+	$ nano system/controlDict
+
+		endTime         0.5;
+
+
+::
+
+	$ reconstructPar
+
+
+Modify blockMesh
+~~~~~~~~~~~~~~~~
+
+
+--> FOAM FATAL ERROR: 
+face 0 in patch 1 does not have neighbour cell face: 4(11 15 14 10)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tutorial on Non-Newtonain fluid
+===============================
+
+fluentMeshToFoam needs a system directory and a controlDict:
+
+
+
+::
+
+	$ two
+	$ mkdir system
+	$ nano system/controlDict
+
+		application     nonNewtonianIcoFoam;
+
+		startFrom       startTime;
+
+		startTime       0;
+
+		stopAt          endTime;
+
+		endTime         5;
+
+		deltaT          0.0025;
+
+		writeControl    runTime;
+
+		writeInterval   0.05;
+
+		purgeWrite      0;
+
+		writeFormat     ascii;
+
+		writePrecision  6;
+
+		writeCompression off;
+
+		timeFormat      general;
+
+		timePrecision   6;
+
+		runTimeModifiable true;
+
+Writes the output to constant/polyMesh
+
+::
+
+	$ fluentMeshToFoam fluent.msh
+
+Create a folder for boundary conditions:
+
+::
+
+	$ mkdir 0
+	$ nano 0/p
+
+		FoamFile
+		{
+			version     2.0;
+			format      ascii;
+			class       volScalarField;
+			object      p;
+		}
+
+		dimensions      [0 2 -2 0 0 0 0];
+
+		internalField   uniform 0;
+
+		boundaryField
+		{
+			INLET
+			{
+				type            zeroGradient;
+			}
+
+			OUTLET
+			{
+				type            fixedValue;
+				value           uniform 0;
+			}
+
+
+			FIXED_WALLS
+			{
+				type            zeroGradient;
+			}
+		
+
+			FRONT_AND_BACK
+			{
+				type            empty;
+			}
+
+		}
+
+	$ nano 0/U
+
+		FoamFile
+		{
+			version     2.0;
+			format      ascii;
+			class       volVectorField;
+			object      U;
+		}
+
+		dimensions      [0 1 -1 0 0 0 0];
+
+		internalField   uniform (0 0 0);
+
+		boundaryField
+		{
+			INLET
+			{
+				type            fixedValue;
+				value           uniform (1 0 0);
+			}
+
+			OUTLET
+			{
+				type            zeroGradient;
+			}
+
+
+			FIXED_WALLS
+			{
+				type            fixedValue;
+				value           uniform (0 0 0);
+			}
+
+		
+			FRONT_AND_BACK
+			{
+				type            empty;
+			}
+
+		}
+
+Copy BirdCarreau into directory:
+
+::
+
+	$ cd $WM_PROJECT_DIR
+	$ cp -r --parents src/transportModels/incompressible/viscosityModels/BirdCarreau/ $WM_PROJECT_USER_DIR/
+	$ cd $WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+	$ mv BirdCarreau Casson
+	$ cd Casson
+	$ mv BirdCarreau.C Casson.C
+	$ mv BirdCarreau.H Casson.H
+	$ sed -i s/BirdCarreau/Casson/g Casson.C
+	$ sed –i s/BirdCarreau/Casson/g Casson.H			(may not work, so find and replace in file) 
+
+
+
+Create make files:
+
+::
+
+	$ mkdir Make
+	$ nano Make/files
+		
+		Casson.C
+
+		LIB = $(FOAM_USER_LIBBIN)/libCasson
+
+	$ nano Make/options
+
+		EXE_INC = \
+			-I$(LIB_SRC)/transportModels/incompressible/lnInclude \
+			-I$(LIB_SRC)/finiteVolume/lnInclude
+		LIB_LIBS = \
+			-lfiniteVolume
+
+
+Add formula for Casson plot:
+
+::
+
+	$ nano Casson.C
+
+		// * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * * //
+
+		Foam::tmp<Foam::volScalarField>
+		Foam::viscosityModels::Casson::calcNu() const
+		{
+        // ADDED:
+		return max
+			(
+				nuMin_, min( nuMax_,pow(pow(tau0_/max(strainRate(),dimensionedScalar("VSMALL", dimless/dimTime,VSMALL)),0.5)+pow(m_,0.5),scalar(2.0)))
+			);
+
+		}
+
+Add new coefficients:
+
+::
+
+	// * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
+
+	Foam::viscosityModels::Casson::Casson
+	(
+		const word& name,
+		const dictionary& viscosityProperties,
+		const volVectorField& U,
+		const surfaceScalarField& phi
+	)
+	:
+		viscosityModel(name, viscosityProperties, U, phi),
+		CassonCoeffs_(viscosityProperties.subDict(typeName + "Coeffs")),
+        m_(CassonCoeffs_.lookup("m")),            // ADDED
+        tau0_(CassonCoeffs_.lookup("tau0")),      // ADDED
+        nuMin_(CassonCoeffs_.lookup("nuMin")),    // ADDED
+        nuMax_(CassonCoeffs_.lookup("nuMax")),    // ADDED
+		nu_
+		(
+		    IOobject
+		    (
+		        "nu",
+		        U_.time().timeName(),
+		        U_.db(),
+		        IOobject::NO_READ,
+		        IOobject::AUTO_WRITE
+		    ),
+		    calcNu()
+		)
+	{}
+
+Add read coefficients:
+
+::
+
+	// * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * * //
+
+	bool Foam::viscosityModels::Casson::read
+	(
+		const dictionary& viscosityProperties
+	)
+	{
+		viscosityModel::read(viscosityProperties);
+
+		CassonCoeffs_ = viscosityProperties.subDict(typeName + "Coeffs");
+
+		CassonCoeffs_.lookup("nu0") >> nu0_;             // ADDED
+		CassonCoeffs_.lookup("nuInf") >> nuInf_;         // ADDED
+		CassonCoeffs_.lookup("k") >> k_;                 // ADDED
+		CassonCoeffs_.lookup("n") >> n_;                 // ADDED
+
+
+Add coefficients in header file:
+
+::
+
+	$ nano Casson.H
+	
+        dimensionedScalar m_;
+        dimensionedScalar tau0_;
+        dimensionedScalar nuMin_;
+        dimensionedScalar nuMax_;
+
+Compile in the main folder:
+
+::
+
+	$ wmake libso
+
+Test the solver
+---------------
+
+In constant/transportProperties
+
+::
+
+	transportModel  Casson;
+
+	CassonCoeffs
+	{
+		m             m [ 0 2 -1 0 0 0 0 ] 0.00414;
+		tau0          tau0 [0 2 -2 0 0 0 0] 0.0038;
+		nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+		nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+	}
+
+In system/controlDict
+
+::
+
+	libs
+	(
+		"libCasson.so"
+	);
+
+::
+
+	$ nonNewtonianIcoFoam
+
+Calculate the velocity magnitude:
+
+::
+	
+	$ foamCalc mag U
+
+Sample the velocity profile:
+
+::
+
+	$ nano ./system/sampleDict
+
+		/*--------------------------------*- C++ -*----------------------------------*\
+		| =========                 |                                                 |
+		| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+		|  \\    /   O peration     | Version:  2.4.0                                 |
+		|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+		|    \\/     M anipulation  |                                                 |
+		\*---------------------------------------------------------------------------*/
+		FoamFile
+		{
+			version     2.0;
+			format      ascii;
+			class       dictionary;
+			location    "system";
+			object      sampleDict;
+		}
+		// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+		interpolationScheme cellPoint;
+
+		setFormat       raw;
+
+		sets
+		(
+			data
+			{
+				type    uniform;
+				axis    y;
+				start   (10 0 0);
+				end     (10 1 0);
+				nPoints 10;
+			}
+		);
+
+		fields          (magU);
+
+		// ************************************************************************* //
+
+Sample the data:
+
+	$ sample
+
+Run the non-Newtonian case
+
+Remove the data:
+
+::
+
+	$ rm -rf 0.* [1-9]* postProcessing *.foam
+
+In constant/transportProperties
+
+::
+
+	transportModel  Newtonian;
+
+	nu              nu [ 0 2 -1 0 0 0 0 ] 1;
+
+In constant/controlDict remove the library:
+
+::
+
+	libs
+	(
+		    "libCasson.so"
+	);
+
+
+::
+
+	$ nonNewtonianIcoFoam
+
+Calculate the velocity magnitude:
+
+::
+	
+	$ foamCalc mag U
+
+Sample the data:
+
+	$ sample
+
+Plot in Python:
+
+::
+
+
+	import numpy as np
+	import matplotlib.pyplot as plt
+	import math as mt
+
+	data = np.genfromtxt('postProcessing/sets/5/data_magU.xy', delimiter=' ', skip_header=0, names=['x','magU'])
+	data2 = np.genfromtxt('../non_newtonian_002_plates_test_casson/postProcessing/sets/5/data_magU.xy', delimiter=' ', skip_header=0, names=['x2','magU2'])
+	x = data['x']
+	magU = data['magU']
+
+	x2 = data2['x2']
+	magU2 = data2['magU2']
+
+	ax1 = plt.gca()
+
+	plt.rc('text', usetex=True)
+	plt.rc('font', family='serif')
+
+	line3=ax1.plot(data['x'], data['magU'], color='r', label='Newtonian')
+	line4=ax1.plot(data2['x2'], data2['magU2'], color='g', label='Non-Newtonian')
+
+	lines = line3+line4
+	labels = [l.get_label() for l in lines]
+	legend= ax1.legend(lines, labels, loc=0, fontsize='medium')
+
+	ax1.set_xlabel(r'Distance, x \textit{(m)}')
+	ax1.set_ylabel(r'Velocity Magnitude \textit{(m/s)}')
+	ax1.set_xlim([0,1])
+	ax1.set_ylim([0,2])
+	plt.savefig('compare_velocity_profiles')
+	plt.show()
+
+
+Increase the mesh density near the wall - Newtonian
+---------------------------------------------------
+
+::
+
+    $ cp -rf non_newtonian_003_plates_test_newtonian non_newtonian_004_plates_test_newtonian_dense
+    $ cd non_newtonian_004_plates_test_newtonian_dense
+
+::
+
+	$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+
+Increase mesh density
+
+::
+
+    $ nano constant/polyMesh/blockMeshDict
+    
+        blocks
+        (
+            hex (0 1 2 3 4 5 6 7) porosity (120 20 1)
+            simpleGrading
+            (
+                1       // x-direction expansion
+                (
+                        (0.2 0.3 4)
+                        (0.6 0.4 1)
+                        (0.2 0.3 0.25)
+                )
+                1       // z-direction expansion
+            )
+        );
+
+Re-run the nonNewtonian case:
+
+::
+
+	$ nonNewtonianIcoFoam
+	
+Calculate the velocity magnitude:
+
+::
+	
+	$ foamCalc mag U
+
+
+
+Sample the velocity profile:
+
+::
+
+	$ nano ./system/sampleDict
+
+		/*--------------------------------*- C++ -*----------------------------------*\
+		| =========                 |                                                 |
+		| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+		|  \\    /   O peration     | Version:  2.4.0                                 |
+		|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+		|    \\/     M anipulation  |                                                 |
+		\*---------------------------------------------------------------------------*/
+		FoamFile
+		{
+			version     2.0;
+			format      ascii;
+			class       dictionary;
+			location    "system";
+			object      sampleDict;
+		}
+		// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+		interpolationScheme cellPoint;
+
+		setFormat       raw;
+
+		sets
+		(
+			data
+			{
+				type    uniform;
+				axis    y;
+				start   (10 0 0);
+				end     (10 1 0);
+				nPoints 1000;
+			}
+		);
+
+		fields          (magU);
+
+		// ************************************************************************* //
+
+Sample the data:
+
+	$ sample
+
+Plot in Python:
+
+::
+
+    $ python plot.py
+    
+    
+Increase the mesh density near the wall - Casson 
+------------------------------------------------
+    
+::
+
+    $ cp -rf non_newtonian_002_plates_test_casson non_newtonian_005_plates_test_casson_dense
+    $ cp -rf non_newtonian_004_plates_test_newtonian_dense/constant/polyMesh/blockMeshDict non_newtonian_005_plates_test_casson_dense/constant/polyMesh/blockMeshDict
+    $ cd non_newtonian_005_plates_test_casson_dense
+
+::
+
+	$ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+    
+Re-run the nonNewtonian case:
+
+::
+
+	$ nonNewtonianIcoFoam
+    
+Sample the velocity profile:
+
+::
+
+	$ nano ./system/sampleDict
+
+		/*--------------------------------*- C++ -*----------------------------------*\
+		| =========                 |                                                 |
+		| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+		|  \\    /   O peration     | Version:  2.4.0                                 |
+		|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+		|    \\/     M anipulation  |                                                 |
+		\*---------------------------------------------------------------------------*/
+		FoamFile
+		{
+			version     2.0;
+			format      ascii;
+			class       dictionary;
+			location    "system";
+			object      sampleDict;
+		}
+		// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+		interpolationScheme cellPoint;
+
+		setFormat       raw;
+
+		sets
+		(
+			data
+			{
+				type    uniform;
+				axis    y;
+				start   (10 0 0);
+				end     (10 1 0);
+				nPoints 1000;
+			}
+		);
+
+		fields          (magU);
+
+		// ************************************************************************* //
+    
+Sample the data:
+
+::
+
+    $ sample    
+    
+Change the python script:
+
+::
+
+    $ cd ../non_newtonian_004_plates_test_newtonian_dense    
+    $ nano plot.py
+        data2 = np.genfromtxt('../non_newtonian_005_plates_test_casson_dense/postProcessing/sets/5/data_magU.xy', delimiter=' ', skip_hea$
+    $ python plot.py
+    
+
+
+
+
+Additional Modifications to Non-Newtonian fluid model
+=====================================================
+
+
+
+
+Add da Cruz non-Newtonian model
+-------------------------------
+
+* Add pressure as volScalarField (like temperature dependent viscosity)
+* Set constant effective friction and nu = mu p / gamma
+* Set linear effective friction
+
+ConstantFriction
+
+::
+
+	$ cd $WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+	$ cp -rf Casson ConstantFriction
+	$ cd ConstantFriction
+	
+Remove everything except .C and .H files:
+
+::
+	
+	$ rm *.dep *.C.save
+	$ mv Casson.C ConstantFriction.C
+	$ mv Casson.H ConstantFriction.H
+	$ sed -i s/Casson/ConstantFriction/g ConstantFriction.C
+	$ sed -i s/Casson/ConstantFriction/g ConstantFriction.H			
+
+Create make files:
+
+::
+
+	$ nano Make/files
+		
+		ConstantFriction.C
+
+		LIB = $(FOAM_USER_LIBBIN)/libConstantFriction
+
+	$ nano Make/options
+
+		EXE_INC = \
+			-I$(LIB_SRC)/transportModels/incompressible/lnInclude \
+			-I$(LIB_SRC)/finiteVolume/lnInclude
+		LIB_LIBS = \
+			-lfiniteVolume
+
+Add formula for ConstantFriction plot:
+
+::
+
+	$ nano ConstantFriction.C
+
+        // * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * * //
+
+        Foam::tmp<Foam::volScalarField>
+        Foam::viscosityModels::ConstantFriction::calcNu() const
+        {   
+            const volScalarField& p = U_.mesh().lookupObject<volScalarField>("p");
+            
+            return max
+            (
+                nuMin_, 
+                min
+                (
+                    nuMax_, 
+                    (muStar_*p)/
+                    max
+                    (
+                        strainRate(),
+                        dimensionedScalar("VSMALL", dimless/dimTime, VSMALL)
+                    )
+                )
+            );
+        }
+
+
+Add new coefficients:
+
+::
+
+	$ nano ConstantFriction.C
+	
+	    // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
+
+        Foam::viscosityModels::ConstantFriction::ConstantFriction
+        (
+            const word& name,
+            const dictionary& viscosityProperties,
+            const volVectorField& U,
+            const surfaceScalarField& phi
+        )
+        :
+            viscosityModel(name, viscosityProperties, U, phi),
+            ConstantFrictionCoeffs_(viscosityProperties.subDict(typeName + "Coeffs")),
+            muStar_(ConstantFrictionCoeffs_.lookup("muStar")),
+            nuMin_(ConstantFrictionCoeffs_.lookup("nuMin")),
+            nuMax_(ConstantFrictionCoeffs_.lookup("nuMax")),
+            nu_
+            (
+                IOobject
+                (
+                    "nu",
+                    U_.time().timeName(),
+                    U_.db(),
+                    IOobject::NO_READ,
+                    IOobject::AUTO_WRITE
+                ),
+                calcNu()
+            )
+        {}
+
+::
+
+	$ nano ConstantFriction.C
+	
+        // * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * * //
+
+        bool Foam::viscosityModels::ConstantFriction::read
+        (
+            const dictionary& viscosityProperties
+        )
+        {
+            viscosityModel::read(viscosityProperties);
+
+            ConstantFrictionCoeffs_ = viscosityProperties.subDict(typeName + "Coeffs");
+
+            ConstantFrictionCoeffs_.lookup("muStar") >> muStar_;
+            ConstantFrictionCoeffs_.lookup("nuMin") >> nuMin_;
+            ConstantFrictionCoeffs_.lookup("nuMax") >> nuMax_;
+
+
+            return true;
+        }
+
+
+        // ************************************************************************* //
+
+Add coefficients in header file:
+
+::
+
+    $ nano ConstantFriction.H
+	
+        dimensionedScalar muStar_;
+        dimensionedScalar nuMin_;
+        dimensionedScalar nuMax_;
+
+
+Compile in the main folder (creates .dep):
+
+::
+
+    $ wmake libso
+
+If a mistake is made, clean using
+
+::
+
+    $ wclean libso
+
+Test the solver
+---------------
+
+::
+
+    $ cp -rf non_newtonian_005_plates_test_casson_dense non_newtonian_006_plates_test_constant_friction_dense
+    $ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+
+In constant/transportProperties
+
+::
+
+    $ nano constant/transportProperties
+    
+        transportModel  ConstantFriction;
+
+        ConstantFrictionCoeffs
+        {
+                muStar        muStar [ 0 0 0 0 0 0 0 ] 0.11;
+                nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+                nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+        }
+
+In system/controlDict
+
+::
+
+    $ nano system/controlDict
+    
+        libs
+        (
+                "libConstantFriction.so"
+        );
+        
+::
+
+	$ nonNewtonianIcoFoam
+
+Calculate the velocity magnitude:
+
+::
+	
+	$ foamCalc mag U
+
+Sample the data:
+
+::
+
+	$ sample    
+
+Copy python
+
+::
+
+    $ cp ../non_newtonian_004_plates_test_newtonian_dense/plot.py .
+	
+Change the python script:
+
+::
+
+    $ cd ../non_newtonian_004_plates_test_newtonian_dense    
+    $ nano plot.py
+        data2 = np.genfromtxt('../non_newtonian_005_plates_test_casson_dense/postProcessing/sets/5/data_magU.xy', delimiter=' ', skip_hea$
+    $ python plot.py  
+        
+
+Add linear daCruz model - LinearFriction
+----------------------------------------
+
+LinearFriction
+
+::
+
+	$ cd $WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+	$ cp -rf ConstantFriction LinearFriction
+	$ cd LinearFriction
+	
+Remove everything except .C and .H files:
+
+::
+	
+	$ wclean libso
+	$ mv ConstantFriction.C LinearFriction.C
+	$ mv ConstantFriction.H LinearFriction.H
+	$ sed -i s/ConstantFriction/LinearFriction/g LinearFriction.C
+	$ sed -i s/ConstantFriction/LinearFriction/g LinearFriction.H
+
+
+Create make files:
+
+::
+
+	$ nano Make/files
+		
+		LinearFriction.C
+
+		LIB = $(FOAM_USER_LIBBIN)/libLinearFriction
+
+	$ nano Make/options
+
+		EXE_INC = \
+			-I$(LIB_SRC)/transportModels/incompressible/lnInclude \
+			-I$(LIB_SRC)/finiteVolume/lnInclude
+		LIB_LIBS = \
+			-lfiniteVolume	
+	
+
+Add Linear Friction model:		
+
+	
+::
+
+    $ nano LinearFriction.C	
+	
+	
+        / * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * * //
+
+        Foam::tmp<Foam::volScalarField>
+        Foam::viscosityModels::LinearFriction::calcNu() const
+        {
+            const volScalarField& p = U_.mesh().lookupObject<volScalarField>("p");
+            const volScalarField& muStar = muStar1_ + muStar2_ * (strainRate() / 
+                                pow
+                                (
+                                    max
+                                    (
+                                        p,
+                                        dimensionedScalar("VSMALL", p.dimensions(), VSMALL)
+                                    ),
+                                    0.5
+                                )
+                            );
+
+        
+            return max
+            (
+                nuMin_,
+                min
+                (
+                    nuMax_,
+                    (muStar*p)/
+                    max
+                    (
+                        strainRate(),
+                        dimensionedScalar("VSMALL", dimless/dimTime, VSMALL)
+                    )
+                )
+            );
+
+        }
+
+
+Add new coefficients:
+
+::
+
+	$ nano LinearFriction.C
+	
+	    // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
+
+        Foam::viscosityModels::LinearFriction::LinearFriction
+        (
+            const word& name,
+            const dictionary& viscosityProperties,
+            const volVectorField& U,
+            const surfaceScalarField& phi
+        )
+        :
+            viscosityModel(name, viscosityProperties, U, phi),
+            LinearFrictionCoeffs_(viscosityProperties.subDict(typeName + "Coeffs")),
+            muStar1_(LinearFrictionCoeffs_.lookup("muStar1")),
+            muStar2_(LinearFrictionCoeffs_.lookup("muStar2")),
+            nuMin_(LinearFrictionCoeffs_.lookup("nuMin")),
+            nuMax_(LinearFrictionCoeffs_.lookup("nuMax")),
+            nu_
+            (
+                IOobject
+                (
+                    "nu",
+                    U_.time().timeName(),
+                    U_.db(),
+                    IOobject::NO_READ,
+                    IOobject::AUTO_WRITE
+                ),
+                calcNu()
+            )
+        {}
+
+
+::
+
+	$ nano ConstantFriction.C
+	
+        // * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * * //
+
+        bool Foam::viscosityModels::ConstantFriction::read
+        (
+            const dictionary& viscosityProperties
+        )
+        {
+            viscosityModel::read(viscosityProperties);
+
+            ConstantFrictionCoeffs_ = viscosityProperties.subDict(typeName + "Coeffs");
+
+            ConstantFrictionCoeffs_.lookup("muStar1") >> muStar1_;
+            ConstantFrictionCoeffs_.lookup("muStar2") >> muStar2_; 
+            ConstantFrictionCoeffs_.lookup("nuMin") >> nuMin_;
+            ConstantFrictionCoeffs_.lookup("nuMax") >> nuMax_;
+
+
+            return true;
+        }
+
+
+        // ************************************************************************* //
+
+        
+ Add coefficients in header file:
+
+::
+
+    $ nano LinearFriction.H
+	
+        dimensionedScalar muStar1_;
+        dimensionedScalar muStar2_; 
+        dimensionedScalar nuMin_;
+        dimensionedScalar nuMax_;
+       
+Compile in the main folder (creates .dep):
+
+::
+
+    $ wmake libso
+
+If a mistake is made, clean using
+
+::
+
+    $ wclean libso        
+        
+        
+Test the solver
+---------------
+
+::
+
+    $ cp -rf non_newtonian_006_plates_test_constant_friction_dense non_newtonian_007_plates_test_linear_friction_dense
+    $ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+
+In constant/transportProperties
+
+::
+
+    $ nano constant/transportProperties
+    
+        transportModel  LinearFriction;
+
+        LinearFrictionCoeffs
+        {
+            muStar1       muStar1 [ 0 0 0 0 0 0 0 ] 0.11;
+            muStar2       muStar2 [ 0 1 0 0 0 0 0 ] 1.62;
+            nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+            nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+        }
+
+In system/controlDict
+
+::
+
+    $ nano system/controlDict
+    
+        libs
+        (
+                "libLinearFriction.so"
+        );
+        
+::
+
+	$ nonNewtonianIcoFoam
+
+Calculate the velocity magnitude:
+
+::
+	
+    $ foamCalc mag U
+
+Sample the data:
+
+::
+
+    $ sample    
+
+Copy python
+
+::
+
+    $ cp ../non_newtonian_004_plates_test_newtonian_dense/plot.py .
+	
+Change the python script:
+
+::
+
+    $ cd ../non_newtonian_004_plates_test_newtonian_dense    
+    $ nano plot.py
+        data2 = np.genfromtxt('../non_newtonian_005_plates_test_casson_dense/postProcessing/sets/5/data_magU.xy', delimiter=' ', skip_hea$
+    $ python plot.py          
+        
+        
+::  
+
+    Selecting incompressible transport model LinearFriction
+    new cannot satisfy memory request.
+    This does not necessarily mean you have run out of virtual memory.
+    It could be due to a stack violation caused by e.g. bad use of pointers or an out of date shared library
+    Aborted (core dumped)
+        
+        
+::
+
+    $ nano LinearFriction.C	
+	
+	
+        / * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * * //
+
+        Foam::tmp<Foam::volScalarField>
+        Foam::viscosityModels::LinearFriction::calcNu() const
+        {
+            const volScalarField& p = U_.mesh().lookupObject<volScalarField>("p");
+        
+            return max
+            (
+                nuMin_,
+                min
+                (
+                    nuMax_,
+                    (( muStar1_ + muStar2_ * (strainRate() / pow (max(p,dimensionedScalar("VSMALL", p.dimensions(), VSMALL)),0.5)))*p) /
+                    max
+                    (
+                        strainRate(),
+                        dimensionedScalar("VSMALL", dimless/dimTime, VSMALL)
+                    )
+                )
+            );
+
+        }
+
+        
+Add non-linear Jop model - NonLinearFriction
+--------------------------------------------        
+        
+NonLinearFriction
+
+::
+
+	$ cd $WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+	$ cp -rf LinearFriction NonLinearFriction
+	$ cd NonLinearFriction
+	
+Remove everything except .C and .H files:
+
+::
+
+	$ two
+	$ wclean libso
+	$ mv LinearFriction.C NonLinearFriction.C
+	$ mv LinearFriction.H NonLinearFriction.H
+	$ sed -i s/LinearFriction/NonLinearFriction/g NonLinearFriction.C
+	$ sed -i s/LinearFriction/NonLinearFriction/g NonLinearFriction.H
+        
+Create make files:
+
+::
+
+	$ nano Make/files
+		
+		NonLinearFriction.C
+
+		LIB = $(FOAM_USER_LIBBIN)/libNonLinearFriction
+
+	$ nano Make/options
+
+		EXE_INC = \
+			-I$(LIB_SRC)/transportModels/incompressible/lnInclude \
+			-I$(LIB_SRC)/finiteVolume/lnInclude
+		LIB_LIBS = \
+			-lfiniteVolume	
+	        
+Add NonLinear Friction model:		
+
+	
+::
+
+    $ nano NonLinearFriction.C	
+	
+	
+        // * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * * //
+
+		Foam::tmp<Foam::volScalarField>
+		Foam::viscosityModels::NonLinearFriction::calcNu() const
+		{
+			const volScalarField& p = U_.mesh().lookupObject<volScalarField>("p");
+
+			return max
+			(
+				nuMin_,
+				min
+				(
+				    nuMax_,
+				    (( muStar1_ + ( muStar2_ - muStar1_ ) / ( iZero_ / (max(strainRate(),dimensionedScalar("VSMALL", dimless/dimTime, VSMALL)) / pow (max(p,dimensionedScalar("VSMALL", p.dimensions(), VSMALL)),0.5)) + 1 ) )*p)/
+				    max
+				    (
+				        strainRate(),
+				        dimensionedScalar("VSMALL", dimless/dimTime, VSMALL)
+				    )
+				)
+			);
+
+		}
+        
+        
+::
+
+	$ nano LinearFriction.C
+	
+            // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
+
+            Foam::viscosityModels::NonLinearFriction::NonLinearFriction
+            (
+                const word& name,
+                const dictionary& viscosityProperties,
+                const volVectorField& U,
+                const surfaceScalarField& phi
+            )
+            :
+                viscosityModel(name, viscosityProperties, U, phi),
+                NonLinearFrictionCoeffs_(viscosityProperties.subDict(typeName + "Coeffs")),
+                iZero_(NonLinearFrictionCoeffs_.lookup("iZero")),
+                muStar1_(NonLinearFrictionCoeffs_.lookup("muStar1")),
+                muStar2_(NonLinearFrictionCoeffs_.lookup("muStar2")),
+                nuMin_(NonLinearFrictionCoeffs_.lookup("nuMin")),
+                nuMax_(NonLinearFrictionCoeffs_.lookup("nuMax")),
+                nu_
+                (
+                    IOobject
+                    (
+                        "nu",
+                        U_.time().timeName(),
+                        U_.db(),
+                        IOobject::NO_READ,
+                        IOobject::AUTO_WRITE
+                    ),
+                    calcNu()
+                )
+            {}      
+
+::            
+            
+    // * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * * //
+
+    bool Foam::viscosityModels::NonLinearFriction::read
+    (
+        const dictionary& viscosityProperties
+    )
+    {
+        viscosityModel::read(viscosityProperties);
+
+        NonLinearFrictionCoeffs_ = viscosityProperties.subDict(typeName + "Coeffs");
+        
+        NonLinearFrictionCoeffs_.lookup("iZero") >> iZero_;
+        NonLinearFrictionCoeffs_.lookup("muStar1") >> muStar1_;
+        NonLinearFrictionCoeffs_.lookup("muStar2") >> muStar2_;
+        NonLinearFrictionCoeffs_.lookup("nuMin") >> nuMin_;
+        NonLinearFrictionCoeffs_.lookup("nuMax") >> nuMax_;
+
+
+        return true;
+    }            
+            
+Add coefficients in header file:
+
+::
+
+    $ nano NonLinearFriction.H
+    
+	dimensionedScalar iZero_;
+        dimensionedScalar muStar1_;
+        dimensionedScalar muStar2_; 
+        dimensionedScalar nuMin_;
+        dimensionedScalar nuMax_;            
+            
+ Compile in the main folder (creates .dep):
+
+::
+
+    $ wmake libso
+
+If a mistake is made, clean using
+
+::
+
+    $ wclean libso             
+
+    
+Test the solver
+---------------
+
+::
+
+    $ cp -rf non_newtonian_007_plates_test_linear_friction_dense non_newtonian_008_plates_test_non_linear_friction_dense
+    $ cd non_newtonian_008_plates_test_non_linear_friction_dense
+    $ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+
+In constant/transportProperties
+
+::
+
+    $ nano constant/transportProperties
+    
+        transportModel  NonLinearFriction;
+
+        NonLinearFrictionCoeffs
+        {
+            iZero         iZero [ 0 -1 0 0 0 0 0 ] 0.279;
+            muStar1       muStar1 [ 0 0 0 0 0 0 0 ] 0.382;
+            muStar2       muStar2 [ 0 0 0 0 0 0 0 ] 0.643;
+            nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+            nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+        }
+
+In system/controlDict
+
+::
+
+    $ nano system/controlDict
+    
+        libs
+        (
+                "libNonLinearFriction.so"
+        );
+        
+::
+
+	$ nonNewtonianIcoFoam
+
+Calculate the velocity magnitude:
+
+::
+	
+    $ foamCalc mag U
+
+Sample the data:
+
+::
+
+    $ sample    
+    
+::
+
+    Floating point exception (core dumped)
+    
+Made sure everything was positive
+
+Now there is some distrubance - increase the length of the pipe to see if it is fully developed
+
+::
+
+    $ nano constant/polyMesh/blockMeshDict
+
+        // The vertices can be defined using variables Lx, Ly, Lz. It saves time to modify the size of the domain
+
+        Lx 20;
+        Ly 1;
+        Lz 0.1;
+
+::
+
+    $ nano system/sampleDict
+
+        start   (20 0 0);
+        end     (20 1 0);
+
+
+        
+::
+
+    $ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+
+Create the new mesh:
+
+::
+
+    $ blockMesh    
+    
+    
+::
+
+    $ nonNewtonianIcoFoam
+
+Calculate the velocity magnitude:
+
+::
+	
+    $ foamCalc mag U
+
+Sample the data:
+
+::
+
+    $ sample      
+
+    
+The inertial number is possibly too small. so that the regime being tested is not the dense regime.
+So export the local strain rate to see what the inertial number is
+
+::
+
+    $ nano NonLinearFriction.C	
+    
+    nu_
+    (
+        IOobject
+        (
+            "nu",
+            U_.time().timeName(),
+            U_.db(),
+            IOobject::NO_READ,
+            IOobject::AUTO_WRITE
+        ),
+        calcNu()
+    ),
+    strainRate_
+    (
+        IOobject
+        (
+            "strainRate",
+            U_.time().timeName(),
+            U_.db(),
+            IOobject::NO_READ,
+            IOobject::AUTO_WRITE
+        ),
+        strainRate()
+    )
+    
+::
+
+    $ nano NonLinearFriction.H
+
+        volScalarField strainRate_;
+    
+::
+
+    $ cp -rf  non_newtonian_008_plates_test_non_linear_friction_dense non_newtonian_009_plates_test_non_linear_friction_dense_strain
+    $ cd non_newtonian_009_plates_test_non_linear_friction_dense_strain
+    $ rm -rf 0.* [1-9]* postProcessing *.foam *.png  
+    
+    
+::
+
+    $ nonNewtonianIcoFoam
+
+Calculate the velocity magnitude:
+
+::
+	
+    $ foamCalc mag U
+
+Sample the data:
+
+::
+
+    $ sample  
+    
+    
+Strain rate can't be zero, so output strain rate from a Functions
+
+::
+
+    $ nano NonLinearFriction.C
+
+        Foam::tmp<Foam::volScalarField>
+        Foam::viscosityModels::NonLinearFriction::calcStrainRate() const
+        {
+
+            return max
+            (
+                strainRate(),
+                dimensionedScalar("VSMALL", dimless/dimTime, VSMALL)
+
+            );
+
+        }
+        
+::
+
+    $ nano NonLinearFriction.H
+        
+        //- Calculate and return the strain rate
+        tmp<volScalarField> calcStrainRate() const;  
+        
+        
+Strain rate is zero for most of the channel
+
+So what is the friction?
+
+::
+
+    Foam::tmp<Foam::volScalarField>
+    Foam::viscosityModels::NonLinearFriction::calcMu() const
+    {
+
+        return
+        ( muStar1_ + ( muStar2_ - muStar1_ ) / ( iZero_ / (max(strainRate(),dimensionedScalar("VSMALL", dimless/dimTime, VSMALL)) / pow (max(p,dimensionedScalar("VSMALL", p.dimensions(), VSMALL)),0.5)) + 1 ) );
+
+    }
+
+    mu_
+    (
+        IOobject
+        (
+            "mu",
+            U_.time().timeName(),
+            U_.db(),
+            IOobject::NO_READ,
+            IOobject::AUTO_WRITE
+        ),
+        calcMu()
+    )
+    
+Viscosity is out of range because pressure is extremely high.
+
+set pressure = 100 at inlet
+
+::
+
+    $ cp -rf  non_newtonian_009_plates_test_non_linear_friction_dense_strain non_newtonian_010_plates_non_linear_pressure
+    $ cd non_newtonian_010_plates_non_linear_pressure
+    $ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+    
+    
+    
+    
+::
+
+	$ mkdir 0
+	$ nano 0/p
+
+            FoamFile
+            {
+                version     2.0;
+                format      ascii;
+                class       volScalarField;
+                object      p;
+            }
+            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+            dimensions      [0 2 -2 0 0 0 0];
+
+            internalField   uniform 0;
+
+            boundaryField
+            {
+                inlet
+                {
+                    type            fixedValue;
+                    value           uniform 101.325;
+                }
+
+                outlet
+                {
+                    type            fixedValue;
+                    value           uniform 0;
+                }
+
+
+                walls
+                {
+                    type            zeroGradient;
+                }
+
+
+                frontAndBack
+                {
+                    type            empty;
+                }
+
+            }
+
+
+	$ nano 0/U
+
+            FoamFile
+            {
+                version     2.0;
+                format      ascii;
+                class       volVectorField;
+                object      U;
+            }
+            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+            dimensions      [0 1 -1 0 0 0 0];
+
+            internalField   uniform (0 0 0);
+
+            boundaryField
+            {
+                inlet
+                {
+                    type            zeroGradient;
+                }
+
+                outlet
+                {
+                    type            zeroGradient;
+                }
+
+
+                walls
+                {
+                    type            fixedValue;
+                    value           uniform (0 0 0);
+                }
+
+                
+                frontAndBack
+                {
+                    type            empty;
+                }
+
+            }  
+    
+ ::
+
+    $ nonNewtonianIcoFoam
+
+Calculate the velocity magnitude:
+
+::
+	
+    $ foamCalc mag U
+
+Sample the data:
+
+::
+
+    $ sample  
+       
+Reduce pressure at inlet:       
+              
+::
+
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 10;
+    }    
+    
+Output in solver  not constructor for updated values
+    
+$ cp -r $FOAM_APP/solvers/incompressible/nonNewtonianIcoFoam nonNewtonianIcoFoamGranular
+
+Once the laplacianFoam solver has been copied into the user directory, we rename the main file and edit the Make/files    
+    
+::    
+    
+    $ cd nonNewtonianIcoFoamGranular
+    $ mv nonNewtonianIcoFoam.C nonNewtonianIcoFoamGranular.C
+    $ wclean
+    $ gedit Make/files
+
+Change files    
+    
+::
+
+    nonNewtonianIcoFoamGranular.C
+
+    EXE = $(FOAM_USER_APPBIN)/nonNewtonianIcoFoamGranular
+
+We can now clean the previous compilation with wclean and compile this new program with wmake.
+
+::
+
+    $ wclean
+    $ wmake
+    
+Add this to NonLinearFriction.H
+
+::
+
+        //- Correct the laminar viscosity
+        void correct()
+        {
+            nu_ = calcNu();
+            strainRate_ = calcStrainRate();
+            mu_ = calcMu();
+            Info << "max(nu): " << max(calcNu()).value() << " min(nu): " << min(calcNu()).value() << endl; 
+            Info << "max(sr): " << max(calcStrainRate()).value() << " min(sr): " << min(calcStrainRate()).value() << endl;
+            Info << "max(mu): " << max(calcMu()).value() << " min(mu): " << min(calcMu()).value() << endl;
+        }
+
+        
+        
+        
+It's unclear why the maximum value of calcstrainRate() as output from correct() is different from the value in paraview
+
+before PISO loop:
+
+max(calcStrainRate()).value() = 0.103329
+
+after PISO loop:
+
+max(calcStrainRate()).value()  = 0.0752414
+
+Paraview: max strainrate (volumes) = 0.0629
+                         (points) = 0.0833
+
+May depend on the way the maximum is computed, using points or volumes     
+
+Choose to define inertia number based on global values
+    
+Repeat with Newtonian ,  linear and Casson (Poiseulle)
+
+
+
+
+non_newtonian_010_plates_non_linear_pressure        
+--------------------------------------------
+
+In system/controlDict
+
+::
+
+    $ nano system/controlDict
+    
+        application nonNewtonianIcoFoamGranular
+        
+::
+
+    $ nonNewtonianIcoFoamGranular
+
+Calculate the velocity magnitude:
+
+::
+	
+    $ foamCalc mag U
+
+Sample the data:
+
+::
+
+    $ sample
+    
+    
+non_newtonian_011_plates_linear_pressure     
+----------------------------------------
+
+::
+
+    $ cp -rf non_newtonian_010_plates_non_linear_pressure non_newtonian_011_plates_linear_pressure
+    $ cd non_newtonian_011_plates_linear_pressure
+    $ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+
+In system/controlDict
+
+::
+
+    $ nano system/controlDict
+
+    
+        application nonNewtonianIcoFoamGranular
+        
+        libs
+        (
+                "libLinearFriction.so"
+        );    
+    
+::
+
+    $ nano constant/transportProperties
+    
+    transportModel  LinearFriction;
+    
+::
+
+    $ nonNewtonianIcoFoamGranular
+
+Calculate the velocity magnitude:
+
+::
+	
+    $ foamCalc mag U
+
+Sample the data:
+
+::
+
+    $ sample    
+
+non_newtonian_012_plates_casson_pressure      
+----------------------------------------
+
+::
+
+    $ cp -rf non_newtonian_011_plates_linear_pressure non_newtonian_012_plates_casson_pressure
+    $ cd non_newtonian_012_plates_casson_pressure
+    $ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+
+In system/controlDict
+
+::
+
+    $ nano system/controlDict
+    
+        libs
+        (
+                "libCasson.so"
+        );    
+    
+::
+
+    $ nano constant/transportProperties
+    
+    transportModel  Casson;    
+
+::
+
+    $ nonNewtonianIcoFoam    
+    
+
+non_newtonian_013_plates_newtonian_pressure      
+-------------------------------------------
+
+::
+
+    $ cp -rf non_newtonian_012_plates_casson_pressure non_newtonian_013_plates_newtonian_pressure
+    $ cd non_newtonian_013_plates_newtonian_pressure
+    $ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+
+::
+
+    $ nano system/controlDict
+    
+      //  libs
+      //  (
+      //         "libCasson.so"
+      //  );    
+    
+::
+
+    $ nano constant/transportProperties
+    
+    transportModel  Newtonian;    
+    
+::
+
+    $ nonNewtonianIcoFoam 
+
+
+non_newtonian_014_plates_linear_new_coefficients     
+------------------------------------------------
+
+Use coefficients from daCruz 2008
+
+::
+
+    $ cp -rf non_newtonian_011_plates_linear_pressure non_newtonian_014_plates_linear_new_coefficients
+    $ cd non_newtonian_014_plates_linear_new_coefficients
+    $ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+
+In system/controlDict
+
+::
+
+    $ nano system/controlDict
+
+    
+        LinearFrictionCoeffs
+        {
+            muStar1       muStar1 [ 0 0 0 0 0 0 0 ] 0.22;
+            muStar2       muStar2 [ 0 1 0 0 0 0 0 ] 1.00;
+            nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+            nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+        }   
+    
+::
+
+    $ nonNewtonianIcoFoamGranular
+
+Calculate the velocity magnitude:
+
+::
+	
+    $ foamCalc mag U
+
+Sample the data:
+
+::
+
+    $ sample    
+    
+    
+mu is becoming very large = 7.81189e+148, this is no -physical
+
+Introduce satruation for mu
+
+New Viscosity Model - LinearFrictionSaturated
+---------------------------------------------
+
+LinearFrictionSaturated
+
+::
+        
+        $ two
+        $ cd $WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+        $ cp -rf LinearFriction LinearFrictionSaturated
+        $ cd LinearFrictionSaturated
+	
+Remove everything except .C and .H files:
+
+::
+	
+	$ wclean libso
+	$ mv LinearFriction.C LinearFrictionSaturated.C
+	$ mv LinearFriction.H LinearFrictionSaturated.H
+	$ sed -i s/LinearFriction/LinearFrictionSaturated/g LinearFrictionSaturated.C
+	$ sed -i s/LinearFriction/LinearFrictionSaturated/g LinearFrictionSaturated.H
+	$ sed -i s/LinearFriction/LinearFrictionSaturated/g Make/files
+
+Add Linear Friction model:		
+
+::
+
+        $ nano LinearFrictionSaturated.C
+        
+            Foam::tmp<Foam::volScalarField>
+            Foam::viscosityModels::LinearFrictionSaturated::calcNu() const
+            {
+                const volScalarField& p = U_.mesh().lookupObject<volScalarField>("p");
+
+                return max
+                (
+                    nuMin_,
+                    min
+                    (
+                        nuMax_,
+                        ((min
+                        (
+                            muMax_,
+                            muStar1_ + muStar2_ * ((strainRate() * diameter_) / pow (max(p,dimensionedScalar("VSMALL", p.dimensions(), VSMALL)),0.5))
+                        ))*p)/
+                        max
+                        (
+                            strainRate(),
+                            dimensionedScalar("VSMALL", dimless/dimTime, VSMALL)
+                        )
+                    )
+                );
+
+            }
+        
+        
+            Foam::tmp<Foam::volScalarField>
+            Foam::viscosityModels::LinearFrictionSaturated::calcMu() const
+            {
+                const volScalarField& p = U_.mesh().lookupObject<volScalarField>("p");
+
+                return min 
+                (
+                    muMax_,
+                    muStar1_ + muStar2_ * ((strainRate() * diameter_) / pow (max(p,dimensionedScalar("VSMALL", p.dimensions(), VSMALL)),0.5))
+                );
+
+            }
+
+            
+            muMax_(LinearFrictionSaturatedCoeffs_.lookup("muMax")),
+            diameter_(LinearFrictionSaturatedCoeffs_.lookup("diameter")),
+            
+            LinearFrictionSaturatedCoeffs_.lookup("muMax") >> muMax_;
+            LinearFrictionSaturatedCoeffs_.lookup("diameter") >> diameter_;
+            
+            
+::
+
+    $ nano LinearFrictionSaturated.H
+
+        dimensionedScalar muMax_;
+        dimensionedScalar diameter_;
+
+Compile in the main folder (creates .dep):
+
+::
+
+    $ wmake libso
+
+If a mistake is made, clean using
+
+::
+
+    $ wclean libso 
+
+
+non_newtonian_015_plates_linear_saturated     
+-----------------------------------------
+
+::
+
+    $ cd $FOAM_RUN
+    $ cp -rf non_newtonian_014_plates_linear_new_coefficients non_newtonian_015_plates_linear_saturated
+    $ cd non_newtonian_015_plates_linear_saturated
+    $ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+
+::
+
+    $ nano constant/transportProperties
+
+    
+        LinearFrictionSaturatedCoeffs
+        {
+            muStar1       muStar1 [ 0 0 0 0 0 0 0 ] 0.22;
+            muStar2       muStar2 [ 0 1 0 0 0 0 0 ] 1.00;
+            muMax         muMax [ 0 0 0 0 0 0 0 ] 0.44;
+            nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+            nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+            diameter      diameter [ 0 1 0 0 0 0 0 ] 1;
+        }   
+   
+::
+
+    $ nano system/controlDict
+
+        libs
+        (
+                "libLinearFrictionSaturated.so"
+        );   
+   
+::
+
+    $ nonNewtonianIcoFoamGranular
+
+Calculate the velocity magnitude:
+
+::
+	
+    $ foamCalc mag U
+
+Sample the data:
+
+::
+
+    $ sample 
+
+
+Introduce diameter into Inertial Number in Non Linear Friction Model
+--------------------------------------------------------------------
+
+NonLinearFrictionDiameter
+
+::
+        
+        $ two
+        $ cd $WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+        $ cp -rf NonLinearFriction NonLinearFrictionDiameter
+        $ cd NonLinearFrictionDiameter
+	
+Remove everything except .C and .H files:
+
+::
+	
+	$ wclean libso
+	$ mv NonLinearFriction.C NonLinearFrictionDiameter.C
+	$ mv NonLinearFriction.H NonLinearFrictionDiameter.H
+	$ sed -i s/NonLinearFriction/NonLinearFrictionDiameter/g NonLinearFrictionDiameter.C
+	$ sed -i s/NonLinearFriction/NonLinearFrictionDiameter/g NonLinearFrictionDiameter.H
+	$ sed -i s/NonLinearFriction/NonLinearFrictionDiameter/g Make/files
+
+Add Linear Friction model:		
+
+::
+
+    Foam::tmp<Foam::volScalarField>
+    Foam::viscosityModels::NonLinearFrictionDiameter::calcNu() const
+    {
+        const volScalarField& p = U_.mesh().lookupObject<volScalarField>("p");
+        //volScalarField sR("StrainRate", strainRate());
+        //Info << "Max volSR = " << max(sR) << "; min volSR = " << min(sR) << endl;
+        //Info << "max(strainRate): " << max(strainRate()).value() << " min(strainRate): " << min(strainRate()).value() << endl; 
+        
+        return max
+        (
+            nuMin_,
+            min
+            (
+                nuMax_,
+                (( muStar1_ + ( muStar2_ - muStar1_ ) / ( iZero_ / ( ((max(strainRate(),dimensionedScalar("VSMALL", dimless/dimTime, VSMALL)) * diameter_) / pow (max(p,dimensionedScalar("VSMALL", p.dimensions(), VSMALL)),0.5)) + 1 ) ) )*p)/
+                max
+                (
+                    strainRate(),
+                    dimensionedScalar("VSMALL", dimless/dimTime, VSMALL)
+                )
+            )
+        );
+
+    }
+    
+    
+    Foam::tmp<Foam::volScalarField>
+    Foam::viscosityModels::NonLinearFrictionDiameter::calcMu() const
+    {
+        const volScalarField& p = U_.mesh().lookupObject<volScalarField>("p");
+
+        return
+        ( muStar1_ + ( muStar2_ - muStar1_ ) / ( iZero_ / ( ((max(strainRate(),dimensionedScalar("VSMALL", dimless/dimTime, VSMALL)) * diameter_) / pow (max(p,dimensionedScalar("VSMALL", p.dimensions(), VSMALL)),0.5)) + 1 ) ) );
+
+    }
+    
+    diameter_(NonLinearFrictionDiameterCoeffs_.lookup("diameter")),
+    NonLinearFrictionDiameterCoeffs_.lookup("diameter") >> diameter_;
+    
+    
+::
+
+    $ nano LinearFrictionSaturated.H
+    
+        dimensionedScalar diameter_;
+        
+Compile in the main folder (creates .dep):
+
+::
+
+    $ wmake libso
+
+If a mistake is made, clean using
+
+::
+
+    $ wclean libso 
+    
+    
+non_newtonian_016_plates_non_linear_diameter     
+--------------------------------------------
+
+::
+
+    $ cd $FOAM_RUN
+    $ cp -rf non_newtonian_015_plates_linear_saturated non_newtonian_016_plates_linear_diameter
+    $ cd non_newtonian_016_plates_linear_diameter
+    $ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+
+::
+
+    $ nano constant/transportProperties
+
+    
+        NonLinearFrictionDiameterCoeffs
+        {
+			iZero         iZero [ 0 0 0 0 0 0 0 ] 0.279;
+			muStar1       muStar1 [ 0 0 0 0 0 0 0 ] 0.382;
+			muStar2       muStar2 [ 0 0 0 0 0 0 0 ] 0.643;
+			nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+			nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+			diameter      diameter [ 0 1 0 0 0 0 0 ] 1;
+        }   
+   
+::
+
+    $ nano system/controlDict
+
+        libs
+        (
+                "libNonLinearFrictionDiameter.so"
+        );   
+   
+::
+
+    $ nonNewtonianIcoFoamGranular
+
+Calculate the velocity magnitude:
+
+::
+	
+    $ foamCalc mag U
+
+Sample the data:
+
+::
+
+    $ sample     
+    
+Declare variables separately for easy readability
+-------------------------------------------------
+
+
+NonLinearFrictionDiameterDeclare
+
+::
+        
+        $ two
+        $ cd $WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+        $ cp -rf NonLinearFrictionDiameter NonLinearFrictionDiameterDeclare
+        $ cd NonLinearFrictionDiameterDeclare
+
+Remove everything except .C and .H files:
+
+::
+	
+	$ wclean libso
+	$ mv NonLinearFrictionDiameter.C NonLinearFrictionDiameterDeclare.C
+	$ mv NonLinearFrictionDiameter.H NonLinearFrictionDiameterDeclare.H
+	$ sed -i s/NonLinearFrictionDiameter/NonLinearFrictionDiameterDeclare/g NonLinearFrictionDiameterDeclare.C
+	$ sed -i s/NonLinearFrictionDiameter/NonLinearFrictionDiameterDeclare/g NonLinearFrictionDiameterDeclare.H
+	$ sed -i s/NonLinearFrictionDiameter/NonLinearFrictionDiameterDeclare/g Make/files
+
+::
+
+	// * * * * * * * * * * * * Private Member Functions  * * * * * * * * * * * * //
+
+	Foam::tmp<Foam::volScalarField>
+	Foam::viscosityModels::NonLinearFrictionDiameterDeclare::calcNu() const
+	{
+		const volScalarField& p = U_.mesh().lookupObject<volScalarField>("p");
+		
+		const volScalarField strainRate_
+		( 
+		    max(strainRate(), dimensionedScalar("VSMALL", dimless/dimTime, VSMALL))     // Zero strainRate -> Divide by zero in return statement
+		);
+		
+		return max
+		(
+		    nuMin_, min ( nuMax_, (calcMu()*p)/strainRate_ )
+		);
+
+	}
+
+
+	Foam::tmp<Foam::volScalarField>
+	Foam::viscosityModels::NonLinearFrictionDiameterDeclare::calcMu() const
+	{
+		const volScalarField& p = U_.mesh().lookupObject<volScalarField>("p");
+		
+		// VSMALL = 1.0e-37
+		
+		const volScalarField strainRate_
+		( 
+		    max(strainRate(), dimensionedScalar("VSMALL", dimless/dimTime, VSMALL))     // Zero strainRate -> Zero iNumber_ -> Divide by zero in return statement             
+		);
+		
+		const volScalarField pressure_
+		( 
+		    max(p, dimensionedScalar("VSMALL", p.dimensions(), VSMALL))                 // Zero pressure -> Sqrt of negative number in iNumber_
+		);
+		
+		const volScalarField iNumber_
+		( 
+		    (strainRate_ * diameter_) / pow (pressure_, 0.5) 
+		);
+		
+		return ( muStar1_ + ( muStar2_ - muStar1_ ) / ( (iZero_ / iNumber_) + 1 ) );
+
+	}
+
+
+
+
+
+Compile in the main folder (creates .dep):
+
+::
+
+    $ wmake libso
+
+If a mistake is made, clean using
+
+::
+
+    $ wclean libso     
+    
+non_newtonian_017_plates_nonlinear_diameter_declare     
+---------------------------------------------------
+
+::
+
+    $ cd $FOAM_RUN
+    $ cp -rf non_newtonian_016_plates_nonlinear_diameter non_newtonian_017_plates_nonlinear_diameter_declare
+    $ cd non_newtonian_017_plates_nonlinear_diameter_declare
+    $ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+
+::
+
+    $ nano constant/transportProperties
+
+    
+        NonLinearFrictionDiameterDeclareCoeffs
+        {
+			iZero         iZero [ 0 0 0 0 0 0 0 ] 0.279;
+			muStar1       muStar1 [ 0 0 0 0 0 0 0 ] 0.382;
+			muStar2       muStar2 [ 0 0 0 0 0 0 0 ] 0.643;
+			nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+			nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+			diameter      diameter [ 0 1 0 0 0 0 0 ] 1;
+        }   
+   
+::
+
+    $ nano system/controlDict
+
+        libs
+        (
+                "libNonLinearFrictionDiameterDeclare.so"
+        );   
+   
+::
+
+    $ nonNewtonianIcoFoamGranular
+
+Calculate the velocity magnitude:
+
+::
+	
+    $ foamCalc mag U
+
+Sample the data:
+
+::
+
+    $ sample 
+
+Declare variables separately for easy readability
+-------------------------------------------------
+
+
+LinearFrictionDiameterDeclare
+
+::
+        
+    $ two
+    $ cd $WM_PROJECT_USER_DIR/src/transportModels/incompressible/viscosityModels
+    $ cp -rf LinearFrictionSaturated LinearFrictionDiameterDeclare
+    $ cd LinearFrictionDiameterDeclare
+
+Remove everything except .C and .H files:
+
+::
+	
+	$ mv LinearFrictionSaturated.C LinearFrictionDiameterDeclare.C
+	$ mv LinearFrictionSaturated.H LinearFrictionDiameterDeclare.H
+	$ sed -i s/LinearFrictionSaturated/LinearFrictionDiameterDeclare/g LinearFrictionDiameterDeclare.C
+	$ sed -i s/LinearFrictionSaturated/LinearFrictionDiameterDeclare/g LinearFrictionDiameterDeclare.H
+	$ sed -i s/LinearFrictionSaturated/LinearFrictionDiameterDeclare/g Make/files
+
+::
+
+	Foam::tmp<Foam::volScalarField>
+	Foam::viscosityModels::LinearFrictionDiameterDeclare::calcNu() const
+	{
+		const volScalarField& p = U_.mesh().lookupObject<volScalarField>("p");
+
+		const volScalarField strainRate_
+		( 
+		    max(strainRate(), dimensionedScalar("VSMALL", dimless/dimTime, VSMALL))     // Zero strainRate -> Divide by zero in return statement
+		);
+		
+		return max
+		(
+		    nuMin_, min ( nuMax_, (calcMu()*p)/strainRate_ )
+		);
+
+	}
+
+
+	Foam::tmp<Foam::volScalarField>
+	Foam::viscosityModels::LinearFrictionDiameterDeclare::calcMu() const
+	{
+		const volScalarField& p = U_.mesh().lookupObject<volScalarField>("p");
+
+		const volScalarField pressure_
+		( 
+		    max(p, dimensionedScalar("VSMALL", p.dimensions(), VSMALL))                 // Zero pressure -> Sqrt of negative number in iNumber_
+		);
+		
+		const volScalarField iNumber_
+		( 
+		    (strainRate() * diameter_) / pow (pressure_, 0.5) 
+		);
+		
+		
+		return min 
+		(
+		    muMax_, ( muStar1_ + muStar2_ * iNumber_ )
+		);
+
+	}
+
+
+non_newtonian_018_plates_linear_diameter_declare     
+------------------------------------------------
+
+::
+
+    $ cd $FOAM_RUN
+    $ cp -rf non_newtonian_017_plates_nonlinear_diameter non_newtonian_018_plates_linear_diameter_declare
+    $ cd non_newtonian_018_plates_linear_diameter_declare
+    $ rm -rf 0.* [1-9]* postProcessing *.foam *.png
+
+::
+
+    $ nano constant/transportProperties
+
+    
+		LinearFrictionDiameterDeclareCoeffs
+		{
+			muStar1       muStar1 [ 0 0 0 0 0 0 0 ] 0.22;
+			muStar2       muStar2 [ 0 0 0 0 0 0 0 ] 1.00;
+			muMax         muMax [ 0 0 0 0 0 0 0 ] 0.44;
+			nuMin         nuMin [ 0 2 -1 0 0 0 0 ] 0.0001;
+			nuMax         nuMax [ 0 2 -1 0 0 0 0 ] 100;
+			diameter      diameter [ 0 1 0 0 0 0 0 ] 1.0;
+		}
+ 
+   
+::
+
+    $ nano system/controlDict
+
+        libs
+        (
+                "libLinearFrictionDiameterDeclare.so"
+        );   
+   
+::
+
+    $ nonNewtonianIcoFoamGranular
+
+Calculate the velocity magnitude:
+
+::
+	
+    $ foamCalc mag U
+
+Sample the data:
+
+::
+
+    $ sample 
+
+
+twoPhaseEulerFoam Modifications
+===============================
+
+::
+
+	$ cp -rf /home/apr207/OpenFOAM/OpenFOAM-2.4.0/tutorials/multiphase/twoPhaseEulerFoam/laminar .
+
+Laminar air flow, turbulent particle flow
+
+Altered geometry so that the width is only 8cm (from 15cm)
+
+Also added alpha.air to initial conditions so that setFields will work correctly
+
+::
+
+	$ cd ~/OpenFOAM/apr207-2.4.0/run/eulerian_006_fluidisedBed_geometry/
+
+::
+
+	$ ./script_run
+
+::
+
+	$ gnuplot -persist plot_residuals_live
+
+control + c will quit this window
+
+Wall clock time = 315 seconds (5 min)
+
+
+Copy twoPhaseEulerFoam to check if 2.2.2 is installed correctly
+---------------------------------------------------------------
+
+Copy the code from source
+
+::
+
+	cd $WM_PROJECT_USER_DIR/applications/solvers
+	cp -rf $FOAM_APP/solvers/multiphase/twoPhaseEulerFoam/ .
+	mv twoPhaseEulerFoam twoPhaseEulerFoamNew
+	cd twoPhaseEulerFoamNew
+	mv twoPhaseEulerFoam.C twoPhaseEulerFoamNew.C
+	sed -i s/twoPhaseEulerFoam/twoPhaseEulerFoamNew/g twoPhaseEulerFoamNew.C
+	sed -i s/twoPhaseEulerFoam/twoPhaseEulerFoamNew/g Make/files
+	wclean
+	wmake
+
+	In file included from twoPhaseEulerFoamNew.C:64:0:
+	/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/finiteVolume/lnInclude/readTimeControls.H: In function ‘int main(int, char**)’:
+	/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/finiteVolume/lnInclude/readTimeControls.H:38:8: warning: unused variable ‘maxDeltaT’ [-Wunused-variable]
+	 scalar maxDeltaT =
+
+
+Run the case:
+
+::
+
+	run
+	cp -rf $FOAM_TUTORIALS/multiphase/twoPhaseEulerFoam/bed2/ .
+	cd bed2
+	sed -i s/twoPhaseEulerFoam/twoPhaseEulerFoamNew/g system/controlDict
+	blockMesh
+
+
+Corrected 2.1.0 case and solver to 2.2.2
+----------------------------------------
+
+Run the case:
+
+::
+
+	run
+	cd twoPhaseEulerSource
+	blockMesh
+	cp 0/alpha1.org 0/alpha1
+	setFields
+	decomposePar
+	mpirun -np 8 twoPhaseEulerSource -parallel > log &
+
+
+
+Adding New Boundary Condition to twoPhaseEulerFoam
+--------------------------------------------------
+
+Create new solver
+~~~~~~~~~~~~~~~~~
+
+::
+
+	cd $WM_PROJECT_USER_DIR/applications/solvers/multiphase
+	cp -rf twoPhaseEulerFoamNew twoPhaseEulerSrivastava
+	cd twoPhaseEulerSrivastava
+	mv twoPhaseEulerFoamNew.C twoPhaseEulerSrivastava.C
+	sed -i s/twoPhaseEulerFoamNew/twoPhaseEulerSrivastava/g twoPhaseEulerSrivastava.C
+	sed -i s/twoPhaseEulerFoamNew/twoPhaseEulerSrivastava/g Make/files
+	wclean
+	wmake
+
+
+Copy JohnsonJacksonParticleSlip from 2.3.x to 2.2.2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+OpenFOAM-2.3.x/applications/solvers/multiphase/twoPhaseEulerFoam/phaseCompressibleTurbulenceModels/kineticTheoryModels/derivedFvPatchFields/JohnsonJacksonParticleSlip/
+
+into folder 
+
+~/OpenFOAM/apr207-2.2.2/applications/solvers/multiphase/twoPhaseEulerSrivastava/kineticTheoryModels/derivedFvPatchFields/JohnsonJacksonParticleSlip/
+
+Added .C file to kineticTheoryModels/Make
+
+::
+
+    derivedFvPatchFields/JohnsonJacksonParticleSlip/JohnsonJacksonParticleSlipFvPatchVectorField.C
+
+    
+Correct Make and options files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+twoPhaseEulerSrivastava    
+""""""""""""""""""""""" 
+
+nano Make/files (altered) - location and name of executable has changed
+
+The first line means the .C file to compile is located one directory above the Make folder.
+
+The second line means put the executable in the directory $FOAM_USER_APPBIN
+
+::
+
+    twoPhaseEulerSrivastava.C
+
+    EXE = $(FOAM_USER_APPBIN)/twoPhaseEulerSrivastava
+
+https://cfd.direct/openfoam/user-guide/compiling-applications/    
+    
+nano Make/options (altered):
+
+* EXE_INC is the path to the libraries
+* EXE_LIBS is the library names (these have been altered). The library path must also be given, the user location.
+* The actual library files to be linked must be specified using the -l option and removing the lib prefix and .so extension from the library file name, e.g.  libnew.so is included with the flag -lnew
+
+Why is -L specified only once? Possibly because -L adds an additional path to the default path ($FOAM_LIBBIN)
+
+::
+
+    EXE_INC = \
+        -I$(LIB_SRC)/finiteVolume/lnInclude \
+        -I$(LIB_SRC)/transportModels/incompressible/lnInclude \
+        -IturbulenceModel \
+        -I$(WM_PROJECT_USER_DIR)/applications/solvers/multiphase/twoPhaseEulerSrivastava/kineticTheoryModels/lnInclude \
+        -I$(WM_PROJECT_USER_DIR)/applications/solvers/multiphase/twoPhaseEulerSrivastava/interfacialModels/lnInclude \
+        -I$(WM_PROJECT_USER_DIR)/applications/solvers/multiphase/twoPhaseEulerSrivastava/phaseModel/lnInclude \
+        -Iaveraging
+
+    EXE_LIBS = \
+        -L$(FOAM_USER_LIBBIN) \
+        -lEulerianInterfacialModelsSrivastava \
+        -lfiniteVolume \
+        -lmeshTools \
+        -lincompressibleTransportModels \
+        -lphaseModelSrivastava \
+        -lkineticTheoryModelSrivastava
+
+The result:
+
+::
+
+    + wmake
+    SOURCE=twoPhaseEulerSrivastava.C ;  
+    -I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/finiteVolume/lnInclude 
+    -I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/transportModels/incompressible/lnInclude 
+    -IturbulenceModel 
+    -I/home/apr207/OpenFOAM/apr207-2.2.2/applications/solvers/multiphase/twoPhaseEulerSrivastava/kineticTheoryModels/lnInclude 
+    -I/home/apr207/OpenFOAM/apr207-2.2.2/applications/solvers/multiphase/twoPhaseEulerSrivastava/interfacialModels/lnInclude 
+    -I/home/apr207/OpenFOAM/apr207-2.2.2/applications/solvers/multiphase/twoPhaseEulerSrivastava/phaseModel/lnInclude 
+    -Iaveraging 
+
+    -L/home/apr207/OpenFOAM/apr207-2.2.2/platforms/linux64GccDPOpt/lib 
+    -lEulerianInterfacialModelsSrivastava 
+    -lfiniteVolume 
+    -lmeshTools 
+    -lincompressibleTransportModels 
+    -lphaseModelSrivastava 
+    -lkineticTheoryModelSrivastava 
+
+Interfacial Model    
+"""""""""""""""""             
+
+The location of the nine .C files to compile is the same relative to the Make folder.
+
+nano interfacialModels/Make/files (altered):
+
+* The location and name of the EulerianInterfacialModels library has changed
+
+::
+
+    dragModels/dragModel/dragModel.C
+    dragModels/dragModel/newDragModel.C
+    dragModels/Ergun/Ergun.C
+    dragModels/GidaspowErgunWenYu/GidaspowErgunWenYu.C
+    dragModels/GidaspowSchillerNaumann/GidaspowSchillerNaumann.C
+    dragModels/SchillerNaumann/SchillerNaumann.C
+    dragModels/Gibilaro/Gibilaro.C
+    dragModels/WenYu/WenYu.C
+    dragModels/SyamlalOBrien/SyamlalOBrien.C
+
+    LIB = $(FOAM_USER_LIBBIN)/libEulerianInterfacialModelsSrivastava
+
+nano interfacialModels/Make/options (altered):
+
+* The name and location of the phaseModel library has changed
+    
+::
+
+    EXE_INC = \
+        -I$(LIB_SRC)/finiteVolume/lnInclude \
+        -I$(WM_PROJECT_USER_DIR)/applications/solvers/multiphase/twoPhaseEulerSrivastava/phaseModel/lnInclude
+
+    LIB_LIBS = \
+        -L$(FOAM_USER_LIBBIN) \
+        -lphaseModelSrivastava  
+    
+    
+The result (just the bits that correspond with the above) - library `lphaseModelSrivastava` can't be seen - for some unknown reason. 
+
+::
+
+    + wmake libso interfacialModels
+    SOURCE=dragModels/dragModel/dragModel.C ;  
+    -I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/finiteVolume/lnInclude 
+    -I/home/apr207/OpenFOAM/apr207-2.2.2/applications/solvers/multiphase/twoPhaseEulerSrivastava/phaseModel/lnInclude 
+    -I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude 
+    -I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OSspecific/POSIX/lnInclude   
+    SOURCE=dragModels/dragModel/newDragModel.C ;  
+    ...   
+    SOURCE=dragModels/Ergun/Ergun.C ;  
+    ...
+    SOURCE=dragModels/GidaspowErgunWenYu/GidaspowErgunWenYu.C ; 
+    ...
+    SOURCE=dragModels/GidaspowSchillerNaumann/GidaspowSchillerNaumann.C ; 
+    ...
+    SOURCE=dragModels/SchillerNaumann/SchillerNaumann.C ;  
+    ...
+    SOURCE=dragModels/WenYu/WenYu.C ;  
+    ...
+    SOURCE=dragModels/Gibilaro/Gibilaro.C ; 
+    ...
+    SOURCE=dragModels/SyamlalOBrien/SyamlalOBrien.C ;  
+    ...
+    '/home/apr207/OpenFOAM/apr207-2.2.2/platforms/linux64GccDPOpt/lib/libEulerianInterfacialModelsSrivastava.so' is up to date.
+
+    
+Kinetic Theory Model    
+""""""""""""""""""""      
+
+nano kineticTheoryModel/Make/files (altered):
+
+* The location and name of the kineticTheoryModel library has changed
+    
+::
+
+    kineticTheoryModel/kineticTheoryModel.C
+
+    viscosityModel/viscosityModel/viscosityModel.C
+    viscosityModel/viscosityModel/newViscosityModel.C
+    viscosityModel/Gidaspow/GidaspowViscosity.C
+    viscosityModel/Syamlal/SyamlalViscosity.C
+    viscosityModel/HrenyaSinclair/HrenyaSinclairViscosity.C
+    viscosityModel/none/noneViscosity.C
+
+    conductivityModel/conductivityModel/conductivityModel.C
+    conductivityModel/conductivityModel/newConductivityModel.C
+    conductivityModel/Gidaspow/GidaspowConductivity.C
+    conductivityModel/Syamlal/SyamlalConductivity.C
+    conductivityModel/HrenyaSinclair/HrenyaSinclairConductivity.C
+
+    radialModel/radialModel/radialModel.C
+    radialModel/radialModel/newRadialModel.C
+    radialModel/CarnahanStarling/CarnahanStarlingRadial.C
+    radialModel/LunSavage/LunSavageRadial.C
+    radialModel/SinclairJackson/SinclairJacksonRadial.C
+
+    granularPressureModel/granularPressureModel/granularPressureModel.C
+    granularPressureModel/granularPressureModel/newGranularPressureModel.C
+    granularPressureModel/Lun/LunPressure.C
+    granularPressureModel/SyamlalRogersOBrien/SyamlalRogersOBrienPressure.C
+
+    frictionalStressModel/frictionalStressModel/frictionalStressModel.C
+    frictionalStressModel/frictionalStressModel/newFrictionalStressModel.C
+    frictionalStressModel/JohnsonJackson/JohnsonJacksonFrictionalStress.C
+    frictionalStressModel/Schaeffer/SchaefferFrictionalStress.C
+    
+    derivedFvPatchFields/JohnsonJacksonParticleSlip/JohnsonJacksonParticleSlipFvPatchVectorField.C
+    
+    LIB = $(FOAM_USER_LIBBIN)/libkineticTheoryModelSrivastava
+
+nano kineticTheoryModel/Make/options (altered):
+
+::
+    
+    EXE_INC = \
+        -I$(LIB_SRC)/foam/lnInclude \
+        -I$(LIB_SRC)/finiteVolume/lnInclude \
+        -I$(WM_PROJECT_USER_DIR)/applications/solvers/multiphase/twoPhaseEulerSrivastava/phaseModel/lnInclude \
+        -I$(WM_PROJECT_USER_DIR)/applications/solvers/multiphase/twoPhaseEulerSrivastava/interfacialModels/lnInclude   
+
+
+The result (I miss out the repeating block and any extra bits):
+        
+::
+
+    + wmake libso kineticTheoryModels
+
+    SOURCE=kineticTheoryModel/kineticTheoryModel.C
+
+    -I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/foam/lnInclude -I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/finiteVolume/lnInclude 
+    -I/home/apr207/OpenFOAM/apr207-2.2.2/applications/solvers/multiphase/twoPhaseEulerSrivastava/phaseModel/lnInclude 
+    -I/home/apr207/OpenFOAM/apr207-2.2.2/applications/solvers/multiphase/twoPhaseEulerSrivastava/interfacialModels/lnInclude 
+    -I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude 
+    -I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OSspecific/POSIX/lnInclude
+
+    SOURCE=viscosityModel/viscosityModel/viscosityModel.C 
+    SOURCE=viscosityModel/viscosityModel/newViscosityModel.C
+    SOURCE=viscosityModel/Gidaspow/GidaspowViscosity.C ;  
+    SOURCE=viscosityModel/Syamlal/SyamlalViscosity.C ;  
+    SOURCE=viscosityModel/HrenyaSinclair/HrenyaSinclairViscosity.C ;  
+    SOURCE=conductivityModel/conductivityModel/conductivityModel.C ;  
+    SOURCE=viscosityModel/none/noneViscosity.C ;  
+    SOURCE=conductivityModel/conductivityModel/newConductivityModel.C ;  
+    SOURCE=conductivityModel/Gidaspow/GidaspowConductivity.C ;  
+    SOURCE=conductivityModel/Syamlal/SyamlalConductivity.C ;  
+    SOURCE=conductivityModel/HrenyaSinclair/HrenyaSinclairConductivity.C ; 
+    SOURCE=radialModel/radialModel/radialModel.C ;  
+    SOURCE=radialModel/radialModel/newRadialModel.C ;  
+    SOURCE=radialModel/CarnahanStarling/CarnahanStarlingRadial.C ;  
+    SOURCE=radialModel/LunSavage/LunSavageRadial.C ;  
+    SOURCE=radialModel/SinclairJackson/SinclairJacksonRadial.C ;  
+    SOURCE=granularPressureModel/granularPressureModel/granularPressureModel.C ;  
+    SOURCE=granularPressureModel/granularPressureModel/newGranularPressureModel.C ; 
+    SOURCE=granularPressureModel/Lun/LunPressure.C ;  
+    SOURCE=granularPressureModel/SyamlalRogersOBrien/SyamlalRogersOBrienPressure.C ; 
+    SOURCE=frictionalStressModel/frictionalStressModel/frictionalStressModel.C ;  
+    SOURCE=frictionalStressModel/frictionalStressModel/newFrictionalStressModel.C ; 
+    SOURCE=frictionalStressModel/JohnsonJackson/JohnsonJacksonFrictionalStress.C ;  
+    SOURCE=frictionalStressModel/Schaeffer/SchaefferFrictionalStress.C ; 
+    SOURCE=derivedFvPatchFields/JohnsonJacksonParticleSlip/JohnsonJacksonParticleSlipFvPatchVectorField.C ;  
+    '/home/apr207/OpenFOAM/apr207-2.2.2/platforms/linux64GccDPOpt/lib/libkineticTheoryModelSrivastava.so' is up to date.       
+        
+        
+        
+Phase Model    
+"""""""""""
+
+nano phaseModel/Make/files (altered)
+
+* The location and name of the library has changed
+
+::
+
+    LIB = $(FOAM_USER_LIBBIN)/libphaseModelSrivastava
+
+nano phaseModel/Make/options (unaltered)
+
+::
+    
+    EXE_INC = \
+        -I$(LIB_SRC)/finiteVolume/lnInclude \
+        -I$(LIB_SRC)/transportModels/incompressible/lnInclude
+
+    LIB_LIBS = \
+        -lincompressibleTransportModels    
+
+The result (just the bits that correspond with the above) - library `lincompressibleTransportModels` can't be seen:        
+        
+::
+
+    + wmake libso phaseModel
+    SOURCE=phaseModel/phaseModel.C
+    -I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/finiteVolume/lnInclude 
+    -I/home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/transportModels/incompressible/lnInclude 
+    '/home/apr207/OpenFOAM/apr207-2.2.2/platforms/linux64GccDPOpt/lib/libphaseModelSrivastava.so' is up to date.
+    
+    
+Test if case works
+~~~~~~~~~~~~~~~~~~
+
+Run the case:
+
+::
+
+    run
+    cp -rf $FOAM_TUTORIALS/multiphase/twoPhaseEulerFoam/bed2/ .
+    cd bed2
+    sed -i s/twoPhaseEulerFoam/twoPhaseEulerSrivastava/g system/controlDict
+    blockMesh
+    twoPhaseEulerSrivastava
+
+
+Is the partial slip condition being applied correctly?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Yes, it is being applied correctly, although it ignores friction
+
+
+    
+Consider comparing JohnsonJackson with JohnsonJacksonSchaeffer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Look to twophaseeulersedfoam for example from 2.1.0
+
+         
+OpenFOAM version 5.0
+====================
+
+OpenFOAM version 5.0 run script
+-------------------------------
+
+::
+
+    # Run script for OpenFOAM 5.0
+
+    . $WM_PROJECT_DIR/bin/tools/RunFunctions	                                    # loads RunFunctions
+
+    rm -rf log.*
+
+    export NP=6					                                    # number of processors
+
+    # Mesh
+    runApplication blockMesh
+
+    # Check the mesh
+    runApplication checkMesh
+
+    # Decompose
+    runApplication decomposePar
+
+    # Run
+    runParallel $(getApplication)
+
+    # Reconstruct
+    runApplication reconstructPar
+
+    rm -r processor*
+
+Rename surfaces    
+---------------
+
+::
+
+    sed -i s/frontAndBackPlanes/frontAndBack/g alpha.particles
+    sed -i s/frontAndBackPlanes/frontAndBack/g alpha.particles.orig
+    sed -i s/frontAndBackPlanes/frontAndBack/g alphat.particles
+    sed -i s/frontAndBackPlanes/frontAndBack/g epsilon.air
+    sed -i s/frontAndBackPlanes/frontAndBack/g k.air
+    sed -i s/frontAndBackPlanes/frontAndBack/g nut.air
+    sed -i s/frontAndBackPlanes/frontAndBack/g nut.particles
+    sed -i s/frontAndBackPlanes/frontAndBack/g p
+    sed -i s/frontAndBackPlanes/frontAndBack/g p_rgh
+    sed -i s/frontAndBackPlanes/frontAndBack/g T.air
+    sed -i s/frontAndBackPlanes/frontAndBack/g T.particles
+    sed -i s/frontAndBackPlanes/frontAndBack/g Theta.particles
+    sed -i s/frontAndBackPlanes/frontAndBack/g U.air
+    sed -i s/frontAndBackPlanes/frontAndBack/g U.particles
+
+See if case run    
+    
+Set fields dictionary
+---------------------
+
+::
+
+    defaultFieldValues
+    (
+        volScalarFieldValue alpha.air 1
+        volScalarFieldValue alpha.particles 0
+    );
+
+    regions
+    (
+        boxToCell
+        {
+            box ( -0.04 0.0 0.0 ) ( 0.04 0.5 0.01 );
+            fieldValues
+            (
+                volScalarFieldValue alpha.air 0.40
+                volScalarFieldValue alpha.particles 0.60
+            );
+        }
+    );
+
+Turn off energy equation 
+------------------------
+
+Turn off e:
+
+::
+
+    "(h|e).*"
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-6;
+        relTol          0;
+        minIter         0;  // APR changed from 1 to 0
+        maxIter         0;  // APR added
+    }
+
+Make air density constant
+-------------------------
+    
+Change air properties:
+
+::
+
+    thermoType
+    {
+        type            heRhoThermo;
+        mixture         pureMixture;
+        transport       const;
+        thermo          hConst;
+        equationOfState rhoConst; // APR changed from perfectGas to rhoConst
+        specie          specie;
+        energy          sensibleInternalEnergy;
+    }
+
+    mixture
+    {
+        specie
+        {
+            molWeight   28.9;
+        }
+        equationOfState             // APR added equationOfState
+        {
+            rho         1.2;
+        }
+        thermodynamics
+        {
+            Cp          1007;
+            Hf          0;
+        }
+        transport
+        {
+            mu          1.84e-05;
+            Pr          0.7;
+        }
+    }
+            
+Execution time = 1631.89 seconds = 27 minutes
+
+
+Phase properties
+----------------
+
+residualAlpha is the residual phase-fraction for a given phase. It is used to stabilize the phase momentum as the phase-fraction -> 0
+
+blending method is for blended drag models "none" is a valid selection
+
+sigma keyword is surface tension
+
+The drag models offer swarm correction of the drag force, since it is observed that swarms of bubbles behave
+ different from single bubbles. none indicates there is no correction (unity multiplies the drag coefficient). "none" is a valid selection.
+
+No virtual mass
+
+There has to be a heat transfer model - there is no option "none". "RanzMarshall" is a valid selection
+
+::
+
+    particles
+    {
+        diameterModel constant;
+        constantCoeffs
+        {
+            d               100e-6;
+        }
+
+        alphaMax        0.65;
+        residualAlpha   1e-6;
+    }   
+    
+    
+    drag
+    (
+        (particles in air)
+        {
+            type            WenYu;
+            residualRe      1e-3;
+            swarmCorrection
+            {
+                type        none;
+            }
+        }
+    ); 
+    
+    virtualMass
+    (
+        (solids in gas)
+        {
+            type            none;       // APR changed from constantCoefficient
+            //Cvm             0;        // APR changed from 0.5 to 0
+        }
+    );
+    
+
+thermophysicalProperties.air
+----------------------------
+
+The thermophysicalProperties dictionary is read by any solver that uses the thermophysical model library
+
+heRhoThermo: for solvers that construct rhoThermo, such as twoPhaseEulerFoam
+
+thermophysical models without reactions is pureMixture, which represents a mixture with fixed composition. When pureMixture is specified, the thermophysical models coefficients are specified within a sub-dictionary called mixture.
+
+* transport model: const assumes a constant dynamic viscosity (mu) and Prandtl number (Pr)
+* thermo model: assumes a constant specific heat capacity (Cp) and a heat of fusion (Hf)
+* There is currently only one option for the specie model which specifies the composition of each constituent
+* sensibleInternalEnergy is the form of the energy equation
+
+::
+    
+    thermoType
+    {
+        type            heRhoThermo;
+        mixture         pureMixture;
+        transport       const;
+        thermo          hConst;
+        equationOfState rhoConst; // APR changed from perfectGas to rhoConst
+        specie          specie;
+        energy          sensibleInternalEnergy;
+    }
+
+    mixture
+    {
+        transport
+        {
+            mu          1.84e-05;
+            Pr          0.7;
+        }
+        thermodynamics
+        {
+            Cp          1007;
+            Hf          0;
+        }
+        equationOfState             // APR added equationOfState
+        {
+            rho         1.2;
+        }
+        specie
+        {
+            molWeight   28.9;
+        }
+    }   
+    
+Create location for version 5 solver
+------------------------------------
+
+::
+
+    mkdir 
+
+
+    
+    
+    

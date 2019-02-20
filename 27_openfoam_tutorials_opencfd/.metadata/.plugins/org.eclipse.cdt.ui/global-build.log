@@ -1,0 +1,15 @@
+16:09:49 **** Build of configuration Debug for project hello_world ****
+make all 
+Building file: ../src/hello_world.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/hello_world.d" -MT"src/hello_world.d" -o "src/hello_world.o" "../src/hello_world.cpp"
+Finished building: ../src/hello_world.cpp
+ 
+Building target: hello_world
+Invoking: Cross G++ Linker
+g++  -o "hello_world"  ./src/hello_world.o   
+Finished building target: hello_world
+ 
+16:09:53 **** Incremental Build of configuration Debug for project hello_world ****
+make all 
+make: Nothing to be done for 'all'.

@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+org.eclipse.cdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates><template autoinsert\="false" context\="org.eclipse.cdt.core.cxxSource.contenttype_context" deleted\="false" description\="A template that contains our C++ program" enabled\="true" name\="C++ with main">/*\n${file_name}\n${date}\n${user}\n*/\n\#include &lt;iostream&gt;\nusing namespace std;\nint main()\n{\n// Todo place code here\nreturn 0;\n}</template></templates>
+spelling_locale=en_GB
+spelling_locale_initialized=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

@@ -1,0 +1,20 @@
+/*
+greetings.cpp
+19 Nov 2016
+andrew
+*/
+
+// to allow cin and cout:
+#include <iostream>
+
+// standard namespaces:
+using namespace std;
+
+// main function:
+int main()
+{
+	// Screen output:
+	cout<<"Hello, and welcome to Up and Running with C++"<<endl;
+	return 0;
+
+}

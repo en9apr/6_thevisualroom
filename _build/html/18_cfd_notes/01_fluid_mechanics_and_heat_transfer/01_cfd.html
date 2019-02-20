@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.1.1. CFD &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../../index.html" />
+    <link rel="up" title="4. Personal Notes on CFD" href="../cfd_notes.html" />
+    <link rel="next" title="4.1.2. Continuum Model" href="02_continuum_model.html" />
+    <link rel="prev" title="4. Personal Notes on CFD" href="../cfd_notes.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.1.1. CFD</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../cfd_notes.html">4. Personal Notes on CFD</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="02_continuum_model.html">4.1.2. Continuum Model</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="cfd">
+<h1>4.1.1. CFD<a class="headerlink" href="#cfd" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#what-is-fluid-mechanics" id="id1">What is Fluid Mechanics?</a></li>
+<li><a class="reference internal" href="#what-is-thermodynamics" id="id2">What is Thermodynamics?</a></li>
+<li><a class="reference internal" href="#what-is-cfd" id="id3">What is CFD?</a></li>
+<li><a class="reference internal" href="#what-are-the-reasons-for-using-cfd" id="id4">What are the reasons for using CFD?</a></li>
+<li><a class="reference internal" href="#what-are-the-steps-in-a-cfd-process" id="id5">What are the steps in a CFD process?</a></li>
+<li><a class="reference internal" href="#why-do-vector-calculus-and-linear-algebra-play-important-roles-in-cfd" id="id6">Why do vector calculus and linear algebra play important roles in CFD?</a></li>
+<li><a class="reference internal" href="#what-can-go-wrong-in-cfd" id="id7">What can go wrong in CFD?</a></li>
+</ul>
+</div>
+<div class="section" id="what-is-fluid-mechanics">
+<h2><a class="toc-backref" href="#id1">4.1.1.1. What is Fluid Mechanics?</a><a class="headerlink" href="#what-is-fluid-mechanics" title="Permalink to this headline">¶</a></h2>
+<p>A science and branch of physics concerning:</p>
+<ul class="simple">
+<li><strong>Fluids</strong> - liquids or gases</li>
+<li><strong>Mechanics</strong> - application of laws of force and motion</li>
+</ul>
+<p>There are two branches of fluid mechanics:</p>
+<ul class="simple">
+<li><strong>Fluid statics</strong> - fluids at rest</li>
+<li><strong>Fluid dynamics</strong> - fluids in motion</li>
+</ul>
+</div>
+<div class="section" id="what-is-thermodynamics">
+<h2><a class="toc-backref" href="#id2">4.1.1.2. What is Thermodynamics?</a><a class="headerlink" href="#what-is-thermodynamics" title="Permalink to this headline">¶</a></h2>
+<p>A science and branch of physics concerning:</p>
+<ul class="simple">
+<li><strong>Heat</strong></li>
+<li><strong>Work</strong></li>
+</ul>
+<p>And their relation to variables such as:</p>
+<ul class="simple">
+<li><strong>Internal energy</strong></li>
+<li><strong>Enthalpy</strong></li>
+<li><strong>Entropy</strong></li>
+</ul>
+</div>
+<div class="section" id="what-is-cfd">
+<h2><a class="toc-backref" href="#id3">4.1.1.3. What is CFD?</a><a class="headerlink" href="#what-is-cfd" title="Permalink to this headline">¶</a></h2>
+<p>A science and branch of fluid mechanics and thermodynamics to predict fluid flow using:</p>
+<ul class="simple">
+<li>Conservation laws</li>
+<li>Numerical methods</li>
+<li>Algorithms</li>
+<li>Digital computers</li>
+</ul>
+</div>
+<div class="section" id="what-are-the-reasons-for-using-cfd">
+<h2><a class="toc-backref" href="#id4">4.1.1.4. What are the reasons for using CFD?</a><a class="headerlink" href="#what-are-the-reasons-for-using-cfd" title="Permalink to this headline">¶</a></h2>
+<p>Allows virtual experiments that in the real world would be:</p>
+<ul class="simple">
+<li>Difficult</li>
+<li>Dangerous</li>
+<li>Expensive</li>
+<li>Impossible</li>
+</ul>
+</div>
+<div class="section" id="what-are-the-steps-in-a-cfd-process">
+<h2><a class="toc-backref" href="#id5">4.1.1.5. What are the steps in a CFD process?</a><a class="headerlink" href="#what-are-the-steps-in-a-cfd-process" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Physical model</strong> - describe physical model</li>
+<li><strong>Mathematical model</strong> - describe equations that correspond with physical model</li>
+<li><strong>Numerical methods</strong> - describe numerical methods that correspond with physical model and <strong>implement in code</strong></li>
+<li><strong>Geometry/Grid</strong> - describe grid that corresponds with physical model and <strong>implement in code</strong></li>
+<li><strong>Numerical solver</strong> - describe solver that corresponds with physical model and <strong>implement in code</strong> and <strong>compute solution</strong></li>
+<li><strong>Verification</strong> - establish solution validity</li>
+<li><strong>Validation</strong> - compare with experimental data</li>
+</ul>
+</div>
+<div class="section" id="why-do-vector-calculus-and-linear-algebra-play-important-roles-in-cfd">
+<h2><a class="toc-backref" href="#id6">4.1.1.6. Why do vector calculus and linear algebra play important roles in CFD?</a><a class="headerlink" href="#why-do-vector-calculus-and-linear-algebra-play-important-roles-in-cfd" title="Permalink to this headline">¶</a></h2>
+<p>Vector calculus is important in CFD because it allows <strong>description</strong> e.g.</p>
+<ul class="simple">
+<li>Vector field - velocity of a flow</li>
+<li>Divergence of a flow field - expansion or compression of a flow</li>
+<li>Curl of a flow field - rotation of a flow</li>
+</ul>
+<p>Linear algebra is important in CFD because it allows <strong>solution</strong> of the description of the flow e.g.</p>
+<ul class="simple">
+<li>Eigenvalues - charactersitic speeds of a system of hyperbolic equations</li>
+<li>Eigenvectors - characteristic directions of a system of hyperbolic equations</li>
+<li>TDMA - solution of tri-diagonal systems (e.g. Navier-Stokes momentum equation)</li>
+</ul>
+</div>
+<div class="section" id="what-can-go-wrong-in-cfd">
+<h2><a class="toc-backref" href="#id7">4.1.1.7. What can go wrong in CFD?</a><a class="headerlink" href="#what-can-go-wrong-in-cfd" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Over-simplicifcation</strong> - Simplify domain to look only at part of system not the whole system</li>
+<li><strong>Numerical error</strong> - Numerics introduces dissipation or dispersion</li>
+<li><strong>Geometry/grid</strong> - Errors due to coordinate transformation</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../cfd_notes.html">4. Personal Notes on CFD</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="02_continuum_model.html">4.1.2. Continuum Model</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.1.13. Vorticity Transport Equation &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../../index.html" />
+    <link rel="up" title="4. Personal Notes on CFD" href="../cfd_notes.html" />
+    <link rel="next" title="4.1.14. Conservation of Energy" href="14_conservation_of_energy.html" />
+    <link rel="prev" title="4.1.12. Navier-Stokes Momentum Equation" href="12_navier_stokes_momentum_equation.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.1.13. Vorticity Transport Equation</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="12_navier_stokes_momentum_equation.html">4.1.12. Navier-Stokes Momentum Equation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="14_conservation_of_energy.html">4.1.14. Conservation of Energy</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="vorticity-transport-equation">
+<h1>4.1.13. Vorticity Transport Equation<a class="headerlink" href="#vorticity-transport-equation" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#what-does-irrotational-mean" id="id3">What does irrotational mean?</a></li>
+<li><a class="reference internal" href="#what-is-an-irrotational-vortex" id="id4">What is an irrotational vortex?</a></li>
+<li><a class="reference internal" href="#does-irrotational-and-inviscid-irrotational-and-viscous-vortical-and-inviscid-vortical-and-viscous-exist" id="id5">Does irrotational and inviscid, irrotational and viscous, vortical and inviscid, vortical and viscous exist?</a></li>
+<li><a class="reference internal" href="#what-is-circulation" id="id6">What is circulation?</a></li>
+<li><a class="reference internal" href="#what-is-the-curl-of-the-gradient-of-a-scalar" id="id7">What is the curl of the gradient of a scalar?</a></li>
+<li><a class="reference internal" href="#what-is-the-vector-identity-for" id="id8">What is the vector identity for <span class="math">\(\vec{u} \cdot \nabla \vec{u}\)</span>?</a></li>
+<li><a class="reference internal" href="#what-is-the-curl-of-for-an-incompressible-fluid" id="id9">What is the curl of <span class="math">\(\vec{u} \times \vec{\Omega}\)</span> for an incompressible fluid?</a></li>
+<li><a class="reference internal" href="#how-can-the-non-conservative-form-of-the-navier-stokes-momentum-equation-use-conservative-body-forces" id="id10">How can the non-conservative form of the Navier-Stokes momentum equation use conservative body forces?</a></li>
+<li><a class="reference internal" href="#how-can-the-navier-stokes-momentum-equation-be-arranged-to-include-the-potential-function" id="id11">How can the Navier-Stokes momentum equation be arranged to include the potential function?</a></li>
+<li><a class="reference internal" href="#how-can-the-navier-stokes-equations-using-the-potential-function-be-expressed-as-the-vorticity-transport-equation" id="id12">How can the Navier-Stokes equations using the potential function be expressed as the vorticity transport equation?</a></li>
+<li><a class="reference internal" href="#what-is-the-physical-meaning-of-the-terms-in-the-vorticity-transport-equation" id="id13">What is the physical meaning of the terms in the vorticity transport equation?</a></li>
+<li><a class="reference internal" href="#what-is-the-vortex-stretching-phenomenon" id="id14">What is the vortex stretching phenomenon?</a></li>
+<li><a class="reference internal" href="#what-is-the-vorticity-transport-equation-in-2d" id="id15">What is the vorticity transport equation in 2D?</a></li>
+<li><a class="reference internal" href="#how-are-the-terms-in-the-3d-vorticity-transport-equation-expanded" id="id16">How are the terms in the 3D vorticity transport equation expanded?</a></li>
+</ul>
+</div>
+<div class="section" id="what-does-irrotational-mean">
+<h2><a class="toc-backref" href="#id3">4.1.13.1. What does irrotational mean?</a><a class="headerlink" href="#what-does-irrotational-mean" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\vec{\Omega} = \vec{0} \longrightarrow \nabla \times \vec{u} = \vec{0}\]</div>
+</div>
+<div class="section" id="what-is-an-irrotational-vortex">
+<h2><a class="toc-backref" href="#id4">4.1.13.2. What is an irrotational vortex?</a><a class="headerlink" href="#what-is-an-irrotational-vortex" title="Permalink to this headline">¶</a></h2>
+<p>Particles don&#8217;t rotate about their own axes, but about the axis of the vortex.</p>
+</div>
+<div class="section" id="does-irrotational-and-inviscid-irrotational-and-viscous-vortical-and-inviscid-vortical-and-viscous-exist">
+<h2><a class="toc-backref" href="#id5">4.1.13.3. Does irrotational and inviscid, irrotational and viscous, vortical and inviscid, vortical and viscous exist?</a><a class="headerlink" href="#does-irrotational-and-inviscid-irrotational-and-viscous-vortical-and-inviscid-vortical-and-viscous-exist" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="63%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Type of flow</th>
+<th class="head">Existing</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Irrotational and inviscid</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Irrotational and viscous</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>Vortical and inviscid</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Vortical and viscous</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-is-circulation">
+<h2><a class="toc-backref" href="#id6">4.1.13.4. What is circulation?</a><a class="headerlink" href="#what-is-circulation" title="Permalink to this headline">¶</a></h2>
+<p>The line integral around the contour of the tangential component of velocity <span class="math">\(\vec{u}\)</span>. Via Stokes theorem:</p>
+<div class="math">
+\[\Gamma =  \oint_C \vec{u} \cdot d \vec{C} = \int_S \nabla \times \vec{u} \cdot d \vec{S} = \int_S \vec{\Omega} \cdot d \vec{S}\]</div>
+</div>
+<div class="section" id="what-is-the-curl-of-the-gradient-of-a-scalar">
+<h2><a class="toc-backref" href="#id7">4.1.13.5. What is the curl of the gradient of a scalar?</a><a class="headerlink" href="#what-is-the-curl-of-the-gradient-of-a-scalar" title="Permalink to this headline">¶</a></h2>
+<p>The curl of the gradient of a scalar is <strong>zero</strong>:</p>
+<div class="math">
+\[\nabla \times (\nabla \phi) = \vec{0}\]</div>
+<p>Or:</p>
+<div class="math">
+\[\operatorname{curl} \left( \operatorname{grad} \phi \right) = \vec{0}\]</div>
+<p>where <span class="math">\(\phi\)</span> is a scalar</p>
+<ul class="simple">
+<li>If the gradient points in the direction of increasing <span class="math">\(\phi\)</span>, then</li>
+<li>Travelling in the direction of increasing <span class="math">\(\phi\)</span> does not rotate.</li>
+</ul>
+</div>
+<div class="section" id="what-is-the-vector-identity-for">
+<h2><a class="toc-backref" href="#id8">4.1.13.6. What is the vector identity for <span class="math">\(\vec{u} \cdot \nabla \vec{u}\)</span>?</a><a class="headerlink" href="#what-is-the-vector-identity-for" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\vec{u} \cdot \nabla \vec{u} = \nabla \left( {1 \over 2} \vec{u} \cdot \vec{u} \right) - \vec{u} \times \left( \nabla \times \vec{u} \right)\]</div>
+</div>
+<div class="section" id="what-is-the-curl-of-for-an-incompressible-fluid">
+<h2><a class="toc-backref" href="#id9">4.1.13.7. What is the curl of <span class="math">\(\vec{u} \times \vec{\Omega}\)</span> for an incompressible fluid?</a><a class="headerlink" href="#what-is-the-curl-of-for-an-incompressible-fluid" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\nabla \times (\vec{u} \times \vec{\Omega}) = \vec{\Omega} \cdot \nabla \vec{u} - \vec{u} \cdot \nabla \vec{\Omega}\]</div>
+<p>where: <span class="math">\(\nabla \cdot \vec{\Omega} = \nabla \cdot \vec{u} = 0\)</span></p>
+</div>
+<div class="section" id="how-can-the-non-conservative-form-of-the-navier-stokes-momentum-equation-use-conservative-body-forces">
+<h2><a class="toc-backref" href="#id10">4.1.13.8. How can the non-conservative form of the Navier-Stokes momentum equation use conservative body forces?</a><a class="headerlink" href="#how-can-the-non-conservative-form-of-the-navier-stokes-momentum-equation-use-conservative-body-forces" title="Permalink to this headline">¶</a></h2>
+<p>Navier-Stokes:</p>
+<div class="math">
+\[{{\partial \vec{u}} \over {\partial t}} + \vec{u} \cdot \nabla \vec{u} = - {1 \over \rho} \nabla p + \nu \nabla^2 \vec{u} + \vec{g}\]</div>
+<p>Conservative body forces <span class="math">\(\longrightarrow \vec{g} = -\nabla \Phi\)</span></p>
+<p>where: :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>Phi = ` gravitational potential function</p>
+<div class="math">
+\[{{\partial \vec{u}} \over {\partial t}} + \vec{u} \cdot \nabla \vec{u} = - {1 \over \rho} \nabla p + \nu \nabla^2 \vec{u} -\nabla \Phi\]</div>
+</div>
+<div class="section" id="how-can-the-navier-stokes-momentum-equation-be-arranged-to-include-the-potential-function">
+<h2><a class="toc-backref" href="#id11">4.1.13.9. How can the Navier-Stokes momentum equation be arranged to include the potential function?</a><a class="headerlink" href="#how-can-the-navier-stokes-momentum-equation-be-arranged-to-include-the-potential-function" title="Permalink to this headline">¶</a></h2>
+<p>Navier-Stokes (with conservative body forces):</p>
+<div class="math">
+\[{{\partial \vec{u}} \over {\partial t}} + \vec{u} \cdot \nabla \vec{u} = - {1 \over \rho} \nabla p + \nu \nabla^2 \vec{u} -\nabla \Phi\]</div>
+<p>By expansion:</p>
+<div class="math">
+\[\vec{u} \cdot \nabla \vec{u} = \nabla \left( {1 \over 2} \vec{u} \cdot \vec{u} \right) - \vec{u} \times \nabla \times \vec{u} = \nabla \left( {1 \over 2} \vec{u} \cdot \vec{u} \right) - \vec{u} \times \vec{\Omega}\]</div>
+<p>By substitution:</p>
+<div class="math">
+\[{{\partial \vec{u}} \over {\partial t}} + \nabla( {1 \over 2} \vec{u} \cdot \vec{u}) - \vec{u} \times \vec{\Omega} = - {1 \over \rho} \nabla p + \nu \nabla^2 \vec{u} -\nabla \Phi\]</div>
+<p>Re-arranging:</p>
+<div class="math">
+\[{{\partial \vec{u}} \over {\partial t}} - \vec{u} \times \vec{\Omega} = - \nabla \left( {1 \over \rho} p  + {1 \over 2} \vec{u}^2 + \Phi \right) + \nu \nabla^2 \vec{u}\]</div>
+<p>By re-definition:</p>
+<div class="math">
+\[{{\partial \vec{u}} \over {\partial t}} - \vec{u} \times \vec{\Omega} = - \nabla \Pi + \nu \nabla^2 \vec{u}\]</div>
+</div>
+<div class="section" id="how-can-the-navier-stokes-equations-using-the-potential-function-be-expressed-as-the-vorticity-transport-equation">
+<h2><a class="toc-backref" href="#id12">4.1.13.10. How can the Navier-Stokes equations using the potential function be expressed as the vorticity transport equation?</a><a class="headerlink" href="#how-can-the-navier-stokes-equations-using-the-potential-function-be-expressed-as-the-vorticity-transport-equation" title="Permalink to this headline">¶</a></h2>
+<p>Navier-Stokes (with potential function):</p>
+<div class="math">
+\[{{\partial \vec{u}} \over {\partial t}} - \vec{u} \times \vec{\Omega} = - \nabla \Pi + \nu \nabla^2 \vec{u}\]</div>
+<p>Taking the curl of both sides:</p>
+<div class="math">
+\[\nabla \times \left( {{\partial \vec{u}} \over {\partial t}} - \vec{u} \times \vec{\Omega} \right) = \nabla \times \left( - \nabla \Pi + \nu \nabla^2 \vec{u} \right)\]</div>
+<p>First part:</p>
+<div class="math">
+\[\nabla \times {{\partial \vec{u}} \over {\partial t}} = {{\partial \vec{\Omega}} \over {\partial t}}\]</div>
+<p>Second part:</p>
+<div class="math">
+\[\nabla \times (- \vec{u} \times \vec{\Omega}) =
+-\nabla \times \vec{u} \times \vec{\Omega} =
+- \left( (\vec{\Omega} \cdot \nabla) \vec{u} - (\vec{u} \cdot \nabla) \vec{\Omega}  \right) =
+-(\Omega \cdot \nabla) \vec{u} + (\vec{u} \cdot \nabla) \vec{\Omega}\]</div>
+<p>Third part:</p>
+<div class="math">
+\[\nabla \times (\nabla \Pi) = 0\]</div>
+<p>Fourth part:</p>
+<div class="math">
+\[\nabla \times ( \nu \nabla^2 \vec{u} ) = \nu \nabla^2 \vec{\Omega}\]</div>
+<p>Hence:</p>
+<div class="math">
+\[{{\partial \vec{\Omega}} \over {\partial t}} + (\vec{u} \cdot \nabla) \vec{\Omega} = (\vec{\Omega} \cdot \nabla) \vec{u} + \nu \nabla^2 \vec{\Omega}\]</div>
+</div>
+<div class="section" id="what-is-the-physical-meaning-of-the-terms-in-the-vorticity-transport-equation">
+<h2><a class="toc-backref" href="#id13">4.1.13.11. What is the physical meaning of the terms in the vorticity transport equation?</a><a class="headerlink" href="#what-is-the-physical-meaning-of-the-terms-in-the-vorticity-transport-equation" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[{{\partial \vec{\Omega}} \over {\partial t}} + (\vec{u} \cdot \nabla) \vec{\Omega} = (\vec{\Omega} \cdot \nabla) \vec{u} + \nu \nabla^2 \vec{\Omega}\]</div>
+<ul class="simple">
+<li>Temporal change of vorticity / unit volume:</li>
+</ul>
+<div class="math">
+\[{{\partial \vec{\Omega}} \over {\partial t}}\]</div>
+<ul class="simple">
+<li>Spatial change of vorticity / unit volume:</li>
+</ul>
+<div class="math">
+\[(\vec{u} \cdot \nabla) \vec{\Omega}\]</div>
+<ul class="simple">
+<li>Vortex stretching term:</li>
+</ul>
+<div class="math">
+\[(\vec{\Omega} \cdot \nabla) \vec{u}\]</div>
+<ul class="simple">
+<li>Diffusion of vorticity / unit volume:</li>
+</ul>
+<div class="math">
+\[\nu \nabla^2 \vec{\Omega}\]</div>
+</div>
+<div class="section" id="what-is-the-vortex-stretching-phenomenon">
+<h2><a class="toc-backref" href="#id14">4.1.13.12. What is the vortex stretching phenomenon?</a><a class="headerlink" href="#what-is-the-vortex-stretching-phenomenon" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The vortex stretching term is <span class="math">\((\vec{\Omega} \cdot \nabla) \vec{u}\)</span></li>
+<li>Conservation of angular momentum:</li>
+</ul>
+<div class="math">
+\[{{D(I \vec{\Omega})} \over {Dt}} = I {{D \vec{\Omega}} \over {Dt}} + \vec{\Omega} {{DI} \over {Dt}}\]</div>
+<ul class="simple">
+<li>For constant angular momentum:</li>
+</ul>
+<div class="math">
+\[{{D(I \vec{\Omega})} \over {Dt}} = 0\]</div>
+<ul class="simple">
+<li>Hence:</li>
+</ul>
+<div class="math">
+\[{{D \vec{\Omega}} \over {Dt}} = - {{\vec{\Omega}} \over {I}} {{DI} \over {Dt}}\]</div>
+<ul class="simple">
+<li>Vortex stretching is an increase in vorticity caused by reduced momentum intertia of vortex elements in 3D</li>
+</ul>
+</div>
+<div class="section" id="what-is-the-vorticity-transport-equation-in-2d">
+<h2><a class="toc-backref" href="#id15">4.1.13.13. What is the vorticity transport equation in 2D?</a><a class="headerlink" href="#what-is-the-vorticity-transport-equation-in-2d" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>In 2D:</li>
+</ul>
+<div class="math">
+\[(\vec{\Omega} \cdot \nabla) \vec{u} = \left(  \Omega_x {\partial \over {\partial x}} +
+\Omega_y {\partial \over {\partial y}} +
+\Omega_z {\partial \over {\partial z}}
+\right) \vec{u} = 0\]</div>
+<p>as <span class="math">\(\Omega_x = \Omega_y = {\partial \over {\partial z}} = 0\)</span></p>
+<ul class="simple">
+<li>Hence:</li>
+</ul>
+<div class="math">
+\[{{\partial \vec{\Omega}} \over {\partial t}} + (\vec{u} \cdot \nabla) \vec{\Omega} = \nu \nabla^2 \vec{\Omega}\]</div>
+<ul class="simple">
+<li>For <span class="math">\(\Omega_z\)</span>:</li>
+</ul>
+<div class="math">
+\[{{\partial \Omega_z} \over {\partial t}} + (\vec{u} \cdot \nabla) \Omega_z = \nu \nabla^2 \Omega_z\]</div>
+<ul class="simple">
+<li>By expansion:</li>
+</ul>
+<div class="math">
+\[{{\partial \Omega_z} \over {\partial t}} + u {{\partial \Omega_z} \over {\partial x}} + v {{\partial \Omega_z} \over {\partial y}}  = \nu \left( {{\partial^2 \Omega_z} \over {\partial x^2}} + {{\partial^2 \Omega_z} \over {\partial y^2}} \right)\]</div>
+<ul class="simple">
+<li>Also:</li>
+</ul>
+<div class="math">
+\[\Omega_x = \Omega_y = 0\]</div>
+</div>
+<div class="section" id="how-are-the-terms-in-the-3d-vorticity-transport-equation-expanded">
+<h2><a class="toc-backref" href="#id16">4.1.13.14. How are the terms in the 3D vorticity transport equation expanded?</a><a class="headerlink" href="#how-are-the-terms-in-the-3d-vorticity-transport-equation-expanded" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><span class="math">\(\Omega_x\)</span> by expansion:</li>
+</ul>
+<div class="math">
+\[{{\partial \Omega_x} \over {\partial t}} +
+u {{\partial \Omega_x} \over {\partial x}} +
+v {{\partial \Omega_x} \over {\partial y}} +
+w {{\partial \Omega_x} \over {\partial z}}
+= \Omega_x {{\partial u} \over {\partial x}} +
+\Omega_y {{\partial u} \over {\partial y}} +
+\Omega_z {{\partial u} \over {\partial z}} +
+\nu \left(
+{{\partial^2 \Omega_x} \over {\partial x^2}} +
+{{\partial^2 \Omega_x} \over {\partial y^2}} +
+{{\partial^2 \Omega_x} \over {\partial z^2}}
+\right)\]</div>
+<ul class="simple">
+<li><span class="math">\(\Omega_y\)</span> by expansion:</li>
+</ul>
+<div class="math">
+\[{{\partial \Omega_y} \over {\partial t}} +
+u {{\partial \Omega_y} \over {\partial x}} +
+v {{\partial \Omega_y} \over {\partial y}} +
+w {{\partial \Omega_y} \over {\partial z}}
+= \Omega_x {{\partial v} \over {\partial x}} +
+\Omega_y {{\partial v} \over {\partial y}} +
+\Omega_z {{\partial v} \over {\partial z}} +
+\nu \left(
+{{\partial^2 \Omega_y} \over {\partial x^2}} +
+{{\partial^2 \Omega_y} \over {\partial y^2}} +
+{{\partial^2 \Omega_y} \over {\partial z^2}}
+\right)\]</div>
+<ul class="simple">
+<li><span class="math">\(\Omega_z\)</span> by expansion:</li>
+</ul>
+<div class="math">
+\[{{\partial \Omega_z} \over {\partial t}} +
+u {{\partial \Omega_z} \over {\partial x}} +
+v {{\partial \Omega_z} \over {\partial y}} +
+w {{\partial \Omega_z} \over {\partial z}}
+= \Omega_x {{\partial w} \over {\partial x}} +
+\Omega_y {{\partial w} \over {\partial y}} +
+\Omega_z {{\partial w} \over {\partial z}} +
+\nu \left(
+{{\partial^2 \Omega_z} \over {\partial x^2}} +
+{{\partial^2 \Omega_z} \over {\partial y^2}} +
+{{\partial^2 \Omega_z} \over {\partial z^2}}
+\right)\]</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="12_navier_stokes_momentum_equation.html">4.1.12. Navier-Stokes Momentum Equation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="14_conservation_of_energy.html">4.1.14. Conservation of Energy</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+21:40:01 **** Incremental Build of configuration Debug for project travelCost ****
+make all 
+Building file: ../travelCost.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"travelCost.d" -MT"travelCost.d" -o "travelCost.o" "../travelCost.cpp"
+Finished building: ../travelCost.cpp
+ 
+Building target: travelCost
+Invoking: GCC C++ Linker
+g++  -o "travelCost"  ./travelCost.o   
+Finished building target: travelCost
+ 
+21:40:03 **** Incremental Build of configuration Debug for project travelCost ****
+make all 
+make: Nothing to be done for 'all'.

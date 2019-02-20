@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.6. Input/Output &#8212; The Visual Room</title>
+    <title>4.1.6. Input/Output &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="1. Fortran Programming Language" href="fortran.html" />
-    <link rel="next" title="2. Using Fortran" href="../06_fortran_use/fortran_use.html" />
-    <link rel="prev" title="1.5. Intrinsic Procedures" href="fortran_procedures.html" /> 
+    <link rel="up" title="4.1. Fortran Programming Language" href="fortran.html" />
+    <link rel="next" title="4.2. Using Fortran" href="../06_fortran_use/fortran_use.html" />
+    <link rel="prev" title="4.1.5. Intrinsic Procedures" href="fortran_procedures.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>1.6. Input/Output</span></h2>
+        <h2 class="heading"><span>4.1.6. Input/Output</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="fortran_procedures.html">1.5. Intrinsic Procedures</a>
+        «&#160;&#160;<a href="fortran_procedures.html">4.1.5. Intrinsic Procedures</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="../06_fortran_use/fortran_use.html">2. Using Fortran</a>&#160;&#160;»
+        <a href="../06_fortran_use/fortran_use.html">4.2. Using Fortran</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,7 +49,7 @@
         
         
   <div class="section" id="input-output">
-<h1>1.6. Input/Output<a class="headerlink" href="#input-output" title="Permalink to this headline">¶</a></h1>
+<h1>4.1.6. Input/Output<a class="headerlink" href="#input-output" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#print-statements" id="id1">Print Statements</a></li>
@@ -71,12 +71,12 @@
 </ul>
 </div>
 <div class="section" id="print-statements">
-<h2><a class="toc-backref" href="#id1">1.6.1. Print Statements</a><a class="headerlink" href="#print-statements" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">4.1.6.1. Print Statements</a><a class="headerlink" href="#print-statements" title="Permalink to this headline">¶</a></h2>
 <p>The print statement is used to send output to monitor - can use single or double quotes.</p>
 <ul class="simple">
 <li>The format statement of <code class="docutils literal"><span class="pre">es22.15</span></code> is typical for double precision, which is usually to 15 digits of precision. We have 22 character positions (including dot, exponent and 2 signs), so the largest number that could be printed is (which may depend on what we expect) - but this is nothing to do with machine precision:</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="n">most</span> <span class="n">positive</span> <span class="o">=</span> <span class="o">+</span><span class="mf">9.999999999999999E+99</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="n">most</span> <span class="n">positive</span> <span class="o">=</span> <span class="o">+</span><span class="mf">9.999999999999999E+99</span>
 <span class="n">smallest</span> <span class="o">=</span> <span class="o">+</span><span class="mf">9.999999999999999E-99</span>
 <span class="n">most</span> <span class="n">negative</span> <span class="o">=</span> <span class="o">-</span><span class="mf">9.999999999999999E+99</span>
 </pre></div>
@@ -84,7 +84,7 @@
 <ul class="simple">
 <li>Choosing the format of integers may depend on what we expect - so if the maximum number of iterations is 50, we might choose <code class="docutils literal"><span class="pre">i2</span></code> which would cover this range - again this is nothing to do with machine precision of integers:</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="n">largest</span> <span class="o">=</span> <span class="mi">99</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="n">largest</span> <span class="o">=</span> <span class="mi">99</span>
 <span class="n">smallest</span> <span class="o">=</span> <span class="mi">0</span>
 </pre></div>
 </div>
@@ -99,14 +99,14 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="s1">&#39;(i10, es22.15)&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.0</span><span class="n">d10</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">print</span> <span class="s1">&#39;(i10, es22.15)&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.0</span><span class="n">d10</span>
 <span class="k">print</span> <span class="s2">&quot;(i10, es22.15)&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.0</span><span class="n">d10</span>
 </pre></div>
 </div>
 </td>
 <td><strong>Print to screen with format</strong>: integer with 10 digits, scientific number with 22 digits and 15 decimal places. Syntax is <code class="docutils literal"><span class="pre">print</span> <span class="pre">format,</span> <span class="pre">list</span></code></td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">print </span><span class="mi">10</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">iterations</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">print </span><span class="mi">10</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">iterations</span>
 <span class="mi">10</span> <span class="k">format</span><span class="p">(</span><span class="s2">&quot;solver returns x=&quot;</span><span class="p">,</span> <span class="n">es22</span><span class="p">.</span><span class="mi">15</span><span class="p">,</span><span class="s2">&quot; after&quot;</span><span class="p">,</span> <span class="n">i3</span><span class="p">,</span> <span class="s2">&quot; iterations&quot;</span><span class="p">)</span>
 
 <span class="k">print </span><span class="mi">11</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">iterations</span>
@@ -116,20 +116,20 @@
 </td>
 <td><strong>Print to screen with format</strong> (for extra long lines)</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Velocity v=&quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s2">&quot;m/s&quot;</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;Velocity v=&quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s2">&quot;m/s&quot;</span>
 <span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s1">&#39;Velocity u=&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s1">&#39;m/s&#39;</span>
 </pre></div>
 </div>
 </td>
 <td><strong>List-directed I/O</strong> The asterisk (*) means print in a format compatible with the items in the list. Either double or single quotes may be used. Using undefined format will leave a blank space at the start (because in old Fortran this was column control). It&#8217;s probably always best to give a format anyway. The default print width for integers is 12 (with i) and it&#8217;s 25 for doubles (with es).</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;&quot;</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">print</span> <span class="o">*</span><span class="p">,</span> <span class="s2">&quot;&quot;</span>
 </pre></div>
 </div>
 </td>
 <td><strong>Print a Blank Line</strong></td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">print</span> <span class="s2">&quot;(a)&quot;</span><span class="p">,</span> <span class="s2">&quot;x = &quot;</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">print</span> <span class="s2">&quot;(a)&quot;</span><span class="p">,</span> <span class="s2">&quot;x = &quot;</span>
 <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="mi">1</span>
     <span class="k">print</span> <span class="s2">&quot;(11g12.4)&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">:)</span>
 <span class="k">end do</span>
@@ -142,7 +142,7 @@
 </table>
 </div>
 <div class="section" id="opening-closing-reading-from-and-writing-to-files">
-<h2><a class="toc-backref" href="#id2">1.6.2. Opening, Closing, Reading from and Writing to Files</a><a class="headerlink" href="#opening-closing-reading-from-and-writing-to-files" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">4.1.6.2. Opening, Closing, Reading from and Writing to Files</a><a class="headerlink" href="#opening-closing-reading-from-and-writing-to-files" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p class="first">In Fortran each file is associated with a <strong>unit number</strong>, an integer between 1 and 99.</p>
 </li>
@@ -170,25 +170,25 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">write</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;(i10, 2e22.15)&#39;</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">write_error</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="n">n</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">pressure</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">write</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;(i10, 2e22.15)&#39;</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">write_error</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="n">n</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">pressure</span>
 </pre></div>
 </div>
 </td>
 <td><strong>Write list to unit</strong> <code class="docutils literal"><span class="pre">write(unit,</span> <span class="pre">format,</span> <span class="pre">specifiers)</span> <span class="pre">list</span></code></td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">read</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;(i10, 2e22.15)&#39;</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">read_error</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> <span class="n">n</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">pressure</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">read</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;(i10, 2e22.15)&#39;</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">read_error</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> <span class="n">n</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">pressure</span>
 </pre></div>
 </div>
 </td>
 <td><strong>Read list from unit</strong> <code class="docutils literal"><span class="pre">read(unit,</span> <span class="pre">format,</span> <span class="pre">specifiers)</span> <span class="pre">list</span></code></td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">open</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="k">file</span><span class="o">=</span><span class="s1">&#39;data.txt&#39;</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">open_error</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">open</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="k">file</span><span class="o">=</span><span class="s1">&#39;data.txt&#39;</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">open_error</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 </pre></div>
 </div>
 </td>
 <td><strong>Open file</strong> <code class="docutils literal"><span class="pre">open(unit,</span> <span class="pre">specifiers)</span></code></td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">close</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">close_error</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">close</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">close_error</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
 </pre></div>
 </div>
 </td>
@@ -198,18 +198,18 @@
 </table>
 </div>
 <div class="section" id="format-of-the-file">
-<h2><a class="toc-backref" href="#id3">1.6.3. Format of the File</a><a class="headerlink" href="#format-of-the-file" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">4.1.6.3. Format of the File</a><a class="headerlink" href="#format-of-the-file" title="Permalink to this headline">¶</a></h2>
 <p>Take the following read statement:</p>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">read</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;(i10, 2e22.15)&#39;</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">read_error</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> <span class="n">n</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">pressure</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">read</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;(i10, 2e22.15)&#39;</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">read_error</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> <span class="n">n</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">pressure</span>
 </pre></div>
 </div>
 <p>The format of the corresponding file must match with comma separated values, i.e.:</p>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">35</span><span class="mf">0.0</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">35</span><span class="mf">0.0</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="format-statements-print-read-write">
-<h2><a class="toc-backref" href="#id4">1.6.4. Format Statements (print, read, write)</a><a class="headerlink" href="#format-statements-print-read-write" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">4.1.6.4. Format Statements (print, read, write)</a><a class="headerlink" href="#format-statements-print-read-write" title="Permalink to this headline">¶</a></h2>
 <p>The key to format statements:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -222,43 +222,43 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">w</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">w</span>
 </pre></div>
 </div>
 </td>
 <td>Full length</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">m</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">m</span>
 </pre></div>
 </div>
 </td>
 <td>Minimum digits</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">d</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">d</span>
 </pre></div>
 </div>
 </td>
 <td>Decimal places</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">e</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">e</span>
 </pre></div>
 </div>
 </td>
 <td>Exponent length</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">n</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">n</span>
 </pre></div>
 </div>
 </td>
 <td>Positions to skip</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">c</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">c</span>
 </pre></div>
 </div>
 </td>
 <td>Positions to move</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">r</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">r</span>
 </pre></div>
 </div>
 </td>
@@ -277,115 +277,115 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">format</span> <span class="o">=</span> <span class="s2">&quot;(F10.3, A, ES14.7)&quot;</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">format</span> <span class="o">=</span> <span class="s2">&quot;(F10.3, A, ES14.7)&quot;</span>
 </pre></div>
 </div>
 </td>
 <td>Format string</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">Iw</span> <span class="n">Iw</span><span class="p">.</span><span class="n">m</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">Iw</span> <span class="n">Iw</span><span class="p">.</span><span class="n">m</span>
 </pre></div>
 </div>
 </td>
 <td>Integer form</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">Bw</span><span class="p">.</span><span class="n">m</span> <span class="n">Ow</span><span class="p">.</span><span class="n">m</span> <span class="n">Zw</span><span class="p">.</span><span class="n">m</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">Bw</span><span class="p">.</span><span class="n">m</span> <span class="n">Ow</span><span class="p">.</span><span class="n">m</span> <span class="n">Zw</span><span class="p">.</span><span class="n">m</span>
 </pre></div>
 </div>
 </td>
 <td>Binary, octal, hex integer form</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">Fw</span><span class="p">.</span><span class="n">d</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">Fw</span><span class="p">.</span><span class="n">d</span>
 </pre></div>
 </div>
 </td>
 <td>Decimal form real format</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">Ew</span><span class="p">.</span><span class="n">d</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">Ew</span><span class="p">.</span><span class="n">d</span>
 </pre></div>
 </div>
 </td>
 <td>Exponential form (0.12..E-11)</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">Ew</span><span class="p">.</span><span class="n">dEe</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">Ew</span><span class="p">.</span><span class="n">dEe</span>
 </pre></div>
 </div>
 </td>
 <td>Specified exponent length</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">ESw</span><span class="p">.</span><span class="n">d</span> <span class="n">ESw</span><span class="p">.</span><span class="n">dEe</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">ESw</span><span class="p">.</span><span class="n">d</span> <span class="n">ESw</span><span class="p">.</span><span class="n">dEe</span>
 </pre></div>
 </div>
 </td>
 <td>Scientific form (1.2...E-10)</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">ENw</span><span class="p">.</span><span class="n">d</span> <span class="n">ENw</span><span class="p">.</span><span class="n">dEe</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">ENw</span><span class="p">.</span><span class="n">d</span> <span class="n">ENw</span><span class="p">.</span><span class="n">dEe</span>
 </pre></div>
 </div>
 </td>
 <td>Engineering form (123.4...E-12)</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">Gw</span><span class="p">.</span><span class="n">d</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">Gw</span><span class="p">.</span><span class="n">d</span>
 </pre></div>
 </div>
 </td>
 <td>Generalized form</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">Gw</span><span class="p">.</span><span class="n">dEe</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">Gw</span><span class="p">.</span><span class="n">dEe</span>
 </pre></div>
 </div>
 </td>
 <td>Generalized exponent form</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">Lw</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">Lw</span>
 </pre></div>
 </div>
 </td>
 <td>Logical format (T, F)</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">Aw</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">A</span> <span class="n">Aw</span>
 </pre></div>
 </div>
 </td>
 <td>Characters format</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">nX</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">nX</span>
 </pre></div>
 </div>
 </td>
 <td>Horizontal positioning (skip)</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">Tc</span> <span class="n">TLc</span> <span class="n">TRc</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">Tc</span> <span class="n">TLc</span> <span class="n">TRc</span>
 </pre></div>
 </div>
 </td>
 <td>Move (absolute, left, right)</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">r</span><span class="o">/</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">r</span><span class="o">/</span>
 </pre></div>
 </div>
 </td>
 <td>Vert. positioning (skip lines)</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">(...)</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">r</span><span class="p">(...)</span>
 </pre></div>
 </div>
 </td>
 <td>Grouping / repetition</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="p">:</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="p">:</span>
 </pre></div>
 </div>
 </td>
 <td>Format scanning control</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="n">SP</span> <span class="n">SS</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">S</span> <span class="n">SP</span> <span class="n">SS</span>
 </pre></div>
 </div>
 </td>
 <td>Sign control</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">BN</span> <span class="n">BZ</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">BN</span> <span class="n">BZ</span>
 </pre></div>
 </div>
 </td>
@@ -395,9 +395,9 @@
 </table>
 </div>
 <div class="section" id="data-transfer-specifiers-read-write">
-<h2><a class="toc-backref" href="#id5">1.6.5. Data-Transfer Specifiers (Read, Write)</a><a class="headerlink" href="#data-transfer-specifiers-read-write" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">4.1.6.5. Data-Transfer Specifiers (Read, Write)</a><a class="headerlink" href="#data-transfer-specifiers-read-write" title="Permalink to this headline">¶</a></h2>
 <p>Important specifiers are in <strong>bold</strong>, typical example:</p>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">write</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;(i10, e22.15, e15.6)&#39;</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">write_error</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="n">n</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">pressure</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">write</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;(i10, e22.15, e15.6)&#39;</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">write_error</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="n">n</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">pressure</span>
 
 <span class="k">read</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;(i10, e22.15, e15.6)&#39;</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">read_error</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> <span class="n">n</span><span class="p">,</span> <span class="n">velocity</span><span class="p">,</span> <span class="n">pressure</span>
 </pre></div>
@@ -413,44 +413,44 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">iostat</span><span class="o">=</span><span class="n">integer_variable</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">iostat</span><span class="o">=</span><span class="n">integer_variable</span>
 </pre></div>
 </div>
 </td>
 <td><strong>Save iocode (error) to variable</strong></td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">err</span><span class="o">=</span><span class="n">label</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">err</span><span class="o">=</span><span class="n">label</span>
 </pre></div>
 </div>
 </td>
 <td><strong>Label to jump to on error</strong></td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">advance</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span>
 <span class="n">advance</span><span class="o">=</span><span class="s1">&#39;no&#39;</span>
 </pre></div>
 </div>
 </td>
 <td>(Non-)advancing data transfer</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">end</span><span class="o">=</span><span class="n">label</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">end</span><span class="o">=</span><span class="n">label</span>
 </pre></div>
 </div>
 </td>
 <td>Label to jump to on end of file</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">eor</span><span class="o">=</span><span class="n">label</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">eor</span><span class="o">=</span><span class="n">label</span>
 </pre></div>
 </div>
 </td>
 <td>Label for end of record</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">rec</span><span class="o">=</span><span class="n">integer_variable</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">rec</span><span class="o">=</span><span class="n">integer_variable</span>
 </pre></div>
 </div>
 </td>
 <td>Record number to read or write</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">size</span><span class="o">=</span><span class="n">integer_variable</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">size</span><span class="o">=</span><span class="n">integer_variable</span>
 </pre></div>
 </div>
 </td>
@@ -460,11 +460,11 @@
 </table>
 </div>
 <div class="section" id="i-o-specifiers">
-<h2><a class="toc-backref" href="#id6">1.6.6. I/O Specifiers</a><a class="headerlink" href="#i-o-specifiers" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">4.1.6.6. I/O Specifiers</a><a class="headerlink" href="#i-o-specifiers" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="open-specifiers">
-<h3><a class="toc-backref" href="#id7">1.6.6.1. Open Specifiers</a><a class="headerlink" href="#open-specifiers" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id7">4.1.6.6.1. Open Specifiers</a><a class="headerlink" href="#open-specifiers" title="Permalink to this headline">¶</a></h3>
 <p>Important specifiers are in <strong>bold</strong>, typical example:</p>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">open</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="k">file</span><span class="o">=</span><span class="s1">&#39;data.txt&#39;</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">open_error</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">open</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="k">file</span><span class="o">=</span><span class="s1">&#39;data.txt&#39;</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">open_error</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 </pre></div>
 </div>
 <table border="1" class="docutils">
@@ -478,19 +478,19 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">file</span><span class="o">=</span><span class="s1">&#39;filename&#39;</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">file</span><span class="o">=</span><span class="s1">&#39;filename&#39;</span>
 </pre></div>
 </div>
 </td>
 <td><strong>Name of file to open</strong>, e.g. <code class="docutils literal"><span class="pre">file</span> <span class="pre">=</span> <span class="pre">'data.txt'</span></code> (if it&#8217;s in the same directory as the complied code)</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">iostat</span><span class="o">=</span><span class="n">integer_variable</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">iostat</span><span class="o">=</span><span class="n">integer_variable</span>
 </pre></div>
 </div>
 </td>
 <td><strong>Save iocode (error) to variable</strong>, e.g. <code class="docutils literal"><span class="pre">iostat</span> <span class="pre">=</span> <span class="pre">open_error</span></code></td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">status</span><span class="o">=</span><span class="s1">&#39;old&#39;</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">status</span><span class="o">=</span><span class="s1">&#39;old&#39;</span>
 <span class="n">status</span><span class="o">=</span><span class="s1">&#39;new&#39;</span>
 <span class="n">status</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span>
 <span class="n">status</span><span class="o">=</span><span class="s1">&#39;scratch&#39;</span>
@@ -500,47 +500,47 @@
 </td>
 <td><strong>Status of input file</strong>, e.g. <code class="docutils literal"><span class="pre">status='unknown'</span></code></td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">err</span><span class="o">=</span><span class="n">label</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">err</span><span class="o">=</span><span class="n">label</span>
 </pre></div>
 </div>
 </td>
 <td><strong>Label to jump to on error</strong></td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">access</span><span class="o">=</span><span class="s1">&#39;sequential&#39;</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="nb">access</span><span class="o">=</span><span class="s1">&#39;sequential&#39;</span>
 <span class="nb">access</span><span class="o">=</span><span class="s1">&#39;direct&#39;</span>
 </pre></div>
 </div>
 </td>
 <td>Access method</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">form</span><span class="o">=</span><span class="s1">&#39;formatted&#39;</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">form</span><span class="o">=</span><span class="s1">&#39;formatted&#39;</span>
 <span class="n">form</span><span class="o">=</span><span class="s1">&#39;unformatted&#39;</span>
 </pre></div>
 </div>
 </td>
 <td>Formatted/unformatted I/O</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">recl</span><span class="o">=</span><span class="n">integer_variable</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">recl</span><span class="o">=</span><span class="n">integer_variable</span>
 </pre></div>
 </div>
 </td>
 <td>Length of record</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">blank</span><span class="o">=</span><span class="s1">&#39;null&#39;</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">blank</span><span class="o">=</span><span class="s1">&#39;null&#39;</span>
 <span class="n">blank</span><span class="o">=</span><span class="s1">&#39;zero&#39;</span>
 </pre></div>
 </div>
 </td>
 <td>Ignore blanks/treat them as 0</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">access</span><span class="o">=</span><span class="s1">&#39;sequential&#39;</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="nb">access</span><span class="o">=</span><span class="s1">&#39;sequential&#39;</span>
 <span class="nb">access</span><span class="o">=</span><span class="s1">&#39;direct&#39;</span>
 </pre></div>
 </div>
 </td>
 <td>Access method</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">position</span><span class="o">=</span><span class="s1">&#39;asis&#39;</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">position</span><span class="o">=</span><span class="s1">&#39;asis&#39;</span>
 <span class="n">position</span><span class="o">=</span><span class="s1">&#39;rewind&#39;</span>
 <span class="n">position</span><span class="o">=</span><span class="s1">&#39;append&#39;</span>
 </pre></div>
@@ -548,7 +548,7 @@
 </td>
 <td>Position, if sequential I/O</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;read&#39;</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">action</span><span class="o">=</span><span class="s1">&#39;read&#39;</span>
 <span class="n">action</span><span class="o">=</span><span class="s1">&#39;write&#39;</span>
 <span class="n">action</span><span class="o">=</span><span class="s1">&#39;readwrite&#39;</span>
 </pre></div>
@@ -556,7 +556,7 @@
 </td>
 <td>Read/write mode</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">delim</span><span class="o">=</span><span class="s1">&#39;quote&#39;</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">delim</span><span class="o">=</span><span class="s1">&#39;quote&#39;</span>
 <span class="n">delim</span><span class="o">=</span><span class="s1">&#39;apostrophe&#39;</span>
 <span class="n">delim</span><span class="o">=</span><span class="s1">&#39;none&#39;</span>
 </pre></div>
@@ -564,7 +564,7 @@
 </td>
 <td>Delimiter for char constants</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">pad</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">pad</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span>
 <span class="n">pad</span><span class="o">=</span><span class="s1">&#39;no&#39;</span>
 </pre></div>
 </div>
@@ -575,9 +575,9 @@
 </table>
 </div>
 <div class="section" id="close-specifiers">
-<h3><a class="toc-backref" href="#id8">1.6.6.2. Close Specifiers</a><a class="headerlink" href="#close-specifiers" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id8">4.1.6.6.2. Close Specifiers</a><a class="headerlink" href="#close-specifiers" title="Permalink to this headline">¶</a></h3>
 <p>Important specifiers are in <strong>bold</strong>, typical example (to close the file we opened, with unit <code class="docutils literal"><span class="pre">10</span></code>):</p>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">close</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">close_error</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">close</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">iostat</span><span class="o">=</span><span class="n">close_error</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 </pre></div>
 </div>
 <table border="1" class="docutils">
@@ -591,19 +591,19 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">iostat</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">iostat</span>
 </pre></div>
 </div>
 </td>
 <td><strong>Save iocode (error) to variable</strong></td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">err</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">err</span>
 </pre></div>
 </div>
 </td>
 <td><strong>Label to jump to on error</strong></td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">status</span><span class="o">=</span><span class="s1">&#39;keep&#39;</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">status</span><span class="o">=</span><span class="s1">&#39;keep&#39;</span>
 <span class="n">status</span><span class="o">=</span><span class="s1">&#39;delete&#39;</span>
 </pre></div>
 </div>
@@ -615,10 +615,10 @@
 </div>
 </div>
 <div class="section" id="reference-list">
-<h2><a class="toc-backref" href="#id9">1.6.7. Reference List</a><a class="headerlink" href="#reference-list" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id9">4.1.6.7. Reference List</a><a class="headerlink" href="#reference-list" title="Permalink to this headline">¶</a></h2>
 <p>This contains commands I haven&#8217;t used, but maybe useful for translation/understanding.</p>
 <div class="section" id="getarg-inquire-backspace-endfile-rewind-functions">
-<h3><a class="toc-backref" href="#id10">1.6.7.1. Getarg, Inquire, Backspace, Endfile, Rewind Functions</a><a class="headerlink" href="#getarg-inquire-backspace-endfile-rewind-functions" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id10">4.1.6.7.1. Getarg, Inquire, Backspace, Endfile, Rewind Functions</a><a class="headerlink" href="#getarg-inquire-backspace-endfile-rewind-functions" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
 <col width="33%" />
@@ -630,43 +630,43 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">call </span><span class="nb">getarg</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">call </span><span class="nb">getarg</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span>
 </pre></div>
 </div>
 </td>
 <td>Put 2nd CLI-argument in var</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">inquire</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">spec</span><span class="p">)</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">inquire</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">spec</span><span class="p">)</span>
 </pre></div>
 </div>
 </td>
 <td>Inquiry by unit</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">inquire</span><span class="p">(</span><span class="k">file</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">spec</span><span class="p">)</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">inquire</span><span class="p">(</span><span class="k">file</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">spec</span><span class="p">)</span>
 </pre></div>
 </div>
 </td>
 <td>Inquiry by filename</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">inquire</span><span class="p">(</span><span class="n">iolength</span><span class="o">=</span><span class="n">iol</span><span class="p">)</span> <span class="n">outlist</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">inquire</span><span class="p">(</span><span class="n">iolength</span><span class="o">=</span><span class="n">iol</span><span class="p">)</span> <span class="n">outlist</span>
 </pre></div>
 </div>
 </td>
 <td>Inquiry by output item list</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">backspace</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">spec</span><span class="p">)</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">backspace</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">spec</span><span class="p">)</span>
 </pre></div>
 </div>
 </td>
 <td>Go back one record</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">endfile</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">spec</span><span class="p">)</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">endfile</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">spec</span><span class="p">)</span>
 </pre></div>
 </div>
 </td>
 <td>Write eof record</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">rewind</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">spec</span><span class="p">)</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">rewind</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">spec</span><span class="p">)</span>
 </pre></div>
 </div>
 </td>
@@ -676,7 +676,7 @@
 </table>
 </div>
 <div class="section" id="inquire-specifiers">
-<h3><a class="toc-backref" href="#id11">1.6.7.2. Inquire Specifiers</a><a class="headerlink" href="#inquire-specifiers" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id11">4.1.6.7.2. Inquire Specifiers</a><a class="headerlink" href="#inquire-specifiers" title="Permalink to this headline">¶</a></h3>
 <p>I haven&#8217;t used these</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -689,139 +689,139 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="nb">access</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="nb">access</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">action</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">action</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">blank</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">blank</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">delim</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">delim</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">direct</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">direct</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">exist</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">exist</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">form</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">form</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">formatted</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">formatted</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">iostat</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">iostat</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">name</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">name</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">named</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">named</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">nextrec</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">nextrec</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">number</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">number</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">opened</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">opened</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">pad</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">pad</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">position</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">position</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">read</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">read</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">readwrite</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">readwrite</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">recl</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">recl</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">sequential</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">sequential</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">unformatted</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">unformatted</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">write</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">write</span>
 </pre></div>
 </div>
 </td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">iolength</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">iolength</span>
 </pre></div>
 </div>
 </td>
@@ -831,7 +831,7 @@
 </table>
 </div>
 <div class="section" id="backspace-endfile-rewind-specifiers">
-<h3><a class="toc-backref" href="#id12">1.6.7.3. Backspace-, endfile-, rewind-specifiers</a><a class="headerlink" href="#backspace-endfile-rewind-specifiers" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id12">4.1.6.7.3. Backspace-, endfile-, rewind-specifiers</a><a class="headerlink" href="#backspace-endfile-rewind-specifiers" title="Permalink to this headline">¶</a></h3>
 <p>I haven&#8217;t used these</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -844,13 +844,13 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">iostat</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">iostat</span>
 </pre></div>
 </div>
 </td>
 <td>Save iocode (error) to variable</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">err</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">err</span>
 </pre></div>
 </div>
 </td>
@@ -867,17 +867,17 @@
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="fortran_procedures.html">1.5. Intrinsic Procedures</a>
+        «&#160;&#160;<a href="fortran_procedures.html">4.1.5. Intrinsic Procedures</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="../06_fortran_use/fortran_use.html">2. Using Fortran</a>&#160;&#160;»
+        <a href="../06_fortran_use/fortran_use.html">4.2. Using Fortran</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

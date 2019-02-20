@@ -1,0 +1,1941 @@
+===========================
+OpenFOAM Use - Private
+===========================
+
+This is the OpenFOAM language.
+
+.. contents::
+   :local:
+
+What is the process in CFD?
+---------------------------
+
+* Analyse problem 
+    - literature survey
+    - dimensionless groups
+    - physical principles
+* Model physics 
+    - NSE, turbulence, other physics
+    - Identify models and coefficients
+* Setup geometry and mesh
+* Determine numerical method
+    - transient/steady state
+    - differencing schemes
+* Run calculation
+* Analyse and post-process results
+
+Directories
+-----------
+    
+
+    
+How to get to the installation directory?
+=========================================
+
+The following command gets you to /opt/openfoam4/
+
+::
+
+    $ foam    
+
+    
+How is the installation directory structured?
+=============================================
+
+Shortcut to ``/opt/openfoam4`` = ``$WM_PROJECT_DIR``
+
+* /opt/openfoam4/ 
+    - applications
+        + solvers
+            * basic
+            * discreteMethods
+            * financial
+            * lagrangian
+            * combustion
+            * DNS
+            * heatTransfer
+            * multiphase
+            * compressible
+            * electromagetics
+            * incompressible
+            * stressAnalysis
+        + test
+        + utilities
+    - doc
+    - src
+    - tutorials
+    - bin
+    - etc
+    - wmake
+    - platforms
+
+    
+How to get to the run directory?
+================================
+
+The following command gets you to /home/andrew/Dropbox/7_OpenFOAM/run/
+
+::
+
+    $ run  
+    
+How is the user directory structured?
+=====================================
+
+Each of 1_lid_driven_cavity etc represents a "case directory".
+
+* /home/andrew/Dropbox/7_OpenFOAM/run/
+    - 1_tutorials/
+        + 1_lid_driven_cavity 
+        + 2_pipe_flow
+        + 3_flat_plate
+* /home/andrew/Dropbox/7_OpenFOAM/applications/
+* /home/andrew/Dropbox/7_OpenFOAM/lib/    
+    
+What is in the case directory?
+==============================
+
+A list of dictionaries:
+
+* /constant/
+    - turbulenceProperties
+    - transportProperties
+    - /polyMesh/
+        + boundary
+        + faces
+        + neighbour
+        + owner
+        + points
+* /system/
+    - blockMeshDict
+    - controlDict
+    - fvSchemes
+    - fvSolution
+* /0/ (timesteps)
+    - U
+    - p
+    - k
+    - epsilon
+    
+What is the constant directory?
+===============================
+
+* turbulenceProperties - turbulence properties
+* transportProperties - physical properties e.g. viscosity
+* polyMesh - mesh details
+    
+What is in the system directory?
+================================
+
+* blockMeshDict - mesh scaling, basic meshing, boundary names
+* controlDict - application, time start/end, timestep, write controls
+* fvSchemes - differencing schemes
+* fvSolution - solver, solver controls, pressure-velocity coupling controls
+
+What is in the 0 (timestep) directory?
+======================================
+
+* Boundary conditions
+* Initial conditions  
+
+Dictionaries
+------------
+
+What are dictionaries?
+======================
+
+A dictionary is an entity that contains data entries that can be retrieved by the I/O by means of keywords. The keyword entries follow the general format (keyword-value pairs)
+
+::
+
+    <keyword>  <dataEntry1> … <dataEntryN>; 
+
+* Free format ASCII text files
+* Parsed by OpenFOAM
+* Only values actually needed are read in
+* Comment lines are ``//`` or ``/* .... */`` (C format comments)
+* More flexible than alternatives
+* Format:
+    - banner
+    - FoamFile - dictionary with general information
+    - e.g. transportProperties - the dictionary with the actual information
+    
+What is a dimensionedScalar in the transportProperties dictionary?
+==================================================================
+
+A scalar with a:
+
+* Name
+* Physical dimensions
+* Value
+
+.. code-block:: c
+
+    nu [0 2 -1 0 0 0 0] 0.01;
+    
+How are the dimensions given in the transportProperties dictionary?
+===================================================================
+
+.. code-block:: c
+
+    [M L T theta mol I Cd]
+    
+* M = mass (kg)
+* L = length (m)
+* T = time (s)
+* theta = temperature (K)
+* mol = quantity (mol)
+* I = current (A)
+* Cd = luminous intensity (candela)
+
+OpenFOAM checks dimensions of equations
+
+
+What is the turbulenceProperties dictionary?
+============================================
+
+Read by pisoFoam and simpleFoam to switch turbulence model, e.g.
+
+.. code-block:: c
+
+    simulationType RASModel;
+    
+    RAS
+    {
+        RASModel kEpsilon;      // chosen model
+        turbulence on;          // turbulence on
+        printCoeffs on;         // coefficients printed to terminal
+    }
+
+Coefficients are stored in sub-dictionaries with appopriate names.
+
+What is the controlDict dictionary?
+===================================
+
+Controls overall behaviour of run, timestep and saving behaviour
+
+.. code-block:: c
+
+    startFrom startTime;        // simulation starts at t=0
+    startTime 0;
+    
+    stopAt endTime;             // simulation ends at t=10
+    endTime 10;
+    
+    deltaT 0.005;               // timestep = 0.005s
+    
+    writeControl timeStep;      // write every 100 timesteps (uncompressed ASCII format)
+    writeInterval 100;
+
+**latestTime = continue after you have started simulation for a few seconds**    
+    
+What is the polyMesh dictionary?
+================================
+
+Stores the mesh structure containing (from blockMeshDict):
+
+* Boundary - list of boundary types 
+* Points - list of the mesh vertices
+* Faces - list of which vertices make up which faces
+* Owner - list of which cells own which faces
+* Neighbour - list of which face has which neighbour cell
+
+Located in ``case/constant/polyMesh``
+
+At start of run OpenFOAM reads this information, checks it and constructs a mesh
+
+What is the blockMeshDict dictionary?
+=====================================
+
+* Lists boundary patches
+* Used by ``$ blockMesh`` utility to generate mesh (creates polyMesh dictionary)
+* Located in ``case/system``
+
+How are vertices created in blockMeshDict dictionary?
+=====================================================
+
+Right hand rule starting bottom left
+
+.. code-block:: c 
+
+    vertices
+    (
+        (0 0 0)             // node 0
+        (1 0 0)             // node 1
+        (1 1 0)             // node 2
+        (0 1 0)             // node 3
+        (0 0 0.1)           // node 4
+        (1 0 0.1)           // node 5
+        (1 1 0.1)           // node 6
+        (0 1 0.1)           // node 7
+    );
+
+How are blocks created in blockMeshDict dictionary?
+===================================================
+
+.. code-block:: c
+
+    blocks
+    (
+        hex (0 1 2 3 4 5 6 7) (20 20 1) simpleGrading (1 1 1)   // vertex numbers, cells (x y z), expansion ratios (x y z)
+    );
+
+How are patches created in blockMeshDict dictionary?
+====================================================
+
+* Patches = boundary type, name and location
+* Points must be connected in sequence  - right hand rule 
+
+
+.. code-block:: c
+
+    boundary
+    (
+        movingWall
+        {
+            type wall;
+            faces
+            (
+                (3 7 6 2)
+            );
+        }
+        fixedWalls
+        {
+            type wall;
+            faces
+            (
+                (0 4 7 3)
+                (2 6 5 1)
+                (1 5 4 0)
+            );
+        }
+        frontAndBack
+        {
+            type empty;     // no calculations in z-direction, OpenFOAM is a 3D code, 2D is done with single thickness mesh in z-dir
+            faces
+            (
+                (0 3 2 1)
+                (4 5 6 7)
+            );
+        }
+    );
+
+How is pressure initialised in the ``0/p`` dictionary?
+======================================================
+
+.. code-block:: c
+
+    dimensions      [0 2 -2 0 0 0 0];       // all fields have dimensions
+
+    internalField   uniform 0;              // uniform internal field
+
+    boundaryField                           // boundary conditions: patch name { type type info }
+    {                                       // ordering same as blockMeshDict
+        movingWall
+        {
+            type            zeroGradient;
+        }
+
+        fixedWalls
+        {
+            type            zeroGradient;
+        }
+
+        frontAndBack
+        {
+            type            empty;
+        }
+    }
+
+**Pressure in OpenFOAM is pressure divided by density, units $m^2 s^{-2}$**
+
+How is velocity initialised in the ``0/U`` dictionary?
+======================================================
+
+.. code-block:: c
+
+    dimensions      [0 1 -1 0 0 0 0];           // m/s units
+
+    internalField   uniform (0 0 0);            // u, v, w = 0
+
+    boundaryField
+    {
+        movingWall
+        {
+            type            fixedValue;         // constant velocity = 1
+            value           uniform (1 0 0);
+        }
+
+        fixedWalls
+        {
+            type            fixedValue;         // no slip
+            value           uniform (0 0 0);
+        }
+
+        frontAndBack                            // no calculations
+        {
+            type            empty;
+        }
+    }
+
+    
+How are discretisation schemes specified in the fvScheme dictionary?
+====================================================================
+
+For example ``div(phi,q)`` - this requires an entry in fvSchemes
+
+.. code-block:: c
+
+    divSchemes
+    (
+        default none;
+        div(phi,q) Gauss upwind;    // discretisation method is always Gauss
+                                    // interpolation method is upwind (can be another method)
+    )
+
+Which interpolation methods are avaliable in the fvScheme dictionary?    
+=====================================================================
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Scheme
+     - Meaning
+   * - ::
+
+           upwind
+
+     - 1st order upwind
+   * - ::
+
+           linearUpwind
+
+     - 2nd order correction to upwind  
+   * - ::
+
+           linearUpwindV
+
+     - Improved handling for vectors
+   * - ::
+
+           linear
+
+     - Central differencing (2nd order)
+   * - ::
+
+           SFCD
+
+     - Self filtered central differencing     
+   * - ::
+
+           vanLeer
+
+     - van Leer limited CD     
+
+    
+How are temporal schemes specified in the fvScheme dictionary?
+==============================================================
+
+.. code-block:: c
+
+    ddtSchemes
+    (
+        default Euler;
+    )
+
+
+Which temporal schemes are avaliable in the fvScheme dictionary?    
+================================================================
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Scheme
+     - Meaning
+   * - ::
+
+           steadyState
+
+     - Steady state
+   * - ::
+
+           Euler
+
+     - Euler
+   * - ::
+
+           CrankNicholson
+
+     - Crank-Nicholson
+   * - ::
+
+           backward
+
+     - Backward differencing
+     
+
+Which solvers are avaliable in the fvSolution dictionary, in the solvers subdictionary?    
+=======================================================================================
+
+Specify which solver to use for which equation (U, p) etc.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Solver
+     - Meaning
+   * - ::
+
+           smoothSolver
+
+     - Solver with smoothing (for speed)
+   * - ::
+
+           PCG
+           
+
+     - Preconditioned conjugate gradient (for stability) 
+   * - ::
+
+           PBiCG
+
+     - Preconditioned biconjugate gradient (for stability)
+   * - ::
+
+           GAMG
+
+     - Algebraic multigrid (for speed)
+    
+The solvers subdictionary also specifies:
+
+* The tolerance and relative tolerance (relative tolerance = 0 for transient cases)
+* Smoother and preconditioners
+
+Which how is PISO specified in the fvSolution dictionary, in the PISO subdictionary?    
+====================================================================================
+
+Defines:
+
+* ``nCorrectors`` - number of correction iterations (usually 2)
+* ``nNonOrthogonalCorrectors`` - if mesh is badly non-orthogonal
+* ``pRefCell`` and ``pRefValue`` - for reference values, if no boundaries have pressure
+
+Which how is SIMPLE specified in the fvSolution dictionary, in the SIMPLE subdictionary?    
+========================================================================================
+
+Defines:
+
+* ``nNonOrthogonalCorrectors`` - if mesh is badly non-orthogonal (not normally neccessary)
+
+How are relaxation factors specified in the fvSolution dictionary, in the relxationFactors subdictionary?    
+=========================================================================================================
+
+Defines:
+
+* Underrelaxation factors for equations (typically 0.3 to 0.9)
+
+Lower relaxation factors means:
+
+* Slower convergence
+* More stable
+
+How are iterations introduced in the controlDict dictionary?
+============================================================
+
+* set ``deltaT = 1`` in the controlDict
+
+
+
+Utilities
+---------
+
+What are utilities?
+===================
+
+Utilities are used for:
+
+* Mesh generation, conversion, manipulation
+* Pre/post processing
+* Data conversion
+
+What are the mesh generation utilities?
+=======================================
+
+::
+
+    $ blockMesh         // block structured mesh
+    $ snappyHexMesh     // hexa mesh truncated at boundaries defined by STL files
+    $ fluentMeshToFoam  // .msh
+    $ gambitToFoam      // .neu
+    $ startToFoam       // .neu
+    $ ideasToFoam       // .ans
+    $ cfxToFoam         // .geo
+    
+What are the post-processing utilities?
+=======================================
+
+::
+
+    $ sample    // sample data along a line between two points
+    $ flowType  // calculates a flow parameter
+    $ yPlusRAS  // calculates y plus on walls
+    $ yPlusLES  // calculates y plus on walls
+    $ foamCalc  // takes a number of arguments for general field operations e.g. foamCalc mag U
+
+What are functionObjects?
+=========================
+
+Evalautes quantities during run, by adding functions to controlDict e.g.
+
+* Evaulate forces
+* Manipulate fields
+* Sample data
+* Visualise flows
+* Control execution
+    
+e.g.
+
+.. code-block:: c
+
+    forces
+    {
+        type forceCoeffs;
+    }
+
+    
+Solvers
+-------
+
+What are solvers?
+=================
+
+Solve computational continuum mechanics problems e.g. turbulent flow, stress analysis
+
+
+    
+How are solvers invoked?
+========================
+
+e.g. to run the icoFoam solver:
+
+::
+
+    $ icoFoam
+
+What are the simple solvers?
+============================
+    
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Solver
+     - Purpose
+   * - ::
+
+           laplacianFoam
+
+     - Laplace Equation
+   * - ::
+
+           potentialFoam
+
+     - Potential flow
+   * - ::
+
+           scalarTransportFoam
+           
+     - Tranpsort equation for a given velocity field
+   * - ::
+
+           icoFoam
+           
+     - Transient, incompressible, laminar, Newtonian flow (based on PISO)
+   * - ::
+
+           nonNewtonianIcoFoam
+           
+     - Transient, incompressible, laminar, non-Newtonian flow (based on PISO)       
+   * - ::
+
+           sonicFoam
+           
+     - Transonic/supersonic transient gas flow      
+     
+What are the turbulent solvers?
+===============================
+    
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Solver
+     - Purpose
+   * - ::
+
+           simpleFoam
+
+     - Steady state (SIMPLE) solver for turbulent flows
+   * - ::
+
+           pisoFoam
+
+     - Transient (PISO) solver for turbulent flows
+   * - ::
+
+           pimpleFoam
+           
+     - Large time step transient solver using merged PISO-SIMPLE algorithm (very stable with large timestep)
+   * - ::
+
+           pimpleDymFoam
+           
+     - Same as pimpleFoam but with mesh motion
+   * - ::
+
+           boundaryFoam
+           
+     - Steady state 1D turbulent flow used to generate boundary layer conditions at inlet      
+   * - ::
+
+           channelFoam
+           
+     - LES code for cyclic channels 
+   * - ::
+
+           porousSimpleFoam
+           
+     - Turbulent flow in a porous medium 
+
+(The laminar option is avaliable in turbulent codes)
+
+What are the multi-phase solvers?
+=================================
+    
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Solver
+     - Purpose
+   * - ::
+
+           bubbleFoam
+           twoPhaseEulerFoam
+
+     - Solvers for dispersed phase flow, e.g. gas bubbles in liquid
+   * - ::
+
+           interFoam
+           multiphaseInterFoam
+
+     - Solves for 2 (or multiple) immiscible phases with interface capturing using VOF method, laminar flow case
+   * - ::
+
+           twoLiquidMixingFoam
+
+     - Solver for two immiscible fluids
+   * - ::
+
+           settlingFoam
+
+     - Settling of solid particles in liquid
+          
+What are the combustion solvers?
+================================
+    
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Solver
+     - Purpose
+   * - ::
+
+           XiFoam
+
+     - Premixed/partially premixed combustion with RANS/LES turbulence modelling and Weller model
+   * - ::
+
+           engineFoam
+           coldEngineFlow
+
+     - Solver for IC engine calculations with/without combustion            
+   * - ::
+
+           dieselFoam
+           dieselEngineFoam
+
+     - Diesel engine spray/combustion codes         
+   * - ::
+
+           reactingFoam
+           rhoReactingFoam
+
+     - Chemical reaction code    
+     
+What are the other solvers?
+===========================
+    
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Solver
+     - Purpose
+   * - ::
+
+           buoyant...Foam
+
+     - Transient/s.s. solver comp. fluid, h.t. w/wo Boussinesq
+   * - ::
+
+           chtMultiRegionFoam
+
+     - CHT between solid and fluid regions          
+   * - ::
+
+           dsmcFoam
+
+     - Direct simulation Monte Carlo solver for multi-species flow         
+   * - ::
+
+           mdFoam
+
+     - Molecular dynamics solver
+   * - ::
+
+           solidDisplacementFoam
+
+     - Transient/s.s. solver for linear-elastic deformation
+   * - ::
+
+           financialFoam
+
+     - Black-Scholes equations
+    
+    
+    
+What are the RANS solvers?
+==========================
+    
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Solver
+     - Purpose
+   * - ::
+
+           pisoFoam
+
+     - Transient incompressible turbulent flow using PISO algorithm
+   * - ::
+
+           simpleFoam
+
+     - Steady state incompressible turbulent flow using SIMPLE algorithm         
+   * - ::
+
+           spalartAllmaras
+           kEpsilon
+           realizableKE
+           RNGkEpsilon
+           NonlinearKEShih
+           LienCubicKE
+           kOmegaSST
+
+     - 1 and 2 equation models
+   * - ::
+
+           LienCubicKEKLowRE
+           LienLeschZinerLowRE
+           LaunderSharmaKE
+           LamBremhorstKE
+           QZeta
+
+     - Low Re models    
+   * - ::
+
+           LRR
+           LaunderGibsonRSTM
+
+     - Reynolds Stress models               
+
+How are turbulence models invoked?
+==================================
+
+By a pointer, can switch between models with runtime selection.
+
+::
+
+    fvVectorMatrix UEqn
+    (
+        fvm::ddt(U)
+        + fvm::div(phi,U)
+        + turbulence -> divDevReff(U)
+    );
+
+    
+How can y-plus be checked?
+==========================
+
+The following post-processing utility
+
+::
+
+    $ checkYPlus    
+    
+    
+     
+What are the mesh motion solvers?
+=================================
+
+Solvers include Dym in the name
+    
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Solver
+     - Purpose
+   * - ::
+
+           dynamicFvMesh
+
+     - Generic mesh motion
+   * - ::
+
+           pimpleDymFoam
+
+     - Incompressible turbulent flow solver for moving mesh        
+   * - ::
+
+           rhoCentralDymFoam
+
+     - Transonic (density-based) flow solver with moving mesh      
+   * - ::
+
+           sonicDymFoam
+
+     - Sonic (pressure-based)
+   * - ::
+
+           interDymFoam
+
+     - VOF multiphase solver
+     
+
+How is mesh motion specified?
+=============================
+
+In constant/dynamicMeshDict e.g.
+
+* displacmentLaplacian
+* velocityLaplacian
+
+Different solver options use different fields, e.g.
+
+* pointMotionU
+* velocityLaplacian
+
+     
+What are the fluid-structure interaction solvers?
+=================================================
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Solver
+     - Purpose
+   * - ::
+
+           solidDisplacementFoam
+           solidEquilibriumDisplacementFoam
+
+     - Couping between fluid and solid
+
+     
+What are the free surface solvers?
+==================================
+    
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Solver
+     - Purpose
+   * - ::
+
+           interFoam
+
+     - Basic VOF code (2 fluids) turbulence model can be RANS or LES
+   * - ::
+
+           compressibleInterFoam
+
+     - Compressible flow version of interFoam         
+   * - ::
+
+           interDymFoam
+
+     - Moving mesh version of interFoam       
+   * - ::
+
+           multiPhaseInterFoam
+
+     - Solve for arbitary number of immiscible fluids
+   * - ::
+
+           cavitatingFoam
+
+     - Allows for cavitation
+
+
+What are the compressible flow solvers?
+=======================================
+    
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Solver
+     - Purpose
+   * - ::
+
+           rhoSimpleFoam
+           rhoPimpleFoam
+           rhoPisoFoam
+
+     - Compressible versions of standard OpenFOAM codes (pressure-based)
+   * - ::
+
+           rhoCentralFoam
+
+     - MUSCL scheme of Kuranov and Tadmov         
+   * - ::
+
+           sonicFoam
+
+     - Density based scheme for high speed compressible flows (transient solution)        
+   * - ::
+
+           sonicLiquidFoam
+
+     - Same but for compressible liquids
+
+All codes capable of laminar and turbulent simulation                  
+  
+    
+Example - Boussineq Approximation
+---------------------------------
+
+For buoyancy-driven flow we often make use of the Boussinesq approximation : air modelled as incompressible with a body force proportional to ∆θ. Can we implement this into icoFoam?
+Need to solve standard heat conduction equation:
+
+.. math::
+    {{\partial \theta} \over {\partial t}} + \nabla \cdot (u \theta) = {\kappa \over {\rho_0 C_v}} \nabla^2 \theta
+    
+and alter the momentum equation:
+
+.. math::
+    {{\partial u} \over {\partial t}} + \nabla \cdot(u u) = -\nabla p + \nu \nabla^2 u - \beta g (\theta_0 - \theta)
+ 
+to accommodate this.
+
+1. Copy ``icoFoam`` solver to user directory
+    * ``cd $FOAM_RUN/../applications``
+    * ``cp -r $WM_PROJECT_DIR/applications/solvers/incompressible/icoFoam .``
+2. Compile ``icoFoam`` in user directory
+    * ``cd icoFoam/Make``
+    * edit ``files`` to change ``$FOAM_APPBIN`` to ``$FOAM_USER_APPBIN``
+    * ``cd ..``
+    * ``wmake``
+3. Understand standard icoFoam (OpenFOAM 2.4.0)
+
+.. code-block:: c
+   
+        #include "fvCFD.H" // This file brings in the most fundamental tools for performing any finite volume calculation and includes a bunch of other files.
+
+        int main(int argc, char *argv[])
+        {
+            #include "setRootCase.H" // Checks folder structure of the case
+            #include "createTime.H" // Checks runtime according to the controlDict and initiates time variables
+            #include "createMesh.H" // Defines mesh in the domain
+            #include "createFields.H" // Creates fields (e.g. u, p, T) according to createFields.H 
+            #include "initContinuityErrs.H" // Declare and initialise the cumulative continuity error
+
+            Info<< "\nStarting time loop\n" << endl;
+
+            while (runTime.loop()) // Start time loop
+            {
+                Info<< "Time = " << runTime.timeName() << nl << endl; // Print the current time
+
+                #include "readPISOControls.H" // Read control parameters from fvSchemes
+                #include "CourantNo.H" // Calculates and outputs the mean and maximum Courant Numbers
+
+                // Set up the linear algebra for the momentum equation.  
+                // The flux of U, phi, is treated explicity
+                // using the last known value of U.
+
+                fvVectorMatrix UEqn
+                (
+                    fvm::ddt(U)
+                  + fvm::div(phi, U)
+                  - fvm::laplacian(nu, U)
+                );
+                
+                // Solve using the last known value of p on the RHS.  
+                // This gives us a velocity field that is
+                // not divergence free, but approximately satisfies momentum.  
+                // See Eqn. 7.31 of Ferziger & Peric (predicted velocity)
+                
+                solve(UEqn == -fvc::grad(p));
+
+                // --- PISO loop
+
+                for (int corr=0; corr<nCorr; corr++)
+                {
+                
+                    // From the last solution of velocity, extract the diag. term from the matrix and store the reciprocal
+                    // Note that the matrix coefficients are functions of U due to the non-linearity of convection.
+
+                    volScalarField rAU(1.0/UEqn.A());
+
+                    // take a Jacobi pass and update U.  See Hrv Jasak's thesis eqn. 3.137 and Henrik Rusche's thesis, eqn. 2.43
+                    // UEqn.H is the right-hand side of the UEqn minus the product of (the off-diagonal terms and U).
+                    // Note that since the pressure gradient is not included in the UEqn. above, this gives us U without
+                    // the pressure gradient.  Also note that UEqn.H() is a function of U.
+
+                    volVectorField HbyA("HbyA", U);
+                    
+                    // Calculate the fluxes by dotting the interpolated velocity (to cell faces) with face normals
+                    // The ddtPhiCorr term accounts for the divergence of the face velocity field by taking out the 
+                    // difference between the interpolated velocity and the flux.
+                    
+                    HbyA = rAU*UEqn.H();
+                    surfaceScalarField phiHbyA
+                    (
+                        "phiHbyA",
+                        (fvc::interpolate(HbyA) & mesh.Sf())
+                      + fvc::interpolate(rAU)*fvc::ddtCorr(U, phi)
+                    );
+                    
+                    // Adjusts the inlet and outlet fluxes to obey continuity, which is necessary for creating a well-posed
+                    // problem where a solution for pressure exists.
+                    
+                    adjustPhi(phiHbyA, U, p);
+
+                    // Iteratively correct for non-orthogonality.  The non-orthogonal part of the Laplacian is calculated from the most recent
+                    // solution for pressure, using a deferred-correction approach.
+
+                    for (int nonOrth=0; nonOrth<=nNonOrthCorr; nonOrth++)
+                    {
+                    
+                        // Set up the pressure equation
+                        fvScalarMatrix pEqn
+                        (
+                            fvm::laplacian(rAU, p) == fvc::div(phiHbyA)
+                        );
+
+                        // In incompressible flow, only relative pressure matters.  Unless there is a pressure BC present,
+                        // one cell's pressure can be set arbitrarily to produce a unique pressure solution
+
+                        pEqn.setReference(pRefCell, pRefValue);
+                        pEqn.solve();
+
+                        // On the last non-orthogonality correction, correct the flux using the most up-to-date pressure
+                        // The .flux method includes contributions from all implicit terms of the pEqn (the Laplacian)
+
+                        if (nonOrth == nNonOrthCorr)
+                        {
+                            phi = phiHbyA - pEqn.flux();
+                        }
+                    } // end of non-orthogonality looping
+
+                    #include "continuityErrs.H"
+
+                    // Add pressure gradient to interior velocity and BC's.  
+                    // Note that this pressure is not just a small correction to a previous pressure, 
+                    // but is the entire pressure field.  
+                    // Contrast this to the use of p' in Ferziger & Peric, Eqn. 7.37.
+
+                    U = HbyA - rAU*fvc::grad(p);
+                    U.correctBoundaryConditions();
+                }
+
+                runTime.write();
+
+                Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
+                    << "  ClockTime = " << runTime.elapsedClockTime() << " s"
+                    << nl << endl;
+            } // end of the time step loop
+
+            Info<< "End\n" << endl;
+
+            return 0;
+            }
+   
+4. Modify icoFoam in the following way:
+Open ``createFields.H`` and read in the various properties:
+
+.. code-block:: c
+
+    dimensionedScalar kappa
+    (
+        transportProperties.lookup ("kappa")
+    );
+    
+(similar lines for rho0, Cv, theta0 and beta). Also worth introducing hCoeff:
+
+.. code-block:: c
+
+    dimensionedScalar hCoeff = kappa/( rho0 * Cv );
+    
+5. Introduce gravitational acceleration g; read in from the same dictionary, but is a dimensionedVector rather than a dimensionedScalar.
+
+6. Create a temperature field theta as a volScalarField and read it in. This is very similar to the pressure field, so make a copy of this and modify accordingly.
+
+7. Modify the momentum equation (UEqn) to add the term
+
+.. code-block:: c
+
+    + beta * g *( theta0 - theta )
+
+8. Outside of the PISO loop – create and solve the temperature equation:
+
+.. code-block:: c
+
+    fvScalarMatrix tempEqn
+    (
+        fvm :: ddt (theta)
+        + fvm :: div (phi, theta)
+        - fvm :: laplacian (hCoeff, theta)
+    );
+    tempEqn.solve ();
+
+9. Compile this using wmake (rename executable as boussinesqFoam) - folder name, icoFoam.C and files (icoFoam.C and icoFoam)
+
+
+Example - Casson model
+----------------------
+
+The Casson model is a non-Newtonian viscosity model – used for chocolate, blood, etc. Can we implement in OpenFOAM? Stress-strain relation for a fluid
+
+.. math::
+
+    \tau = \rho \nu \dot{\gamma}
+
+where
+    
+.. math::
+
+    \dot{\gamma} = {1 \over 2}(\nabla \vec{u} + \nabla \vec{u}^T)
+
+is rate of strain tensor
+
+:math:`\nu` = const is a Newtonian fluid. :math:`\nu = \nu(\cdot{\gamma})` is non-Newtonian.
+
+Casson model:
+
+.. math::
+
+    \nu(J_2) = {{[(\eta^2 J_2)^{1/4} + \sqrt{\tau_y / 2}]^2} \over {\rho \sqrt{J_2}}}
+
+where
+
+.. math::
+
+    J_2 = ||{1 \over 2}(\nabla \vec{u} + \nabla \vec{u}^T)||^2
+    
+Example - Mesh Refinement (OpenFOAM 2.4.0)
+------------------------------------------
+
+Jozsef Nagy 1, 2
+
+::
+
+    $ two
+    $ run
+    $ cp -r $FOAM_TUTORIALS/incompressible/icoFoam/elbow/ .
+    $ mv elbow 001_elbow_tri
+    $ cp -r 001_elbow_tri 002_elbow_quad
+    $ cp -r 002_elbow_quad 003_elbow_quad_refined
+    $ rm -rf 002_elbow_quad/elbow.msh
+    $ rm -rf 003_elbow_quad_refined/elbow.msh
+    
+* Download elbow_quad.msh and copy to 002 and 003 directories
+
+* Change endTime to 75s in controlDict for all cases
+
+::
+
+    $ cd 001_elbow_tri
+    $ fluentMeshToFoam elbow.msh
+    $ paraFoam &
+    $ icoFoam
+    $ paraFoam -touch
+    $ paraFoam &
+    
+::
+
+    $ cd ../002_elbow_quad    
+    $ fluentMeshToFoam elbow_quad.msh
+    $ icoFoam
+    $ paraFoam -touch
+    $ paraFoam &
+
+::
+
+    $ cd ../003_elbow_quad_refined 
+    $ fluentMeshToFoam elbow_quad.msh
+    $ refineMesh -overwrite
+    
+* Halve timestep deltaT in controlDict because spatial step has been halved
+* Double writeInterval in controlDict    
+
+::
+
+    $ icoFoam
+    $ paraFoam -touch
+    $ paraFoam &
+
+Create contour plots
+    
+* Load results from ``001_elbow_tri.OpenFOAM`` and ``002_elbow_quad.OpenFOAM``    
+* Translate meshes - can use search to find translate
+* Toggle legend on (first icon from left) 
+* Edit color map (second icon from left)     
+* Rescale to custom range (second icon down RHS) - change max to 4 - Rescale
+* Toggle legend off and on
+* Edit color legend properties (top left icon)
+* Title = Velocity (m/s)
+* Delete component title
+* Change font to 10
+* Apply - ok
+* Can move legend so it's horizontal
+* File > Save Screenshot > Ok > velocity.png
+
+Create line plot
+
+* Select the plot
+* Filters > Data Analysis > Plot Over Line > Apply
+* Move points to correspond with line of interest
+* Use cursor to select the resulting chart (can change the variables that are plotted)
+* File > Save Data > Enter filename
+* If write all timesteps is not selected, then it will write only the last timestep.
+* Open in Libre Office and plot
+
+Example - Block Mesh (OpenFOAM 2.4.0)
+-------------------------------------
+
+Jozsef Nagy 3
+
+Tab will fill in the rest of the folder.
+
+::
+
+    $ two
+    $ run
+    $ cp -r $FOAM_TUTORIALS/compressible/sonicFoam/laminar/forwardStep/ .
+    $ mv forwardStep 004_forward_step
+
+Connect to sftp server.
+
+Run through of blockMeshDict
+
+.. code-block:: c
+
+    /*--------------------------------*- C++ -*----------------------------------*\
+    | =========                 |                                                 |
+    | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+    |  \\    /   O peration     | Version:  2.4.0                                 |
+    |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+    |    \\/     M anipulation  |                                                 |
+    \*---------------------------------------------------------------------------*/
+    FoamFile
+    {
+        version     2.0;
+        format      ascii;
+        class       dictionary;
+        object      blockMeshDict;
+    }
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+    convertToMeters 1;          // 1= values given in meters, 0.001 = millimeters
+
+    vertices                    // it doesn't matter about order here
+    (
+        (0 0 -0.05)
+        (0.6 0 -0.05)
+        (0 0.2 -0.05)
+        (0.6 0.2 -0.05)
+        (3 0.2 -0.05)
+        (0 1 -0.05)
+        (0.6 1 -0.05)
+        (3 1 -0.05)
+        (0 0 0.05)
+        (0.6 0 0.05)
+        (0 0.2 0.05)
+        (0.6 0.2 0.05)
+        (3 0.2 0.05)
+        (0 1 0.05)
+        (0.6 1 0.05)
+        (3 1 0.05)
+    );
+
+    blocks                      // order must be right hand rule (x y z) grading
+    (
+        hex (0 1 3 2 8 9 11 10) (25 10 1) simpleGrading (1 1 1)
+        hex (2 3 6 5 10 11 14 13) (25 40 1) simpleGrading (1 1 1)
+        hex (3 4 7 6 11 12 15 14) (100 40 1) simpleGrading (1 1 1)
+    );
+
+    edges
+    (
+    );
+
+    boundary                    // right hand rule again - normal vector must point outwards
+    (
+        inlet
+        {
+            type patch;
+            faces
+            (
+                (0 8 10 2)
+                (2 10 13 5)
+            );
+        }
+        outlet
+        {
+            type patch;
+            faces
+            (
+                (4 7 15 12)
+            );
+        }
+        bottom
+        {
+            type symmetryPlane;
+            faces
+            (
+                (0 1 9 8)
+            );
+        }
+        top
+        {
+            type symmetryPlane;
+            faces
+            (
+                (5 13 14 6)
+                (6 14 15 7)
+            );
+        }
+        obstacle
+        {
+            type patch;
+            faces
+            (
+                (1 3 11 9)
+                (3 4 12 11)
+            );
+        }
+    );
+
+    mergePatchPairs
+    (
+    );
+
+    // ************************************************************************* //
+
+Run blockMesh
+
+::
+
+    $ blockMesh
+
+
+Check boundary file in constant/polyMesh
+
+.. code-block:: c
+
+    /*--------------------------------*- C++ -*----------------------------------*\
+    | =========                 |                                                 |
+    | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+    |  \\    /   O peration     | Version:  2.4.0                                 |
+    |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+    |    \\/     M anipulation  |                                                 |
+    \*---------------------------------------------------------------------------*/
+    FoamFile
+    {
+        version     2.0;
+        format      ascii;
+        class       polyBoundaryMesh;
+        location    "constant/polyMesh";
+        object      boundary;
+    }
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+    6
+    (
+        inlet
+        {
+            type            patch;
+            nFaces          50;
+            startFace       10325;
+        }
+        outlet
+        {
+            type            patch;
+            nFaces          40;
+            startFace       10375;
+        }
+        bottom
+        {
+            type            symmetryPlane;
+            inGroups        1(symmetryPlane);
+            nFaces          25;
+            startFace       10415;
+        }
+        top
+        {
+            type            symmetryPlane;
+            inGroups        1(symmetryPlane);
+            nFaces          125;
+            startFace       10440;
+        }
+        obstacle
+        {
+            type            patch;
+            nFaces          110;
+            startFace       10565;
+        }
+        defaultFaces                        // unspecified front and back planes
+        {
+            type            empty;
+            inGroups        1(empty);
+            nFaces          10500;
+            startFace       10675;
+        }
+    )
+
+    // ************************************************************************* //
+
+Open mesh in paraView
+
+::
+
+    $ paraFoam -touch
+    $ paraFoam &
+
+Change the mesh to wireframe, black lines and white background:
+
+* Properties > Display > Representation > Wireframe
+* Properties > Coloring > Solid Color > Edit > Black
+* Edit > View Settings > General > Solid Color = White > Apply
+
+Pressure ICs and BCs
+
+.. code-block:: c
+
+    /*--------------------------------*- C++ -*----------------------------------*\
+    | =========                 |                                                 |
+    | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+    |  \\    /   O peration     | Version:  2.4.0                                 |
+    |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+    |    \\/     M anipulation  |                                                 |
+    \*---------------------------------------------------------------------------*/
+    FoamFile
+    {
+        version     2.0;
+        format      ascii;
+        class       volScalarField;
+        object      p;
+    }
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+    dimensions      [1 -1 -2 0 0 0 0];
+
+    internalField   uniform 1;                  // 1 Pa
+
+    boundaryField
+    {
+        inlet
+        {
+            type            fixedValue;
+            value           uniform 1;          // 1 Pa
+        }
+
+        outlet
+        {
+            type            waveTransmissive;
+            field           p;
+            phi             phi;
+            rho             rho;
+            psi             thermo:psi;
+            gamma           1.4;
+            fieldInf        1;
+            lInf            3;
+            value           uniform 1;
+        }
+
+        bottom
+        {
+            type            symmetryPlane;
+        }
+
+        top
+        {
+            type            symmetryPlane;
+        }
+
+        obstacle
+        {
+            type            zeroGradient;       // Neumann boundary condition (derivative)
+        }
+
+        defaultFaces
+        {
+            type            empty;
+        }
+    }
+
+    // ************************************************************************* //
+
+Temperature ICs and BCs
+
+.. code-block:: c   
+    
+    /*--------------------------------*- C++ -*----------------------------------*\
+    | =========                 |                                                 |
+    | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+    |  \\    /   O peration     | Version:  2.4.0                                 |
+    |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+    |    \\/     M anipulation  |                                                 |
+    \*---------------------------------------------------------------------------*/
+    FoamFile
+    {
+        version     2.0;
+        format      ascii;
+        class       volScalarField;
+        object      T;
+    }
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+    dimensions      [0 0 0 1 0 0 0];
+
+    internalField   uniform 1;              // 1K(!)
+
+    boundaryField
+    {
+        inlet
+        {
+            type            fixedValue;
+            value           uniform 1;      // 1K(!)
+        }
+
+        outlet
+        {
+            type            zeroGradient;   // Neumann
+        }
+
+        bottom
+        {
+            type            symmetryPlane;
+        }
+
+        top
+        {
+            type            symmetryPlane;
+        }
+
+        obstacle
+        {
+            type            zeroGradient;
+        }
+
+        defaultFaces
+        {
+            type            empty;
+        }
+    }
+
+    // ************************************************************************* //
+
+Velocity ICs and BCs
+
+.. code-block:: c 
+
+    /*--------------------------------*- C++ -*----------------------------------*\
+    | =========                 |                                                 |
+    | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+    |  \\    /   O peration     | Version:  2.4.0                                 |
+    |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+    |    \\/     M anipulation  |                                                 |
+    \*---------------------------------------------------------------------------*/
+    FoamFile
+    {
+        version     2.0;
+        format      ascii;
+        class       volVectorField;
+        object      U;
+    }
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+    dimensions      [0 1 -1 0 0 0 0];
+
+    internalField   uniform (3 0 0);            // 3 m/s
+
+    boundaryField
+    {
+        inlet
+        {
+            type            fixedValue;
+            value           uniform (3 0 0);    // 3 m/s
+        }
+
+        outlet
+        {
+            type            zeroGradient;
+        }
+
+        bottom
+        {
+            type            symmetryPlane;
+        }
+
+        top
+        {
+            type            symmetryPlane;
+        }
+
+        obstacle
+        {
+            type            fixedValue;         // No slip
+            value           uniform (0 0 0);
+        }
+
+        defaultFaces
+        {
+            type            empty;
+        }
+    }
+
+    // ************************************************************************* //
+
+Turbulence Properties - laminar
+
+.. code-block:: c
+
+    /*--------------------------------*- C++ -*----------------------------------*\
+    | =========                 |                                                 |
+    | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+    |  \\    /   O peration     | Version:  2.4.0                                 |
+    |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+    |    \\/     M anipulation  |                                                 |
+    \*---------------------------------------------------------------------------*/
+    FoamFile
+    {
+        version     2.0;
+        format      ascii;
+        class       dictionary;
+        location    "constant";
+        object      turbulenceProperties;
+    }
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+    simulationType  laminar;
+
+
+    // ************************************************************************* //
+
+Themophyscial properties
+
+.. code-block:: c
+
+    /*--------------------------------*- C++ -*----------------------------------*\
+    | =========                 |                                                 |
+    | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+    |  \\    /   O peration     | Version:  2.4.0                                 |
+    |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+    |    \\/     M anipulation  |                                                 |
+    \*---------------------------------------------------------------------------*/
+    FoamFile
+    {
+        version     2.0;
+        format      ascii;
+        class       dictionary;
+        location    "constant";
+        object      thermophysicalProperties;
+    }
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+    thermoType
+    {
+        type            hePsiThermo;
+        mixture         pureMixture;
+        transport       const;
+        thermo          hConst;
+        equationOfState perfectGas;
+        specie          specie;
+        energy          sensibleInternalEnergy;
+    }
+
+    // Note: these are the properties for a "normalised" inviscid gas
+    //       for which the speed of sound is 1 m/s at a temperature of 1K
+    //       and gamma = 7/5
+    mixture
+    {
+        specie
+        {
+            nMoles          1;
+            molWeight       11640.3;
+        }
+        thermodynamics
+        {
+            Cp              2.5;        // Specific heat
+            Hf              0;
+        }
+        transport
+        {
+            mu              0;
+            Pr              1;          // Prandtl number
+        }
+    }
+
+
+    // ************************************************************************* //
+
+
+Write Interval at 0.5 seconds specified using ``runTime``
+
+.. code-block:: c
+
+    /*--------------------------------*- C++ -*----------------------------------*\
+    | =========                 |                                                 |
+    | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+    |  \\    /   O peration     | Version:  2.4.0                                 |
+    |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+    |    \\/     M anipulation  |                                                 |
+    \*---------------------------------------------------------------------------*/
+    FoamFile
+    {
+        version     2.0;
+        format      ascii;
+        class       dictionary;
+        location    "system";
+        object      controlDict;
+    }
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+    application     sonicFoam;
+
+    startFrom       startTime;
+
+    startTime       0;
+
+    stopAt          endTime;
+
+    endTime         10;
+
+    deltaT          0.002;
+
+    writeControl    runTime;
+
+    writeInterval   0.5;
+
+    purgeWrite      0;
+
+    writeFormat     ascii;
+
+    writePrecision  6;
+
+    writeCompression off;
+
+    timeFormat      general;
+
+    timePrecision   6;
+
+    runTimeModifiable true;
+
+
+    // ************************************************************************* //
+
+Run simulation
+
+::
+
+    $ sonicFoam
+
+Load in ParaView:
+
+::
+
+    $ paraFoam &
+
+Macro to make ParaView black and white ``home/apr207/OpenFOAM/apr207-2.4.0/macros/black_and_white.py``:
+
+.. code-block:: python
+
+    try: paraview.simple
+    except: from paraview.simple import *
+    paraview.simple._DisableFirstRenderCameraReset()
+
+    a004_forward_step_OpenFOAM = GetActiveSource()
+
+    DataRepresentation1 = GetDisplayProperties( a004_forward_step_OpenFOAM )
+    DataRepresentation1.Representation = 'Wireframe'
+    DataRepresentation1.AmbientColor = [0.0, 0.0, 0.0]
+
+    RenderView1 = GetRenderView()
+    RenderView1.Background2 = [0.0, 0.0, 0.16470588235294117]
+    RenderView1.Background = [1.0, 1.0, 1.0]
+    RenderView1.OrientationAxesLabelColor = [0.0, 0.0, 0.0]
+
+    Render()    
+    
+Can refresh if ParaView was already open:
+
+* Properties > Refresh Times    
+    
+Change
+
+* U (points)
+* Surface
+* Magnitude
+    
+Change grading:
+
+.. code-block:: c
+
+    blocks                      // order must be right hand rule (x y z) grading
+    (
+        hex (0 1 3 2 8 9 11 10) (25 10 1) simpleGrading (0.5 1 1)
+        hex (2 3 6 5 10 11 14 13) (25 40 1) simpleGrading (0.5 1 1)
+        hex (3 4 7 6 11 12 15 14) (100 40 1) simpleGrading (1 1 1)
+    );
+    
+Remove all folders except ICS:
+
+::
+
+    $ rm -rf 0.* [1-9]*
+    
+Overwrite files in constant/polyMesh
+
+:: 
+
+    $ blockMesh        
+    
+Reload mesh:
+    
+* File > Open > file.OpenFOAM
+
+Delete the old mesh from Paraview.   
+    
+    
+``29:33`` on How to create a grid with blockMesh Nagy 

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.3. Constructs &#8212; The Visual Room</title>
+    <title>4.1.3. Constructs &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="1. Fortran Programming Language" href="fortran.html" />
-    <link rel="next" title="1.4. Program Structure" href="fortran_program_structure.html" />
-    <link rel="prev" title="1.2. Operators" href="fortran_operators.html" /> 
+    <link rel="up" title="4.1. Fortran Programming Language" href="fortran.html" />
+    <link rel="next" title="4.1.4. Program Structure" href="fortran_program_structure.html" />
+    <link rel="prev" title="4.1.2. Operators" href="fortran_operators.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>1.3. Constructs</span></h2>
+        <h2 class="heading"><span>4.1.3. Constructs</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="fortran_operators.html">1.2. Operators</a>
+        «&#160;&#160;<a href="fortran_operators.html">4.1.2. Operators</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="fortran_program_structure.html">1.4. Program Structure</a>&#160;&#160;»
+        <a href="fortran_program_structure.html">4.1.4. Program Structure</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,7 +49,7 @@
         
         
   <div class="section" id="constructs">
-<h1>1.3. Constructs<a class="headerlink" href="#constructs" title="Permalink to this headline">¶</a></h1>
+<h1>4.1.3. Constructs<a class="headerlink" href="#constructs" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#conditional" id="id1">Conditional</a></li>
@@ -58,7 +58,7 @@
 </ul>
 </div>
 <div class="section" id="conditional">
-<h2><a class="toc-backref" href="#id1">1.3.1. Conditional</a><a class="headerlink" href="#conditional" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">4.1.3.1. Conditional</a><a class="headerlink" href="#conditional" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="33%" />
@@ -70,13 +70,13 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">expression</span><span class="p">)</span> <span class="n">action</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="n">expression</span><span class="p">)</span> <span class="n">action</span>
 </pre></div>
 </div>
 </td>
 <td><strong>One logical condition</strong> expressible as an action (e.g. print) or on a single line (e.g. x = a) i.e. no multi-line blocks are allowed</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">expression</span><span class="p">)</span> <span class="k">then</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="n">expression</span><span class="p">)</span> <span class="k">then</span>
     <span class="c">! block</span>
 <span class="k">else if</span> <span class="p">(</span><span class="n">expression</span><span class="p">)</span> <span class="k">then</span>
     <span class="c">! block</span>
@@ -88,7 +88,7 @@
 </td>
 <td><strong>Multiple logical conditions</strong></td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">block_a</span><span class="p">:</span> <span class="k">if</span> <span class="p">(</span><span class="n">expression</span><span class="p">)</span> <span class="k">then</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">block_a</span><span class="p">:</span> <span class="k">if</span> <span class="p">(</span><span class="n">expression</span><span class="p">)</span> <span class="k">then</span>
     <span class="c">! block</span>
 <span class="k">else if</span> <span class="p">(</span><span class="n">expression</span><span class="p">)</span> <span class="k">then </span><span class="n">block_a</span>
     <span class="n">block_b</span><span class="p">:</span> <span class="k">if</span> <span class="p">(</span><span class="n">expression</span><span class="p">)</span> <span class="k">then</span>
@@ -102,7 +102,7 @@
 </td>
 <td><strong>Named Blocks</strong> for nested blocks</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">select case</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">select case</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
     <span class="k">case</span> <span class="p">(:</span><span class="mi">0</span><span class="p">)</span>
         <span class="c">! block</span>
     <span class="k">case</span> <span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">)</span>
@@ -127,7 +127,7 @@
 </ul>
 </td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">where</span> <span class="p">(</span><span class="n">mask</span> <span class="n">expression</span><span class="p">)</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">where</span> <span class="p">(</span><span class="n">mask</span> <span class="n">expression</span><span class="p">)</span>
     <span class="c">! block</span>
 <span class="n">elsewhere</span>
     <span class="c">! block</span>
@@ -141,7 +141,7 @@
 </table>
 </div>
 <div class="section" id="iteration">
-<h2><a class="toc-backref" href="#id2">1.3.2. Iteration</a><a class="headerlink" href="#iteration" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">4.1.3.2. Iteration</a><a class="headerlink" href="#iteration" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="40%" />
@@ -153,7 +153,7 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="n">i_start</span><span class="p">,</span> <span class="n">i_stop</span><span class="p">,</span> <span class="n">i_step</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="n">i_start</span><span class="p">,</span> <span class="n">i_stop</span><span class="p">,</span> <span class="n">i_step</span>
     <span class="c">! block</span>
 <span class="k">end do</span>
 </pre></div>
@@ -161,7 +161,7 @@
 </td>
 <td><strong>Iterator</strong> - loops with an integer counter until stop is reached</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">do while</span> <span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">do while</span> <span class="p">(</span><span class="n">expression</span><span class="p">)</span>
     <span class="c">! block</span>
 <span class="k">end do</span>
 </pre></div>
@@ -169,7 +169,7 @@
 </td>
 <td><strong>Do-While</strong> - loops with condition tested at start</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">do</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">do</span>
 <span class="k">    if</span> <span class="p">(</span><span class="n">expression</span><span class="p">)</span> <span class="k">exit</span>
         <span class="c">! block</span>
 <span class="k">end do</span>
@@ -178,7 +178,7 @@
 </td>
 <td><strong>Blank Do</strong> - loops without condition until the if statement is true</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">outer</span><span class="p">:</span> <span class="k">do</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">outer</span><span class="p">:</span> <span class="k">do</span>
 <span class="k">    </span><span class="n">inner</span><span class="p">:</span> <span class="k">do </span><span class="n">i</span> <span class="o">=</span> <span class="n">i_start</span><span class="p">,</span> <span class="n">i_stop</span><span class="p">,</span> <span class="n">i_step</span>
          <span class="k">if</span> <span class="p">(</span><span class="n">expression</span><span class="p">)</span> <span class="k">cycle </span><span class="n">inner</span>
              <span class="c">! block</span>
@@ -203,7 +203,7 @@
 </table>
 </div>
 <div class="section" id="statements">
-<h2><a class="toc-backref" href="#id3">1.3.3. Statements</a><a class="headerlink" href="#statements" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">4.1.3.3. Statements</a><a class="headerlink" href="#statements" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="29%" />
@@ -215,43 +215,43 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">stop</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">stop</span>
 </pre></div>
 </div>
 </td>
 <td>Halts the program cleanly</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">stop</span> <span class="s1">&#39;message&#39;</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">stop</span> <span class="s1">&#39;message&#39;</span>
 </pre></div>
 </div>
 </td>
 <td>Halts the program cleanly displaying a message</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">return</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">return</span>
 </pre></div>
 </div>
 </td>
 <td>Leaves a subroutine or function</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">exit</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">exit</span>
 </pre></div>
 </div>
 </td>
 <td>Leaves a loop</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">cycle</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">cycle</span>
 </pre></div>
 </div>
 </td>
 <td>Next iteration</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">continue</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">continue</span>
 </pre></div>
 </div>
 </td>
 <td>Used in a do loop, which would otherwise end in an if (archaic)</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">go</span> <span class="n">to</span> <span class="mi">100</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">go</span> <span class="n">to</span> <span class="mi">100</span>
 </pre></div>
 </div>
 </td>
@@ -267,17 +267,17 @@
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="fortran_operators.html">1.2. Operators</a>
+        «&#160;&#160;<a href="fortran_operators.html">4.1.2. Operators</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="fortran_program_structure.html">1.4. Program Structure</a>&#160;&#160;»
+        <a href="fortran_program_structure.html">4.1.4. Program Structure</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

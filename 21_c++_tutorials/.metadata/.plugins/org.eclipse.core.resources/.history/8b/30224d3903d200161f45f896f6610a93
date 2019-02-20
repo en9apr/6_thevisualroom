@@ -1,0 +1,146 @@
+/*
+File name: challenge_lunch_menu.cpp
+Date: 24 Dec 2016
+Author: Andrew Roberts
+*/
+
+#include <iostream>
+#include <string>
+//#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+//int findNumber(string array[], int size, string target);
+
+int search(string[], int, string);
+
+int main()
+{
+	// array declaration:
+	string menu[] = {"hotdog", "hamburger", "french fries", "salad", "exit"};
+	//vector <string> menu(5);
+//	std::vector<int>::iterator it;
+	double prices[] = {1.20, 3.34, 0.99, 1.11, 0.00};
+	string choices[] = {"exit", "exit", "exit", "exit"};
+	int quantities[] = {0, 0, 0, 0};
+	int positions[] = {4, 4, 4, 4};
+	int arraysize = 4;
+	int check;
+	double cost = 0.0;
+	string check = "exit";
+//	double cost[4];
+/*
+	menu.push_back("hotdog");
+	menu.push_back("hamburger");
+	menu.push_back("french fries");
+	menu.push_back("salad");
+	menu.push_back("exit");
+*/
+	for(int i=0; i<4; i++)
+	{
+		cout << "Please enter choice number " << i+1 << " (hotdog, hamburger, french fries, salad or exit)." << endl;
+		getline(cin, choices[i]);
+		check = search(menu, arraysize, choices[i]);
+		while(check == -1)
+		{
+			cout << "Invalid choice." << endl;
+			cout << "Please enter choice number " << i+1 << " (hotdog, hamburger, french fries, salad or exit)." << endl;
+			getline(cin, choices[i]);
+			check = search(menu, arraysize, choices[i]);
+		}
+		if (choices[i].compare("exit") == 0)
+		{
+			break;
+		}
+		cout << "Please enter quantity of " << choices[i] << endl;
+		cin >> quantities[i];
+		cin.ignore();
+	}
+
+	cout << "These are your choices:" << endl;
+	for(int i=0; i<4; i++)
+	{
+		cout << choices[i] << endl;
+	}
+
+	cout << "These are the positions in the menu:" << endl;
+	for(int i=0; i<4; i++)
+	{
+		positions[i] = search(menu, arraysize, choices[i]);
+	}
+	for(int i=0; i<4; i++)
+	{
+		cout << positions[i] << endl;
+	}
+	cout << "These are the prices from the menu:" << endl;
+	for(int i=0; i<4; i++)
+	{
+		cout << prices[positions[i]] << endl;
+	}
+	cout << "This is the total cost:" << endl;
+	for(int i=0; i<4; i++)
+	{
+		cost += quantities[i]*prices[positions[i]];
+	}
+	cout << "$" << cost << endl;
+
+
+/*}
+	for(int i=0; i==3; i++)
+	it = find(menu.begin(), menu.end(), choices[i]);
+
+	if (it != menu.end())
+	    cout << "Element found in menu: " << *it << '\n';
+	else
+	    cout << "Element not found in menu\n";
+	}
+*/
+	return 0;
+
+}
+
+
+int search(string numbers[], int size, string value)
+{
+
+	bool exit = false;
+	int pos = 0;
+	while(!exit)
+	{
+		if(numbers[pos] == value)
+		{
+			exit = true;
+		}
+		else if(pos + 1 == size)
+		{
+			pos = -1;
+			exit = true;
+		}
+		else
+		{
+			pos = pos + 1;
+		}
+	}
+	return pos;
+}
+
+
+/*
+
+int findNumber(string array[], int size, string target)
+{
+	for(int counter = 0;counter<size;counter++)
+	{
+		if(array[counter] == target)
+		{
+			return counter;
+			//break;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+}
+*/

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.9. Functions &#8212; The Visual Room</title>
+    <title>3.1.9. Functions &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="3. Python Programming Language" href="python_language.html" />
-    <link rel="next" title="3.10. Modules" href="modules.html" />
-    <link rel="prev" title="3.8. Variables and Constants" href="variables_and_constants.html" /> 
+    <link rel="up" title="3.1. Python Programming Language" href="python_language.html" />
+    <link rel="next" title="3.1.10. Modules" href="modules.html" />
+    <link rel="prev" title="3.1.8. Variables and Constants" href="variables_and_constants.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>3.9. Functions</span></h2>
+        <h2 class="heading"><span>3.1.9. Functions</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="variables_and_constants.html">3.8. Variables and Constants</a>
+        «&#160;&#160;<a href="variables_and_constants.html">3.1.8. Variables and Constants</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="modules.html">3.10. Modules</a>&#160;&#160;»
+        <a href="modules.html">3.1.10. Modules</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,7 +49,7 @@
         
         
   <div class="section" id="functions">
-<h1>3.9. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h1>
+<h1>3.1.9. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#purpose-of-functions" id="id1">Purpose of Functions</a></li>
@@ -65,7 +65,7 @@
 </ul>
 </div>
 <div class="section" id="purpose-of-functions">
-<h2><a class="toc-backref" href="#id1">3.9.1. Purpose of Functions</a><a class="headerlink" href="#purpose-of-functions" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">3.1.9.1. Purpose of Functions</a><a class="headerlink" href="#purpose-of-functions" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Functions are reusable pieces of programs that take an input and
 produce an output.</li>
@@ -73,7 +73,7 @@ produce an output.</li>
 </ul>
 </div>
 <div class="section" id="separation-of-interface-and-implementation">
-<h2><a class="toc-backref" href="#id2">3.9.2. Separation of Interface and Implementation</a><a class="headerlink" href="#separation-of-interface-and-implementation" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">3.1.9.2. Separation of Interface and Implementation</a><a class="headerlink" href="#separation-of-interface-and-implementation" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Everything within the box is the implementation</li>
 <li>Everything outside the box is the interface</li>
@@ -81,11 +81,11 @@ produce an output.</li>
 <img alt="../_images/functions_classless_methods_7_0.png" src="../_images/functions_classless_methods_7_0.png" />
 </div>
 <div class="section" id="comments">
-<h2><a class="toc-backref" href="#id3">3.9.3. Comments</a><a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">3.1.9.3. Comments</a><a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Decide what the function must do and type this as a docstring</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">function_name</span><span class="p">():</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">function_name</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot; Purpose and Interface of a function &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="mi">0</span>
 </pre></div>
@@ -94,12 +94,12 @@ produce an output.</li>
 <li>Any comments about implementation w.r.t. mathematics can be included
 in the body as an inline comment:</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">simple_formula</span> <span class="c1"># Implementation comment</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">a</span> <span class="o">=</span> <span class="n">simple_formula</span> <span class="c1"># Implementation comment</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="syntax-of-functions">
-<h2><a class="toc-backref" href="#id4">3.9.4. Syntax of Functions</a><a class="headerlink" href="#syntax-of-functions" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">3.1.9.4. Syntax of Functions</a><a class="headerlink" href="#syntax-of-functions" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>A function definition consists of a header and a body</li>
 <li>The header includes:<ul>
@@ -119,7 +119,7 @@ are not sure about implementation</li>
 </ul>
 </div>
 <div class="section" id="deciding-names">
-<h2><a class="toc-backref" href="#id5">3.9.5. Deciding Names</a><a class="headerlink" href="#deciding-names" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">3.1.9.5. Deciding Names</a><a class="headerlink" href="#deciding-names" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>All valid variable names are valid function names - but a function
 should not have the same name as a variable name - and should not be
@@ -129,7 +129,7 @@ a built-in function</li>
 </ul>
 </div>
 <div class="section" id="unit-test-functions">
-<h2><a class="toc-backref" href="#id6">3.9.6. Unit Test Functions</a><a class="headerlink" href="#unit-test-functions" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">3.1.9.6. Unit Test Functions</a><a class="headerlink" href="#unit-test-functions" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>To evaluate a function call, replace the function&#8217;s parameters in the
 body of the function by their associated values in the call and
@@ -141,7 +141,7 @@ error, but assume that it&#8217;s a variable</li>
 </ul>
 </div>
 <div class="section" id="global-and-local-variables">
-<h2><a class="toc-backref" href="#id7">3.9.7. Global and Local Variables</a><a class="headerlink" href="#global-and-local-variables" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id7">3.1.9.7. Global and Local Variables</a><a class="headerlink" href="#global-and-local-variables" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Local Variables are only available inside a function</li>
 <li>Global Variables are available inside and outside a function</li>
@@ -150,17 +150,17 @@ must be declared at the start using: global variable_name</li>
 </ul>
 </div>
 <div class="section" id="built-in-functions">
-<h2><a class="toc-backref" href="#id8">3.9.8. Built-in functions</a><a class="headerlink" href="#built-in-functions" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="nb">int</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span> <span class="c1">#convert to int</span>
-<span class="nb">print</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">)</span> <span class="c1">#convert to float</span>
-<span class="nb">print</span> <span class="nb">str</span><span class="p">(</span><span class="mi">34</span><span class="p">)</span> <span class="c1">#convert to string</span>
-<span class="nb">print</span> <span class="nb">abs</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span> <span class="c1">#absolute value</span>
-<span class="nb">print</span> <span class="nb">max</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span> <span class="c1">#maximum of a set of numbers</span>
-<span class="nb">print</span> <span class="nb">min</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">)</span> <span class="c1">#minimum of a set of numbers</span>
-<span class="nb">print</span> <span class="nb">round</span><span class="p">(</span><span class="mf">0.123456</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c1">#round to 4 d.p.</span>
+<h2><a class="toc-backref" href="#id8">3.1.9.8. Built-in functions</a><a class="headerlink" href="#built-in-functions" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="nb">int</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span> <span class="c1">#convert to int</span>
+<span class="k">print</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">)</span> <span class="c1">#convert to float</span>
+<span class="k">print</span> <span class="nb">str</span><span class="p">(</span><span class="mi">34</span><span class="p">)</span> <span class="c1">#convert to string</span>
+<span class="k">print</span> <span class="nb">abs</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span> <span class="c1">#absolute value</span>
+<span class="k">print</span> <span class="nb">max</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span> <span class="c1">#maximum of a set of numbers</span>
+<span class="k">print</span> <span class="nb">min</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">)</span> <span class="c1">#minimum of a set of numbers</span>
+<span class="k">print</span> <span class="nb">round</span><span class="p">(</span><span class="mf">0.123456</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c1">#round to 4 d.p.</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>3
+<div class="highlight-none"><div class="highlight"><pre>3
 3.0
 34
 5
@@ -171,28 +171,28 @@ must be declared at the start using: global variable_name</li>
 </div>
 </div>
 <div class="section" id="examples-of-functions">
-<h2><a class="toc-backref" href="#id9">3.9.9. Examples of Functions</a><a class="headerlink" href="#examples-of-functions" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Computes the area of a triangle</span>
+<h2><a class="toc-backref" href="#id9">3.1.9.9. Examples of Functions</a><a class="headerlink" href="#examples-of-functions" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># Computes the area of a triangle</span>
 <span class="k">def</span> <span class="nf">triangle_area</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>    <span class="c1"># header</span>
     <span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">base</span> <span class="o">*</span> <span class="n">height</span>             <span class="c1"># body of function</span>
     <span class="k">return</span> <span class="n">area</span>                 <span class="c1"># output         # body of function</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">a1</span> <span class="o">=</span> <span class="n">triangle_area</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
-<span class="nb">print</span> <span class="n">a1</span>   <span class="c1"># you must always know what to expect from a function answer = 12</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">a1</span> <span class="o">=</span> <span class="n">triangle_area</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">a1</span>   <span class="c1"># you must always know what to expect from a function answer = 12</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>12.0
+<div class="highlight-none"><div class="highlight"><pre>12.0
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">a1</span> <span class="o">=</span> <span class="n">triangle_area</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
-<span class="nb">print</span> <span class="n">a1</span>  <span class="c1"># output is 14</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">a1</span> <span class="o">=</span> <span class="n">triangle_area</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">a1</span>  <span class="c1"># output is 14</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>14.0
+<div class="highlight-none"><div class="highlight"><pre>14.0
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Converts farenheit to celcius</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># Converts farenheit to celcius</span>
 <span class="k">def</span> <span class="nf">fahrenheit2celcius</span><span class="p">(</span><span class="n">fahrenheit</span><span class="p">):</span>
     <span class="n">celcius</span> <span class="o">=</span> <span class="p">(</span><span class="mf">5.0</span> <span class="o">/</span> <span class="mi">9</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">fahrenheit</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">celcius</span>
@@ -200,13 +200,13 @@ must be declared at the start using: global variable_name</li>
 <span class="c1"># test</span>
 <span class="n">c1</span> <span class="o">=</span> <span class="n">fahrenheit2celcius</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
 <span class="n">c2</span> <span class="o">=</span> <span class="n">fahrenheit2celcius</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
-<span class="nb">print</span> <span class="n">c1</span><span class="p">,</span><span class="n">c2</span>
+<span class="k">print</span> <span class="n">c1</span><span class="p">,</span><span class="n">c2</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>0.0 100.0
+<div class="highlight-none"><div class="highlight"><pre>0.0 100.0
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Converts fahrenheit to kelvin</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># Converts fahrenheit to kelvin</span>
 <span class="k">def</span> <span class="nf">fahrenheit2kelvin</span><span class="p">(</span><span class="n">fahrenheit</span><span class="p">):</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">fahrenheit2celcius</span><span class="p">(</span><span class="n">fahrenheit</span><span class="p">)</span> <span class="c1"># code is reused - not re-written</span>
     <span class="n">kelvin</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="mf">273.15</span>
@@ -215,48 +215,41 @@ must be declared at the start using: global variable_name</li>
 <span class="c1">#test</span>
 <span class="n">k1</span> <span class="o">=</span> <span class="n">fahrenheit2kelvin</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
 <span class="n">k2</span> <span class="o">=</span> <span class="n">fahrenheit2kelvin</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
-<span class="nb">print</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span>
+<span class="k">print</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>273.15 373.15
+<div class="highlight-none"><div class="highlight"><pre>273.15 373.15
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># prints hello world</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># prints hello world</span>
 <span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>     <span class="c1">#no inputs</span>
-    <span class="nb">print</span> <span class="s2">&quot;Hello, world&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;Hello, world&quot;</span>
     <span class="c1">#no outputs</span>
 <span class="c1">#test</span>
 <span class="n">hello</span><span class="p">()</span>
 <span class="n">h</span> <span class="o">=</span> <span class="n">hello</span><span class="p">()</span>
-<span class="nb">print</span> <span class="n">h</span>    <span class="c1"># None shows because there is no returned value</span>
+<span class="k">print</span> <span class="n">h</span>    <span class="c1"># None shows because there is no returned value</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre><span></span>Hello, world
+<div class="highlight-none"><div class="highlight"><pre>Hello, world
 Hello, world
 None
 </pre></div>
 </div>
 </div>
 <div class="section" id="lambda-functions">
-<h2><a class="toc-backref" href="#id10">3.9.10. Lambda Functions</a><a class="headerlink" href="#lambda-functions" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id10">3.1.9.10. Lambda Functions</a><a class="headerlink" href="#lambda-functions" title="Permalink to this headline">¶</a></h2>
 <p>Python supports the creation of anonymous functions (i.e. functions that are not bound to a name) at runtime, using a construct called &#8220;lambda&#8221;. This is not exactly the same as lambda in functional programming languages, but it is a very powerful concept that&#8217;s well integrated into Python and is often used in conjunction with typical functional concepts like filter(), map() and reduce().</p>
 <p>This piece of code shows the difference between a normal function definition (&#8220;f&#8221;) and a lambda function (&#8220;g&#8221;):</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">f</span> <span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="k">def</span> <span class="nf">f</span> <span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
 
 <span class="gp">In [2]: </span><span class="k">print</span> <span class="n">f</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-<span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-2-dbd1f323725c&gt;&quot;</span><span class="gt">, line </span><span class="mi">1</span>
-    <span class="k">print</span> <span class="n">f</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-          <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
-
+<span class="go">64</span>
 
 <span class="gp">In [3]: </span><span class="n">g</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
 
 <span class="gp">In [4]: </span><span class="k">print</span> <span class="n">g</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-<span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-4-8c459b2a706d&gt;&quot;</span><span class="gt">, line </span><span class="mi">1</span>
-    <span class="k">print</span> <span class="n">g</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-          <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
+<span class="go">64</span>
 </pre></div>
 </div>
 <p>As you can see, f() and g() do exactly the same and can be used in the same ways. Note that the lambda definition does not include a &#8220;return&#8221; statement &#8211; it always contains an expression which is returned. Also note that you can put a lambda definition anywhere a function is expected, and you don&#8217;t have to assign it to a variable at all.</p>
@@ -268,17 +261,17 @@ None
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="variables_and_constants.html">3.8. Variables and Constants</a>
+        «&#160;&#160;<a href="variables_and_constants.html">3.1.8. Variables and Constants</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="modules.html">3.10. Modules</a>&#160;&#160;»
+        <a href="modules.html">3.1.10. Modules</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

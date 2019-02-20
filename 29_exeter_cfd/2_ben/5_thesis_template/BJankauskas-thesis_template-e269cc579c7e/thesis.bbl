@@ -1,0 +1,12 @@
+\begin{thebibliography}{1}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{ }\fi
+
+\bibitem{Blockley_etal}
+E.~W. Blockley, A.~P. Bassom, A.~D. Gilbert, A.~M. Soward, {\em Pulse-train
+  solutions of a spatially heterogeneous amplitude equation arising in the
+  subcritical instability of narrow gap spherical Couette flow}, Physica D 228
+  (2007)  p.~1--30.
+
+\end{thebibliography}

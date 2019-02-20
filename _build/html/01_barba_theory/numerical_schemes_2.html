@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.3.2. Numerical Schemes 2 &#8212; The Visual Room</title>
+    <title>1.1.3.2. Numerical Schemes 2 &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
-    <link rel="next" title="1.3.3. The Modified Differential Equation" href="analysis_of_numerical_schemes.html" />
-    <link rel="prev" title="1.3.1. Numerical Schemes 1" href="numerical_scheme_1.html" /> 
+    <link rel="up" title="1.1. Computational Fluid Dynamics Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.1.3.3. The Modified Differential Equation" href="analysis_of_numerical_schemes.html" />
+    <link rel="prev" title="1.1.3.1. Numerical Schemes 1" href="numerical_scheme_1.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>1.3.2. Numerical Schemes 2</span></h2>
+        <h2 class="heading"><span>1.1.3.2. Numerical Schemes 2</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="numerical_scheme_1.html">1.3.1. Numerical Schemes 1</a>
+        «&#160;&#160;<a href="numerical_scheme_1.html">1.1.3.1. Numerical Schemes 1</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="analysis_of_numerical_schemes.html">1.3.3. The Modified Differential Equation</a>&#160;&#160;»
+        <a href="analysis_of_numerical_schemes.html">1.1.3.3. The Modified Differential Equation</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,16 +49,16 @@
         
         
   <div class="section" id="numerical-schemes-2">
-<h1>1.3.2. Numerical Schemes 2<a class="headerlink" href="#numerical-schemes-2" title="Permalink to this headline">¶</a></h1>
+<h1>1.1.3.2. Numerical Schemes 2<a class="headerlink" href="#numerical-schemes-2" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="definition-of-consistency">
-<h2>1.3.2.1. Definition of Consistency<a class="headerlink" href="#definition-of-consistency" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.2.1. Definition of Consistency<a class="headerlink" href="#definition-of-consistency" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Consistency is a condition on the <strong>numerical scheme</strong>, i.e.</li>
 <li>The scheme must tend to the differential equation when the step in time and space tend to zero.</li>
 </ul>
 </div>
 <div class="section" id="definition-of-stability">
-<h2>1.3.2.2. Definition of Stability<a class="headerlink" href="#definition-of-stability" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.2.2. Definition of Stability<a class="headerlink" href="#definition-of-stability" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Stability is a condition on the <strong>numerical solution</strong>, i.e.</li>
 <li>All errors must <strong>remain bounded</strong> when the iteration process progresses</li>
@@ -85,7 +85,7 @@
 </ol>
 </div>
 <div class="section" id="definition-of-convergence">
-<h2>1.3.2.3. Definition of Convergence<a class="headerlink" href="#definition-of-convergence" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.2.3. Definition of Convergence<a class="headerlink" href="#definition-of-convergence" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Convergence is a condition on the <strong>numerical solution</strong></li>
 <li>The numerical solution must <strong>tend</strong> to the exact solution of the mathematical model, when steps in <span class="math">\(t\)</span> and <span class="math">\(x\)</span> tend to zero (i.e. when the mesh is refined).</li>
@@ -103,7 +103,7 @@
 \[\lim_{\Delta x \to 0, \Delta t \to 0} \left \vert \tilde{\epsilon}_i^n \right \vert = 0\]</div>
 </div>
 <div class="section" id="equivalence-theorem-of-lax">
-<h2>1.3.2.4. Equivalence Theorem of Lax<a class="headerlink" href="#equivalence-theorem-of-lax" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.2.4. Equivalence Theorem of Lax<a class="headerlink" href="#equivalence-theorem-of-lax" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>For a well-posed IVP and a <strong>consistent</strong> discretisation scheme, <strong>stability</strong> is the necessary and sufficient condition for <strong>convergence</strong></li>
 </ul>
@@ -112,7 +112,7 @@
 </div>
 </div>
 <div class="section" id="consistency-and-the-modified-differential-equation">
-<h2>1.3.2.5. Consistency and the modified differential equation<a class="headerlink" href="#consistency-and-the-modified-differential-equation" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.2.5. Consistency and the modified differential equation<a class="headerlink" href="#consistency-and-the-modified-differential-equation" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>A consistent scheme is one in which the <strong>truncation error</strong> tends to zero for <span class="math">\(\Delta t\)</span>, <span class="math">\(\Delta x \rightarrow 0\)</span></li>
 <li>e.g. CD in space and FD in time for linear convection:</li>
@@ -166,17 +166,17 @@ O(\Delta t^2) + O(\Delta x^4)\]</div>
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="numerical_scheme_1.html">1.3.1. Numerical Schemes 1</a>
+        «&#160;&#160;<a href="numerical_scheme_1.html">1.1.3.1. Numerical Schemes 1</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="analysis_of_numerical_schemes.html">1.3.3. The Modified Differential Equation</a>&#160;&#160;»
+        <a href="analysis_of_numerical_schemes.html">1.1.3.3. The Modified Differential Equation</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5.1.1. Aerodynamics of Jet Exhausts Part 1 &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="5. Papers - Private" href="private_literature.html" />
+    <link rel="next" title="5.1.2. Aerodynamics of Jet Exhausts Part 2" href="aerodynamics_of_jet_exhausts_part_2.html" />
+    <link rel="prev" title="5. Papers - Private" href="private_literature.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>5.1.1. Aerodynamics of Jet Exhausts Part 1</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="private_literature.html">5. Papers - Private</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="aerodynamics_of_jet_exhausts_part_2.html">5.1.2. Aerodynamics of Jet Exhausts Part 2</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="aerodynamics-of-jet-exhausts-part-1">
+<h1>5.1.1. Aerodynamics of Jet Exhausts Part 1<a class="headerlink" href="#aerodynamics-of-jet-exhausts-part-1" title="Permalink to this headline">¶</a></h1>
+<p>Goulos, I., Stankowski, T., Otter, J., MacManus, D., Grech, N. and Sheaf, C. (2016) &#8216;&#8217;Aerodynamic Design of Separate-Jet Exhausts for Future Civil Aero-engines - Part 1: Parametric Geometry Definition and Computational Fluid Dynamics Approach`` Journal of Engineering for Gas Turbines and Power, Vol 138.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#abstract" id="id1">Abstract</a></li>
+<li><a class="reference internal" href="#introduction" id="id2">Introduction</a><ul>
+<li><a class="reference internal" href="#background" id="id3">Background</a></li>
+<li><a class="reference internal" href="#performance-prediction-of-engine-exhaust-systems" id="id4">Performance Prediction of Engine Exhaust Systems</a></li>
+<li><a class="reference internal" href="#scope-of-present-work" id="id5">Scope of Present Work</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#numerical-approach" id="id6">Numerical Approach</a><ul>
+<li><a class="reference internal" href="#methodological-overview" id="id7">Methodological Overview</a></li>
+<li><a class="reference internal" href="#engine-performance-simulation-turbomatch" id="id8">Engine Performance Simulation (Turbomatch)</a></li>
+<li><a class="reference internal" href="#parametric-geometry-definition-of-exhaust-nozzles" id="id9">Parametric Geometry Definition of Exhaust Nozzles</a></li>
+<li><a class="reference internal" href="#cfd-domain-and-bcs" id="id10">CFD Domain and BCs</a></li>
+<li><a class="reference internal" href="#automatic-mesh-generation" id="id11">Automatic mesh generation</a></li>
+<li><a class="reference internal" href="#definition-of-cfd-approach" id="id12">Definition of CFD Approach</a></li>
+<li><a class="reference internal" href="#exhaust-system-performance-accounting" id="id13">Exhaust System Performance Accounting</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#results-and-discussion" id="id14">Results and Discussion</a><ul>
+<li><a class="reference internal" href="#grid-sensitivity-analysis" id="id15">Grid Sensitivity Analysis</a></li>
+<li><a class="reference internal" href="#validation-of-employed-cfd-approach" id="id16">Validation of Employed CFD Approach</a></li>
+<li><a class="reference internal" href="#design-space-exploration" id="id17">Design Space Exploration</a><ul>
+<li><a class="reference internal" href="#case-study-description" id="id18">Case Study Description</a></li>
+<li><a class="reference internal" href="#design-space-definition" id="id19">Design Space Definition</a></li>
+<li><a class="reference internal" href="#preliminary-statistical-analysis" id="id20">Preliminary Statistical Analysis</a></li>
+<li><a class="reference internal" href="#assessment-of-apparent-design-space-linearity" id="id21">Assessment of Apparent Design Space Linearity</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusions" id="id22">Conclusions</a></li>
+</ul>
+</div>
+<div class="section" id="abstract">
+<h2><a class="toc-backref" href="#id1">5.1.1.1. Abstract</a><a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Output is: <strong>integrated approach</strong> targeting <strong>aerodynamic design</strong> of <strong>separate-jet exhaust systems</strong> for future gas-turbine aero-engines.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Framework is a series of fundamental theories applicable to:</dt>
+<dd><ul class="first last simple">
+<li>engine performance simulation</li>
+<li>parametric geometry definition</li>
+<li>viscous/compressible flow solution</li>
+<li><strong>design space exploration (DSE)</strong></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Method:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>Mathematical method developed based on:</dt>
+<dd><ul class="first last simple">
+<li><strong>class-shape transformation (CST)</strong> functions for geometric design of axi-symmetric engines</li>
+<li>Standard set of nozzle design parameters</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Design carried out using:</dt>
+<dd><ul class="first last simple">
+<li>Flow capacities established from <strong>0D cycle analysis</strong></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Coupled to:</dt>
+<dd><ul class="first last simple">
+<li>ICEM for automatic mesh generation using <strong>block structured approach</strong></li>
+<li>Fluent for <strong>RANS solution</strong></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Validation against:</dt>
+<dd><ul class="first last simple">
+<li>Experimental data on a small-scale turbine powered simulator (TPS)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Coupled tool to:</dt>
+<dd><ul class="first last simple">
+<li><strong>DSE Latin-hypercube sampling</strong></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Applied to two civil engines:</dt>
+<dd><ul class="first last simple">
+<li>Current</li>
+<li>Future</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Results:</dt>
+<dd><ul class="first last simple">
+<li>Relation between <strong>exhaust systems thrust</strong> and <strong>discharge coefficient</strong> has been quantified</li>
+<li><strong>Dominant design variables</strong> that affect aerodynamic performance of the exhausts have been determined</li>
+<li>Comparative evaluation of the <strong>optimised exhaust design</strong> of each engine</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Conclusions:</dt>
+<dd><ul class="first last simple">
+<li>Enables aerodynamic design of exhausts using only a <strong>few design variables</strong></li>
+<li>Enables <strong>quantification and correlation</strong> of aerodynamic behaviour of each engine architecture</li>
+<li>Is an enabling technology to <strong>identify fundamental aerodynamic mechanisms</strong> for exhaust system performance</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id2">5.1.1.2. Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="background">
+<h3><a class="toc-backref" href="#id3">5.1.1.2.1. Background</a><a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>What is the future trend in civil turbofans?</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>The <strong>motor</strong> of civil turbofan engines will have greater <strong>thermal efficiency</strong>:</dt>
+<dd><ul class="first last simple">
+<li>Increased TET</li>
+<li>Increased OPR</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Maybe leads to intercooled and intercooled-recuperated cycles</p>
+</li>
+<li><dl class="first docutils">
+<dt>Future turbofan engines will have lower <strong>specific thrust</strong> and improved <strong>propulsive efficiency</strong>:</dt>
+<dd><ul class="first last simple">
+<li>Higher BPR (15+, it is currently ~11)</li>
+<li>Lower FPR</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Why is the <strong>exhaust</strong> important?</dt>
+<dd><ul class="first last simple">
+<li>Higher BPR means higher gross to net propulsive force ratio</li>
+<li>High BPR designs are therefore more sensitive to gross propulsive thrust</li>
+<li>Gross propulsive thrust is linearly dependent on the aerodynamics of the exhaust</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Why is the <strong>bypass</strong> duct important?</dt>
+<dd><ul class="first last simple">
+<li>High BPR means higher mass flow through bypass</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><strong>Post-exit components</strong> are also important</p>
+</li>
+</ul>
+</div>
+<div class="section" id="performance-prediction-of-engine-exhaust-systems">
+<h3><a class="toc-backref" href="#id4">5.1.1.2.2. Performance Prediction of Engine Exhaust Systems</a><a class="headerlink" href="#performance-prediction-of-engine-exhaust-systems" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Engine housing is not designed by engine manufacturer, so <strong>thrust-drag bookkeeping</strong> (TDB) is needed to mitigate losses.</p>
+</li>
+<li><p class="first">Exhaust system can cause 1.5 to 2% loss in gross propulsive thrust</p>
+</li>
+<li><p class="first">In TDB <span class="math">\(C_V\)</span> (velocity coefficient) and <span class="math">\(C_D\)</span> (drag coefficient) are used for measuring performance</p>
+</li>
+<li><p class="first">CFD used for aerodynamics analysis of exhaust nozzles</p>
+</li>
+<li><dl class="first docutils">
+<dt>What are the flow features?</dt>
+<dd><ul class="first last simple">
+<li>Boundary and shear layer interaction</li>
+<li>Expansion waves</li>
+<li>Shock waves</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>What is the accuracy of CFD?</dt>
+<dd><ul class="first last simple">
+<li>less than 1% for <span class="math">\(C_D\)</span> and <span class="math">\(C_V\)</span>, largely due to uncertainty in exprimental data</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="scope-of-present-work">
+<h3><a class="toc-backref" href="#id5">5.1.1.2.3. Scope of Present Work</a><a class="headerlink" href="#scope-of-present-work" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>What is unique about the current work?</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>Methodological approach for:</dt>
+<dd><ul class="first last simple">
+<li>Parametric geometry definition</li>
+<li>Aerodynamic analysis</li>
+<li>Examination of separate jet exhaust systems</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Impact of high BPR and lower FPR on exhaust system design</p>
+</li>
+<li><p class="first"><strong>Not considering installation geometry then?</strong></p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">What are the objectives of the current work?</p>
+<blockquote>
+<div><ul class="simple">
+<li>Derive analytical formula for <strong>parametric geometry definition</strong> of separate jet exhausts</li>
+<li><strong>CFD model</strong> of bypass duct, nozzle and post exit conditions</li>
+<li><strong>Framework for exploring design space</strong> for aerodynamic performance</li>
+<li>Explore design space for <strong>future and current engines</strong></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">How is the parametric geometry defined?</p>
+<blockquote>
+<div><ul class="simple">
+<li>CST functions (class function shape function transformation)</li>
+<li>Axi-symmetric</li>
+<li>Separate jet exhausts</li>
+<li>Extends Qin&#8217;s aerofoil approach to exhausts and nozzles</li>
+<li>Parameterisation based on required flow capacities</li>
+<li>Coupled to ICEM and Fluent</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">How is the CFD model defined?</p>
+<blockquote>
+<div><ul class="simple">
+<li>CFD validated against small scale turbine power simulator (TPS)</li>
+<li><strong>What is the definition of the CFD model? (section below)</strong></li>
+<li><strong>BCs, discretisation scheme, solver, turbulence model?</strong></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">How is the design space defined?</p>
+<blockquote>
+<div><ul class="simple">
+<li>Coupled to framework</li>
+<li>Explores future and current turbofan</li>
+<li><strong>How is DSE done (second paper)?</strong></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="numerical-approach">
+<h2><a class="toc-backref" href="#id6">5.1.1.3. Numerical Approach</a><a class="headerlink" href="#numerical-approach" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="methodological-overview">
+<h3><a class="toc-backref" href="#id7">5.1.1.3.1. Methodological Overview</a><a class="headerlink" href="#methodological-overview" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">What is GEMINI?</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><strong>Geometric Engine Modeler Including Nozzle Installation</strong></p>
+</li>
+<li><p class="first">Designs separate jet exhaust systems based on key <strong>engine hard points</strong></p>
+</li>
+<li><dl class="first docutils">
+<dt>Applicable to:</dt>
+<dd><ul class="first last simple">
+<li>Engine performance simulation</li>
+<li>Exhaust nozzle geometry</li>
+<li>Parameterisation</li>
+<li>Viscous compressible flow solution</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">How is the 0D engine performance model defined?</p>
+<blockquote>
+<div><ul class="simple">
+<li>Inputs: thermodynamic and geometric design parameters</li>
+<li>Analyse engine cycle at design point and off design</li>
+<li>Uses Cranfield&#8217;s Turbomatch</li>
+<li>Outputs: <strong>size</strong> of bypass and core, <strong>average flow properties</strong> at inlet and exit of bypass and core</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">How is the GEMINI, ICEM, Fluent and Post processing done?</p>
+<blockquote>
+<div><ul class="simple">
+<li>Inputs: <strong>flow capacities</strong> and <strong>size</strong> of bypass and core</li>
+<li>Inverse design approach in Gemini produces 2D axi-symmetric geometry</li>
+<li>Transfers to ICEM</li>
+<li>Transfer to Fluent</li>
+<li>Transfer to Post processor</li>
+<li>Outputs: <span class="math">\(C_D^{bypass}\)</span> and <span class="math">\(C_D^{core}\)</span> and <span class="math">\(C_V^{overall}\)</span></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="engine-performance-simulation-turbomatch">
+<h3><a class="toc-backref" href="#id8">5.1.1.3.2. Engine Performance Simulation (Turbomatch)</a><a class="headerlink" href="#engine-performance-simulation-turbomatch" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">How is the 0D engine performance model done?</p>
+<blockquote>
+<div><ul class="simple">
+<li>Turbomatch</li>
+<li>0D aerothermal analysis</li>
+<li>Solves for mass and energy balance between engine components</li>
+<li>Assumes engine is operating at steady state</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="parametric-geometry-definition-of-exhaust-nozzles">
+<h3><a class="toc-backref" href="#id9">5.1.1.3.3. Parametric Geometry Definition of Exhaust Nozzles</a><a class="headerlink" href="#parametric-geometry-definition-of-exhaust-nozzles" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">How is the parametric geometry defined?</p>
+<blockquote>
+<div><ul class="simple">
+<li>Kulfans CST functions</li>
+<li>Qins CST (class shape transformations) extended from aerofoils to exhausts</li>
+<li>nth order Bernstein polynomial - <strong>uses a summation of polynomials</strong> to describe the surface <strong>with an offset for position</strong></li>
+<li>The geometry is split into the <strong>upstream duct</strong> and <strong>exhaust nozzle</strong></li>
+<li>Geometric parameters are specified to achieve design parameters using <strong>control points</strong> (where geometric information is avaliable)</li>
+<li><span class="math">\((n-1) \times (n-1)\)</span> system of linear equations created</li>
+<li>BCs are established from control points</li>
+<li><strong>How is the geometric BCs satisfied to be unique? (e.g. is the gradient specified as well?)</strong></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="cfd-domain-and-bcs">
+<h3><a class="toc-backref" href="#id10">5.1.1.3.4. CFD Domain and BCs</a><a class="headerlink" href="#cfd-domain-and-bcs" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">2D axi-symmetric</p>
+</li>
+<li><dl class="first docutils">
+<dt>Why is the engine intake included?</dt>
+<dd><ul class="first last simple">
+<li>Domain includes engine intake to account for effect of mass flow capture ratio on the nacelle pressure distribution</li>
+<li>This is required to capture the static pressure aft of the nacelle afterbody and the effect of freestream supression on the aerodynamics</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Freestream:</dt>
+<dd><ul class="first last simple">
+<li>Pressure far-field</li>
+<li>static pressure, static temperature, Mach number</li>
+<li>Position of freestream: 150 maximum nacelle diameters <strong>Is this really big enough?</strong> (despite sensitivity analysis, maybe ok if inviscid)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Fan face:</dt>
+<dd><ul class="first last simple">
+<li>Pressure outlet</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Bypass:</dt>
+<dd><ul class="first last simple">
+<li>Pressure inlet</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Core:</dt>
+<dd><ul class="first last simple">
+<li>Pressure inlet</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Vent:</dt>
+<dd><ul class="first last simple">
+<li>Prescribed mass flow</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>How is the non-uniformity of flow accounted for?</dt>
+<dd><ul class="first last simple">
+<li><strong>Streamline curvature method</strong> applied to fan rotor and fan outlet guide vanes</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="automatic-mesh-generation">
+<h3><a class="toc-backref" href="#id11">5.1.1.3.5. Automatic mesh generation</a><a class="headerlink" href="#automatic-mesh-generation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Block-structured mesh automatically generated using ICEM</li>
+<li>y+ is unity</li>
+<li>50 nodes normal to aeroline surface</li>
+<li>Expansion ratio 1.2</li>
+<li>Mesh topology based on MSc thesis?</li>
+<li><strong>Why not use more efficient hybrid mesh generation?</strong></li>
+<li><strong>Why not use better scripting language than ICEM e.g. Pointwise?</strong></li>
+<li><strong>Why not use better quality expansion using hyperbolic PDE in boundary layer using Pointwise?</strong></li>
+</ul>
+</div>
+<div class="section" id="definition-of-cfd-approach">
+<h3><a class="toc-backref" href="#id12">5.1.1.3.6. Definition of CFD Approach</a><a class="headerlink" href="#definition-of-cfd-approach" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>ANSYS Fluent</li>
+<li>RANS using <span class="math">\(k-\omega\)</span> SST turbulence model</li>
+<li>Green-Gauss for gradients</li>
+<li>2nd order upwind scheme for flow variables, turbulent kinetic energy and dissipation rate</li>
+<li>Thermal conductivity via kinetic theory</li>
+<li>Eighth order polynomial for specific heat capacity (<span class="math">\(C_P\)</span>)</li>
+<li>Sutherlands law for dynamic viscosity</li>
+<li><strong>Why not MUSCL scheme?</strong></li>
+<li><strong>Why not Riemann solver instead of slow SIMPLE algorithm?</strong></li>
+<li><strong>Acoustics cannot be included using steady state CFD model</strong></li>
+<li><strong>Solution won&#8217;t be solver independent</strong></li>
+</ul>
+</div>
+<div class="section" id="exhaust-system-performance-accounting">
+<h3><a class="toc-backref" href="#id13">5.1.1.3.7. Exhaust System Performance Accounting</a><a class="headerlink" href="#exhaust-system-performance-accounting" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Discharge coefficient:</li>
+</ul>
+<div class="math">
+\[C_D = {{\dot{m}_{actual} }\over {\left( {\dot{m} \over A }\right)_{ideal} \ A_{throat}}}\]</div>
+<ul class="simple">
+<li>The throat area is taken to be equal to the exit area <strong>Is this valid? Is there a vena contracta?</strong></li>
+<li><strong>It could be like a Venturi meter, where the contraction coefficient is unity, such that</strong> <span class="math">\(C_D\)</span> <strong>equals</strong> <span class="math">\(C_V\)</span> <strong>a ratio of velocities for single phase flow</strong></li>
+<li><span class="math">\(C_D\)</span> is defined for the core and the bypass separately</li>
+<li>Gross propulsive force:</li>
+</ul>
+<div class="math">
+\[F_G = F_G^{bypass} + F_G^{core}  + F_G^{zone3} - \text{integral of (static pressure term in axial direction aft of max nacelle diameter - viscous shear stress)}\]</div>
+<ul class="simple">
+<li>Overall velocity coefficient (divide a force by a mass flow rate and you get the actual velocity on top):</li>
+</ul>
+<div class="math">
+\[C_V^{overall} = {F_G \over { \left(\dot{m}_{actual}^{bypass} V_{ideal}^{bypass} + \dot{m}_{actual}^{core} V_{ideal}^{core} + \dot{m}_{actual}^{zone3} V_{ideal}^{zone3} \right) }}\]</div>
+</div>
+</div>
+<div class="section" id="results-and-discussion">
+<h2><a class="toc-backref" href="#id14">5.1.1.4. Results and Discussion</a><a class="headerlink" href="#results-and-discussion" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="grid-sensitivity-analysis">
+<h3><a class="toc-backref" href="#id15">5.1.1.4.1. Grid Sensitivity Analysis</a><a class="headerlink" href="#grid-sensitivity-analysis" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Numerical predictions at DP mid cruise conditions</li>
+<li>5 meshes using uniform refinement</li>
+<li>Around 100,000 cells for coarse mesh, 1 million cells for fine mesh</li>
+<li><strong>Non-monotonic behaviour could be caused by turbulence model</strong></li>
+<li><strong>Non-montone behaviour due to limiter in 2nd order scheme?</strong></li>
+<li><strong>Investigate the effect of higher order schemes on monotonicity?</strong></li>
+<li><strong>May be able to use coarser mesh with 3rd order scheme?</strong></li>
+<li><strong>Big Problem: No AMR - may be able to use even very coarse grid with AMR and high order scheme</strong></li>
+</ul>
+</div>
+<div class="section" id="validation-of-employed-cfd-approach">
+<h3><a class="toc-backref" href="#id16">5.1.1.4.2. Validation of Employed CFD Approach</a><a class="headerlink" href="#validation-of-employed-cfd-approach" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Pylon blockage in experiment, so CFD must be corrected</li>
+<li>No correction for 3D nature of flow, CFD is 2D axi-symmetric</li>
+<li>Used different FPRs and measured normalised mass flow and gross propulsive thrust</li>
+<li>Difference is around 5% due to 3D nature of flow and possibly uncertainty about pylon</li>
+<li>Isentropic Mach number is around 10% different in bypass and 6% in core</li>
+<li><strong>Possibly because of lack of resolution around shock waves?</strong></li>
+</ul>
+</div>
+<div class="section" id="design-space-exploration">
+<h3><a class="toc-backref" href="#id17">5.1.1.4.3. Design Space Exploration</a><a class="headerlink" href="#design-space-exploration" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Design of Experiment approach is <strong>Latin Hypercube</strong> to mitigate the cost of CFD simulations</li>
+<li>After a representative database is collected, the beaviour is investigated statistically</li>
+<li>Design variables are correlated with the performance metrics using <strong>Pearson&#8217;s product moment of correlation</strong></li>
+</ul>
+<div class="section" id="case-study-description">
+<h4><a class="toc-backref" href="#id18">Case Study Description</a><a class="headerlink" href="#case-study-description" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Two engines, Current (E2) and Future (E1) with BPR of 11 and 16 respectively</li>
+<li>Each cycle has been optimised wrt FPR to maximise <strong>specific thrust</strong> and minimise <strong>specific fuel consumption</strong></li>
+<li><strong>How was it optimised?</strong></li>
+<li>DP mid cruise conditions for both engine models</li>
+<li>Bypass is choked, core is unchoked</li>
+</ul>
+</div>
+<div class="section" id="design-space-definition">
+<h4><a class="toc-backref" href="#id19">Design Space Definition</a><a class="headerlink" href="#design-space-definition" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>11 and 12 parameters for E1 and E2 engines have specified ranges, in agreement with <strong>design guidelines</strong> and <strong>manufacturing constraints</strong></li>
+</ul>
+</div>
+<div class="section" id="preliminary-statistical-analysis">
+<h4><a class="toc-backref" href="#id20">Preliminary Statistical Analysis</a><a class="headerlink" href="#preliminary-statistical-analysis" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Each design space was discretised using the Latin Hypercube method</li>
+<li>360 exhaust geometries were used per engine</li>
+<li>Correlation between imposed design variables and performance metrics was investigated</li>
+<li>Question: Which are the dominant variables?</li>
+<li>Large percentage variation in <strong>core discharge coefficient</strong> and <strong>zone 3 pressure ratio</strong>, due to <strong>strong influence of core cowl design on core nozzle exit static pressure</strong></li>
+<li>E2 has an additional parameter, giving it <strong>more degrees of freedom</strong> than E1, so the variation in the values is greater</li>
+<li>Definition of velocity coefficient renders it relatively independent of discharge coefficient to first order, leading to smaller standard deviation for the velocity coefficient.</li>
+<li><strong>Why did E2 have more degrees of freedom?</strong></li>
+</ul>
+</div>
+<div class="section" id="assessment-of-apparent-design-space-linearity">
+<h4><a class="toc-backref" href="#id21">Assessment of Apparent Design Space Linearity</a><a class="headerlink" href="#assessment-of-apparent-design-space-linearity" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">Plotted charts and determined Pearson correlation coefficient for:</p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="math">\(C_V^{overall}\)</span> versus <span class="math">\(C_D^{bypass}\)</span></li>
+<li><span class="math">\(F_N\)</span> versus <span class="math">\(C_D^{bypass}\)</span></li>
+<li><span class="math">\(F_N\)</span> versus <span class="math">\(C_V^{overall}\)</span></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Exchange rates between <span class="math">\(F_N\)</span> and <span class="math">\(C_V^{overall}\)</span> can be almost double for future engines compared to current engines</p>
+</li>
+<li><p class="first">Hinton Diagrams for all performance metrics versus all design variables, coefficients are dependent only on three main design variables</p>
+</li>
+<li><p class="first">Increasing nozzle <span class="math">\(C_P\)</span> to exit length ratio <strong>moves low pressure turbine hump upstream</strong> and mitigates <strong>strong shock</strong></p>
+</li>
+<li><p class="first">This improves discharge coefficient by 0.4 % and velocity coefficient by 0.06% and increases <span class="math">\(F_G\)</span> by 0.45%</p>
+</li>
+<li><p class="first"><strong>Why are the improvements so small?</strong> But I suppose nearly 0.5% is large for discharge coefficient?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="conclusions">
+<h2><a class="toc-backref" href="#id22">5.1.1.5. Conclusions</a><a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Integrated approach for aerodynamic design of separate jet exhaust systems</p>
+</li>
+<li><dl class="first docutils">
+<dt>Applicable to:</dt>
+<dd><ul class="first last simple">
+<li>Engine performance simulation</li>
+<li>Parametric geometry definition</li>
+<li>Viscous compressible flow</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Analytical approach for parametric geometry using CST functions</p>
+</li>
+<li><p class="first">Validated against experimental data</p>
+</li>
+<li><p class="first">Formulation for design space evaluation</p>
+</li>
+<li><p class="first">Used future and current aero engines</p>
+</li>
+<li><p class="first">Sensitivity to parametric changes has been identified</p>
+</li>
+<li><p class="first">Hinton diagrams are effective in representing behaviour and to identify guidelines for design</p>
+</li>
+<li><p class="first">Can be used to identify fundamental aerodynamic mechanisms</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="private_literature.html">5. Papers - Private</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="aerodynamics_of_jet_exhausts_part_2.html">5.1.2. Aerodynamics of Jet Exhausts Part 2</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

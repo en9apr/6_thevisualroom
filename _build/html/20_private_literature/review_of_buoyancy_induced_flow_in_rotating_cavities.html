@@ -1,0 +1,548 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5.1.3. Review of Buoyancy-Induced Flow in Rotating Cavities &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="5. Papers - Private" href="private_literature.html" />
+    <link rel="next" title="1. Fortran Programming Language" href="../05_fortran/fortran.html" />
+    <link rel="prev" title="5.1.2. Aerodynamics of Jet Exhausts Part 2" href="aerodynamics_of_jet_exhausts_part_2.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>5.1.3. Review of Buoyancy-Induced Flow in Rotating Cavities</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="aerodynamics_of_jet_exhausts_part_2.html">5.1.2. Aerodynamics of Jet Exhausts Part 2</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../05_fortran/fortran.html">1. Fortran Programming Language</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="review-of-buoyancy-induced-flow-in-rotating-cavities">
+<h1>5.1.3. Review of Buoyancy-Induced Flow in Rotating Cavities<a class="headerlink" href="#review-of-buoyancy-induced-flow-in-rotating-cavities" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#abstract" id="id1">Abstract</a><ul>
+<li><a class="reference internal" href="#where-does-buoyancy-induced-flow-occur" id="id2">Where does buoyancy-induced flow occur?</a></li>
+<li><a class="reference internal" href="#how-does-the-buoyancy-induced-flow-occur" id="id3">How does the buoyancy-induced flow occur?</a></li>
+<li><a class="reference internal" href="#why-is-the-heat-transfer-from-the-solid-surface-to-air-difficult-to-measure-or-compute" id="id4">Why is the heat transfer from the solid surface to air difficult to measure or compute?</a></li>
+<li><a class="reference internal" href="#what-do-designers-want-to-measure-during-engine-accelerations-and-decelerations" id="id5">What do designers want to measure during engine accelerations and decelerations?</a></li>
+<li><a class="reference internal" href="#what-kind-of-geometries-can-be-considered" id="id6">What kind of geometries can be considered?</a></li>
+<li><a class="reference internal" href="#what-kind-of-flows-can-be-considered" id="id7">What kind of flows can be considered?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#introduction" id="id8">Introduction</a><ul>
+<li><a class="reference internal" href="#what-do-we-wish-to-calculate" id="id9">What do we wish to calculate?</a></li>
+<li><a class="reference internal" href="#what-is-needed-in-order-to-calculate-this" id="id10">What is needed in order to calculate this?</a></li>
+<li><a class="reference internal" href="#why-is-this-difficult" id="id11">Why is this difficult?</a></li>
+<li><a class="reference internal" href="#what-are-the-two-regimes-between-which-transition-must-be-predicted" id="id12">What are the two regimes, between which transition must be predicted?</a></li>
+<li><a class="reference internal" href="#what-types-of-problem-are-present" id="id13">What types of problem are present?</a></li>
+<li><a class="reference internal" href="#what-are-the-important-non-dimensional-parameters" id="id14">What are the important non-dimensional parameters?</a></li>
+<li><a class="reference internal" href="#what-are-the-ranges-of-these-non-dimensional-parameters" id="id15">What are the ranges of these non-dimensional parameters?</a></li>
+<li><a class="reference internal" href="#rayleigh-number" id="id16">Rayleigh Number</a><ul>
+<li><a class="reference internal" href="#how-is-the-rayleigh-number-defined" id="id17">How is the Rayleigh Number defined?</a></li>
+<li><a class="reference internal" href="#what-does-the-rayleigh-number-mean" id="id18">What does the Rayleigh Number mean?</a></li>
+<li><a class="reference internal" href="#what-does-the-prandtl-number-measure" id="id19">What does the Prandtl Number measure?</a></li>
+<li><a class="reference internal" href="#what-does-the-grashof-number-measure" id="id20">What does the Grashof Number measure?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rossby-number" id="id21">Rossby Number</a><ul>
+<li><a class="reference internal" href="#how-is-the-rossby-number-defined" id="id22">How is the Rossby Number defined?</a></li>
+<li><a class="reference internal" href="#what-does-the-rossby-number-measure" id="id23">What does the Rossby Number measure?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#axial-reynolds-number" id="id24">Axial Reynolds Number</a><ul>
+<li><a class="reference internal" href="#how-is-the-axial-reynolds-number-defined" id="id25">How is the Axial Reynolds Number defined?</a></li>
+<li><a class="reference internal" href="#what-does-the-reynolds-number-measure" id="id26">What does the Reynolds Number measure?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#buoyancy-induced-flow-in-closed-cavities" id="id27">Buoyancy-Induced Flow in Closed Cavities</a><ul>
+<li><a class="reference internal" href="#heat-transfer-in-closed-stationary-cavities" id="id28">Heat Transfer in Closed Stationary Cavities</a></li>
+<li><a class="reference internal" href="#what-is-the-mechanism-for-rayleigh-benard-convection" id="id29">What is the mechanism for Rayleigh-Benard convection?</a></li>
+<li><a class="reference internal" href="#what-is-the-critical-rayleigh-number" id="id30">What is the critical Rayleigh Number?</a></li>
+<li><a class="reference internal" href="#what-is-the-nusselt-number" id="id31">What is the Nusselt Number?</a></li>
+<li><a class="reference internal" href="#what-empirical-correlations-are-possible" id="id32">What empirical correlations are possible?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#coriolis-effects-in-rotating-cavities" id="id33">Coriolis Effects in Rotating Cavities</a><ul>
+<li><a class="reference internal" href="#what-is-radial-convection-in-a-rotating-annulus-analogous-to" id="id34">What is radial convection in a rotating annulus <strong>analogous</strong> to?</a></li>
+<li><a class="reference internal" href="#what-does-the-heat-transfer-depend-on" id="id35">What does the heat transfer depend on?</a></li>
+<li><a class="reference internal" href="#what-are-the-coriolis-accelerations" id="id36">What are the Coriolis accelerations?</a></li>
+<li><a class="reference internal" href="#why-can-an-inviscid-linear-set-of-equations-be-considered" id="id37">Why can an inviscid linear set of equations be considered?</a></li>
+<li><a class="reference internal" href="#how-can-radial-flow-occur-in-such-a-case" id="id38">How can radial flow occur in such a case?</a></li>
+<li><a class="reference internal" href="#what-are-ekman-layers" id="id39">What are Ekman layers?</a></li>
+<li><a class="reference internal" href="#what-kind-of-radial-flows-are-there" id="id40">What kind of radial flows are there?</a></li>
+<li><a class="reference internal" href="#how-can-the-flow-become-non-axisymmetric-and-unsteady" id="id41">How can the flow become non-axisymmetric and unsteady?</a></li>
+<li><a class="reference internal" href="#what-is-the-surprising-phenonmenon-at-large-rotation-speeds" id="id42">What is the surprising phenonmenon at large rotation speeds?</a></li>
+<li><a class="reference internal" href="#why-is-the-critical-rayleigh-number-higher-in-a-rotating-cavity-than-a-stationary-one" id="id43">Why is the critical Rayleigh number higher in a rotating cavity than a stationary one?</a></li>
+<li><a class="reference internal" href="#how-can-rayleigh-benard-convection-occur" id="id44">How can Rayleigh-Benard convection occur?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#heat-transfer-in-closed-rotating-cavities" id="id45">Heat Transfer in Closed Rotating Cavities</a><ul>
+<li><a class="reference internal" href="#what-kind-of-heat-transfer-can-happen-in-closed-rotating-cavities" id="id46">What kind of heat transfer can happen in closed rotating cavities?</a></li>
+<li><a class="reference internal" href="#how-does-axial-heat-transfer-occur" id="id47">How does axial heat transfer occur?</a></li>
+<li><a class="reference internal" href="#what-are-the-nusselt-numbers-and-rayleigh-numbers-in-closed-cavities" id="id48">What are the Nusselt Numbers and Rayleigh Numbers in closed cavities?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#glossary" id="id49">Glossary</a></li>
+</ul>
+</div>
+<div class="section" id="abstract">
+<h2><a class="toc-backref" href="#id1">5.1.3.1. Abstract</a><a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="where-does-buoyancy-induced-flow-occur">
+<h3><a class="toc-backref" href="#id2">5.1.3.1.1. Where does buoyancy-induced flow occur?</a><a class="headerlink" href="#where-does-buoyancy-induced-flow-occur" title="Permalink to this headline">¶</a></h3>
+<p>In the cavity between two co-rotating compressor disks.</p>
+</div>
+<div class="section" id="how-does-the-buoyancy-induced-flow-occur">
+<h3><a class="toc-backref" href="#id3">5.1.3.1.2. How does the buoyancy-induced flow occur?</a><a class="headerlink" href="#how-does-the-buoyancy-induced-flow-occur" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>When the <strong>temperature</strong> of the disks and shroud is higher than that of the air inside the cavity.</li>
+<li><strong>Coriolis forces</strong> in the rotating fluid create cyclonic and anti-cyclonic circulations inside the cavity</li>
+</ul>
+</div>
+<div class="section" id="why-is-the-heat-transfer-from-the-solid-surface-to-air-difficult-to-measure-or-compute">
+<h3><a class="toc-backref" href="#id4">5.1.3.1.3. Why is the heat transfer from the solid surface to air difficult to measure or compute?</a><a class="headerlink" href="#why-is-the-heat-transfer-from-the-solid-surface-to-air-difficult-to-measure-or-compute" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>The flows are:</dt>
+<dd><ul class="first last simple">
+<li>3D</li>
+<li>Unsteady</li>
+<li>Unstable - one flow structure can change quasi-randomly to another</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="what-do-designers-want-to-measure-during-engine-accelerations-and-decelerations">
+<h3><a class="toc-backref" href="#id5">5.1.3.1.4. What do designers want to measure during engine accelerations and decelerations?</a><a class="headerlink" href="#what-do-designers-want-to-measure-during-engine-accelerations-and-decelerations" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Transient temperature changes</li>
+<li>Thermal stresses</li>
+<li>Radial growth of the disks</li>
+</ul>
+</div>
+<div class="section" id="what-kind-of-geometries-can-be-considered">
+<h3><a class="toc-backref" href="#id6">5.1.3.1.5. What kind of geometries can be considered?</a><a class="headerlink" href="#what-kind-of-geometries-can-be-considered" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Closed rotating cavities</li>
+<li>Open cavities</li>
+</ul>
+</div>
+<div class="section" id="what-kind-of-flows-can-be-considered">
+<h3><a class="toc-backref" href="#id7">5.1.3.1.6. What kind of flows can be considered?</a><a class="headerlink" href="#what-kind-of-flows-can-be-considered" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Axial throughflow</li>
+<li>Radial inflow</li>
+</ul>
+</div>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id8">5.1.3.2. Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-do-we-wish-to-calculate">
+<h3><a class="toc-backref" href="#id9">5.1.3.2.1. What do we wish to calculate?</a><a class="headerlink" href="#what-do-we-wish-to-calculate" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>transient and steady clearance between the blades and the casing</strong> of a high pressure compressor in an aeroengine.</p>
+</div>
+<div class="section" id="what-is-needed-in-order-to-calculate-this">
+<h3><a class="toc-backref" href="#id10">5.1.3.2.2. What is needed in order to calculate this?</a><a class="headerlink" href="#what-is-needed-in-order-to-calculate-this" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Radial growth</strong> of the compressor disks</li>
+<li><strong>Transient temperatures of the disk</strong></li>
+<li><strong>Flow and heat transfer in the cavity</strong> between the corotating disks</li>
+</ul>
+</div>
+<div class="section" id="why-is-this-difficult">
+<h3><a class="toc-backref" href="#id11">5.1.3.2.3. Why is this difficult?</a><a class="headerlink" href="#why-is-this-difficult" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>Buoyancy-induced flow is:</dt>
+<dd><ul class="first last simple">
+<li>Unsteady</li>
+<li>3D</li>
+<li>Unstable</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="what-are-the-two-regimes-between-which-transition-must-be-predicted">
+<h3><a class="toc-backref" href="#id12">5.1.3.2.4. What are the two regimes, between which transition must be predicted?</a><a class="headerlink" href="#what-are-the-two-regimes-between-which-transition-must-be-predicted" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>Axial flow is <strong>hotter</strong> than shroud</dt>
+<dd><ul class="first last simple">
+<li>Flow can be stably stratified</li>
+<li>Can occur in <strong>acceleration and deceleration</strong> of engine</li>
+<li>No buoyancy induced convection</li>
+<li>Heat transfer from disks is small</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Axial flow is <strong>cooler</strong> than shroud</dt>
+<dd><ul class="first last simple">
+<li>For <strong>steady state</strong> conditions</li>
+<li><strong>Buoyancy induced convection</strong> can occur</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="what-types-of-problem-are-present">
+<h3><a class="toc-backref" href="#id13">5.1.3.2.5. What types of problem are present?</a><a class="headerlink" href="#what-types-of-problem-are-present" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt><strong>Inverse problem</strong>:</dt>
+<dd><ul class="first last simple">
+<li>Determination of heat fluxes from temperature measurements</li>
+<li>Ill-posed - small uncertainties in temperature create large errors in fluxes</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>Conjugate problem</strong>:</dt>
+<dd><ul class="first last simple">
+<li>Buoyancy induced convection</li>
+<li>Temperature distribution on disks affects the flow in the cavity and vice versa</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="what-are-the-important-non-dimensional-parameters">
+<h3><a class="toc-backref" href="#id14">5.1.3.2.6. What are the important non-dimensional parameters?</a><a class="headerlink" href="#what-are-the-important-non-dimensional-parameters" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Rayleigh, <span class="math">\(Ra\)</span></li>
+<li>Rossby, <span class="math">\(Ro\)</span></li>
+<li>Axial Reynolds, <span class="math">\(Re_z\)</span></li>
+</ul>
+</div>
+<div class="section" id="what-are-the-ranges-of-these-non-dimensional-parameters">
+<h3><a class="toc-backref" href="#id15">5.1.3.2.7. What are the ranges of these non-dimensional parameters?</a><a class="headerlink" href="#what-are-the-ranges-of-these-non-dimensional-parameters" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><span class="math">\(Ra \sim 10^{12}\)</span></li>
+<li><span class="math">\(Ro \sim 10^{0}\)</span></li>
+<li><span class="math">\(Re_z \sim 10^{5}\)</span></li>
+</ul>
+</div>
+<div class="section" id="rayleigh-number">
+<h3><a class="toc-backref" href="#id16">5.1.3.2.8. Rayleigh Number</a><a class="headerlink" href="#rayleigh-number" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="how-is-the-rayleigh-number-defined">
+<h4><a class="toc-backref" href="#id17">How is the Rayleigh Number defined?</a><a class="headerlink" href="#how-is-the-rayleigh-number-defined" title="Permalink to this headline">¶</a></h4>
+<div class="math">
+\[Ra = Pr Gr\]</div>
+<div class="math">
+\[Pr = {{\mu c_p} \over k}\]</div>
+<div class="math">
+\[Gr = {{\tilde{g} L^3 \beta \Delta T} \over {\nu^2}}\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><span class="math">\(L = \text{characteristic length}\)</span></li>
+<li><span class="math">\(\beta = \text{volume expansion coefficient}\)</span></li>
+<li><span class="math">\(k = \text{thermal conductivity of air}\)</span></li>
+<li><span class="math">\(\tilde{g} = \text{charateristic acceleration}\)</span></li>
+</ul>
+</div>
+<div class="section" id="what-does-the-rayleigh-number-mean">
+<h4><a class="toc-backref" href="#id18">What does the Rayleigh Number mean?</a><a class="headerlink" href="#what-does-the-rayleigh-number-mean" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>When <span class="math">\(Ra &lt; Critical \rightarrow \text{conduction}\)</span></li>
+<li>When <span class="math">\(Ra &gt; Critical \rightarrow \text{convection}\)</span></li>
+</ul>
+</div>
+<div class="section" id="what-does-the-prandtl-number-measure">
+<h4><a class="toc-backref" href="#id19">What does the Prandtl Number measure?</a><a class="headerlink" href="#what-does-the-prandtl-number-measure" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Momentum to thermal diffusivity</li>
+</ul>
+</div>
+<div class="section" id="what-does-the-grashof-number-measure">
+<h4><a class="toc-backref" href="#id20">What does the Grashof Number measure?</a><a class="headerlink" href="#what-does-the-grashof-number-measure" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Buoyancy to viscosity</li>
+</ul>
+</div>
+</div>
+<div class="section" id="rossby-number">
+<h3><a class="toc-backref" href="#id21">5.1.3.2.9. Rossby Number</a><a class="headerlink" href="#rossby-number" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="how-is-the-rossby-number-defined">
+<h4><a class="toc-backref" href="#id22">How is the Rossby Number defined?</a><a class="headerlink" href="#how-is-the-rossby-number-defined" title="Permalink to this headline">¶</a></h4>
+<div class="math">
+\[Ro = {W \over {\Omega L}}\]</div>
+<ul class="simple">
+<li><span class="math">\(W = \text{characteristic axial velocity}\)</span></li>
+<li><span class="math">\(\Omega = \text{angular speed of rotor}\)</span></li>
+<li><span class="math">\(L = \text{characteristic length}\)</span></li>
+</ul>
+</div>
+<div class="section" id="what-does-the-rossby-number-measure">
+<h4><a class="toc-backref" href="#id23">What does the Rossby Number measure?</a><a class="headerlink" href="#what-does-the-rossby-number-measure" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Convection to Coriolis forces</li>
+</ul>
+</div>
+</div>
+<div class="section" id="axial-reynolds-number">
+<h3><a class="toc-backref" href="#id24">5.1.3.2.10. Axial Reynolds Number</a><a class="headerlink" href="#axial-reynolds-number" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="how-is-the-axial-reynolds-number-defined">
+<h4><a class="toc-backref" href="#id25">How is the Axial Reynolds Number defined?</a><a class="headerlink" href="#how-is-the-axial-reynolds-number-defined" title="Permalink to this headline">¶</a></h4>
+<div class="math">
+\[Re_z = {W L \over {\nu}}\]</div>
+<ul class="simple">
+<li><span class="math">\(W = \text{characteristic axial velocity}\)</span></li>
+<li><span class="math">\(L = \text{characteristic length}\)</span></li>
+</ul>
+</div>
+<div class="section" id="what-does-the-reynolds-number-measure">
+<h4><a class="toc-backref" href="#id26">What does the Reynolds Number measure?</a><a class="headerlink" href="#what-does-the-reynolds-number-measure" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Inertial to viscous forces</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="buoyancy-induced-flow-in-closed-cavities">
+<h2><a class="toc-backref" href="#id27">5.1.3.3. Buoyancy-Induced Flow in Closed Cavities</a><a class="headerlink" href="#buoyancy-induced-flow-in-closed-cavities" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="heat-transfer-in-closed-stationary-cavities">
+<h3><a class="toc-backref" href="#id28">5.1.3.3.1. Heat Transfer in Closed Stationary Cavities</a><a class="headerlink" href="#heat-transfer-in-closed-stationary-cavities" title="Permalink to this headline">¶</a></h3>
+<p>The Rayleigh number can be defined as:</p>
+<div class="math">
+\[Ra^{'} = {Pr \beta \Delta T} {{g d^3} \over \nu^3}\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><span class="math">\(d\)</span> is the vertical distance between the plates</li>
+<li><span class="math">\(\Delta T = T_H - T_C\)</span> (<span class="math">\(H\)</span> = hot and <span class="math">\(C\)</span> = cold)</li>
+</ul>
+</div>
+<div class="section" id="what-is-the-mechanism-for-rayleigh-benard-convection">
+<h3><a class="toc-backref" href="#id29">5.1.3.3.2. What is the mechanism for Rayleigh-Benard convection?</a><a class="headerlink" href="#what-is-the-mechanism-for-rayleigh-benard-convection" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>When the lower surface is hotter than the upper surface, the flow becomes unstable</li>
+<li>At a critical Rayleigh number, it breaks down into a series of counter-rotating vortices</li>
+<li>(When the upper surface is hotter, the fluid is thermally stratified and heat transfer is by conduction)</li>
+</ul>
+</div>
+<div class="section" id="what-is-the-critical-rayleigh-number">
+<h3><a class="toc-backref" href="#id30">5.1.3.3.3. What is the critical Rayleigh Number?</a><a class="headerlink" href="#what-is-the-critical-rayleigh-number" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><span class="math">\(Ra^{'}_{crit} = 1708\)</span></li>
+</ul>
+</div>
+<div class="section" id="what-is-the-nusselt-number">
+<h3><a class="toc-backref" href="#id31">5.1.3.3.4. What is the Nusselt Number?</a><a class="headerlink" href="#what-is-the-nusselt-number" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><span class="math">\(Nu^{'} = {\text{average heat flow at the surface} \over \text{heat flow due to conduction through the fluid}}\)</span></li>
+<li><span class="math">\(Nu^{'}=1\)</span> <span class="math">\(\longrightarrow\)</span> <span class="math">\(\text{heat transfer is entirely by conduction}\)</span></li>
+</ul>
+</div>
+<div class="section" id="what-empirical-correlations-are-possible">
+<h3><a class="toc-backref" href="#id32">5.1.3.3.5. What empirical correlations are possible?</a><a class="headerlink" href="#what-empirical-correlations-are-possible" title="Permalink to this headline">¶</a></h3>
+<p>King:</p>
+<div class="math">
+\[Nu^{'} = C_1 Ra^{'A} + C_2 Ra^{'B}\]</div>
+<p>Grossmann and Lohse (where <span class="math">\(1/4\)</span> exponent is laminar convection at low <span class="math">\(Ra^{'}\)</span> and the <span class="math">\(1/3\)</span> with turbulent at high <span class="math">\(Ra^{'}\)</span>):</p>
+<div class="math">
+\[Nu^{'} = 0.27 Ra^{'1/4} + 0.038 Ra^{'1/3}\]</div>
+<p>Hollands (where <span class="math">\(Nu^{'} = 1\)</span> for <span class="math">\(Ra^{'} &lt; Ra^{'}_{crit}\)</span>):</p>
+<div class="math">
+\[Nu^{'} = 1 + 1.44 max[1-1708/Ra^{'}, 0] + max[ (Ra^{'}/5830)^{1/3} - 1, 0]\]</div>
+</div>
+</div>
+<div class="section" id="coriolis-effects-in-rotating-cavities">
+<h2><a class="toc-backref" href="#id33">5.1.3.4. Coriolis Effects in Rotating Cavities</a><a class="headerlink" href="#coriolis-effects-in-rotating-cavities" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-is-radial-convection-in-a-rotating-annulus-analogous-to">
+<h3><a class="toc-backref" href="#id34">5.1.3.4.1. What is radial convection in a rotating annulus <strong>analogous</strong> to?</a><a class="headerlink" href="#what-is-radial-convection-in-a-rotating-annulus-analogous-to" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Rayleigh-Benard convection that occurs in the air gap between two stationary horizontal plates</li>
+<li>g is replaced by the centripetal acceleration</li>
+</ul>
+</div>
+<div class="section" id="what-does-the-heat-transfer-depend-on">
+<h3><a class="toc-backref" href="#id35">5.1.3.4.2. What does the heat transfer depend on?</a><a class="headerlink" href="#what-does-the-heat-transfer-depend-on" title="Permalink to this headline">¶</a></h3>
+<p>Whether the outer surface is hotter or colder than the inner one:</p>
+<ul class="simple">
+<li>If the outer surface is hotter than the inner, the density gradient stablizies the flow and heat transfer is by conduction</li>
+<li>If the outer surface is colder than the inner, the heat transfer is by convection</li>
+</ul>
+</div>
+<div class="section" id="what-are-the-coriolis-accelerations">
+<h3><a class="toc-backref" href="#id36">5.1.3.4.3. What are the Coriolis accelerations?</a><a class="headerlink" href="#what-are-the-coriolis-accelerations" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><span class="math">\(\text{Radial acceleration} = -2 \Omega v\)</span></li>
+<li><span class="math">\(\text{Tangential acceleration} = 2 \Omega u\)</span></li>
+</ul>
+<p>where:</p>
+<ul class="simple">
+<li><span class="math">\(u = \text{radial velocity}\)</span></li>
+<li><span class="math">\(v = \text{tangential velocity}\)</span></li>
+</ul>
+<p>These accelerations are associated with respective forces</p>
+</div>
+<div class="section" id="why-can-an-inviscid-linear-set-of-equations-be-considered">
+<h3><a class="toc-backref" href="#id37">5.1.3.4.4. Why can an inviscid linear set of equations be considered?</a><a class="headerlink" href="#why-can-an-inviscid-linear-set-of-equations-be-considered" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><span class="math">\(u / \Omega r &lt;&lt; 1\)</span></li>
+<li><span class="math">\(v / \Omega r &lt;&lt; 1\)</span></li>
+<li>The non-linear terms are much smaller than the linear Coriolis terms</li>
+<li>The Navier-Stokes equations reduce to <strong>inviscid linear equations</strong></li>
+</ul>
+</div>
+<div class="section" id="how-can-radial-flow-occur-in-such-a-case">
+<h3><a class="toc-backref" href="#id38">5.1.3.4.5. How can radial flow occur in such a case?</a><a class="headerlink" href="#how-can-radial-flow-occur-in-such-a-case" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><span class="math">\(u=0\)</span> in an inviscid axisymmetric rotating fluid</p>
+</li>
+<li><dl class="first docutils">
+<dt>For radial flow either:</dt>
+<dd><ul class="first last simple">
+<li>It is confined to the boundary layers (where the Coriolis forces are produced by shear stresses)</li>
+<li>Or the flow is non-axisymmetric</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="what-are-ekman-layers">
+<h3><a class="toc-backref" href="#id39">5.1.3.4.6. What are Ekman layers?</a><a class="headerlink" href="#what-are-ekman-layers" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Circumferential shear stresses in the boundary layers on the two disks which create Coriolis forces</li>
+</ul>
+</div>
+<div class="section" id="what-kind-of-radial-flows-are-there">
+<h3><a class="toc-backref" href="#id40">5.1.3.4.7. What kind of radial flows are there?</a><a class="headerlink" href="#what-kind-of-radial-flows-are-there" title="Permalink to this headline">¶</a></h3>
+<p>For unidirectional flows, such as source-sink flows, with a superposed radial outflow or inflow:</p>
+<ul class="simple">
+<li>Isothermal radial outflow - radial flow is confined to Ekman layers, between which there is a core of inviscid fluid that rotates at an angular speed <strong>slower</strong> than the disks</li>
+<li>Isothermal radial inflow - radial flow is confined to Ekman layers, between which there is a core of inviscid fluid that rotates at an angular speed <strong>faster</strong> than the disks</li>
+</ul>
+</div>
+<div class="section" id="how-can-the-flow-become-non-axisymmetric-and-unsteady">
+<h3><a class="toc-backref" href="#id41">5.1.3.4.8. How can the flow become non-axisymmetric and unsteady?</a><a class="headerlink" href="#how-can-the-flow-become-non-axisymmetric-and-unsteady" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Inner surface is hotter than outer surface</li>
+<li>Rayleigh-Bernard convection occurs</li>
+<li>Contra-rotating vortices are created</li>
+<li>Cyclonic vortices create low pressure regions</li>
+<li>Anti-cyclonic vortices create high pressure regions</li>
+<li>Circumferential pressure gradients produce Coriolis forces for inflow and outflow of hot and cold fluids</li>
+<li>These flows are nonaxisymmetric and unsteady</li>
+</ul>
+</div>
+<div class="section" id="what-is-the-surprising-phenonmenon-at-large-rotation-speeds">
+<h3><a class="toc-backref" href="#id42">5.1.3.4.9. What is the surprising phenonmenon at large rotation speeds?</a><a class="headerlink" href="#what-is-the-surprising-phenonmenon-at-large-rotation-speeds" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>At large rotation speeds <span class="math">\(\Omega^2 b \gg g\)</span></li>
+<li><span class="math">\(Ra \propto \beta \Delta T Re_{\phi}^2\)</span></li>
+<li>A given fluidic Rayleigh number can be produced by an infinite combination of <span class="math">\(Re_{\phi}\)</span> and <span class="math">\(\beta \Delta T\)</span></li>
+<li>Coriolis acceleration is proportional to <span class="math">\(\Omega\)</span></li>
+<li>Higher values of <span class="math">\(Re_{\phi}\)</span> result in lower values of <span class="math">\(Nu\)</span></li>
+<li>A given Rayleigh number could be produced by a wide variety of Nusselt numbers</li>
+<li>The value of Nusselt number could decrease as the Rayleigh number increases!</li>
+</ul>
+</div>
+<div class="section" id="why-is-the-critical-rayleigh-number-higher-in-a-rotating-cavity-than-a-stationary-one">
+<h3><a class="toc-backref" href="#id43">5.1.3.4.10. Why is the critical Rayleigh number higher in a rotating cavity than a stationary one?</a><a class="headerlink" href="#why-is-the-critical-rayleigh-number-higher-in-a-rotating-cavity-than-a-stationary-one" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Coriolis forces tend to attenuate velocity fluctuations</li>
+</ul>
+</div>
+<div class="section" id="how-can-rayleigh-benard-convection-occur">
+<h3><a class="toc-backref" href="#id44">5.1.3.4.11. How can Rayleigh-Benard convection occur?</a><a class="headerlink" href="#how-can-rayleigh-benard-convection-occur" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Can only occur if initial axisymmetry is broken to allow radial flow</li>
+<li>For an initially isothermal closed rotating cavity, the fluid will be in solid-body rotation</li>
+<li>If shroud is heated, heat transfer must initially be by axisymmetric <strong>conduction</strong></li>
+<li>Only after axisymmetry is broken can <strong>convection</strong> begin</li>
+<li>Critical Rayleigh number for Rayleigh-Benard convection could depend on whether the cavity is initially rotating ot stationary before the shroud is heated</li>
+</ul>
+</div>
+</div>
+<div class="section" id="heat-transfer-in-closed-rotating-cavities">
+<h2><a class="toc-backref" href="#id45">5.1.3.5. Heat Transfer in Closed Rotating Cavities</a><a class="headerlink" href="#heat-transfer-in-closed-rotating-cavities" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-kind-of-heat-transfer-can-happen-in-closed-rotating-cavities">
+<h3><a class="toc-backref" href="#id46">5.1.3.5.1. What kind of heat transfer can happen in closed rotating cavities?</a><a class="headerlink" href="#what-kind-of-heat-transfer-can-happen-in-closed-rotating-cavities" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Axial - from a hot disk to a cold one</li>
+<li>Radial - from hot outer cylinder to cold inner one</li>
+</ul>
+</div>
+<div class="section" id="how-does-axial-heat-transfer-occur">
+<h3><a class="toc-backref" href="#id47">5.1.3.5.2. How does axial heat transfer occur?</a><a class="headerlink" href="#how-does-axial-heat-transfer-occur" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Radial inflow in boundary layer on a hot disk</li>
+<li>Radial outflow in boundary layer on cold disk</li>
+</ul>
+</div>
+<div class="section" id="what-are-the-nusselt-numbers-and-rayleigh-numbers-in-closed-cavities">
+<h3><a class="toc-backref" href="#id48">5.1.3.5.3. What are the Nusselt Numbers and Rayleigh Numbers in closed cavities?</a><a class="headerlink" href="#what-are-the-nusselt-numbers-and-rayleigh-numbers-in-closed-cavities" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Nusselt numbers are small</li>
+<li>Convection is the same magnitude as radiation</li>
+<li>Measured Nusselt numbers are less than <span class="math">\(10\)</span> when Rayleigh numbers are up to <span class="math">\(10^{11}\)</span></li>
+</ul>
+</div>
+</div>
+<div class="section" id="glossary">
+<h2><a class="toc-backref" href="#id49">5.1.3.6. Glossary</a><a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h2>
+<p><strong>Shroud</strong>: the surface defining the outer diameter of a turbomachine flow <em>annulus</em> (ring-shaped object).</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="aerodynamics_of_jet_exhausts_part_2.html">5.1.2. Aerodynamics of Jet Exhausts Part 2</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../05_fortran/fortran.html">1. Fortran Programming Language</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.1.7. Euler and Lagrange &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../../index.html" />
+    <link rel="up" title="4. Personal Notes on CFD" href="../cfd_notes.html" />
+    <link rel="next" title="4.1.8. Integral and Derivative Form" href="08_integral_and_derivative_form.html" />
+    <link rel="prev" title="4.1.6. Kinematics" href="06_kinematics.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.1.7. Euler and Lagrange</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="06_kinematics.html">4.1.6. Kinematics</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="08_integral_and_derivative_form.html">4.1.8. Integral and Derivative Form</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="euler-and-lagrange">
+<h1>4.1.7. Euler and Lagrange<a class="headerlink" href="#euler-and-lagrange" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#what-is-the-difference-between-the-euler-and-lagrange-approach" id="id1">What is the difference between the Euler and Lagrange approach?</a></li>
+<li><a class="reference internal" href="#what-are-the-advantages-and-disadvantages-between-the-euler-and-lagrange-approach" id="id2">What are the advantages and disadvantages between the Euler and Lagrange approach?</a></li>
+<li><a class="reference internal" href="#what-is-the-derivation-of-the-link-between-the-euler-and-lagrange-mass-conservation" id="id3">What is the derivation of the link between the Euler and Lagrange mass conservation?</a></li>
+</ul>
+</div>
+<div class="section" id="what-is-the-difference-between-the-euler-and-lagrange-approach">
+<h2><a class="toc-backref" href="#id1">4.1.7.1. What is the difference between the Euler and Lagrange approach?</a><a class="headerlink" href="#what-is-the-difference-between-the-euler-and-lagrange-approach" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="first docutils">
+<dt>Lagrange:</dt>
+<dd><ul class="first last simple">
+<li>Moving frame of reference</li>
+<li>Elements are matter</li>
+<li>Results in pathlines</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Euler:</dt>
+<dd><ul class="first last simple">
+<li>Stationary frame of reference</li>
+<li>Elements are spatial</li>
+<li>Results in streamlines</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="what-are-the-advantages-and-disadvantages-between-the-euler-and-lagrange-approach">
+<h2><a class="toc-backref" href="#id2">4.1.7.2. What are the advantages and disadvantages between the Euler and Lagrange approach?</a><a class="headerlink" href="#what-are-the-advantages-and-disadvantages-between-the-euler-and-lagrange-approach" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="first docutils">
+<dt>Lagrange:</dt>
+<dd><ul class="first last simple">
+<li>Advantage: More suitable than Euler for the dynamics of discrete particles in a fluid e.g. flow visualisation.</li>
+<li>Disadvantage: Computationally expensive to keep track of large numbers of particles in a flow field</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Euler:</dt>
+<dd><ul class="first last simple">
+<li>Advantage: More suitable than Lagrange for the dynamics of a fluid flow field, e.g. CFD</li>
+<li>Disadvantage: Time step limited by grid due to stability or accuracy</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="what-is-the-derivation-of-the-link-between-the-euler-and-lagrange-mass-conservation">
+<h2><a class="toc-backref" href="#id3">4.1.7.3. What is the derivation of the link between the Euler and Lagrange mass conservation?</a><a class="headerlink" href="#what-is-the-derivation-of-the-link-between-the-euler-and-lagrange-mass-conservation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Eulerian mass conservation:</li>
+</ul>
+<div class="math">
+\[{{\partial \rho} \over {\partial t}} + \nabla \cdot (\rho \vec{u}) =
+{{\partial \rho} \over {\partial t}} + (\vec{u} \cdot \nabla) \rho  + (\nabla \cdot \vec{u})\rho
+= 0\]</div>
+<ul class="simple">
+<li>Lagrangian derivative (or Total/Material/Substantive derivative):</li>
+</ul>
+<div class="math">
+\[{{D \rho} \over {D t}} = {{\partial \rho} \over {\partial t}} + \nabla \cdot (\rho \vec{u}) =
+{{\partial \rho} \over {\partial t}} + (\vec{u} \cdot \nabla) \rho  + (\nabla \cdot \vec{u})\rho\]</div>
+<ul class="simple">
+<li>Lagrangian derivative applies to incompressible flow <span class="math">\(\longrightarrow \nabla \cdot \vec{u} = 0\)</span></li>
+</ul>
+<div class="math">
+\[{{D \rho} \over {D t}} = {{\partial \rho} \over {\partial t}} + (\vec{u} \cdot \nabla) \rho\]</div>
+<ul class="simple">
+<li>Substituting Lagrangian derivative into expanded Eulerian mass conservation:</li>
+</ul>
+<div class="math">
+\[{{D \rho} \over {D t}} + (\vec{u} \cdot \nabla) \rho = 0\]</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="06_kinematics.html">4.1.6. Kinematics</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="08_integral_and_derivative_form.html">4.1.8. Integral and Derivative Form</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

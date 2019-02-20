@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.1.11. Euler Momentum Equation &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../../index.html" />
+    <link rel="up" title="4. Personal Notes on CFD" href="../cfd_notes.html" />
+    <link rel="next" title="4.1.12. Navier-Stokes Momentum Equation" href="12_navier_stokes_momentum_equation.html" />
+    <link rel="prev" title="4.1.10. Cauchy Momentum Equation" href="10_cauchy_equation.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.1.11. Euler Momentum Equation</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="10_cauchy_equation.html">4.1.10. Cauchy Momentum Equation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="12_navier_stokes_momentum_equation.html">4.1.12. Navier-Stokes Momentum Equation</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="euler-momentum-equation">
+<h1>4.1.11. Euler Momentum Equation<a class="headerlink" href="#euler-momentum-equation" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#what-is-the-derivation-of-the-euler-momentum-equation-from-the-cauchy-equation" id="id1">What is the derivation of the Euler Momentum Equation from the Cauchy Equation?</a></li>
+<li><a class="reference internal" href="#what-is-the-meaning-of-the-terms-in-the-euler-momentum-equation" id="id2">What is the meaning of the terms in the Euler momentum equation?</a></li>
+<li><a class="reference internal" href="#how-are-all-the-terms-in-the-euler-equations-expanded-in-3d" id="id3">How are all the terms in the Euler Equations expanded in 3D?</a></li>
+</ul>
+</div>
+<div class="section" id="what-is-the-derivation-of-the-euler-momentum-equation-from-the-cauchy-equation">
+<h2><a class="toc-backref" href="#id1">4.1.11.1. What is the derivation of the Euler Momentum Equation from the Cauchy Equation?</a><a class="headerlink" href="#what-is-the-derivation-of-the-euler-momentum-equation-from-the-cauchy-equation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Cauchy Equation:</li>
+</ul>
+<div class="math">
+\[\rho \left( {{\partial \vec{u}} \over {\partial t}}+ (\vec{u} \cdot \nabla) \vec{u} \right) = \nabla \cdot \overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} + \rho \vec{g}\]</div>
+<ul class="simple">
+<li>Inviscid flow <span class="math">\(\longrightarrow \overset{\underset{\mathrm{\rightrightarrows}}{}}{\tau}=0\)</span>:</li>
+</ul>
+<div class="math">
+\[\begin{split}\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} =
+\begin{bmatrix}
+\sigma_{11} &amp; 0 &amp; 0 \\
+0 &amp; \sigma_{22} &amp; 0 \\
+0 &amp; 0 &amp; \sigma_{33}
+\end{bmatrix}\end{split}\]</div>
+<ul class="simple">
+<li>Normal stresses = applied pressure:</li>
+</ul>
+<div class="math">
+\[\begin{split}\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} = -p \delta_{ij}
+= -p \overset{\underset{\mathrm{\rightrightarrows}}{}}{I} =
+\begin{bmatrix}
+-p &amp; 0 &amp; 0 \\
+0 &amp; -p &amp; 0 \\
+0 &amp; 0 &amp; -p
+\end{bmatrix}\end{split}\]</div>
+<ul class="simple">
+<li>Expansion of divergence of shear stress:</li>
+</ul>
+<div class="math">
+\[\nabla \cdot \overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} =
+\nabla \cdot (-p \overset{\underset{\mathrm{\rightrightarrows}}{}}{I}) =
+-(\nabla \cdot \overset{\underset{\mathrm{\rightrightarrows}}{}}{I})p
+-(\overset{\underset{\mathrm{\rightrightarrows}}{}}{I} \cdot \nabla)p = -\nabla p\]</div>
+<ul class="simple">
+<li>Hence:</li>
+</ul>
+<div class="math">
+\[\rho \left( {{\partial \vec{u}} \over {\partial t}}+ (\vec{u} \cdot \nabla) \vec{u} \right) =
+-\nabla p + \rho \vec{g}\]</div>
+</div>
+<div class="section" id="what-is-the-meaning-of-the-terms-in-the-euler-momentum-equation">
+<h2><a class="toc-backref" href="#id2">4.1.11.2. What is the meaning of the terms in the Euler momentum equation?</a><a class="headerlink" href="#what-is-the-meaning-of-the-terms-in-the-euler-momentum-equation" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\rho \left( {{\partial \vec{u}} \over {\partial t}}+ (\vec{u} \cdot \nabla) \vec{u} \right) =
+-\nabla p + \rho \vec{g}\]</div>
+<ul class="simple">
+<li><span class="math">\(\rho {{\partial \vec{u}} \over {\partial t}}\)</span> = Temporal change of momentum/unit volume at a fixed point</li>
+<li><span class="math">\(\rho(\vec{u} \cdot \nabla) \vec{u}\)</span> = Spatial change of momentum/unit volume at a fixed point</li>
+<li><span class="math">\(-\nabla p\)</span> = Pressure force/unit volume at a fixed point</li>
+<li><span class="math">\(\rho \vec{g}\)</span> = Gravity force/unit volume at a fixed point</li>
+</ul>
+</div>
+<div class="section" id="how-are-all-the-terms-in-the-euler-equations-expanded-in-3d">
+<h2><a class="toc-backref" href="#id3">4.1.11.3. How are all the terms in the Euler Equations expanded in 3D?</a><a class="headerlink" href="#how-are-all-the-terms-in-the-euler-equations-expanded-in-3d" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>x-direction:</li>
+</ul>
+<div class="math">
+\[\rho \left( {{\partial {u}} \over {\partial t}}+ {u} {{\partial u} \over {\partial x}} +
+{v} {{\partial u} \over {\partial y}} + {w} {{\partial u} \over {\partial z}} \right)=
+-{{\partial {p}} \over {\partial x}} + \rho g_x\]</div>
+<ul class="simple">
+<li>y-direction:</li>
+</ul>
+<div class="math">
+\[\rho \left( {{\partial {v}} \over {\partial t}}+ {u} {{\partial v} \over {\partial x}} +
+{v} {{\partial v} \over {\partial y}} + {w} {{\partial v} \over {\partial z}} \right)=
+-{{\partial {p}} \over {\partial y}} + \rho g_y\]</div>
+<ul class="simple">
+<li>z-direction:</li>
+</ul>
+<div class="math">
+\[\rho \left( {{\partial {w}} \over {\partial t}}+ {u} {{\partial w} \over {\partial x}} +
+{v} {{\partial w} \over {\partial y}} + {w} {{\partial w} \over {\partial z}} \right)=
+-{{\partial {p}} \over {\partial z}} + \rho g_z\]</div>
+<ul class="simple">
+<li>Can also add source terms to the RHS <span class="math">\(S_x\)</span>, <span class="math">\(S_y\)</span> and <span class="math">\(S_z\)</span></li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="10_cauchy_equation.html">4.1.10. Cauchy Momentum Equation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="12_navier_stokes_momentum_equation.html">4.1.12. Navier-Stokes Momentum Equation</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

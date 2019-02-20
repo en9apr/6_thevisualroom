@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.1.15. Thermodynamics &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../../index.html" />
+    <link rel="up" title="4. Personal Notes on CFD" href="../cfd_notes.html" />
+    <link rel="next" title="4.2.1. Linear Algebra for CFD Applications" href="../../15_mathematics/linear_algebra.html" />
+    <link rel="prev" title="4.1.14. Conservation of Energy" href="14_conservation_of_energy.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.1.15. Thermodynamics</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="14_conservation_of_energy.html">4.1.14. Conservation of Energy</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../../15_mathematics/linear_algebra.html">4.2.1. Linear Algebra for CFD Applications</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="thermodynamics">
+<h1>4.1.15. Thermodynamics<a class="headerlink" href="#thermodynamics" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#what-are-examples-of-path-functions-and-state-variables" id="id1">What are examples of path functions and state variables?</a></li>
+<li><a class="reference internal" href="#what-is-the-first-law-of-thermodynamics-and-what-kind-of-processes-is-it-applicable-to" id="id2">What is the First Law of Thermodynamics and what kind of processes is it applicable to?</a></li>
+<li><a class="reference internal" href="#what-is-the-second-law-of-thermodynamics-and-what-is-it-for-a-reversible-process" id="id3">What is the Second Law of Thermodynamics and what is it for a reversible process?</a></li>
+<li><a class="reference internal" href="#what-is-enthalpy" id="id4">What is Enthalpy?</a></li>
+<li><a class="reference internal" href="#what-is-entropy" id="id5">What is Entropy?</a></li>
+<li><a class="reference internal" href="#what-are-the-two-property-relations-for-entropy-change-from-the-1st-and-2nd-laws-of-thermodynamics-at-constant-pressure-and-constant-volume" id="id6">What are the two property relations for entropy change from the 1st and 2nd laws of thermodynamics at constant pressure and constant volume?</a></li>
+<li><a class="reference internal" href="#what-is-the-entropy-change-for-an-ideal-gas-for-a-reversible-and-irreversible-process" id="id7">What is the entropy change for an ideal gas for a reversible and irreversible process?</a></li>
+<li><a class="reference internal" href="#how-are-the-isentropic-relations-for-an-ideal-gas-derived-from-the-entropy-change" id="id8">How are the isentropic relations for an ideal gas derived from the entropy change?</a></li>
+</ul>
+</div>
+<div class="section" id="what-are-examples-of-path-functions-and-state-variables">
+<h2><a class="toc-backref" href="#id1">4.1.15.1. What are examples of path functions and state variables?</a><a class="headerlink" href="#what-are-examples-of-path-functions-and-state-variables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Path functions: Heat and work (about the boundary)</li>
+<li>State variables: Internal energy, enthalpy, entropy (about the fluid)</li>
+</ul>
+</div>
+<div class="section" id="what-is-the-first-law-of-thermodynamics-and-what-kind-of-processes-is-it-applicable-to">
+<h2><a class="toc-backref" href="#id2">4.1.15.2. What is the First Law of Thermodynamics and what kind of processes is it applicable to?</a><a class="headerlink" href="#what-is-the-first-law-of-thermodynamics-and-what-kind-of-processes-is-it-applicable-to" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\text{Net heat added to system} + \text{Net work done on system} = \text{Increase in internal energy of system}\]</div>
+<div class="math">
+\[dq + dw = de\]</div>
+<p>(lower case implies per unit mass)</p>
+<p>The first law applies to reversible and irreversible processes</p>
+</div>
+<div class="section" id="what-is-the-second-law-of-thermodynamics-and-what-is-it-for-a-reversible-process">
+<h2><a class="toc-backref" href="#id3">4.1.15.3. What is the Second Law of Thermodynamics and what is it for a reversible process?</a><a class="headerlink" href="#what-is-the-second-law-of-thermodynamics-and-what-is-it-for-a-reversible-process" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\text{Gross heat added to system} + \text{Net work done by system}  \ge 0\]</div>
+<div class="math">
+\[dq + \Sigma = Tds\]</div>
+<p>i.e. there is irreversible work done by internal molecular changes <span class="math">\(\Sigma\)</span></p>
+<p>For a reversible process <span class="math">\(\Sigma = 0\)</span></p>
+<p>i.e. <span class="math">\(ds = {dq \over T}\)</span></p>
+</div>
+<div class="section" id="what-is-enthalpy">
+<h2><a class="toc-backref" href="#id4">4.1.15.4. What is Enthalpy?</a><a class="headerlink" href="#what-is-enthalpy" title="Permalink to this headline">¶</a></h2>
+<p>From the <span class="math">\(1^{st}\)</span> law, for both reversible and irreversible processes:</p>
+<div class="math">
+\[dq = d(e+pv) = dh\]</div>
+<p>where <span class="math">\(dw = -d(pv)\)</span></p>
+<p>Enthalpy is a state variables</p>
+<p>For both reversible and irreversible processes it equals the internal energy plus pressure-volume potential energy.</p>
+</div>
+<div class="section" id="what-is-entropy">
+<h2><a class="toc-backref" href="#id5">4.1.15.5. What is Entropy?</a><a class="headerlink" href="#what-is-entropy" title="Permalink to this headline">¶</a></h2>
+<p>From the <span class="math">\(2^{nd}\)</span> law for a reversible process:</p>
+<div class="math">
+\[s_2 - s_1 = \int_1^2 {dq \over T}\]</div>
+<p>Entropy is a macro state variable</p>
+<p>For a reversible process it is the infinitisimal heat added over constant temperature (non-adiabatic).</p>
+</div>
+<div class="section" id="what-are-the-two-property-relations-for-entropy-change-from-the-1st-and-2nd-laws-of-thermodynamics-at-constant-pressure-and-constant-volume">
+<h2><a class="toc-backref" href="#id6">4.1.15.6. What are the two property relations for entropy change from the 1st and 2nd laws of thermodynamics at constant pressure and constant volume?</a><a class="headerlink" href="#what-are-the-two-property-relations-for-entropy-change-from-the-1st-and-2nd-laws-of-thermodynamics-at-constant-pressure-and-constant-volume" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>1st Law (reversible and irreversible) <span class="math">\(\longrightarrow de = dw+dq\)</span></li>
+<li>Reversible work done by system <span class="math">\(\longrightarrow dw = -pdv\)</span></li>
+<li>Reversible heat added to system (2nd law) <span class="math">\(\longrightarrow dq = Tds\)</span></li>
+<li>For reversible and irreversible processes (1) <span class="math">\(\longrightarrow Tds = de + pdv\)</span></li>
+<li>Definition of enthalpy <span class="math">\(\longrightarrow dh = d(e+pv) = de + d(pv) = de + pdv + vdp\)</span></li>
+<li>By rearrangement <span class="math">\(\longrightarrow de = dh - pdv - vdp\)</span></li>
+<li>For reversible and irreversible processes (2) <span class="math">\(\longrightarrow Tds = dh - vdp\)</span></li>
+</ul>
+</div>
+<div class="section" id="what-is-the-entropy-change-for-an-ideal-gas-for-a-reversible-and-irreversible-process">
+<h2><a class="toc-backref" href="#id7">4.1.15.7. What is the entropy change for an ideal gas for a reversible and irreversible process?</a><a class="headerlink" href="#what-is-the-entropy-change-for-an-ideal-gas-for-a-reversible-and-irreversible-process" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><span class="math">\(ds = {de \over T}+{p \over T}dv\)</span></li>
+<li><span class="math">\(ds = {dh \over T} - {v \over T}dp\)</span></li>
+<li>Calorically perfect</li>
+</ul>
+<p><span class="math">\(\longrightarrow de=c_vdT\)</span></p>
+<p><span class="math">\(\longrightarrow dh=c_pdT\)</span></p>
+<ul class="simple">
+<li>Ideal gas</li>
+</ul>
+<p><span class="math">\(\longrightarrow p = {RT \over v}\)</span></p>
+<p><span class="math">\(\longrightarrow v = {RT \over p}\)</span></p>
+<ul class="simple">
+<li>Hence</li>
+</ul>
+<p><span class="math">\(\longrightarrow s_2 - s_1 = c_v \int_1^2 {dT \over T} + R \int_1^2 {dv \over v} = c_v ln{T_2 \over T_1} + R ln{v_2 \over v_1} = c_v ln{T_2 \over T_1} + R ln{\rho_1 \over \rho_2}\)</span></p>
+<p><span class="math">\(\longrightarrow s_2 - s_1 = c_p \int_1^2 {dT \over T} - R \int_1^2 {dp \over p} = c_p ln{T_2 \over T_1} - R ln{p_2 \over p_1}\)</span></p>
+</div>
+<div class="section" id="how-are-the-isentropic-relations-for-an-ideal-gas-derived-from-the-entropy-change">
+<h2><a class="toc-backref" href="#id8">4.1.15.8. How are the isentropic relations for an ideal gas derived from the entropy change?</a><a class="headerlink" href="#how-are-the-isentropic-relations-for-an-ideal-gas-derived-from-the-entropy-change" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Isentropic <span class="math">\(\longrightarrow s_2 - s_1 = 0\)</span></li>
+<li>Hence</li>
+</ul>
+<p><span class="math">\(\longrightarrow 0 = c_v ln{T_2 \over T_1} - R ln{\rho_2 \over \rho_1}\)</span></p>
+<p><span class="math">\(\longrightarrow 0 = c_p ln{T_2 \over T_1} - R ln{p_2 \over p_1}\)</span></p>
+<ul class="simple">
+<li>Definition of <span class="math">\(c_v\)</span> and <span class="math">\(c_p\)</span>:</li>
+</ul>
+<p><span class="math">\(c_v = {R \over {\gamma -1}}\)</span></p>
+<p><span class="math">\(c_v = {{\gamma R} \over {\gamma -1}}\)</span></p>
+<ul class="simple">
+<li>Hence:</li>
+</ul>
+<p><span class="math">\(\longrightarrow ln{\rho_2 \over \rho_1} = {1 \over {\gamma -1}} ln{T_2 \over T_1}\)</span></p>
+<p><span class="math">\(\longrightarrow ln{p_2 \over p_1} = {{\gamma} \over {\gamma -1}} ln{T_2 \over T_1}\)</span></p>
+<ul class="simple">
+<li>Hence:</li>
+</ul>
+<p><span class="math">\(\longrightarrow {\rho_2 \over \rho_1} =  {T_2 \over T_1}^{1 \over {\gamma -1}}\)</span></p>
+<p><span class="math">\(\longrightarrow {p_2 \over p_1} =  {T_2 \over T_1}^{{\gamma} \over {\gamma -1}}\)</span></p>
+<ul class="simple">
+<li>Hence:</li>
+</ul>
+<p><span class="math">\(\longrightarrow {p_2 \over p_1} =  {\rho_1 \over \rho_2}^{\gamma}\)</span></p>
+<p><span class="math">\(\longrightarrow {p \over {\rho^{\gamma}}} =  \alpha\)</span></p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="14_conservation_of_energy.html">4.1.14. Conservation of Energy</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../../15_mathematics/linear_algebra.html">4.2.1. Linear Algebra for CFD Applications</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,146 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%							%
+%    	File to include definitions in the thesis	%
+%							%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% here are some of mine that I used (or sometimes didn't!)
+%% feel free to delete or add to them......
+
+\newcommand*{\ds}{\displaystyle}
+\newcommand*{\sfrac}[2]{{\textstyle{#1\over#2}}}
+\newcommand{\degree}{\ensuremath{^\circ}}
+
+\providecommand*{\dfrac}[2]{\ds\frac{#1}{#2}}
+
+\def\hat{\widehat}
+\def\tilde{\widetilde}
+\def\bar{\overline}
+
+\def\pmb#1{\setbox0=\hbox{#1}%
+  \kern-.025em\copy0\kern-\wd0
+  \kern.05em\copy0\kern-\wd0
+  \kern-.025em\raise.0433em\box0}
+
+\def\bftheta{\pmb{$\theta$}}
+\def\bfOmega{\pmb{$\Omega$}}
+\def\bfphi{\pmb{$\phi$}}
+\def\bfmult{\pmb{$\times$}}
+\def\bfcdot{\pmb{$\cdot$}}
+\def\sp#1#2{#1\bfcdot#2}
+\def\vp#1#2{#1\,\bfmult\,#2}
+\def\grad{\pmb{$\nabla$}}
+\def\div{\grad\bfcdot}
+\def\curl{\grad\bfmult}
+\def\curlmult#1#2{\curl\left(#1\bfmult#2\right)}
+\def\dotgrad#1#2{\left(#1\bfcdot\grad\right)#2}
+\def\od#1#2{\dfrac{{\rm d}#1}{{\rm d}#2}}
+\def\pd#1#2{\dfrac{\partial#1}{\partial#2}}
+\def\qd#1#2#3{{\partial^2#1\over\partial#2\partial#3}}
+\def\Dt#1{{{\rm D}#1\over{\rm D}t}}
+\def\eq#1{\eqno(#1)$$}
+\def\eqap#1#2{\eqno({\rm #1}.#2)$$}
+\def\epsilon{\varepsilon}
+\def\dt{\dR_\theta}
+\def\qx#1{\qquad\hbox{#1}\qquad}
+\def\lx#1{\line{#1\hfil}}
+\def\ilx#1{\line{$\qquad$#1\hfil}}
+
+
+\def\Ai{\mbox{Ai}}
+\def\Bi{\mbox{Bi}}  
+\def\aR{{\rm a}}\def\bR{{\rm b}}\def\cR{{\rm c}}\def\dR{{\rm d}}
+\def\eR{{\rm e}}\def\fR{{\rm f}}\def\gR{{\rm g}}\def\hR{{\rm h}}
+\def\iR{{\rm i}}\def\jR{{\rm j}}\def\kR{{\rm k}}\def\lR{{\rm l}}
+\def\mR{{\rm m}}\def\nR{{\rm n}}\def\oR{{\rm o}}\def\pR{{\rm p}}
+\def\vR{{\rm q}}\def\rR{{\rm r}}\def\sR{{\rm s}}\def\tR{{\rm t}}
+\def\uR{{\rm u}}\def\vR{{\rm v}}\def\wR{{\rm w}}\def\xR{{\rm x}}
+\def\yR{{\rm y}}\def\zR{{\rm z}}
+\def\av{{\bf a}}\def\bv{{\bf b}}\def\cv{{\bf c}}\def\dv{{\bf d}}
+\def\ev{{\bf e}}\def\fv{{\bf f}}\def\gv{{\bf g}}\def\hv{{\bf h}}
+\def\iv{{\bf i}}\def\jv{{\bf j}}\def\kv{{\bf k}}\def\lv{{\bf l}}
+\def\mv{{\bf m}}\def\nv{{\bf n}}\def\ov{{\bf o}}\def\pv{{\bf p}}
+\def\qv{{\bf q}}\def\rv{{\bf r}}\def\sv{{\bf s}}\def\tv{{\bf t}}
+\def\uv{{\bf u}}\def\vv{{\bf v}}\def\wv{{\bf w}}\def\xv{{\bf x}}
+\def\yv{{\bf y}}\def\zv{{\bf z}}
+\def\Av{{\bf A}}\def\Bv{{\bf B}}\def\Cv{{\bf C}}\def\Dv{{\bf D}}
+\def\Ev{{\bf E}}\def\Fv{{\bf F}}\def\Gv{{\bf G}}\def\Hv{{\bf H}}
+\def\Iv{{\bf I}}\def\Jv{{\bf J}}\def\Kv{{\bf K}}\def\Lv{{\bf L}}
+\def\Mv{{\bf M}}\def\Nv{{\bf N}}\def\Ov{{\bf O}}\def\Pv{{\bf P}}
+\def\Qv{{\bf Q}}\def\Rv{{\bf R}}\def\Sv{{\bf S}}\def\Tv{{\bf T}}
+\def\Uv{{\bf U}}\def\Vv{{\bf V}}\def\Wv{{\bf W}}\def\Xv{{\bf X}}
+\def\Yv{{\bf Y}}\def\Zv{{\bf Z}}
+\def\AR{{\rm A}}\def\BR{{\rm B}}\def\CR{{\rm C}}\def\DR{{\rm D}}
+\def\ER{{\rm E}}\def\FR{{\rm F}}\def\GR{{\rm G}}\def\HR{{\rm H}}
+\def\IR{{\rm I}}\def\JR{{\rm J}}\def\KR{{\rm K}}\def\LR{{\rm L}}
+\def\MR{{\rm M}}\def\NR{{\rm N}}\def\OR{{\rm O}}\def\PR{{\rm P}}
+\def\QR{{\rm Q}}\def\RR{{\rm R}}\def\SR{{\rm S}}\def\TR{{\rm T}}
+\def\UR{{\rm U}}\def\VR{{\rm V}}\def\WR{{\rm W}}\def\XR{{\rm X}}
+\def\YR{{\rm Y}}\def\ZR{{\rm Z}}
+\def\AC{{\cal A}}\def\BC{{\cal B}}\def\CC{{\cal C}}\def\DC{{\cal D}}
+\def\EC{{\cal E}}\def\FC{{\cal F}}\def\GC{{\cal G}}\def\HC{{\cal H}}
+\def\IC{{\cal I}}\def\JC{{\cal J}}\def\KC{{\cal K}}\def\LC{{\cal L}}
+\def\MC{{\cal M}}\def\NC{{\cal N}}\def\OC{{\rm O}}\def\PC{{\cal P}}
+\def\QC{{\cal Q}}\def\RC{{\cal R}}\def\SC{{\cal S}}\def\TC{{\cal T}}
+\def\UC{{\cal U}}\def\VC{{\cal V}}\def\WC{{\cal W}}\def\XC{{\cal X}}
+\def\YC{{\cal Y}}\def\ZC{{\cal Z}}
+\def\vv{{\mathbf v}}
+\def\ZZ{\mathbb{Z}}
+\def\NN{\mathbb{N}}
+\def\QQ{\mathbb{Q}}
+\def\CCC{\mathbb{C}}
+%\def\OR{{\it O}}
+
+\def\bfPC{\pmb{$\PC$}}
+\def\bfhphi{\hat{\bfphi}}
+\def\tlambda{{\tilde \lambda}}
+\def\tkappa{{\tilde \kappa}}
+\def\tomega{{\tilde\omega}}
+\def\ttheta{{\tilde\theta}}
+\def\tOmega{{\tilde\Omega}}
+\def\tPhi{{\tilde\Phi}}
+\def\tAC{{\tilde\AC}}\def\tBC{{\tilde\BC}}
+\def\hAC{{\hat\AC}}\def\hBC{{\hat\BC}}
+\def\ha{{\hat a}}\def\hb{{\hat b}}
+\def\hA{{\hat A}}\def\hB{{\hat B}}\def\hC{{\hat C}}\def\hE{{\hat E}}\def\hF{{\hat F}}
+\def\ba{{\bar a}}\def\bb{{\bar b}}\def\bc{{\bar c}}\def\bd{{\bar d}}
+\def\bA{{\bar A}}\def\bB{{\bar B}}
+\def\ta{{\tilde a}}\def\tb{{\tilde b}}\def\tx{{\tilde x}}
+\def\tA{{\tilde A}}\def\tB{{\tilde B}}\def\tD{{\tilde D}}
+\def\tildet{{\tilde t}}
+\def\kvh{{\hat \kv}}\def\rvh{{\hat \rv}}\def\zvh{{\hat \zv}}
+\def\Bvh{{\hat \Bv}}\def\Dvh{{\hat \Dv}}\def\Evh{{\hat \Ev}}\def\Hvh{{\hat \Hv}}
+\def\Im{\mathop{\IR\mR}}\def\Re{\mathop{\RR\eR}}
+\def\erf{\mathop{\eR\rR\fR}}\def\erfc{\mathop{\eR\rR\fR\cR}}
+\def\sgn{\hbox{sgn}}
+
+\def \ie{{i.e.\ }}                  \def \eg{{e.g.\ }}
+\def \etc{{etc.\ }}                 \def \etal{{\it et al.\ }}
+\def \cf{{cf.\ }}                   \def \vs{{\it vs.\ }}
+
+
+\def \fr#1#2{{\textstyle{#1\over#2}}}
+
+\newcommand{\ic}{\mbox{i}}
+
+\newcommand{\R}{\mbox{$\cal R$}}
+\newcommand{\F}{\mbox{$\cal F$}}
+\newcommand{\G}{\mbox{$\cal G$}}
+\newcommand{\W}{\mbox{$\cal W$}}
+\newcommand{\Q}{\mbox{$\cal Q$}}
+
+\newcommand{\bfu}{\mbox{\bf u}}
+\newcommand{\bfz}{\mbox{\bf z}}
+\newcommand{\bfr}{\mbox{\bf r}}
+\newcommand{\bfnabla}{\pmb{$\nabla$}}
+
+
+%%%%% For multiletter symbols %%%%%
+%
+\def\Real{\mbox{Re}}      % cf plain TeX's \Re and Reynolds number
+\def\Imag{\mbox{Im}}      % cf plain TeX's \Im
+\def\Rey{\mbox{\it Re}}   % Reynolds number
+\def\Pran{\mbox{\it Pr}}  % Prandtl number, cf plain TeX's \Pr product
+\def\Pen{\mbox{\it Pe}}   % Peclet number
+\def\Ai{\mbox{\rm Ai}}    % Airy function
+\def\Bi{\mbox{\rm Bi}}    % Airy function

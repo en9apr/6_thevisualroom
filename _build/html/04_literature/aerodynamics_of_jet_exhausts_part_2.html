@@ -1,0 +1,662 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3.3.2. Aerodynamics of Jet Exhausts Part 2 &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="3. Literature" href="literature.html" />
+    <link rel="next" title="3.3.3. Review of Buoyancy-Induced Flow in Rotating Cavities" href="review_of_buoyancy_induced_flow_in_rotating_cavities.html" />
+    <link rel="prev" title="3.3.1. Aerodynamics of Jet Exhausts Part 1" href="aerodynamics_of_jet_exhausts_part_1.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>3.3.2. Aerodynamics of Jet Exhausts Part 2</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="aerodynamics_of_jet_exhausts_part_1.html">3.3.1. Aerodynamics of Jet Exhausts Part 1</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="review_of_buoyancy_induced_flow_in_rotating_cavities.html">3.3.3. Review of Buoyancy-Induced Flow in Rotating Cavities</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="aerodynamics-of-jet-exhausts-part-2">
+<h1>3.3.2. Aerodynamics of Jet Exhausts Part 2<a class="headerlink" href="#aerodynamics-of-jet-exhausts-part-2" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#introduction" id="id1">Introduction</a><ul>
+<li><a class="reference internal" href="#background" id="id2">Background</a></li>
+<li><a class="reference internal" href="#exhaust-system-performance-accounting" id="id3">Exhaust system performance accounting</a></li>
+<li><a class="reference internal" href="#design-optimisation-of-engine-exhaust-systems" id="id4">Design Optimisation of Engine Exhaust Systems</a><ul>
+<li><a class="reference internal" href="#heath-2015" id="id5">Heath (2015)</a></li>
+<li><a class="reference internal" href="#clemen-2012" id="id6">Clemen (2012)</a></li>
+<li><a class="reference internal" href="#haderlie-and-crossley-2010" id="id7">Haderlie and Crossley (2010)</a></li>
+<li><a class="reference internal" href="#qiu-2014" id="id8">Qiu (2014)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#scope-of-present-work" id="id9">Scope of Present Work</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#numerical-approach" id="id10">Numerical Approach</a><ul>
+<li><a class="reference internal" href="#aerodynamic-design-of-separate-jet-exhausts" id="id11">Aerodynamic Design of Separate-Jet Exhausts</a></li>
+<li><a class="reference internal" href="#exhaust-system-parametric-geometry-definition" id="id12">Exhaust System Parametric Geometry Definition</a></li>
+<li><a class="reference internal" href="#dse-and-optimisation" id="id13">DSE and Optimisation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#results-and-discussion" id="id14">Results and Discussion</a><ul>
+<li><a class="reference internal" href="#definition-of-baseline-engines" id="id15">Definition of Baseline Engines</a></li>
+<li><a class="reference internal" href="#parametric-design-space-definition" id="id16">Parametric Design Space Definition</a></li>
+<li><a class="reference internal" href="#design-space-exploration" id="id17">Design Space Exploration</a></li>
+<li><a class="reference internal" href="#response-surface-modelling" id="id18">Response Surface Modelling</a></li>
+<li><a class="reference internal" href="#exhaust-system-design-optimisation" id="id19">Exhaust System Design Optimisation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusions" id="id20">Conclusions</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id1">3.3.2.1. Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="background">
+<h3><a class="toc-backref" href="#id2">3.3.2.1.1. Background</a><a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>Civil aviation traffic will increase in the future, so reduce:</dt>
+<dd><ul class="first last simple">
+<li>direct operating costs</li>
+<li>fuel burn</li>
+<li>emissions</li>
+<li>noise</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Need to improve design technology in:</dt>
+<dd><ul class="first last simple">
+<li>Motor</li>
+<li>Propulsor</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Improve motor thermal efficiency by:</dt>
+<dd><ul class="first last simple">
+<li>Increase TET</li>
+<li>Increase OPR</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Future architectures:</dt>
+<dd><ul class="first last simple">
+<li><strong>Higher BPR</strong> (currently 11, will be 15+)</li>
+<li>Lower FPR</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>This will:</dt>
+<dd><ul class="first last simple">
+<li><strong>Lower specific thrust</strong></li>
+<li><strong>Improve propulsive efficiency</strong></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Why is the <strong>exhaust</strong> important?</dt>
+<dd><ul class="first last simple">
+<li>Increasing <strong>BPR</strong> will increase <strong>gross to net propulsive thrust</strong></li>
+<li>Designs are therefore more <strong>sensitive to variations in gross propulsive thrust</strong></li>
+<li>Gross propulsive thrust is <strong>linearly dependent</strong> on the <strong>aerodynamic performance of the exhaust</strong></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Which components will be analysed?</dt>
+<dd><ul class="first last simple">
+<li><strong>Bypass duct</strong></li>
+<li><strong>Nozzle</strong></li>
+<li><strong>Post exit components</strong></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="exhaust-system-performance-accounting">
+<h3><a class="toc-backref" href="#id3">3.3.2.1.2. Exhaust system performance accounting</a><a class="headerlink" href="#exhaust-system-performance-accounting" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>What is separate jet exhausts?</dt>
+<dd><ul class="first last simple">
+<li><strong>Core cowl</strong> separates core flow from bypass flow</li>
+<li><strong>Protruding core plug</strong> limits the length of core cowl</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>What is the problem with separate jet exahusts?</dt>
+<dd><ul class="first last simple">
+<li>Can be substantial sources of thrust loss (gross thrust reduced by 2%)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>How is performance measured?</dt>
+<dd><ul class="first last simple">
+<li>Discarge coefficient</li>
+<li>Velocity coefficient</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="design-optimisation-of-engine-exhaust-systems">
+<h3><a class="toc-backref" href="#id4">3.3.2.1.3. Design Optimisation of Engine Exhaust Systems</a><a class="headerlink" href="#design-optimisation-of-engine-exhaust-systems" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>CFD is a reliable performance prediction tool</li>
+<li>It is also efficient and used in design optimisation (<strong>Efficiency is depending on mesh size, geometry complexity, schemes, solvers and models used</strong>)</li>
+</ul>
+<div class="section" id="heath-2015">
+<h4><a class="toc-backref" href="#id5">3.3.2.1.3.1. Heath (2015)</a><a class="headerlink" href="#heath-2015" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Axi-symmetric, dual stream plug nozzle</li>
+<li>Parametric geometry via free-form deformation and 3rd order b-splines</li>
+<li>RANS solver</li>
+<li><strong>Steady state</strong></li>
+<li>Unstructured grid</li>
+<li>Adjoint, grid deformation, grid adaption to obtain gradients</li>
+<li>Optimisation using sequential quadratic programming (SQP)</li>
+<li>Minimise integral of <strong>near-field pressure disturbances</strong> relative to freestream flow</li>
+<li>Gross thrust gain of 0.2% relative to baseline</li>
+</ul>
+</div>
+<div class="section" id="clemen-2012">
+<h4><a class="toc-backref" href="#id6">3.3.2.1.3.2. Clemen (2012)</a><a class="headerlink" href="#clemen-2012" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><dl class="first docutils">
+<dt><strong>Why not use HYDRA for?</strong></dt>
+<dd><ul class="first last simple">
+<li>Linearised unsteady solver</li>
+<li>Non-linear solver</li>
+<li>Steady adjoint solver</li>
+<li>Harmonic adjoint solver</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Integrated framework for high BPR turbofan with core mounted gearbox <strong>Like Ultrafan?</strong></p>
+</li>
+<li><p class="first">2nd order splines for parametric geometry</p>
+</li>
+<li><p class="first"><strong>3D RANS solver HYDRA</strong></p>
+</li>
+<li><p class="first"><strong>Steady state</strong></p>
+</li>
+<li><p class="first">Hybrid optimisation comprising initial design of experiment coupled with RSM and global optimiser</p>
+</li>
+<li><p class="first"><strong>RSM</strong> (Response Surface Modelling) based on design of experiment results using interpolations based on radial basis functions</p>
+</li>
+<li><p class="first"><strong>Genetic algorithm</strong> to minimise total pressure loss within bypass duct</p>
+</li>
+<li><p class="first">0.1 % reduction in pressure loss</p>
+</li>
+</ul>
+</div>
+<div class="section" id="haderlie-and-crossley-2010">
+<h4><a class="toc-backref" href="#id7">3.3.2.1.3.3. Haderlie and Crossley (2010)</a><a class="headerlink" href="#haderlie-and-crossley-2010" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Axi-symmetric supersonic inlet</li>
+<li>Modified splitter geometry that separates core and bypass flow</li>
+<li>Parametric geometry based on Kulfan&#8217;s CST method</li>
+<li>RANS flow field</li>
+<li>Multiblock structured mesh</li>
+<li>Optimisation based on design of experiment - Latin hypercube</li>
+<li>Surrogate model using Kriging interpolation</li>
+<li>Optimisation from genetic algorithm and local gradient based sequential quadratic programming</li>
+<li>Optimisations used total pressure recovery and peak radial distortion intensity at the inlet&#8217;s aerodynamic interface plane</li>
+<li>Improved splitter design that satisfied imposed geometric constraints</li>
+<li><strong>Current paper is based mainly on this one</strong></li>
+</ul>
+</div>
+<div class="section" id="qiu-2014">
+<h4><a class="toc-backref" href="#id8">3.3.2.1.3.4. Qiu (2014)</a><a class="headerlink" href="#qiu-2014" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Unsteady, continous adjoint-based acoustic propagation method</li>
+<li>Optimise the design of a low bypass duct for a civil turbofan</li>
+<li>Hick-Henne shape functions for parametric model of bypass and nozzle</li>
+<li>Optimisation based on local gradient based algorithm driven by Jacobian from adjoint method</li>
+<li>Minimise tonal noise</li>
+<li>Reduced overall SPL in far-field by 2.78dB</li>
+</ul>
+</div>
+</div>
+<div class="section" id="scope-of-present-work">
+<h3><a class="toc-backref" href="#id9">3.3.2.1.4. Scope of Present Work</a><a class="headerlink" href="#scope-of-present-work" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Aerodynamics of the exhaust is important for future high BPR engines</p>
+</li>
+<li><dl class="first docutils">
+<dt>What is unique about the current work?</dt>
+<dd><ul class="first last simple">
+<li>Previous authors have looked at optimising exhaust nozzles</li>
+<li>A holistic approach for <strong>separate jet exhausts</strong> including bypass, core duct and post exit components has not been reported</li>
+<li>Impact of <strong>high BPR engines</strong> and lower FPR on exahust system design and optimisation has not been reported</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>What is the approach?</dt>
+<dd><ul class="first last simple">
+<li>Cycle analysis</li>
+<li>Geometry parameterisation</li>
+<li>Mesh generation</li>
+<li>RANS flow solution</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>What is new?</dt>
+<dd><ul class="first last simple">
+<li>Expand optimisation strategy using DOE (Design of Experiment), RSM (Response Surface Modelling) and GA (Genetic Algorithm)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>What is being optimised?</dt>
+<dd><ul class="first last simple">
+<li>Current and future engine architectures</li>
+<li>Large turbofans</li>
+<li>Optimise the exhaust designs</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="numerical-approach">
+<h2><a class="toc-backref" href="#id10">3.3.2.2. Numerical Approach</a><a class="headerlink" href="#numerical-approach" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="aerodynamic-design-of-separate-jet-exhausts">
+<h3><a class="toc-backref" href="#id11">3.3.2.2.1. Aerodynamic Design of Separate-Jet Exhausts</a><a class="headerlink" href="#aerodynamic-design-of-separate-jet-exhausts" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>What is GEMINI?</dt>
+<dd><ul class="first last">
+<li><p class="first">Tool developed is GEMINI</p>
+</li>
+<li><p class="first">Designs complete exhaust system for designated engine cycle using key engine hardpoints</p>
+</li>
+<li><dl class="first docutils">
+<dt>Applicable to:</dt>
+<dd><ul class="first last simple">
+<li>Engine performance simulation</li>
+<li>Exhaust duct and nozzle aeroline parameterisation</li>
+<li>Viscous compressible flow</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>What is the process?</dt>
+<dd><ul class="first last simple">
+<li>Designate a set of thermodynamic cycles and geometric design parameters</li>
+<li>Analyse engine at design point and off design (0D conditions) - Turbomatch, output bypass and core sizes and flow capacities, at steady state conditions</li>
+<li>Inverse design to create 2D axi-symmetric model</li>
+<li>Automatic generation of grid</li>
+<li>Convege CFD solution</li>
+<li>Determine discharge and velocity coefficients</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="exhaust-system-parametric-geometry-definition">
+<h3><a class="toc-backref" href="#id12">3.3.2.2.2. Exhaust System Parametric Geometry Definition</a><a class="headerlink" href="#exhaust-system-parametric-geometry-definition" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>How is the parametric geometry defined?</dt>
+<dd><ul class="first last simple">
+<li>Kulfan&#8217;s CST functions</li>
+<li>Qin&#8217;s CST variations</li>
+<li>Bypass, core, duct exhaust are reduced to a set of analytical expressions</li>
+<li>The expressions are functions of a standard set of design parameters</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>How is the nozzle designed?</dt>
+<dd><ul class="first last simple">
+<li>Geometric throat area is known</li>
+<li>An effective convegent-divergent ratio is defined</li>
+<li>Application of the rolling ball area estimation method to nozzle exit plane and upstream CP results in a series of control points that satisfy the prescribed design parameters</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>How is the upstream duct defined?</dt>
+<dd><ul class="first last simple">
+<li>Direct control of a series of control points</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Why is the engine intake considered?</dt>
+<dd><ul class="first last simple">
+<li>To capture the effect of inlet mass flow capture ratio</li>
+<li>To then account for the effect of the static pressure distributionon the nacelle</li>
+<li>To then account for the effect of freestream supression on the aerodynamic performance of the exhaust system</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>How is the geometry defined?</dt>
+<dd><ul class="first last simple">
+<li>Upstream duct via specifying position, slope and curvature within a series of control points</li>
+<li>Core cowl and plug are modelled as straight lines</li>
+<li>Includes a third nozzle</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="dse-and-optimisation">
+<h3><a class="toc-backref" href="#id13">3.3.2.2.3. DSE and Optimisation</a><a class="headerlink" href="#dse-and-optimisation" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>What is done in this paper?</dt>
+<dd><ul class="first last simple">
+<li>Extend GEMINI</li>
+<li>Implement DSE and optimisation environment</li>
+<li>Non-linear nature must be dealt with</li>
+<li>Must mitigate the cost of numerous CFD applications</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>How is the process of DSE done?</dt>
+<dd><ul class="first last simple">
+<li>Deployment of <strong>DOE</strong> method to explore the available design space</li>
+<li>Construct <strong>RSMs</strong> from DOE results</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>What kind of DOE is used?</dt>
+<dd><ul class="first last simple">
+<li><strong>Latin Hypercube</strong></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>What is a RSM?</dt>
+<dd><ul class="first last simple">
+<li>Hypersurface describing the mathematical relationship between a set of imposed design inputs and outputs</li>
+<li>The use of RSMs will avoid a <strong>prohibatively large number of CFD simulations</strong></li>
+<li>Interpolation using Gaussian process regression, <strong>Kriging interpolation</strong></li>
+<li>Performance metrics are <strong>discharge and velocity coefficient</strong></li>
+<li><strong>Leave-one-out cross validation</strong> used to check predictive accuracy of RSMs</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>How is the optimisation done?</dt>
+<dd><ul class="first last simple">
+<li>Global method to avoid being trapped in locally optimal solution - GA (Genetic Algorithm)</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="results-and-discussion">
+<h2><a class="toc-backref" href="#id14">3.3.2.3. Results and Discussion</a><a class="headerlink" href="#results-and-discussion" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="definition-of-baseline-engines">
+<h3><a class="toc-backref" href="#id15">3.3.2.3.1. Definition of Baseline Engines</a><a class="headerlink" href="#definition-of-baseline-engines" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>How are the baseline engines defined?</dt>
+<dd><ul class="first last simple">
+<li>Optimise low pressure exhaust system design and core afterbody aerolines for current and future aero-engines.</li>
+<li>BPR current = 11</li>
+<li>BPR future = 15</li>
+<li>OPR, TET, component efficiencies selected according to technology guidelines</li>
+<li>Each cycle optimised wrt FPR to maximise specific thrust</li>
+<li>2D axi-symmetric</li>
+<li>Geometry from public domain</li>
+<li>Predictions at mid-cruise</li>
+<li>Bypass is choked, core is unchoked</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="parametric-design-space-definition">
+<h3><a class="toc-backref" href="#id16">3.3.2.3.2. Parametric Design Space Definition</a><a class="headerlink" href="#parametric-design-space-definition" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>How are the parameters designed?</dt>
+<dd><ul class="first last simple">
+<li>11 to 12 variables for future and current engines</li>
+<li><strong>Outer line angle</strong> is kept constant for future engine</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="design-space-exploration">
+<h3><a class="toc-backref" href="#id17">3.3.2.3.3. Design Space Exploration</a><a class="headerlink" href="#design-space-exploration" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">How is the design space explored?</p>
+<blockquote>
+<div><ul class="simple">
+<li>Design space discretised using Latin Hypercube</li>
+<li>360 exhaust geometries</li>
+<li>Correlation between design variables and performance metrics was investigated</li>
+<li>Hinton Diagram using Pearson&#8217;s product-moment correlation</li>
+<li>Shows only a few parameters influence the performance metrics</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Within the range of assumptions, the aerodynamic <strong>performance of the exhaust is decoupled from the intake and nacelle forebody</strong></p>
+</li>
+<li><p class="first">Changes applied to the exhaust do not influence the intake or nacelle</p>
+</li>
+</ul>
+</div>
+<div class="section" id="response-surface-modelling">
+<h3><a class="toc-backref" href="#id18">3.3.2.3.4. Response Surface Modelling</a><a class="headerlink" href="#response-surface-modelling" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>How are the RSMs constructed?</dt>
+<dd><ul class="first last simple">
+<li>Using DOE data</li>
+<li>Interpolation using Gaussian processes regression (Kriging interpolation)</li>
+<li>Quadratic regression function and squared exponential autocorrelation function</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>How are the RSMs checked?</dt>
+<dd><ul class="first last simple">
+<li>Leave one out cross validation</li>
+<li>Employs all the avaliable data apart from one, which is the one to prediction</li>
+<li>Prediction is compared with original raw data for accuracy</li>
+<li>Surrogate model predictions are correlated against raw data using Pearson&#8217;s product moment of correlation</li>
+<li>Also assesses averge model error and standard deviation for each performance metric</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Result shows that CFD raw data and predicted data has very high correlation.</p>
+</li>
+<li><p class="first"><strong>Could be improved using a larger amount of data</strong></p>
+</li>
+<li><p class="first">Low percentage error</p>
+</li>
+<li><p class="first">Standard deviation is of similar order to error, so data is scattered - shows non-linearity of the system</p>
+</li>
+</ul>
+</div>
+<div class="section" id="exhaust-system-design-optimisation">
+<h3><a class="toc-backref" href="#id19">3.3.2.3.5. Exhaust System Design Optimisation</a><a class="headerlink" href="#exhaust-system-design-optimisation" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>How is the optimisation performed?</dt>
+<dd><ul class="first last simple">
+<li>Genetic algorithm</li>
+<li>Advantage of using RSMs is that they are more efficient than CFD models</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>What is the process for the GA?</dt>
+<dd><ul class="first last simple">
+<li>For current and future engines</li>
+<li>Optimise in terms of overall velocity coefficient</li>
+<li>Population size is 10 times number of design variables</li>
+<li>40 generations</li>
+<li>Convergence criterion of <span class="math">\(10^{-12}\)</span></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>What are the results of the optimisation?</dt>
+<dd><ul class="first last simple">
+<li>Good solution achieved within 500 evaluations</li>
+<li>Still contains small number of unfit individuals</li>
+<li>Improvement wrt baseline values is large (2-4% in thrust)</li>
+<li>CP to exit length ratio is increased (as before) mitigating strong shock</li>
+<li>Also flow separations are mitigated</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="conclusions">
+<h2><a class="toc-backref" href="#id20">3.3.2.4. Conclusions</a><a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Design optimisation for separate jet exhausts for future civil aero engines</p>
+</li>
+<li><dl class="first docutils">
+<dt>Modules for:</dt>
+<dd><ul class="first last simple">
+<li>Cycle analysis</li>
+<li>Geometry parameterisation</li>
+<li>Mesh generation</li>
+<li>Viscous compressible flow solution</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Novel analytical geometry tool using CST functions</p>
+</li>
+<li><p class="first">2D axi-symmetric RANS CFD model</p>
+</li>
+<li><dl class="first docutils">
+<dt>Extended formulation to include:</dt>
+<dd><ul class="first last simple">
+<li>DOE</li>
+<li>RSM</li>
+<li>GA</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Used to optimise:</dt>
+<dd><ul class="first last simple">
+<li>Current engine</li>
+<li>Future engine</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Design optimisation can increase net propulsive force by 1.4% or 3.4% for future and current engines</p>
+</li>
+<li><p class="first">Can identify design guidelines and mitigate undesirable flow features</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="aerodynamics_of_jet_exhausts_part_1.html">3.3.1. Aerodynamics of Jet Exhausts Part 1</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="review_of_buoyancy_induced_flow_in_rotating_cavities.html">3.3.3. Review of Buoyancy-Induced Flow in Rotating Cavities</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

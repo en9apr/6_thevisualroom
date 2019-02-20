@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.3.3. The Modified Differential Equation &#8212; The Visual Room</title>
+    <title>1.1.3.3. The Modified Differential Equation &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
-    <link rel="next" title="1.3.4. von Neumann Stability Analysis" href="von_neumann_stability_analysis.html" />
-    <link rel="prev" title="1.3.2. Numerical Schemes 2" href="numerical_schemes_2.html" /> 
+    <link rel="up" title="1.1. Computational Fluid Dynamics Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.1.3.4. von Neumann Stability Analysis" href="von_neumann_stability_analysis.html" />
+    <link rel="prev" title="1.1.3.2. Numerical Schemes 2" href="numerical_schemes_2.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>1.3.3. The Modified Differential Equation</span></h2>
+        <h2 class="heading"><span>1.1.3.3. The Modified Differential Equation</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="numerical_schemes_2.html">1.3.2. Numerical Schemes 2</a>
+        «&#160;&#160;<a href="numerical_schemes_2.html">1.1.3.2. Numerical Schemes 2</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="von_neumann_stability_analysis.html">1.3.4. von Neumann Stability Analysis</a>&#160;&#160;»
+        <a href="von_neumann_stability_analysis.html">1.1.3.4. von Neumann Stability Analysis</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,9 +49,9 @@
         
         
   <div class="section" id="the-modified-differential-equation">
-<h1>1.3.3. The Modified Differential Equation<a class="headerlink" href="#the-modified-differential-equation" title="Permalink to this headline">¶</a></h1>
+<h1>1.1.3.3. The Modified Differential Equation<a class="headerlink" href="#the-modified-differential-equation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="the-truncation-error">
-<h2>1.3.3.1. The Truncation Error<a class="headerlink" href="#the-truncation-error" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.3.1. The Truncation Error<a class="headerlink" href="#the-truncation-error" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>The <em>truncation error</em> is the difference between the numerical scheme and the differential equation.</li>
 </ul>
@@ -64,7 +64,7 @@
 </ul>
 </div>
 <div class="section" id="modified-differential-equation">
-<h2>1.3.3.2. Modified Differential Equation<a class="headerlink" href="#modified-differential-equation" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.3.2. Modified Differential Equation<a class="headerlink" href="#modified-differential-equation" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Consider <strong>exact</strong> solution of the <strong>discretised</strong> equation <span class="math">\(\rightarrow \bar{u}_i^n\)</span>:</li>
 </ul>
@@ -130,7 +130,7 @@ O(\Delta t) - O(\Delta x^2)\]</div>
 <li>The <strong>Modified Differential Equation</strong> and the <strong>Truncation Error</strong> provide essential information about the scheme</li>
 </ul>
 <div class="section" id="summary-of-the-method-for-obtaining-the-modified-de">
-<h3>Summary of the Method for obtaining the  Modified DE<a class="headerlink" href="#summary-of-the-method-for-obtaining-the-modified-de" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.3.3.2.1. Summary of the Method for obtaining the  Modified DE<a class="headerlink" href="#summary-of-the-method-for-obtaining-the-modified-de" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Denote <span class="math">\(D(u)=0\)</span> the mathematical model we are to solve numerically (the Differential Equation)</li>
 <li>And <span class="math">\(N(u_i^n)=0\)</span> the numerical scheme (the Numerical Scheme)</li>
@@ -154,7 +154,7 @@ O(\Delta t) - O(\Delta x^2)\]</div>
 </div>
 </div>
 <div class="section" id="example-convection-with-1st-order-upwind-bd-in-space-fd-in-time">
-<h2>1.3.3.3. Example: Convection with 1st order Upwind (BD in space, FD in time)<a class="headerlink" href="#example-convection-with-1st-order-upwind-bd-in-space-fd-in-time" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.3.3. Example: Convection with 1st order Upwind (BD in space, FD in time)<a class="headerlink" href="#example-convection-with-1st-order-upwind-bd-in-space-fd-in-time" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Introduce the Taylor expansions as before</li>
 <li>Follow steps just listed</li>
@@ -170,10 +170,10 @@ O(\Delta t) - O(\Delta x^2)\]</div>
 \[{{c \Delta x} \over 2} \left ( 1-{{c \Delta t} \over {\Delta x}} \right )\]</div>
 </div>
 <div class="section" id="cfl-condition">
-<h2>1.3.3.4. CFL Condition<a class="headerlink" href="#cfl-condition" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.3.4. CFL Condition<a class="headerlink" href="#cfl-condition" title="Permalink to this headline">¶</a></h2>
 <p>The CFL Condition is to ensure stability of the scheme:</p>
 <div class="math">
-\[ \begin{align}\begin{aligned}\text {For } c \gt 0\\\sigma = {{c \Delta t} \over {\Delta x}} \lt 1\end{aligned}\end{align} \]</div>
+\[\text {For } c \gt 0\]\[\sigma = {{c \Delta t} \over {\Delta x}} \lt 1\]</div>
 <p><span class="math">\(\sigma\)</span> is called the CFL number, the <strong>Courant-Friedrichs-Lewy</strong> number</p>
 <ul class="simple">
 <li>CFL has a deep physical significance</li>
@@ -187,17 +187,17 @@ O(\Delta t) - O(\Delta x^2)\]</div>
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="numerical_schemes_2.html">1.3.2. Numerical Schemes 2</a>
+        «&#160;&#160;<a href="numerical_schemes_2.html">1.1.3.2. Numerical Schemes 2</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="von_neumann_stability_analysis.html">1.3.4. von Neumann Stability Analysis</a>&#160;&#160;»
+        <a href="von_neumann_stability_analysis.html">1.1.3.4. von Neumann Stability Analysis</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

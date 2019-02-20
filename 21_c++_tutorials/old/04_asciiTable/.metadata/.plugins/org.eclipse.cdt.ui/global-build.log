@@ -1,0 +1,15 @@
+21:49:15 **** Incremental Build of configuration Debug for project asciiTable ****
+make all 
+Building file: ../asciiTable.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"asciiTable.d" -MT"asciiTable.d" -o "asciiTable.o" "../asciiTable.cpp"
+Finished building: ../asciiTable.cpp
+ 
+Building target: asciiTable
+Invoking: GCC C++ Linker
+g++  -o "asciiTable"  ./asciiTable.o   
+Finished building target: asciiTable
+ 
+21:49:18 **** Incremental Build of configuration Debug for project asciiTable ****
+make all 
+make: Nothing to be done for 'all'.

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.3.1. Numerical Schemes 1 &#8212; The Visual Room</title>
+    <title>1.1.3.1. Numerical Schemes 1 &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
-    <link rel="next" title="1.3.2. Numerical Schemes 2" href="numerical_schemes_2.html" />
-    <link rel="prev" title="1.2.4. Finite Difference Formulas in 2D" href="finite_difference_formulas_in_2D.html" /> 
+    <link rel="up" title="1.1. Computational Fluid Dynamics Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.1.3.2. Numerical Schemes 2" href="numerical_schemes_2.html" />
+    <link rel="prev" title="1.1.2.4. Finite Difference Formulas in 2D" href="finite_difference_formulas_in_2D.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>1.3.1. Numerical Schemes 1</span></h2>
+        <h2 class="heading"><span>1.1.3.1. Numerical Schemes 1</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="finite_difference_formulas_in_2D.html">1.2.4. Finite Difference Formulas in 2D</a>
+        «&#160;&#160;<a href="finite_difference_formulas_in_2D.html">1.1.2.4. Finite Difference Formulas in 2D</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="numerical_schemes_2.html">1.3.2. Numerical Schemes 2</a>&#160;&#160;»
+        <a href="numerical_schemes_2.html">1.1.3.2. Numerical Schemes 2</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,21 +49,21 @@
         
         
   <div class="section" id="numerical-schemes-1">
-<h1>1.3.1. Numerical Schemes 1<a class="headerlink" href="#numerical-schemes-1" title="Permalink to this headline">¶</a></h1>
+<h1>1.1.3.1. Numerical Schemes 1<a class="headerlink" href="#numerical-schemes-1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="setting-the-scene-stability">
-<h2>1.3.1.1. Setting the Scene: Stability<a class="headerlink" href="#setting-the-scene-stability" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.1.1. Setting the Scene: Stability<a class="headerlink" href="#setting-the-scene-stability" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>We encounter several instances when the solution &#8220;blows up&#8221;. Why?</li>
 <li>Upwind schemes, implicit schemes, 2nd order schemes, leapfrog schemes</li>
 </ul>
 </div>
 <div class="section" id="consistency-stability-and-error-analysis">
-<h2>1.3.1.2. Consistency, stability and error analysis<a class="headerlink" href="#consistency-stability-and-error-analysis" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.1.2. Consistency, stability and error analysis<a class="headerlink" href="#consistency-stability-and-error-analysis" title="Permalink to this headline">¶</a></h2>
 <p>Recall step one: 1D Linear Convection:</p>
 <div class="math">
 \[{\partial u \over \partial t} + c {\partial u \over \partial x} = 0\]</div>
 <div class="section" id="fd-in-time-bd-in-space">
-<h3>FD in time, BD in space<a class="headerlink" href="#fd-in-time-bd-in-space" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.3.1.2.1. FD in time, BD in space<a class="headerlink" href="#fd-in-time-bd-in-space" title="Permalink to this headline">¶</a></h3>
 <p><strong>Explicit version:</strong></p>
 <div class="math">
 \[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{u_i^n - u_{i-1}^n} \over \Delta x}=0\]</div>
@@ -77,7 +77,7 @@
 \[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{u_i^{n+1} - u_{i-1}^{n+1}} \over \Delta x}=0\]</div>
 </div>
 <div class="section" id="fd-in-time-cd-in-space">
-<h3>FD in time, CD in space<a class="headerlink" href="#fd-in-time-cd-in-space" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.3.1.2.2. FD in time, CD in space<a class="headerlink" href="#fd-in-time-cd-in-space" title="Permalink to this headline">¶</a></h3>
 <p><strong>Explicit version:</strong></p>
 <div class="math">
 \[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{u_{i+1}^n - u_{i-1}^n} \over {2 \Delta x}}=0\]</div>
@@ -87,7 +87,7 @@
 <p>Results in linear system of equation with tridiagonal matrix</p>
 </div>
 <div class="section" id="fd-in-time-fd-in-space">
-<h3>FD in time, FD in space<a class="headerlink" href="#fd-in-time-fd-in-space" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.3.1.2.3. FD in time, FD in space<a class="headerlink" href="#fd-in-time-fd-in-space" title="Permalink to this headline">¶</a></h3>
 <p><strong>Explicit version:</strong></p>
 <div class="math">
 \[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{u_{i+1}^n - u_{i}^n} \over {\Delta x}}=0\]</div>
@@ -97,7 +97,7 @@
 <p>FD or BD in space and implicit versions are called <strong>first order upwind</strong> schemes for the <strong>convection equation</strong>.</p>
 </div>
 <div class="section" id="fd-in-time-2nd-order-bd-in-space">
-<h3>FD in time, 2nd order BD in space<a class="headerlink" href="#fd-in-time-2nd-order-bd-in-space" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.3.1.2.4. FD in time, 2nd order BD in space<a class="headerlink" href="#fd-in-time-2nd-order-bd-in-space" title="Permalink to this headline">¶</a></h3>
 <p><strong>Explicit version:</strong></p>
 <div class="math">
 \[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{3u_i^n - 4 u_{i-1}^n + u_{i-2}^n} \over {2 \Delta x}}=0\]</div>
@@ -106,7 +106,7 @@
 \[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + c {{3u_i^{n+1} - 4 u_{i-1}^{n+1} + u_{i-2}^{n+1}} \over {2 \Delta x}}=0\]</div>
 </div>
 <div class="section" id="nd-order-cd-in-time-2nd-order-cd-in-space">
-<h3>2nd order CD in time, 2nd order CD in space<a class="headerlink" href="#nd-order-cd-in-time-2nd-order-cd-in-space" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.3.1.2.5. 2nd order CD in time, 2nd order CD in space<a class="headerlink" href="#nd-order-cd-in-time-2nd-order-cd-in-space" title="Permalink to this headline">¶</a></h3>
 <p><strong>Explicit version:</strong> (Leapfrog scheme)</p>
 <div class="math">
 \[{{u_i^{n+1} - u_i^{n-1}} \over {2 \Delta t}} + c {{u_{i+1}^n - u_{i-1}^n} \over {2 \Delta x}}=0\]</div>
@@ -116,7 +116,7 @@
 </div>
 </div>
 <div class="section" id="example">
-<h2>1.3.1.3. Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.1.3. Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>Recall step one: 1D Linear Convection:</p>
 <div class="math">
 \[{\partial u \over \partial t} + c {\partial u \over \partial x} = 0\]</div>
@@ -129,7 +129,7 @@
 \[1.0 \le x \le 1.1 \Rightarrow u_0(x) = 10(1.1-x)\]</div>
 <div class="math">
 \[x \ge 1.1 \Rightarrow u_0(x) = 0\]</div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">diffusion</span><span class="p">(</span><span class="n">nt</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">diffusion</span><span class="p">(</span><span class="n">nt</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">   Returns the velocity field and distance for 2D diffusion</span>
 <span class="sd">   &quot;&quot;&quot;</span>
@@ -189,7 +189,7 @@
 </pre></div>
 </div>
 <p>(<a class="reference external" href="../01_barba_theory/numerical_scheme_1-1.py">Source code</a>)</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">diffusion</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;CD&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">u</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">diffusion</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;CD&#39;</span><span class="p">)</span>
 <span class="n">plot_diffusion</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="s1">&#39;Figure 1: sigma=0.8, Central Differencing in x&#39;</span><span class="p">)</span>
 
 <span class="n">u</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">diffusion</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;BD&#39;</span><span class="p">)</span>
@@ -213,7 +213,7 @@
 </div>
 </div>
 <div class="section" id="what-happened">
-<h2>1.3.1.4. What Happened?<a class="headerlink" href="#what-happened" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.1.4. What Happened?<a class="headerlink" href="#what-happened" title="Permalink to this headline">¶</a></h2>
 <ol class="loweralpha simple">
 <li>Explicit CD scheme with the parameter <span class="math">\(\sigma = {{c \Delta t} \over {\Delta x}} = 0.8 \Rightarrow\)</span> <strong>UNSTABLE</strong></li>
 <li>1st order upwind (Step 1) BD scheme <span class="math">\(\sigma = 0.8 \Rightarrow\)</span> <strong>STABLE, but significantly diffused</strong></li>
@@ -221,7 +221,7 @@
 </ol>
 </div>
 <div class="section" id="basic-questions">
-<h2>1.3.1.5. Basic Questions<a class="headerlink" href="#basic-questions" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.1.5. Basic Questions<a class="headerlink" href="#basic-questions" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>What <strong>conditions</strong> should we impose on a numerical scheme to obtain an acceptable approximation to the problem?</li>
 <li>Why do various schemes have such different behaviour?</li>
@@ -242,17 +242,17 @@
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="finite_difference_formulas_in_2D.html">1.2.4. Finite Difference Formulas in 2D</a>
+        «&#160;&#160;<a href="finite_difference_formulas_in_2D.html">1.1.2.4. Finite Difference Formulas in 2D</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="numerical_schemes_2.html">1.3.2. Numerical Schemes 2</a>&#160;&#160;»
+        <a href="numerical_schemes_2.html">1.1.3.2. Numerical Schemes 2</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

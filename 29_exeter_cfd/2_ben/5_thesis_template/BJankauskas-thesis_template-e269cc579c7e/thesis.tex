@@ -1,0 +1,101 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%							%
+%    	University of Exeter thesis template		%
+%							%
+%    		Ed Blockley, 2008			%
+%							%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt,reqno,a4paper]{report}
+\usepackage{amsfonts,amssymb,amsmath,amsthm,amscd,verbatim,epsf,color}
+\usepackage[T1]{fontenc}
+\usepackage{uarial}
+\pagestyle{headings}
+\usepackage[dvips]{graphicx,psfrag,geometry}
+    \usepackage{multirow}
+\NeedsTeXFormat{LaTeX2e}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% include macros & definitions %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{defs}
+\include{macros}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% page layout information %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textwidth 148mm       	%% leaving 60mm for margins
+\oddsidemargin 14.6mm  	%% gives a 20mm left margin on a right-hand page
+\voffset -1in          	%% removes vertical offset....
+\topmargin 20mm        	%% ...and gives a 20mm top margin
+\newdimen\jsbtmp	%% set text height to be paper height less top and bottom
+\jsbtmp=\paperheight	%% 20mm margins plus \headheight, \headsep and \footskip
+\advance\jsbtmp by-\topmargin
+\advance\jsbtmp by-\headheight
+\advance\jsbtmp by-\headsep
+\advance\jsbtmp by-\footskip
+\advance\jsbtmp by-20mm	%% bottom margin 20mm	
+\textheight=\jsbtmp		
+\renewcommand{\baselinestretch}{1.5}  %% line-and-a-half spacing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% include title definition %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{title}		%% file "title.tex" containing the generic title function "\titlep"
+
+%% NB. this file is included as part of the template and does not need editing.
+%% your name, thesis title and submission date are passed to \titlep as variables.
+
+%%%%%%%%%%%%%%%%%%%%%
+%% Thesis mainbody %%
+%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\title{Hydrodynamic vortex separator as a reaction vessel modelling with Computational Fluid Dynamics} 				%% your thesis title
+\author{Bernardas Jankauskas}	%% your name
+\titlep 	%% creates the title page using the above author/title and the current month
+
+\include{abstract}		%% file "abstract.tex" containing your abstract
+\include{acknowledgements}	%% file "acknowledgements.tex" containing your acknowledgements
+
+%% create table of contents on a separate page
+%% and include 'Contents' as an entry in the table of contents
+\addcontentsline{toc}{chapter}{Contents}
+\tableofcontents
+\clearpage
+
+%% create list of figures on a separate page
+%% and include 'List of Figures' as an entry in the table of contents
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+\clearpage
+
+%% create list of tables on a separate page
+%% and include 'List of Tables' as an entry in the table of contents
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+%% no need to \clearpage here as the \include{} statement will do that for you
+
+\include{chapters/introduction}
+\include{chapters/Chapter2}
+\include{chapters/Chapter3}
+\include{chapters/Chapter4}
+\include{chapters/Chapter5}
+\include{chapters/Chapter6}
+\include{chapters/Chapter7}
+\include{chapters/Chapter8}
+
+%% start appendix mode
+%% all chapters from now on will be defined using letters not numbers (starting with A)
+\appendix
+
+\include{chapters/appendix1}		%% file "appendix1.tex" containing your 1st appendix
+\include{chapters/appendix2}		%% file "appendix1.tex" containing your 2nd appendix
+
+\bibliography{thesis}		%% file "thesis.bib" containing your bibtex bibliography
+\bibliographystyle{elsart-num}  %% file "elsart-num.bst" defining the bibliography style
+
+\end{document}
+
+%% end of file thesis.tex

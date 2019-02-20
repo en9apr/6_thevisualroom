@@ -1,0 +1,6 @@
+21:40:26 **** Incremental Build of configuration Debug for project 23_weights ****
+make all 
+make: Nothing to be done for 'all'.
+
+21:40:26 Build Finished (took 98ms)
+

@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.1.5. Pressure, Streamlines and Streaklines &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../../index.html" />
+    <link rel="up" title="4. Personal Notes on CFD" href="../cfd_notes.html" />
+    <link rel="next" title="4.1.6. Kinematics" href="06_kinematics.html" />
+    <link rel="prev" title="4.1.4. ODEs and PDEs" href="04_odes_and_pdes.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.1.5. Pressure, Streamlines and Streaklines</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="04_odes_and_pdes.html">4.1.4. ODEs and PDEs</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="06_kinematics.html">4.1.6. Kinematics</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="pressure-streamlines-and-streaklines">
+<h1>4.1.5. Pressure, Streamlines and Streaklines<a class="headerlink" href="#pressure-streamlines-and-streaklines" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#what-are-the-components-of-pressure" id="id1">What are the components of pressure?</a></li>
+<li><a class="reference internal" href="#what-is-the-definition-of-pressure" id="id2">What is the definition of pressure?</a></li>
+<li><a class="reference internal" href="#what-is-a-streamline" id="id3">What is a streamline?</a></li>
+<li><a class="reference internal" href="#what-is-a-pathline" id="id4">What is a pathline?</a></li>
+</ul>
+</div>
+<div class="section" id="what-are-the-components-of-pressure">
+<h2><a class="toc-backref" href="#id1">4.1.5.1. What are the components of pressure?</a><a class="headerlink" href="#what-are-the-components-of-pressure" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>Static/thermodynamic</strong> - expresses a fluid&#8217;s temperature or internal energy, e.g. from ideal gas law <span class="math">\(\longrightarrow\)</span> <span class="math">\(p_{static}=nk_bT\)</span></li>
+<li><strong>Hydrostatic</strong> - expresses a fluid&#8217;s depth <span class="math">\(\longrightarrow\)</span> <span class="math">\(p_{hydrostatic}=\rho gh\)</span></li>
+<li><strong>Dynamic</strong> - expresses a fluid&#8217;s velocity <span class="math">\(\longrightarrow\)</span> <span class="math">\(p_{dynamic}={1 \over 2} \rho u^2\)</span></li>
+<li><strong>Stagnation</strong> - the pressure that would be reached if flow is brought to rest frictionlessly <span class="math">\(\longrightarrow\)</span> <span class="math">\(p_{stagnation} = p_{static} + p_{dynamic}\)</span></li>
+<li><strong>Total</strong> - sum of all components of pressure  <span class="math">\(\longrightarrow\)</span> <span class="math">\(p_{total} = p_{static} + p_{dynamic} + p_{hydrostatic}\)</span></li>
+</ul>
+</div>
+<div class="section" id="what-is-the-definition-of-pressure">
+<h2><a class="toc-backref" href="#id2">4.1.5.2. What is the definition of pressure?</a><a class="headerlink" href="#what-is-the-definition-of-pressure" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Normal force per unit surface</p>
+</li>
+<li><dl class="first docutils">
+<dt>Measured as:</dt>
+<dd><ul class="first last simple">
+<li>Absolute (relative to vacuum)</li>
+<li>Relative (relative to atmosphere)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">The relationship between relative and absolute pressure is: <span class="math">\(p_{rel} = p_{abs} - p_{atm}\)</span></p>
+</li>
+</ul>
+</div>
+<div class="section" id="what-is-a-streamline">
+<h2><a class="toc-backref" href="#id3">4.1.5.3. What is a streamline?</a><a class="headerlink" href="#what-is-a-streamline" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>A curve that is instantaneously tangent to the velocity field throughout the flow field.</li>
+<li>In unsteady flow this changes with time.</li>
+<li>Usually generated computationally.</li>
+</ul>
+</div>
+<div class="section" id="what-is-a-pathline">
+<h2><a class="toc-backref" href="#id4">4.1.5.4. What is a pathline?</a><a class="headerlink" href="#what-is-a-pathline" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The trajectory of a fluid particle of fixed identity over a period of time.</li>
+<li>In unsteady flow pathlines cannot change their time history</li>
+<li>Usually generated experimentally.</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="04_odes_and_pdes.html">4.1.4. ODEs and PDEs</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="06_kinematics.html">4.1.6. Kinematics</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

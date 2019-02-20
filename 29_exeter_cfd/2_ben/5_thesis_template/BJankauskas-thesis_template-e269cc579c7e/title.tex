@@ -1,0 +1,74 @@
+\makeatletter
+
+%\def\dept#1{\gdef\@dept{#1}}
+%\def\advis@r{Adviser}
+\def\submitdate#1{\gdef\@submitdate{#1}}
+\def\copyrightyear#1{\gdef\@copyrightyear{#1}} % \author, \title in report
+\def\@title{}\def\@author{}\def\@dept{}
+\def\@submitdate{\ifcase\the\month\or
+  January\or February\or March\or April\or May\or June\or
+    July\or August\or September\or October\or November\or December\fi
+      \space \number\the\year}
+      \ifnum\month=12
+          \@tempcnta=\year \advance\@tempcnta by 1
+      \edef\@copyrightyear{\number\the\@tempcnta}
+      \else
+          \def\@copyrightyear{\number\the\year}
+  \fi
+  \newif\ifcopyright \newif\iffigurespage \newif\iftablespage
+  \copyrightfalse \figurespagefalse \tablespagefalse
+  
+\long\def\signature#1{%
+
+\newdimen\parindentold
+\parindentold=\parindent
+
+%  \begin{center}
+\vspace{28mm}
+\parindent=0pt
+This thesis is available for Library use on the understanding that it is copyright material and that no quotation from the thesis may be published without proper acknowledgement.
+\par
+
+%\vspace{10mm}
+\parindent=0pt
+I certify that all material in this thesis which is not my own work has been identified and that no material has previously been submitted and approved for the award of a degree by this or any other University.
+
+\parindent=\parindentold
+
+\par
+\vspace{10mm}
+\begin{flushright}
+%\hbox to 4in
+{\hfil\shortstack{\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\\
+%{\vline width 2in height 0.4pt\\
+\vspace{1mm}\\
+#1}}
+\end{flushright}
+%\end{center}
+}
+
+\def\titlep{
+%\thispagestyle{empty}
+\pagenumbering{arabic}
+\thispagestyle{plain}
+\null\vskip1in
+ \vspace{-2cm}
+\begin{center}
+{\bf\LARGE\expandafter{\@title}}
+\end{center}
+ \vspace{22mm}
+\vfill
+\begin{center}
+%        \parindent=0pt
+Submitted by\\
+\vspace{3mm}
+{\bf\large\@author}\\
+\vspace{3mm}
+to the University of Exeter as a thesis for the degree
+of Doctor of Philosophy in Applied Mathematics, \@submitdate.
+\end{center}
+%\vspace{4cm}
+      \signature{\@author}
+      \newpage}
+     
+\makeatother

@@ -1,0 +1,3161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.2. OpenFOAM Use &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. OpenFOAM" href="../24_25_26_27_openfoam_landing_page/openfoam_landing_page.html" />
+    <link rel="next" title="1.3. OpenFOAM Tutorials - University of Exeter (Password Protected)" href="../26_openfoam_tutorials_exeter/openfoam_tutorials_exeter.html" />
+    <link rel="prev" title="1.1. OpenFOAM Language" href="../24_openfoam_language/openfoam_language.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.2. OpenFOAM Use</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../24_openfoam_language/openfoam_language.html">1.1. OpenFOAM Language</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../26_openfoam_tutorials_exeter/openfoam_tutorials_exeter.html">1.3. OpenFOAM Tutorials - University of Exeter (Password Protected)</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="openfoam-use">
+<h1>1.2. OpenFOAM Use<a class="headerlink" href="#openfoam-use" title="Permalink to this headline">¶</a></h1>
+<p>This is the use of the OpenFOAM language.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#what-is-the-process-in-cfd" id="id1">What is the process in CFD?</a></li>
+<li><a class="reference internal" href="#directories" id="id2">Directories</a><ul>
+<li><a class="reference internal" href="#how-to-get-to-the-installation-directory" id="id3">How to get to the installation directory?</a></li>
+<li><a class="reference internal" href="#how-is-the-installation-directory-structured" id="id4">How is the installation directory structured?</a></li>
+<li><a class="reference internal" href="#how-to-get-to-the-run-directory" id="id5">How to get to the run directory?</a></li>
+<li><a class="reference internal" href="#how-is-the-user-directory-structured" id="id6">How is the user directory structured?</a></li>
+<li><a class="reference internal" href="#what-is-in-the-case-directory" id="id7">What is in the case directory?</a></li>
+<li><a class="reference internal" href="#what-is-the-constant-directory" id="id8">What is the constant directory?</a></li>
+<li><a class="reference internal" href="#what-is-in-the-system-directory" id="id9">What is in the system directory?</a></li>
+<li><a class="reference internal" href="#what-is-in-the-0-timestep-directory" id="id10">What is in the 0 (timestep) directory?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dictionaries" id="id11">Dictionaries</a><ul>
+<li><a class="reference internal" href="#what-are-dictionaries" id="id12">What are dictionaries?</a></li>
+<li><a class="reference internal" href="#what-is-a-dimensionedscalar-in-the-transportproperties-dictionary" id="id13">What is a dimensionedScalar in the transportProperties dictionary?</a></li>
+<li><a class="reference internal" href="#how-are-the-dimensions-given-in-the-transportproperties-dictionary" id="id14">How are the dimensions given in the transportProperties dictionary?</a></li>
+<li><a class="reference internal" href="#what-is-the-turbulenceproperties-dictionary" id="id15">What is the turbulenceProperties dictionary?</a></li>
+<li><a class="reference internal" href="#what-is-the-controldict-dictionary" id="id16">What is the controlDict dictionary?</a></li>
+<li><a class="reference internal" href="#what-is-the-polymesh-dictionary" id="id17">What is the polyMesh dictionary?</a></li>
+<li><a class="reference internal" href="#what-is-the-blockmeshdict-dictionary" id="id18">What is the blockMeshDict dictionary?</a></li>
+<li><a class="reference internal" href="#how-are-vertices-created-in-blockmeshdict-dictionary" id="id19">How are vertices created in blockMeshDict dictionary?</a></li>
+<li><a class="reference internal" href="#how-are-blocks-created-in-blockmeshdict-dictionary" id="id20">How are blocks created in blockMeshDict dictionary?</a></li>
+<li><a class="reference internal" href="#how-are-patches-created-in-blockmeshdict-dictionary" id="id21">How are patches created in blockMeshDict dictionary?</a></li>
+<li><a class="reference internal" href="#how-is-pressure-initialised-in-the-0-p-dictionary" id="id22">How is pressure initialised in the <code class="docutils literal"><span class="pre">0/p</span></code> dictionary?</a></li>
+<li><a class="reference internal" href="#how-is-velocity-initialised-in-the-0-u-dictionary" id="id23">How is velocity initialised in the <code class="docutils literal"><span class="pre">0/U</span></code> dictionary?</a></li>
+<li><a class="reference internal" href="#how-are-discretisation-schemes-specified-in-the-fvscheme-dictionary" id="id24">How are discretisation schemes specified in the fvScheme dictionary?</a></li>
+<li><a class="reference internal" href="#which-interpolation-methods-are-avaliable-in-the-fvscheme-dictionary" id="id25">Which interpolation methods are avaliable in the fvScheme dictionary?</a></li>
+<li><a class="reference internal" href="#how-are-temporal-schemes-specified-in-the-fvscheme-dictionary" id="id26">How are temporal schemes specified in the fvScheme dictionary?</a></li>
+<li><a class="reference internal" href="#which-temporal-schemes-are-avaliable-in-the-fvscheme-dictionary" id="id27">Which temporal schemes are avaliable in the fvScheme dictionary?</a></li>
+<li><a class="reference internal" href="#which-solvers-are-avaliable-in-the-fvsolution-dictionary-in-the-solvers-subdictionary" id="id28">Which solvers are avaliable in the fvSolution dictionary, in the solvers subdictionary?</a></li>
+<li><a class="reference internal" href="#which-how-is-piso-specified-in-the-fvsolution-dictionary-in-the-piso-subdictionary" id="id29">Which how is PISO specified in the fvSolution dictionary, in the PISO subdictionary?</a></li>
+<li><a class="reference internal" href="#which-how-is-simple-specified-in-the-fvsolution-dictionary-in-the-simple-subdictionary" id="id30">Which how is SIMPLE specified in the fvSolution dictionary, in the SIMPLE subdictionary?</a></li>
+<li><a class="reference internal" href="#how-are-relaxation-factors-specified-in-the-fvsolution-dictionary-in-the-relxationfactors-subdictionary" id="id31">How are relaxation factors specified in the fvSolution dictionary, in the relxationFactors subdictionary?</a></li>
+<li><a class="reference internal" href="#how-are-iterations-introduced-in-the-controldict-dictionary" id="id32">How are iterations introduced in the controlDict dictionary?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#utilities" id="id33">Utilities</a><ul>
+<li><a class="reference internal" href="#what-are-utilities" id="id34">What are utilities?</a></li>
+<li><a class="reference internal" href="#what-are-the-mesh-generation-utilities" id="id35">What are the mesh generation utilities?</a></li>
+<li><a class="reference internal" href="#what-are-the-post-processing-utilities" id="id36">What are the post-processing utilities?</a></li>
+<li><a class="reference internal" href="#what-are-functionobjects" id="id37">What are functionObjects?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#solvers" id="id38">Solvers</a><ul>
+<li><a class="reference internal" href="#what-are-solvers" id="id39">What are solvers?</a></li>
+<li><a class="reference internal" href="#how-are-solvers-invoked" id="id40">How are solvers invoked?</a></li>
+<li><a class="reference internal" href="#what-are-the-simple-solvers" id="id41">What are the simple solvers?</a></li>
+<li><a class="reference internal" href="#what-are-the-turbulent-solvers" id="id42">What are the turbulent solvers?</a></li>
+<li><a class="reference internal" href="#what-are-the-multi-phase-solvers" id="id43">What are the multi-phase solvers?</a></li>
+<li><a class="reference internal" href="#what-are-the-combustion-solvers" id="id44">What are the combustion solvers?</a></li>
+<li><a class="reference internal" href="#what-are-the-other-solvers" id="id45">What are the other solvers?</a></li>
+<li><a class="reference internal" href="#what-are-the-rans-solvers" id="id46">What are the RANS solvers?</a></li>
+<li><a class="reference internal" href="#how-are-turbulence-models-invoked" id="id47">How are turbulence models invoked?</a></li>
+<li><a class="reference internal" href="#how-can-y-plus-be-checked" id="id48">How can y-plus be checked?</a></li>
+<li><a class="reference internal" href="#what-are-the-mesh-motion-solvers" id="id49">What are the mesh motion solvers?</a></li>
+<li><a class="reference internal" href="#how-is-mesh-motion-specified" id="id50">How is mesh motion specified?</a></li>
+<li><a class="reference internal" href="#what-are-the-fluid-structure-interaction-solvers" id="id51">What are the fluid-structure interaction solvers?</a></li>
+<li><a class="reference internal" href="#what-are-the-free-surface-solvers" id="id52">What are the free surface solvers?</a></li>
+<li><a class="reference internal" href="#what-are-the-compressible-flow-solvers" id="id53">What are the compressible flow solvers?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example-boussineq-approximation" id="id54">Example - Boussineq Approximation</a></li>
+<li><a class="reference internal" href="#example-casson-model" id="id55">Example - Casson model</a></li>
+<li><a class="reference internal" href="#how-to-make-builtin-create-foam-extension-files" id="id56">How to make -builtin create .foam extension files?</a></li>
+<li><a class="reference internal" href="#how-to-load-new-results-into-paraview" id="id57">How to load new results into Paraview?</a></li>
+<li><a class="reference internal" href="#how-to-save-a-state" id="id58">How to save a state?</a></li>
+<li><a class="reference internal" href="#how-to-load-a-state" id="id59">How to load a state?</a></li>
+<li><a class="reference internal" href="#example-mesh-refinement-openfoam-2-4-0" id="id60">Example - Mesh Refinement (OpenFOAM 2.4.0)</a></li>
+<li><a class="reference internal" href="#example-block-mesh-openfoam-2-4-0" id="id61">Example - Block Mesh (OpenFOAM 2.4.0)</a></li>
+<li><a class="reference internal" href="#example-grid-convergence-openfoam-2-4-0" id="id62">Example - Grid Convergence (OpenFOAM 2.4.0)</a></li>
+<li><a class="reference internal" href="#example-transport-equation-openfoam-2-4-0" id="id63">Example - Transport Equation (OpenFOAM 2.4.0)</a></li>
+<li><a class="reference internal" href="#example-discretisation-openfoam-2-4-0" id="id64">Example - Discretisation (OpenFOAM 2.4.0)</a></li>
+<li><a class="reference internal" href="#example-blob-openfoam-2-4-0" id="id65">Example - Blob (OpenFOAM 2.4.0)</a></li>
+<li><a class="reference internal" href="#example-blob-2-openfoam-2-4-0" id="id66">Example - Blob 2 (OpenFOAM 2.4.0)</a></li>
+</ul>
+</div>
+<div class="section" id="what-is-the-process-in-cfd">
+<h2><a class="toc-backref" href="#id1">1.2.1. What is the process in CFD?</a><a class="headerlink" href="#what-is-the-process-in-cfd" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="first docutils">
+<dt>Analyse problem</dt>
+<dd><ul class="first last simple">
+<li>literature survey</li>
+<li>dimensionless groups</li>
+<li>physical principles</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Model physics</dt>
+<dd><ul class="first last simple">
+<li>NSE, turbulence, other physics</li>
+<li>Identify models and coefficients</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Setup geometry and mesh</p>
+</li>
+<li><dl class="first docutils">
+<dt>Determine numerical method</dt>
+<dd><ul class="first last simple">
+<li>transient/steady state</li>
+<li>differencing schemes</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Run calculation</p>
+</li>
+<li><p class="first">Analyse and post-process results</p>
+</li>
+</ul>
+</div>
+<div class="section" id="directories">
+<h2><a class="toc-backref" href="#id2">1.2.2. Directories</a><a class="headerlink" href="#directories" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-to-get-to-the-installation-directory">
+<h3><a class="toc-backref" href="#id3">1.2.2.1. How to get to the installation directory?</a><a class="headerlink" href="#how-to-get-to-the-installation-directory" title="Permalink to this headline">¶</a></h3>
+<p>The following command gets you to /opt/openfoam4/</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foam
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-is-the-installation-directory-structured">
+<h3><a class="toc-backref" href="#id4">1.2.2.2. How is the installation directory structured?</a><a class="headerlink" href="#how-is-the-installation-directory-structured" title="Permalink to this headline">¶</a></h3>
+<p>Shortcut to <code class="docutils literal"><span class="pre">/opt/openfoam4</span></code> = <code class="docutils literal"><span class="pre">$WM_PROJECT_DIR</span></code></p>
+<ul>
+<li><dl class="first docutils">
+<dt>/opt/openfoam4/</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>applications</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>solvers</dt>
+<dd><ul class="first last simple">
+<li>basic</li>
+<li>discreteMethods</li>
+<li>financial</li>
+<li>lagrangian</li>
+<li>combustion</li>
+<li>DNS</li>
+<li>heatTransfer</li>
+<li>multiphase</li>
+<li>compressible</li>
+<li>electromagetics</li>
+<li>incompressible</li>
+<li>stressAnalysis</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">test</p>
+</li>
+<li><p class="first">utilities</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">doc</p>
+</li>
+<li><p class="first">src</p>
+</li>
+<li><p class="first">tutorials</p>
+</li>
+<li><p class="first">bin</p>
+</li>
+<li><p class="first">etc</p>
+</li>
+<li><p class="first">wmake</p>
+</li>
+<li><p class="first">platforms</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="how-to-get-to-the-run-directory">
+<h3><a class="toc-backref" href="#id5">1.2.2.3. How to get to the run directory?</a><a class="headerlink" href="#how-to-get-to-the-run-directory" title="Permalink to this headline">¶</a></h3>
+<p>The following command gets you to /home/andrew/Dropbox/7_OpenFOAM/run/</p>
+<div class="highlight-python"><div class="highlight"><pre>$ run
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-is-the-user-directory-structured">
+<h3><a class="toc-backref" href="#id6">1.2.2.4. How is the user directory structured?</a><a class="headerlink" href="#how-is-the-user-directory-structured" title="Permalink to this headline">¶</a></h3>
+<p>Each of 1_lid_driven_cavity etc represents a &#8220;case directory&#8221;.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>/home/andrew/Dropbox/7_OpenFOAM/run/</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>1_tutorials/</dt>
+<dd><ul class="first last simple">
+<li>1_lid_driven_cavity</li>
+<li>2_pipe_flow</li>
+<li>3_flat_plate</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">/home/andrew/Dropbox/7_OpenFOAM/applications/</p>
+</li>
+<li><p class="first">/home/andrew/Dropbox/7_OpenFOAM/lib/</p>
+</li>
+</ul>
+</div>
+<div class="section" id="what-is-in-the-case-directory">
+<h3><a class="toc-backref" href="#id7">1.2.2.5. What is in the case directory?</a><a class="headerlink" href="#what-is-in-the-case-directory" title="Permalink to this headline">¶</a></h3>
+<p>A list of dictionaries:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>/constant/</dt>
+<dd><ul class="first last">
+<li><p class="first">turbulenceProperties</p>
+</li>
+<li><p class="first">transportProperties</p>
+</li>
+<li><dl class="first docutils">
+<dt>/polyMesh/</dt>
+<dd><ul class="first last simple">
+<li>boundary</li>
+<li>faces</li>
+<li>neighbour</li>
+<li>owner</li>
+<li>points</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>/system/</dt>
+<dd><ul class="first last simple">
+<li>blockMeshDict</li>
+<li>controlDict</li>
+<li>fvSchemes</li>
+<li>fvSolution</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>/0/ (timesteps)</dt>
+<dd><ul class="first last simple">
+<li>U</li>
+<li>p</li>
+<li>k</li>
+<li>epsilon</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="what-is-the-constant-directory">
+<h3><a class="toc-backref" href="#id8">1.2.2.6. What is the constant directory?</a><a class="headerlink" href="#what-is-the-constant-directory" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>turbulenceProperties - turbulence properties</li>
+<li>transportProperties - physical properties e.g. viscosity</li>
+<li>polyMesh - mesh details</li>
+</ul>
+</div>
+<div class="section" id="what-is-in-the-system-directory">
+<h3><a class="toc-backref" href="#id9">1.2.2.7. What is in the system directory?</a><a class="headerlink" href="#what-is-in-the-system-directory" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>blockMeshDict - mesh scaling, basic meshing, boundary names</li>
+<li>controlDict - application, time start/end, timestep, write controls</li>
+<li>fvSchemes - differencing schemes</li>
+<li>fvSolution - solver, solver controls, pressure-velocity coupling controls</li>
+</ul>
+</div>
+<div class="section" id="what-is-in-the-0-timestep-directory">
+<h3><a class="toc-backref" href="#id10">1.2.2.8. What is in the 0 (timestep) directory?</a><a class="headerlink" href="#what-is-in-the-0-timestep-directory" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Boundary conditions</li>
+<li>Initial conditions</li>
+</ul>
+</div>
+</div>
+<div class="section" id="dictionaries">
+<h2><a class="toc-backref" href="#id11">1.2.3. Dictionaries</a><a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-are-dictionaries">
+<h3><a class="toc-backref" href="#id12">1.2.3.1. What are dictionaries?</a><a class="headerlink" href="#what-are-dictionaries" title="Permalink to this headline">¶</a></h3>
+<p>A dictionary is an entity that contains data entries that can be retrieved by the I/O by means of keywords. The keyword entries follow the general format (keyword-value pairs)</p>
+<div class="highlight-python"><div class="highlight"><pre>&lt;keyword&gt;  &lt;dataEntry1&gt; … &lt;dataEntryN&gt;;
+</pre></div>
+</div>
+<ul>
+<li><p class="first">Free format ASCII text files</p>
+</li>
+<li><p class="first">Parsed by OpenFOAM</p>
+</li>
+<li><p class="first">Only values actually needed are read in</p>
+</li>
+<li><p class="first">Comment lines are <code class="docutils literal"><span class="pre">//</span></code> or <code class="docutils literal"><span class="pre">/*</span> <span class="pre">....</span> <span class="pre">*/</span></code> (C format comments)</p>
+</li>
+<li><p class="first">More flexible than alternatives</p>
+</li>
+<li><dl class="first docutils">
+<dt>Format:</dt>
+<dd><ul class="first last simple">
+<li>banner</li>
+<li>FoamFile - dictionary with general information</li>
+<li>e.g. transportProperties - the dictionary with the actual information</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="what-is-a-dimensionedscalar-in-the-transportproperties-dictionary">
+<h3><a class="toc-backref" href="#id13">1.2.3.2. What is a dimensionedScalar in the transportProperties dictionary?</a><a class="headerlink" href="#what-is-a-dimensionedscalar-in-the-transportproperties-dictionary" title="Permalink to this headline">¶</a></h3>
+<p>A scalar with a:</p>
+<ul class="simple">
+<li>Name</li>
+<li>Physical dimensions</li>
+<li>Value</li>
+</ul>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">nu</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">2</span> <span class="o">-</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">]</span> <span class="mf">0.01</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-are-the-dimensions-given-in-the-transportproperties-dictionary">
+<h3><a class="toc-backref" href="#id14">1.2.3.3. How are the dimensions given in the transportProperties dictionary?</a><a class="headerlink" href="#how-are-the-dimensions-given-in-the-transportproperties-dictionary" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c"><div class="highlight"><pre><span class="p">[</span><span class="n">M</span> <span class="n">L</span> <span class="n">T</span> <span class="n">theta</span> <span class="n">mol</span> <span class="n">I</span> <span class="n">Cd</span><span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>M = mass (kg)</li>
+<li>L = length (m)</li>
+<li>T = time (s)</li>
+<li>theta = temperature (K)</li>
+<li>mol = quantity (mol)</li>
+<li>I = current (A)</li>
+<li>Cd = luminous intensity (candela)</li>
+</ul>
+<p>OpenFOAM checks dimensions of equations</p>
+</div>
+<div class="section" id="what-is-the-turbulenceproperties-dictionary">
+<h3><a class="toc-backref" href="#id15">1.2.3.4. What is the turbulenceProperties dictionary?</a><a class="headerlink" href="#what-is-the-turbulenceproperties-dictionary" title="Permalink to this headline">¶</a></h3>
+<p>Read by pisoFoam and simpleFoam to switch turbulence model, e.g.</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">simulationType</span> <span class="n">RASModel</span><span class="p">;</span>
+
+<span class="n">RAS</span>
+<span class="p">{</span>
+    <span class="n">RASModel</span> <span class="n">kEpsilon</span><span class="p">;</span>      <span class="c1">// chosen model</span>
+    <span class="n">turbulence</span> <span class="n">on</span><span class="p">;</span>          <span class="c1">// turbulence on</span>
+    <span class="n">printCoeffs</span> <span class="n">on</span><span class="p">;</span>         <span class="c1">// coefficients printed to terminal</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Coefficients are stored in sub-dictionaries with appopriate names.</p>
+</div>
+<div class="section" id="what-is-the-controldict-dictionary">
+<h3><a class="toc-backref" href="#id16">1.2.3.5. What is the controlDict dictionary?</a><a class="headerlink" href="#what-is-the-controldict-dictionary" title="Permalink to this headline">¶</a></h3>
+<p>Controls overall behaviour of run, timestep and saving behaviour</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">startFrom</span> <span class="n">startTime</span><span class="p">;</span>        <span class="c1">// simulation starts at t=0</span>
+<span class="n">startTime</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="n">stopAt</span> <span class="n">endTime</span><span class="p">;</span>             <span class="c1">// simulation ends at t=10</span>
+<span class="n">endTime</span> <span class="mi">10</span><span class="p">;</span>
+
+<span class="n">deltaT</span> <span class="mf">0.005</span><span class="p">;</span>               <span class="c1">// timestep = 0.005s</span>
+
+<span class="n">writeControl</span> <span class="n">timeStep</span><span class="p">;</span>      <span class="c1">// write every 100 timesteps (uncompressed ASCII format)</span>
+<span class="n">writeInterval</span> <span class="mi">100</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>latestTime = continue after you have started simulation for a few seconds</strong></p>
+</div>
+<div class="section" id="what-is-the-polymesh-dictionary">
+<h3><a class="toc-backref" href="#id17">1.2.3.6. What is the polyMesh dictionary?</a><a class="headerlink" href="#what-is-the-polymesh-dictionary" title="Permalink to this headline">¶</a></h3>
+<p>Stores the mesh structure containing (from blockMeshDict):</p>
+<ul class="simple">
+<li>Boundary - list of boundary types</li>
+<li>Points - list of the mesh vertices</li>
+<li>Faces - list of which vertices make up which faces</li>
+<li>Owner - list of which cells own which faces</li>
+<li>Neighbour - list of which face has which neighbour cell</li>
+</ul>
+<p>Located in <code class="docutils literal"><span class="pre">case/constant/polyMesh</span></code></p>
+<p>At start of run OpenFOAM reads this information, checks it and constructs a mesh</p>
+</div>
+<div class="section" id="what-is-the-blockmeshdict-dictionary">
+<h3><a class="toc-backref" href="#id18">1.2.3.7. What is the blockMeshDict dictionary?</a><a class="headerlink" href="#what-is-the-blockmeshdict-dictionary" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Lists boundary patches</li>
+<li>Used by <code class="docutils literal"><span class="pre">$</span> <span class="pre">blockMesh</span></code> utility to generate mesh (creates polyMesh dictionary)</li>
+<li>Located in <code class="docutils literal"><span class="pre">case/system</span></code></li>
+</ul>
+</div>
+<div class="section" id="how-are-vertices-created-in-blockmeshdict-dictionary">
+<h3><a class="toc-backref" href="#id19">1.2.3.8. How are vertices created in blockMeshDict dictionary?</a><a class="headerlink" href="#how-are-vertices-created-in-blockmeshdict-dictionary" title="Permalink to this headline">¶</a></h3>
+<p>Right hand rule starting bottom left</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">vertices</span>
+<span class="p">(</span>
+    <span class="p">(</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)</span>             <span class="c1">// node 0</span>
+    <span class="p">(</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)</span>             <span class="c1">// node 1</span>
+    <span class="p">(</span><span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">)</span>             <span class="c1">// node 2</span>
+    <span class="p">(</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">)</span>             <span class="c1">// node 3</span>
+    <span class="p">(</span><span class="mi">0</span> <span class="mi">0</span> <span class="mf">0.1</span><span class="p">)</span>           <span class="c1">// node 4</span>
+    <span class="p">(</span><span class="mi">1</span> <span class="mi">0</span> <span class="mf">0.1</span><span class="p">)</span>           <span class="c1">// node 5</span>
+    <span class="p">(</span><span class="mi">1</span> <span class="mi">1</span> <span class="mf">0.1</span><span class="p">)</span>           <span class="c1">// node 6</span>
+    <span class="p">(</span><span class="mi">0</span> <span class="mi">1</span> <span class="mf">0.1</span><span class="p">)</span>           <span class="c1">// node 7</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-are-blocks-created-in-blockmeshdict-dictionary">
+<h3><a class="toc-backref" href="#id20">1.2.3.9. How are blocks created in blockMeshDict dictionary?</a><a class="headerlink" href="#how-are-blocks-created-in-blockmeshdict-dictionary" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">blocks</span>
+<span class="p">(</span>
+    <span class="n">hex</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span><span class="p">)</span> <span class="p">(</span><span class="mi">20</span> <span class="mi">20</span> <span class="mi">1</span><span class="p">)</span> <span class="n">simpleGrading</span> <span class="p">(</span><span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1">// vertex numbers, cells (x y z), expansion ratios (x y z)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-are-patches-created-in-blockmeshdict-dictionary">
+<h3><a class="toc-backref" href="#id21">1.2.3.10. How are patches created in blockMeshDict dictionary?</a><a class="headerlink" href="#how-are-patches-created-in-blockmeshdict-dictionary" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Patches = boundary type, name and location</li>
+<li>Points must be connected in sequence  - right hand rule</li>
+</ul>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">boundary</span>
+<span class="p">(</span>
+    <span class="n">movingWall</span>
+    <span class="p">{</span>
+        <span class="n">type</span> <span class="n">wall</span><span class="p">;</span>
+        <span class="n">faces</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="mi">3</span> <span class="mi">7</span> <span class="mi">6</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">fixedWalls</span>
+    <span class="p">{</span>
+        <span class="n">type</span> <span class="n">wall</span><span class="p">;</span>
+        <span class="n">faces</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="mi">0</span> <span class="mi">4</span> <span class="mi">7</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="p">(</span><span class="mi">2</span> <span class="mi">6</span> <span class="mi">5</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">(</span><span class="mi">1</span> <span class="mi">5</span> <span class="mi">4</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">frontAndBack</span>
+    <span class="p">{</span>
+        <span class="n">type</span> <span class="n">empty</span><span class="p">;</span>     <span class="c1">// no calculations in z-direction, OpenFOAM is a 3D code, 2D is done with single thickness mesh in z-dir</span>
+        <span class="n">faces</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="mi">0</span> <span class="mi">3</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">(</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span><span class="p">)</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-is-pressure-initialised-in-the-0-p-dictionary">
+<h3><a class="toc-backref" href="#id22">1.2.3.11. How is pressure initialised in the <code class="docutils literal"><span class="pre">0/p</span></code> dictionary?</a><a class="headerlink" href="#how-is-pressure-initialised-in-the-0-p-dictionary" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">dimensions</span>      <span class="p">[</span><span class="mi">0</span> <span class="mi">2</span> <span class="o">-</span><span class="mi">2</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">];</span>       <span class="c1">// all fields have dimensions</span>
+
+<span class="n">internalField</span>   <span class="n">uniform</span> <span class="mi">0</span><span class="p">;</span>              <span class="c1">// uniform internal field</span>
+
+<span class="n">boundaryField</span>                           <span class="c1">// boundary conditions: patch name { type type info }</span>
+<span class="p">{</span>                                       <span class="c1">// ordering same as blockMeshDict</span>
+    <span class="n">movingWall</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">zeroGradient</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">fixedWalls</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">zeroGradient</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">frontAndBack</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">empty</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Pressure in OpenFOAM is pressure divided by density, units $m^2 s^{-2}$</strong></p>
+</div>
+<div class="section" id="how-is-velocity-initialised-in-the-0-u-dictionary">
+<h3><a class="toc-backref" href="#id23">1.2.3.12. How is velocity initialised in the <code class="docutils literal"><span class="pre">0/U</span></code> dictionary?</a><a class="headerlink" href="#how-is-velocity-initialised-in-the-0-u-dictionary" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">dimensions</span>      <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="o">-</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">];</span>           <span class="c1">// m/s units</span>
+
+<span class="n">internalField</span>   <span class="nf">uniform</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">);</span>            <span class="c1">// u, v, w = 0</span>
+
+<span class="n">boundaryField</span>
+<span class="p">{</span>
+    <span class="n">movingWall</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">fixedValue</span><span class="p">;</span>         <span class="c1">// constant velocity = 1</span>
+        <span class="n">value</span>           <span class="nf">uniform</span> <span class="p">(</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">fixedWalls</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">fixedValue</span><span class="p">;</span>         <span class="c1">// no slip</span>
+        <span class="n">value</span>           <span class="nf">uniform</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">frontAndBack</span>                            <span class="c1">// no calculations</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">empty</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-are-discretisation-schemes-specified-in-the-fvscheme-dictionary">
+<h3><a class="toc-backref" href="#id24">1.2.3.13. How are discretisation schemes specified in the fvScheme dictionary?</a><a class="headerlink" href="#how-are-discretisation-schemes-specified-in-the-fvscheme-dictionary" title="Permalink to this headline">¶</a></h3>
+<p>For example <code class="docutils literal"><span class="pre">div(phi,q)</span></code> - this requires an entry in fvSchemes</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">divSchemes</span>
+<span class="p">(</span>
+    <span class="k">default</span> <span class="n">none</span><span class="p">;</span>
+    <span class="n">div</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span><span class="n">q</span><span class="p">)</span> <span class="n">Gauss</span> <span class="n">upwind</span><span class="p">;</span>    <span class="c1">// discretisation method is always Gauss</span>
+                                <span class="c1">// interpolation method is upwind (can be another method)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="which-interpolation-methods-are-avaliable-in-the-fvscheme-dictionary">
+<h3><a class="toc-backref" href="#id25">1.2.3.14. Which interpolation methods are avaliable in the fvScheme dictionary?</a><a class="headerlink" href="#which-interpolation-methods-are-avaliable-in-the-fvscheme-dictionary" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Scheme</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">upwind</span>
+</pre></div>
+</div>
+</td>
+<td>1st order upwind</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">linearUpwind</span>
+</pre></div>
+</div>
+</td>
+<td>2nd order correction to upwind</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">linearUpwindV</span>
+</pre></div>
+</div>
+</td>
+<td>Improved handling for vectors</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">linear</span>
+</pre></div>
+</div>
+</td>
+<td>Central differencing (2nd order)</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">SFCD</span>
+</pre></div>
+</div>
+</td>
+<td>Self filtered central differencing</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">vanLeer</span>
+</pre></div>
+</div>
+</td>
+<td>van Leer limited CD</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-are-temporal-schemes-specified-in-the-fvscheme-dictionary">
+<h3><a class="toc-backref" href="#id26">1.2.3.15. How are temporal schemes specified in the fvScheme dictionary?</a><a class="headerlink" href="#how-are-temporal-schemes-specified-in-the-fvscheme-dictionary" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">ddtSchemes</span>
+<span class="p">(</span>
+    <span class="k">default</span> <span class="n">Euler</span><span class="p">;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="which-temporal-schemes-are-avaliable-in-the-fvscheme-dictionary">
+<h3><a class="toc-backref" href="#id27">1.2.3.16. Which temporal schemes are avaliable in the fvScheme dictionary?</a><a class="headerlink" href="#which-temporal-schemes-are-avaliable-in-the-fvscheme-dictionary" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Scheme</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">steadyState</span>
+</pre></div>
+</div>
+</td>
+<td>Steady state</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">Euler</span>
+</pre></div>
+</div>
+</td>
+<td>Euler</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">CrankNicholson</span>
+</pre></div>
+</div>
+</td>
+<td>Crank-Nicholson</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">backward</span>
+</pre></div>
+</div>
+</td>
+<td>Backward differencing</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="which-solvers-are-avaliable-in-the-fvsolution-dictionary-in-the-solvers-subdictionary">
+<h3><a class="toc-backref" href="#id28">1.2.3.17. Which solvers are avaliable in the fvSolution dictionary, in the solvers subdictionary?</a><a class="headerlink" href="#which-solvers-are-avaliable-in-the-fvsolution-dictionary-in-the-solvers-subdictionary" title="Permalink to this headline">¶</a></h3>
+<p>Specify which solver to use for which equation (U, p) etc.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Solver</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">smoothSolver</span>
+</pre></div>
+</div>
+</td>
+<td>Solver with smoothing (for speed)</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">PCG</span>
+</pre></div>
+</div>
+</td>
+<td>Preconditioned conjugate gradient (for stability)</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">PBiCG</span>
+</pre></div>
+</div>
+</td>
+<td>Preconditioned biconjugate gradient (for stability)</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">GAMG</span>
+</pre></div>
+</div>
+</td>
+<td>Algebraic multigrid (for speed)</td>
+</tr>
+</tbody>
+</table>
+<p>The solvers subdictionary also specifies:</p>
+<ul class="simple">
+<li>The tolerance and relative tolerance (relative tolerance = 0 for transient cases)</li>
+<li>Smoother and preconditioners</li>
+</ul>
+</div>
+<div class="section" id="which-how-is-piso-specified-in-the-fvsolution-dictionary-in-the-piso-subdictionary">
+<h3><a class="toc-backref" href="#id29">1.2.3.18. Which how is PISO specified in the fvSolution dictionary, in the PISO subdictionary?</a><a class="headerlink" href="#which-how-is-piso-specified-in-the-fvsolution-dictionary-in-the-piso-subdictionary" title="Permalink to this headline">¶</a></h3>
+<p>Defines:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">nCorrectors</span></code> - number of correction iterations (usually 2)</li>
+<li><code class="docutils literal"><span class="pre">nNonOrthogonalCorrectors</span></code> - if mesh is badly non-orthogonal</li>
+<li><code class="docutils literal"><span class="pre">pRefCell</span></code> and <code class="docutils literal"><span class="pre">pRefValue</span></code> - for reference values, if no boundaries have pressure</li>
+</ul>
+</div>
+<div class="section" id="which-how-is-simple-specified-in-the-fvsolution-dictionary-in-the-simple-subdictionary">
+<h3><a class="toc-backref" href="#id30">1.2.3.19. Which how is SIMPLE specified in the fvSolution dictionary, in the SIMPLE subdictionary?</a><a class="headerlink" href="#which-how-is-simple-specified-in-the-fvsolution-dictionary-in-the-simple-subdictionary" title="Permalink to this headline">¶</a></h3>
+<p>Defines:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">nNonOrthogonalCorrectors</span></code> - if mesh is badly non-orthogonal (not normally neccessary)</li>
+</ul>
+</div>
+<div class="section" id="how-are-relaxation-factors-specified-in-the-fvsolution-dictionary-in-the-relxationfactors-subdictionary">
+<h3><a class="toc-backref" href="#id31">1.2.3.20. How are relaxation factors specified in the fvSolution dictionary, in the relxationFactors subdictionary?</a><a class="headerlink" href="#how-are-relaxation-factors-specified-in-the-fvsolution-dictionary-in-the-relxationfactors-subdictionary" title="Permalink to this headline">¶</a></h3>
+<p>Defines:</p>
+<ul class="simple">
+<li>Underrelaxation factors for equations (typically 0.3 to 0.9)</li>
+</ul>
+<p>Lower relaxation factors means:</p>
+<ul class="simple">
+<li>Slower convergence</li>
+<li>More stable</li>
+</ul>
+</div>
+<div class="section" id="how-are-iterations-introduced-in-the-controldict-dictionary">
+<h3><a class="toc-backref" href="#id32">1.2.3.21. How are iterations introduced in the controlDict dictionary?</a><a class="headerlink" href="#how-are-iterations-introduced-in-the-controldict-dictionary" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>set <code class="docutils literal"><span class="pre">deltaT</span> <span class="pre">=</span> <span class="pre">1</span></code> in the controlDict</li>
+</ul>
+</div>
+</div>
+<div class="section" id="utilities">
+<h2><a class="toc-backref" href="#id33">1.2.4. Utilities</a><a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-are-utilities">
+<h3><a class="toc-backref" href="#id34">1.2.4.1. What are utilities?</a><a class="headerlink" href="#what-are-utilities" title="Permalink to this headline">¶</a></h3>
+<p>Utilities are used for:</p>
+<ul class="simple">
+<li>Mesh generation, conversion, manipulation</li>
+<li>Pre/post processing</li>
+<li>Data conversion</li>
+</ul>
+</div>
+<div class="section" id="what-are-the-mesh-generation-utilities">
+<h3><a class="toc-backref" href="#id35">1.2.4.2. What are the mesh generation utilities?</a><a class="headerlink" href="#what-are-the-mesh-generation-utilities" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ blockMesh         // block structured mesh
+$ snappyHexMesh     // hexa mesh truncated at boundaries defined by STL files
+$ fluentMeshToFoam  // .msh
+$ gambitToFoam      // .neu
+$ startToFoam       // .neu
+$ ideasToFoam       // .ans
+$ cfxToFoam         // .geo
+</pre></div>
+</div>
+</div>
+<div class="section" id="what-are-the-post-processing-utilities">
+<h3><a class="toc-backref" href="#id36">1.2.4.3. What are the post-processing utilities?</a><a class="headerlink" href="#what-are-the-post-processing-utilities" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>$ sample    // sample data along a line between two points
+$ flowType  // calculates a flow parameter
+$ yPlusRAS  // calculates y plus on walls
+$ yPlusLES  // calculates y plus on walls
+$ foamCalc  // takes a number of arguments for general field operations e.g. foamCalc mag U
+</pre></div>
+</div>
+</div>
+<div class="section" id="what-are-functionobjects">
+<h3><a class="toc-backref" href="#id37">1.2.4.4. What are functionObjects?</a><a class="headerlink" href="#what-are-functionobjects" title="Permalink to this headline">¶</a></h3>
+<p>Evalautes quantities during run, by adding functions to controlDict e.g.</p>
+<ul class="simple">
+<li>Evaulate forces</li>
+<li>Manipulate fields</li>
+<li>Sample data</li>
+<li>Visualise flows</li>
+<li>Control execution</li>
+</ul>
+<p>e.g.</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">forces</span>
+<span class="p">{</span>
+    <span class="n">type</span> <span class="n">forceCoeffs</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="solvers">
+<h2><a class="toc-backref" href="#id38">1.2.5. Solvers</a><a class="headerlink" href="#solvers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-are-solvers">
+<h3><a class="toc-backref" href="#id39">1.2.5.1. What are solvers?</a><a class="headerlink" href="#what-are-solvers" title="Permalink to this headline">¶</a></h3>
+<p>Solve computational continuum mechanics problems e.g. turbulent flow, stress analysis</p>
+</div>
+<div class="section" id="how-are-solvers-invoked">
+<h3><a class="toc-backref" href="#id40">1.2.5.2. How are solvers invoked?</a><a class="headerlink" href="#how-are-solvers-invoked" title="Permalink to this headline">¶</a></h3>
+<p>e.g. to run the icoFoam solver:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ icoFoam
+</pre></div>
+</div>
+</div>
+<div class="section" id="what-are-the-simple-solvers">
+<h3><a class="toc-backref" href="#id41">1.2.5.3. What are the simple solvers?</a><a class="headerlink" href="#what-are-the-simple-solvers" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Solver</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">laplacianFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Laplace Equation</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">potentialFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Potential flow</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">scalarTransportFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Tranpsort equation for a given velocity field</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">icoFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Transient, incompressible, laminar, Newtonian flow (based on PISO)</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">nonNewtonianIcoFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Transient, incompressible, laminar, non-Newtonian flow (based on PISO)</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">sonicFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Transonic/supersonic transient gas flow</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-are-the-turbulent-solvers">
+<h3><a class="toc-backref" href="#id42">1.2.5.4. What are the turbulent solvers?</a><a class="headerlink" href="#what-are-the-turbulent-solvers" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Solver</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">simpleFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Steady state (SIMPLE) solver for turbulent flows</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">pisoFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Transient (PISO) solver for turbulent flows</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">pimpleFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Large time step transient solver using merged PISO-SIMPLE algorithm (very stable with large timestep)</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">pimpleDymFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Same as pimpleFoam but with mesh motion</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">boundaryFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Steady state 1D turbulent flow used to generate boundary layer conditions at inlet</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">channelFoam</span>
+</pre></div>
+</div>
+</td>
+<td>LES code for cyclic channels</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">porousSimpleFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Turbulent flow in a porous medium</td>
+</tr>
+</tbody>
+</table>
+<p>(The laminar option is avaliable in turbulent codes)</p>
+</div>
+<div class="section" id="what-are-the-multi-phase-solvers">
+<h3><a class="toc-backref" href="#id43">1.2.5.5. What are the multi-phase solvers?</a><a class="headerlink" href="#what-are-the-multi-phase-solvers" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Solver</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">bubbleFoam</span>
+<span class="n">twoPhaseEulerFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Solvers for dispersed phase flow, e.g. gas bubbles in liquid</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">interFoam</span>
+<span class="n">multiphaseInterFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Solves for 2 (or multiple) immiscible phases with interface capturing using VOF method, laminar flow case</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">twoLiquidMixingFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Solver for two immiscible fluids</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">settlingFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Settling of solid particles in liquid</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-are-the-combustion-solvers">
+<h3><a class="toc-backref" href="#id44">1.2.5.6. What are the combustion solvers?</a><a class="headerlink" href="#what-are-the-combustion-solvers" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Solver</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">XiFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Premixed/partially premixed combustion with RANS/LES turbulence modelling and Weller model</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">engineFoam</span>
+<span class="n">coldEngineFlow</span>
+</pre></div>
+</div>
+</td>
+<td>Solver for IC engine calculations with/without combustion</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">dieselFoam</span>
+<span class="n">dieselEngineFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Diesel engine spray/combustion codes</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">reactingFoam</span>
+<span class="n">rhoReactingFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Chemical reaction code</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-are-the-other-solvers">
+<h3><a class="toc-backref" href="#id45">1.2.5.7. What are the other solvers?</a><a class="headerlink" href="#what-are-the-other-solvers" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Solver</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">buoyant</span><span class="o">...</span><span class="n">Foam</span>
+</pre></div>
+</div>
+</td>
+<td>Transient/s.s. solver comp. fluid, h.t. w/wo Boussinesq</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">chtMultiRegionFoam</span>
+</pre></div>
+</div>
+</td>
+<td>CHT between solid and fluid regions</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">dsmcFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Direct simulation Monte Carlo solver for multi-species flow</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">mdFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Molecular dynamics solver</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">solidDisplacementFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Transient/s.s. solver for linear-elastic deformation</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">financialFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Black-Scholes equations</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-are-the-rans-solvers">
+<h3><a class="toc-backref" href="#id46">1.2.5.8. What are the RANS solvers?</a><a class="headerlink" href="#what-are-the-rans-solvers" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Solver</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">pisoFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Transient incompressible turbulent flow using PISO algorithm</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">simpleFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Steady state incompressible turbulent flow using SIMPLE algorithm</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">spalartAllmaras</span>
+<span class="n">kEpsilon</span>
+<span class="n">realizableKE</span>
+<span class="n">RNGkEpsilon</span>
+<span class="n">NonlinearKEShih</span>
+<span class="n">LienCubicKE</span>
+<span class="n">kOmegaSST</span>
+</pre></div>
+</div>
+</td>
+<td>1 and 2 equation models</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">LienCubicKEKLowRE</span>
+<span class="n">LienLeschZinerLowRE</span>
+<span class="n">LaunderSharmaKE</span>
+<span class="n">LamBremhorstKE</span>
+<span class="n">QZeta</span>
+</pre></div>
+</div>
+</td>
+<td>Low Re models</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">LRR</span>
+<span class="n">LaunderGibsonRSTM</span>
+</pre></div>
+</div>
+</td>
+<td>Reynolds Stress models</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-are-turbulence-models-invoked">
+<h3><a class="toc-backref" href="#id47">1.2.5.9. How are turbulence models invoked?</a><a class="headerlink" href="#how-are-turbulence-models-invoked" title="Permalink to this headline">¶</a></h3>
+<p>By a pointer, can switch between models with runtime selection.</p>
+<div class="highlight-python"><div class="highlight"><pre>fvVectorMatrix UEqn
+(
+    fvm::ddt(U)
+    + fvm::div(phi,U)
+    + turbulence -&gt; divDevReff(U)
+);
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-can-y-plus-be-checked">
+<h3><a class="toc-backref" href="#id48">1.2.5.10. How can y-plus be checked?</a><a class="headerlink" href="#how-can-y-plus-be-checked" title="Permalink to this headline">¶</a></h3>
+<p>The following post-processing utility</p>
+<div class="highlight-python"><div class="highlight"><pre>$ checkYPlus
+</pre></div>
+</div>
+</div>
+<div class="section" id="what-are-the-mesh-motion-solvers">
+<h3><a class="toc-backref" href="#id49">1.2.5.11. What are the mesh motion solvers?</a><a class="headerlink" href="#what-are-the-mesh-motion-solvers" title="Permalink to this headline">¶</a></h3>
+<p>Solvers include Dym in the name</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Solver</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">dynamicFvMesh</span>
+</pre></div>
+</div>
+</td>
+<td>Generic mesh motion</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">pimpleDymFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Incompressible turbulent flow solver for moving mesh</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">rhoCentralDymFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Transonic (density-based) flow solver with moving mesh</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">sonicDymFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Sonic (pressure-based)</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">interDymFoam</span>
+</pre></div>
+</div>
+</td>
+<td>VOF multiphase solver</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-is-mesh-motion-specified">
+<h3><a class="toc-backref" href="#id50">1.2.5.12. How is mesh motion specified?</a><a class="headerlink" href="#how-is-mesh-motion-specified" title="Permalink to this headline">¶</a></h3>
+<p>In constant/dynamicMeshDict e.g.</p>
+<ul class="simple">
+<li>displacmentLaplacian</li>
+<li>velocityLaplacian</li>
+</ul>
+<p>Different solver options use different fields, e.g.</p>
+<ul class="simple">
+<li>pointMotionU</li>
+<li>velocityLaplacian</li>
+</ul>
+</div>
+<div class="section" id="what-are-the-fluid-structure-interaction-solvers">
+<h3><a class="toc-backref" href="#id51">1.2.5.13. What are the fluid-structure interaction solvers?</a><a class="headerlink" href="#what-are-the-fluid-structure-interaction-solvers" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Solver</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">solidDisplacementFoam</span>
+<span class="n">solidEquilibriumDisplacementFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Couping between fluid and solid</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-are-the-free-surface-solvers">
+<h3><a class="toc-backref" href="#id52">1.2.5.14. What are the free surface solvers?</a><a class="headerlink" href="#what-are-the-free-surface-solvers" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Solver</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">interFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Basic VOF code (2 fluids) turbulence model can be RANS or LES</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">compressibleInterFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Compressible flow version of interFoam</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">interDymFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Moving mesh version of interFoam</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">multiPhaseInterFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Solve for arbitary number of immiscible fluids</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">cavitatingFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Allows for cavitation</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-are-the-compressible-flow-solvers">
+<h3><a class="toc-backref" href="#id53">1.2.5.15. What are the compressible flow solvers?</a><a class="headerlink" href="#what-are-the-compressible-flow-solvers" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Solver</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">rhoSimpleFoam</span>
+<span class="n">rhoPimpleFoam</span>
+<span class="n">rhoPisoFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Compressible versions of standard OpenFOAM codes (pressure-based)</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">rhoCentralFoam</span>
+</pre></div>
+</div>
+</td>
+<td>MUSCL scheme of Kuranov and Tadmov</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">sonicFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Density based scheme for high speed compressible flows (transient solution)</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">sonicLiquidFoam</span>
+</pre></div>
+</div>
+</td>
+<td>Same but for compressible liquids</td>
+</tr>
+</tbody>
+</table>
+<p>All codes capable of laminar and turbulent simulation</p>
+</div>
+</div>
+<div class="section" id="example-boussineq-approximation">
+<h2><a class="toc-backref" href="#id54">1.2.6. Example - Boussineq Approximation</a><a class="headerlink" href="#example-boussineq-approximation" title="Permalink to this headline">¶</a></h2>
+<p>For buoyancy-driven flow we often make use of the Boussinesq approximation : air modelled as incompressible with a body force proportional to ∆θ. Can we implement this into icoFoam?
+Need to solve standard heat conduction equation:</p>
+<div class="math">
+\[{{\partial \theta} \over {\partial t}} + \nabla \cdot (u \theta) = {\kappa \over {\rho_0 C_v}} \nabla^2 \theta\]</div>
+<p>and alter the momentum equation:</p>
+<div class="math">
+\[{{\partial u} \over {\partial t}} + \nabla \cdot(u u) = -\nabla p + \nu \nabla^2 u - \beta g (\theta_0 - \theta)\]</div>
+<p>to accommodate this.</p>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>Copy <code class="docutils literal"><span class="pre">icoFoam</span></code> solver to user directory</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">cd</span> <span class="pre">$FOAM_RUN/../applications</span></code></li>
+<li><code class="docutils literal"><span class="pre">cp</span> <span class="pre">-r</span> <span class="pre">$WM_PROJECT_DIR/applications/solvers/incompressible/icoFoam</span> <span class="pre">.</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Compile <code class="docutils literal"><span class="pre">icoFoam</span></code> in user directory</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">cd</span> <span class="pre">icoFoam/Make</span></code></li>
+<li>edit <code class="docutils literal"><span class="pre">files</span></code> to change <code class="docutils literal"><span class="pre">$FOAM_APPBIN</span></code> to <code class="docutils literal"><span class="pre">$FOAM_USER_APPBIN</span></code></li>
+<li><code class="docutils literal"><span class="pre">cd</span> <span class="pre">..</span></code></li>
+<li><code class="docutils literal"><span class="pre">wmake</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Understand standard icoFoam (OpenFOAM 2.4.0)</p>
+</li>
+</ol>
+<div class="highlight-c"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&quot;fvCFD.H&quot; // This file brings in the most fundamental tools for performing any finite volume calculation and includes a bunch of other files.</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="cp">#include</span> <span class="cpf">&quot;setRootCase.H&quot; // Checks folder structure of the case</span><span class="cp"></span>
+    <span class="cp">#include</span> <span class="cpf">&quot;createTime.H&quot; // Checks runtime according to the controlDict and initiates time variables</span><span class="cp"></span>
+    <span class="cp">#include</span> <span class="cpf">&quot;createMesh.H&quot; // Defines mesh in the domain</span><span class="cp"></span>
+    <span class="cp">#include</span> <span class="cpf">&quot;createFields.H&quot; // Creates fields (e.g. u, p, T) according to createFields.H</span><span class="cp"></span>
+    <span class="cp">#include</span> <span class="cpf">&quot;initContinuityErrs.H&quot; // Declare and initialise the cumulative continuity error</span><span class="cp"></span>
+
+    <span class="n">Info</span><span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Starting time loop</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">runTime</span><span class="p">.</span><span class="n">loop</span><span class="p">())</span> <span class="c1">// Start time loop</span>
+    <span class="p">{</span>
+        <span class="n">Info</span><span class="o">&lt;&lt;</span> <span class="s">&quot;Time = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">runTime</span><span class="p">.</span><span class="n">timeName</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">nl</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// Print the current time</span>
+
+        <span class="cp">#include</span> <span class="cpf">&quot;readPISOControls.H&quot; // Read control parameters from fvSchemes</span><span class="cp"></span>
+        <span class="cp">#include</span> <span class="cpf">&quot;CourantNo.H&quot; // Calculates and outputs the mean and maximum Courant Numbers</span><span class="cp"></span>
+
+        <span class="c1">// Set up the linear algebra for the momentum equation.</span>
+        <span class="c1">// The flux of U, phi, is treated explicity</span>
+        <span class="c1">// using the last known value of U.</span>
+
+        <span class="n">fvVectorMatrix</span> <span class="n">UEqn</span>
+        <span class="p">(</span>
+            <span class="n">fvm</span><span class="o">::</span><span class="n">ddt</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
+          <span class="o">+</span> <span class="n">fvm</span><span class="o">::</span><span class="n">div</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
+          <span class="o">-</span> <span class="n">fvm</span><span class="o">::</span><span class="n">laplacian</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
+        <span class="p">);</span>
+
+        <span class="c1">// Solve using the last known value of p on the RHS.</span>
+        <span class="c1">// This gives us a velocity field that is</span>
+        <span class="c1">// not divergence free, but approximately satisfies momentum.</span>
+        <span class="c1">// See Eqn. 7.31 of Ferziger &amp; Peric (predicted velocity)</span>
+
+        <span class="n">solve</span><span class="p">(</span><span class="n">UEqn</span> <span class="o">==</span> <span class="o">-</span><span class="n">fvc</span><span class="o">::</span><span class="n">grad</span><span class="p">(</span><span class="n">p</span><span class="p">));</span>
+
+        <span class="c1">// --- PISO loop</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">corr</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">corr</span><span class="o">&lt;</span><span class="n">nCorr</span><span class="p">;</span> <span class="n">corr</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+
+            <span class="c1">// From the last solution of velocity, extract the diag. term from the matrix and store the reciprocal</span>
+            <span class="c1">// Note that the matrix coefficients are functions of U due to the non-linearity of convection.</span>
+
+            <span class="n">volScalarField</span> <span class="n">rAU</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">UEqn</span><span class="p">.</span><span class="n">A</span><span class="p">());</span>
+
+            <span class="c1">// take a Jacobi pass and update U.  See Hrv Jasak&#39;s thesis eqn. 3.137 and Henrik Rusche&#39;s thesis, eqn. 2.43</span>
+            <span class="c1">// UEqn.H is the right-hand side of the UEqn minus the product of (the off-diagonal terms and U).</span>
+            <span class="c1">// Note that since the pressure gradient is not included in the UEqn. above, this gives us U without</span>
+            <span class="c1">// the pressure gradient.  Also note that UEqn.H() is a function of U.</span>
+
+            <span class="n">volVectorField</span> <span class="n">HbyA</span><span class="p">(</span><span class="s">&quot;HbyA&quot;</span><span class="p">,</span> <span class="n">U</span><span class="p">);</span>
+
+            <span class="c1">// Calculate the fluxes by dotting the interpolated velocity (to cell faces) with face normals</span>
+            <span class="c1">// The ddtPhiCorr term accounts for the divergence of the face velocity field by taking out the</span>
+            <span class="c1">// difference between the interpolated velocity and the flux.</span>
+
+            <span class="n">HbyA</span> <span class="o">=</span> <span class="n">rAU</span><span class="o">*</span><span class="n">UEqn</span><span class="p">.</span><span class="n">H</span><span class="p">();</span>
+            <span class="n">surfaceScalarField</span> <span class="n">phiHbyA</span>
+            <span class="p">(</span>
+                <span class="s">&quot;phiHbyA&quot;</span><span class="p">,</span>
+                <span class="p">(</span><span class="n">fvc</span><span class="o">::</span><span class="n">interpolate</span><span class="p">(</span><span class="n">HbyA</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">mesh</span><span class="p">.</span><span class="n">Sf</span><span class="p">())</span>
+              <span class="o">+</span> <span class="n">fvc</span><span class="o">::</span><span class="n">interpolate</span><span class="p">(</span><span class="n">rAU</span><span class="p">)</span><span class="o">*</span><span class="n">fvc</span><span class="o">::</span><span class="n">ddtCorr</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
+            <span class="p">);</span>
+
+            <span class="c1">// Adjusts the inlet and outlet fluxes to obey continuity, which is necessary for creating a well-posed</span>
+            <span class="c1">// problem where a solution for pressure exists.</span>
+
+            <span class="n">adjustPhi</span><span class="p">(</span><span class="n">phiHbyA</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+
+            <span class="c1">// Iteratively correct for non-orthogonality.  The non-orthogonal part of the Laplacian is calculated from the most recent</span>
+            <span class="c1">// solution for pressure, using a deferred-correction approach.</span>
+
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">nonOrth</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">nonOrth</span><span class="o">&lt;=</span><span class="n">nNonOrthCorr</span><span class="p">;</span> <span class="n">nonOrth</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+
+                <span class="c1">// Set up the pressure equation</span>
+                <span class="n">fvScalarMatrix</span> <span class="n">pEqn</span>
+                <span class="p">(</span>
+                    <span class="n">fvm</span><span class="o">::</span><span class="n">laplacian</span><span class="p">(</span><span class="n">rAU</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="n">fvc</span><span class="o">::</span><span class="n">div</span><span class="p">(</span><span class="n">phiHbyA</span><span class="p">)</span>
+                <span class="p">);</span>
+
+                <span class="c1">// In incompressible flow, only relative pressure matters.  Unless there is a pressure BC present,</span>
+                <span class="c1">// one cell&#39;s pressure can be set arbitrarily to produce a unique pressure solution</span>
+
+                <span class="n">pEqn</span><span class="p">.</span><span class="n">setReference</span><span class="p">(</span><span class="n">pRefCell</span><span class="p">,</span> <span class="n">pRefValue</span><span class="p">);</span>
+                <span class="n">pEqn</span><span class="p">.</span><span class="n">solve</span><span class="p">();</span>
+
+                <span class="c1">// On the last non-orthogonality correction, correct the flux using the most up-to-date pressure</span>
+                <span class="c1">// The .flux method includes contributions from all implicit terms of the pEqn (the Laplacian)</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">nonOrth</span> <span class="o">==</span> <span class="n">nNonOrthCorr</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">phi</span> <span class="o">=</span> <span class="n">phiHbyA</span> <span class="o">-</span> <span class="n">pEqn</span><span class="p">.</span><span class="n">flux</span><span class="p">();</span>
+                <span class="p">}</span>
+            <span class="p">}</span> <span class="c1">// end of non-orthogonality looping</span>
+
+            <span class="cp">#include</span> <span class="cpf">&quot;continuityErrs.H&quot;</span><span class="cp"></span>
+
+            <span class="c1">// Add pressure gradient to interior velocity and BC&#39;s.</span>
+            <span class="c1">// Note that this pressure is not just a small correction to a previous pressure,</span>
+            <span class="c1">// but is the entire pressure field.</span>
+            <span class="c1">// Contrast this to the use of p&#39; in Ferziger &amp; Peric, Eqn. 7.37.</span>
+
+            <span class="n">U</span> <span class="o">=</span> <span class="n">HbyA</span> <span class="o">-</span> <span class="n">rAU</span><span class="o">*</span><span class="n">fvc</span><span class="o">::</span><span class="n">grad</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+            <span class="n">U</span><span class="p">.</span><span class="n">correctBoundaryConditions</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="n">runTime</span><span class="p">.</span><span class="n">write</span><span class="p">();</span>
+
+        <span class="n">Info</span><span class="o">&lt;&lt;</span> <span class="s">&quot;ExecutionTime = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">runTime</span><span class="p">.</span><span class="n">elapsedCpuTime</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; s&quot;</span>
+            <span class="o">&lt;&lt;</span> <span class="s">&quot;  ClockTime = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">runTime</span><span class="p">.</span><span class="n">elapsedClockTime</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; s&quot;</span>
+            <span class="o">&lt;&lt;</span> <span class="n">nl</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span> <span class="c1">// end of the time step loop</span>
+
+    <span class="n">Info</span><span class="o">&lt;&lt;</span> <span class="s">&quot;End</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>4. Modify icoFoam in the following way:
+Open <code class="docutils literal"><span class="pre">createFields.H</span></code> and read in the various properties:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">dimensionedScalar</span> <span class="nf">kappa</span>
+<span class="p">(</span>
+    <span class="n">transportProperties</span><span class="p">.</span><span class="n">lookup</span> <span class="p">(</span><span class="s">&quot;kappa&quot;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>(similar lines for rho0, Cv, theta0 and beta). Also worth introducing hCoeff:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">dimensionedScalar</span> <span class="n">hCoeff</span> <span class="o">=</span> <span class="n">kappa</span><span class="o">/</span><span class="p">(</span> <span class="n">rho0</span> <span class="o">*</span> <span class="n">Cv</span> <span class="p">);</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li>Introduce gravitational acceleration g; read in from the same dictionary, but is a dimensionedVector rather than a dimensionedScalar.</li>
+<li>Create a temperature field theta as a volScalarField and read it in. This is very similar to the pressure field, so make a copy of this and modify accordingly.</li>
+<li>Modify the momentum equation (UEqn) to add the term</li>
+</ol>
+<div class="highlight-c"><div class="highlight"><pre><span class="o">+</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span><span class="p">(</span> <span class="n">theta0</span> <span class="o">-</span> <span class="n">theta</span> <span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="8">
+<li>Outside of the PISO loop – create and solve the temperature equation:</li>
+</ol>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">fvScalarMatrix</span> <span class="nf">tempEqn</span>
+<span class="p">(</span>
+    <span class="n">fvm</span> <span class="o">::</span> <span class="n">ddt</span> <span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">fvm</span> <span class="o">::</span> <span class="n">div</span> <span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+    <span class="o">-</span> <span class="n">fvm</span> <span class="o">::</span> <span class="n">laplacian</span> <span class="p">(</span><span class="n">hCoeff</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="n">tempEqn</span><span class="p">.</span><span class="n">solve</span> <span class="p">();</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="9">
+<li>Compile this using wmake (rename executable as boussinesqFoam) - folder name, icoFoam.C and files (icoFoam.C and icoFoam)</li>
+</ol>
+</div>
+<div class="section" id="example-casson-model">
+<h2><a class="toc-backref" href="#id55">1.2.7. Example - Casson model</a><a class="headerlink" href="#example-casson-model" title="Permalink to this headline">¶</a></h2>
+<p>The Casson model is a non-Newtonian viscosity model – used for chocolate, blood, etc. Can we implement in OpenFOAM? Stress-strain relation for a fluid</p>
+<div class="math">
+\[\tau = \rho \nu \dot{\gamma}\]</div>
+<p>where</p>
+<div class="math">
+\[\dot{\gamma} = {1 \over 2}(\nabla \vec{u} + \nabla \vec{u}^T)\]</div>
+<p>is rate of strain tensor</p>
+<p><span class="math">\(\nu\)</span> = const is a Newtonian fluid. <span class="math">\(\nu = \nu(\cdot{\gamma})\)</span> is non-Newtonian.</p>
+<p>Casson model:</p>
+<div class="math">
+\[\nu(J_2) = {{[(\eta^2 J_2)^{1/4} + \sqrt{\tau_y / 2}]^2} \over {\rho \sqrt{J_2}}}\]</div>
+<p>where</p>
+<div class="math">
+\[J_2 = ||{1 \over 2}(\nabla \vec{u} + \nabla \vec{u}^T)||^2\]</div>
+</div>
+<div class="section" id="how-to-make-builtin-create-foam-extension-files">
+<h2><a class="toc-backref" href="#id56">1.2.8. How to make -builtin create .foam extension files?</a><a class="headerlink" href="#how-to-make-builtin-create-foam-extension-files" title="Permalink to this headline">¶</a></h2>
+<p>In:</p>
+<div class="highlight-python"><div class="highlight"><pre>/OpenFOAM/OpenFOAM-2.4.0/bin/paraFoam
+</pre></div>
+</div>
+<p>Change these lines:</p>
+<p>Line 71:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">extension</span><span class="o">=</span><span class="n">foam</span>
+</pre></div>
+</div>
+<p>Line 181:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">extension</span><span class="o">=</span><span class="n">foam</span>
+</pre></div>
+</div>
+<p>Line 241:</p>
+<div class="highlight-python"><div class="highlight"><pre>builtin | foam)
+</pre></div>
+</div>
+<p>In:</p>
+<div class="highlight-python"><div class="highlight"><pre>/OpenFOAM/OpenFOAM-v1612+/bin/paraFoam
+</pre></div>
+</div>
+<p>Change these lines:</p>
+<p>Line 72:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">extension</span><span class="o">=</span><span class="n">foam</span>
+</pre></div>
+</div>
+<p>Line 187:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">extension</span><span class="o">=</span><span class="n">foam</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-load-new-results-into-paraview">
+<h2><a class="toc-backref" href="#id57">1.2.9. How to load new results into Paraview?</a><a class="headerlink" href="#how-to-load-new-results-into-paraview" title="Permalink to this headline">¶</a></h2>
+<p>The first command creates .foam
+The second comment opens Paraview</p>
+<div class="highlight-python"><div class="highlight"><pre>$ paraFoam -touch
+$ paraFoam &amp;
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-save-a-state">
+<h2><a class="toc-backref" href="#id58">1.2.10. How to save a state?</a><a class="headerlink" href="#how-to-save-a-state" title="Permalink to this headline">¶</a></h2>
+<p>File &gt; Save State</p>
+<p>Filename.pvsm</p>
+</div>
+<div class="section" id="how-to-load-a-state">
+<h2><a class="toc-backref" href="#id59">1.2.11. How to load a state?</a><a class="headerlink" href="#how-to-load-a-state" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>$ paraview &amp;
+</pre></div>
+</div>
+<p>File &gt; Load State</p>
+<p>Filename.pvsm</p>
+</div>
+<div class="section" id="example-mesh-refinement-openfoam-2-4-0">
+<h2><a class="toc-backref" href="#id60">1.2.12. Example - Mesh Refinement (OpenFOAM 2.4.0)</a><a class="headerlink" href="#example-mesh-refinement-openfoam-2-4-0" title="Permalink to this headline">¶</a></h2>
+<p>Jozsef Nagy 1, 2</p>
+<div class="highlight-python"><div class="highlight"><pre>$ two
+$ run
+$ cp -r $FOAM_TUTORIALS/incompressible/icoFoam/elbow/ .
+$ mv elbow 001_elbow_tri
+$ cp -r 001_elbow_tri 002_elbow_quad
+$ cp -r 002_elbow_quad 003_elbow_quad_refined
+$ rm -rf 002_elbow_quad/elbow.msh
+$ rm -rf 003_elbow_quad_refined/elbow.msh
+</pre></div>
+</div>
+<ul class="simple">
+<li>Download elbow_quad.msh and copy to 002 and 003 directories</li>
+<li>Change endTime to 75s in controlDict for all cases</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>$ cd 001_elbow_tri
+$ fluentMeshToFoam elbow.msh
+$ paraFoam &amp;
+$ icoFoam
+$ paraFoam -touch
+$ paraFoam &amp;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ cd ../002_elbow_quad
+$ fluentMeshToFoam elbow_quad.msh
+$ icoFoam
+$ paraFoam -touch
+$ paraFoam &amp;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ cd ../003_elbow_quad_refined
+$ fluentMeshToFoam elbow_quad.msh
+$ refineMesh -overwrite
+</pre></div>
+</div>
+<ul class="simple">
+<li>Halve timestep deltaT in controlDict because spatial step has been halved</li>
+<li>Double writeInterval in controlDict</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>$ icoFoam
+$ paraFoam -touch
+$ paraFoam &amp;
+</pre></div>
+</div>
+<p>Create contour plots</p>
+<ul class="simple">
+<li>Load results from <code class="docutils literal"><span class="pre">001_elbow_tri.OpenFOAM</span></code> and <code class="docutils literal"><span class="pre">002_elbow_quad.OpenFOAM</span></code></li>
+<li>Translate meshes - can use search to find translate</li>
+<li>Toggle legend on (first icon from left)</li>
+<li>Edit color map (second icon from left)</li>
+<li>Rescale to custom range (second icon down RHS) - change max to 4 - Rescale</li>
+<li>Toggle legend off and on</li>
+<li>Edit color legend properties (top left icon)</li>
+<li>Title = Velocity (m/s)</li>
+<li>Delete component title</li>
+<li>Change font to 10</li>
+<li>Apply - ok</li>
+<li>Can move legend so it&#8217;s horizontal</li>
+<li>File &gt; Save Screenshot &gt; Ok &gt; velocity.png</li>
+</ul>
+<p>Create line plot</p>
+<ul class="simple">
+<li>Select the plot</li>
+<li>Filters &gt; Data Analysis &gt; Plot Over Line &gt; Apply</li>
+<li>Move points to correspond with line of interest</li>
+<li>Use cursor to select the resulting chart (can change the variables that are plotted)</li>
+<li>File &gt; Save Data &gt; Enter filename</li>
+<li>If write all timesteps is not selected, then it will write only the last timestep.</li>
+<li>Open in Libre Office and plot</li>
+</ul>
+</div>
+<div class="section" id="example-block-mesh-openfoam-2-4-0">
+<h2><a class="toc-backref" href="#id61">1.2.13. Example - Block Mesh (OpenFOAM 2.4.0)</a><a class="headerlink" href="#example-block-mesh-openfoam-2-4-0" title="Permalink to this headline">¶</a></h2>
+<p>Jozsef Nagy 3</p>
+<p>Tab will fill in the rest of the folder.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ two
+$ run
+$ cp -r $FOAM_TUTORIALS/compressible/sonicFoam/laminar/forwardStep/ .
+$ mv forwardStep 004_forward_step
+</pre></div>
+</div>
+<p>Connect to sftp server.</p>
+<p>Run through of blockMeshDict</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cm">/*--------------------------------*- C++ -*----------------------------------*\</span>
+<span class="cm">| =========                 |                                                 |</span>
+<span class="cm">| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |</span>
+<span class="cm">|  \\    /   O peration     | Version:  2.4.0                                 |</span>
+<span class="cm">|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |</span>
+<span class="cm">|    \\/     M anipulation  |                                                 |</span>
+<span class="cm">\*---------------------------------------------------------------------------*/</span>
+<span class="n">FoamFile</span>
+<span class="p">{</span>
+    <span class="n">version</span>     <span class="mf">2.0</span><span class="p">;</span>
+    <span class="n">format</span>      <span class="n">ascii</span><span class="p">;</span>
+    <span class="n">class</span>       <span class="n">dictionary</span><span class="p">;</span>
+    <span class="n">object</span>      <span class="n">blockMeshDict</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span>
+
+<span class="n">convertToMeters</span> <span class="mi">1</span><span class="p">;</span>          <span class="c1">// 1= values given in meters, 0.001 = millimeters</span>
+
+<span class="n">vertices</span>                    <span class="c1">// it doesn&#39;t matter about order here</span>
+<span class="p">(</span>
+    <span class="p">(</span><span class="mi">0</span> <span class="mi">0</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">)</span>
+    <span class="p">(</span><span class="mf">0.6</span> <span class="mi">0</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">0</span> <span class="mf">0.2</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">)</span>
+    <span class="p">(</span><span class="mf">0.6</span> <span class="mf">0.2</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">3</span> <span class="mf">0.2</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">0</span> <span class="mi">1</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">)</span>
+    <span class="p">(</span><span class="mf">0.6</span> <span class="mi">1</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">3</span> <span class="mi">1</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">0</span> <span class="mi">0</span> <span class="mf">0.05</span><span class="p">)</span>
+    <span class="p">(</span><span class="mf">0.6</span> <span class="mi">0</span> <span class="mf">0.05</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">0</span> <span class="mf">0.2</span> <span class="mf">0.05</span><span class="p">)</span>
+    <span class="p">(</span><span class="mf">0.6</span> <span class="mf">0.2</span> <span class="mf">0.05</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">3</span> <span class="mf">0.2</span> <span class="mf">0.05</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">0</span> <span class="mi">1</span> <span class="mf">0.05</span><span class="p">)</span>
+    <span class="p">(</span><span class="mf">0.6</span> <span class="mi">1</span> <span class="mf">0.05</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">3</span> <span class="mi">1</span> <span class="mf">0.05</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="n">blocks</span>                      <span class="c1">// order must be right hand rule (x y z) grading</span>
+<span class="p">(</span>
+    <span class="n">hex</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mi">2</span> <span class="mi">8</span> <span class="mi">9</span> <span class="mi">11</span> <span class="mi">10</span><span class="p">)</span> <span class="p">(</span><span class="mi">25</span> <span class="mi">10</span> <span class="mi">1</span><span class="p">)</span> <span class="n">simpleGrading</span> <span class="p">(</span><span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">hex</span> <span class="p">(</span><span class="mi">2</span> <span class="mi">3</span> <span class="mi">6</span> <span class="mi">5</span> <span class="mi">10</span> <span class="mi">11</span> <span class="mi">14</span> <span class="mi">13</span><span class="p">)</span> <span class="p">(</span><span class="mi">25</span> <span class="mi">40</span> <span class="mi">1</span><span class="p">)</span> <span class="n">simpleGrading</span> <span class="p">(</span><span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">hex</span> <span class="p">(</span><span class="mi">3</span> <span class="mi">4</span> <span class="mi">7</span> <span class="mi">6</span> <span class="mi">11</span> <span class="mi">12</span> <span class="mi">15</span> <span class="mi">14</span><span class="p">)</span> <span class="p">(</span><span class="mi">100</span> <span class="mi">40</span> <span class="mi">1</span><span class="p">)</span> <span class="n">simpleGrading</span> <span class="p">(</span><span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="n">edges</span>
+<span class="p">(</span>
+<span class="p">);</span>
+
+<span class="n">boundary</span>                    <span class="c1">// right hand rule again - normal vector must point outwards</span>
+<span class="p">(</span>
+    <span class="n">inlet</span>
+    <span class="p">{</span>
+        <span class="n">type</span> <span class="n">patch</span><span class="p">;</span>
+        <span class="n">faces</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="mi">0</span> <span class="mi">8</span> <span class="mi">10</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="p">(</span><span class="mi">2</span> <span class="mi">10</span> <span class="mi">13</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">outlet</span>
+    <span class="p">{</span>
+        <span class="n">type</span> <span class="n">patch</span><span class="p">;</span>
+        <span class="n">faces</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="mi">4</span> <span class="mi">7</span> <span class="mi">15</span> <span class="mi">12</span><span class="p">)</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">bottom</span>
+    <span class="p">{</span>
+        <span class="n">type</span> <span class="n">symmetryPlane</span><span class="p">;</span>
+        <span class="n">faces</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">9</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">top</span>
+    <span class="p">{</span>
+        <span class="n">type</span> <span class="n">symmetryPlane</span><span class="p">;</span>
+        <span class="n">faces</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="mi">5</span> <span class="mi">13</span> <span class="mi">14</span> <span class="mi">6</span><span class="p">)</span>
+            <span class="p">(</span><span class="mi">6</span> <span class="mi">14</span> <span class="mi">15</span> <span class="mi">7</span><span class="p">)</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">obstacle</span>
+    <span class="p">{</span>
+        <span class="n">type</span> <span class="n">patch</span><span class="p">;</span>
+        <span class="n">faces</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="mi">1</span> <span class="mi">3</span> <span class="mi">11</span> <span class="mi">9</span><span class="p">)</span>
+            <span class="p">(</span><span class="mi">3</span> <span class="mi">4</span> <span class="mi">12</span> <span class="mi">11</span><span class="p">)</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+
+<span class="n">mergePatchPairs</span>
+<span class="p">(</span>
+<span class="p">);</span>
+
+<span class="c1">// ************************************************************************* //</span>
+</pre></div>
+</div>
+<p>Run blockMesh</p>
+<div class="highlight-python"><div class="highlight"><pre>$ blockMesh
+</pre></div>
+</div>
+<p>Check boundary file in constant/polyMesh</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cm">/*--------------------------------*- C++ -*----------------------------------*\</span>
+<span class="cm">| =========                 |                                                 |</span>
+<span class="cm">| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |</span>
+<span class="cm">|  \\    /   O peration     | Version:  2.4.0                                 |</span>
+<span class="cm">|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |</span>
+<span class="cm">|    \\/     M anipulation  |                                                 |</span>
+<span class="cm">\*---------------------------------------------------------------------------*/</span>
+<span class="n">FoamFile</span>
+<span class="p">{</span>
+    <span class="n">version</span>     <span class="mf">2.0</span><span class="p">;</span>
+    <span class="n">format</span>      <span class="n">ascii</span><span class="p">;</span>
+    <span class="n">class</span>       <span class="n">polyBoundaryMesh</span><span class="p">;</span>
+    <span class="n">location</span>    <span class="s">&quot;constant/polyMesh&quot;</span><span class="p">;</span>
+    <span class="n">object</span>      <span class="n">boundary</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span>
+
+<span class="mi">6</span>
+<span class="p">(</span>
+    <span class="n">inlet</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">patch</span><span class="p">;</span>
+        <span class="n">nFaces</span>          <span class="mi">50</span><span class="p">;</span>
+        <span class="n">startFace</span>       <span class="mi">10325</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">outlet</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">patch</span><span class="p">;</span>
+        <span class="n">nFaces</span>          <span class="mi">40</span><span class="p">;</span>
+        <span class="n">startFace</span>       <span class="mi">10375</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">bottom</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">symmetryPlane</span><span class="p">;</span>
+        <span class="n">inGroups</span>        <span class="mi">1</span><span class="p">(</span><span class="n">symmetryPlane</span><span class="p">);</span>
+        <span class="n">nFaces</span>          <span class="mi">25</span><span class="p">;</span>
+        <span class="n">startFace</span>       <span class="mi">10415</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">top</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">symmetryPlane</span><span class="p">;</span>
+        <span class="n">inGroups</span>        <span class="mi">1</span><span class="p">(</span><span class="n">symmetryPlane</span><span class="p">);</span>
+        <span class="n">nFaces</span>          <span class="mi">125</span><span class="p">;</span>
+        <span class="n">startFace</span>       <span class="mi">10440</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">obstacle</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">patch</span><span class="p">;</span>
+        <span class="n">nFaces</span>          <span class="mi">110</span><span class="p">;</span>
+        <span class="n">startFace</span>       <span class="mi">10565</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">defaultFaces</span>                        <span class="c1">// unspecified front and back planes</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">empty</span><span class="p">;</span>
+        <span class="n">inGroups</span>        <span class="mi">1</span><span class="p">(</span><span class="n">empty</span><span class="p">);</span>
+        <span class="n">nFaces</span>          <span class="mi">10500</span><span class="p">;</span>
+        <span class="n">startFace</span>       <span class="mi">10675</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1">// ************************************************************************* //</span>
+</pre></div>
+</div>
+<p>Open mesh in paraView</p>
+<div class="highlight-python"><div class="highlight"><pre>$ paraFoam -touch
+$ paraFoam &amp;
+</pre></div>
+</div>
+<p>Change the mesh to wireframe, black lines and white background:</p>
+<ul class="simple">
+<li>Properties &gt; Display &gt; Representation &gt; Wireframe</li>
+<li>Properties &gt; Coloring &gt; Solid Color &gt; Edit &gt; Black</li>
+<li>Edit &gt; View Settings &gt; General &gt; Solid Color = White &gt; Apply</li>
+</ul>
+<p>Change default color space to RGB:</p>
+<ul class="simple">
+<li>Edit color map &gt; Choose preset &gt; Blue to Red Rainbow &gt; Save as default</li>
+</ul>
+<p>Pressure ICs and BCs</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cm">/*--------------------------------*- C++ -*----------------------------------*\</span>
+<span class="cm">| =========                 |                                                 |</span>
+<span class="cm">| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |</span>
+<span class="cm">|  \\    /   O peration     | Version:  2.4.0                                 |</span>
+<span class="cm">|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |</span>
+<span class="cm">|    \\/     M anipulation  |                                                 |</span>
+<span class="cm">\*---------------------------------------------------------------------------*/</span>
+<span class="n">FoamFile</span>
+<span class="p">{</span>
+    <span class="n">version</span>     <span class="mf">2.0</span><span class="p">;</span>
+    <span class="n">format</span>      <span class="n">ascii</span><span class="p">;</span>
+    <span class="n">class</span>       <span class="n">volScalarField</span><span class="p">;</span>
+    <span class="n">object</span>      <span class="n">p</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span>
+
+<span class="n">dimensions</span>      <span class="p">[</span><span class="mi">1</span> <span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="mi">2</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">];</span>
+
+<span class="n">internalField</span>   <span class="n">uniform</span> <span class="mi">1</span><span class="p">;</span>                  <span class="c1">// 1 Pa</span>
+
+<span class="n">boundaryField</span>
+<span class="p">{</span>
+    <span class="n">inlet</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">fixedValue</span><span class="p">;</span>
+        <span class="n">value</span>           <span class="n">uniform</span> <span class="mi">1</span><span class="p">;</span>          <span class="c1">// 1 Pa</span>
+    <span class="p">}</span>
+
+    <span class="n">outlet</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">waveTransmissive</span><span class="p">;</span>
+        <span class="n">field</span>           <span class="n">p</span><span class="p">;</span>
+        <span class="n">phi</span>             <span class="n">phi</span><span class="p">;</span>
+        <span class="n">rho</span>             <span class="n">rho</span><span class="p">;</span>
+        <span class="n">psi</span>             <span class="nl">thermo</span><span class="p">:</span><span class="n">psi</span><span class="p">;</span>
+        <span class="n">gamma</span>           <span class="mf">1.4</span><span class="p">;</span>
+        <span class="n">fieldInf</span>        <span class="mi">1</span><span class="p">;</span>
+        <span class="n">lInf</span>            <span class="mi">3</span><span class="p">;</span>
+        <span class="n">value</span>           <span class="n">uniform</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">bottom</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">symmetryPlane</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">top</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">symmetryPlane</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">obstacle</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">zeroGradient</span><span class="p">;</span>       <span class="c1">// Neumann boundary condition (derivative)</span>
+    <span class="p">}</span>
+
+    <span class="n">defaultFaces</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">empty</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ************************************************************************* //</span>
+</pre></div>
+</div>
+<p>Temperature ICs and BCs</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cm">/*--------------------------------*- C++ -*----------------------------------*\</span>
+<span class="cm">| =========                 |                                                 |</span>
+<span class="cm">| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |</span>
+<span class="cm">|  \\    /   O peration     | Version:  2.4.0                                 |</span>
+<span class="cm">|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |</span>
+<span class="cm">|    \\/     M anipulation  |                                                 |</span>
+<span class="cm">\*---------------------------------------------------------------------------*/</span>
+<span class="n">FoamFile</span>
+<span class="p">{</span>
+    <span class="n">version</span>     <span class="mf">2.0</span><span class="p">;</span>
+    <span class="n">format</span>      <span class="n">ascii</span><span class="p">;</span>
+    <span class="n">class</span>       <span class="n">volScalarField</span><span class="p">;</span>
+    <span class="n">object</span>      <span class="n">T</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span>
+
+<span class="n">dimensions</span>      <span class="p">[</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">];</span>
+
+<span class="n">internalField</span>   <span class="n">uniform</span> <span class="mi">1</span><span class="p">;</span>              <span class="c1">// 1K(!)</span>
+
+<span class="n">boundaryField</span>
+<span class="p">{</span>
+    <span class="n">inlet</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">fixedValue</span><span class="p">;</span>
+        <span class="n">value</span>           <span class="n">uniform</span> <span class="mi">1</span><span class="p">;</span>      <span class="c1">// 1K(!)</span>
+    <span class="p">}</span>
+
+    <span class="n">outlet</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">zeroGradient</span><span class="p">;</span>   <span class="c1">// Neumann</span>
+    <span class="p">}</span>
+
+    <span class="n">bottom</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">symmetryPlane</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">top</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">symmetryPlane</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">obstacle</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">zeroGradient</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">defaultFaces</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">empty</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ************************************************************************* //</span>
+</pre></div>
+</div>
+<p>Velocity ICs and BCs</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cm">/*--------------------------------*- C++ -*----------------------------------*\</span>
+<span class="cm">| =========                 |                                                 |</span>
+<span class="cm">| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |</span>
+<span class="cm">|  \\    /   O peration     | Version:  2.4.0                                 |</span>
+<span class="cm">|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |</span>
+<span class="cm">|    \\/     M anipulation  |                                                 |</span>
+<span class="cm">\*---------------------------------------------------------------------------*/</span>
+<span class="n">FoamFile</span>
+<span class="p">{</span>
+    <span class="n">version</span>     <span class="mf">2.0</span><span class="p">;</span>
+    <span class="n">format</span>      <span class="n">ascii</span><span class="p">;</span>
+    <span class="n">class</span>       <span class="n">volVectorField</span><span class="p">;</span>
+    <span class="n">object</span>      <span class="n">U</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span>
+
+<span class="n">dimensions</span>      <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="o">-</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">];</span>
+
+<span class="n">internalField</span>   <span class="nf">uniform</span> <span class="p">(</span><span class="mi">3</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">);</span>            <span class="c1">// 3 m/s</span>
+
+<span class="n">boundaryField</span>
+<span class="p">{</span>
+    <span class="n">inlet</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">fixedValue</span><span class="p">;</span>
+        <span class="n">value</span>           <span class="nf">uniform</span> <span class="p">(</span><span class="mi">3</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">);</span>    <span class="c1">// 3 m/s</span>
+    <span class="p">}</span>
+
+    <span class="n">outlet</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">zeroGradient</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">bottom</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">symmetryPlane</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">top</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">symmetryPlane</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">obstacle</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">fixedValue</span><span class="p">;</span>         <span class="c1">// No slip</span>
+        <span class="n">value</span>           <span class="nf">uniform</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">defaultFaces</span>
+    <span class="p">{</span>
+        <span class="n">type</span>            <span class="n">empty</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ************************************************************************* //</span>
+</pre></div>
+</div>
+<p>Turbulence Properties - laminar</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cm">/*--------------------------------*- C++ -*----------------------------------*\</span>
+<span class="cm">| =========                 |                                                 |</span>
+<span class="cm">| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |</span>
+<span class="cm">|  \\    /   O peration     | Version:  2.4.0                                 |</span>
+<span class="cm">|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |</span>
+<span class="cm">|    \\/     M anipulation  |                                                 |</span>
+<span class="cm">\*---------------------------------------------------------------------------*/</span>
+<span class="n">FoamFile</span>
+<span class="p">{</span>
+    <span class="n">version</span>     <span class="mf">2.0</span><span class="p">;</span>
+    <span class="n">format</span>      <span class="n">ascii</span><span class="p">;</span>
+    <span class="n">class</span>       <span class="n">dictionary</span><span class="p">;</span>
+    <span class="n">location</span>    <span class="s">&quot;constant&quot;</span><span class="p">;</span>
+    <span class="n">object</span>      <span class="n">turbulenceProperties</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span>
+
+<span class="n">simulationType</span>  <span class="n">laminar</span><span class="p">;</span>
+
+
+<span class="c1">// ************************************************************************* //</span>
+</pre></div>
+</div>
+<p>Themophyscial properties</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cm">/*--------------------------------*- C++ -*----------------------------------*\</span>
+<span class="cm">| =========                 |                                                 |</span>
+<span class="cm">| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |</span>
+<span class="cm">|  \\    /   O peration     | Version:  2.4.0                                 |</span>
+<span class="cm">|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |</span>
+<span class="cm">|    \\/     M anipulation  |                                                 |</span>
+<span class="cm">\*---------------------------------------------------------------------------*/</span>
+<span class="n">FoamFile</span>
+<span class="p">{</span>
+    <span class="n">version</span>     <span class="mf">2.0</span><span class="p">;</span>
+    <span class="n">format</span>      <span class="n">ascii</span><span class="p">;</span>
+    <span class="n">class</span>       <span class="n">dictionary</span><span class="p">;</span>
+    <span class="n">location</span>    <span class="s">&quot;constant&quot;</span><span class="p">;</span>
+    <span class="n">object</span>      <span class="n">thermophysicalProperties</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span>
+
+<span class="n">thermoType</span>
+<span class="p">{</span>
+    <span class="n">type</span>            <span class="n">hePsiThermo</span><span class="p">;</span>
+    <span class="n">mixture</span>         <span class="n">pureMixture</span><span class="p">;</span>
+    <span class="n">transport</span>       <span class="k">const</span><span class="p">;</span>
+    <span class="n">thermo</span>          <span class="n">hConst</span><span class="p">;</span>
+    <span class="n">equationOfState</span> <span class="n">perfectGas</span><span class="p">;</span>
+    <span class="n">specie</span>          <span class="n">specie</span><span class="p">;</span>
+    <span class="n">energy</span>          <span class="n">sensibleInternalEnergy</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Note: these are the properties for a &quot;normalised&quot; inviscid gas</span>
+<span class="c1">//       for which the speed of sound is 1 m/s at a temperature of 1K</span>
+<span class="c1">//       and gamma = 7/5</span>
+<span class="n">mixture</span>
+<span class="p">{</span>
+    <span class="n">specie</span>
+    <span class="p">{</span>
+        <span class="n">nMoles</span>          <span class="mi">1</span><span class="p">;</span>
+        <span class="n">molWeight</span>       <span class="mf">11640.3</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">thermodynamics</span>
+    <span class="p">{</span>
+        <span class="n">Cp</span>              <span class="mf">2.5</span><span class="p">;</span>        <span class="c1">// Specific heat</span>
+        <span class="n">Hf</span>              <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">transport</span>
+    <span class="p">{</span>
+        <span class="n">mu</span>              <span class="mi">0</span><span class="p">;</span>
+        <span class="n">Pr</span>              <span class="mi">1</span><span class="p">;</span>          <span class="c1">// Prandtl number</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="c1">// ************************************************************************* //</span>
+</pre></div>
+</div>
+<p>Write Interval at 0.5 seconds specified using <code class="docutils literal"><span class="pre">runTime</span></code></p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cm">/*--------------------------------*- C++ -*----------------------------------*\</span>
+<span class="cm">| =========                 |                                                 |</span>
+<span class="cm">| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |</span>
+<span class="cm">|  \\    /   O peration     | Version:  2.4.0                                 |</span>
+<span class="cm">|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |</span>
+<span class="cm">|    \\/     M anipulation  |                                                 |</span>
+<span class="cm">\*---------------------------------------------------------------------------*/</span>
+<span class="n">FoamFile</span>
+<span class="p">{</span>
+    <span class="n">version</span>     <span class="mf">2.0</span><span class="p">;</span>
+    <span class="n">format</span>      <span class="n">ascii</span><span class="p">;</span>
+    <span class="n">class</span>       <span class="n">dictionary</span><span class="p">;</span>
+    <span class="n">location</span>    <span class="s">&quot;system&quot;</span><span class="p">;</span>
+    <span class="n">object</span>      <span class="n">controlDict</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span>
+
+<span class="n">application</span>     <span class="n">sonicFoam</span><span class="p">;</span>
+
+<span class="n">startFrom</span>       <span class="n">startTime</span><span class="p">;</span>
+
+<span class="n">startTime</span>       <span class="mi">0</span><span class="p">;</span>
+
+<span class="n">stopAt</span>          <span class="n">endTime</span><span class="p">;</span>
+
+<span class="n">endTime</span>         <span class="mi">10</span><span class="p">;</span>
+
+<span class="n">deltaT</span>          <span class="mf">0.002</span><span class="p">;</span>
+
+<span class="n">writeControl</span>    <span class="n">runTime</span><span class="p">;</span>
+
+<span class="n">writeInterval</span>   <span class="mf">0.5</span><span class="p">;</span>
+
+<span class="n">purgeWrite</span>      <span class="mi">0</span><span class="p">;</span>
+
+<span class="n">writeFormat</span>     <span class="n">ascii</span><span class="p">;</span>
+
+<span class="n">writePrecision</span>  <span class="mi">6</span><span class="p">;</span>
+
+<span class="n">writeCompression</span> <span class="n">off</span><span class="p">;</span>
+
+<span class="n">timeFormat</span>      <span class="n">general</span><span class="p">;</span>
+
+<span class="n">timePrecision</span>   <span class="mi">6</span><span class="p">;</span>
+
+<span class="n">runTimeModifiable</span> <span class="nb">true</span><span class="p">;</span>
+
+
+<span class="c1">// ************************************************************************* //</span>
+</pre></div>
+</div>
+<p>Run simulation</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sonicFoam
+</pre></div>
+</div>
+<ul class="simple">
+<li>Load paraView:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>$ paraFoam -builtin &amp;
+</pre></div>
+</div>
+<p>Change the colors to black and white:</p>
+<p>Edit &gt; Settings &gt; Colors &gt; Palette = Print &gt; Apply &gt; Ok</p>
+<p>Can refresh if ParaView was already open:</p>
+<ul class="simple">
+<li>Properties &gt; Refresh</li>
+<li>Toggle: Surface, Wireframe</li>
+</ul>
+<p>Change grading:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">blocks</span>                      <span class="c1">// order must be right hand rule (x y z) grading</span>
+<span class="p">(</span>
+    <span class="n">hex</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mi">2</span> <span class="mi">8</span> <span class="mi">9</span> <span class="mi">11</span> <span class="mi">10</span><span class="p">)</span> <span class="p">(</span><span class="mi">25</span> <span class="mi">10</span> <span class="mi">1</span><span class="p">)</span> <span class="n">simpleGrading</span> <span class="p">(</span><span class="mf">0.5</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">hex</span> <span class="p">(</span><span class="mi">2</span> <span class="mi">3</span> <span class="mi">6</span> <span class="mi">5</span> <span class="mi">10</span> <span class="mi">11</span> <span class="mi">14</span> <span class="mi">13</span><span class="p">)</span> <span class="p">(</span><span class="mi">25</span> <span class="mi">40</span> <span class="mi">1</span><span class="p">)</span> <span class="n">simpleGrading</span> <span class="p">(</span><span class="mf">0.5</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">hex</span> <span class="p">(</span><span class="mi">3</span> <span class="mi">4</span> <span class="mi">7</span> <span class="mi">6</span> <span class="mi">11</span> <span class="mi">12</span> <span class="mi">15</span> <span class="mi">14</span><span class="p">)</span> <span class="p">(</span><span class="mi">100</span> <span class="mi">40</span> <span class="mi">1</span><span class="p">)</span> <span class="n">simpleGrading</span> <span class="p">(</span><span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Remove all folders except ICS:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ rm -rf 0.* [1-9]*
+</pre></div>
+</div>
+<p>Overwrite files in constant/polyMesh</p>
+<div class="highlight-python"><div class="highlight"><pre>$ blockMesh
+</pre></div>
+</div>
+<p>Reload mesh:</p>
+<ul class="simple">
+<li>Properties &gt; Refresh</li>
+<li>Toggle: Surface, Wireframe</li>
+</ul>
+<p>The expansion ratio is:</p>
+<div class="math">
+\[\text{Ratio} = {\text{End spacing} \over \text{Start spacing}}\]</div>
+<p>With the directions given by the Cartesian coordinates</p>
+<p>Can change to edge spacing:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">blocks</span>                      <span class="c1">// order must be right hand rule (x y z) grading</span>
+<span class="p">(</span>
+    <span class="n">hex</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mi">2</span> <span class="mi">8</span> <span class="mi">9</span> <span class="mi">11</span> <span class="mi">10</span><span class="p">)</span> <span class="p">(</span><span class="mi">50</span> <span class="mi">20</span> <span class="mi">1</span><span class="p">)</span> <span class="n">edgeGrading</span> <span class="p">(</span><span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">hex</span> <span class="p">(</span><span class="mi">2</span> <span class="mi">3</span> <span class="mi">6</span> <span class="mi">5</span> <span class="mi">10</span> <span class="mi">11</span> <span class="mi">14</span> <span class="mi">13</span><span class="p">)</span> <span class="p">(</span><span class="mi">25</span> <span class="mi">40</span> <span class="mi">1</span><span class="p">)</span> <span class="n">simpleGrading</span> <span class="p">(</span><span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">hex</span> <span class="p">(</span><span class="mi">3</span> <span class="mi">4</span> <span class="mi">7</span> <span class="mi">6</span> <span class="mi">11</span> <span class="mi">12</span> <span class="mi">15</span> <span class="mi">14</span><span class="p">)</span> <span class="p">(</span><span class="mi">100</span> <span class="mi">40</span> <span class="mi">1</span><span class="p">)</span> <span class="n">simpleGrading</span> <span class="p">(</span><span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Overwrite files in constant/polyMesh</p>
+<div class="highlight-python"><div class="highlight"><pre>$ blockMesh
+</pre></div>
+</div>
+<p>Reload mesh:</p>
+<ul class="simple">
+<li>Properties &gt; Refresh</li>
+<li>Toggle: Surface, Wireframe</li>
+</ul>
+</div>
+<div class="section" id="example-grid-convergence-openfoam-2-4-0">
+<h2><a class="toc-backref" href="#id62">1.2.14. Example - Grid Convergence (OpenFOAM 2.4.0)</a><a class="headerlink" href="#example-grid-convergence-openfoam-2-4-0" title="Permalink to this headline">¶</a></h2>
+<p>Jozsef Nagy 4</p>
+<p>Tab will fill in the rest of the folder.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ two
+$ run
+$ cp -r $FOAM_TUTORIALS/compressible/sonicFoam/laminar/shockTube/ .
+$ mv shockTube 005_shock_tube
+$ cd 005_shock_tube
+$ gedit ./constant/polyMesh/blockMeshDict
+$ cd ..
+</pre></div>
+</div>
+<p>Change the number of x cells from 1000 to 100 and save.</p>
+<p>Change the name and copy the folders for 1000 and 10000 cells</p>
+<div class="highlight-python"><div class="highlight"><pre>$ mv 005_shock_tube 005_shock_tube_100
+$ cp -r 005_shock_tube_100 006_shock_tube_1000
+$ cp -r 005_shock_tube_100 007_shock_tube_10000
+</pre></div>
+</div>
+<p>Create the mesh for the 100 cell case</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd 005_shock_tube_100
+$ blockMesh
+</pre></div>
+</div>
+<p>Open case in Paraview</p>
+<div class="highlight-python"><div class="highlight"><pre>$ paraFoam -builtin &amp;
+</pre></div>
+</div>
+<p>Remove region in setFieldsDict in order to set all the fields to be the same</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ./system/setFieldsDict
+</pre></div>
+</div>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">defaultFieldValues</span> <span class="p">(</span> <span class="n">volVectorFieldValue</span> <span class="n">U</span> <span class="p">(</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="p">)</span> <span class="n">volScalarFieldValue</span> <span class="n">T</span> <span class="mf">348.432</span> <span class="n">volScalarFieldValue</span> <span class="n">p</span> <span class="mi">100000</span> <span class="p">);</span>
+
+<span class="n">regions</span>         <span class="p">(</span>
+<span class="c1">// boxToCell { box ( 0 -1 -1 ) ( 5 1 1 ) ; fieldValues ( volScalarFieldValue T 278.746 volScalarFieldValue p 10000 ) ; }</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Now set the fields - this sets the fields of 0/p, 0/U, 0/magU and 0/T to uniform values</p>
+<div class="highlight-python"><div class="highlight"><pre>$ setFields
+</pre></div>
+</div>
+<p>Now set a non-uniform field from centre to end in x and all y and all z (RHS of geometry)</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ./system/setFieldsDict
+</pre></div>
+</div>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">defaultFieldValues</span> <span class="p">(</span> <span class="n">volVectorFieldValue</span> <span class="n">U</span> <span class="p">(</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="p">)</span> <span class="n">volScalarFieldValue</span> <span class="n">T</span> <span class="mf">348.432</span> <span class="n">volScalarFieldValue</span> <span class="n">p</span> <span class="mi">100000</span> <span class="p">);</span>
+
+<span class="n">regions</span>         <span class="p">(</span>
+<span class="n">boxToCell</span> <span class="p">{</span> <span class="n">box</span> <span class="p">(</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="mi">1</span> <span class="p">)</span> <span class="p">(</span> <span class="mi">5</span> <span class="mi">1</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">;</span> <span class="n">fieldValues</span> <span class="p">(</span> <span class="n">volScalarFieldValue</span> <span class="n">T</span> <span class="mf">278.746</span> <span class="n">volScalarFieldValue</span> <span class="n">p</span> <span class="mi">10000</span> <span class="p">)</span> <span class="p">;</span> <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>ctrl + o
+ctrl + x</p>
+<p>This sets the fields of 0/p, 0/U, 0/magU and 0/T to non-uniform values</p>
+<div class="highlight-python"><div class="highlight"><pre>$ setFields
+</pre></div>
+</div>
+<p>Check that the fields are correct:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ./0/p
+</pre></div>
+</div>
+<p>Run the simulation</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sonicFoam
+</pre></div>
+</div>
+<p>Refresh the results in ParaView</p>
+<ul class="simple">
+<li>Properties &gt; Refresh</li>
+<li>Toggle: Surface, Wireframe</li>
+</ul>
+<p>Plot the values as a line chart:</p>
+<ul class="simple">
+<li>Filters &gt; Search &gt; plot over line &gt; Enter</li>
+<li>Apply</li>
+<li>Change y and z values to 0 for centreline &gt; Apply</li>
+<li>Top right order of chart will change from fullscreen to split screen and back</li>
+<li>Shows that grid density is too coarse</li>
+<li>File &gt; Save State &gt; name.pvsm</li>
+</ul>
+<p>(You have to run blockMesh on the grid before loading a state paraview, as foam.foam is empty - but you can load foam.foam from stratch)</p>
+<p>Now simulate different grids</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd ../006_shock_tube_1000
+</pre></div>
+</div>
+<p>Change resolution to 1000 in blockMeshDict</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ./constant/polyMesh/blockMeshDict
+</pre></div>
+</div>
+<p>ctrl + o
+ctrl + x</p>
+<p>Create mesh and set fields</p>
+<div class="highlight-python"><div class="highlight"><pre>$ blockMesh
+$ setFields
+</pre></div>
+</div>
+<p>Check that the fields are correct:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ./0/p
+</pre></div>
+</div>
+<p>Run:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sonicFoam
+</pre></div>
+</div>
+<p>Load in Paraview</p>
+<div class="highlight-python"><div class="highlight"><pre>$ paraFoam -builtin &amp;
+</pre></div>
+</div>
+<p>Compare with coarse case:</p>
+<p>File &gt; Open &gt; X.foam from coarse directory</p>
+<p>Change resolution to 10000 in blockMeshDict</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd ../007_shock_tube_10000
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ./constant/polyMesh/blockMeshDict
+</pre></div>
+</div>
+<p>ctrl + o
+ctrl + x</p>
+<p>Create mesh and set fields</p>
+<div class="highlight-python"><div class="highlight"><pre>$ blockMesh
+$ setFields
+</pre></div>
+</div>
+<p>Check that the fields are correct:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ./0/p
+</pre></div>
+</div>
+<p>Run:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sonicFoam
+</pre></div>
+</div>
+<p>Simulation will diverge - due to Courant number being too high (C &gt; 1). Reducing cell spacing by a factor of 10 increases Courant number by a factor of 10 from previous value (0.28)</p>
+<div class="highlight-python"><div class="highlight"><pre>Courant Number mean: 0.00264441 max: 2.84091
+</pre></div>
+</div>
+<p>Reduce timestep by a factor of 10</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ./system/controlDict
+</pre></div>
+</div>
+<p>Run:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sonicFoam
+</pre></div>
+</div>
+<p>Compare with coarse case:</p>
+<p>File &gt; Open &gt; X.foam from coarse directory</p>
+<p>Translate the grid by 2.1</p>
+<p>Use sampleDict to sample 10,000 points on 10,000 cell grid.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ./system/sampleDict
+</pre></div>
+</div>
+<div class="highlight-c"><div class="highlight"><pre><span class="c1">// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //</span>
+
+<span class="n">interpolationScheme</span> <span class="n">cellPoint</span><span class="p">;</span>
+
+<span class="n">setFormat</span>       <span class="n">raw</span><span class="p">;</span>
+
+<span class="n">sets</span>
+<span class="p">(</span>
+    <span class="n">data</span>
+    <span class="p">{</span>
+        <span class="n">type</span>    <span class="n">uniform</span><span class="p">;</span>
+        <span class="n">axis</span>    <span class="n">x</span><span class="p">;</span>
+        <span class="n">start</span>   <span class="p">(</span><span class="o">-</span><span class="mf">4.995</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">end</span>     <span class="p">(</span><span class="mf">4.995</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">nPoints</span> <span class="mi">10000</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+
+<span class="n">fields</span>          <span class="p">(</span><span class="n">T</span> <span class="n">magU</span> <span class="n">p</span><span class="p">);</span>
+
+<span class="c1">// ************************************************************************* //</span>
+</pre></div>
+</div>
+<p>To list all folders (should not see magU in all folders):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ tree
+</pre></div>
+</div>
+<p>Calculate the magnitude of the velocity (magU should now appear):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+$ tree
+</pre></div>
+</div>
+<p>Now sample the data:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+<p>Check if sample has created:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ tree
+</pre></div>
+</div>
+<p>Do the same for 1000 (10,000 points):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd ../006_shock_tube_1000
+$ nano ./system/sampleDict
+</pre></div>
+</div>
+<p>Magnitude of velocity:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the velocity:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+<p>Do the same for 100 (10,000 points):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd ../005_shock_tube_100
+$ nano ./system/sampleDict
+</pre></div>
+</div>
+<p>Magnitude of velocity:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ foamCalc mag U
+</pre></div>
+</div>
+<p>Sample the velocity:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ sample
+</pre></div>
+</div>
+<p>Plot three mesh densities in one chart:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">math</span> <span class="kn">as</span> <span class="nn">mt</span>
+
+<span class="n">data10000</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s1">&#39;postProcessing/sets/0.007/data_T_magU_p.xy&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                         <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;magU&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">data10000</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">data10000</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
+<span class="n">magU</span> <span class="o">=</span> <span class="n">data10000</span><span class="p">[</span><span class="s1">&#39;magU&#39;</span><span class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">data10000</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">]</span>
+
+<span class="n">data1000</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s1">&#39;../006_shock_tube_1000/postProcessing/sets/0.007/data_T_magU_p.xy&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                         <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;magU&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">data1000</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">data1000</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
+<span class="n">magU</span> <span class="o">=</span> <span class="n">data1000</span><span class="p">[</span><span class="s1">&#39;magU&#39;</span><span class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">data1000</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">]</span>
+
+<span class="n">data100</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s1">&#39;../005_shock_tube_100/postProcessing/sets/0.007/data_T_magU_p.xy&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                         <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;magU&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">data100</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">data100</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
+<span class="n">magU</span> <span class="o">=</span> <span class="n">data100</span><span class="p">[</span><span class="s1">&#39;magU&#39;</span><span class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">data100</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">]</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">)</span>
+<span class="n">line1</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data10000</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data10000</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;10000 cells&#39;</span><span class="p">)</span>
+<span class="n">line2</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data1000</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data1000</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;1000 cells&#39;</span><span class="p">)</span>
+<span class="n">line3</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data100</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data100</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;100 cells&#39;</span><span class="p">)</span>
+
+<span class="c1"># added these three lines</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">line1</span><span class="o">+</span><span class="n">line2</span><span class="o">+</span><span class="n">line3</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+<span class="n">legend</span><span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;medium&#39;</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">r&#39;Distance, x \textit{(m)}&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">r&#39;Pressure \textit{(Pa)}&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">120000</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;shock_tube_pressure&#39;</span><span class="p">)</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">)</span>
+<span class="n">line1</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data10000</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data10000</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;10000 cells&#39;</span><span class="p">)</span>
+<span class="n">line2</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data1000</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data1000</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;1000 cells&#39;</span><span class="p">)</span>
+<span class="n">line3</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data100</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data100</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;100 cells&#39;</span><span class="p">)</span>
+
+<span class="n">lines</span> <span class="o">=</span> <span class="n">line1</span><span class="o">+</span><span class="n">line2</span><span class="o">+</span><span class="n">line3</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+<span class="n">legend</span><span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;medium&#39;</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">r&#39;Distance, x \textit{(m)}&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">r&#39;Temperature \textit{(K)}&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">200</span><span class="p">,</span><span class="mi">500</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;shock_tube_temperature&#39;</span><span class="p">)</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">)</span>
+<span class="n">line1</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data10000</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data10000</span><span class="p">[</span><span class="s1">&#39;magU&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;10000 cells&#39;</span><span class="p">)</span>
+<span class="n">line2</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data1000</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data1000</span><span class="p">[</span><span class="s1">&#39;magU&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;1000 cells&#39;</span><span class="p">)</span>
+<span class="n">line3</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data100</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data100</span><span class="p">[</span><span class="s1">&#39;magU&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;100 cells&#39;</span><span class="p">)</span>
+
+<span class="c1"># added these three lines</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">line1</span><span class="o">+</span><span class="n">line2</span><span class="o">+</span><span class="n">line3</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+<span class="n">legend</span><span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;medium&#39;</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">r&#39;Distance, x \textit{(m)}&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">r&#39;Velocity \textit{(m/s)}&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span><span class="mi">350</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;shock_tube_velocity&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Plot pressure, velocity and temperature:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">math</span> <span class="kn">as</span> <span class="nn">mt</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s1">&#39;postProcessing/sets/0.007/data_T_magU_p.xy&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">skip_header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                         <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;magU&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
+<span class="n">magU</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;magU&#39;</span><span class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">]</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">)</span>
+<span class="n">line1</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Pressure (Pa)&#39;</span><span class="p">)</span>
+<span class="n">line2</span><span class="o">=</span><span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
+<span class="n">line3</span><span class="o">=</span><span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;magU&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Velocity Magnitude (m/s)&#39;</span><span class="p">)</span>
+
+<span class="n">lines</span> <span class="o">=</span> <span class="n">line1</span><span class="o">+</span><span class="n">line2</span><span class="o">+</span><span class="n">line3</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+<span class="n">legend</span><span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;medium&#39;</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">r&#39;Distance, x \textit{(m)}&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">r&#39;Pressure \textit{(-)}&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">r&#39;Temperature or Velocity Magnitude \textit{(-)}&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">120000</span><span class="p">])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">600</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;005_shock_tube_100&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-transport-equation-openfoam-2-4-0">
+<h2><a class="toc-backref" href="#id63">1.2.15. Example - Transport Equation (OpenFOAM 2.4.0)</a><a class="headerlink" href="#example-transport-equation-openfoam-2-4-0" title="Permalink to this headline">¶</a></h2>
+<p>Jozsef Nagy 5</p>
+<p>Copy transport properties from pitz daily.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ two
+$ run
+$ cp -r $FOAM_TUTORIALS/compressible/sonicFoam/laminar/shockTube/ .
+$ cp -r $FOAM_TUTORIALS/basic/scalarTransportFoam/pitzDaily/ .
+    $ mv shockTube 008_tranport_base_case
+    $ mv pitzDaily 009_pitz_daily
+    $ cd 008_tranport_base_case
+    $ rm ./0/magU ./0/p
+    $ rm ./constant/thermophysicalProperties ./constant/turbulenceProperties
+    $ cp -r ../009_pitz_daily/constant/transportProperties ./constant
+</pre></div>
+</div>
+<p>Copy fvSchemes, fvSolution and controlDict from pitz daily</p>
+<div class="highlight-python"><div class="highlight"><pre>$ rm ./system/controlDict ./system/fvSchemes ./system/fvSolution
+$ cp ../009_pitz_daily/system/controlDict ./system
+$ cp ../009_pitz_daily/system/fvSchemes ./system
+$ cp ../009_pitz_daily/system/fvSolution ./system
+</pre></div>
+</div>
+<p>Change controlDict for an endTime = 5, writeControl = runTime, writeInterval=1</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ./system/controlDict
+</pre></div>
+</div>
+<p>Remove sampleDict</p>
+<div class="highlight-python"><div class="highlight"><pre>$ rm ./system/sampleDict
+</pre></div>
+</div>
+<p>Change setFieldsDict so U is 0, T is 0 by default and there is a region where T=1</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ./system/setFieldsDict
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>defaultFieldValues ( volVectorFieldValue U ( 0 0 0 ) volScalarFieldValue T 0 );
+regions         ( boxToCell { box ( -0.5 -1 -1 ) ( 0.5 1 1 ) ; fieldValues ( volScalarFieldValue T 1 ) ; } );
+</pre></div>
+</div>
+<p>Create the mesh and set the fields</p>
+<div class="highlight-python"><div class="highlight"><pre>$ blockMesh
+$ setFields
+</pre></div>
+</div>
+<p>Check U and T</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ./0/U
+$ nano ./0/T
+</pre></div>
+</div>
+<p>Open Paraview and check temperature is initialised correctly</p>
+<div class="highlight-python"><div class="highlight"><pre>$ paraFoam -touch
+$ paraFoam -builtin &amp;
+</pre></div>
+</div>
+<p>Make copies of base case</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cp -r 008_tranport_base_case 009_transport_base_case
+$ cp -r 008_tranport_base_case 010_transport_base_case
+$ cp -r 008_tranport_base_case 011_transport_base_case
+$ cp -r 008_tranport_base_case 012_transport_base_case
+$ cp -r 008_tranport_base_case 013_transport_base_case
+$ cp -r 008_tranport_base_case 014_transport_base_case
+$ cp -r 008_tranport_base_case 015_transport_base_case
+$ cp -r 008_tranport_base_case 016_transport_base_case
+$ cp -r 008_tranport_base_case 017_transport_base_case
+$ cp -r 008_tranport_base_case 018_transport_base_case
+$ cp -r 008_tranport_base_case 019_transport_base_case
+</pre></div>
+</div>
+<p>Set the values like this</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/nagy.png"><img alt="../_images/nagy.png" src="../_images/nagy.png" style="width: 535.5px; height: 288.0px;" /></a>
+</div>
+<ol class="loweralpha simple">
+<li>Run 008_transport_base_case</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre>$ scalarTransportFoam
+</pre></div>
+</div>
+<ol class="loweralpha simple" start="2">
+<li>Open in Paraview</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre>$ paraFoam -touch
+$ paraFoam -builtin
+</pre></div>
+</div>
+<ol class="loweralpha simple" start="3">
+<li>Save state</li>
+</ol>
+<p>Do a), b) and c) for 009, 010, 011, 012, 013, 014, 015, 016, 017, 018 and 019_transport_base_case</p>
+</div>
+<div class="section" id="example-discretisation-openfoam-2-4-0">
+<h2><a class="toc-backref" href="#id64">1.2.16. Example - Discretisation (OpenFOAM 2.4.0)</a><a class="headerlink" href="#example-discretisation-openfoam-2-4-0" title="Permalink to this headline">¶</a></h2>
+<p>Orthogonal means the vector from the face is parallel to the vector joining the cell centres.</p>
+<p>Non-orthogonal means the vector from the face is not parallel to the vector from the cell centres.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ two
+$ cp -r $FOAM_TUTORIALS/compressible/sonicFoam/laminar/shockTube/ .
+$ mv shockTube 019_discretisation_base_case
+$ cd 019_discretisation_base_case
+$ cd 0
+$ rm magU p
+$ nano T
+</pre></div>
+</div>
+<p>Change sides to inletOutlet (from zeroGradient). Velocity is fixed to zero entering domain.</p>
+<div class="highlight-python"><div class="highlight"><pre>sides
+{
+    type        inletOutlet;
+    inletValue  uniform 0;
+    value       uniform 0;
+}
+</pre></div>
+</div>
+<p>Copy pitzDaily transportProperties from scalarTransportFoam</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd ../constant
+$ rm thermophysicalProperties turbulenceProperties
+$ cp -r $FOAM_TUTORIALS/basic/scalarTransportFoam/pitzDaily/constant/transportProperties .
+</pre></div>
+</div>
+<p>Set diffusivity to zero - so that only convection will be used.</p>
+<p>remove controlDict fvSchemes and fvSolution</p>
+<div class="highlight-python"><div class="highlight"><pre>$ rm ./system/controlDict ./system/fvSchemes ./system/fvSolution
+</pre></div>
+</div>
+<p>Copy files from pitzDaily for scalarTrasportFoam</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cp $FOAM_TUTORIALS/basic/scalarTransportFoam/pitzDaily/system/controlDict ./system
+$ cp $FOAM_TUTORIALS/basic/scalarTransportFoam/pitzDaily/system/fvSchemes ./system
+$ cp $FOAM_TUTORIALS/basic/scalarTransportFoam/pitzDaily/system/fvSolution ./system
+</pre></div>
+</div>
+<p>Change endtime to 5 in controlDict, deltaT = 0.005 (for CFL&lt;1 for Quick scheme), writeControl = runTime, writeInterval = 1;</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ./system/controlDict
+</pre></div>
+</div>
+<p>Set the fields to a velocity of 1 in positive x and passive scalar to 1</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano ./system/setFieldsDict
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>defaultFieldValues ( volVectorFieldValue U ( 1 0 0 ) volScalarFieldValue T 0 );
+
+regions ( boxToCell { box ( -0.5 -1 -1 ) ( 0.5 1 1 ) ; fieldValues ( volScalarFieldValue T 1 ) ; } );
+</pre></div>
+</div>
+<p>Create mesh</p>
+<div class="highlight-python"><div class="highlight"><pre>$ blockMesh
+</pre></div>
+</div>
+<p>setFields</p>
+<div class="highlight-python"><div class="highlight"><pre>$ setFields
+</pre></div>
+</div>
+<p>Create other cases:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd ..
+$ cp -r 019_discretisation_base_case 020_upwind
+$ cp -r 019_discretisation_base_case 021_linear
+$ cp -r 019_discretisation_base_case 022_linear_upwind
+$ cp -r 019_discretisation_base_case 023_quick
+$ cp -r 019_discretisation_base_case 024_cubic
+</pre></div>
+</div>
+<p>Change the schemes</p>
+<ul class="simple">
+<li>Upwind for divergence term in transport equation</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>$ cd 020_upwind
+$ nano ./system/fvSchemes
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>divSchemes
+{
+    ...
+    div(phi,T) Gauss upwind;
+}
+</pre></div>
+</div>
+<p>Start the simulation</p>
+<div class="highlight-python"><div class="highlight"><pre>$ scalarTransportFoam
+</pre></div>
+</div>
+<p>Create .foam file</p>
+<div class="highlight-python"><div class="highlight"><pre>$ paraFoam -touch
+</pre></div>
+</div>
+<p>Open Paraview</p>
+<div class="highlight-python"><div class="highlight"><pre>$ paraFoam -builtin
+</pre></div>
+</div>
+<p>Can rescale to range to observe diffusion</p>
+<ul class="simple">
+<li>Linear for divergence term in transport equation</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>$ cd 021_linear
+$ nano ./system/fvSchemes
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>divSchemes
+{
+    ...
+    div(phi,T) Gauss linear;
+}
+</pre></div>
+</div>
+<p>Start simulation, create .foam file and open in paraview (from existing paraview)</p>
+<p>Linear scheme maintains 1, but now has -ve values - oscillations seen by rescaling from -0.01 to 0.01</p>
+<p>The inletOutlet condition is one derived from mixed, which switches between zeroGradient when the fluid flows out of the domain at a patch face, and fixedValue, when the fluid is flowing into the domain. This was applied for temperature T.</p>
+<p>The inletOutlet boundary condition is normally the same as zeroGradient, but it switches to fixedValue if the velocity vector next to the boundary aims inside the domain (backward flow). The value of that fixedValue is inletValue.</p>
+<ul class="simple">
+<li>Linear upwind for divergence term in transport equation</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>$ cd 022_linear_upwind
+$ nano ./system/fvSchemes
+</pre></div>
+</div>
+<p>The grad(T) is needed in the linear upwind differencing scheme - will use linear scheme defined for gradSchemes</p>
+<div class="highlight-python"><div class="highlight"><pre>gradSchemes
+{
+    default Gauss linear;
+}
+
+divSchemes
+{
+    ...
+    div(phi,T) Gauss linearUpwind grad(T);
+}
+</pre></div>
+</div>
+<p>Start simulation, create .foam file and open in paraview (from existing paraview)</p>
+<p>No more oscillations in T using linearUpwind, but still slightly negative value.</p>
+<ul class="simple">
+<li>QUICK for divergence term in transport equation</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>$ cd 023_quick
+$ nano ./system/fvSchemes
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>divSchemes
+{
+    ...
+    div(phi,T) Gauss QUICK;
+}
+</pre></div>
+</div>
+<p>The minimum in QUICK is zero, QUICK and linearUpwind are comparable.</p>
+<ul class="simple">
+<li>4th order cubic for divergence term in transport equation</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>$ cd 024_cubic
+$ nano ./system/fvSchemes
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>divSchemes
+{
+    ...
+    div(phi,T) Gauss cubic;
+}
+</pre></div>
+</div>
+<p>Cubic has some oscillations</p>
+<p>Change T boundary sides from inletOutlet to zeroGradient</p>
+<p>Deleted old folders</p>
+<div class="highlight-python"><div class="highlight"><pre>$ rm -rf *[1-9]
+</pre></div>
+</div>
+<p>Re-run simulation</p>
+<div class="highlight-python"><div class="highlight"><pre>$ scalarTransportFoam
+</pre></div>
+</div>
+<p>Refresh in Paraview - shows large oscillations - wave is being reflected.</p>
+<p>QUICK and linear upwind are the best.</p>
+<p>Change Courant number to 1 for Linear Upwind deltaT = 0.01:</p>
+<div class="highlight-python"><div class="highlight"><pre>nano system/controlDict
+</pre></div>
+</div>
+<p>Deleted old folders</p>
+<div class="highlight-python"><div class="highlight"><pre>$ rm -rf *[1-9]
+</pre></div>
+</div>
+<p>Re-run</p>
+<div class="highlight-python"><div class="highlight"><pre>$ scalarTransportFoam
+</pre></div>
+</div>
+<p>Refresh in paraview - field is now more smeared, but it runs</p>
+<p>Using Courant number 1 for QUICK - it doesn&#8217;t run</p>
+</div>
+<div class="section" id="example-blob-openfoam-2-4-0">
+<h2><a class="toc-backref" href="#id65">1.2.17. Example - Blob (OpenFOAM 2.4.0)</a><a class="headerlink" href="#example-blob-openfoam-2-4-0" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>$ two
+$ run
+$ cp -r $FOAM_TUTORIALS/basic/scalarTransportFoam/pitzDaily/ .
+$ mv pitzDaily 025_blob
+$ cd 025_blob
+</pre></div>
+</div>
+<p>Seeing what Pitz Daily actually does</p>
+<div class="highlight-python"><div class="highlight"><pre>$ blockMesh
+$ scalarTransportFoam
+$ paraFoam -touch
+$ paraFoam -builtin
+</pre></div>
+</div>
+<p>Realising that Pitz Daily has the wrong mesh and wrong boundary conditions</p>
+<p>Copying the mesh from the lid driven cavity:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cp -r /home/apr207/OpenFOAM/OpenFOAM-2.4.0/tutorials/incompressible/icoFoam/cavity/constant/polyMesh/blockMeshDict ./constant/polyMesh/
+</pre></div>
+</div>
+<p>Changing the blockMeshDict to match the geometry:</p>
+<div class="highlight-python"><div class="highlight"><pre>convertToMeters 1.0;
+
+vertices
+(
+    (0 0 0)
+    (10 0 0)
+    (10 10 0)
+    (0 10 0)
+    (0 0 1)
+    (10 0 1)
+    (10 10 1)
+    (0 10 1)
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) (50 50 1) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    sides
+    {
+        type patch;
+        faces
+        (
+            (3 7 6 2)
+            (0 4 7 3)
+            (2 6 5 1)
+            (1 5 4 0)
+        );
+    }
+    frontAndBack
+    {
+        type empty;
+        faces
+        (
+            (0 3 2 1)
+            (4 5 6 7)
+        );
+    }
+);
+
+mergePatchPairs
+(
+);
+</pre></div>
+</div>
+<p>Possible setFields (tutorials/compressible/sonicFoam/laminar)</p>
+<ul class="simple">
+<li>boxToCell</li>
+<li>cylinderToCell</li>
+<li>sphereToCell</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>cylinderToCell
+(
+    p1 (5 5 0);
+    p2 (5 5 1);
+    radius 1;
+    fieldValues
+    (
+        volScalarFieldValue T 600
+    );
+)
+
+sphereToCell
+(
+    centre (0 0 0);
+    radius 1;
+    fieldValues
+    (
+        volScalarFieldValue T 600
+    );
+)
+
+boxToCell
+(
+    box (0 0 0) (0 0 1);
+    fieldValues
+    (
+        volScalarFieldValue T 600
+    );
+)
+</pre></div>
+</div>
+<p>Use cylinder to cell - scalar is one in circle, zero outside</p>
+<div class="highlight-python"><div class="highlight"><pre>cylinderToCell
+(
+    p1 (5 5 0);
+    p2 (5 5 1);
+    radius 1;
+    fieldValues
+    (
+        volScalarFieldValue T 1
+    );
+)
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-blob-2-openfoam-2-4-0">
+<h2><a class="toc-backref" href="#id66">1.2.18. Example - Blob 2 (OpenFOAM 2.4.0)</a><a class="headerlink" href="#example-blob-2-openfoam-2-4-0" title="Permalink to this headline">¶</a></h2>
+<p>Copy the shockTube case</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cp -rf /home/apr207/OpenFOAM/OpenFOAM-2.4.0/tutorials/compressible/sonicFoam/laminar/shockTube/ .
+$ mv shockTube 026_blob_2
+$ cd 026_blob_2
+</pre></div>
+</div>
+<p>Edit BCs</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano 0/T
+
+    sides
+    {
+        type            inletOutlet;
+        inletValue      uniform 0;
+        outletValue     uniform 0;
+    }
+
+$ nano 0/p
+
+    internalField   uniform (1 0 0);
+</pre></div>
+</div>
+<p>Copy transport properties from pitzDaily tutorial (scalar transport case) and remove others</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cp $FOAM_TUTORIALS/basic/scalarTransportFoam/pitzDaily/constant/transportProperties
+$ rm -rf thermophysicalProperties turbulenceProperties
+</pre></div>
+</div>
+<p>Set a zero diffusion</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/transportProperties
+
+    DT              DT [ 0 2 -1 0 0 0 0 ] 0.0;
+</pre></div>
+</div>
+<p>Change the blockMeshDict</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nano constant/polyMesh/blockMeshDict
+
+    vertices
+    (
+        (-5 -5 -1)
+        (5 -5 -1)
+        (5 5 -1)
+        (-5 5 -1)
+        (-5 -5 1)
+        (5 -5 1)
+        (5 5 1)
+        (-5 5 1)
+    );
+
+    blocks
+    (
+        hex (0 1 2 3 4 5 6 7) (100 100 1) simpleGrading (1 1 1)
+    );
+
+    edges
+    (
+    );
+
+    boundary
+    (
+        sides
+        {
+            type patch;
+            faces
+            (
+                (1 2 6 5)
+                (0 4 7 3)
+                (3 7 6 2)
+                (0 1 5 4)
+            );
+        }
+        empty
+        {
+            type empty;
+            faces
+            (
+                (5 6 7 4)
+                (0 3 2 1)
+            );
+        }
+    );
+</pre></div>
+</div>
+<p>Delete fvSolution, fvSchemes and controlDict (as they were for sonicFoam) and copy the ones from pitzDaily</p>
+<div class="highlight-python"><div class="highlight"><pre>$ rm -rf controlDict  fvSchemes  fvSolution
+$ cp -rf $FOAM_TUTORIALS/basic/scalarTransportFoam/pitzDaily/system/controlDict system/
+$ cp -rf $FOAM_TUTORIALS/basic/scalarTransportFoam/pitzDaily/system/fvS* system/
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/controlDict
+
+    startFrom       latestTime;
+
+    startTime       0;
+
+    stopAt          endTime;
+
+    endTime         4;
+
+    deltaT          0.01;
+
+    writeControl    runTime;
+
+    writeInterval   1;
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ nano system/setFieldsDict
+
+    defaultFieldValues ( volScalarFieldValue T 0.0 );
+
+    regions
+    (
+            sphereToCell
+            {
+                    centre (0.0 0.0 0.0);
+                    radius 1;
+                    fieldValues
+                    (
+                            volScalarFieldValue T 1
+                    );
+            }
+    );
+</pre></div>
+</div>
+<p>Create Mesh and set fields and run case</p>
+<div class="highlight-python"><div class="highlight"><pre>$ blockMesh
+$ setFields
+$ scalarTransportFoam
+</pre></div>
+</div>
+<p>Change the direction of the blob  - phi depends on velocity (createPhi.H), so must be deleted if velocity is changed</p>
+<div class="highlight-python"><div class="highlight"><pre>$ rm 4/phi
+$ nano 4/U
+    internalField uniform (0 1 0);
+$ nano system/controlDict
+    endTime 8;
+</pre></div>
+</div>
+<p>Change the direction of the blob  - phi depends on velocity (createPhi.H), so must be deleted if velocity is changed</p>
+<div class="highlight-python"><div class="highlight"><pre>$ rm 8/phi
+$ nano 8/U
+    internalField uniform (-1 -1 0);
+$ nano system/controlDict
+    endTime 12;
+</pre></div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../24_openfoam_language/openfoam_language.html">1.1. OpenFOAM Language</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../26_openfoam_tutorials_exeter/openfoam_tutorials_exeter.html">1.3. OpenFOAM Tutorials - University of Exeter (Password Protected)</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,754 @@
+twoPhaseEulerFoamErrors
+=======================
+
+.. contents::
+   :local:
+
+.. highlight:: c++   
+   
+Error 1 - alpha not showing at t=0
+----------------------------------
+
+If setFields does show alpha values at t=0, it is because you need to set the limits of setFields dictionary to exactly correspond with the limits in the model. If you renumberMesh, you must use -overwrite as well, otherwise it will stick the mesh in a funny place 
+
+Adding cells with center within box (-0.04 0 0) (0.04 1 0.01)
+
+
+Error 2 - floating point exception
+----------------------------------
+
+Granular pressure, pa, has gone to infinity (1.8e6) near the wall.
+
+Alpha has also gone above 0.65 
+
+Need to plot everything in gnuplot: residuals, pa, Theta, nua
+
+::
+
+    Courant Number mean: 0.0693311 max: 3.65054
+    Max Ur Courant Number = 62.5038
+    Time = 0.041
+
+    DILUPBiCG:  Solving for alpha, Initial residual = 0.0210031, Final residual = 4.16181e-11, No Iterations 9
+    Dispersed phase volume fraction = 0.571186  Min(alpha) = -0.019327  Max(alpha) = 0.995556
+    DILUPBiCG:  Solving for alpha, Initial residual = 0.0107219, Final residual = 3.03307e-11, No Iterations 10
+    Dispersed phase volume fraction = 0.571186  Min(alpha) = -0.27625  Max(alpha) = 1.34132
+    kinTheory: max(Theta) = 48.117
+    kinTheory: min(nua) = 5.03589e-13, max(nua) = 0.0344828
+    kinTheory: min(pa) = -7.09087e-10, max(pa) = 3.32578e+07
+    [5] #0  Foam::error::printStack(Foam::Ostream&) at ??:?
+    [5] #1  Foam::sigFpe::sigHandler(int) at ??:?
+    [5] #2   in "/lib/x86_64-linux-gnu/libc.so.6"
+    [5] #3  Foam::GAMGSolver::scalingFactor(Foam::Field<double>&, Foam::Field<double> const&, Foam::Field<double> const&, Foam::Field<double> const&) const at ??:?
+    [5] #4  Foam::GAMGSolver::scalingFactor(Foam::Field<double>&, Foam::lduMatrix const&, Foam::Field<double>&, Foam::FieldField<Foam::Field, double> const&, Foam::UPtrList<Foam::lduInterfaceField const> const&, Foam::Field<double> const&, unsigned char) const at ??:?
+    [5] #5  Foam::GAMGSolver::Vcycle(Foam::PtrList<Foam::lduMatrix::smoother> const&, Foam::Field<double>&, Foam::Field<double> const&, Foam::Field<double>&, Foam::Field<double>&, Foam::Field<double>&, Foam::PtrList<Foam::Field<double> >&, Foam::PtrList<Foam::Field<double> >&, unsigned char) const at ??:?
+    [5] #6  Foam::GAMGSolver::solve(Foam::Field<double>&, Foam::Field<double> const&, unsigned char) const at ??:?
+    [5] #7  Foam::fvMatrix<double>::solve(Foam::dictionary const&) at ??:?
+    [5] #8  
+    [5]  at ??:?
+    [5] #9  __libc_start_main in "/lib/x86_64-linux-gnu/libc.so.6"
+    [5] #10  
+    [5]  at ??:?
+    [emps-andrew:02679] *** Process received signal ***
+    [emps-andrew:02679] Signal: Floating point exception (8)
+    [emps-andrew:02679] Signal code:  (-6)
+    [emps-andrew:02679] Failing at address: 0x3e800000a77
+    [emps-andrew:02679] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x354b0)[0x7fbe424d84b0]
+    [emps-andrew:02679] [ 1] /lib/x86_64-linux-gnu/libc.so.6(gsignal+0x38)[0x7fbe424d8428]
+    [emps-andrew:02679] [ 2] /lib/x86_64-linux-gnu/libc.so.6(+0x354b0)[0x7fbe424d84b0]
+    [emps-andrew:02679] [ 3] /home/apr207/OpenFOAM/OpenFOAM-2.1.0/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZNK4Foam10GAMGSolver13scalingFactorERNS_5FieldIdEERKS2_S5_S5_+0x64)[0x7fbe435c0934]
+    [emps-andrew:02679] [ 4] /home/apr207/OpenFOAM/OpenFOAM-2.1.0/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZNK4Foam10GAMGSolver13scalingFactorERNS_5FieldIdEERKNS_9lduMatrixES3_RKNS_10FieldFieldIS1_dEERKNS_8UPtrListIKNS_17lduInterfaceFieldEEERKS2_h+0x9e)[0x7fbe435c0d0e]
+    [emps-andrew:02679] [ 5] /home/apr207/OpenFOAM/OpenFOAM-2.1.0/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZNK4Foam10GAMGSolver6VcycleERKNS_7PtrListINS_9lduMatrix8smootherEEERNS_5FieldIdEERKS8_S9_S9_S9_RNS1_IS8_EESD_h+0x1023)[0x7fbe435c3353]
+    [emps-andrew:02679] [ 6] /home/apr207/OpenFOAM/OpenFOAM-2.1.0/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZNK4Foam10GAMGSolver5solveERNS_5FieldIdEERKS2_h+0x38c)[0x7fbe435c42bc]
+    [emps-andrew:02679] [ 7] /home/apr207/OpenFOAM/OpenFOAM-2.1.0/platforms/linux64GccDPOpt/lib/libfiniteVolume.so(_ZN4Foam8fvMatrixIdE5solveERKNS_10dictionaryE+0x10b)[0x7fbe44e3bcbb]
+    [emps-andrew:02679] [ 8] twoPhaseEulerFoam[0x449c6a]
+    [emps-andrew:02679] [ 9] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf0)[0x7fbe424c3830]
+    [emps-andrew:02679] [10] twoPhaseEulerFoam[0x450859]
+    [emps-andrew:02679] *** End of error message ***
+    --------------------------------------------------------------------------
+    mpirun noticed that process rank 5 with PID 2679 on node emps-andrew exited on signal 8 (Floating point exception).
+    --------------------------------------------------------------------------
+
+Error 3 - polyMesh folder not present in polymesh (Case Conflict)
+-----------------------------------------------------------------
+
+processor7/constant/polymesh (Case Conflict)
+
+rename processor7/constant/polyMesh (Case Conflict) to processor7/constant/polyMesh
+
+::
+
+    --> FOAM FATAL ERROR: 
+    Cannot find file "points" in directory "polyMesh" in times 0 down to constant
+
+        From function Time::findInstance(const fileName&, const word&, const IOobject::readOption, const word&)
+        in file db/Time/findInstance.C at line 203.
+
+Error 4 - cannot find phaseProperties
+-------------------------------------
+
+Because using the alias paraview4 invokes openfoam 2.4.0, so to run, you must use 2.2.2 again
+
+::
+
+    [0] --> FOAM FATAL IO ERROR: 
+    [0] cannot open file
+    [0] 
+    [0] file: /home/apr207/OpenFOAM/apr207-2.1.0/run/eulerian_002_bin_discharge/processor0/constant/phaseProperties at line 0.
+
+
+Error 5 - cannot find file
+--------------------------
+
+The sets folder is written when checkMesh employed
+
+::
+
+    [1] --> FOAM FATAL IO ERROR: 
+    [1] cannot find file
+    [1] 
+    [1] file: /home/apr207/OpenFOAM/apr207-2.2.2/run/eulerian_011_analytical_equation/processor1/0/U1 at line 0.
+
+Error 5 - zig-zag results that are bizzare
+------------------------------------------
+
+Remove mean files from 0 folder
+
+If there are no mean results - re-run 
+
+
+Error 6 - no rule
+-----------------
+
+::
+
+    ./Allwclean
+    ./Allwmake
+
+Make sure that the files are defintely in the correct folder! If not, there will be an error like this:
+
+::
+
+    make: *** No rule to make target 'derivedFvPatchFields/JohnsonJacksonParticleSlip/JohnsonJacksonParticleSlipFvPatchVectorField.dep', needed by 'Make/linux64GccDPOpt/dependencies'. Stop.
+
+Error 7 - twoPhaseSystem.H: No such file or directory
+-----------------------------------------------------
+
+This error occurs because of renaming of variables and the way they are looked up in the dictinaries between 2.3.x and 2.2.2.
+
+::
+
+    ./Allwclean
+    ./Allwmake
+
+::
+    
+    derivedFvPatchFields/JohnsonJacksonParticleSlip/JohnsonJacksonParticleSlipFvPatchVectorField.C:24:28: fatal error: twoPhaseSystem.H: No such file or directory
+
+Replace header files - twoPhaseSystem.H is used in 2.3.x to allow different names for the two phases, e.g. air and water, looked up in the phaseProperties dictionary.
+ 
+The equivalent in 2.2.2 is phaseModel.H, which looks up everything from transportProperties.
+
+ 
+.. list-table::
+    :header-rows: 1
+    :widths: 60 60
+
+    * - Old
+      - New
+    * - ::
+
+            #include "twoPhaseSystem.H"
+            
+      - ::
+
+            #include "phaseModel.H"
+
+However, this requires that we change the rest of the code, in order to lookup everything from the new dictionary.           
+           
+           
+.. list-table::
+   :header-rows: 1
+   :widths: 50 50
+
+   * - Old
+     - New           
+   * - ::
+       
+            void Foam::JohnsonJacksonParticleSlipFvPatchVectorField::updateCoeffs()
+            {
+                if (updated())
+                {
+                    return;
+                }
+
+                // lookup the fluid model and the phase
+                const twoPhaseSystem& fluid = db().lookupObject<twoPhaseSystem>
+                (
+                    "phaseProperties"
+                );
+
+                const phaseModel& phased
+                (
+                    fluid.phase1().name() == dimensionedInternalField().group()
+                ? fluid.phase1()
+                : fluid.phase2()
+                );
+
+                // lookup all the fields on this patch
+                const fvPatchScalarField& alpha
+                (
+                    patch().lookupPatchField<volScalarField, scalar>
+                    (
+                        phased.volScalarField::name()
+                    )
+                );
+
+                const fvPatchScalarField& gs0
+                (
+                    patch().lookupPatchField<volScalarField, scalar>
+                    (
+                        IOobject::groupName("gs0", phased.name())
+                    )
+                );
+
+                const scalarField nu
+                (
+                    patch().lookupPatchField<volScalarField, scalar>
+                    (
+                        IOobject::groupName("nut", phased.name())
+                    )
+                );
+
+                word ThetaName(IOobject::groupName("Theta", phased.name()));
+
+                const fvPatchScalarField& Theta
+                (
+                    db().foundObject<volScalarField>(ThetaName)
+                ? patch().lookupPatchField<volScalarField, scalar>(ThetaName)
+                : alpha
+                );
+
+                // lookup the packed volume fraction
+                dimensionedScalar alphaMax
+                (
+                    "alphaMax",
+                    dimless,
+                    db()
+                .lookupObject<IOdictionary>
+                    (
+                        IOobject::groupName("turbulenceProperties", phased.name())
+                    )
+                .subDict("RAS")
+                .subDict("kineticTheoryCoeffs")
+                .lookup("alphaMax")
+                );
+
+                // calculate the slip value fraction
+                scalarField c
+                (
+                    constant::mathematical::pi
+                *alpha
+                *gs0
+                *specularityCoefficient_.value()
+                *sqrt(3.0*Theta)
+                /max(6.0*nu*alphaMax.value(), SMALL)
+                );
+
+                this->valueFraction() = c/(c + patch().deltaCoeffs());
+
+                partialSlipFvPatchVectorField::updateCoeffs();
+            }
+            
+     - ::
+      
+            void Foam::JohnsonJacksonParticleSlipFvPatchVectorField::updateCoeffs()
+            {
+                if (updated())
+                {
+                    return;
+                }
+
+
+                // lookup all the fields on this patch
+                const fvPatchScalarField& alpha =
+                    patch().lookupPatchField<volScalarField, scalar>("alpha1");
+                const fvPatchScalarField& nu =
+                    patch().lookupPatchField<volScalarField, scalar>("nuEff1");
+                const fvPatchScalarField& gs0 =
+                    patch().lookupPatchField<volScalarField, scalar>("gs0");
+                const fvPatchScalarField& Theta =
+                    patch().lookupPatchField<volScalarField, scalar>("Theta");
+
+
+                const dictionary& kineticTheoryProperties =
+                    db()
+                .lookupObject<IOdictionary>
+                    (
+                        "kineticTheoryProperties"
+                    );
+
+                const dimensionedScalar alphaMax(kineticTheoryProperties.lookup("alphaMax"));	
+
+                // calculate the slip value fraction
+                scalarField c
+                (
+                    constant::mathematical::pi
+                *alpha
+                *gs0
+                *specularityCoefficient_.value()
+                *sqrt(3.0*Theta)
+                /max(6.0*nu*alphaMax.value(), SMALL)
+                );
+
+                this->valueFraction() = c/(c + patch().deltaCoeffs());
+
+                partialSlipFvPatchVectorField::updateCoeffs();
+            }
+           
+           
+Error 8 - can't find patch type
+-------------------------------  
+   
+::
+
+    [2] --> FOAM FATAL IO ERROR:
+    [2] Unknown patchField type JohnsonJacksonParticleSlip for patch type wall
+  
+Add this to controlDict - when you have custom libraries, OpenFOAM needs to be given the name of the new library. However, if the solver has been compiled correctly, this should now be neccessary./
+
+::
+
+   libs ("libkineticTheoryModelSrivastava.so");
+   
+   
+   
+Error 9 - duplicate entries
+---------------------------
+   
+::
+
+    Duplicate entry Gidaspow in runtime selection table viscosityModel
+    Duplicate entry Syamlal in runtime selection table viscosityModel
+    Duplicate entry HrenyaSinclair in runtime selection table viscosityModel
+    Duplicate entry none in runtime selection table viscosityModel
+    Duplicate entry Gidaspow in runtime selection table conductivityModel
+    Duplicate entry CarnahanStarling in runtime selection table radialModel
+    Duplicate entry LunSavage in runtime selection table radialModel
+    Duplicate entry SinclairJackson in runtime selection table radialModel   
+    Duplicate entry Lun in runtime selection table granularPressureModel   
+    Duplicate entry SyamlalRogersOBrien in runtime selection table granularPressureModel   
+    Duplicate entry JohnsonJackson in runtime selection table frictionalStressModel   
+    Duplicate entry Schaeffer in runtime selection table frictionalStressModel   
+
+This is because these two libraries duplicate the entries:    
+
+::
+
+    /home/apr207/OpenFOAM/apr207-2.2.2/platforms/linux64GccDPOpt/lib/libkineticTheoryModel.so
+    /home/apr207/OpenFOAM/apr207-2.2.2/platforms/linux64GccDPOpt/lib/libkineticTheoryModelSrivastava.so   
+   
+This is because you are running twoPhaseEulerFoam and calling the library twoPhaseEulerSrivastava in controlDict, so these two conflict!
+   
+   
+Error 10 - mpi failure at end
+-----------------------------   
+
+This was because you are running twoPhaseEulerFoam and not twoPhaseeulerSrivastava
+   
+::
+
+    fieldAverage fieldAverage1 output:
+        Calculating averages
+        Writing average fields
+
+    End
+
+    Finalising parallel run
+    [emps-andrew:00860] *** Process received signal ***
+    [emps-andrew:00860] Signal: Aborted (6)
+    [emps-andrew:00860] Signal code:  (-6)
+    [emps-andrew:00860] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x354b0)[0x7f872ddda4b0]
+    [emps-andrew:00860] [ 1] /lib/x86_64-linux-gnu/libc.so.6(gsignal+0x38)[0x7f872ddda428]
+    [emps-andrew:00860] [ 2] /lib/x86_64-linux-gnu/libc.so.6(abort+0x16a)[0x7f872dddc02a]
+    [emps-andrew:00860] [ 3] /lib/x86_64-linux-gnu/libc.so.6(+0x777ea)[0x7f872de1c7ea]
+    [emps-andrew:00860] [ 4] /lib/x86_64-linux-gnu/libc.so.6(+0x80baf)[0x7f872de25baf]
+    [emps-andrew:00860] [ 5] /lib/x86_64-linux-gnu/libc.so.6(cfree+0x4c)[0x7f872de2953c]
+    [emps-andrew:00860] [ 6] [emps-andrew:00861] *** Process received signal ***
+    [emps-andrew:00861] Signal: Aborted (6)
+    [emps-andrew:00861] Signal code:  (-6)
+    [emps-andrew:00861] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x354b0)[0x7f181f02b4b0]
+    [emps-andrew:00861] [ 1] /lib/x86_64-linux-gnu/libc.so.6(gsignal+0x38)[0x7f181f02b428]
+    [emps-andrew:00861] [ 2] /lib/x86_64-linux-gnu/libc.so.6(abort+0x16a)[0x7f181f02d02a]
+    /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam10dictionaryD1Ev+0xdd)[0x7f872eec55ad]
+    [emps-andrew:00860] [ 7] [emps-andrew:00863] *** Process received signal ***
+    [emps-andrew:00863] Signal: Aborted (6)
+    [emps-andrew:00863] Signal code:  (-6)
+    [emps-andrew:00863] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x354b0)[0x7efc67b424b0]
+    [emps-andrew:00863] [ 1] [emps-andrew:00861] [ 3] /lib/x86_64-linux-gnu/libc.so.6(gsignal+0x38)[0x7efc67b42428]
+    /lib/x86_64-linux-gnu/libc.so.6(+0x777ea)[0x7f181f06d7ea]
+    [emps-andrew:00861] [ 4] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam15dictionaryEntryD0Ev+0x2a)[0x7f872eeda88a]
+    [emps-andrew:00860] [ 8] [emps-andrew:00863] [ 2] /lib/x86_64-linux-gnu/libc.so.6(+0x80c71)[0x7f181f076c71]
+    /lib/x86_64-linux-gnu/libc.so.6(abort+0x16a)[0x7efc67b4402a]
+    [emps-andrew:00863] [ 3] [emps-andrew:00861] /lib/x86_64-linux-gnu/libc.so.6(+0x777ea)[0x7efc67b847ea]
+    [emps-andrew:00863] [ 4] [ 5] /lib/x86_64-linux-gnu/libc.so.6(+0x80c71)[0x7efc67b8dc71]
+    [emps-andrew:00863] [ 5] /lib/x86_64-linux-gnu/libc.so.6(cfree+0x4c)[0x7efc67b9153c]
+    /lib/x86_64-linux-gnu/libc.so.6(cfree+0x4c)[0x7f181f07a53c]
+    [emps-andrew:00861] [ 6] /lib/x86_64-linux-gnu/libc.so.6(+0x3a025)[0x7f181f030025]
+    [emps-andrew:00861] [ 7] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam10dictionaryD1Ev+0xdd)[0x7f872eec55ad]
+    [emps-andrew:00860] [ 9] /lib/x86_64-linux-gnu/libc.so.6(+0x3a045)[0x7f181f030045]
+    [emps-andrew:00861] [ 8] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/openmpi-system/libPstream.so(+0x476a)[0x7f181edef76a]
+    [emps-andrew:00861] [ 9] twoPhaseEulerFoam[0x44050a]
+    [emps-andrew:00861] [10] [emps-andrew:00863] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf0)[0x7f181f016830]
+    [emps-andrew:00861] [11] twoPhaseEulerFoam[0x441eb9]
+    [emps-andrew:00861] *** End of error message ***
+    [ 6] /lib/x86_64-linux-gnu/libc.so.6(+0x3a025)[0x7efc67b47025]
+    /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam10dictionaryD0Ev+0x9)[0x7f872eec5719]
+    [emps-andrew:00860] [10] [emps-andrew:00863] [ 7] /lib/x86_64-linux-gnu/libc.so.6(+0x3a045)[0x7efc67b47045]
+    [emps-andrew:00863] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam5debug20deleteControlDictPtrD1Ev+0x2b4)[0x7f872ee1b134]
+    [emps-andrew:00860] [11] [ 8] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/openmpi-system/libPstream.so(+0x476a)[0x7efc6790676a]
+    [emps-andrew:00863] [ 9] /lib/x86_64-linux-gnu/libc.so.6(__cxa_finalize+0x9a)[0x7f872dddf36a]
+    [emps-andrew:00860] [12] twoPhaseEulerFoam[0x44050a]
+    [emps-andrew:00863] [10] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf0)[0x7efc67b2d830]
+    [emps-andrew:00863] [11] twoPhaseEulerFoam[0x441eb9]
+    [emps-andrew:00863] *** End of error message ***
+    /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(+0x1fd623)[0x7f872ee11623]
+    [emps-andrew:00860] *** End of error message ***
+    [emps-andrew:00864] *** Process received signal ***
+    [emps-andrew:00864] Signal: Aborted (6)
+    [emps-andrew:00864] Signal code:  (-6)
+    [emps-andrew:00864] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x354b0)[0x7f12485454b0]
+    [emps-andrew:00864] [ 1] /lib/x86_64-linux-gnu/libc.so.6(gsignal+0x38)[0x7f1248545428]
+    [emps-andrew:00864] [ 2] /lib/x86_64-linux-gnu/libc.so.6(abort+0x16a)[0x7f124854702a]
+    [emps-andrew:00864] [ 3] /lib/x86_64-linux-gnu/libc.so.6(+0x777ea)[0x7f12485877ea]
+    [emps-andrew:00864] [ 4] /lib/x86_64-linux-gnu/libc.so.6(+0x80c71)[0x7f1248590c71]
+    [emps-andrew:00864] [ 5] /lib/x86_64-linux-gnu/libc.so.6(cfree+0x4c)[0x7f124859453c]
+    [emps-andrew:00864] [ 6] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam10dictionaryD1Ev+0xdd)[0x7f12496305ad]
+    [emps-andrew:00864] [ 7] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam15dictionaryEntryD0Ev+0x2a)[0x7f124964588a]
+    [emps-andrew:00864] [ 8] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam10dictionaryD1Ev+0xdd)[0x7f12496305ad]
+    [emps-andrew:00864] [ 9] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam10dictionaryD0Ev+0x9)[0x7f1249630719]
+    [emps-andrew:00864] [10] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam5debug20deleteControlDictPtrD1Ev+0x2b4)[0x7f1249586134]
+    [emps-andrew:00864] [11] /lib/x86_64-linux-gnu/libc.so.6(__cxa_finalize+0x9a)[0x7f124854a36a]
+    [emps-andrew:00864] [12] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(+0x1fd623)[0x7f124957c623]
+    [emps-andrew:00864] *** End of error message ***
+    [emps-andrew:00865] *** Process received signal ***
+    [emps-andrew:00865] Signal: Aborted (6)
+    [emps-andrew:00865] Signal code:  (-6)
+    [emps-andrew:00865] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x354b0)[0x7fdbfd0364b0]
+    [emps-andrew:00865] [ 1] /lib/x86_64-linux-gnu/libc.so.6(gsignal+0x38)[0x7fdbfd036428]
+    [emps-andrew:00865] [ 2] /lib/x86_64-linux-gnu/libc.so.6(abort+0x16a)[0x7fdbfd03802a]
+    [emps-andrew:00865] [ 3] /lib/x86_64-linux-gnu/libc.so.6(+0x777ea)[0x7fdbfd0787ea]
+    [emps-andrew:00865] [ 4] /lib/x86_64-linux-gnu/libc.so.6(+0x7e6ed)[0x7fdbfd07f6ed]
+    [emps-andrew:00865] [ 5] /lib/x86_64-linux-gnu/libc.so.6(+0x80678)[0x7fdbfd081678]
+    [emps-andrew:00865] [ 6] /lib/x86_64-linux-gnu/libc.so.6(cfree+0x4c)[0x7fdbfd08553c]
+    [emps-andrew:00865] [ 7] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam10dictionaryD1Ev+0xdd)[0x7fdbfe1215ad]
+    [emps-andrew:00865] [ 8] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam15dictionaryEntryD0Ev+0x2a)[0x7fdbfe13688a]
+    [emps-andrew:00865] [ 9] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam10dictionaryD1Ev+0xdd)[0x7fdbfe1215ad]
+    [emps-andrew:00865] [10] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam10dictionaryD0Ev+0x9)[0x7fdbfe121719]
+    [emps-andrew:00865] [11] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam5debug20deleteControlDictPtrD1Ev+0x2b4)[0x7fdbfe077134]
+    [emps-andrew:00865] [12] /lib/x86_64-linux-gnu/libc.so.6(__cxa_finalize+0x9a)[0x7fdbfd03b36a]
+    [emps-andrew:00865] [13] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(+0x1fd623)[0x7fdbfe06d623]
+    [emps-andrew:00865] *** End of error message ***
+    [emps-andrew:00862] *** Process received signal ***
+    [emps-andrew:00862] Signal: Aborted (6)
+    [emps-andrew:00862] Signal code:  (-6)
+    [emps-andrew:00862] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x354b0)[0x7f55f39fb4b0]
+    [emps-andrew:00862] [ 1] /lib/x86_64-linux-gnu/libc.so.6(gsignal+0x38)[0x7f55f39fb428]
+    [emps-andrew:00862] [ 2] /lib/x86_64-linux-gnu/libc.so.6(abort+0x16a)[0x7f55f39fd02a]
+    [emps-andrew:00862] [ 3] /lib/x86_64-linux-gnu/libc.so.6(+0x777ea)[0x7f55f3a3d7ea]
+    [emps-andrew:00862] [ 4] /lib/x86_64-linux-gnu/libc.so.6(+0x80c71)[0x7f55f3a46c71]
+    [emps-andrew:00862] [ 5] /lib/x86_64-linux-gnu/libc.so.6(cfree+0x4c)[0x7f55f3a4a53c]
+    [emps-andrew:00862] [ 6] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam10dictionaryD1Ev+0xdd)[0x7f55f4ae65ad]
+    [emps-andrew:00862] [ 7] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam15dictionaryEntryD0Ev+0x2a)[0x7f55f4afb88a]
+    [emps-andrew:00862] [ 8] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam10dictionaryD1Ev+0xdd)[0x7f55f4ae65ad]
+    [emps-andrew:00862] [ 9] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam10dictionaryD0Ev+0x9)[0x7f55f4ae6719]
+    [emps-andrew:00862] [10] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(_ZN4Foam5debug20deleteControlDictPtrD1Ev+0x2b4)[0x7f55f4a3c134]
+    [emps-andrew:00862] [11] /lib/x86_64-linux-gnu/libc.so.6(__cxa_finalize+0x9a)[0x7f55f3a0036a]
+    [emps-andrew:00862] [12] /home/apr207/OpenFOAM/OpenFOAM-2.2.2/platforms/linux64GccDPOpt/lib/libOpenFOAM.so(+0x1fd623)[0x7f55f4a32623]
+    [emps-andrew:00862] *** End of error message ***
+    --------------------------------------------------------------------------
+    mpirun noticed that process rank 2 with PID 862 on node emps-andrew exited on signal 6 (Aborted).
+    --------------------------------------------------------------------------
+   
+   
+Error 11 - member function not implemented
+------------------------------------------   
+
+This was because you are running twoPhaseEulerFoam and not twoPhaseEulerSrivastava
+   
+   
+   
+ ::
+
+    In file included from /home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/token.H:49:0,
+                    from /home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/UILListIO.C:28,
+                    from /home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/UILList.C:92,
+                    from /home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/UILList.H:330,
+                    from /home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/ILList.H:39,
+                    from /home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/IDLList.H:35,
+                    from /home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/entry.H:45,
+                    from /home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/dictionary.H:53,
+                    from lnInclude/frictionalStressModel.H:35,
+                    from frictionalStressModel/JohnsonJacksonSchaeffer/JohnsonJacksonSchaefferFrictionalStress.H:36,
+                    from frictionalStressModel/JohnsonJacksonSchaeffer/JohnsonJacksonSchaefferFrictionalStress.C:26:
+    lnInclude/frictionalStressModel.H: In instantiation of ‘static Foam::autoPtr<Foam::frictionalStressModel> Foam::frictionalStressModel::adddictionaryConstructorToTable<frictionalStressModelType>::New(const Foam::dictionary&) [with frictionalStressModelType = Foam::JohnsonJacksonSchaefferFrictionalStress]’:
+    lnInclude/frictionalStressModel.H:73:5:   required from ‘Foam::frictionalStressModel::adddictionaryConstructorToTable<frictionalStressModelType>::adddictionaryConstructorToTable(const Foam::word&) [with frictionalStressModelType = Foam::JohnsonJacksonSchaefferFrictionalStress]’
+    frictionalStressModel/JohnsonJacksonSchaeffer/JohnsonJacksonSchaefferFrictionalStress.C:35:5:   required from here
+    /home/apr207/OpenFOAM/OpenFOAM-2.2.2/src/OpenFOAM/lnInclude/runTimeSelectionTables.H:76:66: error: invalid new-expression of abstract class type ‘Foam::JohnsonJacksonSchaefferFrictionalStress’
+                return autoPtr< baseType >(new baseType##Type parList);           \
+                                                                    ^
+    lnInclude/frictionalStressModel.H:73:5: note: in expansion of macro ‘declareRunTimeSelectionTable’
+        declareRunTimeSelectionTable
+     ^
+
+::
+
+    In file included from frictionalStressModel/JohnsonJacksonSchaeffer/JohnsonJacksonSchaefferFrictionalStress.C:26:0:
+    frictionalStressModel/JohnsonJacksonSchaeffer/JohnsonJacksonSchaefferFrictionalStress.H:47:7: note:   because the following virtual functions are pure within ‘Foam::JohnsonJacksonSchaefferFrictionalStress’:
+    class JohnsonJacksonSchaefferFrictionalStress
+        ^
+        
+::
+
+    In file included from frictionalStressModel/JohnsonJacksonSchaeffer/JohnsonJacksonSchaefferFrictionalStress.H:36:0,
+                    from frictionalStressModel/JohnsonJacksonSchaeffer/JohnsonJacksonSchaefferFrictionalStress.C:26:
+    lnInclude/frictionalStressModel.H:125:37: note: 	virtual Foam::tmp<Foam::GeometricField<double, Foam::fvPatchField, Foam::volMesh> > Foam::frictionalStressModel::muf(const volScalarField&, const dimensionedScalar&, const volScalarField&, const volSymmTensorField&, const dimensionedScalar&) const
+            virtual tmp<volScalarField> muf
+                                        ^
+
+There is nothing unclear about the error message. Your class Foam::JohnsonJacksonSchaefferFrictionalStress has at least one member that is not implemented, which means it is abstract. You cannot instantiate an abstract class.
+
+Where to look: frictionModel.H needs a new defintion for muf (and so do all the other friction models):
+
+::
+
+        virtual tmp<volScalarField> muf
+        (
+            const volScalarField& alpha1,
+            const volScalarField& Theta,
+            const dimensionedScalar& alphaMinFriction,
+            const dimensionedScalar& alphaMax,
+            const volScalarField& pf,
+            const volSymmTensorField& D,
+            const dimensionedScalar& phi
+        ) const = 0;
+
+
+
+Error 12 - Not enough arguments
+-------------------------------
+
+::
+
+    In member function ‘void Foam::kineticTheoryModel::solve(const volTensorField&)’:
+    kineticTheoryModel/kineticTheoryModel.C:369:9: error: no matching function for call to ‘Foam::frictionalStressModel::muf(const volScalarField&, const dimensionedScalar&, Foam::volScalarField&, Foam::volSymmTensorField&, const dimensionedScalar&)’
+            )
+            ^
+    In file included from kineticTheoryModel/kineticTheoryModel.H:44:0,
+                    from kineticTheoryModel/kineticTheoryModel.C:26:
+    lnInclude/frictionalStressModel.H:125:37: note: candidate: virtual Foam::tmp<Foam::GeometricField<double, Foam::fvPatchField, Foam::volMesh> > Foam::frictionalStressModel::muf(const volScalarField&, const volScalarField&, const dimensionedScalar&, const dimensionedScalar&, const volScalarField&, const volSymmTensorField&, const dimensionedScalar&) const
+            virtual tmp<volScalarField> muf
+                                        ^
+    lnInclude/frictionalStressModel.H:125:37: note:   candidate expects 7 arguments, 5 provided            
+            
+
+Simply add more arguments to match the .H files:            
+            
+::
+
+    // frictional shear stress, Eq. 3.30, p. 52
+    volScalarField muf
+    (
+        frictionalStressModel_->muf
+        (
+            alpha1_,
+            Theta_,
+            alphaMinFriction_,
+            alphaMax_,
+            pf,
+            D,
+            phi_
+        )
+    );  
+   
+   
+Error 13 - OpenFOAM version 5.0 - cannot open case directory 
+------------------------------------------------------------
+
+blockMesh has not been run
+
+::
+   
+    [0] 
+    [0] 
+    [0] --> FOAM FATAL ERROR: 
+    [0] twoPhaseEulerFoam: cannot open case directory "/home/apr207/OpenFOAM/apr207-5.0/run/fluidisedBed/processor0"
+    [0] 
+    [0] 
+    FOAM parallel run exiting
+    [0]  
+   
+
+Error 14 - crazy zig-zag results
+--------------------------------
+
+Parallization probably not working properly - changed run script to use run functions
+
+::
+
+    # Run script for OpenFOAM 5.0
+
+    . $WM_PROJECT_DIR/bin/tools/RunFunctions	                                    # loads RunFunctions
+
+    rm -rf log.*
+
+    export NP=6					                                    # number of processors
+
+    # Mesh
+    runApplication blockMesh
+
+    # Check the mesh
+    runApplication checkMesh
+
+    # Decompose
+    runApplication decomposePar
+
+    # Run
+    runParallel $(getApplication)
+
+    # Reconstruct
+    runApplication reconstructPar
+
+    rm -r processor*
+
+    echo
+    echo "Creating files for paraview post-processing"
+    echo
+    touch foam.foam
+   
+   
+Error 15 - negative initial temperature
+---------------------------------------   
+
+::
+   
+    [0] --> FOAM FATAL ERROR: 
+    [0] Negative initial temperature T0: -730.68
+    [0]    
+   
+Turn off e:
+
+::
+
+    "(h|e).*"
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-6;
+        relTol          0;
+        minIter         0;  // APR changed from 1 to 0
+        maxIter         0;  // APR added
+    }
+   
+Change air properties:
+
+::
+
+    thermoType
+    {
+        type            heRhoThermo;
+        mixture         pureMixture;
+        transport       const;
+        thermo          hConst;
+        equationOfState rhoConst; // APR changed from perfectGas to rhoConst
+        specie          specie;
+        energy          sensibleInternalEnergy;
+    }
+
+    mixture
+    {
+        specie
+        {
+            molWeight   28.9;
+        }
+        equationOfState             // APR added equationOfState
+        {
+            rho         1.2;
+        }
+        thermodynamics
+        {
+            Cp          1007;
+            Hf          0;
+        }
+        transport
+        {
+            mu          1.84e-05;
+            Pr          0.7;
+        }
+    }
+
+Error 16 - cannot find file
+---------------------------
+
+Remove mean files
+
+::
+
+    --> FOAM FATAL IO ERROR:
+    [2] cannot find file
+    [2]
+    [2] file: /home/apr207/OpenFOAM/apr207-2.2.2/run/eulerian_043_walls_johnson_jackson_schaeffer/processor2/0/U1 at line 0.
+    [2]
+    [2]     From function regIOobject::readStream()
+    [2]     in file db/regIOobject/regIOobjectRead.C at line 73.
+  
+
+  
+Error 17 - Simulation stopped after I logged out
+------------------------------------------------
+  
+::
+
+    nohup sh run_script.sh &
+
+Or to direct it to a log file:
+
+::
+
+    nohup sh run_script.sh > log &
+  
+  
+::  
+  
+    # Run script for OpenFOAM 5.0
+
+    rm -rf log.*
+
+    # Check the mesh
+    checkMesh
+
+    # Set fields
+    rm -rf 0/alpha.particles
+    cp 0/alpha.particles.orig 0/alpha.particles
+    setFields
+
+    # Decompose
+    decomposePar
+
+    # Renumber
+    renumberMesh -overwrite
+
+    # Run
+    nohup nice -19 mpirun -np 6 twoPhaseEulerFoam -parallel > log 2>&1
+
+    # Reconstruct
+    reconstructPar
+
+    rm -r processor*
+
+    echo "Creating files for paraview post-processing"
+    touch foam.foam
+  
+  
+  
+

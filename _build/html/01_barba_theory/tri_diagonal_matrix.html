@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.7.1. Tri-Diagonal Matrix Algorithm &#8212; The Visual Room</title>
+    <title>1.1.7.1. Tri-Diagonal Matrix Algorithm &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
-    <link rel="next" title="1.8.1. The Euler Equations in Vector Form" href="euler_equations_in_vector_form.html" />
-    <link rel="prev" title="1.6.4. Strong and Weak Solutions" href="strong_weak.html" /> 
+    <link rel="up" title="1.1. Computational Fluid Dynamics Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.1.8.1. The Euler Equations in Vector Form" href="euler_equations_in_vector_form.html" />
+    <link rel="prev" title="1.1.6.4. Strong and Weak Solutions" href="strong_weak.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>1.7.1. Tri-Diagonal Matrix Algorithm</span></h2>
+        <h2 class="heading"><span>1.1.7.1. Tri-Diagonal Matrix Algorithm</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="strong_weak.html">1.6.4. Strong and Weak Solutions</a>
+        «&#160;&#160;<a href="strong_weak.html">1.1.6.4. Strong and Weak Solutions</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="euler_equations_in_vector_form.html">1.8.1. The Euler Equations in Vector Form</a>&#160;&#160;»
+        <a href="euler_equations_in_vector_form.html">1.1.8.1. The Euler Equations in Vector Form</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,7 +49,7 @@
         
         
   <div class="section" id="tri-diagonal-matrix-algorithm">
-<h1>1.7.1. Tri-Diagonal Matrix Algorithm<a class="headerlink" href="#tri-diagonal-matrix-algorithm" title="Permalink to this headline">¶</a></h1>
+<h1>1.1.7.1. Tri-Diagonal Matrix Algorithm<a class="headerlink" href="#tri-diagonal-matrix-algorithm" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#use-of-the-tri-diagonal-matrix-algorithm" id="id1">Use of the Tri-Diagonal Matrix Algorithm</a></li>
@@ -69,7 +69,7 @@
 </ul>
 </div>
 <div class="section" id="use-of-the-tri-diagonal-matrix-algorithm">
-<h2><a class="toc-backref" href="#id1">1.7.1.1. Use of the Tri-Diagonal Matrix Algorithm</a><a class="headerlink" href="#use-of-the-tri-diagonal-matrix-algorithm" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">1.1.7.1.1. Use of the Tri-Diagonal Matrix Algorithm</a><a class="headerlink" href="#use-of-the-tri-diagonal-matrix-algorithm" title="Permalink to this headline">¶</a></h2>
 <p>The <strong>Tri-Diagonal Matrix Algorithm (TDMA)</strong> or <strong>Thomas Algorithm</strong> is a simplified form of Gaussian elimination that can be used to solve tri-diagonal systems of equations.</p>
 <p>Advantages of the TDMA:</p>
 <ul class="simple">
@@ -93,7 +93,7 @@
 </ul>
 </div>
 <div class="section" id="matrix-configuration">
-<h2><a class="toc-backref" href="#id2">1.7.1.2. Matrix Configuration</a><a class="headerlink" href="#matrix-configuration" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">1.1.7.1.2. Matrix Configuration</a><a class="headerlink" href="#matrix-configuration" title="Permalink to this headline">¶</a></h2>
 <p>Tri-diagonal systems for <span class="math">\(nx\)</span> unknowns may be written as:</p>
 <div class="math">
 \[a_i u_{i-1} + b_i u_i + c_i u_{i+1} = d_i\]</div>
@@ -134,7 +134,7 @@ B_{nx-1}
 \end{bmatrix}\end{split}\]</div>
 </div>
 <div class="section" id="influence-of-the-boundary-values">
-<h2><a class="toc-backref" href="#id3">1.7.1.3. Influence of the Boundary Values</a><a class="headerlink" href="#influence-of-the-boundary-values" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">1.1.7.1.3. Influence of the Boundary Values</a><a class="headerlink" href="#influence-of-the-boundary-values" title="Permalink to this headline">¶</a></h2>
 <p>Notice the equation on Line 1 can be re-arranged, since we don&#8217;t need to solve for <span class="math">\(u_0\)</span>, since it equals <span class="math">\(B_0\)</span>:</p>
 <div class="math">
 \[a_1 u_{0} + b_1 u_1 + c_1 u_{2} = d_1\]</div>
@@ -153,7 +153,7 @@ B_{nx-1}
 \[a_{nx-2} u_{nx-3} + b_{nx-2} u_{nx-2}  = d_{nx-2} - c_{nx-2} B_{nx-1}\]</div>
 </div>
 <div class="section" id="re-arrangement-of-the-matrix">
-<h2><a class="toc-backref" href="#id4">1.7.1.4. Re-arrangement of the Matrix</a><a class="headerlink" href="#re-arrangement-of-the-matrix" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">1.1.7.1.4. Re-arrangement of the Matrix</a><a class="headerlink" href="#re-arrangement-of-the-matrix" title="Permalink to this headline">¶</a></h2>
 <div class="math">
 \[\begin{split}\begin{bmatrix}
  b_1 &amp; c_1 &amp; &amp; &amp;  0 \\
@@ -178,7 +178,7 @@ d_{nx-3} \\
 d_{nx-2}-c_{nx-2} B_{nx-1} \\
 \end{bmatrix}\end{split}\]</div>
 <div class="section" id="step-1">
-<h3><a class="toc-backref" href="#id5">Step 1</a><a class="headerlink" href="#step-1" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id5">1.1.7.1.4.1. Step 1</a><a class="headerlink" href="#step-1" title="Permalink to this headline">¶</a></h3>
 <p>Forward elimination adjusts the upper diagonal &amp; RHS and eliminates lower diagonal:</p>
 <div class="math">
 \[i = 1 \qquad \Rightarrow \qquad c_1^* = {c_1 \over b_1}\]</div>
@@ -190,7 +190,7 @@ d_{nx-2}-c_{nx-2} B_{nx-1} \\
 \[i = 2,3,... nx-2 \quad \Rightarrow \quad d_i^* = {{d_i-d_{i-1}^* a_i} \over {b_i - c_{i-1}^* a_i}}\]</div>
 </div>
 <div class="section" id="step-2">
-<h3><a class="toc-backref" href="#id6">Step 2</a><a class="headerlink" href="#step-2" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id6">1.1.7.1.4.2. Step 2</a><a class="headerlink" href="#step-2" title="Permalink to this headline">¶</a></h3>
 <p>The solution is then obtained by back substitution:</p>
 <div class="math">
 \[i = nx-2 \qquad \Rightarrow \qquad u_{nx-2} = d_{nx-2}^*\]</div>
@@ -198,7 +198,7 @@ d_{nx-2}-c_{nx-2} B_{nx-1} \\
 \[i = nx-3, nx-4,... 1 \quad \Rightarrow \quad u_i = d_i^* - c_i^* u_{i+1}\]</div>
 </div>
 <div class="section" id="alternative-step-1">
-<h3><a class="toc-backref" href="#id7">Alternative Step 1</a><a class="headerlink" href="#alternative-step-1" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id7">1.1.7.1.4.3. Alternative Step 1</a><a class="headerlink" href="#alternative-step-1" title="Permalink to this headline">¶</a></h3>
 <p>Forward elimination adjusts the central diagonal &amp; RHS and elminates the lower diagonal (From Ferziger and Peric)</p>
 <p>The line at i=1 is unchanged</p>
 <div class="math">
@@ -207,7 +207,7 @@ d_{nx-2}-c_{nx-2} B_{nx-1} \\
 \[i = 2,3,... nx-2 \quad \Rightarrow \quad d_i^* = d_i - {{a_{i} d_{i-1}^* } \over {d_{i-1}}}\]</div>
 </div>
 <div class="section" id="alternative-step-2">
-<h3><a class="toc-backref" href="#id8">Alternative Step 2</a><a class="headerlink" href="#alternative-step-2" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id8">1.1.7.1.4.4. Alternative Step 2</a><a class="headerlink" href="#alternative-step-2" title="Permalink to this headline">¶</a></h3>
 <p>The solution is obtained by back substitution:</p>
 <p>Ferziger and Peric omitted this, but it&#8217;s true:</p>
 <div class="math">
@@ -218,7 +218,7 @@ d_{nx-2}-c_{nx-2} B_{nx-1} \\
 </div>
 </div>
 <div class="section" id="how-does-this-translate-into-python-code">
-<h2><a class="toc-backref" href="#id9">1.7.1.5. How does this translate into Python Code?</a><a class="headerlink" href="#how-does-this-translate-into-python-code" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id9">1.1.7.1.5. How does this translate into Python Code?</a><a class="headerlink" href="#how-does-this-translate-into-python-code" title="Permalink to this headline">¶</a></h2>
 <p>For the Implicit Beam-Warming Method:</p>
 <div class="math">
 \[- {\Delta t \over {4 \Delta x}} \left( A_{i-1}^n u_{i-1}^{n+1} \right) +
@@ -248,9 +248,9 @@ u_i^n - {1 \over 2} {\Delta t \over \Delta x} (F_{i+1}^n - F_{i-1}^n) +
 \[d_{nx-2} =  d_{nx-2} - ({\Delta t \over {4 \Delta x}} A_{nx-1}^n)B_{nx-1}\]</div>
 </div>
 <div class="section" id="use-a-tdma-solver">
-<h2><a class="toc-backref" href="#id10">1.7.1.6. Use a TDMA Solver</a><a class="headerlink" href="#use-a-tdma-solver" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id10">1.1.7.1.6. Use a TDMA Solver</a><a class="headerlink" href="#use-a-tdma-solver" title="Permalink to this headline">¶</a></h2>
 <p>This is from Ofan&#8217;s Blog:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">numpypy</span> <span class="kn">as</span> <span class="nn">np</span> <span class="c1"># for compatibility with numpy in pypy</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span> <span class="c1"># if using numpy in cpython</span>
@@ -281,7 +281,7 @@ u_i^n - {1 \over 2} {\Delta t \over \Delta x} (F_{i+1}^n - F_{i-1}^n) +
 </div>
 </div>
 <div class="section" id="when-implementing-this-change-the-index-of-the-coefficients">
-<h2><a class="toc-backref" href="#id11">1.7.1.7. When implementing this, change the index of the coefficients</a><a class="headerlink" href="#when-implementing-this-change-the-index-of-the-coefficients" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id11">1.1.7.1.7. When implementing this, change the index of the coefficients</a><a class="headerlink" href="#when-implementing-this-change-the-index-of-the-coefficients" title="Permalink to this headline">¶</a></h2>
 <p>Change index of coefficients, so that they run from <span class="math">\(0\)</span> to <span class="math">\(nx-3\)</span> (i.e. we need two less coefficients than there are in the <span class="math">\(u\)</span> vector).</p>
 <div class="math">
 \[\begin{split}\begin{bmatrix}
@@ -308,7 +308,7 @@ d_{nx-3}-c_{nx-3} B_{nx-1} \\
 \end{bmatrix}\end{split}\]</div>
 </div>
 <div class="section" id="introduction-of-damping">
-<h2><a class="toc-backref" href="#id12">1.7.1.8. Introduction of Damping</a><a class="headerlink" href="#introduction-of-damping" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id12">1.1.7.1.8. Introduction of Damping</a><a class="headerlink" href="#introduction-of-damping" title="Permalink to this headline">¶</a></h2>
 <p>The Beam-Warming method may become unstable. Therefore introduce fourth order damping term onto the RHS</p>
 <div class="math">
 \[D_e = -\epsilon_e(\Delta x)^4 {\partial^4 u \over \partial x^4}\]</div>
@@ -325,17 +325,17 @@ d_{nx-3}-c_{nx-3} B_{nx-1} \\
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="strong_weak.html">1.6.4. Strong and Weak Solutions</a>
+        «&#160;&#160;<a href="strong_weak.html">1.1.6.4. Strong and Weak Solutions</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="euler_equations_in_vector_form.html">1.8.1. The Euler Equations in Vector Form</a>&#160;&#160;»
+        <a href="euler_equations_in_vector_form.html">1.1.8.1. The Euler Equations in Vector Form</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

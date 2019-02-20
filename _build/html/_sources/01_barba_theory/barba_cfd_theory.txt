@@ -1,13 +1,12 @@
-=====================================
-Computational Fluid Dynamics - Theory
-=====================================
+===================================
+Computational Fluid Dynamics Theory
+===================================
 
 Introduction to CFD and the Navier-Stokes Equations
 ===================================================
 
 .. toctree::
    :maxdepth: 1
-   :numbered: 4
 
    cfd
    continuity
@@ -19,7 +18,6 @@ The Finite Difference Method
 
 .. toctree::
    :maxdepth: 1
-   :numbered: 4
 
    finite_difference_method
    order_of_accuracy
@@ -31,7 +29,6 @@ Analysis of Numerical Schemes
 
 .. toctree::
    :maxdepth: 1
-   :numbered: 4
 
    numerical_scheme_1
    numerical_schemes_2
@@ -43,7 +40,6 @@ Finite Difference Solution of the Navier-Stokes Equations
 
 .. toctree::
    :maxdepth: 1
-   :numbered: 4
 
    poisson_for_pressure
    marker_and_cell_method
@@ -54,7 +50,6 @@ Numerical Methods for Linear Hyperbolic Equations
 
 .. toctree::
    :maxdepth: 1
-   :numbered: 4
 
    courant_number
    new_convection_schemes
@@ -67,7 +62,6 @@ Numerical Methods for Non-linear Hyperbolic Equations
 
 .. toctree::
    :maxdepth: 1
-   :numbered: 4
 
    multi_step_methods
    conservative_form
@@ -79,7 +73,6 @@ Linear Solvers
 
 .. toctree::
    :maxdepth: 1
-   :numbered: 4
 
    tri_diagonal_matrix
 
@@ -88,7 +81,6 @@ Finite Difference Solution of the Euler Equations
 
 .. toctree::
    :maxdepth: 1
-   :numbered: 4
 
    euler_equations_in_vector_form
    discrete_euler
@@ -100,7 +92,6 @@ The Finite Volume Method
 
 .. toctree::
    :maxdepth: 1
-   :numbered: 4
 
    finite_volume_method_1
    finite_volume_method_2
@@ -115,7 +106,6 @@ General Stability Analysis
 
 .. toctree::
    :maxdepth: 1
-   :numbered: 4
 
    time_integration_1
    matrix_method

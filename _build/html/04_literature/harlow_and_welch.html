@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.1. Harlow and Welch (1965) “Numercial Calculation of Fluid with Free Surface” &#8212; The Visual Room</title>
+    <title>3.1.1. Harlow and Welch (1965) “Numercial Calculation of Fluid with Free Surface” &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="4. Literature" href="literature.html" />
-    <link rel="next" title="4.2. Thompson et al. (2001) “Investigation of Rigid-Roll Coating”" href="thompson.html" />
-    <link rel="prev" title="4. Literature" href="literature.html" /> 
+    <link rel="up" title="3. Literature" href="literature.html" />
+    <link rel="next" title="3.1.2. Drikakis (2003) “Advances in Turbulent Flow Computations”" href="drikakis.html" />
+    <link rel="prev" title="3. Literature" href="literature.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>4.1. Harlow and Welch (1965) “Numercial Calculation of Fluid with Free Surface”</span></h2>
+        <h2 class="heading"><span>3.1.1. Harlow and Welch (1965) “Numercial Calculation of Fluid with Free Surface”</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="literature.html">4. Literature</a>
+        «&#160;&#160;<a href="literature.html">3. Literature</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="thompson.html">4.2. Thompson et al. (2001) &#8220;Investigation of Rigid-Roll Coating&#8221;</a>&#160;&#160;»
+        <a href="drikakis.html">3.1.2. Drikakis (2003) &#8220;Advances in Turbulent Flow Computations&#8221;</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,7 +49,7 @@
         
         
   <div class="section" id="harlow-and-welch-1965-numercial-calculation-of-fluid-with-free-surface">
-<h1>4.1. Harlow and Welch (1965) &#8220;Numercial Calculation of Fluid with Free Surface&#8221;<a class="headerlink" href="#harlow-and-welch-1965-numercial-calculation-of-fluid-with-free-surface" title="Permalink to this headline">¶</a></h1>
+<h1>3.1.1. Harlow and Welch (1965) &#8220;Numercial Calculation of Fluid with Free Surface&#8221;<a class="headerlink" href="#harlow-and-welch-1965-numercial-calculation-of-fluid-with-free-surface" title="Permalink to this headline">¶</a></h1>
 <p>Harlow, F.H. and Welch, J.E. &#8220;Numerical Calculation of Time-Dependent Viscous Incompressible Flow of Fluid with Free Surface&#8221; The Physics of Fluids, Volume 8, 1965</p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -78,7 +78,7 @@
 </ul>
 </div>
 <div class="section" id="introduction">
-<h2><a class="toc-backref" href="#id1">4.1.1. Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">3.1.1.1. Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>New technique for numerical solution of free surface problems, designated the &#8220;Marker and Cell Method&#8221;</li>
 <li>Physical assumptions:</li>
@@ -127,9 +127,9 @@
 </div></blockquote>
 </div>
 <div class="section" id="description-of-the-method">
-<h2><a class="toc-backref" href="#id2">4.1.2. Description of the Method</a><a class="headerlink" href="#description-of-the-method" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">3.1.1.2. Description of the Method</a><a class="headerlink" href="#description-of-the-method" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="outline">
-<h3><a class="toc-backref" href="#id3">4.1.2.1. Outline</a><a class="headerlink" href="#outline" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id3">3.1.1.2.1. Outline</a><a class="headerlink" href="#outline" title="Permalink to this headline">¶</a></h3>
 <p>The derivation of the finite difference method is based on:</p>
 <ol class="arabic simple">
 <li>The initial velocity field is known and <strong>divergence free</strong></li>
@@ -142,7 +142,7 @@
 <p>The marker particles are not like the particle-in-cell method, i.e. the marker particles <strong>do not</strong> participate in the calculation, where as in the particle-in-cell method, they do.</p>
 </div>
 <div class="section" id="finite-difference-equations">
-<h3><a class="toc-backref" href="#id4">4.1.2.2. Finite Difference Equations</a><a class="headerlink" href="#finite-difference-equations" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id4">3.1.1.2.2. Finite Difference Equations</a><a class="headerlink" href="#finite-difference-equations" title="Permalink to this headline">¶</a></h3>
 <p>Use the Conservative Form of the Navier-Stokes Equations:</p>
 <div class="math" id="equation-1">
 <span class="eqno">(1)</span>\[{\partial u \over \partial x}+ {\partial v \over \partial y} = 0\]</div>
@@ -155,7 +155,7 @@
 <p>Harlow and Welch use <span class="math">\(\psi\)</span> to denote a pressure at a constant density i.e. <span class="math">\(p \over \rho\)</span></p>
 </div>
 <div class="section" id="finite-difference-discretisation">
-<h3><a class="toc-backref" href="#id5">4.1.2.3. Finite Difference Discretisation</a><a class="headerlink" href="#finite-difference-discretisation" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id5">3.1.1.2.3. Finite Difference Discretisation</a><a class="headerlink" href="#finite-difference-discretisation" title="Permalink to this headline">¶</a></h3>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/h_w.png"><img alt="../_images/h_w.png" src="../_images/h_w.png" style="width: 466.0px; height: 298.0px;" /></a>
 </div>
@@ -225,7 +225,7 @@
 <p><strong>The divergence of velocity must also vanish at the boundaries</strong></p>
 </div>
 <div class="section" id="marker-particles">
-<h3><a class="toc-backref" href="#id6">4.1.2.4. Marker Particles</a><a class="headerlink" href="#marker-particles" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id6">3.1.1.2.4. Marker Particles</a><a class="headerlink" href="#marker-particles" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Harlow and Welch developed (a now obsolete) particles method for tracking the motion of the free surface</li>
 <li>They actually track the motion of particles throughout the fluid (not just at the free surface)</li>
@@ -234,7 +234,7 @@
 </ul>
 </div>
 <div class="section" id="boundary-conditions-at-rigid-walls-velocity">
-<h3><a class="toc-backref" href="#id7">4.1.2.5. Boundary Conditions at Rigid Walls - Velocity</a><a class="headerlink" href="#boundary-conditions-at-rigid-walls-velocity" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id7">3.1.1.2.5. Boundary Conditions at Rigid Walls - Velocity</a><a class="headerlink" href="#boundary-conditions-at-rigid-walls-velocity" title="Permalink to this headline">¶</a></h3>
 <p>Rigid walls may be of two types:</p>
 <ul class="simple">
 <li>No-slip</li>
@@ -258,12 +258,12 @@
 </ul>
 </div>
 <div class="section" id="boundary-conditions-at-rigid-walls-pressure">
-<h3><a class="toc-backref" href="#id8">4.1.2.6. Boundary Conditions at Rigid Walls - Pressure</a><a class="headerlink" href="#boundary-conditions-at-rigid-walls-pressure" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id8">3.1.1.2.6. Boundary Conditions at Rigid Walls - Pressure</a><a class="headerlink" href="#boundary-conditions-at-rigid-walls-pressure" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>The boundary condition for <span class="math">\(\psi\)</span> must be consistent with the velocity</li>
 </ul>
 <div class="section" id="free-slip-wall">
-<h4><a class="toc-backref" href="#id9">Free slip wall</a><a class="headerlink" href="#free-slip-wall" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id9">3.1.1.2.6.1. Free slip wall</a><a class="headerlink" href="#free-slip-wall" title="Permalink to this headline">¶</a></h4>
 <p><strong>Vertical wall</strong> From the momentum equation for <span class="math">\(u\)</span> (with the reversal of all normal velocities and no change in the tangential velocity):</p>
 <div class="math">
 \[\psi' = \psi \pm g_x \Delta x\]</div>
@@ -276,7 +276,7 @@
 <p><span class="math">\(- \Rightarrow\)</span> fluid is above the wall</p>
 </div>
 <div class="section" id="no-slip-wall">
-<h4><a class="toc-backref" href="#id10">No slip wall</a><a class="headerlink" href="#no-slip-wall" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id10">3.1.1.2.6.2. No slip wall</a><a class="headerlink" href="#no-slip-wall" title="Permalink to this headline">¶</a></h4>
 <p>Condition is that the divergence of velocity on the outer cell must be zero:</p>
 <p><strong>Vertical wall</strong></p>
 <div class="math">
@@ -290,7 +290,7 @@
 <p><span class="math">\(- \Rightarrow\)</span> fluid is on the right of the wall</p>
 </div>
 <div class="section" id="boundary-conditions-at-free-surface-velocity">
-<h4><a class="toc-backref" href="#id11">Boundary Conditions at Free Surface - Velocity</a><a class="headerlink" href="#boundary-conditions-at-free-surface-velocity" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id11">3.1.1.2.6.3. Boundary Conditions at Free Surface - Velocity</a><a class="headerlink" href="#boundary-conditions-at-free-surface-velocity" title="Permalink to this headline">¶</a></h4>
 <p>Condition is that the free surface has zero divergence of velocity</p>
 <ul class="simple">
 <li>One side facing vacuum: three sides computed normally, fourth side follows from vanished divergence</li>
@@ -300,7 +300,7 @@
 </ul>
 </div>
 <div class="section" id="boundary-conditions-at-free-surface-pressure">
-<h4><a class="toc-backref" href="#id12">Boundary Conditions at Free Surface - Pressure</a><a class="headerlink" href="#boundary-conditions-at-free-surface-pressure" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id12">3.1.1.2.6.4. Boundary Conditions at Free Surface - Pressure</a><a class="headerlink" href="#boundary-conditions-at-free-surface-pressure" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li>Condition is that the normal stress is zero or of equating it to the applied external pressure</li>
 <li><strong>Neglected the effect of viscous stress in the surface boundary and equated surface pressure directly to applied pressure</strong> (to reduce complexity of simulation)</li>
@@ -310,7 +310,7 @@
 </div>
 </div>
 <div class="section" id="numerical-stability-and-accuracy">
-<h2><a class="toc-backref" href="#id13">4.1.3. Numerical Stability and Accuracy</a><a class="headerlink" href="#numerical-stability-and-accuracy" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id13">3.1.1.3. Numerical Stability and Accuracy</a><a class="headerlink" href="#numerical-stability-and-accuracy" title="Permalink to this headline">¶</a></h2>
 <p>The method is stable - viscosity is not needed to ensure stability</p>
 <p>&#8220;Artificial viscosity&#8221; term is not needed (which it is in the treatment of shocks in compressible flow and for the elimination of stagnation fluctuations)</p>
 <p>Condition 1 for diffusional stability:</p>
@@ -322,9 +322,9 @@
 <p>Harlow and Welsh also did internal consistency checks</p>
 </div>
 <div class="section" id="examples">
-<h2><a class="toc-backref" href="#id14">4.1.4. Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id14">3.1.1.4. Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="broken-dam-problem">
-<h3><a class="toc-backref" href="#id15">4.1.4.1. Broken Dam Problem</a><a class="headerlink" href="#broken-dam-problem" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id15">3.1.1.4.1. Broken Dam Problem</a><a class="headerlink" href="#broken-dam-problem" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Variant 1: Entire Dam Removed Instantly</li>
 <li>Variant 2: Dam Partly Broken (like a sluice gate)</li>
@@ -335,7 +335,7 @@
 </div>
 </div>
 <div class="section" id="conclusions">
-<h2><a class="toc-backref" href="#id16">4.1.5. Conclusions</a><a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id16">3.1.1.5. Conclusions</a><a class="headerlink" href="#conclusions" title="Permalink to this headline">¶</a></h2>
 <p>Harlow and Walsh conclude by saying:</p>
 <ul class="simple">
 <li>The technique can be extended to 3D</li>
@@ -365,17 +365,17 @@
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="literature.html">4. Literature</a>
+        «&#160;&#160;<a href="literature.html">3. Literature</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="thompson.html">4.2. Thompson et al. (2001) &#8220;Investigation of Rigid-Roll Coating&#8221;</a>&#160;&#160;»
+        <a href="drikakis.html">3.1.2. Drikakis (2003) &#8220;Advances in Turbulent Flow Computations&#8221;</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

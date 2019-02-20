@@ -1,0 +1,913 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Lid Driven Cavity &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../../index.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>Lid Driven Cavity</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="lid-driven-cavity">
+<h1>Lid Driven Cavity<a class="headerlink" href="#lid-driven-cavity" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#problem-specification" id="id1">Problem Specification</a></li>
+<li><a class="reference internal" href="#pre-processing" id="id2">Pre-Processing</a><ul>
+<li><a class="reference internal" href="#mesh-generation" id="id3">Mesh Generation</a><ul>
+<li><a class="reference internal" href="#header-information" id="id4">Header information</a></li>
+<li><a class="reference internal" href="#file-information" id="id5">File information</a></li>
+<li><a class="reference internal" href="#scaling-factor-for-the-vertex-coordinates" id="id6">Scaling factor for the vertex coordinates</a></li>
+<li><a class="reference internal" href="#vertices" id="id7">Vertices</a></li>
+<li><a class="reference internal" href="#block" id="id8">Block</a></li>
+<li><a class="reference internal" href="#edges" id="id9">Edges</a></li>
+<li><a class="reference internal" href="#boundary-conditions" id="id10">Boundary Conditions</a></li>
+<li><a class="reference internal" href="#merge-patch-pairs" id="id11">Merge Patch Pairs</a></li>
+<li><a class="reference internal" href="#how-to-generate-a-mesh" id="id12">How to generate a mesh?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#boundary-and-initial-conditions" id="id13">Boundary and Initial Conditions</a><ul>
+<li><a class="reference internal" href="#dimensions" id="id14">Dimensions</a></li>
+<li><a class="reference internal" href="#internal-field" id="id15">Internal Field</a></li>
+<li><a class="reference internal" href="#boundary-field" id="id16">Boundary Field</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#physical-properties" id="id17">Physical Properties</a></li>
+<li><a class="reference internal" href="#control" id="id18">Control</a><ul>
+<li><a class="reference internal" href="#solver" id="id19">Solver</a></li>
+<li><a class="reference internal" href="#start-and-end-times" id="id20">Start and End Times</a></li>
+<li><a class="reference internal" href="#timestep" id="id21">Timestep</a></li>
+<li><a class="reference internal" href="#write-interval" id="id22">Write Interval</a></li>
+<li><a class="reference internal" href="#additional-settings" id="id23">Additional Settings</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#finite-volume-discretisation-schemes" id="id24">Finite Volume Discretisation Schemes</a></li>
+<li><a class="reference internal" href="#finite-volume-solvers" id="id25">Finite Volume Solvers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#viewing-the-mesh" id="id26">Viewing the Mesh</a></li>
+<li><a class="reference internal" href="#running-the-application" id="id27">Running the Application</a></li>
+<li><a class="reference internal" href="#post-processing" id="id28">Post-processing</a><ul>
+<li><a class="reference internal" href="#contours" id="id29">Contours</a></li>
+<li><a class="reference internal" href="#slice" id="id30">Slice</a></li>
+<li><a class="reference internal" href="#vectors-slice" id="id31">Vectors, slice</a></li>
+<li><a class="reference internal" href="#streamlines" id="id32">Streamlines</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#increased-mesh-resolution" id="id33">Increased Mesh Resolution</a><ul>
+<li><a class="reference internal" href="#create-new-case-from-existing-case" id="id34">Create new case from existing case</a></li>
+<li><a class="reference internal" href="#create-fine-mesh-how-to-re-generate-a-mesh" id="id35">Create fine mesh - How to re-generate a mesh?</a></li>
+<li><a class="reference internal" href="#how-to-map-the-coarse-mesh-results-onto-the-fine-mesh" id="id36">How to map the coarse mesh results onto the fine mesh?</a></li>
+<li><a class="reference internal" href="#control-adjustments-how-to-maintain-a-courant-number-of-1" id="id37">Control adjustments - How to maintain a Courant number of 1?</a></li>
+<li><a class="reference internal" href="#how-to-run-the-code-in-the-background" id="id38">How to run the code in the background?</a></li>
+<li><a class="reference internal" href="#how-to-do-a-vector-plot-comparing-unrefined-with-a-refined-mesh" id="id39">How to do a vector plot comparing unrefined with a refined mesh?</a></li>
+<li><a class="reference internal" href="#how-to-plot-the-velocity-in-the-x-direction-versus-y" id="id40">How to plot the velocity in the x-direction versus y?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="problem-specification">
+<h2><a class="toc-backref" href="#id1">Problem Specification</a><a class="headerlink" href="#problem-specification" title="Permalink to this headline">¶</a></h2>
+<p>For the open cavity, what is the influence of:</p>
+<ul class="simple">
+<li>Increased mesh resolution?</li>
+<li>Increased mesh grading?</li>
+<li>Reynolds Number?</li>
+<li>Turbulent flow?</li>
+</ul>
+<p>The open cavity is defined as shown below:</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../_images/lid_driven_cavity.png"><img alt="../../_images/lid_driven_cavity.png" src="../../_images/lid_driven_cavity.png" style="width: 277.5px; height: 221.25px;" /></a>
+</div>
+<p>Case 1 - icoFoam Solver:</p>
+<ul class="simple">
+<li>Laminar</li>
+<li>Isothermal</li>
+<li>Incompressible</li>
+</ul>
+<p>Case 2 - pisoFoam Solver:</p>
+<ul class="simple">
+<li>Turbulent</li>
+<li>Isothermal</li>
+<li>Incompressible</li>
+</ul>
+</div>
+<div class="section" id="pre-processing">
+<h2><a class="toc-backref" href="#id2">Pre-Processing</a><a class="headerlink" href="#pre-processing" title="Permalink to this headline">¶</a></h2>
+<p>I use Kate for processing the text files. I have set <code class="docutils literal"><span class="pre">$FOAM_RUN</span> <span class="pre">=</span> <span class="pre">/home/andrew/Dropbox/7_OpenFOAM/run</span></code>. Now I copy the files from the tutorial directory:</p>
+<div class="highlight-none"><div class="highlight"><pre>$ cd $FOAM_RUN/1_tutorials/1_lid_driven_cavity
+$ cp -r $FOAM_TUTORIALS/incompressible/icoFoam/cavity .
+$ cd cavity
+</pre></div>
+</div>
+<p>This copies the following ascii dictionaries into <code class="docutils literal"><span class="pre">cavity</span></code> (the case directory):</p>
+<ul>
+<li><dl class="first docutils">
+<dt>0</dt>
+<dd><ul class="first last simple">
+<li>p (ics and bcs values)</li>
+<li>U (ics and bcs values)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>constant</dt>
+<dd><ul class="first last simple">
+<li>transportProperties (viscosity)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>system</dt>
+<dd><ul class="first last simple">
+<li>blockMeshDict (mesh, domain and bcs application)</li>
+<li>controlDict (parameters for solver)</li>
+<li>fvSchemes (time and space numerical schemes)</li>
+<li>fvSolution (parameters for numerical schemes)</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="mesh-generation">
+<h3><a class="toc-backref" href="#id3">Mesh Generation</a><a class="headerlink" href="#mesh-generation" title="Permalink to this headline">¶</a></h3>
+<p>OpenFOAM always uses a 3D system, but 2D can be used by specifying an empty bc on the 3rd dimension. The right-hand rule for node numbering:</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../_images/mesh.png"><img alt="../../_images/mesh.png" src="../../_images/mesh.png" style="width: 214.5px; height: 222.0px;" /></a>
+</div>
+<p>The components of the blockMeshDict are given below.</p>
+<div class="section" id="header-information">
+<h4><a class="toc-backref" href="#id4">Header information</a><a class="headerlink" href="#header-information" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-none"><div class="highlight"><pre>/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+</pre></div>
+</div>
+</div>
+<div class="section" id="file-information">
+<h4><a class="toc-backref" href="#id5">File information</a><a class="headerlink" href="#file-information" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-none"><div class="highlight"><pre>FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+</pre></div>
+</div>
+</div>
+<div class="section" id="scaling-factor-for-the-vertex-coordinates">
+<h4><a class="toc-backref" href="#id6">Scaling factor for the vertex coordinates</a><a class="headerlink" href="#scaling-factor-for-the-vertex-coordinates" title="Permalink to this headline">¶</a></h4>
+<p>All the coordinates given in the vertices section are multiplied by 0.1, or whatever factor is given. Looking at the vertices coordinates, this sets the sides of the cavity to 0.1m x 0.1m and it&#8217;s depth to 0.01m.</p>
+<div class="highlight-none"><div class="highlight"><pre>convertToMeters 0.1;
+</pre></div>
+</div>
+</div>
+<div class="section" id="vertices">
+<h4><a class="toc-backref" href="#id7">Vertices</a><a class="headerlink" href="#vertices" title="Permalink to this headline">¶</a></h4>
+<p>Ordering of vertices is 0, 1, 2, 3, 4, 5, 6, 7 as per the figure above.</p>
+<div class="highlight-none"><div class="highlight"><pre>vertices
+(
+    (0 0 0)
+    (1 0 0)
+    (1 1 0)
+    (0 1 0)
+    (0 0 0.1)
+    (1 0 0.1)
+    (1 1 0.1)
+    (0 1 0.1)
+);
+</pre></div>
+</div>
+</div>
+<div class="section" id="block">
+<h4><a class="toc-backref" href="#id8">Block</a><a class="headerlink" href="#block" title="Permalink to this headline">¶</a></h4>
+<p>Ordered list of vertex labels, number of nodes in three directions (x, y, z) and grading in three directions (x, y, z).</p>
+<div class="highlight-none"><div class="highlight"><pre>blocks
+(
+    hex (0 1 2 3 4 5 6 7) (20 20 1) simpleGrading (1 1 1)
+);
+</pre></div>
+</div>
+</div>
+<div class="section" id="edges">
+<h4><a class="toc-backref" href="#id9">Edges</a><a class="headerlink" href="#edges" title="Permalink to this headline">¶</a></h4>
+<p>This is blank because it is used to describe arc or spline edges.</p>
+<div class="highlight-none"><div class="highlight"><pre>edges
+(
+);
+</pre></div>
+</div>
+</div>
+<div class="section" id="boundary-conditions">
+<h4><a class="toc-backref" href="#id10">Boundary Conditions</a><a class="headerlink" href="#boundary-conditions" title="Permalink to this headline">¶</a></h4>
+<p>This is a description of the boundary patches, using the vertex numbers.</p>
+<div class="highlight-none"><div class="highlight"><pre>boundary
+(
+    movingWall
+    {
+        type wall;
+        faces
+        (
+            (3 7 6 2)
+        );
+    }
+    fixedWalls
+    {
+        type wall;
+        faces
+        (
+            (0 4 7 3)
+            (2 6 5 1)
+            (1 5 4 0)
+        );
+    }
+    frontAndBack
+    {
+        type empty;
+        faces
+        (
+            (0 3 2 1)
+            (4 5 6 7)
+        );
+    }
+);
+</pre></div>
+</div>
+</div>
+<div class="section" id="merge-patch-pairs">
+<h4><a class="toc-backref" href="#id11">Merge Patch Pairs</a><a class="headerlink" href="#merge-patch-pairs" title="Permalink to this headline">¶</a></h4>
+<p>This is blank because there is only one block, so no merging is needed.</p>
+<div class="highlight-none"><div class="highlight"><pre>mergePatchPairs
+(
+);
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-generate-a-mesh">
+<h4><a class="toc-backref" href="#id12">How to generate a mesh?</a><a class="headerlink" href="#how-to-generate-a-mesh" title="Permalink to this headline">¶</a></h4>
+<p>The mesh is generated by running</p>
+<div class="highlight-none"><div class="highlight"><pre>$ cd $FOAM_RUN/1_tutorials/1_lid_driven_cavity/cavity
+$ blockMesh
+</pre></div>
+</div>
+<p>This creates the following subfolder:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>constant</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>polyMesh</dt>
+<dd><ul class="first last simple">
+<li>boundary</li>
+<li>faces</li>
+<li>neighbours</li>
+<li>owner</li>
+<li>points</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="boundary-and-initial-conditions">
+<h3><a class="toc-backref" href="#id13">Boundary and Initial Conditions</a><a class="headerlink" href="#boundary-and-initial-conditions" title="Permalink to this headline">¶</a></h3>
+<p>The ICs and BCs are set in this folder:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>0</dt>
+<dd><ul class="first last simple">
+<li>p</li>
+<li>U</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The components of the p and U files:</p>
+<div class="section" id="dimensions">
+<h4><a class="toc-backref" href="#id14">Dimensions</a><a class="headerlink" href="#dimensions" title="Permalink to this headline">¶</a></h4>
+<p>This specifies that kinematic pressure <span class="math">\(m^2/s^2\)</span> is being used, i.e. kinematic pressure <span class="math">\(P = p/\rho_0\)</span>. The dimensions for u are m/s according to [M L T Temp Quantity Current Luminosity].</p>
+<div class="highlight-none"><div class="highlight"><pre>dimensions      [0 2 -2 0 0 0 0];
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre>dimensions      [0 1 -1 0 0 0 0];
+</pre></div>
+</div>
+</div>
+<div class="section" id="internal-field">
+<h4><a class="toc-backref" href="#id15">Internal Field</a><a class="headerlink" href="#internal-field" title="Permalink to this headline">¶</a></h4>
+<p>The internal field in given a value, a uniform value of 0 in this case for the scalar pressure and (0 0 0) for the velocity vector.</p>
+<div class="highlight-none"><div class="highlight"><pre>internalField   uniform 0;
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre>internalField   uniform (0 0 0);
+</pre></div>
+</div>
+</div>
+<div class="section" id="boundary-field">
+<h4><a class="toc-backref" href="#id16">Boundary Field</a><a class="headerlink" href="#boundary-field" title="Permalink to this headline">¶</a></h4>
+<p>This specified that the pressure gradient is zero on the moving and fixed walls. The fixed walls have a noslip condition and the moving wall as a velocity of 1m/s. On the front and back the 2D condition is specified i.e. empty.</p>
+<div class="highlight-none"><div class="highlight"><pre>boundaryField
+{
+    movingWall
+    {
+        type            zeroGradient;
+    }
+
+    fixedWalls
+    {
+        type            zeroGradient;
+    }
+
+    frontAndBack
+    {
+        type            empty;
+    }
+}
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre>boundaryField
+{
+    movingWall
+    {
+        type            fixedValue;
+        value           uniform (1 0 0);
+    }
+
+    fixedWalls
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+
+    frontAndBack
+    {
+        type            empty;
+    }
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="physical-properties">
+<h3><a class="toc-backref" href="#id17">Physical Properties</a><a class="headerlink" href="#physical-properties" title="Permalink to this headline">¶</a></h3>
+<p>The physical properties are located in this folder:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>constant</dt>
+<dd><ul class="first last simple">
+<li>transportProperties</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The Reynolds Number is 10, such that the kinematic viscosity must be 0.01, if the velocity is 1 and the characteristic length is 0.1m.</p>
+<div class="highlight-none"><div class="highlight"><pre>nu              [0 2 -1 0 0 0 0] 0.01;
+</pre></div>
+</div>
+</div>
+<div class="section" id="control">
+<h3><a class="toc-backref" href="#id18">Control</a><a class="headerlink" href="#control" title="Permalink to this headline">¶</a></h3>
+<p>The control dictionary is located here:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>system</dt>
+<dd><ul class="first last simple">
+<li>controlDict</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>This dictionary controls the time and reading and writing of the solution data and is described as follows:</p>
+<div class="section" id="solver">
+<h4><a class="toc-backref" href="#id19">Solver</a><a class="headerlink" href="#solver" title="Permalink to this headline">¶</a></h4>
+<p>This selects the incompressible, isothermal and laminar solver.</p>
+<div class="highlight-none"><div class="highlight"><pre>application     icoFoam;
+</pre></div>
+</div>
+</div>
+<div class="section" id="start-and-end-times">
+<h4><a class="toc-backref" href="#id20">Start and End Times</a><a class="headerlink" href="#start-and-end-times" title="Permalink to this headline">¶</a></h4>
+<p>This sets the start and end times of the simulation. Usually the solution runs for 10 circulation times, which would be 10 x (0.1m / 1m/s) = 1s, however with hindsight, 0.5s is sufficient.</p>
+<div class="highlight-none"><div class="highlight"><pre>startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         0.5;
+</pre></div>
+</div>
+</div>
+<div class="section" id="timestep">
+<h4><a class="toc-backref" href="#id21">Timestep</a><a class="headerlink" href="#timestep" title="Permalink to this headline">¶</a></h4>
+<p>The timestep is set according to the Counrant Number. For a Courant Number of 1, a velocity of 1, a spatial step of 0.1/20 = 0.005m, the timestep is 0.005s.</p>
+<div class="highlight-none"><div class="highlight"><pre>deltaT          0.005;
+</pre></div>
+</div>
+</div>
+<div class="section" id="write-interval">
+<h4><a class="toc-backref" href="#id22">Write Interval</a><a class="headerlink" href="#write-interval" title="Permalink to this headline">¶</a></h4>
+<p>In order to write out the data (U and p for the icoFoam solver) every 0.1s, we must specify a write interval of 20.</p>
+<div class="highlight-none"><div class="highlight"><pre>writeInterval   20;
+</pre></div>
+</div>
+</div>
+<div class="section" id="additional-settings">
+<h4><a class="toc-backref" href="#id23">Additional Settings</a><a class="headerlink" href="#additional-settings" title="Permalink to this headline">¶</a></h4>
+<p>The additional settings are given below for the control dictionary, and are probably not changed very much from case to case.</p>
+<div class="highlight-none"><div class="highlight"><pre>purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="finite-volume-discretisation-schemes">
+<h3><a class="toc-backref" href="#id24">Finite Volume Discretisation Schemes</a><a class="headerlink" href="#finite-volume-discretisation-schemes" title="Permalink to this headline">¶</a></h3>
+<p>The finite volume discretisation scheme selection is made in fvSchemes:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>system</dt>
+<dd><ul class="first last simple">
+<li>fvSchemes</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-none"><div class="highlight"><pre>ddtSchemes
+{
+    default         Euler;
+}
+
+gradSchemes
+{
+    default         Gauss linear;
+    grad(p)         Gauss linear;
+}
+
+divSchemes
+{
+    default         none;
+    div(phi,U)      Gauss linear;
+}
+
+laplacianSchemes
+{
+    default         Gauss linear orthogonal;
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+snGradSchemes
+{
+    default         orthogonal;
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="finite-volume-solvers">
+<h3><a class="toc-backref" href="#id25">Finite Volume Solvers</a><a class="headerlink" href="#finite-volume-solvers" title="Permalink to this headline">¶</a></h3>
+<p>The selection of the finite volume solvers is made in fvSolution. In a closed incompressible system such as the cavity, pressure is relative: it is the pressure range that matters not the absolute values. In cases such as this, the solver sets a reference level by pRefValue in cell pRefCell. In this example both are set to 0. Changing either of these values will change the absolute pressure field, but not, of course, the relative pressures or velocity field.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>system</dt>
+<dd><ul class="first last simple">
+<li>fvSolution</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-none"><div class="highlight"><pre>solvers
+{
+    p
+    {
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-06;
+        relTol          0.05;
+    }
+
+    pFinal
+    {
+        $p;
+        relTol          0;
+    }
+
+    U
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-05;
+        relTol          0;
+    }
+}
+
+PISO
+{
+    nCorrectors     2;
+    nNonOrthogonalCorrectors 0;
+    pRefCell        0;
+    pRefValue       0;
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="viewing-the-mesh">
+<h2><a class="toc-backref" href="#id26">Viewing the Mesh</a><a class="headerlink" href="#viewing-the-mesh" title="Permalink to this headline">¶</a></h2>
+<p>ParaView is loaded</p>
+<div class="highlight-none"><div class="highlight"><pre>$ cd $FOAM_RUN/1_tutorials/1_lid_driven_cavity/cavity
+$ paraFoam
+</pre></div>
+</div>
+<p>Load the mesh:</p>
+<ul class="simple">
+<li>cavity.OpenFOAM is loaded.</li>
+<li>Properties &gt; Mesh Parts &gt; Click X by Mesh Parts</li>
+<li>Properties &gt; Apply</li>
+</ul>
+<p>Change the colors:</p>
+<ul class="simple">
+<li>Properties &gt; Display &gt; Representation &gt; Wireframe</li>
+<li>Properties &gt; Coloring &gt; Solid Color &gt; Edit &gt; Black</li>
+<li>Properties &gt; View &gt; Background &gt; Single color &gt; White</li>
+</ul>
+<p>Change the representation:</p>
+<ul class="simple">
+<li>Layout &gt; Toggle to 2D (if 3D)</li>
+<li>Click in white area</li>
+</ul>
+</div>
+<div class="section" id="running-the-application">
+<h2><a class="toc-backref" href="#id27">Running the Application</a><a class="headerlink" href="#running-the-application" title="Permalink to this headline">¶</a></h2>
+<p>Run the application</p>
+<div class="highlight-none"><div class="highlight"><pre>$ cd $FOAM_RUN/1_tutorials/1_lid_driven_cavity/cavity
+$ icoFoam
+</pre></div>
+</div>
+<p>Or with the optional case argument</p>
+<div class="highlight-none"><div class="highlight"><pre>$ cd $FOAM_RUN/1_tutorials/1_lid_driven_cavity/cavity
+$ icoFoam -case $FOAM_RUN/1_tutorials/1_lid_driven_cavity/cavity
+</pre></div>
+</div>
+<p>The progress of the job is written to the terminal window. It tells the user the current time, maximum Courant number, initial and final residuals for all fields.</p>
+</div>
+<div class="section" id="post-processing">
+<h2><a class="toc-backref" href="#id28">Post-processing</a><a class="headerlink" href="#post-processing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="contours">
+<h3><a class="toc-backref" href="#id29">Contours</a><a class="headerlink" href="#contours" title="Permalink to this headline">¶</a></h3>
+<p>ParaView is loaded</p>
+<div class="highlight-none"><div class="highlight"><pre>$ cd $FOAM_RUN/1_tutorials/1_lid_driven_cavity/cavity
+$ paraFoam
+</pre></div>
+</div>
+<p>Load the mesh:</p>
+<ul class="simple">
+<li>cavity.OpenFOAM is loaded.</li>
+<li>Properties &gt; Mesh Parts &gt; Click X by Mesh Parts</li>
+<li>Properties &gt; Apply</li>
+</ul>
+<p>Colours:</p>
+<ul class="simple">
+<li>Properties &gt; Representation &gt; Surface</li>
+<li>Last Frame</li>
+<li>Properties &gt; Coloring &gt; Rescale</li>
+<li>Properties &gt; Background = White</li>
+<li>Properties &gt; Coloring &gt; Edit &gt; Choose Preset &gt; Blue to Red Rainbow</li>
+<li>Properties &gt; Coloring &gt; Edit &gt; Save Current Colormap as default</li>
+<li>Properties &gt; Coloring &gt; Edit &gt; Edit Color Legend Properties &gt; Title Text = Pressure (Pa)</li>
+<li>Properties &gt; Lighting &gt; Specular = 1</li>
+<li>Move legend to central position</li>
+</ul>
+</div>
+<div class="section" id="slice">
+<h3><a class="toc-backref" href="#id30">Slice</a><a class="headerlink" href="#slice" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Hold left mouse button to rotate view</li>
+<li>Filters &gt; Slice (icon)</li>
+<li>Properties &gt; Origin = 0.05, 0.05, 0.005</li>
+<li>Properties &gt; Normal = 0, 0, 1</li>
+<li>Properties &gt; Apply</li>
+<li>Filters &gt; Contour (icon) <strong>I&#8217;m not sure this adds anything</strong></li>
+<li>Properties &gt; Contour by &gt; p <strong>I&#8217;m not sure this adds anything</strong></li>
+<li>Isosurfaces &gt; Range = 10 <strong>I&#8217;m not sure this adds anything</strong></li>
+</ul>
+</div>
+<div class="section" id="vectors-slice">
+<h3><a class="toc-backref" href="#id31">Vectors, slice</a><a class="headerlink" href="#vectors-slice" title="Permalink to this headline">¶</a></h3>
+<p>Outline:</p>
+<ul class="simple">
+<li>Remove the eye from Slice and Contour filters</li>
+<li>cavity.OpenFOAM &gt; Representation &gt; Outline</li>
+<li>cavity.OpenFOAM &gt; Coloring &gt; Solid Colour &gt; Black</li>
+<li>cavity.OpenFOAM &gt; Orientation Axes &gt; Orentiation Axes Labrl Color &gt; Black</li>
+</ul>
+<p>Cell Centres:</p>
+<ul class="simple">
+<li>Filter &gt; Alphabetical &gt; Cell Centres</li>
+<li>CellCenters1 &gt; Coloring &gt; U</li>
+<li>Apply</li>
+</ul>
+<p>Arrows:</p>
+<ul class="simple">
+<li>Filter &gt; Alphabetical &gt; Glyph</li>
+<li>Glyph1 &gt; scalars: p, vectors: U</li>
+<li>Apply</li>
+</ul>
+<p>To Save State:</p>
+<ul class="simple">
+<li>File &gt; Save State &gt; contours_vectors.pvsm</li>
+</ul>
+</div>
+<div class="section" id="streamlines">
+<h3><a class="toc-backref" href="#id32">Streamlines</a><a class="headerlink" href="#streamlines" title="Permalink to this headline">¶</a></h3>
+<p>Streamlines:</p>
+<ul class="simple">
+<li>Filter &gt; Alphabetical &gt; Stream Tracer</li>
+<li>Properties &gt; Seeds &gt; Seed Type &gt; High Res Line Source</li>
+<li>P1 = 0.05 0 0.005, P2 = 0.05 0.1 0.005</li>
+<li>Resolution  = 21</li>
+<li>Max step = 0.5</li>
+<li>Initial step = 0.2</li>
+<li>Direction = BOTH</li>
+<li>Type = Runge-Kutta-4-5</li>
+<li>Properties &gt; Coloring &gt; U</li>
+<li>Apply</li>
+</ul>
+<p>Tube:</p>
+<ul class="simple">
+<li>Filter &gt; Alphabetical &gt; Tube</li>
+<li>Tube1 &gt; Radius Factor = 10, Number of Sides = 6, Radius = 0.0003</li>
+<li>Apply</li>
+</ul>
+</div>
+</div>
+<div class="section" id="increased-mesh-resolution">
+<h2><a class="toc-backref" href="#id33">Increased Mesh Resolution</a><a class="headerlink" href="#increased-mesh-resolution" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Increase mesh density by a factor of 2</li>
+<li>Map results of coarser mesh onto finer mesh</li>
+<li>Compare results of fine and coarse mesh</li>
+</ul>
+<div class="section" id="create-new-case-from-existing-case">
+<h3><a class="toc-backref" href="#id34">Create new case from existing case</a><a class="headerlink" href="#create-new-case-from-existing-case" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-none"><div class="highlight"><pre>$ cd $FOAM_RUN/1_tutorials/1_lid_driven_cavity
+$ mkdir cavityFine
+$ cp -r cavity/constant cavityFine
+$ cp -r cavity/system cavityFine
+$ cd cavityFine
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-fine-mesh-how-to-re-generate-a-mesh">
+<h3><a class="toc-backref" href="#id35">Create fine mesh - How to re-generate a mesh?</a><a class="headerlink" href="#create-fine-mesh-how-to-re-generate-a-mesh" title="Permalink to this headline">¶</a></h3>
+<p>Open <code class="docutils literal"><span class="pre">blockMeshDict</span></code> file and change <code class="docutils literal"><span class="pre">(20</span> <span class="pre">20</span> <span class="pre">1)</span></code> to <code class="docutils literal"><span class="pre">(40</span> <span class="pre">40</span> <span class="pre">1)</span></code>, i.e.</p>
+<div class="highlight-none"><div class="highlight"><pre>blocks
+(
+    hex (0 1 2 3 4 5 6 7) (40 40 1) simpleGrading (1 1 1)
+);
+</pre></div>
+</div>
+<p>Now run blockMesh to generate the constant folder:</p>
+<div class="highlight-none"><div class="highlight"><pre>$ cd $FOAM_RUN/1_tutorials/1_lid_driven_cavity/cavityFine
+$ blockMesh
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-map-the-coarse-mesh-results-onto-the-fine-mesh">
+<h3><a class="toc-backref" href="#id36">How to map the coarse mesh results onto the fine mesh?</a><a class="headerlink" href="#how-to-map-the-coarse-mesh-results-onto-the-fine-mesh" title="Permalink to this headline">¶</a></h3>
+<p>Open <code class="docutils literal"><span class="pre">controlDict</span></code> file and change <code class="docutils literal"><span class="pre">startTime</span> <span class="pre">0</span></code> to <code class="docutils literal"><span class="pre">startTime</span> <span class="pre">0.5</span></code></p>
+<div class="highlight-none"><div class="highlight"><pre>startTime       0.5;
+</pre></div>
+</div>
+<p>Check the predicates of <code class="docutils literal"><span class="pre">mapFields</span></code></p>
+<div class="highlight-none"><div class="highlight"><pre>mapFields -help
+</pre></div>
+</div>
+<p>Now map coarse to fine grid (consistent is used because the boundary conditions, boundary types and geometry are identical):</p>
+<div class="highlight-none"><div class="highlight"><pre>mapFields ../cavity -consistent
+</pre></div>
+</div>
+</div>
+<div class="section" id="control-adjustments-how-to-maintain-a-courant-number-of-1">
+<h3><a class="toc-backref" href="#id37">Control adjustments - How to maintain a Courant number of 1?</a><a class="headerlink" href="#control-adjustments-how-to-maintain-a-courant-number-of-1" title="Permalink to this headline">¶</a></h3>
+<p>To maintain a Courant number of 1, the timestep must be halved, as the spatial step was halved.</p>
+<p>Open <code class="docutils literal"><span class="pre">controlDict</span></code> file and change <code class="docutils literal"><span class="pre">deltaT</span> <span class="pre">0.005</span></code> to <code class="docutils literal"><span class="pre">deltaT</span> <span class="pre">0.0025</span></code></p>
+<div class="highlight-none"><div class="highlight"><pre>deltaT       0.0025;
+</pre></div>
+</div>
+<p>Also specify output every 0.1 seconds by changing <code class="docutils literal"><span class="pre">writeControl</span> <span class="pre">timeStep</span></code> to <code class="docutils literal"><span class="pre">writeControl</span> <span class="pre">runTime</span></code> and <code class="docutils literal"><span class="pre">writeInterval</span> <span class="pre">20</span></code> <code class="docutils literal"><span class="pre">to</span> <span class="pre">writeInterval</span> <span class="pre">0.1</span></code>:</p>
+<div class="highlight-none"><div class="highlight"><pre>writeControl    runTime;
+writeInterval   0.1;
+</pre></div>
+</div>
+<p>Also specify an end time of 0.7 seconds, by changing <code class="docutils literal"><span class="pre">endTime</span> <span class="pre">0.5</span></code> to <code class="docutils literal"><span class="pre">endTime</span> <span class="pre">0.7</span></code>;</p>
+<div class="highlight-none"><div class="highlight"><pre>endTime    0.7;
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-run-the-code-in-the-background">
+<h3><a class="toc-backref" href="#id38">How to run the code in the background?</a><a class="headerlink" href="#how-to-run-the-code-in-the-background" title="Permalink to this headline">¶</a></h3>
+<p>This will send the output to a file called log and then view it with cat.</p>
+<div class="highlight-none"><div class="highlight"><pre>$ cd $FOAM_RUN/1_tutorials/1_lid_driven_cavity/cavityFine
+$ icoFoam &gt; log &amp;
+$ cat log
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-do-a-vector-plot-comparing-unrefined-with-a-refined-mesh">
+<h3><a class="toc-backref" href="#id39">How to do a vector plot comparing unrefined with a refined mesh?</a><a class="headerlink" href="#how-to-do-a-vector-plot-comparing-unrefined-with-a-refined-mesh" title="Permalink to this headline">¶</a></h3>
+<p>Create files with .OpenFOAM extension:</p>
+<div class="highlight-none"><div class="highlight"><pre>$ cd $FOAM_RUN/1_tutorials/1_lid_driven_cavity/cavity
+$ paraFoam -touch
+$ cd ../cavityFine
+$ paraFoam -touch
+$ paraFoam
+</pre></div>
+</div>
+<p>Outline:</p>
+<ul class="simple">
+<li>cavityFine.OpenFOAM &gt; Properties &gt; Apply</li>
+<li>cavityFine.OpenFOAM &gt; Properties &gt; Representation &gt; Outline</li>
+<li>cavityFine.OpenFOAM &gt; Properties &gt; Coloring &gt; Solid Colour &gt; Black</li>
+<li>Change from 3D to 2D</li>
+</ul>
+<p>Cell Centres:</p>
+<ul class="simple">
+<li>Filters &gt; Alphabetical &gt; Cell Centres</li>
+<li>CellCentres1 &gt; Properties &gt; Apply</li>
+<li>CellCentres1 &gt; Properties &gt; Coloring = U</li>
+</ul>
+<p>Arrows:</p>
+<ul class="simple">
+<li>Filters &gt; Alphabetical &gt; Glyphs</li>
+<li>Glyph1 &gt; Properties &gt; Apply</li>
+<li>Glyph1 &gt; Propeties &gt; Active Attributes &gt; Vectors = U</li>
+<li>Glyph1 &gt; Propeties &gt; Glyph Source &gt; Glyph type = 2D Glyph</li>
+<li>Glyph1 &gt; Propeties &gt; Scaling &gt; Scale factor = 0.005</li>
+<li>Glyph1 &gt; Properties &gt; Apply</li>
+</ul>
+<p>Open coarse mesh:</p>
+<ul class="simple">
+<li>File &gt; Open &gt; cavity.OpenFOAM</li>
+<li>Repeat Outline, Cell Centres and Arrows (above)</li>
+<li>File &gt; Save State &gt; vectors_fine_vs_coarse.pvsm</li>
+</ul>
+</div>
+<div class="section" id="how-to-plot-the-velocity-in-the-x-direction-versus-y">
+<h3><a class="toc-backref" href="#id40">How to plot the velocity in the x-direction versus y?</a><a class="headerlink" href="#how-to-plot-the-velocity-in-the-x-direction-versus-y" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>List the functions possible in post processing (not really needed):</li>
+</ul>
+<div class="highlight-none"><div class="highlight"><pre>$ postProcess -list
+</pre></div>
+</div>
+<ul class="simple">
+<li>Create volume fields Ux, Uy, Uz for all the time periods in the directories:</li>
+</ul>
+<div class="highlight-none"><div class="highlight"><pre>$ postProcess -func &quot;components(U)&quot;
+$ paraFoam
+</pre></div>
+</div>
+<ul>
+<li><p class="first">Select <strong>cavityFine.OpenFOAM</strong> in Pipeline Browser</p>
+</li>
+<li><p class="first">Check that the velocities have been created in Properties &gt; Volume Fields &gt; Ux, Uy, Uz</p>
+</li>
+<li><p class="first">Properties tab &gt; Properties &gt; Mesh Parts &gt; Select only internalMesh to avoid interpolation error.</p>
+</li>
+<li><p class="first">Properties tab &gt; Apply</p>
+</li>
+<li><p class="first">Filter &gt; Data Analysis &gt; Plot Over Line</p>
+</li>
+<li><p class="first">Select LineChartView1 (the panel on the right)</p>
+</li>
+<li><p class="first">Select <strong>PlotOverLine1</strong> in PipeLine Browser</p>
+</li>
+<li><dl class="first docutils">
+<dt>Properties tab &gt; Properties(PlotOverLine1)</dt>
+<dd><ul class="first last simple">
+<li>Point 1 0.05, 0, 0.005</li>
+<li>Point 2 0.05, 0.1, 0.005</li>
+<li>Resolution 100</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Properties tab &gt; Display(XYChartRepresentation)</dt>
+<dd><ul class="first last simple">
+<li>Attibute Type = Point data</li>
+<li>Array name = arc_length (distance from base of cavity)</li>
+<li>Deselect everything except Ux variable (U_X was created by default, so the PostProcess calculation wasn&#8217;t really needed)</li>
+<li>Double click colour to change it</li>
+<li>Line Style = None</li>
+<li>Marker Style = Cross</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Properties tab &gt; View(Line Chart View)</dt>
+<dd><ul class="first last simple">
+<li>Deselect Show Legend</li>
+<li>Left axis title = Velocity in x-direction, Ux (m/s)</li>
+<li>Left Axis Range Minimum = -0.3</li>
+<li>Left Axis Range Maximum = 1.0</li>
+<li>Bottom axis title = Distance from cavity base, y (m)</li>
+<li>Bottom Axis Range Minimum = 0</li>
+<li>Bottom Axis Range Maximum = 0.1</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">File &gt; Save State &gt; u_velocity_profile.pvsm</p>
+</li>
+<li><p class="first">File &gt; Exit</p>
+</li>
+<li><p class="first"><strong>To the future: I can&#8217;t work out how to plot to charts on the same chart, because only one PlotOverLine seems possible per ParaView session</strong></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

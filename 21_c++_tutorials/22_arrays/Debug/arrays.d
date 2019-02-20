@@ -1,0 +1,1 @@
+arrays.d: ../arrays.cpp

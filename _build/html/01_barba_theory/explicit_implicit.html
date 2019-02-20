@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.2.3. Explicit and Implicit Finite Difference Formulas &#8212; The Visual Room</title>
+    <title>1.1.2.3. Explicit and Implicit Finite Difference Formulas &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
-    <link rel="next" title="1.2.4. Finite Difference Formulas in 2D" href="finite_difference_formulas_in_2D.html" />
-    <link rel="prev" title="1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations" href="order_of_accuracy.html" /> 
+    <link rel="up" title="1.1. Computational Fluid Dynamics Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.1.2.4. Finite Difference Formulas in 2D" href="finite_difference_formulas_in_2D.html" />
+    <link rel="prev" title="1.1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations" href="order_of_accuracy.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>1.2.3. Explicit and Implicit Finite Difference Formulas</span></h2>
+        <h2 class="heading"><span>1.1.2.3. Explicit and Implicit Finite Difference Formulas</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="order_of_accuracy.html">1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations</a>
+        «&#160;&#160;<a href="order_of_accuracy.html">1.1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="finite_difference_formulas_in_2D.html">1.2.4. Finite Difference Formulas in 2D</a>&#160;&#160;»
+        <a href="finite_difference_formulas_in_2D.html">1.1.2.4. Finite Difference Formulas in 2D</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,16 +49,16 @@
         
         
   <div class="section" id="explicit-and-implicit-finite-difference-formulas">
-<h1>1.2.3. Explicit and Implicit Finite Difference Formulas<a class="headerlink" href="#explicit-and-implicit-finite-difference-formulas" title="Permalink to this headline">¶</a></h1>
+<h1>1.1.2.3. Explicit and Implicit Finite Difference Formulas<a class="headerlink" href="#explicit-and-implicit-finite-difference-formulas" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="d-diffusion-equation">
-<h2>1.2.3.1. 1D Diffusion Equation<a class="headerlink" href="#d-diffusion-equation" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.2.3.1. 1D Diffusion Equation<a class="headerlink" href="#d-diffusion-equation" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Recall the 1D diffusion equation (Parabolic type):</li>
 </ul>
 <div class="math">
 \[{\partial u \over \partial t} = \nu {\partial^2 u \over \partial x^2}\]</div>
 <div class="section" id="explicit-solution">
-<h3>Explicit Solution<a class="headerlink" href="#explicit-solution" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.2.3.1.1. Explicit Solution<a class="headerlink" href="#explicit-solution" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p class="first">In step 3, we had:</p>
 <ul>
@@ -103,7 +103,7 @@
 </div>
 </div>
 <div class="section" id="implicit-solution">
-<h3>Implicit Solution<a class="headerlink" href="#implicit-solution" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.2.3.1.2. Implicit Solution<a class="headerlink" href="#implicit-solution" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>How can we have a scheme that includes the BCs at every time level for the computations?<ul>
 <li>Approximate <span class="math">\({\partial u} \over {\partial t}\)</span> and  <span class="math">\({\partial^2 u} \over {\partial x^2}\)</span> at <span class="math">\(n+1\)</span></li>
@@ -208,17 +208,17 @@ r{u_{i+1}^{n+1}}=u_i^n\]</div>
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="order_of_accuracy.html">1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations</a>
+        «&#160;&#160;<a href="order_of_accuracy.html">1.1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="finite_difference_formulas_in_2D.html">1.2.4. Finite Difference Formulas in 2D</a>&#160;&#160;»
+        <a href="finite_difference_formulas_in_2D.html">1.1.2.4. Finite Difference Formulas in 2D</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

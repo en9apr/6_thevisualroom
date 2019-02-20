@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.1.8. Integral and Derivative Form &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../../index.html" />
+    <link rel="up" title="4. Personal Notes on CFD" href="../cfd_notes.html" />
+    <link rel="next" title="4.1.9. Conservation of Mass" href="09_conservation_of_mass.html" />
+    <link rel="prev" title="4.1.7. Euler and Lagrange" href="07_euler_and_lagrange.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.1.8. Integral and Derivative Form</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="07_euler_and_lagrange.html">4.1.7. Euler and Lagrange</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="09_conservation_of_mass.html">4.1.9. Conservation of Mass</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="integral-and-derivative-form">
+<h1>4.1.8. Integral and Derivative Form<a class="headerlink" href="#integral-and-derivative-form" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#what-are-the-conditions-of-applicability-of-the-integral-and-differential-forms-of-the-conservation-laws" id="id1">What are the conditions of applicability of the integral and differential forms of the conservation laws?</a></li>
+<li><a class="reference internal" href="#what-is-the-reynolds-transport-theorem" id="id2">What is the Reynolds Transport Theorem?</a></li>
+<li><a class="reference internal" href="#what-is-the-meaning-of-the-reynolds-transport-theorem" id="id3">What is the meaning of the Reynolds Transport Theorem?</a></li>
+<li><a class="reference internal" href="#what-are-some-examples-of-the-reynolds-transport-theorem" id="id4">What are some examples of the Reynolds Transport Theorem?</a></li>
+<li><a class="reference internal" href="#what-is-the-total-derivative" id="id5">What is the total derivative?</a></li>
+<li><a class="reference internal" href="#what-is-the-meaning-of-the-total-derivative" id="id6">What is the meaning of the total derivative?</a></li>
+</ul>
+</div>
+<div class="section" id="what-are-the-conditions-of-applicability-of-the-integral-and-differential-forms-of-the-conservation-laws">
+<h2><a class="toc-backref" href="#id1">4.1.8.1. What are the conditions of applicability of the integral and differential forms of the conservation laws?</a><a class="headerlink" href="#what-are-the-conditions-of-applicability-of-the-integral-and-differential-forms-of-the-conservation-laws" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Integral form <span class="math">\(\longrightarrow\)</span> same as limits of continuum model:</p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="math">\(Kn \lt \lt 1\)</span></li>
+<li>No mass-energy conversion</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Differential form <span class="math">\(\longrightarrow\)</span> same as limits of Gauss-Divergence theorem:</p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="math">\(\phi\)</span> must be continuous (no shock waves or free surfaces etc)</li>
+<li><span class="math">\(\partial \phi / \partial x\)</span> must exist</li>
+<li><span class="math">\(\partial \phi / \partial x\)</span> must be continuous</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="what-is-the-reynolds-transport-theorem">
+<h2><a class="toc-backref" href="#id2">4.1.8.2. What is the Reynolds Transport Theorem?</a><a class="headerlink" href="#what-is-the-reynolds-transport-theorem" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[{D \over {Dt}} \int_V \phi dV =
+{\partial \over {\partial t}} \int_V \phi dV + \int_S \phi (\vec{u} \cdot \vec{n}) dS\]</div>
+<ul class="simple">
+<li>where: <span class="math">\(\phi\)</span> is a scalar or vector and is a conserved quantity</li>
+</ul>
+</div>
+<div class="section" id="what-is-the-meaning-of-the-reynolds-transport-theorem">
+<h2><a class="toc-backref" href="#id3">4.1.8.3. What is the meaning of the Reynolds Transport Theorem?</a><a class="headerlink" href="#what-is-the-meaning-of-the-reynolds-transport-theorem" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\mathbf{Temporal} \ change \ of \ \phi \ following \ a \ \mathbf{moving} \ volume =
+\mathbf{Temporal} \ change \ of \ \phi \ in \ a \ \mathbf{fixed} \ volume +
+\mathbf{Spatial} \ change \ of \ \phi \ through \ \mathbf{fixed} \ surfaces\]</div>
+</div>
+<div class="section" id="what-are-some-examples-of-the-reynolds-transport-theorem">
+<h2><a class="toc-backref" href="#id4">4.1.8.4. What are some examples of the Reynolds Transport Theorem?</a><a class="headerlink" href="#what-are-some-examples-of-the-reynolds-transport-theorem" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Mass conservation <span class="math">\(\phi = \rho\)</span> (mass per unit volume):</li>
+</ul>
+<div class="math">
+\[{D \over {Dt}} \int_V \rho dV =
+{\partial \over {\partial t}} \int_V \rho dV + \int_S \rho (\vec{u} \cdot \vec{n}) dS\]</div>
+<ul class="simple">
+<li>Momentum conservation <span class="math">\(\phi = \rho \vec{u}\)</span> (momentum per unit volume):</li>
+</ul>
+<div class="math">
+\[{D \over {Dt}} \int_V \rho \vec{u} dV =
+{\partial \over {\partial t}} \int_V \rho \vec{u} dV + \int_S \rho \vec{u} (\vec{u} \cdot \vec{n}) dS\]</div>
+<ul class="simple">
+<li>Energy conservation <span class="math">\(\phi = \rho E\)</span> (total specific energy per unit volume):</li>
+</ul>
+<div class="math">
+\[{D \over {Dt}} \int_V \rho E dV =
+{\partial \over {\partial t}} \int_V \rho E dV + \int_S \rho E (\vec{u} \cdot \vec{n}) dS\]</div>
+</div>
+<div class="section" id="what-is-the-total-derivative">
+<h2><a class="toc-backref" href="#id5">4.1.8.5. What is the total derivative?</a><a class="headerlink" href="#what-is-the-total-derivative" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>From Reynolds Transport Theorem:</li>
+</ul>
+<div class="math">
+\[{D \over {Dt}} \int_V \phi dV =
+{\partial \over {\partial t}} \int_V \phi dV + \int_S \phi (\vec{u} \cdot \vec{n}) dS\]</div>
+<ul class="simple">
+<li>Gauss Divergence:</li>
+</ul>
+<div class="math">
+\[{D \over {Dt}} \int_V \phi dV =
+{\partial \over {\partial t}} \int_V \phi dV + \int_V \nabla \cdot (\phi \vec{n}) dV\]</div>
+<ul class="simple">
+<li>Equal Volumes:</li>
+</ul>
+<div class="math">
+\[{{D \phi} \over {Dt}} = {{\partial \phi} \over {\partial t}} + \nabla \cdot (\phi \vec{u})\]</div>
+<ul class="simple">
+<li>By expansion:</li>
+</ul>
+<div class="math">
+\[{{D \phi} \over {Dt}} = {{\partial \phi} \over {\partial t}} +
+(\vec{u} \cdot \nabla) \phi + (\nabla \cdot \vec{u}) \phi\]</div>
+<ul class="simple">
+<li>Incompressible <span class="math">\(\longrightarrow \nabla \cdot \vec{u} = 0\)</span>:</li>
+</ul>
+<div class="math">
+\[{{D \phi} \over {Dt}} = {{\partial \phi} \over {\partial t}} +
+(\vec{u} \cdot \nabla) \phi  =
+{{\partial \phi} \over {\partial t}} +
+u_i {{\partial \phi} \over {\partial x_i}}\]</div>
+</div>
+<div class="section" id="what-is-the-meaning-of-the-total-derivative">
+<h2><a class="toc-backref" href="#id6">4.1.8.6. What is the meaning of the total derivative?</a><a class="headerlink" href="#what-is-the-meaning-of-the-total-derivative" title="Permalink to this headline">¶</a></h2>
+<div class="math">
+\[\mathbf{Temporal} \ change \ of \ \phi \ following \ a \ \mathbf{moving} \ point =
+\mathbf{Temporal} \ change \ of \ \phi \ at \ a \ \mathbf{fixed} \ point +
+\mathbf{Spatial} \ change \ of \ \phi \ at \ a \ \mathbf{fixed} \ point\]</div>
+<p>Or</p>
+<div class="math">
+\[Total \ Acceleration = Unsteady \ Acceleration + Convective/Advective \ Acceleration\]</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="07_euler_and_lagrange.html">4.1.7. Euler and Lagrange</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="09_conservation_of_mass.html">4.1.9. Conservation of Mass</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

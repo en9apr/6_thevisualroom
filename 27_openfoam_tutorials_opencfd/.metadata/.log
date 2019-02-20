@@ -1,0 +1,196 @@
+!SESSION 2016-10-20 14:11:34.753 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_GB
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2016-10-20 15:28:45.655
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.operations 2 10001 2016-10-20 15:28:45.655
+!MESSAGE Your original request has been modified.
+!SUBENTRY 2 org.eclipse.equinox.p2.operations 2 10004 2016-10-20 15:28:45.655
+!MESSAGE "Eclipse Java Development Tools" will be ignored because a newer version is already installed. 
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2016-10-20 15:28:45.655
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:28:45.655
+!MESSAGE Software being installed: C/C++ Call Graph Visualization (Incubation) 0.9.0.201202152032 (org.eclipse.linuxtools.callgraph.feature.feature.group 0.9.0.201202152032)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:28:45.655
+!MESSAGE Software being installed: C/C++ Call Graph Visualization (Incubation) 0.0.2.201108301805 (org.eclipse.linuxtools.callgraph.feature.group 0.0.2.201108301805)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2016-10-20 15:28:45.655
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:28:45.656
+!MESSAGE Callgraph Launch (Incubation) 0.9.0.201202152032 (org.eclipse.linuxtools.callgraph.launch 0.9.0.201202152032)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:28:45.656
+!MESSAGE Callgraph Launch (Incubation) 0.0.1.201108301805 (org.eclipse.linuxtools.callgraph.launch 0.0.1.201108301805)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2016-10-20 15:28:45.656
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:28:45.656
+!MESSAGE From: C/C++ Call Graph Visualization (Incubation) 0.9.0.201202152032 (org.eclipse.linuxtools.callgraph.feature.feature.group 0.9.0.201202152032)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:28:45.656
+!MESSAGE To: org.eclipse.linuxtools.callgraph.launch [0.9.0.201202152032]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2016-10-20 15:28:45.656
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:28:45.656
+!MESSAGE From: C/C++ Call Graph Visualization (Incubation) 0.0.2.201108301805 (org.eclipse.linuxtools.callgraph.feature.group 0.0.2.201108301805)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:28:45.656
+!MESSAGE To: org.eclipse.linuxtools.callgraph.launch [0.0.1.201108301805]
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2016-10-20 15:28:45.670
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.operations 2 10001 2016-10-20 15:28:45.670
+!MESSAGE Your original request has been modified.
+!SUBENTRY 2 org.eclipse.equinox.p2.operations 2 10004 2016-10-20 15:28:45.670
+!MESSAGE "Eclipse Java Development Tools" will be ignored because a newer version is already installed. 
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2016-10-20 15:28:45.670
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:28:45.670
+!MESSAGE Software being installed: C/C++ Call Graph Visualization (Incubation) 0.9.0.201202152032 (org.eclipse.linuxtools.callgraph.feature.feature.group 0.9.0.201202152032)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:28:45.670
+!MESSAGE Software being installed: C/C++ Call Graph Visualization (Incubation) 0.0.2.201108301805 (org.eclipse.linuxtools.callgraph.feature.group 0.0.2.201108301805)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2016-10-20 15:28:45.670
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:28:45.670
+!MESSAGE Callgraph Launch (Incubation) 0.9.0.201202152032 (org.eclipse.linuxtools.callgraph.launch 0.9.0.201202152032)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:28:45.670
+!MESSAGE Callgraph Launch (Incubation) 0.0.1.201108301805 (org.eclipse.linuxtools.callgraph.launch 0.0.1.201108301805)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2016-10-20 15:28:45.671
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:28:45.671
+!MESSAGE From: C/C++ Call Graph Visualization (Incubation) 0.9.0.201202152032 (org.eclipse.linuxtools.callgraph.feature.feature.group 0.9.0.201202152032)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:28:45.671
+!MESSAGE To: org.eclipse.linuxtools.callgraph.launch [0.9.0.201202152032]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2016-10-20 15:28:45.671
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:28:45.671
+!MESSAGE From: C/C++ Call Graph Visualization (Incubation) 0.0.2.201108301805 (org.eclipse.linuxtools.callgraph.feature.group 0.0.2.201108301805)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:28:45.671
+!MESSAGE To: org.eclipse.linuxtools.callgraph.launch [0.0.1.201108301805]
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2016-10-20 15:32:02.785
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.operations 2 10001 2016-10-20 15:32:02.785
+!MESSAGE Your original request has been modified.
+!SUBENTRY 2 org.eclipse.equinox.p2.operations 2 10004 2016-10-20 15:32:02.785
+!MESSAGE "Eclipse Java Development Tools" will be ignored because a newer version is already installed. 
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2016-10-20 15:32:02.785
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:32:02.785
+!MESSAGE Software being installed: C/C++ Call Graph Visualization (Incubation) 0.9.0.201202152032 (org.eclipse.linuxtools.callgraph.feature.feature.group 0.9.0.201202152032)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:32:02.786
+!MESSAGE Software being installed: C/C++ Call Graph Visualization (Incubation) 0.0.2.201108301805 (org.eclipse.linuxtools.callgraph.feature.group 0.0.2.201108301805)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2016-10-20 15:32:02.787
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:32:02.787
+!MESSAGE Callgraph Launch (Incubation) 0.9.0.201202152032 (org.eclipse.linuxtools.callgraph.launch 0.9.0.201202152032)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:32:02.787
+!MESSAGE Callgraph Launch (Incubation) 0.0.1.201108301805 (org.eclipse.linuxtools.callgraph.launch 0.0.1.201108301805)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2016-10-20 15:32:02.787
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:32:02.787
+!MESSAGE From: C/C++ Call Graph Visualization (Incubation) 0.9.0.201202152032 (org.eclipse.linuxtools.callgraph.feature.feature.group 0.9.0.201202152032)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:32:02.787
+!MESSAGE To: org.eclipse.linuxtools.callgraph.launch [0.9.0.201202152032]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2016-10-20 15:32:02.788
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:32:02.788
+!MESSAGE From: C/C++ Call Graph Visualization (Incubation) 0.0.2.201108301805 (org.eclipse.linuxtools.callgraph.feature.group 0.0.2.201108301805)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:32:02.788
+!MESSAGE To: org.eclipse.linuxtools.callgraph.launch [0.0.1.201108301805]
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2016-10-20 15:32:02.791
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.operations 2 10001 2016-10-20 15:32:02.791
+!MESSAGE Your original request has been modified.
+!SUBENTRY 2 org.eclipse.equinox.p2.operations 2 10004 2016-10-20 15:32:02.791
+!MESSAGE "Eclipse Java Development Tools" will be ignored because a newer version is already installed. 
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2016-10-20 15:32:02.791
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:32:02.792
+!MESSAGE Software being installed: C/C++ Call Graph Visualization (Incubation) 0.9.0.201202152032 (org.eclipse.linuxtools.callgraph.feature.feature.group 0.9.0.201202152032)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:32:02.792
+!MESSAGE Software being installed: C/C++ Call Graph Visualization (Incubation) 0.0.2.201108301805 (org.eclipse.linuxtools.callgraph.feature.group 0.0.2.201108301805)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2016-10-20 15:32:02.792
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:32:02.792
+!MESSAGE Callgraph Launch (Incubation) 0.9.0.201202152032 (org.eclipse.linuxtools.callgraph.launch 0.9.0.201202152032)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:32:02.792
+!MESSAGE Callgraph Launch (Incubation) 0.0.1.201108301805 (org.eclipse.linuxtools.callgraph.launch 0.0.1.201108301805)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2016-10-20 15:32:02.792
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:32:02.792
+!MESSAGE From: C/C++ Call Graph Visualization (Incubation) 0.9.0.201202152032 (org.eclipse.linuxtools.callgraph.feature.feature.group 0.9.0.201202152032)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:32:02.792
+!MESSAGE To: org.eclipse.linuxtools.callgraph.launch [0.9.0.201202152032]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2016-10-20 15:32:02.792
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:32:02.792
+!MESSAGE From: C/C++ Call Graph Visualization (Incubation) 0.0.2.201108301805 (org.eclipse.linuxtools.callgraph.feature.group 0.0.2.201108301805)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2016-10-20 15:32:02.792
+!MESSAGE To: org.eclipse.linuxtools.callgraph.launch [0.0.1.201108301805]
+!SESSION 2016-10-20 16:04:49.277 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_GB
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.814
+!MESSAGE NLS unused message: TemplateEngine.internalError in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.818
+!MESSAGE NLS unused message: TemplateEngine.templateEngine in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.818
+!MESSAGE NLS unused message: ProjectCreatedActions.InsufficientInformation in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.818
+!MESSAGE NLS unused message: ConditionalProcessGroup.notExecuting in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.818
+!MESSAGE NLS unused message: ConditionalProcessGroup.unexpandableMacro in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.818
+!MESSAGE NLS unused message: Process.argument in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.818
+!MESSAGE NLS unused message: Process.expandableMacro in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.818
+!MESSAGE NLS unused message: Process.error in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.819
+!MESSAGE NLS unused message: Process.success in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.819
+!MESSAGE NLS unused message: Process.info in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.819
+!MESSAGE NLS unused message: Process.unknownProcess in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.819
+!MESSAGE NLS unused message: Process.executedSuccessfully in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.820
+!MESSAGE NLS unused message: ProcessRunner.unexpectedArguments in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.820
+!MESSAGE NLS unused message: ProcessRunner.missingArguments in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.820
+!MESSAGE NLS unused message: ProcessRunner.argumentsMismatch in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.820
+!MESSAGE NLS unused message: ProcessRunner.error in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.820
+!MESSAGE NLS unused message: ProcessRunner.success in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.820
+!MESSAGE NLS unused message: ProcessRunner.info in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2016-10-20 16:09:10.820
+!MESSAGE NLS unused message: ProcessHelper.fileNotFound in: org.eclipse.cdt.core.templateengine.process.Messages
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-10-20 16:09:12.551
+!MESSAGE Indexed 'hello_world' (1 sources, 0 headers) in 0.163 sec: 1 declarations; 0 references; 1 unresolved inclusions; 0 syntax errors; 3 unresolved names (75%)

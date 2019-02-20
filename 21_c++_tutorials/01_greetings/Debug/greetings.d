@@ -1,0 +1,1 @@
+greetings.d: ../greetings.cpp

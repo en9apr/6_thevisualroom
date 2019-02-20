@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.6.2. Conservative Form &#8212; The Visual Room</title>
+    <title>1.1.6.2. Conservative Form &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
-    <link rel="next" title="1.6.3. Explicit and Implicit Numerical Methods" href="explicit_implicit_non_linear_convection.html" />
-    <link rel="prev" title="1.6.1. Multi-step Numerical Methods" href="multi_step_methods.html" /> 
+    <link rel="up" title="1.1. Computational Fluid Dynamics Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.1.6.3. Explicit and Implicit Numerical Methods" href="explicit_implicit_non_linear_convection.html" />
+    <link rel="prev" title="1.1.6.1. Multi-step Numerical Methods" href="multi_step_methods.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>1.6.2. Conservative Form</span></h2>
+        <h2 class="heading"><span>1.1.6.2. Conservative Form</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="multi_step_methods.html">1.6.1. Multi-step Numerical Methods</a>
+        «&#160;&#160;<a href="multi_step_methods.html">1.1.6.1. Multi-step Numerical Methods</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="explicit_implicit_non_linear_convection.html">1.6.3. Explicit and Implicit Numerical Methods</a>&#160;&#160;»
+        <a href="explicit_implicit_non_linear_convection.html">1.1.6.3. Explicit and Implicit Numerical Methods</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,7 +49,7 @@
         
         
   <div class="section" id="conservative-form">
-<h1>1.6.2. Conservative Form<a class="headerlink" href="#conservative-form" title="Permalink to this headline">¶</a></h1>
+<h1>1.1.6.2. Conservative Form<a class="headerlink" href="#conservative-form" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#conversion-from-non-conservative-form-to-conservative-form" id="id2">Conversion from Non-Conservative Form to Conservative Form</a></li>
@@ -62,7 +62,7 @@
 </ul>
 </div>
 <div class="section" id="conversion-from-non-conservative-form-to-conservative-form">
-<h2><a class="toc-backref" href="#id2">1.6.2.1. Conversion from Non-Conservative Form to Conservative Form</a><a class="headerlink" href="#conversion-from-non-conservative-form-to-conservative-form" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">1.1.6.2.1. Conversion from Non-Conservative Form to Conservative Form</a><a class="headerlink" href="#conversion-from-non-conservative-form-to-conservative-form" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Scalar conservation laws have the following <strong>Conservative Form</strong> in 1D (where <span class="math">\(F\)</span> = Flux):</li>
 </ul>
@@ -97,7 +97,7 @@ A(u) {{\partial u} \over {\partial x}}\]</div>
 \[F(u) = \int A(u) du\]</div>
 </div>
 <div class="section" id="conversion-of-the-burgers-equation-from-non-conservative-to-conservative-form">
-<h2><a class="toc-backref" href="#id3">1.6.2.2. Conversion of the Burgers Equation from Non-Conservative to Conservative Form</a><a class="headerlink" href="#conversion-of-the-burgers-equation-from-non-conservative-to-conservative-form" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">1.1.6.2.2. Conversion of the Burgers Equation from Non-Conservative to Conservative Form</a><a class="headerlink" href="#conversion-of-the-burgers-equation-from-non-conservative-to-conservative-form" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Non-Conservative Form:</li>
 </ul>
@@ -128,10 +128,10 @@ A(u) {{\partial u} \over {\partial x}}\]</div>
 <p><strong>Is this now an alternate solution?</strong></p>
 </div>
 <div class="section" id="what-is-the-difference-between-the-conservative-and-non-conservative-forms">
-<h2><a class="toc-backref" href="#id4">1.6.2.3. What is the Difference Between the Conservative and Non-Conservative Forms?</a><a class="headerlink" href="#what-is-the-difference-between-the-conservative-and-non-conservative-forms" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">1.1.6.2.3. What is the Difference Between the Conservative and Non-Conservative Forms?</a><a class="headerlink" href="#what-is-the-difference-between-the-conservative-and-non-conservative-forms" title="Permalink to this headline">¶</a></h2>
 <p>Using BD for the Flux term for both Conservative and Non-Conservative Forms (we had to do this as it doesn&#8217;t make sense to integrate the Non-Conservative Form):</p>
 <div class="section" id="id1">
-<h3><a class="toc-backref" href="#id5">Conservative Form</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id5">1.1.6.2.3.1. Conservative Form</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="math">
 \[\sum {\partial \over {\partial x}} \left( {{u^2} \over 2} \right) =
 {{u_1^2-u_0^2} \over {2 \Delta x}} +
@@ -147,7 +147,7 @@ A(u) {{\partial u} \over {\partial x}}\]</div>
 \[{d \over dt} \int_{out}^{in} u(x,t) dx = F(u(out,t))-F(u(in,t))\]</div>
 </div>
 <div class="section" id="non-conservative-form">
-<h3><a class="toc-backref" href="#id6">Non-Conservative Form</a><a class="headerlink" href="#non-conservative-form" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id6">1.1.6.2.3.2. Non-Conservative Form</a><a class="headerlink" href="#non-conservative-form" title="Permalink to this headline">¶</a></h3>
 <div class="math">
 \[\sum u {{\partial u} \over {\partial x}}=
 u_1 {(u_1-u_0) \over {\Delta x}} +
@@ -164,17 +164,17 @@ u_3 {(u_3-u_2) \over {\Delta x}} =
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="multi_step_methods.html">1.6.1. Multi-step Numerical Methods</a>
+        «&#160;&#160;<a href="multi_step_methods.html">1.1.6.1. Multi-step Numerical Methods</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="explicit_implicit_non_linear_convection.html">1.6.3. Explicit and Implicit Numerical Methods</a>&#160;&#160;»
+        <a href="explicit_implicit_non_linear_convection.html">1.1.6.3. Explicit and Implicit Numerical Methods</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

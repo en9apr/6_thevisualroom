@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;32_challenge_file_read/challenge_file_read_simple.cpp&apos;" deleteContents="false" description="Delete resource &apos;32_challenge_file_read/challenge_file_read_simple.cpp&apos;" element1="/32_challenge_file_read/challenge_file_read_simple.cpp" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1484586232079"/>
+</session>

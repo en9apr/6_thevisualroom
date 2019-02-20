@@ -1,0 +1,1 @@
+distance.d: ../distance.cpp

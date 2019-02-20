@@ -1,0 +1,9 @@
+===========================
+TACDAM (Password Protected)
+===========================
+
+This project is concerned with the removal of powder from additive manufactured components. The objective is to develop a methodology to model the flow of the residual powder within the component in order to be able to identify problems in the powder removal, and optimise powder removal strategies. We will simulate a tubular geometries and identify problems with the flow, particularly issues such as dead spots where powder is not being removed; and attempt to correlate this with empirical knowledge of powder removal. The project is run as a consortium with various industrial partners, including Hieta Technolgies, Insphere, Metalysis, Renishaw, McClaren Automotive, LSN Diffusion, University of Sheffield, University of Leicester and University of Exeter. 
+
+`Draft Report (18th January 2018) <https://www.dropbox.com/s/uae0056vjqwgdt2/myTwoPhaseEulerFoam_do_not_delete.pdf?dl=0>`_
+
+

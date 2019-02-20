@@ -3,65 +3,74 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+=========================================================
+Notes on Current Projects, CFD, Programming and Computing
+=========================================================
 
-=======================================
-Notes on CFD, Computing and Mathematics
-=======================================
+This website was written as a record of my self-taught approach to certain aspects of engineering, as I continue to develop my skills and knowledge.
 
-.. contents::
-   :local:
+Current Projects
+================
 
-Notes on CFD
-============
-
-These notes are based on "Computational Fluid Dynamics" by `Professor Lorena Barba <http://www.seas.gwu.edu/lorena-barba>`_ and "High Performance Scientific Computing" by `Professor Randall LeVeque <http://depts.washington.edu/amath/staff-members/randy-leveque/>`_. The rest of the notes are based on literature from variously quoted academic resources.
+Here is where I provide a list of the current projects I am working on, with links to progress reports.
 
 .. toctree::
    :maxdepth: 1
-   :numbered: 4
+   :numbered: 6
    
-   01_barba_theory/barba_cfd_theory
-   02_barba_projects/barba_cfd_projects
+   00_current_projects/current_projects
+
+CFD
+===
+
+These pages are based on several MOOCS, variously quoted academic resources and personal notes I have made.
+
+.. toctree::
+   :maxdepth: 1
+   :numbered: 6
+   
+   01_02_barba_landing_page/barba_landing_page
    03_leveque/leveque_hpsc
    04_literature/literature   
+   18_cfd_notes/cfd_notes
    
-Notes on Computing
-==================
+Programming
+===========
 
-The Python notes are largely based on "Introduction to Interactive Programming in Python" by `Professor Joe Warren <http://report.rice.edu/sir/faculty.detail?p=A2D78585F9777919>`_ et al. The rest of the notes are a complied set from various internet sources.
+The notes here are a complied set from various internet sources, online courses and my own experience.
 
 .. toctree::
    :maxdepth: 1
-   :numbered: 4
+   :numbered: 6
    
-   05_fortran/fortran
-   06_fortran_use/fortran_use
-   07_python/python_language
-   08_version_control/git
-   09_open_foam/openfoam
+   24_25_26_27_openfoam_landing_page/openfoam_landing_page
+   21_22_c++_landing_page/c++_landing_page
+   07_python_landing_page/python_landing_page
+   05_06_fortran_landing_page/fortran_landing_page
+
+   
+Computing
+=========
+
+These topics include the operating system, version control and desktop publishing.
+
+.. toctree::
+   :maxdepth: 1
+   :numbered: 6
+   
+   11_linux_landing_page/linux_landing_page
+   08_git/git
    10_latex/latex
-   11_linux/linux
-   12_virtual_machines/virtual_machines
-   13_virtual_machines_use/virtual_machines_use
-   14_software/software
-
-Notes on Mathematics
-====================
-
-.. toctree::
-   :maxdepth: 1
-   :numbered: 4
-
-   15_mathematics/linear_algebra
-
-Useful Links
-============
-
-.. toctree::
-   :hidden:
-
+   23_sphinx/sphinx
    16_links/unicode
+   
+Search
+======
 
-* `MathJax Syntax <http://en.wikipedia.org/wiki/Help:Displaying_a_formula>`_
-* `Unicode <http://www.thevisualroom.com/unicode.html>`_
+If you want to search this website, please use the link below:
+
 * :ref:`search` 
+
+
+
+

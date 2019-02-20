@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.1.10. Cauchy Momentum Equation &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../../index.html" />
+    <link rel="up" title="4. Personal Notes on CFD" href="../cfd_notes.html" />
+    <link rel="next" title="4.1.11. Euler Momentum Equation" href="11_euler_momentum_equation.html" />
+    <link rel="prev" title="4.1.9. Conservation of Mass" href="09_conservation_of_mass.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.1.10. Cauchy Momentum Equation</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="09_conservation_of_mass.html">4.1.9. Conservation of Mass</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="11_euler_momentum_equation.html">4.1.11. Euler Momentum Equation</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="cauchy-momentum-equation">
+<h1>4.1.10. Cauchy Momentum Equation<a class="headerlink" href="#cauchy-momentum-equation" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#what-is-the-derivation-of-the-cauchy-equation" id="id1">What is the derivation of the Cauchy Equation?</a></li>
+<li><a class="reference internal" href="#what-is-the-derivation-of-the-conservation-of-momentum-in-differential-form" id="id2">What is the derivation of the conservation of momentum in differential form?</a></li>
+<li><a class="reference internal" href="#what-is-the-non-conservative-form-of-the-momentum-equation-cauchy-equation-for-incompressible-flow" id="id3">What is the non-conservative form of the momentum equation (Cauchy Equation) for incompressible flow?</a></li>
+<li><a class="reference internal" href="#what-is-represented-by-the-cauchy-equation" id="id4">What is represented by the Cauchy Equation?</a></li>
+</ul>
+</div>
+<div class="section" id="what-is-the-derivation-of-the-cauchy-equation">
+<h2><a class="toc-backref" href="#id1">4.1.10.1. What is the derivation of the Cauchy Equation?</a><a class="headerlink" href="#what-is-the-derivation-of-the-cauchy-equation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Temporal change in momentum:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} \int_V \rho \vec{u} dV\]</div>
+<ul class="simple">
+<li>Spatial change in momentum:</li>
+</ul>
+<div class="math">
+\[\int_S \rho \vec{u} (\vec{u} \cdot \vec{n}) dS\]</div>
+<ul class="simple">
+<li>Surface forces:</li>
+</ul>
+<div class="math">
+\[\int_S (\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} \cdot \vec{n}) dS\]</div>
+<ul class="simple">
+<li>Body forces:</li>
+</ul>
+<div class="math">
+\[\int_V \rho \vec{g} dV\]</div>
+<ul class="simple">
+<li>Newton&#8217;s 2nd Law:</li>
+</ul>
+<div class="math">
+\[\text{Temporal change in momentum + Spatial change in momentum = Surface forces + Body forces}\]</div>
+<div class="math">
+\[{\partial \over {\partial t}} \int_V \rho \vec{u} dV +
+\int_S \rho \vec{u} (\vec{u} \cdot \vec{n}) dS =
+\int_S (\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} \cdot \vec{n}) dS +
+\int_V \rho \vec{g} dV\]</div>
+</div>
+<div class="section" id="what-is-the-derivation-of-the-conservation-of-momentum-in-differential-form">
+<h2><a class="toc-backref" href="#id2">4.1.10.2. What is the derivation of the conservation of momentum in differential form?</a><a class="headerlink" href="#what-is-the-derivation-of-the-conservation-of-momentum-in-differential-form" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Gauss divergence theorem:</li>
+</ul>
+<div class="math">
+\[\int_S \rho \vec{u} (\vec{u} \cdot \vec{n}) = \int_V \nabla \cdot (\rho \vec{u} \otimes \vec{u}) dV\]</div>
+<div class="math">
+\[\int_S (\overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} \cdot \vec{n}) dS = \int_V \nabla \cdot \overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} dV\]</div>
+<ul class="simple">
+<li>From integral form:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} \int_V \rho \vec{u} dV +
+\int_V \nabla \cdot (\rho \vec{u} \otimes \vec{u}) dV =
+\int_V \nabla \cdot \overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} dV +
+\int_V \rho \vec{g} dV\]</div>
+<ul class="simple">
+<li>Volume is fixed and arbitary:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} (\rho \vec{u}) +
+\nabla \cdot (\rho \vec{u} \otimes \vec{u}) =
+\nabla \cdot \overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} +
+\rho \vec{g}\]</div>
+<ul class="simple">
+<li>In Einstein notation:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} (\rho u_j) +
+{\partial \over {\partial x_i}} (\rho u_j u_i) =
+{\partial \over {\partial x_i}} {\sigma_{ij}} +
+\rho g_j\]</div>
+</div>
+<div class="section" id="what-is-the-non-conservative-form-of-the-momentum-equation-cauchy-equation-for-incompressible-flow">
+<h2><a class="toc-backref" href="#id3">4.1.10.3. What is the non-conservative form of the momentum equation (Cauchy Equation) for incompressible flow?</a><a class="headerlink" href="#what-is-the-non-conservative-form-of-the-momentum-equation-cauchy-equation-for-incompressible-flow" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Differential form:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} (\rho \vec{u}) +
+\nabla \cdot (\rho \vec{u} \otimes \vec{u}) =
+\nabla \cdot \overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} +
+\rho \vec{g}\]</div>
+<ul class="simple">
+<li>Differentiation:</li>
+</ul>
+<div class="math">
+\[\vec{u} {{\partial \rho} \over {\partial t}} +
+\rho {{\partial \vec{u}} \over {\partial t}} +
+(\vec{u} \cdot \nabla) \rho \vec{u} +
+(\nabla \cdot \vec{u}) \rho \vec{u} =
+\nabla \cdot \overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} +
+\rho \vec{g}\]</div>
+<ul class="simple">
+<li>Incompressible <span class="math">\(\longrightarrow\)</span> <span class="math">\(\partial \rho / \partial t = 0\)</span>, <span class="math">\(\rho = constant\)</span> and <span class="math">\(\nabla \cdot \vec{u}=0\)</span>:</li>
+</ul>
+<div class="math">
+\[\rho {{\partial \vec{u}} \over {\partial t}}+ (\vec{u} \cdot \nabla) \rho \vec{u} = \nabla \cdot \overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} + \rho \vec{g}\]</div>
+<div class="math">
+\[\rho \left( {{\partial \vec{u}} \over {\partial t}}+ (\vec{u} \cdot \nabla) \vec{u} \right) = \nabla \cdot \overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} + \rho \vec{g}\]</div>
+</div>
+<div class="section" id="what-is-represented-by-the-cauchy-equation">
+<h2><a class="toc-backref" href="#id4">4.1.10.4. What is represented by the Cauchy Equation?</a><a class="headerlink" href="#what-is-represented-by-the-cauchy-equation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>From non-conservative, differential form:</li>
+</ul>
+<div class="math">
+\[\rho \left( {{\partial \vec{u}} \over {\partial t}}+ (\vec{u} \cdot \nabla) \vec{u} \right) = \nabla \cdot \overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma} + \rho \vec{g}\]</div>
+<ul class="simple">
+<li><span class="math">\(\rho {{\partial \vec{u}} \over {\partial t}}\)</span> = Temporal change in momentum/unit volume at a fixed point</li>
+<li><span class="math">\(\rho (\vec{u} \cdot \nabla) \vec{u}\)</span> = Spatial change in momentum/unit volume at a fixed point</li>
+<li><span class="math">\(\nabla \cdot \overset{\underset{\mathrm{\rightrightarrows}}{}}{\sigma}\)</span> = Total stress force/unit volume</li>
+<li><span class="math">\(\rho \vec{g}\)</span> = Gravity force/unit volume</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="09_conservation_of_mass.html">4.1.9. Conservation of Mass</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="11_euler_momentum_equation.html">4.1.11. Euler Momentum Equation</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

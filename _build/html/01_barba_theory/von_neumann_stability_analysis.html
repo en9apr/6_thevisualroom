@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.3.4. von Neumann Stability Analysis &#8212; The Visual Room</title>
+    <title>1.1.3.4. von Neumann Stability Analysis &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
-    <link rel="next" title="1.4.1. Poisson Equation for Pressure" href="poisson_for_pressure.html" />
-    <link rel="prev" title="1.3.3. The Modified Differential Equation" href="analysis_of_numerical_schemes.html" /> 
+    <link rel="up" title="1.1. Computational Fluid Dynamics Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.1.4.1. Poisson Equation for Pressure" href="poisson_for_pressure.html" />
+    <link rel="prev" title="1.1.3.3. The Modified Differential Equation" href="analysis_of_numerical_schemes.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>1.3.4. von Neumann Stability Analysis</span></h2>
+        <h2 class="heading"><span>1.1.3.4. von Neumann Stability Analysis</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="analysis_of_numerical_schemes.html">1.3.3. The Modified Differential Equation</a>
+        «&#160;&#160;<a href="analysis_of_numerical_schemes.html">1.1.3.3. The Modified Differential Equation</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="poisson_for_pressure.html">1.4.1. Poisson Equation for Pressure</a>&#160;&#160;»
+        <a href="poisson_for_pressure.html">1.1.4.1. Poisson Equation for Pressure</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,10 +49,10 @@
         
         
   <div class="section" id="von-neumann-stability-analysis">
-<h1>1.3.4. von Neumann Stability Analysis<a class="headerlink" href="#von-neumann-stability-analysis" title="Permalink to this headline">¶</a></h1>
+<h1>1.1.3.4. von Neumann Stability Analysis<a class="headerlink" href="#von-neumann-stability-analysis" title="Permalink to this headline">¶</a></h1>
 <p>The key to the von Neumann stability analysis is to <strong>expand the solution (or error) in a finite Fourier series</strong></p>
 <div class="section" id="fourier-decomposition-of-the-solution">
-<h2>1.3.4.1. Fourier decomposition of the solution<a class="headerlink" href="#fourier-decomposition-of-the-solution" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.4.1. Fourier decomposition of the solution<a class="headerlink" href="#fourier-decomposition-of-the-solution" title="Permalink to this headline">¶</a></h2>
 <p><span class="math">\(\bar{u}_i^n \rightarrow\)</span> <strong>exact</strong> solution of the discretised equations</p>
 <p><span class="math">\(u_i^n \rightarrow\)</span> <strong>numerical</strong> solution of the discretised equations (roundoff error, errors in I.C. etc)</p>
 <p><span class="math">\(N \rightarrow\)</span> <strong>numerical scheme</strong></p>
@@ -65,14 +65,14 @@
 \[N(u_i^n) = N(\bar{u}_i^n + \bar{\epsilon}_i^n)\]</div>
 <p>If the Numerical scheme is <strong>linear</strong></p>
 <div class="math">
-\[ \begin{align}\begin{aligned}N(u_i^n) = N(\bar{u}_i^n) + N(\bar{\epsilon}_i^n)\\N(u_i^n) = N(\bar{\epsilon}_i^n)\end{aligned}\end{align} \]</div>
+\[N(u_i^n) = N(\bar{u}_i^n) + N(\bar{\epsilon}_i^n)\]\[N(u_i^n) = N(\bar{\epsilon}_i^n)\]</div>
 <ul class="simple">
 <li>If <span class="math">\(N(u_i^n)=0\)</span> represents the numerical scheme</li>
 <li>Then the <strong>errors</strong> satisfy the same equation as the numerical solution, i.e.  <span class="math">\(N(\bar{\epsilon}_i^n)=0\)</span></li>
 </ul>
 </div>
 <div class="section" id="wavenumbers-resolvable-by-a-domain">
-<h2>1.3.4.2. Wavenumbers resolvable by a domain<a class="headerlink" href="#wavenumbers-resolvable-by-a-domain" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.4.2. Wavenumbers resolvable by a domain<a class="headerlink" href="#wavenumbers-resolvable-by-a-domain" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/wavenumbers.png"><img alt="../_images/wavenumbers.png" src="../_images/wavenumbers.png" style="width: 600.0px; height: 187.5px;" /></a>
 </div>
@@ -82,14 +82,14 @@
 <li>Create mesh point, spacing <span class="math">\(\Delta x\)</span></li>
 </ul>
 <div class="section" id="maximum-wavenumber">
-<h3>Maximum wavenumber<a class="headerlink" href="#maximum-wavenumber" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.3.4.2.1. Maximum wavenumber<a class="headerlink" href="#maximum-wavenumber" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><strong>Shortest resolvable wavelength</strong> <span class="math">\(\lambda_{min} = 2 \Delta x\)</span></li>
 <li><strong>Maximum wavenumber</strong> <span class="math">\(k_{max} = {{2 \pi} \over {2 \Delta x}} = {\pi \over {\Delta x}}\)</span></li>
 </ul>
 </div>
 <div class="section" id="minimum-wavenumber">
-<h3>Minimum wavenumber<a class="headerlink" href="#minimum-wavenumber" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.3.4.2.2. Minimum wavenumber<a class="headerlink" href="#minimum-wavenumber" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><strong>Largest resolvable wavelength</strong> <span class="math">\(\lambda_{max} = 2 L\)</span></li>
 <li><strong>Minimum wavenumber</strong> <span class="math">\(k_{min} = {{2 \pi} \over {2 L}} = {\pi \over {L}}\)</span></li>
@@ -97,7 +97,7 @@
 </div>
 </div>
 <div class="section" id="harmonics">
-<h2>1.3.4.3. Harmonics<a class="headerlink" href="#harmonics" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.4.3. Harmonics<a class="headerlink" href="#harmonics" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Mesh index <span class="math">\(i = 0 .... N\)</span>, <span class="math">\(x_i = i \Delta x\)</span>, <span class="math">\(\Delta x = {L \over N}\)</span></li>
 <li>All harmonics represented in this finite mesh are:</li>
@@ -109,7 +109,7 @@
 </ul>
 </div>
 <div class="section" id="phase-angle">
-<h2>1.3.4.4. Phase angle<a class="headerlink" href="#phase-angle" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.4.4. Phase angle<a class="headerlink" href="#phase-angle" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Phase angle is given by:</li>
 </ul>
@@ -118,7 +118,7 @@
 <p>Covers the whole domain <span class="math">\((-\pi, \pi)\)</span> in steps <span class="math">\(\pi \over N\)</span></p>
 </div>
 <div class="section" id="decomposition-in-finite-fourier-series">
-<h2>1.3.4.5. Decomposition in finite Fourier series<a class="headerlink" href="#decomposition-in-finite-fourier-series" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.4.5. Decomposition in finite Fourier series<a class="headerlink" href="#decomposition-in-finite-fourier-series" title="Permalink to this headline">¶</a></h2>
 <div class="math">
 \[u_i^n = \sum_{j=-N}^N V_j^n e ^{I k_j x_i} = \sum_{j=-N}^N V_j^n e ^{I k_j i \Delta x} = \sum_{j=-N}^N V_j^n e ^{{I i j \pi} / N}\]</div>
 <ul class="simple">
@@ -127,7 +127,7 @@
 </ul>
 </div>
 <div class="section" id="von-neumann-stability-condition">
-<h2>1.3.4.6. von Neumann Stability Condition<a class="headerlink" href="#von-neumann-stability-condition" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.4.6. von Neumann Stability Condition<a class="headerlink" href="#von-neumann-stability-condition" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>The amplitude of any harmonic many not grow indefinitely in time (as <span class="math">\(n \rightarrow \infty\)</span>)</li>
 <li>Amplification factor - This is a function of the scheme parameters and <span class="math">\(\phi\)</span> (not n):</li>
@@ -138,10 +138,10 @@
 <li>Stability condition:</li>
 </ul>
 <div class="math">
-\[ \begin{align}\begin{aligned}\left\vert G \right\vert \le 1\\\forall \phi_j = j {\pi \over N}\\j = -N, N\end{aligned}\end{align} \]</div>
+\[\left\vert G \right\vert \le 1\]\[\forall \phi_j = j {\pi \over N}\]\[j = -N, N\]</div>
 </div>
 <div class="section" id="example-1-explicit-fd-in-t-cd-in-x-for-1d-linear-convection">
-<h2>1.3.4.7. Example 1: Explicit FD in t, CD in x for 1D linear convection<a class="headerlink" href="#example-1-explicit-fd-in-t-cd-in-x-for-1d-linear-convection" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.4.7. Example 1: Explicit FD in t, CD in x for 1D linear convection<a class="headerlink" href="#example-1-explicit-fd-in-t-cd-in-x-for-1d-linear-convection" title="Permalink to this headline">¶</a></h2>
 <p>FD in t, CD in x:</p>
 <div class="math">
 \[{{u_i^{n+1} - u_i^n} \over {\Delta t}} + {c \over {2 \Delta x}} ({u_{i+1}^n - u_{i-1}^n})=0\]</div>
@@ -171,7 +171,7 @@
 <p><strong>Hence FD in t, CD in x for 1D linear convection is unconditionally unstable</strong></p>
 </div>
 <div class="section" id="example-2-implicit-bd-in-t-cd-in-x-for-1d-linear-convection">
-<h2>1.3.4.8. Example 2 - Implicit BD in t, CD in x for 1D linear convection<a class="headerlink" href="#example-2-implicit-bd-in-t-cd-in-x-for-1d-linear-convection" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.4.8. Example 2 - Implicit BD in t, CD in x for 1D linear convection<a class="headerlink" href="#example-2-implicit-bd-in-t-cd-in-x-for-1d-linear-convection" title="Permalink to this headline">¶</a></h2>
 <p>BD in t, CD in x:</p>
 <div class="math">
 \[u_i^{n+1}= u_i^n - {\sigma \over 2} ({u_{i+1}^{n+1} - u_{i-1}^{n+1}})\]</div>
@@ -190,7 +190,7 @@
 </ul>
 </div>
 <div class="section" id="example-3-explicit-fd-in-t-bd-in-x-upwind-for-1d-linear-convection">
-<h2>1.3.4.9. Example 3 - Explicit FD in t, BD in x (upwind) for 1D linear convection<a class="headerlink" href="#example-3-explicit-fd-in-t-bd-in-x-upwind-for-1d-linear-convection" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.4.9. Example 3 - Explicit FD in t, BD in x (upwind) for 1D linear convection<a class="headerlink" href="#example-3-explicit-fd-in-t-bd-in-x-upwind-for-1d-linear-convection" title="Permalink to this headline">¶</a></h2>
 <p>FD in t, BD in x:</p>
 <div class="math">
 \[u_i^{n+1}= u_i^n - \sigma ({u_{i}^{n} - u_{i-1}^{n}})\]</div>
@@ -214,7 +214,7 @@
 <p><strong>Hence FD in t, BD in x for 1D linear convection is conditionally stable</strong></p>
 </div>
 <div class="section" id="example-4-implicit-bd-in-t-bd-in-x-for-1d-linear-convection">
-<h2>1.3.4.10. Example 4 - Implicit BD in t, BD in x for 1D linear convection<a class="headerlink" href="#example-4-implicit-bd-in-t-bd-in-x-for-1d-linear-convection" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.4.10. Example 4 - Implicit BD in t, BD in x for 1D linear convection<a class="headerlink" href="#example-4-implicit-bd-in-t-bd-in-x-for-1d-linear-convection" title="Permalink to this headline">¶</a></h2>
 <p>BD in t, BD in x:</p>
 <div class="math">
 \[u_i^{n+1}= u_i^n - \sigma ({u_{i}^{n+1} - u_{i-1}^{n+1}})\]</div>
@@ -237,7 +237,7 @@
 <p><strong>Explicit</strong> schemes are useless for practical work. However, <strong>implicit</strong> schemes require more work to solve.</p>
 </div>
 <div class="section" id="example-5-explicit-fd-in-t-cd-in-x-for-1d-diffusion">
-<h2>1.3.4.11. Example 5 - Explicit FD in t, CD in x for 1D diffusion<a class="headerlink" href="#example-5-explicit-fd-in-t-cd-in-x-for-1d-diffusion" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.4.11. Example 5 - Explicit FD in t, CD in x for 1D diffusion<a class="headerlink" href="#example-5-explicit-fd-in-t-cd-in-x-for-1d-diffusion" title="Permalink to this headline">¶</a></h2>
 <div class="math">
 \[{\partial u \over \partial t} = \nu {\partial^2 u \over \partial x^2}\]</div>
 <p>FD in t, CD in x:</p>
@@ -261,7 +261,7 @@
 <p><span class="math">\({\nu {\Delta t \over \Delta x^2}} \le {1 \over 2}\)</span> (conditional stability of the scheme)</p>
 </div>
 <div class="section" id="example-6-implicit-bd-in-t-cd-in-x-for-1d-diffusion">
-<h2>1.3.4.12. Example 6 - Implicit BD in t, CD in x for 1D diffusion<a class="headerlink" href="#example-6-implicit-bd-in-t-cd-in-x-for-1d-diffusion" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.4.12. Example 6 - Implicit BD in t, CD in x for 1D diffusion<a class="headerlink" href="#example-6-implicit-bd-in-t-cd-in-x-for-1d-diffusion" title="Permalink to this headline">¶</a></h2>
 <div class="math">
 \[{\partial u \over \partial t} = \nu {\partial^2 u \over \partial x^2}\]</div>
 <p>BD in t, CD in x:</p>
@@ -291,13 +291,13 @@
 <li>Stability requires that the magnitude of G is less than 1:</li>
 </ol>
 <div class="math">
-\[ \begin{align}\begin{aligned}cos \phi = 1 \qquad \left\vert G \right\vert = \left\vert {1 \over {1-2\beta} } \right\vert\\cos \phi = 0 \qquad \left\vert G \right\vert = \left\vert {1 \over {1+2\beta} } \right\vert\\cos \phi = -1 \qquad \left\vert G \right\vert = \left\vert {1 \over {1-4\beta} } \right\vert\\\beta \rightarrow \infty \qquad \left\vert G \right\vert \rightarrow 0\\\beta = 0 \qquad \left\vert G \right\vert = 1\\\beta \rightarrow -\infty \qquad \left\vert G \right\vert \rightarrow 0\end{aligned}\end{align} \]</div>
+\[cos \phi = 1 \qquad \left\vert G \right\vert = \left\vert {1 \over {1-2\beta} } \right\vert\]\[cos \phi = 0 \qquad \left\vert G \right\vert = \left\vert {1 \over {1+2\beta} } \right\vert\]\[cos \phi = -1 \qquad \left\vert G \right\vert = \left\vert {1 \over {1-4\beta} } \right\vert\]\[\beta \rightarrow \infty \qquad \left\vert G \right\vert \rightarrow 0\]\[\beta = 0 \qquad \left\vert G \right\vert = 1\]\[\beta \rightarrow -\infty \qquad \left\vert G \right\vert \rightarrow 0\]</div>
 <div class="math">
 \[\left\vert G \right\vert \le 1\]</div>
 <p><strong>Hence BD in t, CD in x for 1D diffusion is unconditionally stable</strong></p>
 </div>
 <div class="section" id="summary">
-<h2>1.3.4.13. Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.3.4.13. Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Stability conditions place a limit on the time step for a given spatial step.</li>
 <li>This has a physical interpretation - the solution progresses too rapidly in time - especially a problem for convection dominated flows and compressible flows at the speed of sound - if c is large <span class="math">\(\Delta t\)</span> must be small.</li>
@@ -313,17 +313,17 @@
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="analysis_of_numerical_schemes.html">1.3.3. The Modified Differential Equation</a>
+        «&#160;&#160;<a href="analysis_of_numerical_schemes.html">1.1.3.3. The Modified Differential Equation</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="poisson_for_pressure.html">1.4.1. Poisson Equation for Pressure</a>&#160;&#160;»
+        <a href="poisson_for_pressure.html">1.1.4.1. Poisson Equation for Pressure</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

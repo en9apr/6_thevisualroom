@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1.2.1. The Finite Difference Method &#8212; The Visual Room</title>
+    <title>1.1.2.1. The Finite Difference Method &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,23 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="up" title="1. Computational Fluid Dynamics - Theory" href="barba_cfd_theory.html" />
-    <link rel="next" title="1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations" href="order_of_accuracy.html" />
-    <link rel="prev" title="1.1.4. Derivation of the Navier-Stokes Equations" href="navier_stokes.html" /> 
+    <link rel="up" title="1.1. Computational Fluid Dynamics Theory" href="barba_cfd_theory.html" />
+    <link rel="next" title="1.1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations" href="order_of_accuracy.html" />
+    <link rel="prev" title="1.1.1.4. Derivation of the Navier-Stokes Equations" href="navier_stokes.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>1.2.1. The Finite Difference Method</span></h2>
+        <h2 class="heading"><span>1.1.2.1. The Finite Difference Method</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="navier_stokes.html">1.1.4. Derivation of the Navier-Stokes Equations</a>
+        «&#160;&#160;<a href="navier_stokes.html">1.1.1.4. Derivation of the Navier-Stokes Equations</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="order_of_accuracy.html">1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations</a>&#160;&#160;»
+        <a href="order_of_accuracy.html">1.1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations</a>&#160;&#160;»
         </p>
 
       </div>
@@ -49,16 +49,16 @@
         
         
   <div class="section" id="the-finite-difference-method">
-<h1>1.2.1. The Finite Difference Method<a class="headerlink" href="#the-finite-difference-method" title="Permalink to this headline">¶</a></h1>
+<h1>1.1.2.1. The Finite Difference Method<a class="headerlink" href="#the-finite-difference-method" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="origin-and-concept">
-<h2>1.2.1.1. Origin and Concept<a class="headerlink" href="#origin-and-concept" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.2.1.1. Origin and Concept<a class="headerlink" href="#origin-and-concept" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Invented by Euler in 1768 for one dimension, extended by Runge in 1908 to two dimensions</li>
 <li>Concept is to approximate derivatives using Taylor Expansions</li>
 </ul>
 </div>
 <div class="section" id="define-numerical-grid">
-<h2>1.2.1.2. Define numerical grid<a class="headerlink" href="#define-numerical-grid" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.2.1.2. Define numerical grid<a class="headerlink" href="#define-numerical-grid" title="Permalink to this headline">¶</a></h2>
 <a class="reference internal image-reference" href="../_images/grid.png"><img alt="../_images/grid.png" class="align-center" src="../_images/grid.png" style="width: 600.0px; height: 225.0px;" /></a>
 <ul class="simple">
 <li>Two families of grid lines</li>
@@ -68,14 +68,14 @@
 </ul>
 </div>
 <div class="section" id="define-derivative">
-<h2>1.2.1.3. Define Derivative<a class="headerlink" href="#define-derivative" title="Permalink to this headline">¶</a></h2>
+<h2>1.1.2.1.3. Define Derivative<a class="headerlink" href="#define-derivative" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="mathematical-interpretation">
-<h3>Mathematical Interpretation<a class="headerlink" href="#mathematical-interpretation" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.2.1.3.1. Mathematical Interpretation<a class="headerlink" href="#mathematical-interpretation" title="Permalink to this headline">¶</a></h3>
 <div class="math">
 \[\left .  {\partial u \over \partial x} \right \vert_i = \lim_{\Delta x \rightarrow 0} {u(x_i + \Delta x) - u(x_i) \over \Delta x}\]</div>
 </div>
 <div class="section" id="geometric-interpretation">
-<h3>Geometric Interpretation<a class="headerlink" href="#geometric-interpretation" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.2.1.3.2. Geometric Interpretation<a class="headerlink" href="#geometric-interpretation" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Slope of the tangent to the curve with three approximation to the exact solution: Backward, Forward and Central Difference.</li>
 </ul>
@@ -97,14 +97,14 @@
 \[\left .  {\partial u \over \partial x} \right \vert_i \approx {{u_{i+1} - u_{i-1}} \over 2 \Delta x}\]</div>
 </div>
 <div class="section" id="error">
-<h3>Error<a class="headerlink" href="#error" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.2.1.3.3. Error<a class="headerlink" href="#error" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Some approximations are better than others</li>
 <li>Quality of approximation improves as <span class="math">\(\Delta x\)</span> is made smaller</li>
 </ul>
 </div>
 <div class="section" id="taylor-series-expansion-order-of-the-approximations">
-<h3>Taylor Series Expansion - Order of the approximations<a class="headerlink" href="#taylor-series-expansion-order-of-the-approximations" title="Permalink to this headline">¶</a></h3>
+<h3>1.1.2.1.3.4. Taylor Series Expansion - Order of the approximations<a class="headerlink" href="#taylor-series-expansion-order-of-the-approximations" title="Permalink to this headline">¶</a></h3>
 <div class="math">
 \[u(x) = u(x_i)+(x-x_i) \left . {\partial u \over \partial x} \right \vert_i + {(x - x_i)^2 \over 2!} \left . {\partial^2 u \over \partial x^2} \right \vert_i + \cdots + {(x - x_i)^n \over n!} \left . {\partial^n u \over \partial x^n} \right \vert_i\]</div>
 <ul class="simple">
@@ -144,17 +144,17 @@
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="navier_stokes.html">1.1.4. Derivation of the Navier-Stokes Equations</a>
+        «&#160;&#160;<a href="navier_stokes.html">1.1.1.4. Derivation of the Navier-Stokes Equations</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="order_of_accuracy.html">1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations</a>&#160;&#160;»
+        <a href="order_of_accuracy.html">1.1.2.2. Order of Accuracy, Midpoint Scheme and Model Equations</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

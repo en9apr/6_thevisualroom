@@ -1,0 +1,13 @@
+================
+Papers - Private
+================
+
+Aerodynamics
+============
+
+.. toctree::
+   :maxdepth: 1
+
+   aerodynamics_of_jet_exhausts_part_1
+   aerodynamics_of_jet_exhausts_part_2
+   review_of_buoyancy_induced_flow_in_rotating_cavities

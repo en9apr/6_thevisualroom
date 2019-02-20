@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2. Using Fortran &#8212; The Visual Room</title>
+    <title>4.2. Using Fortran &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,22 +25,23 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="next" title="3. Python Programming Language" href="../07_python/python_language.html" />
-    <link rel="prev" title="1.6. Input/Output" href="../05_fortran/fortran_input_output.html" /> 
+    <link rel="up" title="4. Fortran" href="../05_06_fortran_landing_page/fortran_landing_page.html" />
+    <link rel="next" title="1. Linux" href="../11_linux_landing_page/linux_landing_page.html" />
+    <link rel="prev" title="4.1.6. Input/Output" href="../05_fortran/fortran_input_output.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>2. Using Fortran</span></h2>
+        <h2 class="heading"><span>4.2. Using Fortran</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="../05_fortran/fortran_input_output.html">1.6. Input/Output</a>
+        «&#160;&#160;<a href="../05_fortran/fortran_input_output.html">4.1.6. Input/Output</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="../07_python/python_language.html">3. Python Programming Language</a>&#160;&#160;»
+        <a href="../11_linux_landing_page/linux_landing_page.html">1. Linux</a>&#160;&#160;»
         </p>
 
       </div>
@@ -48,7 +49,7 @@
         
         
   <div class="section" id="using-fortran">
-<h1>2. Using Fortran<a class="headerlink" href="#using-fortran" title="Permalink to this headline">¶</a></h1>
+<h1>4.2. Using Fortran<a class="headerlink" href="#using-fortran" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#developing" id="id1">Developing</a></li>
@@ -95,7 +96,7 @@
 </ul>
 </div>
 <div class="section" id="developing">
-<h2><a class="toc-backref" href="#id1">2.1. Developing</a><a class="headerlink" href="#developing" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">4.2.1. Developing</a><a class="headerlink" href="#developing" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li>Understand the Problem<ul>
 <li>Question being asked</li>
@@ -121,7 +122,7 @@
 <p>Always use meaningful names for programs, modules, functions, subroutines and variables.</p>
 </div>
 <div class="section" id="naming-convections">
-<h2><a class="toc-backref" href="#id2">2.2. Naming Convections</a><a class="headerlink" href="#naming-convections" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">4.2.2. Naming Convections</a><a class="headerlink" href="#naming-convections" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li>Use lowercase for all Fortran constructs (do, subroutine, module, ...).</li>
 <li>Follow short mathematical notation for mathematical variables (sigma, gamma, rho, epsilon, ...).</li>
@@ -130,7 +131,7 @@
 <p>This convection is quite good for Fortran 90:</p>
 <p><a class="reference external" href="http://www.fortran90.org/src/best-practices.html">Fortran Naming Convection</a></p>
 <div class="section" id="program-stucture">
-<h3><a class="toc-backref" href="#id3">2.2.1. Program Stucture</a><a class="headerlink" href="#program-stucture" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id3">4.2.2.1. Program Stucture</a><a class="headerlink" href="#program-stucture" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>The trick with names is to avoid ambigous interpretation, e.g. avoid:</li>
 </ul>
@@ -156,27 +157,27 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">area_under_curve</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">program </span><span class="n">area_under_curve</span>
 </pre></div>
 </div>
 </td>
 <td>Program names usually denote the overall task - &#8220;what is being tested?&#8221; usually answers this one. Prefixes like <code class="docutils literal"><span class="pre">test_</span></code> can sometimes be useful for programs</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">integrate</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">module </span><span class="n">integrate</span>
 <span class="k">module </span><span class="n">problem_description</span>
 </pre></div>
 </div>
 </td>
 <td>Module names should describe the overall function of the procedures within that module</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">function </span><span class="n">trapezoid_rule</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">,</span><span class="n">z</span><span class="p">)</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">function </span><span class="n">trapezoid_rule</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">,</span><span class="n">z</span><span class="p">)</span>
 <span class="k">function </span><span class="n">simpsons_rule</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
 </pre></div>
 </div>
 </td>
 <td>Function names are usually verb-noun combinations. Prefixes like <code class="docutils literal"><span class="pre">print_</span></code>  <code class="docutils literal"><span class="pre">write_</span></code>  <code class="docutils literal"><span class="pre">get_</span></code> and <code class="docutils literal"><span class="pre">set_</span></code> are sometimes useful for functions.</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="k">subroutine </span><span class="n">initial_conditions</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">subroutine </span><span class="n">initial_conditions</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 <span class="k">subroutine </span><span class="n">analytical_solution</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 <span class="k">subroutine </span><span class="n">boundary_conditions</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 </pre></div>
@@ -188,7 +189,7 @@
 </table>
 </div>
 <div class="section" id="variables-and-constants">
-<h3><a class="toc-backref" href="#id4">2.2.2. Variables and Constants</a><a class="headerlink" href="#variables-and-constants" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id4">4.2.2.2. Variables and Constants</a><a class="headerlink" href="#variables-and-constants" title="Permalink to this headline">¶</a></h3>
 <p>As these are used in formulae, it&#8217;s important to keep them as short as possible. Note that Fortran is <strong>case insensitive</strong></p>
 <table border="1" class="docutils">
 <colgroup>
@@ -201,37 +202,37 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
 </pre></div>
 </div>
 </td>
 <td>Cartesian coordinates</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span>
 </pre></div>
 </div>
 </td>
 <td>Usually denote spatial coordinates</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">n</span><span class="p">,</span> <span class="n">m</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">n</span><span class="p">,</span> <span class="n">m</span>
 </pre></div>
 </div>
 </td>
 <td>Usually denote time or interation number</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">process_no</span><span class="p">,</span> <span class="n">step_no</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">process_no</span><span class="p">,</span> <span class="n">step_no</span>
 </pre></div>
 </div>
 </td>
 <td><code class="docutils literal"><span class="pre">_no</span></code> can denote number (as is usual in english)</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">i_max</span><span class="p">,</span> <span class="n">j_max</span><span class="p">,</span> <span class="n">k_max</span><span class="p">,</span> <span class="n">n_max</span><span class="p">,</span> <span class="n">m_max</span><span class="p">,</span> <span class="n">process_no_max</span><span class="p">,</span> <span class="n">step_no_max</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">i_max</span><span class="p">,</span> <span class="n">j_max</span><span class="p">,</span> <span class="n">k_max</span><span class="p">,</span> <span class="n">n_max</span><span class="p">,</span> <span class="n">m_max</span><span class="p">,</span> <span class="n">process_no_max</span><span class="p">,</span> <span class="n">step_no_max</span>
 </pre></div>
 </div>
 </td>
 <td>Maximum value or range denoted by <code class="docutils literal"><span class="pre">_max</span></code>. Max denoting maximum as is usual</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="n">PI</span><span class="p">,</span> <span class="n">RHO</span><span class="p">,</span> <span class="n">NU</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="n">PI</span><span class="p">,</span> <span class="n">RHO</span><span class="p">,</span> <span class="n">NU</span>
 </pre></div>
 </div>
 </td>
@@ -242,19 +243,19 @@
 </div>
 </div>
 <div class="section" id="indentation">
-<h2><a class="toc-backref" href="#id5">2.3. Indentation</a><a class="headerlink" href="#indentation" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">4.2.3. Indentation</a><a class="headerlink" href="#indentation" title="Permalink to this headline">¶</a></h2>
 <p>Use 4 spaces for indentation</p>
 </div>
 <div class="section" id="templates">
-<h2><a class="toc-backref" href="#id6">2.4. Templates</a><a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">4.2.4. Templates</a><a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-template">
-<h3><a class="toc-backref" href="#id7">2.4.1. Module Template</a><a class="headerlink" href="#module-template" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id7">4.2.4.1. Module Template</a><a class="headerlink" href="#module-template" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">implicit</span> <span class="pre">none</span></code> works for whole module</li>
 <li><code class="docutils literal"><span class="pre">private</span></code> implies that everything in this module is private by default</li>
 <li>Only make public what you want</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">integrate</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">module </span><span class="n">integrate</span>
 
     <span class="k">use </span><span class="n">constants</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">RHO</span><span class="p">,</span> <span class="n">PI</span>
     <span class="k">use </span><span class="n">utilities</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">stop_error</span>
@@ -274,11 +275,11 @@
 </div>
 </div>
 <div class="section" id="program-template">
-<h3><a class="toc-backref" href="#id8">2.4.2. Program Template</a><a class="headerlink" href="#program-template" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id8">4.2.4.2. Program Template</a><a class="headerlink" href="#program-template" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Note the use of <strong>explicit</strong> imports, i.e. avoid <code class="docutils literal"><span class="pre">use</span> <span class="pre">integrate</span></code>. Instead say what you are using <code class="docutils literal"><span class="pre">use</span> <span class="pre">integrate,</span> <span class="pre">only:</span> <span class="pre">midpoint</span></code></li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">uranium</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">program </span><span class="n">uranium</span>
     <span class="k">use </span><span class="n">mesh</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">create_mesh</span>
     <span class="k">use </span><span class="n">utilities</span><span class="p">,</span> <span class="n">only</span><span class="p">:</span> <span class="n">stop_error</span><span class="p">,</span> <span class="n">RHO</span>
     <span class="k">implicit none</span>
@@ -293,14 +294,14 @@
 </div>
 </div>
 <div class="section" id="comments">
-<h2><a class="toc-backref" href="#id9">2.5. Comments</a><a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id9">4.2.5. Comments</a><a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
 <p>Comments have two functions - explain the interface and explain the implementation</p>
 <div class="section" id="interface">
-<h3><a class="toc-backref" href="#id10">2.5.1. Interface</a><a class="headerlink" href="#interface" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id10">4.2.5.1. Interface</a><a class="headerlink" href="#interface" title="Permalink to this headline">¶</a></h3>
 <p>Explain what is does - the <strong>interface</strong>. Put it before any code is written</p>
 <div class="section" id="functions-subroutines">
-<h4><a class="toc-backref" href="#id11">2.5.1.1. Functions/Subroutines</a><a class="headerlink" href="#functions-subroutines" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! Estimate the integral of f(x) from a to b using the</span>
+<h4><a class="toc-backref" href="#id11">4.2.5.1.1. Functions/Subroutines</a><a class="headerlink" href="#functions-subroutines" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! Estimate the integral of f(x) from a to b using the</span>
 <span class="c">! Trapezoid Rule with n points.</span>
 
 <span class="c">! Input:</span>
@@ -316,8 +317,8 @@
 </div>
 </div>
 <div class="section" id="modules">
-<h4><a class="toc-backref" href="#id12">2.5.1.2. Modules</a><a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! Performs integration using quadrature integration</span>
+<h4><a class="toc-backref" href="#id12">4.2.5.1.2. Modules</a><a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! Performs integration using quadrature integration</span>
 <span class="c">! and creates a table of the error between this and</span>
 <span class="c">! the known solution.</span>
 
@@ -326,8 +327,8 @@
 </div>
 </div>
 <div class="section" id="programs">
-<h4><a class="toc-backref" href="#id13">2.5.1.3. Programs</a><a class="headerlink" href="#programs" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! Prints a table for the effect of the number</span>
+<h4><a class="toc-backref" href="#id13">4.2.5.1.3. Programs</a><a class="headerlink" href="#programs" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! Prints a table for the effect of the number</span>
 <span class="c">! of integration points on the accuracy of the integration</span>
 
 <span class="c">! Example use:</span>
@@ -340,10 +341,10 @@
 </div>
 </div>
 <div class="section" id="implementation">
-<h3><a class="toc-backref" href="#id14">2.5.2. Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id14">4.2.5.2. Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h3>
 <p>Explain how it does it - the <strong>implementation</strong></p>
 <p>Above a block of code to denote how it does it (never usually need these inline - that&#8217;s too  much commenting)</p>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! Print the number of function evaluations by each thread:</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! Print the number of function evaluations by each thread:</span>
     <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">nthreads</span><span class="o">-</span><span class="mi">1</span>
         <span class="k">print </span><span class="mi">101</span><span class="p">,</span>  <span class="n">i</span><span class="p">,</span> <span class="n">fevals</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 <span class="mi">101</span>     <span class="k">format</span><span class="p">(</span><span class="s2">&quot;fevals by thread &quot;</span><span class="p">,</span><span class="n">i2</span><span class="p">,</span><span class="s2">&quot;: &quot;</span><span class="p">,</span><span class="n">i13</span><span class="p">)</span>
@@ -353,14 +354,14 @@
 </div>
 </div>
 <div class="section" id="makefiles">
-<h2><a class="toc-backref" href="#id15">2.6. Makefiles</a><a class="headerlink" href="#makefiles" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id15">4.2.6. Makefiles</a><a class="headerlink" href="#makefiles" title="Permalink to this headline">¶</a></h2>
 <p>The general form of a make command is as follows. Use a tab character not spaces:</p>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">target</span><span class="p">:</span> <span class="n">dependencies</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">target</span><span class="p">:</span> <span class="n">dependencies</span>
     <span class="o">&lt;</span><span class="n">TAB</span><span class="o">&gt;</span> <span class="n">commands</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">to</span> <span class="n">make</span> <span class="k">target</span>
 </pre></div>
 </div>
 <p>Example where there is no output file. <strong>It&#8217;s important to know the dependencies for the module files, as they will compile in that order</strong>, i.e. <code class="docutils literal"><span class="pre">MODULES</span> <span class="pre">=</span> <span class="pre">functions.mod</span> <span class="pre">newton.mod</span></code> implies that the newton module depends on the functions module.</p>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span># $MYHPSC/homework3/Makefile
+<div class="highlight-fortran"><div class="highlight"><pre># $MYHPSC/homework3/Makefile
 # Example usage:
 #   $ make test1
 #   $ make clean
@@ -409,11 +410,11 @@ clean:
 </pre></div>
 </div>
 <p>You can have multiple Makefiles in the same directory. To distinguish use:</p>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span>$ make test1 -f Makefile_2
+<div class="highlight-fortran"><div class="highlight"><pre>$ make test1 -f Makefile_2
 </pre></div>
 </div>
 <p>To print to the screen from a Makefile use <code class="docutils literal"><span class="pre">&#64;echo</span></code></p>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span>OBJECTS = functions.o newton.o test1.o
+<div class="highlight-fortran"><div class="highlight"><pre>OBJECTS = functions.o newton.o test1.o
 MODULES = functions.mod newton.mod
 .PHONY: test
 
@@ -424,20 +425,20 @@ test:
 </div>
 </div>
 <div class="section" id="compiling">
-<h2><a class="toc-backref" href="#id16">2.7. Compiling</a><a class="headerlink" href="#compiling" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id16">4.2.7. Compiling</a><a class="headerlink" href="#compiling" title="Permalink to this headline">¶</a></h2>
 <p><strong>If the Makefile does not compile, you may need to compile separately to see what the errors are in the compilation</strong></p>
 <div class="section" id="simple-compilation-single-file">
-<h3><a class="toc-backref" href="#id17">2.7.1. Simple compilation (single file)</a><a class="headerlink" href="#simple-compilation-single-file" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span>$ gfortran program.f90
+<h3><a class="toc-backref" href="#id17">4.2.7.1. Simple compilation (single file)</a><a class="headerlink" href="#simple-compilation-single-file" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-fortran"><div class="highlight"><pre>$ gfortran program.f90
 </pre></div>
 </div>
 </div>
 <div class="section" id="multifile-complitation-with-modules">
-<h3><a class="toc-backref" href="#id18">2.7.2. Multifile complitation (with modules)</a><a class="headerlink" href="#multifile-complitation-with-modules" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id18">4.2.7.2. Multifile complitation (with modules)</a><a class="headerlink" href="#multifile-complitation-with-modules" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Compile first (separate compile needed because of module dependencies):</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span>$ gfortran -c program.f90
+<div class="highlight-fortran"><div class="highlight"><pre>$ gfortran -c program.f90
 $ gfortran -c module_1.f90
 $ gfortran -c module_2.f90
 </pre></div>
@@ -445,7 +446,7 @@ $ gfortran -c module_2.f90
 <ul class="simple">
 <li>Then link (with optional executable rename):</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span>$ gfortran program.o module_1.o module_2.o -o program.exe
+<div class="highlight-fortran"><div class="highlight"><pre>$ gfortran program.o module_1.o module_2.o -o program.exe
 </pre></div>
 </div>
 <ul class="simple">
@@ -454,7 +455,7 @@ $ gfortran -c module_2.f90
 </div>
 </div>
 <div class="section" id="flags">
-<h2><a class="toc-backref" href="#id19">2.8. Flags</a><a class="headerlink" href="#flags" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id19">4.2.8. Flags</a><a class="headerlink" href="#flags" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="33%" />
@@ -466,37 +467,37 @@ $ gfortran -c module_2.f90
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">c</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="o">-</span><span class="n">c</span>
 </pre></div>
 </div>
 </td>
 <td>Compile to an object file, object files are later linked into a complete program</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">o</span> <span class="n">FILENAME</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="o">-</span><span class="n">o</span> <span class="n">FILENAME</span>
 </pre></div>
 </div>
 </td>
 <td>Specifies the name of the output file</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">fopenmp</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="o">-</span><span class="n">fopenmp</span>
 </pre></div>
 </div>
 </td>
 <td>Compile using OpenMP</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">g</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="o">-</span><span class="n">g</span>
 </pre></div>
 </div>
 </td>
 <td>Generates extra debugging information for GDB</td>
 </tr>
-<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">g3</span>
+<tr class="row-even"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="o">-</span><span class="n">g3</span>
 </pre></div>
 </div>
 </td>
 <td>Generates even more debugging information</td>
 </tr>
-<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span></span><span class="o">-</span><span class="mi">03</span>
+<tr class="row-odd"><td><div class="first last highlight-fortran"><div class="highlight"><pre><span class="o">-</span><span class="mi">03</span>
 </pre></div>
 </div>
 </td>
@@ -506,11 +507,11 @@ $ gfortran -c module_2.f90
 </table>
 </div>
 <div class="section" id="timing">
-<h2><a class="toc-backref" href="#id20">2.9. Timing</a><a class="headerlink" href="#timing" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id20">4.2.9. Timing</a><a class="headerlink" href="#timing" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="total-cpu-time">
-<h3><a class="toc-backref" href="#id21">2.9.1. Total CPU Time</a><a class="headerlink" href="#total-cpu-time" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id21">4.2.9.1. Total CPU Time</a><a class="headerlink" href="#total-cpu-time" title="Permalink to this headline">¶</a></h3>
 <p>This is for the total CPU time (called the &#8220;user&#8221; time). The real time and sys time aren&#8217;t really important.</p>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span>$ time ./a.out
+<div class="highlight-fortran"><div class="highlight"><pre>$ time ./a.out
 &lt;output from code&gt;
 
 real    0m5.279s
@@ -520,9 +521,9 @@ sys     0m0.006s
 </div>
 </div>
 <div class="section" id="cpu-time-for-part-of-code">
-<h3><a class="toc-backref" href="#id22">2.9.2. CPU Time for Part of Code</a><a class="headerlink" href="#cpu-time-for-part-of-code" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id22">4.2.9.2. CPU Time for Part of Code</a><a class="headerlink" href="#cpu-time-for-part-of-code" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal"><span class="pre">cpu_time</span></code> tells the CPU time used between two successive calls:</p>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">elapsed_cpu_time</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="kd">::</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">elapsed_cpu_time</span>
 
 <span class="k">call </span><span class="nb">cpu_time</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
 
@@ -536,18 +537,18 @@ sys     0m0.006s
 </div>
 </div>
 <div class="section" id="debugging">
-<h2><a class="toc-backref" href="#id23">2.10. Debugging</a><a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id23">4.2.10. Debugging</a><a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="print-statements">
-<h3><a class="toc-backref" href="#id24">2.10.1. Print Statements</a><a class="headerlink" href="#print-statements" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id24">4.2.10.1. Print Statements</a><a class="headerlink" href="#print-statements" title="Permalink to this headline">¶</a></h3>
 <p>Adding print statements to a program is a tried and true method of debugging, and the only method that many programmers use.</p>
 <p>Print statements can be added almost anywhere in a Fortran code to print things out to the terminal window as it goes along.</p>
 <p>You might want to put some special symbols in debugging statements to flag them as such, which makes it easier to see what output is your debug output, and also makes it easier to find them again later to remove from the code, e.g. you might use “+++” or “DEBUG”.</p>
 </div>
 <div class="section" id="compiling-with-gfortran-flags">
-<h3><a class="toc-backref" href="#id25">2.10.2. Compiling with  gfortran Flags</a><a class="headerlink" href="#compiling-with-gfortran-flags" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id25">4.2.10.2. Compiling with  gfortran Flags</a><a class="headerlink" href="#compiling-with-gfortran-flags" title="Permalink to this headline">¶</a></h3>
 <p>There are a number of flags you can use when compiling your code that will make it easier to debug.</p>
 <p>Here’s a generic set of options you might try:</p>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span>$ gfortran -g -W -Wall -fbounds-check -pedantic-errors \
+<div class="highlight-fortran"><div class="highlight"><pre>$ gfortran -g -W -Wall -fbounds-check -pedantic-errors \
 -ffpe-trap=zero, invalid, overflow, underflow program.f90
 </pre></div>
 </div>
@@ -555,9 +556,9 @@ sys     0m0.006s
 <p>Compiling with the -g flag indicates that information should be generated and saved during compilation that can be used to help debug the code using a debugger such as gdb or totalview. You generally have to compile with this option to use a debugger.</p>
 </div>
 <div class="section" id="the-gdb-debugger">
-<h3><a class="toc-backref" href="#id26">2.10.3. The gdb Debugger</a><a class="headerlink" href="#the-gdb-debugger" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id26">4.2.10.3. The gdb Debugger</a><a class="headerlink" href="#the-gdb-debugger" title="Permalink to this headline">¶</a></h3>
 <p>gdb is an open source debugger, but often doesn&#8217;t work well with Fortran.</p>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span>$ cd $UWHPSC/codes/fortran
+<div class="highlight-fortran"><div class="highlight"><pre>$ cd $UWHPSC/codes/fortran
 $ gfortran -g segfault1.f90
 $ gdb a.out
 
@@ -577,7 +578,7 @@ $ gdb a.out
 </div>
 </div>
 <div class="section" id="software">
-<h2><a class="toc-backref" href="#id27">2.11. Software</a><a class="headerlink" href="#software" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id27">4.2.11. Software</a><a class="headerlink" href="#software" title="Permalink to this headline">¶</a></h2>
 <p>It is best to use high quality software as much as possible for several reasons:</p>
 <ol class="arabic simple">
 <li>It will take less time to figure out how to use the software then to write your own version (assuming it&#8217;s well documented)</li>
@@ -607,17 +608,17 @@ $ gdb a.out
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="../05_fortran/fortran_input_output.html">1.6. Input/Output</a>
+        «&#160;&#160;<a href="../05_fortran/fortran_input_output.html">4.1.6. Input/Output</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="../07_python/python_language.html">3. Python Programming Language</a>&#160;&#160;»
+        <a href="../11_linux_landing_page/linux_landing_page.html">1. Linux</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

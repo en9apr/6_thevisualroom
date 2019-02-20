@@ -4,7 +4,6 @@ Python Programming Language
 
 .. toctree::
    :maxdepth: 1
-   :numbered: 4
 
    python
    comments_strings_print_statements

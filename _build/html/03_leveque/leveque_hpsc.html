@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3. High Performance Scientific Computing - Projects &#8212; The Visual Room</title>
+    <title>2. HPSC MOOC &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,30 +25,31 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="next" title="4. Literature" href="../04_literature/literature.html" />
-    <link rel="prev" title="2.3.1. Finite Difference and Finite Volume Projects" href="../02_barba_projects/assignments.html" /> 
+    <link rel="next" title="3. Literature" href="../04_literature/literature.html" />
+    <link rel="prev" title="1.2.3.1. Finite Difference and Finite Volume Projects" href="../02_barba_projects/assignments.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>3. High Performance Scientific Computing - Projects</span></h2>
+        <h2 class="heading"><span>2. HPSC MOOC</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="../02_barba_projects/assignments.html">2.3.1. Finite Difference and Finite Volume Projects</a>
+        «&#160;&#160;<a href="../02_barba_projects/assignments.html">1.2.3.1. Finite Difference and Finite Volume Projects</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="../04_literature/literature.html">4. Literature</a>&#160;&#160;»
+        <a href="../04_literature/literature.html">3. Literature</a>&#160;&#160;»
         </p>
 
       </div>
       <div class="content">
         
         
-  <div class="section" id="high-performance-scientific-computing-projects">
-<h1>3. High Performance Scientific Computing - Projects<a class="headerlink" href="#high-performance-scientific-computing-projects" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="hpsc-mooc">
+<h1>2. HPSC MOOC<a class="headerlink" href="#hpsc-mooc" title="Permalink to this headline">¶</a></h1>
+<p>These projects are based on the course &#8220;High Performance Scientific Computing&#8221; by <a class="reference external" href="https://amath.washington.edu/people/randy-leveque/">Professor Randall LeVeque</a>.</p>
 <p>This page contains the following codes:</p>
 <ul>
 <li><dl class="first docutils">
@@ -158,11 +159,11 @@
 </li>
 </ul>
 <div class="section" id="workspace-1-testing-scripts-and-dummy-code">
-<h2>3.1. Workspace 1: Testing Scripts and Dummy Code<a class="headerlink" href="#workspace-1-testing-scripts-and-dummy-code" title="Permalink to this headline">¶</a></h2>
+<h2>2.1. Workspace 1: Testing Scripts and Dummy Code<a class="headerlink" href="#workspace-1-testing-scripts-and-dummy-code" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><strong>test1.py</strong> (python script to test for environment variables and python version)</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">test1.py file</span>
 
 <span class="sd">Note: this is a Python script.  What you are reading now in the triple</span>
@@ -193,7 +194,7 @@
 
 <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span>
 
-<span class="n">debug_mode</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">debug_mode</span> <span class="o">=</span> <span class="bp">False</span>
 
 <span class="k">if</span> <span class="n">debug_mode</span><span class="p">:</span>
     <span class="n">output_file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>  <span class="c1"># send output to screen</span>
@@ -202,13 +203,13 @@
     <span class="n">output_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;test1output.txt&quot;</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">output_file</span>
 
-<span class="nb">print</span> <span class="s2">&quot;Code run by **Andrew Roberts**&quot;</span>
+<span class="k">print</span> <span class="s2">&quot;Code run by **Andrew Roberts**&quot;</span>
 
 <span class="n">UWHPSC</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;UWHPSC&#39;</span><span class="p">,</span><span class="s1">&#39;** not set **&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="s2">&quot;Environment variable UWHPSC is </span><span class="si">%s</span><span class="s2">&quot;</span>  <span class="o">%</span> <span class="n">UWHPSC</span>
+<span class="k">print</span> <span class="s2">&quot;Environment variable UWHPSC is </span><span class="si">%s</span><span class="s2">&quot;</span>  <span class="o">%</span> <span class="n">UWHPSC</span>
 
 <span class="n">MYHPSC</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MYHPSC&#39;</span><span class="p">,</span><span class="s1">&#39;** not set **&#39;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="s2">&quot;Environment variable MYHPSC is </span><span class="si">%s</span><span class="s2">&quot;</span>  <span class="o">%</span> <span class="n">MYHPSC</span>
+<span class="k">print</span> <span class="s2">&quot;Environment variable MYHPSC is </span><span class="si">%s</span><span class="s2">&quot;</span>  <span class="o">%</span> <span class="n">MYHPSC</span>
 
 
 <span class="c1"># Check for various Python modules and print an error message if</span>
@@ -216,21 +217,21 @@
 
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">numpy</span>
-    <span class="nb">print</span> <span class="s2">&quot;Imported numpy ok&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;Imported numpy ok&quot;</span>
 <span class="k">except</span><span class="p">:</span>
-    <span class="nb">print</span> <span class="s2">&quot;** Error importing numpy&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;** Error importing numpy&quot;</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">matplotlib</span>
-    <span class="nb">print</span> <span class="s2">&quot;Imported matplotlib ok&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;Imported matplotlib ok&quot;</span>
 <span class="k">except</span><span class="p">:</span>
-    <span class="nb">print</span> <span class="s2">&quot;** Error importing matplotlib&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;** Error importing matplotlib&quot;</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">pylab</span>
-    <span class="nb">print</span> <span class="s2">&quot;Imported pylab ok&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;Imported pylab ok&quot;</span>
 <span class="k">except</span><span class="p">:</span>
-    <span class="nb">print</span> <span class="s2">&quot;** Error importing pylab&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;** Error importing pylab&quot;</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">debug_mode</span><span class="p">:</span>
     <span class="n">output_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  <span class="c1"># close the text file</span>
@@ -241,7 +242,7 @@
 <ul class="simple">
 <li><strong>test2.sh</strong> (shell script to test for environment variables, gfortran and ipython version)</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span>
+<div class="highlight-python"><div class="highlight"><pre>
 # bash script to check for software 
 # Insert your name where indicated below, then type
 #    $ bash test2.sh
@@ -275,7 +276,7 @@ gfortran test3.f90
 <ul class="simple">
 <li><strong>test3.f90</strong> (a dummy fortran code)</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! Test fortran program.</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! Test fortran program.</span>
 <span class="c">! Insert your name where indicated below.  </span>
 <span class="c">! This code will be compiled and run when you execute the test2.sh script.</span>
 
@@ -287,19 +288,19 @@ gfortran test3.f90
 </div>
 </div>
 <div class="section" id="workspace-2-quadratic-cubic-and-polynomial-interpolation">
-<h2>3.2. Workspace 2: Quadratic, Cubic and Polynomial Interpolation<a class="headerlink" href="#workspace-2-quadratic-cubic-and-polynomial-interpolation" title="Permalink to this headline">¶</a></h2>
+<h2>2.2. Workspace 2: Quadratic, Cubic and Polynomial Interpolation<a class="headerlink" href="#workspace-2-quadratic-cubic-and-polynomial-interpolation" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><strong>hw2a.py</strong> (python script for quadratic interpolation)</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Demonstration script for quadratic interpolation.</span>
 <span class="sd">Update this docstring to describe your code.</span>
 <span class="sd">Modified by: ** your name here **</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="k">import</span> <span class="n">solve</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">solve</span>
 
 <span class="c1"># Set up linear system to interpolate through data points:</span>
 
@@ -315,8 +316,8 @@ gfortran test3.f90
 <span class="c1"># Solve the system:</span>
 <span class="n">c</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
 
-<span class="nb">print</span> <span class="s2">&quot;The polynomial coefficients are:&quot;</span>
-<span class="nb">print</span> <span class="n">c</span>
+<span class="k">print</span> <span class="s2">&quot;The polynomial coefficients are:&quot;</span>
+<span class="k">print</span> <span class="n">c</span>
 
 <span class="c1"># Plot the resulting polynomial:</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1001</span><span class="p">)</span>   <span class="c1"># points to evaluate polynomial</span>
@@ -338,7 +339,7 @@ gfortran test3.f90
 <ul class="simple">
 <li><strong>hw2b.py</strong> (python script for quadratic, cubic and polynomial interpolation)</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span>
+<div class="highlight-python"><div class="highlight"><pre>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Demonstration module for quadratic interpolation.</span>
 <span class="sd">Update this docstring to describe your code.</span>
@@ -346,9 +347,9 @@ gfortran test3.f90
 <span class="sd">&quot;&quot;&quot;</span>
 
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="k">import</span> <span class="n">solve</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">solve</span>
 
 <span class="k">def</span> <span class="nf">quad_interp</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">yi</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -484,8 +485,8 @@ gfortran test3.f90
     <span class="n">yi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">7.</span><span class="p">])</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">quad_interp</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">yi</span><span class="p">)</span>
     <span class="n">c_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">2.</span><span class="p">])</span>
-    <span class="nb">print</span> <span class="s2">&quot;c =      &quot;</span><span class="p">,</span> <span class="n">c</span>
-    <span class="nb">print</span> <span class="s2">&quot;c_true = &quot;</span><span class="p">,</span> <span class="n">c_true</span>
+    <span class="k">print</span> <span class="s2">&quot;c =      &quot;</span><span class="p">,</span> <span class="n">c</span>
+    <span class="k">print</span> <span class="s2">&quot;c_true = &quot;</span><span class="p">,</span> <span class="n">c_true</span>
     <span class="c1"># test that all elements have small error:</span>
     <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c_true</span><span class="p">),</span> \
         <span class="s2">&quot;Incorrect result, c = </span><span class="si">%s</span><span class="s2">, Expected: c = </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">c_true</span><span class="p">)</span>
@@ -498,8 +499,8 @@ gfortran test3.f90
     <span class="n">yi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">15.</span><span class="p">,</span> <span class="o">-</span><span class="mf">50.</span><span class="p">,</span>  <span class="mf">70.</span><span class="p">])</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">quad_interp</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">yi</span><span class="p">)</span>
     <span class="n">c_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">48.16586922</span><span class="p">,</span>  <span class="o">-</span><span class="mf">2.24162679</span><span class="p">,</span>   <span class="mf">0.40749601</span><span class="p">])</span>
-    <span class="nb">print</span> <span class="s2">&quot;c =      &quot;</span><span class="p">,</span> <span class="n">c</span>
-    <span class="nb">print</span> <span class="s2">&quot;c_true = &quot;</span><span class="p">,</span> <span class="n">c_true</span>
+    <span class="k">print</span> <span class="s2">&quot;c =      &quot;</span><span class="p">,</span> <span class="n">c</span>
+    <span class="k">print</span> <span class="s2">&quot;c_true = &quot;</span><span class="p">,</span> <span class="n">c_true</span>
     <span class="c1"># test that all elements have small error:</span>
     <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c_true</span><span class="p">),</span> \
         <span class="s2">&quot;Incorrect result, c = </span><span class="si">%s</span><span class="s2">, Expected: c = </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">c_true</span><span class="p">)</span>
@@ -512,8 +513,8 @@ gfortran test3.f90
     <span class="n">yi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">cubic_interp</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">yi</span><span class="p">)</span>
     <span class="n">c_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">2.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.41666667</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08333333</span><span class="p">])</span>
-    <span class="nb">print</span> <span class="s2">&quot;c =      &quot;</span><span class="p">,</span> <span class="n">c</span>
-    <span class="nb">print</span> <span class="s2">&quot;c_true = &quot;</span><span class="p">,</span> <span class="n">c_true</span>
+    <span class="k">print</span> <span class="s2">&quot;c =      &quot;</span><span class="p">,</span> <span class="n">c</span>
+    <span class="k">print</span> <span class="s2">&quot;c_true = &quot;</span><span class="p">,</span> <span class="n">c_true</span>
     <span class="c1"># test that all elements have small error:</span>
     <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c_true</span><span class="p">),</span> \
         <span class="s2">&quot;Incorrect result, c = </span><span class="si">%s</span><span class="s2">, Expected: c = </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">c_true</span><span class="p">)</span>
@@ -526,8 +527,8 @@ gfortran test3.f90
     <span class="n">yi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">cubic_interp</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">yi</span><span class="p">)</span>
     <span class="n">c_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">2.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.41666667</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08333333</span><span class="p">])</span>
-    <span class="nb">print</span> <span class="s2">&quot;c =      &quot;</span><span class="p">,</span> <span class="n">c</span>
-    <span class="nb">print</span> <span class="s2">&quot;c_true = &quot;</span><span class="p">,</span> <span class="n">c_true</span>
+    <span class="k">print</span> <span class="s2">&quot;c =      &quot;</span><span class="p">,</span> <span class="n">c</span>
+    <span class="k">print</span> <span class="s2">&quot;c_true = &quot;</span><span class="p">,</span> <span class="n">c_true</span>
     <span class="c1"># test that all elements have small error:</span>
     <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c_true</span><span class="p">),</span> \
         <span class="s2">&quot;Incorrect result, c = </span><span class="si">%s</span><span class="s2">, Expected: c = </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">c_true</span><span class="p">)</span>
@@ -540,8 +541,8 @@ gfortran test3.f90
     <span class="n">yi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">7.</span><span class="p">,</span> <span class="mf">15.</span><span class="p">,</span> <span class="mf">25.</span><span class="p">])</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">poly_interp</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="n">yi</span><span class="p">)</span>
     <span class="n">c_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.22777778</span><span class="p">,</span> <span class="mf">2.51944444</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.66111111</span><span class="p">,</span> <span class="mf">0.04722222</span><span class="p">])</span>
-    <span class="nb">print</span> <span class="s2">&quot;c =      &quot;</span><span class="p">,</span> <span class="n">c</span>
-    <span class="nb">print</span> <span class="s2">&quot;c_true = &quot;</span><span class="p">,</span> <span class="n">c_true</span>
+    <span class="k">print</span> <span class="s2">&quot;c =      &quot;</span><span class="p">,</span> <span class="n">c</span>
+    <span class="k">print</span> <span class="s2">&quot;c_true = &quot;</span><span class="p">,</span> <span class="n">c_true</span>
     <span class="c1"># test that all elements have small error:</span>
     <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">c_true</span><span class="p">),</span> \
         <span class="s2">&quot;Incorrect result, c = </span><span class="si">%s</span><span class="s2">, Expected: c = </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">c_true</span><span class="p">)</span>
@@ -553,18 +554,18 @@ gfortran test3.f90
     <span class="c1"># or run from within Python, e.g. in IPython with</span>
     <span class="c1">#    In[ ]:  run demo2</span>
     <span class="c1"># not if the module is imported.</span>
-    <span class="nb">print</span> <span class="s2">&quot;Running test...&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;Running test...&quot;</span>
     <span class="n">test_quad1</span><span class="p">()</span>
 
 </pre></div>
 </div>
 </div>
 <div class="section" id="workspace-3-newton-s-method-and-convergence-criteria">
-<h2>3.3. Workspace 3: Newton&#8217;s Method and Convergence Criteria<a class="headerlink" href="#workspace-3-newton-s-method-and-convergence-criteria" title="Permalink to this headline">¶</a></h2>
+<h2>2.3. Workspace 3: Newton&#8217;s Method and Convergence Criteria<a class="headerlink" href="#workspace-3-newton-s-method-and-convergence-criteria" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><strong>newton.py</strong> (ipython module to compute square root of a number using Newton&#8217;s method)</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Module to compute the square root of a number</span>
 <span class="sd">using Newton&#39;s method: f(x) = x**2 - n = 0</span>
 
@@ -572,11 +573,11 @@ gfortran test3.f90
 <span class="sd">	max_iter :- maximum number of iterations for iterative method</span>
 <span class="sd">	tol :- relative residual tolerance for iterative method</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="n">max_iter</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">tol</span> <span class="o">=</span> <span class="mf">1.0e-14</span>
 
-<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">	Compute the solution to the function using the initial guess &amp; allow debugging</span>
 
@@ -594,7 +595,7 @@ gfortran test3.f90
 	<span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>	
 	
 	<span class="k">if</span><span class="p">(</span><span class="n">debug</span><span class="p">):</span>
-		<span class="nb">print</span> <span class="s2">&quot;Initial guess: x = </span><span class="si">%20.15e</span><span class="s2">&quot;</span> <span class="o">%</span><span class="n">x0</span>
+		<span class="k">print</span> <span class="s2">&quot;Initial guess: x = </span><span class="si">%20.15e</span><span class="s2">&quot;</span> <span class="o">%</span><span class="n">x0</span>
 
 	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
 
@@ -607,7 +608,7 @@ gfortran test3.f90
 		<span class="n">iters</span> <span class="o">=</span> <span class="n">iters</span> <span class="o">+</span> <span class="mi">1</span>		
 		
 		<span class="k">if</span><span class="p">(</span><span class="n">debug</span><span class="p">):</span>
-			<span class="nb">print</span> <span class="s2">&quot;At iteration </span><span class="si">%d</span><span class="s2"> x = </span><span class="si">%20.15e</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">iters</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> 
+			<span class="k">print</span> <span class="s2">&quot;At iteration </span><span class="si">%d</span><span class="s2"> x = </span><span class="si">%20.15e</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">iters</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> 
 	<span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">iters</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">fvals_sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -630,7 +631,7 @@ gfortran test3.f90
 
 	<span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fp</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">test1</span><span class="p">(</span><span class="n">debug_solve</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">test1</span><span class="p">(</span><span class="n">debug_solve</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">	Test Newton&#39;s method using an array of initial gusses</span>
 <span class="sd">	</span>
@@ -644,13 +645,13 @@ gfortran test3.f90
 	<span class="c1">#for x in [1., 2., 100.]:</span>
 	<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mf">2.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">]:</span>
 
-		<span class="nb">print</span> <span class="s2">&quot;&quot;</span>
+		<span class="k">print</span> <span class="s2">&quot;&quot;</span>
 
 		<span class="p">(</span><span class="n">xout</span><span class="p">,</span> <span class="n">iters</span><span class="p">)</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="n">debug_solve</span><span class="p">)</span>
-		<span class="nb">print</span> <span class="s2">&quot;After </span><span class="si">%d</span><span class="s2"> iterations, the solver returns x = </span><span class="si">%20.15e</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">iters</span><span class="p">,</span><span class="n">xout</span><span class="p">)</span>
+		<span class="k">print</span> <span class="s2">&quot;After </span><span class="si">%d</span><span class="s2"> iterations, the solver returns x = </span><span class="si">%20.15e</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">iters</span><span class="p">,</span><span class="n">xout</span><span class="p">)</span>
 		
 		<span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fp</span><span class="p">)</span> <span class="o">=</span> <span class="n">fvals_sqrt</span><span class="p">(</span><span class="n">xout</span><span class="p">)</span>
-		<span class="nb">print</span> <span class="s2">&quot;The function f(x) = </span><span class="si">%20.15e</span><span class="s2">&quot;</span> <span class="o">%</span><span class="n">f</span>
+		<span class="k">print</span> <span class="s2">&quot;The function f(x) = </span><span class="si">%20.15e</span><span class="s2">&quot;</span> <span class="o">%</span><span class="n">f</span>
 
 		<span class="c1">#assert abs(xout-2.0) &lt; tol, &quot;***Unexpected result: x = %22.15e&quot; %xout</span>
 
@@ -659,7 +660,7 @@ gfortran test3.f90
 <ul class="simple">
 <li><strong>intersections.py</strong> (ipython script to plot a graph where two functions intersect - uses newton.py)</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Script to plot g1(x) and g2(x) versus x</span>
 <span class="sd">and to show where they intersect with black dots</span>
 
@@ -668,8 +669,8 @@ gfortran test3.f90
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">newton</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="n">guesses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">2.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">])</span>
 <span class="n">xarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -707,7 +708,7 @@ gfortran test3.f90
 <ul class="simple">
 <li><strong>test1.f90, newton.f90, intersections.f90, functions.f90, Makefile</strong> (fortran code for the intersection problem using max iterations for convergence)</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! $MYHPSC/homework3/test1.f90</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! $MYHPSC/homework3/test1.f90</span>
 
 <span class="k">program </span><span class="n">test1</span>
 
@@ -747,7 +748,7 @@ gfortran test3.f90
 <span class="k">end program </span><span class="n">test1</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! $MYHPSC/homework3/newton.f90</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! $MYHPSC/homework3/newton.f90</span>
 
 <span class="k">module </span><span class="n">newton</span>
 
@@ -834,7 +835,7 @@ gfortran test3.f90
 <span class="k">end module </span><span class="n">newton</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! $MYHPSC/homework3/intersections.f90</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! $MYHPSC/homework3/intersections.f90</span>
 
 <span class="k">program </span><span class="n">intersections</span>
 
@@ -874,7 +875,7 @@ gfortran test3.f90
 <span class="k">end program </span><span class="n">intersections</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! $MYHPSC/homework3/functions.f90</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! $MYHPSC/homework3/functions.f90</span>
 
 <span class="k">module </span><span class="n">functions</span>
 	
@@ -926,7 +927,7 @@ gfortran test3.f90
 <span class="k">end module </span><span class="n">functions</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span># $MYHPSC/homework3/Makefile
+<div class="highlight-python"><div class="highlight"><pre># $MYHPSC/homework3/Makefile
 # Example usage:
 #	$ make test1
 #	$ make clean
@@ -965,7 +966,7 @@ clean:
 <ul class="simple">
 <li><strong>problem7/newton.f90, problem7/functions.f90, problem7/test_quartic.f90, problem7/Makefile, problem7/intersections.py</strong> (intersection problem using residual error for convergence)</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! $MYHPSC/homework3/problem7/newton.f90</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! $MYHPSC/homework3/problem7/newton.f90</span>
 
 <span class="k">module </span><span class="n">newton</span>
 
@@ -1053,7 +1054,7 @@ clean:
 <span class="k">end module </span><span class="n">newton</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! $MYHPSC/homework3/problem7/functions.f90</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! $MYHPSC/homework3/problem7/functions.f90</span>
 
 <span class="k">module </span><span class="n">functions</span>
 	
@@ -1122,7 +1123,7 @@ clean:
 <span class="k">end module </span><span class="n">functions</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span>! $MYHPSC/homework3/problem7/test_quartic.f90
+<div class="highlight-fortran"><div class="highlight"><pre>! $MYHPSC/homework3/problem7/test_quartic.f90
 
 program test_quartic
 
@@ -1170,7 +1171,7 @@ program test_quartic
 end program test_quartic
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span># $MYHPSC/homework3/problem7/Makefile
+<div class="highlight-python"><div class="highlight"><pre># $MYHPSC/homework3/problem7/Makefile
 # Example usage:
 #	$ make clean
 #	$ make test_quartic
@@ -1198,7 +1199,7 @@ clean:
 	rm -f *.o *.exe *.mod
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Script to plot g1(x) and g2(x) versus x</span>
 <span class="sd">and to show where they intersect with black dots</span>
 
@@ -1207,8 +1208,8 @@ clean:
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">newton</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="n">guesses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
 <span class="n">xarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -1228,7 +1229,7 @@ clean:
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="n">e</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="n">e</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">5e-4</span><span class="p">,</span><span class="mf">5e-4</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x (-)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y (-)&#39;</span><span class="p">)</span>
@@ -1244,11 +1245,11 @@ clean:
 </div>
 </div>
 <div class="section" id="workspace-4-openmp">
-<h2>3.4. Workspace 4: OpenMP<a class="headerlink" href="#workspace-4-openmp" title="Permalink to this headline">¶</a></h2>
+<h2>2.4. Workspace 4: OpenMP<a class="headerlink" href="#workspace-4-openmp" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><strong>quadrature.f90</strong> (module for integrating a function)</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">quadrature</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">module </span><span class="n">quadrature</span>
 
 <span class="c">! Performs integration using quadrature integration </span>
 <span class="c">! and creates a table of the error between this and</span>
@@ -1309,7 +1310,7 @@ clean:
 <ul class="simple">
 <li><strong>test1.f90</strong> (cubic function - uses quadrature module)</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! $MYHPSC/homework4/test1.f90</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! $MYHPSC/homework4/test1.f90</span>
 <span class="c">! The purpose is to print a table for the effect of the number</span>
 <span class="c">! of integration points on the accuracy of the integration</span>
 
@@ -1363,7 +1364,7 @@ clean:
 <ul class="simple">
 <li><strong>test2.f90</strong> (sinusoidal function - uses quadrature module)</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! $MYHPSC/homework4/test2.f90</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! $MYHPSC/homework4/test2.f90</span>
 <span class="c">! The purpose is to print a table for the effect of the number</span>
 <span class="c">! of integration points on the accuracy of the integration</span>
 
@@ -1411,7 +1412,7 @@ clean:
 <ul class="simple">
 <li><strong>quadrature_omp.f90, test2_omp.f90</strong> (same as above but using OpenMP)</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">quadrature_omp</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">module </span><span class="n">quadrature_omp</span>
 
 <span class="c">! Performs integration using quadrature integration </span>
 <span class="c">! and creates a table of the error between this and</span>
@@ -1472,7 +1473,7 @@ clean:
 <span class="k">end module </span><span class="n">quadrature_omp</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! $MYHPSC/homework4/test2_omp.f90</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! $MYHPSC/homework4/test2_omp.f90</span>
 <span class="c">! The purpose is to print a table for the effect of the number</span>
 <span class="c">! of integration points on the accuracy of the integration</span>
 
@@ -1542,11 +1543,11 @@ clean:
 </div>
 </div>
 <div class="section" id="workspace-5-load-balancing">
-<h2>3.5. Workspace 5: Load Balancing<a class="headerlink" href="#workspace-5-load-balancing" title="Permalink to this headline">¶</a></h2>
+<h2>2.5. Workspace 5: Load Balancing<a class="headerlink" href="#workspace-5-load-balancing" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><strong>Makefile</strong> (makefile for the 1D solution)</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span>
+<div class="highlight-python"><div class="highlight"><pre>
 OBJECTS = functions.o quadrature.o test.o
 OBJECTS2 = functions.o quadrature2.o test2.o
 OBJECTS3 = functions.o quadrature3.o test3.o
@@ -1585,7 +1586,7 @@ clean:
 <li><strong>functions.f90</strong> (sinusoial function module)</li>
 </ul>
 <p>functions.f90</p>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">functions</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">module </span><span class="n">functions</span>
 
     <span class="k">use </span><span class="n">omp_lib</span>
     <span class="k">implicit none</span>
@@ -1616,7 +1617,7 @@ clean:
 <ul class="simple">
 <li><strong>quadrature.f90, test.f90</strong> (trapezoid rule module + test - serial)</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">quadrature</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">module </span><span class="n">quadrature</span>
 
     <span class="k">use </span><span class="n">omp_lib</span>
 
@@ -1692,7 +1693,7 @@ clean:
 <span class="k">end module </span><span class="n">quadrature</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">test</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">program </span><span class="n">test</span>
 
     <span class="k">use </span><span class="n">omp_lib</span>
 
@@ -1760,7 +1761,7 @@ clean:
 <ul class="simple">
 <li><strong>quadrature2.f90, test2.f90</strong> (simpson&#8217;s rule module + test - serial)</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">quadrature2</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">module </span><span class="n">quadrature2</span>
 
     <span class="k">use </span><span class="n">omp_lib</span>
 
@@ -1837,7 +1838,7 @@ clean:
 <span class="k">end module </span><span class="n">quadrature2</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">test2</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">program </span><span class="n">test2</span>
 
     <span class="k">use </span><span class="n">omp_lib</span>
 
@@ -1905,7 +1906,7 @@ clean:
 <ul class="simple">
 <li><strong>quadrature3.f90, test3.f90</strong> (trapezoid rule module + test - OpenMP)</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">quadrature3</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">module </span><span class="n">quadrature3</span>
 
     <span class="k">use </span><span class="n">omp_lib</span>
 
@@ -1985,7 +1986,7 @@ clean:
 <span class="k">end module </span><span class="n">quadrature3</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">test3</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">program </span><span class="n">test3</span>
 
     <span class="k">use </span><span class="n">omp_lib</span>
 
@@ -2053,7 +2054,7 @@ clean:
 <ul class="simple">
 <li><strong>quad2d/functions.f90, quad2d/quadrature.f90, quad2d/test.f90, quad2d/Makefile</strong> (integrate a sinusoid with trapezoid rule in 2D with Open MP and load balancing)</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">functions</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">module </span><span class="n">functions</span>
 
     <span class="k">use </span><span class="n">omp_lib</span>
     <span class="k">implicit none</span>
@@ -2108,7 +2109,7 @@ clean:
 <span class="k">end module </span><span class="n">functions</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">quadrature</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">module </span><span class="n">quadrature</span>
 
     <span class="k">use </span><span class="n">omp_lib</span>
 
@@ -2187,7 +2188,7 @@ clean:
 <span class="k">end module </span><span class="n">quadrature</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">test</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">program </span><span class="n">test</span>
 
     <span class="k">use </span><span class="n">omp_lib</span>
 
@@ -2267,11 +2268,11 @@ clean:
 </div>
 </div>
 <div class="section" id="workspace-6-mpi">
-<h2>3.6. Workspace 6: MPI<a class="headerlink" href="#workspace-6-mpi" title="Permalink to this headline">¶</a></h2>
+<h2>2.6. Workspace 6: MPI<a class="headerlink" href="#workspace-6-mpi" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><strong>Makefile</strong> (makefile for this directory)</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span># $MYHPSC/codes/mpi/Makefile
+<div class="highlight-python"><div class="highlight"><pre># $MYHPSC/codes/mpi/Makefile
 
 # Usage:  to try out test1.f90, for example:
 #     make test FNAME=test1
@@ -2304,7 +2305,7 @@ clean:
 <ul class="simple">
 <li><strong>copyvalue.f90</strong> (passes a value from Process 0 to Processes 1-3 using MPI)</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! $UWHPSC/codes/mpi/copyvalue.f90</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/mpi/copyvalue.f90</span>
 <span class="c">!</span>
 <span class="c">! Set value in Process 0 and copy this through a chain of processes</span>
 <span class="c">! and finally print result from Process numprocs-1.</span>
@@ -2365,7 +2366,7 @@ clean:
 <ul class="simple">
 <li><strong>copyvalue2.f90</strong> (passes a value from Process 3 to Processes 0-2 using MPI)</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! $UWHPSC/codes/mpi/copyvalue2.f90</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! $UWHPSC/codes/mpi/copyvalue2.f90</span>
 <span class="c">!</span>
 <span class="c">! Set value in Process numprocs-1 and copy this through a chain of processes</span>
 <span class="c">! and finally print result from Process 0.</span>
@@ -2426,7 +2427,7 @@ clean:
 <ul class="simple">
 <li><strong>part2/functions.f90, part2/quadrature.f90, part2/Makefile</strong> (the sinusoidal function, quadrature module and makefile)</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">functions</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">module </span><span class="n">functions</span>
 
     <span class="k">implicit none</span>
 <span class="k">    </span><span class="kt">integer</span> <span class="kd">::</span> <span class="n">fevals_proc</span>
@@ -2451,7 +2452,7 @@ clean:
 <span class="k">end module </span><span class="n">functions</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">quadrature</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">module </span><span class="n">quadrature</span>
 
 <span class="k">contains</span>
 
@@ -2492,7 +2493,7 @@ clean:
 <span class="k">end module </span><span class="n">quadrature</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span>
+<div class="highlight-python"><div class="highlight"><pre>
 OBJECTS = functions.o quadrature.o test.o
 OBJECTS2 = functions.o quadrature.o test2.o
 FFLAGS = 
@@ -2523,7 +2524,7 @@ clean:
 <ul class="simple">
 <li><strong>part2/test.f90</strong> (compute the same integral over all Processes using MPI)</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">test</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">program </span><span class="n">test</span>
 
     <span class="k">use </span><span class="n">mpi</span>
 
@@ -2590,7 +2591,7 @@ clean:
 <ul class="simple">
 <li><strong>part2/test2.f90</strong> (integral using Master-Worker paradigm)Makefile for this directory</li>
 </ul>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">test2</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">program </span><span class="n">test2</span>
 
     <span class="k">use </span><span class="n">mpi</span>
 
@@ -2699,11 +2700,11 @@ clean:
 </div>
 </div>
 <div class="section" id="project-1-1d-integral-and-mpi">
-<h2>3.7. Project 1: 1D Integral and MPI<a class="headerlink" href="#project-1-1d-integral-and-mpi" title="Permalink to this headline">¶</a></h2>
+<h2>2.7. Project 1: 1D Integral and MPI<a class="headerlink" href="#project-1-1d-integral-and-mpi" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><strong>functions.f90, quadrature.f90, test2.f90, Makefile</strong> (compute a 1D integral using MPI by dividing up intervals between an indeterminate number of processes)</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span>
+<div class="highlight-python"><div class="highlight"><pre>
 OBJECTS = functions.o quadrature.o test.o
 OBJECTS2 = functions.o quadrature.o test2.o
 OBJECTS3 = functions.o quadrature.o test3.o
@@ -2738,7 +2739,7 @@ clean:
 
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">functions</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">module </span><span class="n">functions</span>
 
     <span class="k">implicit none</span>
 <span class="k">    </span><span class="kt">integer</span> <span class="kd">::</span> <span class="n">fevals_proc</span>
@@ -2763,7 +2764,7 @@ clean:
 <span class="k">end module </span><span class="n">functions</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">quadrature</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">module </span><span class="n">quadrature</span>
 
 <span class="k">contains</span>
 
@@ -2804,7 +2805,7 @@ clean:
 <span class="k">end module </span><span class="n">quadrature</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">test2</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">program </span><span class="n">test2</span>
 
     <span class="k">use </span><span class="n">mpi</span>
 
@@ -2913,12 +2914,12 @@ clean:
 </div>
 </div>
 <div class="section" id="project-2-20d-integral-and-the-monte-carlo-method">
-<h2>3.8. Project 2: 20D Integral and the Monte Carlo Method<a class="headerlink" href="#project-2-20d-integral-and-the-monte-carlo-method" title="Permalink to this headline">¶</a></h2>
+<h2>2.8. Project 2: 20D Integral and the Monte Carlo Method<a class="headerlink" href="#project-2-20d-integral-and-the-monte-carlo-method" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><strong>functions.f90, quadrature_mc.f90, random_util.f90, test_quad_mc.f90, Makefile</strong> (compute integral using Monte Carlo method for a 20 dimensional integral - serial)</li>
 <li><strong>plot_mc_quad_error.py</strong> (plot the result)</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span>OBJECTS = random_util.o functions.o quadrature_mc.o test_quad_mc.o
+<div class="highlight-python"><div class="highlight"><pre>OBJECTS = random_util.o functions.o quadrature_mc.o test_quad_mc.o
 FFLAGS = 
 
 .PHONY: test plot clean clobber
@@ -2946,7 +2947,7 @@ clobber: clean
 
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! ---</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! ---</span>
 <span class="c">! This module returns the value of a function:</span>
 <span class="c">! sum(x**2) over all dimensions</span>
 <span class="c">! it also sets the number of evaulations of this function</span>
@@ -2996,7 +2997,7 @@ clobber: clean
 <span class="k">end module </span><span class="n">functions</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! ---</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! ---</span>
 <span class="c">! This module performs Monte Carlo Integration by:</span>
 <span class="c">! 1) Generating random input over a number of points</span>
 <span class="c">! 2) Evaluating the function at these points for 20 dimensions</span>
@@ -3065,7 +3066,7 @@ clobber: clean
 <span class="k">end module </span><span class="n">quadrature_mc</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! ---</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! ---</span>
 <span class="c">! This module returns seed for the random_number function</span>
 <span class="c">! ---</span>
 <span class="k">module </span><span class="n">random_util</span>
@@ -3117,7 +3118,7 @@ clobber: clean
 <span class="k">end module </span><span class="n">random_util</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! ---</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! ---</span>
 <span class="c">! This program computes the Monte Carlo Integral by doubling the number</span>
 <span class="c">! of points every time</span>
 <span class="c">! ---</span>
@@ -3191,15 +3192,15 @@ clobber: clean
 <span class="k">end program </span><span class="n">test_quad_mc</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pylab</span> <span class="k">import</span> <span class="o">*</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="c1"># read in three columns from file and unpack into 3 arrays:</span>
-<span class="n">n</span><span class="p">,</span><span class="n">int_approx</span><span class="p">,</span><span class="n">error</span> <span class="o">=</span> <span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;mc_quad_error.txt&#39;</span><span class="p">,</span><span class="n">unpack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">n</span><span class="p">,</span><span class="n">int_approx</span><span class="p">,</span><span class="n">error</span> <span class="o">=</span> <span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;mc_quad_error.txt&#39;</span><span class="p">,</span><span class="n">unpack</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">clf</span><span class="p">()</span>
 <span class="n">loglog</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">error</span><span class="p">,</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Monte-Carlo&#39;</span><span class="p">)</span>
-<span class="n">loglog</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="n">e7</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">7</span><span class="p">)],</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;1 / sqrt(N)&#39;</span><span class="p">)</span>
+<span class="n">loglog</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mf">1e7</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1e-7</span><span class="p">)],</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;1 / sqrt(N)&#39;</span><span class="p">)</span>
 <span class="n">legend</span><span class="p">()</span>
 <span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;number of MC points used&#39;</span><span class="p">)</span>
 <span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;abs(error)&#39;</span><span class="p">)</span>
@@ -3210,14 +3211,14 @@ clobber: clean
 </div>
 </div>
 <div class="section" id="project-3-laplace-s-equation-and-the-monte-carlo-method">
-<h2>3.9. Project 3: Laplace&#8217;s Equation and the Monte Carlo Method<a class="headerlink" href="#project-3-laplace-s-equation-and-the-monte-carlo-method" title="Permalink to this headline">¶</a></h2>
+<h2>2.9. Project 3: Laplace&#8217;s Equation and the Monte Carlo Method<a class="headerlink" href="#project-3-laplace-s-equation-and-the-monte-carlo-method" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><strong>laplace_mc.py</strong> (python version)</li>
 <li><strong>problem_description.f90, laplace_mc.f90, mc_walk.f90, random_util.f90, Makefile</strong> (compute the solution to Laplace&#8217;s Equation using the Monte Carlo Method - serial)</li>
 <li><strong>test1.f90, test2.f90</strong> (trials I made along the way)</li>
 <li><strong>plot_mc_quad_error.py</strong> (plot the result)</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Random walk approximate solution to Laplace&#39;s equation u_{xx} + u{yy} = 0.</span>
 
 <span class="sd">Set demo==True to plot a few random walks interactively.</span>
@@ -3241,8 +3242,8 @@ clobber: clean
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">pylab</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="k">import</span> <span class="n">RandomState</span>
+<span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">RandomState</span>
 <span class="kn">import</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">sys</span>
 
 
@@ -3250,7 +3251,7 @@ clobber: clean
 <span class="c1">#   True ==&gt; 10 walks will be done, plotting each for illustration.</span>
 <span class="c1">#   False ==&gt; Many more walks taken to investigate convergence.</span>
 
-<span class="n">plot_walk</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">plot_walk</span> <span class="o">=</span> <span class="bp">False</span>
 
 
 <span class="c1"># problem description:</span>
@@ -3265,7 +3266,7 @@ clobber: clean
 <span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">bx</span><span class="o">-</span><span class="n">ax</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">nx</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">dy</span> <span class="o">=</span> <span class="p">(</span><span class="n">by</span><span class="o">-</span><span class="n">ay</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">ny</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">debug</span> <span class="o">=</span> <span class="kc">False</span>     <span class="c1"># to turn on some additional printing</span>
+<span class="n">debug</span> <span class="o">=</span> <span class="bp">False</span>     <span class="c1"># to turn on some additional printing</span>
 
 
 
@@ -3285,7 +3286,7 @@ clobber: clean
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">ax</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">bx</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">ay</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">by</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">print</span> <span class="s2">&quot;*** Not on the boundary&quot;</span>
+        <span class="k">print</span> <span class="s2">&quot;*** Not on the boundary&quot;</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;*** uboundary called at non-boundary point&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">nan</span>
 
@@ -3362,7 +3363,7 @@ clobber: clean
     <span class="n">r</span> <span class="o">=</span> <span class="n">random_generator</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">max_steps</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
-        <span class="nb">print</span> <span class="s2">&quot;+++ generated r: &quot;</span><span class="p">,</span> <span class="n">r</span>
+        <span class="k">print</span> <span class="s2">&quot;+++ generated r: &quot;</span><span class="p">,</span> <span class="n">r</span>
     
 
     <span class="k">for</span> <span class="n">istep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_steps</span><span class="p">):</span>
@@ -3392,13 +3393,13 @@ clobber: clean
             <span class="k">if</span> <span class="n">plot_walk</span><span class="p">:</span>
                 <span class="n">plot_ub</span><span class="p">(</span><span class="n">xb</span><span class="p">,</span><span class="n">yb</span><span class="p">,</span><span class="n">ub</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
-                <span class="nb">print</span> <span class="s2">&quot;Hit boundary at (</span><span class="si">%7.3f</span><span class="s2">, </span><span class="si">%7.3f</span><span class="s2">) after </span><span class="si">%i</span><span class="s2">7 steps, ub = </span><span class="si">%7.3f</span><span class="s2">&quot;</span> \
+                <span class="k">print</span> <span class="s2">&quot;Hit boundary at (</span><span class="si">%7.3f</span><span class="s2">, </span><span class="si">%7.3f</span><span class="s2">) after </span><span class="si">%i</span><span class="s2">7 steps, ub = </span><span class="si">%7.3f</span><span class="s2">&quot;</span> \
                        <span class="o">%</span> <span class="p">(</span><span class="n">xb</span><span class="p">,</span><span class="n">yb</span><span class="p">,</span><span class="n">istep</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">ub</span><span class="p">)</span>
             <span class="k">break</span>  <span class="c1"># end the walk</span>
 
         <span class="k">if</span> <span class="n">istep</span><span class="o">==</span><span class="p">(</span><span class="n">max_steps</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
-                <span class="nb">print</span> <span class="s2">&quot;Did not hit boundary after </span><span class="si">%i</span><span class="s2"> steps&quot;</span> <span class="o">%</span> <span class="n">max_steps</span>
+                <span class="k">print</span> <span class="s2">&quot;Did not hit boundary after </span><span class="si">%i</span><span class="s2"> steps&quot;</span> <span class="o">%</span> <span class="n">max_steps</span>
             <span class="k">if</span> <span class="n">plot_walk</span><span class="p">:</span>
                 <span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="s2">&quot;Did not hit boundary after </span><span class="si">%i</span><span class="s2"> steps&quot;</span> \
                         <span class="o">%</span> <span class="n">max_steps</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
@@ -3445,13 +3446,13 @@ clobber: clean
 
     <span class="n">u_true</span> <span class="o">=</span> <span class="n">utrue</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">)</span>
 
-    <span class="nb">print</span> <span class="s2">&quot;True solution of PDE: u(</span><span class="si">%7.3f</span><span class="s2">, </span><span class="si">%7.3f</span><span class="s2">) = </span><span class="si">%9.5f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">u_true</span><span class="p">)</span>
-    <span class="nb">print</span> <span class="s2">&quot;Note: with solution used in demo this is also the solution to the&quot;</span>
-    <span class="nb">print</span> <span class="s2">&quot;      the finite-difference equations on the same grid.&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;True solution of PDE: u(</span><span class="si">%7.3f</span><span class="s2">, </span><span class="si">%7.3f</span><span class="s2">) = </span><span class="si">%9.5f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">u_true</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s2">&quot;Note: with solution used in demo this is also the solution to the&quot;</span>
+    <span class="k">print</span> <span class="s2">&quot;      the finite-difference equations on the same grid.&quot;</span>
 
-    <span class="n">ans</span> <span class="o">=</span> <span class="n">raw_input</span><span class="p">(</span><span class="s2">&quot;Enter seed for random generator or &lt;return&gt; .... &quot;</span><span class="p">)</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s2">&quot;Enter seed for random generator or &lt;return&gt; .... &quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">ans</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-        <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span>       <span class="c1"># will cause a random seed to be used</span>
+        <span class="n">seed</span> <span class="o">=</span> <span class="bp">None</span>       <span class="c1"># will cause a random seed to be used</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">seed</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>   <span class="c1"># convert string returned from raw_input into integer</span>
 
@@ -3467,7 +3468,7 @@ clobber: clean
 
     <span class="n">error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">((</span><span class="n">u_mc</span> <span class="o">-</span> <span class="n">u_true</span><span class="p">)</span> <span class="o">/</span> <span class="n">u_true</span><span class="p">)</span>
 
-    <span class="nb">print</span> <span class="s2">&quot;After </span><span class="si">%8i</span><span class="s2"> random walks, u = </span><span class="si">%15.9f</span><span class="s2">, rel. error = </span><span class="si">%15.6e</span><span class="s2">&quot;</span> \
+    <span class="k">print</span> <span class="s2">&quot;After </span><span class="si">%8i</span><span class="s2"> random walks, u = </span><span class="si">%15.9f</span><span class="s2">, rel. error = </span><span class="si">%15.6e</span><span class="s2">&quot;</span> \
             <span class="o">%</span> <span class="p">(</span><span class="n">n_success</span><span class="p">,</span> <span class="n">u_mc</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
     
     <span class="k">if</span> <span class="n">plot_walk</span><span class="p">:</span>
@@ -3485,7 +3486,7 @@ clobber: clean
         <span class="n">u_mc_total</span> <span class="o">=</span> <span class="p">(</span><span class="n">u_sum_old</span> <span class="o">+</span> <span class="n">u_sum_new</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_total</span>
         <span class="n">error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">((</span><span class="n">u_mc_total</span> <span class="o">-</span> <span class="n">u_true</span><span class="p">)</span> <span class="o">/</span> <span class="n">u_true</span><span class="p">)</span>
 
-        <span class="nb">print</span> <span class="s2">&quot;After </span><span class="si">%8i</span><span class="s2"> random walks, u = </span><span class="si">%15.9f</span><span class="s2">, rel. error = </span><span class="si">%15.6e</span><span class="s2">&quot;</span> \
+        <span class="k">print</span> <span class="s2">&quot;After </span><span class="si">%8i</span><span class="s2"> random walks, u = </span><span class="si">%15.9f</span><span class="s2">, rel. error = </span><span class="si">%15.6e</span><span class="s2">&quot;</span> \
                 <span class="o">%</span> <span class="p">(</span><span class="n">n_total</span><span class="p">,</span> <span class="n">u_mc_total</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
         <span class="n">n_mc</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">n_mc</span>   <span class="c1"># double number of trials for next iteration</span>
         
@@ -3493,7 +3494,7 @@ clobber: clean
 
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span>OBJECTS = random_util.o problem_description.o mc_walk.o test1.o
+<div class="highlight-python"><div class="highlight"><pre>OBJECTS = random_util.o problem_description.o mc_walk.o test1.o
 OBJECTS2 = random_util.o problem_description.o mc_walk.o test2.o
 OBJECTS3 = random_util.o problem_description.o mc_walk.o laplace_mc.o
 FFLAGS = 
@@ -3526,7 +3527,7 @@ clean:
 
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">problem_description</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">module </span><span class="n">problem_description</span>
 
     <span class="k">implicit none</span>
 <span class="k">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span> <span class="k">parameter</span> <span class="kd">::</span> <span class="n">ax</span> <span class="o">=</span> <span class="mf">0.0</span><span class="n">d0</span>
@@ -3573,7 +3574,7 @@ clean:
 <span class="k">end module </span><span class="n">problem_description</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">laplace_mc</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">program </span><span class="n">laplace_mc</span>
 <span class="c">! ---</span>
 <span class="c">! Uses random seed module</span>
 <span class="c">! ---</span>
@@ -3622,7 +3623,7 @@ clean:
 <span class="k">end program </span><span class="n">laplace_mc</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! ---</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! ---</span>
 <span class="c">! This has two functions random_walk and many_walks</span>
 <span class="c">! ---</span>
 <span class="k">module </span><span class="n">mc_walk</span>
@@ -3777,7 +3778,7 @@ clean:
 <span class="k">end module </span><span class="n">mc_walk</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! ---</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! ---</span>
 <span class="c">! This module returns seed for the random_number function</span>
 <span class="c">! ---</span>
 <span class="k">module </span><span class="n">random_util</span>
@@ -3829,7 +3830,7 @@ clean:
 <span class="k">end module </span><span class="n">random_util</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">test1</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">program </span><span class="n">test1</span>
 <span class="c">! ---</span>
 <span class="c">! Uses random seed module</span>
 <span class="c">! ---</span>
@@ -3852,7 +3853,7 @@ clean:
 <span class="k">end program </span><span class="n">test1</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">test2</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">program </span><span class="n">test2</span>
 <span class="c">! ---</span>
 <span class="c">! Uses random seed module</span>
 <span class="c">! ---</span>
@@ -3874,15 +3875,15 @@ clean:
 <span class="k">end program </span><span class="n">test2</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pylab</span> <span class="k">import</span> <span class="o">*</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="c1"># read in three columns from file and unpack into 3 arrays:</span>
-<span class="n">n</span><span class="p">,</span><span class="n">int_approx</span><span class="p">,</span><span class="n">error</span> <span class="o">=</span> <span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;laplace_mc.txt&#39;</span><span class="p">,</span><span class="n">unpack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">n</span><span class="p">,</span><span class="n">int_approx</span><span class="p">,</span><span class="n">error</span> <span class="o">=</span> <span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;laplace_mc.txt&#39;</span><span class="p">,</span><span class="n">unpack</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">clf</span><span class="p">()</span>
 <span class="n">loglog</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">error</span><span class="p">,</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Monte-Carlo&#39;</span><span class="p">)</span>
-<span class="n">loglog</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="n">e7</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">7</span><span class="p">)],</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;1 / sqrt(N)&#39;</span><span class="p">)</span>
+<span class="n">loglog</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mf">1e7</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1e-7</span><span class="p">)],</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;1 / sqrt(N)&#39;</span><span class="p">)</span>
 <span class="n">legend</span><span class="p">()</span>
 <span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;number of MC points used&#39;</span><span class="p">)</span>
 <span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;abs(error)&#39;</span><span class="p">)</span>
@@ -3893,13 +3894,13 @@ clean:
 </div>
 </div>
 <div class="section" id="project-4-laplace-s-equation-mpi-and-the-monte-carlo-method">
-<h2>3.10. Project 4: Laplace&#8217;s Equation, MPI and the Monte Carlo Method<a class="headerlink" href="#project-4-laplace-s-equation-mpi-and-the-monte-carlo-method" title="Permalink to this headline">¶</a></h2>
+<h2>2.10. Project 4: Laplace&#8217;s Equation, MPI and the Monte Carlo Method<a class="headerlink" href="#project-4-laplace-s-equation-mpi-and-the-monte-carlo-method" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><strong>problem_description.f90, laplace_mc.f90, mc_walk.f90, random_util.f90, Makefile</strong> (compute the solution to Laplace&#8217;s Equation using the Monte Carlo Method - using MPI)</li>
 <li><strong>test1.f90, test1b.f90, test2.f90</strong> (trials I made along the way)</li>
 <li><strong>plot_mc_quad_error.py</strong> (plot the result)</li>
 </ul>
-<div class="highlight-default"><div class="highlight"><pre><span></span># $MYHPSC/project/part4/Makefile
+<div class="highlight-python"><div class="highlight"><pre># $MYHPSC/project/part4/Makefile
 
 OBJECTS = random_util.o problem_description.o mc_walk.o laplace_mc.o
 OBJECTS2 = random_util.o problem_description.o mc_walk.o test1.o
@@ -3950,7 +3951,7 @@ clean:
 	rm -f *.o *.exe *.mod
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! ---</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! ---</span>
 <span class="c">! This module returns the true value and the value at the boundary</span>
 <span class="c">! ---</span>
 <span class="k">module </span><span class="n">problem_description</span>
@@ -4010,7 +4011,7 @@ clean:
 <span class="k">end module </span><span class="n">problem_description</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! ---</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! ---</span>
 <span class="c">! This program loops through the Monte Carlo solution of Laplace&#39;s equation,</span>
 <span class="c">! doubling the number of sample points every loop using MPI</span>
 <span class="c">! ---</span>
@@ -4127,7 +4128,7 @@ clean:
 <span class="k">end program </span><span class="n">laplace_mc</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! ---</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! ---</span>
 <span class="c">! This module performs a random walk and also many random walks</span>
 <span class="c">! ---</span>
 <span class="k">module </span><span class="n">mc_walk</span>
@@ -4415,7 +4416,7 @@ clean:
 <span class="k">end module </span><span class="n">mc_walk</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="c">! ---</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! ---</span>
 <span class="c">! This module returns seed for the random_number function</span>
 <span class="c">! ---</span>
 <span class="k">module </span><span class="n">random_util</span>
@@ -4467,7 +4468,7 @@ clean:
 <span class="k">end module </span><span class="n">random_util</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">test1</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">program </span><span class="n">test1</span>
 <span class="c">! ---</span>
 <span class="c">! Uses random seed module</span>
 <span class="c">! ---</span>
@@ -4521,7 +4522,7 @@ clean:
 <span class="k">end program </span><span class="n">test1</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">test1b</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">program </span><span class="n">test1b</span>
 <span class="c">! ---</span>
 <span class="c">! Uses random seed module</span>
 <span class="c">! ---</span>
@@ -4594,7 +4595,7 @@ clean:
 <span class="k">end program </span><span class="n">test1b</span>
 </pre></div>
 </div>
-<div class="highlight-fortran"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">test2</span>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">program </span><span class="n">test2</span>
 <span class="c">! ---</span>
 <span class="c">! Uses random seed module</span>
 <span class="c">! ---</span>
@@ -4657,15 +4658,15 @@ clean:
 <span class="k">end program </span><span class="n">test2</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pylab</span> <span class="k">import</span> <span class="o">*</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="c1"># read in three columns from file and unpack into 3 arrays:</span>
-<span class="n">n</span><span class="p">,</span><span class="n">int_approx</span><span class="p">,</span><span class="n">error</span> <span class="o">=</span> <span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;laplace_mc.txt&#39;</span><span class="p">,</span><span class="n">unpack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">n</span><span class="p">,</span><span class="n">int_approx</span><span class="p">,</span><span class="n">error</span> <span class="o">=</span> <span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;laplace_mc.txt&#39;</span><span class="p">,</span><span class="n">unpack</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">clf</span><span class="p">()</span>
 <span class="n">loglog</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">error</span><span class="p">,</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Monte-Carlo&#39;</span><span class="p">)</span>
-<span class="n">loglog</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="n">e7</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">7</span><span class="p">)],</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;1 / sqrt(N)&#39;</span><span class="p">)</span>
+<span class="n">loglog</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mf">1e7</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1e-7</span><span class="p">)],</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;1 / sqrt(N)&#39;</span><span class="p">)</span>
 <span class="n">legend</span><span class="p">()</span>
 <span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;number of MC points used&#39;</span><span class="p">)</span>
 <span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;abs(error)&#39;</span><span class="p">)</span>
@@ -4682,17 +4683,17 @@ clean:
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="../02_barba_projects/assignments.html">2.3.1. Finite Difference and Finite Volume Projects</a>
+        «&#160;&#160;<a href="../02_barba_projects/assignments.html">1.2.3.1. Finite Difference and Finite Volume Projects</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="../04_literature/literature.html">4. Literature</a>&#160;&#160;»
+        <a href="../04_literature/literature.html">3. Literature</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

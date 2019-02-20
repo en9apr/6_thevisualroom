@@ -1,0 +1,1205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.1. OpenFOAM Language - Private &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../index.html" />
+    <link rel="up" title="1. OpenFOAM" href="../23_25_26_openfoam_landing_page/openfoam_landing_page.html" />
+    <link rel="next" title="1.2. OpenFOAM Use - Private" href="../25_openfoam_use/openfoam_use.html" />
+    <link rel="prev" title="1. OpenFOAM" href="../23_25_26_openfoam_landing_page/openfoam_landing_page.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>1.1. OpenFOAM Language - Private</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../23_25_26_openfoam_landing_page/openfoam_landing_page.html">1. OpenFOAM</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../25_openfoam_use/openfoam_use.html">1.2. OpenFOAM Use - Private</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="openfoam-language-private">
+<h1>1.1. OpenFOAM Language - Private<a class="headerlink" href="#openfoam-language-private" title="Permalink to this headline">¶</a></h1>
+<p>This is the OpenFOAM language.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#what-are-features-of-c" id="id2">What are features of C++?</a></li>
+<li><a class="reference internal" href="#what-is-explicit-evaluation" id="id3">What is explicit evaluation?</a></li>
+<li><a class="reference internal" href="#what-is-implicit-evaluation" id="id4">What is implicit evaluation?</a></li>
+<li><a class="reference internal" href="#what-are-the-higher-level-data-types" id="id5">What are the higher level data types?</a></li>
+<li><a class="reference internal" href="#what-are-fields" id="id6">What are fields?</a></li>
+<li><a class="reference internal" href="#what-are-the-three-types" id="id7">What are the three types?</a></li>
+<li><a class="reference internal" href="#what-are-the-five-basic-classes" id="id8">What are the five basic classes?</a></li>
+<li><a class="reference internal" href="#what-are-the-three-space-time-classes" id="id9">What are the three space-time classes?</a></li>
+<li><a class="reference internal" href="#what-are-the-three-field-algebra-classes" id="id10">What are the three field algebra classes?</a></li>
+<li><a class="reference internal" href="#what-are-the-two-discretisation-classes" id="id11">What are the two discretisation classes?</a></li>
+<li><a class="reference internal" href="#what-is-a-geometricfield-type" id="id12">What is a geometricField&lt;Type&gt;?</a></li>
+<li><a class="reference internal" href="#what-is-the-objectregistry" id="id13">What is the objectRegistry?</a></li>
+<li><a class="reference internal" href="#what-is-the-ioobject" id="id14">What is the IOobject?</a></li>
+<li><a class="reference internal" href="#how-is-a-dictionary-object-read" id="id15">How is a dictionary object read?</a></li>
+<li><a class="reference internal" href="#how-is-volvectorfield-read-from-disk" id="id16">How is volVectorField read from disk?</a></li>
+<li><a class="reference internal" href="#how-is-volscalarfield-constructed" id="id17">How is volScalarField constructed?</a></li>
+<li><a class="reference internal" href="#what-are-the-read-and-write-options" id="id18">What are the read and write options?</a></li>
+<li><a class="reference internal" href="#how-are-objects-represented-in-openfoam" id="id19">How are objects represented in OpenFOAM?</a></li>
+<li><a class="reference internal" href="#how-is-matrix-inversion-done-in-fvm" id="id20">How is matrix inversion done in fvm?</a></li>
+<li><a class="reference internal" href="#what-are-lists" id="id21">What are lists?</a></li>
+<li><a class="reference internal" href="#id1" id="id22">What are fields?</a></li>
+<li><a class="reference internal" href="#how-is-memory-accessed" id="id23">How is memory accessed?</a></li>
+<li><a class="reference internal" href="#how-is-io-communication-done" id="id24">How is IO Communication done?</a></li>
+<li><a class="reference internal" href="#how-are-derivatives-of-fields-evaluated" id="id25">How are derivatives of fields evaluated?</a></li>
+<li><a class="reference internal" href="#what-are-the-functions-for-discretisation" id="id26">What are the functions for discretisation?</a></li>
+<li><a class="reference internal" href="#how-can-are-equations-translated-into-code" id="id27">How can are equations translated into code?</a></li>
+<li><a class="reference internal" href="#how-is-the-piso-algorithm-programmed" id="id28">How is the PISO algorithm programmed?</a></li>
+<li><a class="reference internal" href="#what-are-header-files" id="id29">What are header files?</a></li>
+<li><a class="reference internal" href="#what-is-wmake" id="id30">What is wmake?</a></li>
+</ul>
+</div>
+<div class="section" id="what-are-features-of-c">
+<h2><a class="toc-backref" href="#id2">1.1.1. What are features of C++?</a><a class="headerlink" href="#what-are-features-of-c" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Feature</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>typedefs</td>
+<td>Alias for a possibly complex type name</td>
+</tr>
+<tr class="row-odd"><td>function</td>
+<td>Group of statements that perform a task</td>
+</tr>
+<tr class="row-even"><td>pointers</td>
+<td>Data type that holds addresses to refer to values in memory (e.g. for dynamic memory allocation)</td>
+</tr>
+<tr class="row-odd"><td>data structures</td>
+<td>Data members grouped under one name (e.g. the nodes in a linked list)</td>
+</tr>
+<tr class="row-even"><td>classes</td>
+<td>Data members and function members grouped under one name</td>
+</tr>
+<tr class="row-odd"><td>constructor</td>
+<td>Function member that initialises the instance of it&#8217;s class</td>
+</tr>
+<tr class="row-even"><td>destructor</td>
+<td>Function member that destroys the instance of it&#8217;s class</td>
+</tr>
+<tr class="row-odd"><td>friends</td>
+<td>Allows a function or class access to private or protected members of a class</td>
+</tr>
+<tr class="row-even"><td>inheritance</td>
+<td>Allows a class to be created based on another class (so code can be reused)</td>
+</tr>
+<tr class="row-odd"><td>virtual member functions</td>
+<td>Member function that will be redefined in a derived class</td>
+</tr>
+<tr class="row-even"><td>abstract class</td>
+<td>Class that contains at least one virtual function</td>
+</tr>
+<tr class="row-odd"><td>template</td>
+<td>Family of classes (class template), functions (function template), variables (variable template) or alias of a family of types (alias template)</td>
+</tr>
+<tr class="row-even"><td>namespace</td>
+<td>Prevents name conflicts in large projects</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-is-explicit-evaluation">
+<h2><a class="toc-backref" href="#id3">1.1.2. What is explicit evaluation?</a><a class="headerlink" href="#what-is-explicit-evaluation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Evaluate spatial derivatives at the <strong>current</strong> timestep</li>
+<li>Uses <strong>known</strong> values</li>
+</ul>
+</div>
+<div class="section" id="what-is-implicit-evaluation">
+<h2><a class="toc-backref" href="#id4">1.1.3. What is implicit evaluation?</a><a class="headerlink" href="#what-is-implicit-evaluation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Evaluate spatial derivatives at <strong>future</strong> timestep</li>
+<li>Uses <strong>unknown</strong> values - generates a matrix equation to be solved</li>
+</ul>
+</div>
+<div class="section" id="what-are-the-higher-level-data-types">
+<h2><a class="toc-backref" href="#id5">1.1.4. What are the higher level data types?</a><a class="headerlink" href="#what-are-the-higher-level-data-types" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Type</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">volScalarField</span>
+</pre></div>
+</div>
+</td>
+<td>scalar, e.g. pressure</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">volVectorField</span>
+</pre></div>
+</div>
+</td>
+<td>vector, e.g. velocity</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">volTensorField</span>
+</pre></div>
+</div>
+</td>
+<td>tensor, e.g. Reynolds Stress</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">surfaceScalarField</span>
+</pre></div>
+</div>
+</td>
+<td>surface scalar, e.g. flux</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">dimensionedScalar</span>
+</pre></div>
+</div>
+</td>
+<td>constant, e.g. viscosity</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-are-fields">
+<h2><a class="toc-backref" href="#id6">1.1.5. What are fields?</a><a class="headerlink" href="#what-are-fields" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Arrays of data stored at <strong>cell centres</strong> in the mesh</p>
+</li>
+<li><p class="first">Include bouundary information</p>
+</li>
+<li><dl class="first docutils">
+<dt>Three types</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">volScalarField</span></code></li>
+<li><code class="docutils literal"><span class="pre">volVectorField</span></code></li>
+<li><code class="docutils literal"><span class="pre">volTensorField</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Values are stored in named dictionary files in named timestep directories e.g. <code class="docutils literal"><span class="pre">case/0/p</span></code> for pressure</p>
+</li>
+</ul>
+</div>
+<div class="section" id="what-are-the-three-types">
+<h2><a class="toc-backref" href="#id7">1.1.6. What are the three types?</a><a class="headerlink" href="#what-are-the-three-types" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">&lt;Type&gt;</span></code> refers to:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">scalar</span></code></li>
+<li><code class="docutils literal"><span class="pre">vector</span></code></li>
+<li><code class="docutils literal"><span class="pre">tensor</span></code></li>
+</ul>
+</div>
+<div class="section" id="what-are-the-five-basic-classes">
+<h2><a class="toc-backref" href="#id8">1.1.7. What are the five basic classes?</a><a class="headerlink" href="#what-are-the-five-basic-classes" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Class</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first highlight-python"><div class="highlight"><pre><span class="n">fvPatchField</span>
+</pre></div>
+</div>
+<p class="last">(and derived classes)</p>
+</td>
+<td>Boundary conditions</td>
+</tr>
+<tr class="row-odd"><td><div class="first highlight-python"><div class="highlight"><pre><span class="n">lduMatrix</span>
+<span class="n">fvMatrix</span>
+</pre></div>
+</div>
+<p class="last">(and linear solvers)</p>
+</td>
+<td>Sparse matrices</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-are-the-three-space-time-classes">
+<h2><a class="toc-backref" href="#id9">1.1.8. What are the three space-time classes?</a><a class="headerlink" href="#what-are-the-three-space-time-classes" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Class</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">polyMesh</span>
+</pre></div>
+</div>
+</td>
+<td><ul class="first last">
+<li><p class="first">Stands for polyhedral mesh</p>
+</li>
+<li><p class="first">Most basic mesh class</p>
+</li>
+<li><dl class="first docutils">
+<dt>Contains:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">pointField</span></code></li>
+<li><code class="docutils literal"><span class="pre">faceList</span></code></li>
+<li><code class="docutils literal"><span class="pre">cellList</span></code></li>
+<li><code class="docutils literal"><span class="pre">polyPatchList</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">fvMesh</span>
+</pre></div>
+</div>
+</td>
+<td><ul class="first last">
+<li><dl class="first docutils">
+<dt>Extends <code class="docutils literal"><span class="pre">polyMesh</span></code> contains:</dt>
+<dd><ul class="first last simple">
+<li>Cell volumes (<code class="docutils literal"><span class="pre">volScalarField</span></code>)</li>
+<li>Cell centres (<code class="docutils literal"><span class="pre">volVectorField</span></code>)</li>
+<li>Face area vectors (<code class="docutils literal"><span class="pre">surfaceVectorField</span></code>)</li>
+<li>Face centres (<code class="docutils literal"><span class="pre">surfaceVectorField</span></code>)</li>
+<li>Face area magnitudes (<code class="docutils literal"><span class="pre">surfaceScalarField</span></code>)</li>
+<li>Face motion centres (<code class="docutils literal"><span class="pre">surfaceScalarField</span></code>)</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">Time</span>
+</pre></div>
+</div>
+</td>
+<td><ul class="first last">
+<li><dl class="first docutils">
+<dt>Class to control time during OpenFOAM</dt>
+<dd><ul class="first last simple">
+<li>Declared as variable <code class="docutils literal"><span class="pre">runTime</span></code></li>
+<li>Provides list of saved times <code class="docutils literal"><span class="pre">runTime.times()</span></code></li>
+<li>Timestep = <code class="docutils literal"><span class="pre">deltaT()</span></code></li>
+<li>Return current directory name = <code class="docutils literal"><span class="pre">name()</span></code></li>
+<li>Time increments = <code class="docutils literal"><span class="pre">operator++()</span></code> <code class="docutils literal"><span class="pre">operator+=(scalar)</span></code></li>
+<li>Write objects to disk = <code class="docutils literal"><span class="pre">write()</span></code></li>
+<li>Start time, end time = <code class="docutils literal"><span class="pre">startTime()</span></code>, <code class="docutils literal"><span class="pre">endTime()</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-are-the-three-field-algebra-classes">
+<h2><a class="toc-backref" href="#id10">1.1.9. What are the three field algebra classes?</a><a class="headerlink" href="#what-are-the-three-field-algebra-classes" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Class</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre>Field&lt;Type&gt;
+</pre></div>
+</div>
+</td>
+<td><ul class="first last">
+<li><p class="first">Array template class, e.g. <code class="docutils literal"><span class="pre">Field&lt;vector&gt;</span> <span class="pre">=</span> <span class="pre">vectorField</span></code></p>
+</li>
+<li><dl class="first docutils">
+<dt>Renamed using <code class="docutils literal"><span class="pre">typedef</span></code> as:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">scalarField</span></code></li>
+<li><code class="docutils literal"><span class="pre">vectorField</span></code></li>
+<li><code class="docutils literal"><span class="pre">tensorField</span></code></li>
+<li><code class="docutils literal"><span class="pre">symmTensorField</span></code></li>
+<li><code class="docutils literal"><span class="pre">tensorThirdField</span></code></li>
+<li><code class="docutils literal"><span class="pre">symmTensorThirdField</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">dimensionedField</span>
+</pre></div>
+</div>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre>geometricField&lt;Type&gt;
+</pre></div>
+</div>
+</td>
+<td><ul class="first last">
+<li><dl class="first docutils">
+<dt>Combination of:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">Field</span></code></li>
+<li><code class="docutils literal"><span class="pre">GeometricBoundaryField</span></code></li>
+<li><code class="docutils literal"><span class="pre">fvMesh</span></code></li>
+<li><code class="docutils literal"><span class="pre">dimensionSet</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Defines values at all locations in domain with aliases:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">volField&lt;Type&gt;</span></code></li>
+<li><code class="docutils literal"><span class="pre">surfaceField&lt;Type&gt;</span></code></li>
+<li><code class="docutils literal"><span class="pre">pointField&lt;Type&gt;</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-are-the-two-discretisation-classes">
+<h2><a class="toc-backref" href="#id11">1.1.10. What are the two discretisation classes?</a><a class="headerlink" href="#what-are-the-two-discretisation-classes" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Class</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">fvc</span>
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Stands for finite volume calculus</li>
+<li>Explicit derivative evaluation</li>
+<li>Input = <strong>known</strong> <code class="docutils literal"><span class="pre">geometricField&lt;Type&gt;</span></code></li>
+<li>Output = <code class="docutils literal"><span class="pre">geometricField&lt;Type&gt;</span></code> object</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">fvm</span>
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Stands for finite volume method</li>
+<li>Implicit derivative evaluation</li>
+<li>Input = <strong>unknown</strong> <code class="docutils literal"><span class="pre">geometricField&lt;Type&gt;</span></code></li>
+<li>Output = <code class="docutils literal"><span class="pre">fvMatrix&lt;Type&gt;</span></code> object, which can be inverted in the matrix equation <code class="docutils literal"><span class="pre">Mx=y</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-is-a-geometricfield-type">
+<h2><a class="toc-backref" href="#id12">1.1.11. What is a geometricField&lt;Type&gt;?</a><a class="headerlink" href="#what-is-a-geometricfield-type" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">volField&lt;Type&gt;</span></code></li>
+<li><code class="docutils literal"><span class="pre">surfaceField&lt;Type&gt;</span></code></li>
+<li><code class="docutils literal"><span class="pre">pointField&lt;Type&gt;</span></code></li>
+</ul>
+</div>
+<div class="section" id="what-is-the-objectregistry">
+<h2><a class="toc-backref" href="#id13">1.1.12. What is the objectRegistry?</a><a class="headerlink" href="#what-is-the-objectregistry" title="Permalink to this headline">¶</a></h2>
+<p>Object registry of entities (dictionaries, fields) which are to be read in or written out</p>
+</div>
+<div class="section" id="what-is-the-ioobject">
+<h2><a class="toc-backref" href="#id14">1.1.13. What is the IOobject?</a><a class="headerlink" href="#what-is-the-ioobject" title="Permalink to this headline">¶</a></h2>
+<p>Defines I/O attributes of entities managed by the object registry.</p>
+</div>
+<div class="section" id="how-is-a-dictionary-object-read">
+<h2><a class="toc-backref" href="#id15">1.1.14. How is a dictionary object read?</a><a class="headerlink" href="#how-is-a-dictionary-object-read" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">Info</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Reading transportProperties&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+</td>
+<td>Send message to screen</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre>IOdictionary transportProperties
+(
+    IOobject
+    (
+        &quot;transportProperties&quot;,
+        runTime.constant(),
+        mesh,
+        IOobject::MUST_READ
+        IOobject::NO_WRITE
+    )
+);
+</pre></div>
+</div>
+</td>
+<td>Read in at creation</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre>dimensionedScalar nu
+(
+    transportProperties.lookup(&quot;nu&quot;)
+);
+</pre></div>
+</div>
+</td>
+<td>Lookup viscosity in dictionary</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-is-volvectorfield-read-from-disk">
+<h2><a class="toc-backref" href="#id16">1.1.15. How is volVectorField read from disk?</a><a class="headerlink" href="#how-is-volvectorfield-read-from-disk" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre>volVectorField U
+(
+    IOobject
+    (
+        &quot;U&quot;,
+        Times[i].name(),
+        runTime,
+        IOobject::MUST_READ
+    ),
+    mesh
+)
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>volVectorField read in from disk</li>
+<li>Associated with runTime database</li>
+<li>Must be read</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-is-volscalarfield-constructed">
+<h2><a class="toc-backref" href="#id17">1.1.16. How is volScalarField constructed?</a><a class="headerlink" href="#how-is-volscalarfield-constructed" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre>volVectorField magU
+(
+    IOobject
+    (
+        &quot;magU&quot;,
+        Times[i].name(),
+        runTime,
+        IOobject::NO_READ
+        IOobject::AUTO_WRITE
+    ),
+    ::mag(U)
+);
+magU.write();
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>construct mag(U) object of type volScalarField called magU</li>
+<li>write it out</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-are-the-read-and-write-options">
+<h2><a class="toc-backref" href="#id18">1.1.17. What are the read and write options?</a><a class="headerlink" href="#what-are-the-read-and-write-options" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Class</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">NO_READ</span>
+</pre></div>
+</div>
+</td>
+<td>Object created</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">MUST_READ</span>
+<span class="n">READ_IF_PRESENT</span>
+</pre></div>
+</div>
+</td>
+<td>Object asked to read</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">NO_WRITE</span>
+</pre></div>
+</div>
+</td>
+<td>Object destroyed</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">AUTO_WRITE</span>
+</pre></div>
+</div>
+</td>
+<td>Object asked to write</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-are-objects-represented-in-openfoam">
+<h2><a class="toc-backref" href="#id19">1.1.18. How are objects represented in OpenFOAM?</a><a class="headerlink" href="#how-are-objects-represented-in-openfoam" title="Permalink to this headline">¶</a></h2>
+<p>How to create an object that writes the magnitude of a velocity vector?</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Class</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre>#include &quot;fvCFD.H&quot;
+int main(int argc, char argv[])
+{
+# include &quot;addTimeOptions.H&quot;
+# include &quot;setRootCase.H&quot;
+# include &quot;createTime.H&quot;
+instantList Times = runTime.times();
+# include &quot;createMesh.H&quot;
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>One block called main is needed</li>
+<li><code class="docutils literal"><span class="pre">#include</span></code> to store commonly used code</li>
+<li><code class="docutils literal"><span class="pre">runTime</span></code> is a variable of the OpenFOAM <code class="docutils literal"><span class="pre">Time</span></code> class - for timestepping through code</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre>for(label i=0; i&lt;runTime.size(); i++)
+{
+    runTime.setTime(Times[i],i);
+    Info &lt;&lt; &quot;Time: &quot; &lt;&lt; runTime.value() &lt;&lt; endl
+    volVectorField U
+    (
+        IOobject
+        (
+            &quot;U&quot;,
+            Times[i].name(),
+            runTime,
+            IOobject::MUST READ
+        ),
+        mesh
+    );
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Loop over all possible times</li>
+<li>Read in a <code class="docutils literal"><span class="pre">volVectorField</span> <span class="pre">U</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre>    volScalarField magU
+    (
+        IOobject
+        (
+            &quot;magU&quot;,
+            Times[i].name(),
+            runTime,
+            IOobject::NO READ,
+            IOobject::AUTO WRITE
+        ),
+        ::mag(U)
+    );
+    magU.write();
+} return 0;}
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Construct a <code class="docutils literal"><span class="pre">volScalarField</span> <span class="pre">magU</span></code></li>
+<li>Write out the velocity</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-is-matrix-inversion-done-in-fvm">
+<h2><a class="toc-backref" href="#id20">1.1.19. How is matrix inversion done in fvm?</a><a class="headerlink" href="#how-is-matrix-inversion-done-in-fvm" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Each operator in fvm constructs particular entries in known <code class="docutils literal"><span class="pre">M</span></code> and <code class="docutils literal"><span class="pre">y</span></code> as a <code class="docutils literal"><span class="pre">fvMatrix</span></code> object</li>
+<li><code class="docutils literal"><span class="pre">fvMatrix</span></code> is a template class (actual classes are <code class="docutils literal"><span class="pre">fvScalarMatrix</span></code> etc)</li>
+<li><code class="docutils literal"><span class="pre">fvMatrix</span></code> handles storage via <code class="docutils literal"><span class="pre">lduMatrix</span></code> class</li>
+<li><code class="docutils literal"><span class="pre">fvMatrix</span></code> class also handles solution</li>
+</ul>
+</div>
+<div class="section" id="what-are-lists">
+<h2><a class="toc-backref" href="#id21">1.1.20. What are lists?</a><a class="headerlink" href="#what-are-lists" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Class</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre>List&lt;Type&gt;
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Array template class</li>
+<li>Allows creation of a list of any object of a class e.g. <code class="docutils literal"><span class="pre">List&lt;vector&gt;</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre>PtrList&lt;Type&gt;
+</pre></div>
+</div>
+</td>
+<td>List of pointers</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre>SLList&lt;Type&gt;
+</pre></div>
+</div>
+</td>
+<td>Non-intrusive singly-linked list</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id22">1.1.21. What are fields?</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Class</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre>Field&lt;Type&gt;
+</pre></div>
+</div>
+</td>
+<td><ul class="first last">
+<li><p class="first">Array template class, e.g. <code class="docutils literal"><span class="pre">Field&lt;vector&gt;</span> <span class="pre">=</span> <span class="pre">vectorField</span></code></p>
+</li>
+<li><dl class="first docutils">
+<dt>Renamed as <code class="docutils literal"><span class="pre">scalarField,</span> <span class="pre">vectorField,</span> <span class="pre">tensorField,</span> <span class="pre">symmTensorField,</span></code></dt>
+<dd><p class="first last"><code class="docutils literal"><span class="pre">tensorThirdField</span> <span class="pre">and</span> <span class="pre">symmTensorThirdField</span></code></p>
+</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-is-memory-accessed">
+<h2><a class="toc-backref" href="#id23">1.1.22. How is memory accessed?</a><a class="headerlink" href="#how-is-memory-accessed" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Arrays</li>
+<li>Pointers</li>
+<li>References</li>
+</ul>
+</div>
+<div class="section" id="how-is-io-communication-done">
+<h2><a class="toc-backref" href="#id24">1.1.23. How is IO Communication done?</a><a class="headerlink" href="#how-is-io-communication-done" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="n">Info</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Time = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">runTime</span><span class="o">.</span><span class="n">timeName</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">nl</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+</td>
+<td>Info object is output to the screen</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-are-derivatives-of-fields-evaluated">
+<h2><a class="toc-backref" href="#id25">1.1.24. How are derivatives of fields evaluated?</a><a class="headerlink" href="#how-are-derivatives-of-fields-evaluated" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Time derivative</p>
+</li>
+<li><dl class="first docutils">
+<dt>Divergence (div)</dt>
+<dd><ul class="first last simple">
+<li>Spatial derivative</li>
+<li>Discretised using the flux at the faces</li>
+<li>e.g. <span class="math">\(\nabla \cdot (\mathbf{u}q)\)</span> (the advection term)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Gradient (grad)</dt>
+<dd><ul class="first last simple">
+<li>Spatial derivative</li>
+<li>e.g. <span class="math">\(\nabla p\)</span> in the momentum equation</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Laplacian</dt>
+<dd><ul class="first last">
+<li><p class="first">Spatial derivative</p>
+</li>
+<li><dl class="first docutils">
+<dt>Discretised as <span class="math">\(\nabla \cdot \mu \nabla q\)</span></dt>
+<dd><ul class="first last simple">
+<li>gradient scheme for <span class="math">\(\nabla q\)</span></li>
+<li>interpolation for <span class="math">\(\mu\)</span></li>
+<li>discretisation for <span class="math">\(\nabla \cdot\)</span></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">e.g. <span class="math">\(\mu \nabla^2 q\)</span> in the momentum equation</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="what-are-the-functions-for-discretisation">
+<h2><a class="toc-backref" href="#id26">1.1.25. What are the functions for discretisation?</a><a class="headerlink" href="#what-are-the-functions-for-discretisation" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Function</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre>fvc::ddt(A)
+fvm::ddt(A)
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Time derivative</li>
+<li><span class="math">\(\partial A / \partial t\)</span></li>
+<li><span class="math">\(A\)</span> can be a scalar, vector or tensor</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre>fvc::ddt(rho,A)
+fvm::ddt(rho,A)
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Density weighted time derivative</li>
+<li><span class="math">\(\partial \rho A / \partial t\)</span></li>
+<li><span class="math">\(\rho\)</span> can be any scalar field</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre>fvc::d2dt2(rho,A)
+fvm::d2dt2(rho,A)
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Second density weighted time derivative</li>
+<li><span class="math">\(\partial / \partial t ( \rho \partial A / \partial t)\)</span></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre>fvc::grad(A)
+fvm::grad(A)
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Gradient</li>
+<li><span class="math">\(A\)</span> can be a scalar or a vector</li>
+<li>Result is a <code class="docutils literal"><span class="pre">volVectorField</span></code> (from scalar) or a <code class="docutils literal"><span class="pre">volTensorField</span></code> (from vector)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre>fvc::div(A)
+fvm::div(A)
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Divergence</li>
+<li><span class="math">\(A\)</span> can be a vector or a tensor</li>
+<li>Result is a <code class="docutils literal"><span class="pre">volScalarField</span></code> (from vector) or a <code class="docutils literal"><span class="pre">volVectorField</span></code> (from tensor)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre>fvc::laplacian(A)
+fvm::laplacian(A)
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Laplacian</li>
+<li><span class="math">\(\nabla^2 A\)</span></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre>fvc::laplacian(mu, A)
+fvm::laplacian(mu, A)
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Laplacian</li>
+<li><span class="math">\(\nabla \cdot(\mu \nabla A)\)</span></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre>fvc::curl(A)
+fvm::curl(A)
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Curl</li>
+<li><span class="math">\(\nabla \times A\)</span></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre>fvm::div(phi,A)
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Divergence using flux to evaluate this</li>
+<li><span class="math">\(A\)</span> can be a scalar, vector or a tensor</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="first last highlight-python"><div class="highlight"><pre>fvm::Sp(rho,A)
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Implicit evaulation of source term</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre>fvm::SuSp(rho,A)
+</pre></div>
+</div>
+</td>
+<td><ul class="first last simple">
+<li>Implicit or explicit evaulation of source term (depending on sign of <code class="docutils literal"><span class="pre">rho</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-can-are-equations-translated-into-code">
+<h2><a class="toc-backref" href="#id27">1.1.26. How can are equations translated into code?</a><a class="headerlink" href="#how-can-are-equations-translated-into-code" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Equation</th>
+<th class="head">Code</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="math">\({{\partial q} \over {\partial t}} + \nabla \cdot q \mathbf{u} = \mu \nabla^2 q\)</span></td>
+<td><div class="first last highlight-c"><div class="highlight"><pre><span class="n">fvScalarMatrix</span> <span class="nf">transport</span>
+<span class="p">(</span>
+     <span class="n">fvm</span><span class="o">::</span><span class="n">ddt</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+     <span class="o">+</span> <span class="n">fvm</span><span class="o">::</span><span class="n">div</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span><span class="n">q</span><span class="p">)</span>
+     <span class="o">-</span> <span class="n">fvm</span><span class="o">::</span><span class="n">laplacian</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span><span class="n">q</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// phi is the flux from the momentum equation</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><span class="math">\({{\partial T} \over {\partial t}} = \kappa \nabla^2 T\)</span></td>
+<td><div class="first last highlight-c"><div class="highlight"><pre><span class="n">solve</span><span class="p">(</span><span class="n">fvm</span><span class="o">::</span><span class="n">ddt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">==</span> <span class="n">kappa</span><span class="o">*</span><span class="n">fvc</span><span class="o">::</span><span class="n">laplacian</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+
+<span class="c1">// T is a volScalarField defined on the mesh</span>
+<span class="c1">// A discretised representation of the field variable T</span>
+<span class="c1">// solve performs matrix inversion for one step</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><span class="math">\({{\partial k} \over {\partial t}} + \nabla \cdot k \mathbf{u} - \nabla \cdot [(\nu + \nu_t)\nabla k ]=\nu_t[1/2(\nabla \mathbf{u} + \nabla \mathbf{u}^T ]^2 - \varepsilon/k\)</span></td>
+<td><div class="first last highlight-c"><div class="highlight"><pre><span class="n">solve</span><span class="p">(</span>
+     <span class="n">fvm</span><span class="o">::</span><span class="n">ddt</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+     <span class="o">+</span> <span class="n">fvm</span><span class="o">::</span><span class="n">div</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+     <span class="o">-</span> <span class="n">fvm</span><span class="o">::</span><span class="n">laplacian</span><span class="p">(</span><span class="n">nu</span><span class="p">()</span><span class="o">+</span><span class="n">nut</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+     <span class="o">==</span> <span class="n">nut</span><span class="o">*</span><span class="n">magSqr</span><span class="p">(</span><span class="n">symm</span><span class="p">(</span><span class="n">fvc</span><span class="o">::</span><span class="n">grad</span><span class="p">(</span><span class="n">U</span><span class="p">)))</span>
+     <span class="o">-</span> <span class="n">fvm</span><span class="o">::</span><span class="n">Sp</span><span class="p">(</span><span class="n">epsilon</span><span class="o">/</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-is-the-piso-algorithm-programmed">
+<h2><a class="toc-backref" href="#id28">1.1.27. How is the PISO algorithm programmed?</a><a class="headerlink" href="#how-is-the-piso-algorithm-programmed" title="Permalink to this headline">¶</a></h2>
+<p>The PISO (Pressure Implicit with Splitting of Operators) is an efficient method to solve the Navier-Stokes equations</p>
+<p>The algorithm can be summed up as follows:</p>
+<ul class="simple">
+<li>Set the boundary conditions.</li>
+<li>Solve the discretized momentum equation to compute an intermediate velocity field.</li>
+<li>Compute the mass fluxes at the cells faces.</li>
+<li>Solve the pressure equation.</li>
+<li>Correct the mass fluxes at the cell faces.</li>
+<li>Correct the velocities on the basis of the new pressure field.</li>
+<li>Update the boundary conditions.</li>
+<li>Repeat from 3 for the prescribed number of times.</li>
+<li>Increase the time step and repeat from 1.</li>
+</ul>
+<p>The implementation:</p>
+<ul class="simple">
+<li>Define the equation for U</li>
+</ul>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">fvVectorMatrix</span> <span class="nf">UEqn</span>
+<span class="p">(</span>
+   <span class="n">fvm</span><span class="o">::</span><span class="n">ddt</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
+ <span class="o">+</span> <span class="n">fvm</span><span class="o">::</span><span class="n">div</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
+ <span class="o">-</span> <span class="n">fvm</span><span class="o">::</span><span class="n">laplacian</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Solve the momentum predictor</li>
+</ul>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">solve</span> <span class="p">(</span><span class="n">UEqn</span> <span class="o">==</span> <span class="o">-</span><span class="n">fvc</span><span class="o">::</span><span class="n">grad</span><span class="p">(</span><span class="n">p</span><span class="p">));</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Calculate the ap coefficient and calculate U</li>
+</ul>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">volScalarField</span> <span class="n">rUA</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">UEqn</span><span class="p">().</span><span class="n">A</span><span class="p">();</span>
+<span class="n">U</span> <span class="o">=</span> <span class="n">rUA</span><span class="o">*</span><span class="n">UEqn</span><span class="p">().</span><span class="n">H</span><span class="p">();</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Calculate the flux</li>
+</ul>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="n">fvc</span><span class="o">::</span><span class="n">interpolate</span><span class="p">(</span><span class="n">U</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">mesh</span><span class="p">.</span><span class="n">Sf</span><span class="p">())</span>
+   <span class="o">+</span> <span class="n">fvc</span><span class="o">::</span><span class="n">ddtPhiCorr</span><span class="p">(</span><span class="n">rUA</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">phi</span><span class="p">);</span>
+<span class="n">adjustPhi</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Define and solve the pressure equation and repeat for the prescribed number of non-orthogonal corrector steps</li>
+</ul>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">fvScalarMatrix</span> <span class="nf">pEqn</span>
+<span class="p">(</span>
+    <span class="n">fvm</span><span class="o">::</span><span class="n">laplacian</span><span class="p">(</span><span class="n">rUA</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="n">fvc</span><span class="o">::</span><span class="n">div</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="n">pEqn</span><span class="p">.</span><span class="n">setReference</span><span class="p">(</span><span class="n">pRefCell</span><span class="p">,</span> <span class="n">pRefValue</span><span class="p">);</span>
+<span class="n">pEqn</span><span class="p">.</span><span class="n">solve</span><span class="p">();</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Correct the flux</li>
+</ul>
+<div class="highlight-c"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="n">nonOrth</span> <span class="o">==</span> <span class="n">nNonOrthCorr</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">phi</span> <span class="o">-=</span> <span class="n">pEqn</span><span class="p">.</span><span class="n">flux</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Calculate continuity errors</li>
+</ul>
+<div class="highlight-c"><div class="highlight"><pre><span class="cp"># include &quot;continuityErrs.H&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Perform the momentum corrector step</li>
+</ul>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">U</span> <span class="o">-=</span> <span class="n">rUA</span><span class="o">*</span><span class="n">fvc</span><span class="o">::</span><span class="n">grad</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="n">U</span><span class="p">.</span><span class="n">correctBoundaryConditions</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The following is from the OpenFOAM UK Users Group:</p>
+</div>
+<div class="section" id="what-are-header-files">
+<h2><a class="toc-backref" href="#id29">1.1.28. What are header files?</a><a class="headerlink" href="#what-are-header-files" title="Permalink to this headline">¶</a></h2>
+<p>Sections of code in separate files that are widely used - all function prototypes in a header file</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Equation</th>
+<th class="head">Code</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><div class="first last highlight-python"><div class="highlight"><pre><span class="c1">#include &quot;CourantNumber.H&quot;</span>
+</pre></div>
+</div>
+</td>
+<td>File containing code for calculating Courant number</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="what-is-wmake">
+<h2><a class="toc-backref" href="#id30">1.1.29. What is wmake?</a><a class="headerlink" href="#what-is-wmake" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">wmake is a make system – directs the compiler to compile specific files in particular ways.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Controlled through files in Make:</dt>
+<dd><ul class="first last simple">
+<li>files – specifies which user-written files to compile and what to call the result</li>
+<li>options – specifies additional header files/libraries to be included in the compilation.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../23_25_26_openfoam_landing_page/openfoam_landing_page.html">1. OpenFOAM</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../25_openfoam_use/openfoam_use.html">1.2. OpenFOAM Use - Private</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

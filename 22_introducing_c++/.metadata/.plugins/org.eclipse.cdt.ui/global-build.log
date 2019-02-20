@@ -1,0 +1,15 @@
+13:11:32 **** Build of configuration Debug for project 12_codewars ****
+make all 
+Building file: ../src/12_codewars.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/12_codewars.d" -MT"src/12_codewars.d" -o "src/12_codewars.o" "../src/12_codewars.cpp"
+Finished building: ../src/12_codewars.cpp
+ 
+Building target: 12_codewars
+Invoking: GCC C++ Linker
+g++  -o "12_codewars"  ./src/12_codewars.o   
+Finished building target: 12_codewars
+ 
+13:11:37 **** Incremental Build of configuration Debug for project 12_codewars ****
+make all 
+make: Nothing to be done for 'all'.

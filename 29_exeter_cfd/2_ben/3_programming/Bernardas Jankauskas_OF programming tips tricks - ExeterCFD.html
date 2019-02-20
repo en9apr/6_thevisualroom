@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OF_programming_tips_tricks -->
+<html lang="en" dir="ltr" class="client-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Bernardas Jankauskas/OF programming tips tricks - ExeterCFD</title>
+<meta name="generator" content="MediaWiki 1.25.1">
+<link rel="shortcut icon" href="https://wiki.emps.ex.ac.uk/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="https://wiki.emps.ex.ac.uk/cfd/opensearch_desc.php" title="ExeterCFD (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.emps.ex.ac.uk/cfd/api.php?action=rsd">
+<link rel="alternate" hreflang="x-default" href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OF_programming_tips_tricks">
+<link rel="alternate" type="application/atom+xml" title="ExeterCFD Atom feed" href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Special:RecentChanges&amp;feed=atom">
+<link rel="stylesheet" href="./Bernardas Jankauskas_OF programming tips tricks - ExeterCFD_files/load.php">
+<style>
+.mw-collapsible-toggle{float:right;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none}  .mw-content-ltr .mw-collapsible-toggle,.mw-content-rtl .mw-content-ltr .mw-collapsible-toggle{float:right} .mw-content-rtl .mw-collapsible-toggle,.mw-content-ltr .mw-content-rtl .mw-collapsible-toggle{float:left}.mw-customtoggle,.mw-collapsible-toggle{cursor:pointer} caption .mw-collapsible-toggle,.mw-content-ltr caption .mw-collapsible-toggle,.mw-content-rtl caption .mw-collapsible-toggle,.mw-content-rtl .mw-content-ltr caption .mw-collapsible-toggle,.mw-content-ltr .mw-content-rtl caption .mw-collapsible-toggle{float:none} li .mw-collapsible-toggle,.mw-content-ltr li .mw-collapsible-toggle,.mw-content-rtl li .mw-collapsible-toggle,.mw-content-rtl .mw-content-ltr li .mw-collapsible-toggle,.mw-content-ltr .mw-content-rtl li .mw-collapsible-toggle{float:none} .mw-collapsible-toggle-li{list-style:none}
+/* cache key: cfd:resourceloader:filter:minify-css:7:e1ffd603cbaaa5f1a36e0d13fe843535 */
+.suggestions{overflow:hidden;position:absolute;top:0;left:0;width:0;border:none;z-index:1099;padding:0;margin:-1px 0 0 0}.suggestions-special{position:relative;background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0;margin-top:-2px;display:none;padding:0.25em 0.25em;line-height:1.25em}.suggestions-results{background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0}.suggestions-result{color:black;margin:0;line-height:1.5em;padding:0.01em 0.25em;text-align:left; overflow:hidden;-o-text-overflow:ellipsis; text-overflow:ellipsis;white-space:nowrap}.suggestions-result-current{background-color:#4C59A6;color:white}.suggestions-special .special-label{color:gray;text-align:left}.suggestions-special .special-query{color:black;font-style:italic;text-align:left}.suggestions-special .special-hover{background-color:silver}.suggestions-result-current .special-label,.suggestions-result-current .special-query{color:white}.highlight{font-weight:bold}
+/* cache key: cfd:resourceloader:filter:minify-css:7:f8d0c6895ce3ae14434c16b8fca59432 */
+.postedit-container{margin:0 auto;position:fixed;top:0;height:0;left:50%;z-index:1000;font-size:13px}.postedit-container:hover{cursor:pointer}.postedit{position:relative;top:0.6em;left:-50%;padding:.6em 3.6em .6em 1.1em;line-height:1.5625em;color:#626465;background-color:#f4f4f4;border:1px solid #dcd9d9;text-shadow:0 0.0625em 0 rgba(255,255,255,0.5);border-radius:5px;box-shadow:0 2px 5px 0 #ccc;-webkit-transition:all 0.25s ease-in-out;-moz-transition:all 0.25s ease-in-out;-ms-transition:all 0.25s ease-in-out;-o-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out}.skin-monobook .postedit{top:6em !important}.postedit-faded{opacity:0}.postedit-icon{padding-left:41px;  line-height:25px;background-repeat:no-repeat;background-position:8px 50%}.postedit-icon-checkmark{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABblBMVEUAAAD///////9PfTf///80aRdTgjn///9Feij///////////9Rfzf///////////9PfjZRgDh1o1xOfTb///////+bwYqLtnj///////9PfTa82K////9WhT6YxIL///9QgDdTgzr////////j7uDl7eLq8efi693k7OH///////9UhjuBr2rp9uRUhjr///9YljVKgir///9WiTlYjT3////9/v57vFlbkT5PjC9dlD/5/fhuq09stUTs9uhxuElctCpfnT1huDFloEZloUZmpENmvDZpvDxpvTxqvjxrvT5rvT9rwTxsqktswD5uwkBvuUdxw0NztFBztU9ztVBzwkp0tlJ1xkd2t1R3uVR4w1F4xk54x014yE15uVZ5v1R5xVB6v1R7yFJ8wVh9xVl9yFR9yVd9ylN+xVh+yFd/x1l/yFeAylmEx1+Ny2uY0Hqe04Wj1Ymv3Ze33qLD47TJ5L3O6cPU7Mrq9eb2+/Q4j37OAAAAQHRSTlMAAQIEBAUFBQwPFB4fJCUoKiosQEhJS01RUlZZXmdydXaChYuSlJSWmJmoq6uur8LExcvM19fg5ejt8fX2+Pr7SljgewAAAKpJREFUGBkFwQNCAwAAAMDLtl3LtrG4rWXbtvX77gAgZ6grFwC0bhwNVgKgdPZx8b0dgLi+s7Wn0VoAqpfOI9+BNADZI7fLrz2pSEwGHZuH+78lSK8ZLkLezF3ooyUG3VPXq2USei9WngeyoG195yBYWDF3E/2pAhl1e9Gr8bGT+bfOFCC2fnvh4X7rcqIAQNNu+HT6sxkAjceTL/2ZAIhv+PorBwBJxfkA//dFHSCBy/UTAAAAAElFTkSuQmCC);background-image:url(https://wiki.emps.ex.ac.uk/cfd/resources/src/mediawiki.action/images/green-checkmark.png?2015-05-25T21:00:00Z)!ie;background-position:left}.postedit-close{position:absolute;padding:0 .8em;right:0;top:0;font-size:1.25em;font-weight:bold;line-height:2.3em;color:black;text-shadow:0 0.0625em 0 white;text-decoration:none;opacity:0.2;filter:alpha(opacity=20)}.postedit-close:hover{color:black;text-decoration:none;opacity:0.4;filter:alpha(opacity=40)}
+/* cache key: cfd:resourceloader:filter:minify-css:7:2af8c3508bea88881a5e98ffb04cf98f */</style><style>
+.suggestions a.mw-searchSuggest-link,.suggestions a.mw-searchSuggest-link:hover,.suggestions a.mw-searchSuggest-link:active,.suggestions a.mw-searchSuggest-link:focus{color:black;text-decoration:none}.suggestions-result-current a.mw-searchSuggest-link,.suggestions-result-current a.mw-searchSuggest-link:hover,.suggestions-result-current a.mw-searchSuggest-link:active,.suggestions-result-current a.mw-searchSuggest-link:focus{color:white}.suggestions a.mw-searchSuggest-link .special-query{ overflow:hidden;-o-text-overflow:ellipsis; text-overflow:ellipsis;white-space:nowrap}
+/* cache key: cfd:resourceloader:filter:minify-css:7:ae3fa4570b5ac0c6cf7b3776c8ae4d6f */</style><meta name="ResourceLoaderDynamicStyles" content="">
+<style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: cfd:resourceloader:filter:minify-css:7:233b1d30d100a8079eac2e505f2781bf */</style>
+<script src="./Bernardas Jankauskas_OF programming tips tricks - ExeterCFD_files/load(1).php"></script><script src="./Bernardas Jankauskas_OF programming tips tricks - ExeterCFD_files/load(2).php"></script>
+<script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Bernardas_Jankauskas/OF_programming_tips_tricks","wgTitle":"Bernardas Jankauskas/OF programming tips tricks","wgCurRevisionId":764,"wgRevisionId":764,"wgArticleId":331,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Bernardas_Jankauskas/OF_programming_tips_tricks","wgRelevantArticleId":331,"wgIsProbablyEditable":false,"wgRestrictionEdit":[],"wgRestrictionMove":[]});
+}</script><script>if(window.mw){
+mw.loader.implement("user.options",function($,jQuery){mw.user.options.set({"variant":"en"});});mw.loader.implement("user.tokens",function($,jQuery){mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\"});});
+/* cache key: cfd:resourceloader:filter:minify-js:7:a5c52c063dc436c1ca7c9f456936a5e9 */
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","mediawiki.legacy.ajax","skins.vector.js"]);
+}</script><script src="./Bernardas Jankauskas_OF programming tips tricks - ExeterCFD_files/load(3).php"></script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/cfd/skins/Vector/csshover.min.htc")}</style><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Bernardas_Jankauskas_OF_programming_tips_tricks skin-vector action-view">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+						<div class="mw-indicators">
+</div>
+			<h1 id="firstHeading" class="firstHeading" lang="en">Bernardas Jankauskas/OF programming tips tricks</h1>
+						<div id="bodyContent" class="mw-body-content">
+									<div id="siteSub">From ExeterCFD</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OF_programming_tips_tricks#mw-head">navigation</a>, 					<a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OF_programming_tips_tricks#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2><span class="toctoggle">&nbsp;[<a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OF_programming_tips_tricks#" id="togglelink">hide</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OF_programming_tips_tricks#OpenFOAM_programming_tips.2C_tricks_and_various_discoveries"><span class="tocnumber">1</span> <span class="toctext">OpenFOAM programming tips, tricks and various discoveries</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OF_programming_tips_tricks#Resetting_dimensions"><span class="tocnumber">1.1</span> <span class="toctext">Resetting dimensions</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OF_programming_tips_tricks#Using_mesh.28.29_to_look_for_specific_objects"><span class="tocnumber">1.2</span> <span class="toctext">Using mesh() to look for specific objects</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OF_programming_tips_tricks#Plotting_dimensionedField_in_Paraview"><span class="tocnumber">1.3</span> <span class="toctext">Plotting dimensionedField in Paraview</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="OpenFOAM_programming_tips.2C_tricks_and_various_discoveries">OpenFOAM programming tips, tricks and various discoveries</span></h2>
+<p>Here I will share different finds inside OF code that might be helpful in your code.
+</p>
+<h4><span class="mw-headline" id="Resetting_dimensions">Resetting dimensions</span></h4>
+<p>Usually empirical formulas in the papers are rarely dimensionally balanced. If one would like to use these formulas in their code there is a way of implementing that. This can be done with help of resetting dimensions function in OpenFoam.
+</p><p><i>Example:</i>
+</p><p>Let's say we have an empirical parameter dependency on the temperature in the system:
+</p><p><img class="mwe-math-fallback-image-inline tex" alt=" pK_{sp} = -0.0265T+13.972" src="./Bernardas Jankauskas_OF programming tips tricks - ExeterCFD_files/9840df7e8c770c9e5e2c784204fed202.png">
+</p><p>As it can be seen in terms of dimensions this equation is unbalanced (pKsp is dimensionless whereas T is in Celcius) and in order to use these values we need to trick the code.
+</p>
+<pre> Foam::volScalarField Foam::liquidSolution::pKsp (volScalarField T)
+ {
+     volScalarField Tnew = T;
+     Tnew.dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
+     return ((-0.0265*(Tnew-273.15))+13.972); 
+ }
+</pre>
+<p>There is an alternative, yet slightly more involved way of doing this. It would involve running over the mesh cell by cell by hand and using the <i>.value()</i> function.
+</p>
+<pre> Foam::tmp&lt;Foam::volScalarField&gt; Foam::liquidSolution::pKsp (volScalarField T)
+ {
+     
+     <b>// Create a temporary field</b>
+     tmp&lt;Foam::volScalarField&gt; tpKsp
+     (
+         new volScalarField
+         (
+             IOobject
+             (
+                 "pKsp",
+                 mesh().time().timeName(),
+                 mesh(),
+                 IOobject::NO_READ,
+                 IOobject:NO_WRITE
+             ),
+             mesh(),
+             dimensionedScalar("zero", dimless, 0.0)
+         )
+     );
+     
+     <b>// Make a reference</b>
+     volScalarField&amp; pKsp = tpKsp();
+     
+     <b>// Loop over all cells and calculate value of tpKsp</b>
+     forAll(T, celli)
+     {
+         const scalar Ti = T[celli];
+         pKsp[celli] = -0.0265*(Ti-273.15))+13.972
+     }
+     
+     return tpKsp;
+ }
+</pre>
+<h4><span class="mw-headline" id="Using_mesh.28.29_to_look_for_specific_objects">Using mesh() to look for specific objects</span></h4>
+<p>There are times that we need to access a specific field in the object database (or as it's named in the code: <b>objectRegistry</b>). Looking into ojectRegistry file we can see that there are multiple lookup functions. Solvers don't usually have this database object flying in the open as it is a background process. Luckily <b>mesh</b> object has access to all of the lookup functions. Not entirely sure why, either it is because it is instantiated as IOobject or the access is coming from the parent classes in the hierarchy. 
+My top guess is that it is related to IOobject, which then means that the following functions should be accessible with all IOobjects in your code (<i>Will double check that at some point and edit this part</i>).
+</p>
+<pre> //- Return the list of names of the IOobjects 
+ // (eg. can use this in Info statement)
+ mesh.names();
+ 
+ //- Return the list of names of the IOobjects of given type (eg. volScalarField)
+ //  eg. can use this in info statement
+ 
+ mesh.names&lt;class Type&gt;() const;
+ 
+ //- Lookup and return the object of the given Type
+ //  eg. again can use this in info statement to see what objects of the type exist
+ 
+ mesh.lookupObject&lt;class Type&gt;();
+ 
+ //- Lookup and return the object of the given Type and name
+ //  Probably the most useful as we can use it to get access to specific object
+ //  eg. sf = mesh.lookupObject&lt;DimensionedField&lt;scalar, volMesh&gt; &gt;("RR.CH4")
+ 
+ mesh.lookupObject&lt;class Type&gt;(object Name);
+</pre>
+<h4><span class="mw-headline" id="Plotting_dimensionedField_in_Paraview">Plotting dimensionedField in Paraview</span></h4>
+<p>Sometimes your solver might be calculating something, but the object does not have a type that ParaView is able to plot. A specific example would be reaction rate values in chemistry libraries, that are only calculated in the internalField. Simply making the solver to write those values into a file wouldn't work, because boundaryField is required in order to plot the field. The way to get the parameter is to create a volScalarField with a dummy zeroGradient boundary field and internalField values from reaction rate.
+</p><p>As an example I will take reactingFoam solver and a counterFlowFlame2D case. In this tutorial one of the reactants is <b>CH4</b> and it's reactionRate object is named <b>RR.CH4</b>.
+</p><p>We first start with <i>createFields.H</i> and at the bottom of it add:
+</p>
+<pre> <b>createFields.H</b>
+ 
+ <b>// New field to store reactionRate values</b>
+ volScalarField RRCH4
+ (
+     IOobject
+     (
+         "RRCH4",
+         runTime.timeName(),
+         mesh,
+         IOobject::NO_READ,
+         IOobject::AUTO_WRITE
+     ),
+     mesh,
+     dimensionedScalar("zero", dimMass/dimVolume/dimTime, 0.0),
+     zeroGradientFvPatchScalarField::typeName  <b>// Force zeroGradient boundary condition</b>
+ );
+ 
+ <b>// Reference to internalField; will add reactionRate to this field</b>
+ scalarField&amp; sf = RRCH4.internalField();
+</pre>
+<p>Next in the solver we move to <b>YEqn.H</b>. During runTime this is the part where reaction rate values are calculated. At the bottom we will add the line to store the calculated reactionRate for <b>CH4</b>
+</p>
+<pre> <b>YEqn.H</b>
+ // Use mesh to lookup object of specific type and name
+ sf = mesh.lookupObject&lt;DimensionedField&lt;scalar, volMesh&gt; &gt;("RR.CH4")
+</pre>
+<p>And there you go. Now the solver will be saving the values in a format that ParaView can understand.
+</p>
+<!-- 
+NewPP limit report
+CPU time usage: 0.024 seconds
+Real time usage: 0.025 seconds
+Preprocessor visited node count: 23/1000000
+Preprocessor generated node count: 40/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 - -total
+-->
+
+<!-- Saved in parser cache with key cfd:pcache:idhash:331-0!*!*!!en!*!*!math=0 and timestamp 20180806165113 and revision id 764
+ -->
+</div>									<div class="printfooter">
+						Retrieved from "<a dir="ltr" href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Bernardas_Jankauskas/OF_programming_tips_tricks&amp;oldid=764">https://wiki.emps.ex.ac.uk/cfd/index.php?title=Bernardas_Jankauskas/OF_programming_tips_tricks&amp;oldid=764</a>"					</div>
+													<div id="catlinks" class="catlinks catlinks-allhidden"></div>												<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+							<li id="pt-createaccount"><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Special:UserLogin&amp;returnto=Bernardas+Jankauskas%2FOF+programming+tips+tricks&amp;type=signup" title="You are encouraged to create an account and log in; however, it is not mandatory">Create account</a></li><li id="pt-login"><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Special:UserLogin&amp;returnto=Bernardas+Jankauskas%2FOF+programming+tips+tricks" title="You are encouraged to log in; however, it is not mandatory [alt-shift-o]" accesskey="o">Log in</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+															<li id="ca-nstab-main" class="selected"><span><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OF_programming_tips_tricks" title="View the content page [alt-shift-c]" accesskey="c">Page</a></span></li>
+															<li id="ca-talk" class="new"><span><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Talk:Bernardas_Jankauskas/OF_programming_tips_tricks&amp;action=edit&amp;redlink=1" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></span></li>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label" tabindex="0"><span>Variants</span><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OF_programming_tips_tricks#" tabindex="-1"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Views</h3>
+						<ul>
+															<li id="ca-view" class="selected"><span><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OF_programming_tips_tricks">Read</a></span></li>
+															<li id="ca-viewsource"><span><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Bernardas_Jankauskas/OF_programming_tips_tricks&amp;action=edit" title="This page is protected.
+You can view its source [alt-shift-e]" accesskey="e">View source</a></span></li>
+															<li id="ca-history" class="collapsible"><span><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Bernardas_Jankauskas/OF_programming_tips_tricks&amp;action=history" title="Past revisions of this page [alt-shift-h]" accesskey="h">View history</a></span></li>
+													</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label" style="">
+						<h3 id="p-cactions-label" tabindex="0"><span>More</span><a href="https://wiki.emps.ex.ac.uk/cfd/Bernardas_Jankauskas/OF_programming_tips_tricks#" tabindex="-1"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Search</label>
+						</h3>
+
+						<form action="https://wiki.emps.ex.ac.uk/cfd/index.php" id="searchform">
+														<div id="simpleSearch">
+															<input type="search" name="search" placeholder="Search" title="Search ExeterCFD [alt-shift-f]" accesskey="f" id="searchInput" tabindex="1" autocomplete="off"><input type="hidden" value="Special:Search" name="title"><input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchButton" class="searchButton">								</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="https://wiki.emps.ex.ac.uk/cfd/Main_Page" title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id="p-navigation" aria-labelledby="p-navigation-label">
+			<h3 id="p-navigation-label">Navigation</h3>
+
+			<div class="body">
+									<ul>
+													<li id="n-Home"><a href="https://wiki.emps.ex.ac.uk/cfd/Home">Home</a></li>
+													<li id="n-recentchanges"><a href="https://wiki.emps.ex.ac.uk/cfd/Special:RecentChanges" title="A list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li>
+													<li id="n-randompage"><a href="https://wiki.emps.ex.ac.uk/cfd/Special:Random" title="Load a random page [alt-shift-x]" accesskey="x">Random page</a></li>
+													<li id="n-help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" title="The place to find out">Help</a></li>
+											</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-tb" aria-labelledby="p-tb-label">
+			<h3 id="p-tb-label">Tools</h3>
+
+			<div class="body">
+									<ul>
+													<li id="t-whatlinkshere"><a href="https://wiki.emps.ex.ac.uk/cfd/Special:WhatLinksHere/Bernardas_Jankauskas/OF_programming_tips_tricks" title="A list of all wiki pages that link here [alt-shift-j]" accesskey="j">What links here</a></li>
+													<li id="t-recentchangeslinked"><a href="https://wiki.emps.ex.ac.uk/cfd/Special:RecentChangesLinked/Bernardas_Jankauskas/OF_programming_tips_tricks" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+													<li id="t-specialpages"><a href="https://wiki.emps.ex.ac.uk/cfd/Special:SpecialPages" title="A list of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+													<li id="t-print"><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Bernardas_Jankauskas/OF_programming_tips_tricks&amp;printable=yes" rel="alternate" title="Printable version of this page [alt-shift-p]" accesskey="p">Printable version</a></li>
+													<li id="t-permalink"><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Bernardas_Jankauskas/OF_programming_tips_tricks&amp;oldid=764" title="Permanent link to this revision of the page">Permanent link</a></li>
+													<li id="t-info"><a href="https://wiki.emps.ex.ac.uk/cfd/index.php?title=Bernardas_Jankauskas/OF_programming_tips_tricks&amp;action=info" title="More information about this page">Page information</a></li>
+											</ul>
+							</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 3 February 2017, at 10:03.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="https://wiki.emps.ex.ac.uk/cfd/ExeterCFD:Privacy_policy" title="ExeterCFD:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="https://wiki.emps.ex.ac.uk/cfd/ExeterCFD:About" title="ExeterCFD:About">About ExeterCFD</a></li>
+											<li id="footer-places-disclaimer"><a href="https://wiki.emps.ex.ac.uk/cfd/ExeterCFD:General_disclaimer" title="ExeterCFD:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-poweredbyico">
+															<a href="https://www.mediawiki.org/"><img src="./Bernardas Jankauskas_OF programming tips tricks - ExeterCFD_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/cfd/resources/assets/poweredby_mediawiki_132x47.png 1.5x, /cfd/resources/assets/poweredby_mediawiki_176x62.png 2x" width="88" height="31"></a>
+													</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>if(window.jQuery)jQuery.ready();</script><script>if(window.mw){
+mw.loader.state({"site":"ready","user":"ready","user.groups":"ready"});
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.toc","mediawiki.action.view.postEdit","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest"],null,true);
+}</script>
+<script>if(window.mw){
+mw.config.set({"wgBackendResponseTime":254});
+}</script>
+	
+
+<div class="suggestions" style="display: none; font-size: 13px;"><div class="suggestions-results"></div><div class="suggestions-special"></div></div></body></html>

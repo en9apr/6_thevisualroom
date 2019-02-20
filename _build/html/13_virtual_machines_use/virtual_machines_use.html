@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>9. How to Use a Virtual Machine &#8212; The Visual Room</title>
+    <title>3. How to Use a Virtual Machine &mdash; The Visual Room</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,22 +25,22 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="The Visual Room" href="../index.html" />
-    <link rel="next" title="10. Software and Customisation" href="../14_software/software.html" />
-    <link rel="prev" title="8. How to Create a Virtual Machine" href="../12_virtual_machines/virtual_machines.html" /> 
+    <link rel="next" title="4. Software and Customisation" href="../14_software/software.html" />
+    <link rel="prev" title="2. How to Create a Virtual Machine" href="../12_virtual_machines/virtual_machines.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
           <span>The Visual Room</span></a></h1>
-        <h2 class="heading"><span>9. How to Use a Virtual Machine</span></h2>
+        <h2 class="heading"><span>3. How to Use a Virtual Machine</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="../12_virtual_machines/virtual_machines.html">8. How to Create a Virtual Machine</a>
+        «&#160;&#160;<a href="../12_virtual_machines/virtual_machines.html">2. How to Create a Virtual Machine</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="../14_software/software.html">10. Software and Customisation</a>&#160;&#160;»
+        <a href="../14_software/software.html">4. Software and Customisation</a>&#160;&#160;»
         </p>
 
       </div>
@@ -48,7 +48,7 @@
         
         
   <div class="section" id="how-to-use-a-virtual-machine">
-<h1>9. How to Use a Virtual Machine<a class="headerlink" href="#how-to-use-a-virtual-machine" title="Permalink to this headline">¶</a></h1>
+<h1>3. How to Use a Virtual Machine<a class="headerlink" href="#how-to-use-a-virtual-machine" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#snapshot-management" id="id1">Snapshot Management</a></li>
@@ -59,7 +59,7 @@
 </ul>
 </div>
 <div class="section" id="snapshot-management">
-<h2><a class="toc-backref" href="#id1">9.1. Snapshot Management</a><a class="headerlink" href="#snapshot-management" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">3.1. Snapshot Management</a><a class="headerlink" href="#snapshot-management" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Useful for trial software installation. Remember: just running an operating system creates changes. We can&#8217;t restore while the machine is powered on.</li>
 <li>In VirtualBox &gt; Snapshots:<ul>
@@ -71,7 +71,7 @@
 </ul>
 </div>
 <div class="section" id="how-to-clone-vms">
-<h2><a class="toc-backref" href="#id2">9.2. How to Clone VMs</a><a class="headerlink" href="#how-to-clone-vms" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">3.2. How to Clone VMs</a><a class="headerlink" href="#how-to-clone-vms" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>How to give other people the VM? <strong>Clone it</strong> Can&#8217;t give just snapshot</li>
 <li>Clone snapshot: Right click &gt; Clone</li>
@@ -84,7 +84,7 @@
 <p>Can now give other people the .vdi file (the harddisk) and the .vbox. They can launch this directly in their copy of virtual box.</p>
 </div>
 <div class="section" id="adjust-network-adapter">
-<h2><a class="toc-backref" href="#id3">9.3. Adjust Network Adapter</a><a class="headerlink" href="#adjust-network-adapter" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">3.3. Adjust Network Adapter</a><a class="headerlink" href="#adjust-network-adapter" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Use: NAT (allows Guest to use Internet)</li>
 <li>Adapter Type: PCnet-Fast III (Am79C973)</li>
@@ -92,14 +92,14 @@
 </ul>
 </div>
 <div class="section" id="types-of-storage">
-<h2><a class="toc-backref" href="#id4">9.4. Types of Storage</a><a class="headerlink" href="#types-of-storage" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">3.4. Types of Storage</a><a class="headerlink" href="#types-of-storage" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>In VirtualBox: Settings &gt; Storage</li>
 <li>Ubuntu uses SATA, CD uses IDE.</li>
 </ul>
 </div>
 <div class="section" id="how-to-copy-vdi-files">
-<h2><a class="toc-backref" href="#id5">9.5. How to Copy vdi files</a><a class="headerlink" href="#how-to-copy-vdi-files" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">3.5. How to Copy vdi files</a><a class="headerlink" href="#how-to-copy-vdi-files" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>File &gt; Virtual Media Manager</li>
 <li>Differencing files are roughly equivalent to snapshots</li>
@@ -116,17 +116,17 @@
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="../12_virtual_machines/virtual_machines.html">8. How to Create a Virtual Machine</a>
+        «&#160;&#160;<a href="../12_virtual_machines/virtual_machines.html">2. How to Create a Virtual Machine</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
-        <a href="../14_software/software.html">10. Software and Customisation</a>&#160;&#160;»
+        <a href="../14_software/software.html">4. Software and Customisation</a>&#160;&#160;»
         </p>
 
       </div>
 
     <div class="footer" role="contentinfo">
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

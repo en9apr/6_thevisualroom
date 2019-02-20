@@ -1,0 +1,15 @@
+17:52:04 **** Incremental Build of configuration Debug for project 19_challenge_change ****
+make all 
+Building file: ../challenge_change.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"challenge_change.d" -MT"challenge_change.d" -o "challenge_change.o" "../challenge_change.cpp"
+Finished building: ../challenge_change.cpp
+ 
+Building target: 19_challenge_change
+Invoking: GCC C++ Linker
+g++  -o "19_challenge_change"  ./challenge_change.o   
+Finished building target: 19_challenge_change
+ 
+
+17:52:04 Build Finished (took 287ms)
+

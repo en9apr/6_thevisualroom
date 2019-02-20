@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.1.9. Conservation of Mass &mdash; The Visual Room</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="The Visual Room" href="../../index.html" />
+    <link rel="up" title="4. Personal Notes on CFD" href="../cfd_notes.html" />
+    <link rel="next" title="4.1.10. Cauchy Momentum Equation" href="10_cauchy_equation.html" />
+    <link rel="prev" title="4.1.8. Integral and Derivative Form" href="08_integral_and_derivative_form.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>The Visual Room</span></a></h1>
+        <h2 class="heading"><span>4.1.9. Conservation of Mass</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="08_integral_and_derivative_form.html">4.1.8. Integral and Derivative Form</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="10_cauchy_equation.html">4.1.10. Cauchy Momentum Equation</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="conservation-of-mass">
+<h1>4.1.9. Conservation of Mass<a class="headerlink" href="#conservation-of-mass" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#what-is-the-difference-between-compressible-and-incompressible-flows" id="id1">What is the difference between compressible and incompressible flows?</a></li>
+<li><a class="reference internal" href="#what-is-the-derivation-of-the-conservation-of-mass-in-integral-form" id="id2">What is the derivation of the conservation of mass in integral form?</a></li>
+<li><a class="reference internal" href="#what-is-the-derivation-of-the-conservation-of-mass-in-differential-form" id="id3">What is the derivation of the conservation of mass in differential form?</a></li>
+</ul>
+</div>
+<div class="section" id="what-is-the-difference-between-compressible-and-incompressible-flows">
+<h2><a class="toc-backref" href="#id1">4.1.9.1. What is the difference between compressible and incompressible flows?</a><a class="headerlink" href="#what-is-the-difference-between-compressible-and-incompressible-flows" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="first docutils">
+<dt>Incompressible flow:</dt>
+<dd><ul class="first last simple">
+<li><span class="math">\(p=f(u)\)</span></li>
+<li><span class="math">\(\partial p\)</span>, <span class="math">\(\partial \rho\)</span> and <span class="math">\(\partial T\)</span> (small changes)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Compressible flow:</dt>
+<dd><ul class="first last simple">
+<li><span class="math">\(p=f(\rho, T)\)</span></li>
+<li><span class="math">\(\Delta p\)</span>, <span class="math">\(\Delta \rho\)</span> and <span class="math">\(\Delta T\)</span> (large changes)</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="what-is-the-derivation-of-the-conservation-of-mass-in-integral-form">
+<h2><a class="toc-backref" href="#id2">4.1.9.2. What is the derivation of the conservation of mass in integral form?</a><a class="headerlink" href="#what-is-the-derivation-of-the-conservation-of-mass-in-integral-form" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Temporal change of mass:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} \int_V \rho dV\]</div>
+<ul class="simple">
+<li>Spatial change of mass:</li>
+</ul>
+<div class="math">
+\[\int_S \rho(\vec{u} \cdot \vec{n})dS\]</div>
+<ul class="simple">
+<li>Conservation of mass:</li>
+</ul>
+<div class="math">
+\[\text{Temporal change of mass} + \text{Spatial change of mass} = 0\]</div>
+<div class="math">
+\[{\partial \over {\partial t}} \int_V \rho dV + \int_S \rho(\vec{u} \cdot \vec{n})dS = 0\]</div>
+<ul class="simple">
+<li>If incompressible <span class="math">\(\partial \rho / \partial t = 0\)</span> and <span class="math">\(\rho=constant\)</span>:</li>
+</ul>
+<div class="math">
+\[\int_S (\vec{u} \cdot \vec{n})dS = 0\]</div>
+</div>
+<div class="section" id="what-is-the-derivation-of-the-conservation-of-mass-in-differential-form">
+<h2><a class="toc-backref" href="#id3">4.1.9.3. What is the derivation of the conservation of mass in differential form?</a><a class="headerlink" href="#what-is-the-derivation-of-the-conservation-of-mass-in-differential-form" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Gauss divergence theorem:</li>
+</ul>
+<div class="math">
+\[\int_S \rho (\vec{u} \cdot \vec{n})dS = \int_V \nabla \cdot (\rho \vec{u}) dV\]</div>
+<ul class="simple">
+<li>From Integral Form:</li>
+</ul>
+<div class="math">
+\[{\partial \over {\partial t}} \int_V \rho dV + \int_V \nabla \cdot (\rho \vec{u})dS = 0\]</div>
+<ul class="simple">
+<li>Volume fixed:</li>
+</ul>
+<div class="math">
+\[\int_V \left( {{\partial \rho} \over {\partial t}} + \nabla \cdot (\rho \vec{u}) \right) dV = 0\]</div>
+<ul class="simple">
+<li>Volume is arbitary (this is for compressible flow):</li>
+</ul>
+<div class="math">
+\[{{\partial \rho} \over {\partial t}} + \nabla \cdot (\rho \vec{u}) = 0\]</div>
+<ul class="simple">
+<li>By expansion:</li>
+</ul>
+<div class="math">
+\[{{\partial \rho} \over {\partial t}} + (\vec{u} \cdot \nabla) \rho  + (\nabla \cdot \vec{u}) \rho  = 0\]</div>
+<ul class="simple">
+<li>If incompressible <span class="math">\({{\partial \rho} \over {\partial t}} = 0\)</span> and <span class="math">\(\nabla \rho = 0\)</span> and <span class="math">\(\rho = constant\)</span>:</li>
+</ul>
+<div class="math">
+\[\nabla \cdot \vec{u} = 0\]</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="08_integral_and_derivative_form.html">4.1.8. Integral and Derivative Form</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="10_cauchy_equation.html">4.1.10. Cauchy Momentum Equation</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

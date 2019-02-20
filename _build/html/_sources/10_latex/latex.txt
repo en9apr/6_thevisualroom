@@ -4,7 +4,6 @@ LaTeX
 
 .. toctree::
    :maxdepth: 1
-   :numbered: 4
 
    latex_creating_a_latex_document
    latex_common_math_notation
@@ -17,3 +16,7 @@ LaTeX
    latex_preamble
    latex_bibliography
    latex_equations
+
+This link is useful for symbols:   
+   
+* `MathJax Syntax <http://en.wikipedia.org/wiki/Help:Displaying_a_formula>`_   

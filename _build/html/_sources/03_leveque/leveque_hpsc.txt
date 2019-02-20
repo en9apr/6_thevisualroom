@@ -1,6 +1,8 @@
-================================================
-High Performance Scientific Computing - Projects
-================================================
+=========
+HPSC MOOC
+=========
+
+These projects are based on the course "High Performance Scientific Computing" by `Professor Randall LeVeque <https://amath.washington.edu/people/randy-leveque/>`_.
 
 This page contains the following codes:
 
