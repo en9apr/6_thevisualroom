@@ -131,6 +131,22 @@ How to put a directory under version control?
 
 You can now add new files and repeat the add, commit and push stages.
 
+Example of how to create a project
+==================================
+
+Exact steps after creating a project twoPhaseEulerSrivastavaFrictionFoam:
+
+::
+
+    cd twoPhaseEulerSrivastavaFrictionFoam
+    git init
+    git remote add origin https://gitlab.com/apr207/twoPhaseEulerSrivastavaFrictionFoam.git
+    git add .
+    git commit -m "16/05/2018 solver working with explicit friction, but massflow is too high"
+    git push -u origin master
+
+
+
 How to change the origin?
 =========================
 
@@ -213,6 +229,113 @@ How to commit three folders to git and push to respository?
 
      - Push the changes to the origin (will have to enter username and password for the origin)
           
+     
+How to change a project from private to public in gitlab?
+=========================================================
+     
+Projects > Your Projects > (click on project) 
+
+Settings > Permissions (expand) > Project visibility = Private
+     
+How to create a new repository
+==============================
+
+Sign into github as en9apr:
+
+https://github.com/
+
+Click New button
+
+Public repository
+
+Create repository
+
+cd existing_folder
+
+echo "# darcyFoam" >> README.md
+
+git init
+
+git add .
+
+git commit -m "first commit"
+
+git remote add origin https://github.com/en9apr/darcyFoam.git
+
+git push -u origin master
+
+username
+password
+
+If I change something?
+======================
+
+git add .
+
+git commit -m "second commit"
+
+In gitk: File > Reload
+
+If I change something else?
+===========================
+
+git add .
+
+git commit -m "third commit"
+
+In gitk: File > Reload
+
+Use git k to revert commits (you can see the tree)
+==================================================
+
+Right click > revert commit
+
+(can only take you one step backwards)
+
+how to remove reverts?
+======================
+
+hard reset. 
+
+In git k: Right click > Reset master branch to here (select Hard reset)
+
+In git k: File > Reload (should remove all commits)
+
+How to create a branch?
+=======================
+
+In git k: right click > new branch > name_of_branch
+
+How to delete a branch?
+=======================
+
+git branch -d name_of_branch
+
+How to view branches?
+=====================
+
+git branch
+
+How to branch off to previous state?
+====================================
+
+Create a branch where the state is - In git k: right click > new branch > name_of_branch
+
+git checkout name_of_branch
+
+can still make commits to this branch:
+
+git add .
+
+git commit -m "third commit"
+
+In gitk: File > Reload
+
+How to go back to master branch?
+================================
+
+git checkout master     
+     
      
      
      

@@ -56,6 +56,7 @@
 <li><a class="reference internal" href="#how-to-remove-a-non-empty-directory" id="id1">How to remove a non-empty directory?</a></li>
 <li><a class="reference internal" href="#how-to-unzip-tar-gz-files" id="id2">How to unzip tar.gz files?</a></li>
 <li><a class="reference internal" href="#how-to-move-files-from-downloads-to-a-new-folder" id="id3">How to move files from Downloads to a new folder?</a></li>
+<li><a class="reference internal" href="#ssh-login-without-password" id="id4">SSH login without password</a></li>
 </ul>
 </div>
 <div class="section" id="how-to-remove-a-non-empty-directory">
@@ -129,6 +130,43 @@
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="ssh-login-without-password">
+<h2><a class="toc-backref" href="#id4">1.1.4. SSH login without password</a><a class="headerlink" href="#ssh-login-without-password" title="Permalink to this headline">¶</a></h2>
+<p>Your aim
+You want to use Linux and OpenSSH to automate your tasks. Therefore you need an automatic login from host A / user a to Host B / user b. You don&#8217;t want to enter any passwords, because you want to call ssh from a within a shell script.</p>
+<p>How to do it
+First log in on A as user a and generate a pair of authentication keys. Do not enter a passphrase:</p>
+<div class="highlight-python"><div class="highlight"><pre>a@A:~&gt; ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/a/.ssh/id_rsa):
+Created directory &#39;/home/a/.ssh&#39;.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/a/.ssh/id_rsa.
+Your public key has been saved in /home/a/.ssh/id_rsa.pub.
+The key fingerprint is:
+3e:4f:05:79:3a:9f:96:7c:3b:ad:e9:58:37:bc:37:e4 a@A
+</pre></div>
+</div>
+<p>Now use ssh to create a directory ~/.ssh as user b on B. (The directory may already exist, which is fine):</p>
+<div class="highlight-python"><div class="highlight"><pre>a@A:~&gt; ssh b@B mkdir -p .ssh
+b@B&#39;s password:
+</pre></div>
+</div>
+<p>Finally append a&#8217;s new public key to b&#64;B:.ssh/authorized_keys and enter b&#8217;s password one last time:</p>
+<div class="highlight-python"><div class="highlight"><pre>a@A:~&gt; cat .ssh/id_rsa.pub | ssh b@B &#39;cat &gt;&gt; .ssh/authorized_keys&#39;
+b@B&#39;s password:
+</pre></div>
+</div>
+<p>From now on you can log into B as b from A as a without password:</p>
+<div class="highlight-python"><div class="highlight"><pre>a@A:~&gt; ssh b@B
+</pre></div>
+</div>
+<p>A note from one of our readers: Depending on your version of SSH you might also have to do the following changes:</p>
+<p>Put the public key in .ssh/authorized_keys2
+Change the permissions of .ssh to 700
+Change the permissions of .ssh/authorized_keys2 to 640</p>
 </div>
 </div>
 

@@ -1,0 +1,6 @@
+$(OBJECTS_DIR)/cppSandbox.o: cppSandbox.dep
+cppSandbox.dep: cppSandbox.C
+$(OBJECTS_DIR)/cppSandbox.o: $(EXE_DEP)
+$(OBJECTS_DIR)/cppSandbox.o:
+	@SOURCE_DIR=.
+	SOURCE=cppSandbox.C ; $(Ctoo)

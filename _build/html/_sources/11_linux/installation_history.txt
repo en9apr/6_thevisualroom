@@ -23,6 +23,11 @@ OpenFOAM 4.1
 
 https://openfoam.org/download/4-1-ubuntu/
 
+OpenFOAM 5.0
+============
+
+https://openfoam.org/download/5-0-ubuntu/
+
 OpenFOAM Extend 4.0
 ===================
 
@@ -321,8 +326,10 @@ Install Heekes CAD
 
     Add heekscnc-devel PPA to your repositories list:
 
-    sudo add-apt-repository ppa:neomilium/heekscnc-devel
+    ### sudo add-apt-repository ppa:neomilium/heekscnc-devel ### maybe not the development version
 
+    sudo add-apt-repository ppa:neomilium/cam
+    
     Update your packages list:
 
     sudo apt-get update
@@ -670,18 +677,51 @@ To create a desktop shortcut for Doxygen
 Symbolic Link to OpenFOAM folder
 ================================
 
+DON'T CREATE ~/Dropbox/OpenFOAM/
+
 ::
 
     $ ln -s /home/apr207/OpenFOAM/apr207-2.4.0/ ~/Dropbox/OpenFOAM/
 
     $ ln -s /home/apr207/OpenFOAM/apr207-2.2.2/ ~/Dropbox/OpenFOAM/
 
+    $ ln -s /home/apr207/OpenFOAM/apr207-5.0/applications ~/Dropbox/OpenFOAM/apr207-5.0/applications
+    
     If there is a mistake:
 
     cd ~/Dropbox/OpenFOAM/
 
     unlink apr207-2.4.0
 
+DONT CREATE ~/Dropbox/Pointwise_User/
+
+    $ ln -s /home/apr207/Pointwise_User/ ~/Dropbox/
+
+    $ ln -s /home/apr207/LAMMPS_User/ ~/Dropbox/
+
+    $ ln -s /home/apr207/LIGGGHTS_User/ ~/Dropbox/
+    
+    $ ln -s /home/apr207/blender-2.78c-linux-glibc219-x86_64/ ~/Dropbox/
+    
+    $ ln -s /home/apr207/cfMesh-v1.1.2/ ~/Dropbox/
+
+Symbolic link to subfolder only
+===============================
+
+make directory apr207-5.0 on Dropbox
+
+::
+    
+    $ ln -s /home/apr207/OpenFOAM/apr207-5.0/applications ~/Dropbox/OpenFOAM/apr207-5.0/
+    
+make directory run on dropbox    
+    
+    $ ln -s /home/apr207/OpenFOAM/apr207-5.0/run/twoPhaseEulerCohesionFoam ~/Dropbox/OpenFOAM/apr207-5.0/run/
+    
+    $ ln -s /home/apr207/OpenFOAM/apr207-5.0/run/twoPhaseEulerDenseFoam_hallflowmeter ~/Dropbox/OpenFOAM/apr207-5.0/run/
+    
+    $ 
+    
 DOS2UNIX
 ========
 
@@ -735,3 +775,243 @@ sudo update-grub
 sudo reboot
 
 I think this makes the mouse disappear (!)
+
+
+Installing OpenFOAM-5.0 on emps-rodrigo (emps-machines)
+=======================================================
+
+1) Download packages:
+
+download from http://dl.openfoam.org/source/5-0
+download from http://dl.openfoam.org/third-party/5-0
+scp -r OpenFOAM-5.x-version-5.0.tar.gz apr207@emps-rodrigo:/home/links/apr207/OpenFOAM
+scp -r ThirdParty-5.x-version-5.0.tar.gz apr207@emps-rodrigo:/home/links/apr207/OpenFOAM
+tar -zxvf OpenFOAM-5.x-version-5.0.tar.gz
+tar -zxvf ThirdParty-5.x-version-5.0.tar.gz
+mv OpenFOAM-5.x-version-5.0 OpenFOAM-5.0
+mv ThirdParty-5.x-version-5.0 ThirdParty-5.0
+
+2) Don't need to install any software for compilation 
+
+3) Set environment variables: 
+
+cd $HOME
+nano .bashrc
+alias five="module load mpi; source $HOME/OpenFOAM/OpenFOAM-5.0/etc/bashrc"
+
+4) After logging out and logging in again, install Third Party Scotch and PT Scotch
+
+five
+cd $WM_THIRD_PARTY_DIR
+./Allwmake > log &
+
+5) Install OpenFOAM
+
+cd ../OpenFOAM-5.0/
+./Allwmake > log &
+
+However, the following error occurred during stage 5):
+
+touch: cannot touch ‘/secamfs/userspace/staff/apr207/OpenFOAM/OpenFOAM-5.0/platforms/linux64GccDPInt32OptSYSTEMOPENMPI/src/parallel/decompose/ptscotchDecomp/using:openmpi-system’: No such file or directory
+touch: cannot touch ‘/secamfs/userspace/staff/apr207/OpenFOAM/OpenFOAM-5.0/platforms/linux64GccDPInt32OptSYSTEMOPENMPI/src/parallel/decompose/ptscotchDecomp/using:scotch_6.0.3’: No such file or directory
+
+6) Install Pstream separately
+
+cd src/parallel
+./Allwmake
+
+7) Re-install OpenFOAM
+
+cd ../OpenFOAM-5.0/
+./Allwmake
+
+
+
+
+Install traceroute
+==================
+
+See who is connected to remote server
+
+sudo apt install traceroute
+
+$ traceroute emps-kodaly
+
+Install CFMESH
+==============
+
+Download from https://sourceforge.net/projects/cfmesh/files/v1.1.2/
+
+Extract to ~/home/apr207/cfMesh-v1.1.2
+
+It only works with version 2.4.0:
+
+$ two
+$ export WM_NCOMPPROCS=[8]
+$ source /home/apr207/OpenFOAM/OpenFOAM-2.4.0/etc/bashrc
+$ ./Allwmake
+
+
+Installing OpenFOAM-2.1.0 on emps-rodrigo (emps-machines)
+=========================================================
+
+1) Download packages:
+
+::
+
+    Till step 4:
+
+    http://openfoamwiki.net/index.php/Installation/Linux/OpenFOAM-2.1.x/Ubuntu#Ubuntu_14.04
+
+    https://openfoam.org/download/2-1-0-source/
+
+    download OpenFOAM-2.1.0 and ThirdParty-2.1.0
+
+    scp -r OpenFOAM-2.1.0.tgz apr207@emps-rodrigo:/home/links/apr207/OpenFOAM
+    
+    scp -r ThirdParty-2.1.0.tgz apr207@emps-rodrigo:/home/links/apr207/OpenFOAM
+
+    tar -zxvf OpenFOAM-2.1.0.tgz
+
+    tar -zxvf ThirdParty-2.1.0.tgz
+
+
+3) Set environment variables: 
+
+::
+
+    cd ~
+    nano .bashrc
+    alias twoone="module load mpi; source $HOME/OpenFOAM/OpenFOAM-2.1.0/etc/bashrc"
+
+
+4) After logging out and logging in again, install Third Party Scotch and PT Scotch
+
+::
+
+    twoone
+    cd $WM_THIRD_PARTY_DIR
+    ./Allwmake > log 2>&1 &
+    
+5) Install OpenFOAM
+
+::
+
+    cd ../OpenFOAM-2.1.0/
+    ./Allwmake > log 2>&1 &    
+    
+
+    
+    could not open file omp.h for source file PstreamGlobals.C
+    could not open file openmpi/ompi/mpi/cxx/mpicxx.h for source file PstreamGlobals.C
+
+    
+    
+Vim highlighting for case files
+===============================
+
+Install pathogen and create .vimrc file
+
+::
+
+    mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+    curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+    vim ~/.vimrc
+    
+        execute pathogen#infect()
+        syntax on
+        filetype plugin indent on
+        set t_Co=256
+        
+Clone the extension
+
+::    
+    
+    cd $HOME/.vim/bundle  
+    git clone https://bitbucket.org/shor-ty/vimextensionopenfoam.git
+    
+    
+Check that 256 colours are present:
+
+::
+
+    export TERM=screen-256color   
+    
+    
+    
+Terminator color scheme (Lemur only)
+====================================
+
+Right click the terminator window and select preferences. Go to the Profile tab and add a new profile. Give it a name. Configure how you want the terminal to look. Close out of that.
+
+When you launch terminator, launch it like so
+
+::
+
+    terminator --profile=profilename
+    
+That will load terminator with a profile with the name of profilename. Change profilename to what you called yours.
+
+
+Redshift colour
+===============
+
+Edit those by adding the -t flag followed by the values (in the form of day:night)
+
+::
+
+    redshift-gtk -l 50.7:-3.53 -t 2500:2500
+
+You'll have to play around with the numbers a bit to find one that works for you. The lower the number, the more red it will get - 6500 being no tint at all. To make RedShift start up when your computer does, you can easily do so by going to Startup Applications and adding a new program. Name it whatever you want and type the above command (using your settings) in the command box.
+
+Simple Screen Recorder
+======================
+
+::
+
+    sudo add-apt-repository ppa:maarten-baert/simplescreenrecorder
+    sudo apt-get update
+    sudo apt-get install simplescreenrecorder
+
+Error - System program problem detected
+=======================================
+
+System program problem detected
+Do you want to report the problem now?
+
+See the crashes:
+
+::
+
+    ls -l /var/crash/
+    sudo rm /var/crash/*
+    sudo gedit /etc/default/apport &
+    
+        # set this to 0 to disable apport, or to 1 to enable it
+        # you can temporarily override this with
+        # sudo service apport start force_start=1
+        enabled=0
+    
+    
+How to install discord on Ubuntu
+================================
+
+Load terminator
+
+::
+
+    $ discord
+
+It says to download discord
+Download deb file
+Open debfile
+Done
+
+::
+
+    $ discord
+
+link account    
+    
+    

@@ -55,9 +55,21 @@
 <li><a class="reference internal" href="#how-to-configure-git-for-a-machine" id="id2">How to configure git for a machine?</a></li>
 <li><a class="reference internal" href="#how-to-download-a-repository" id="id3">How to download a repository?</a></li>
 <li><a class="reference internal" href="#how-to-put-a-directory-under-version-control" id="id4">How to put a directory under version control?</a></li>
-<li><a class="reference internal" href="#how-to-change-the-origin" id="id5">How to change the origin?</a></li>
-<li><a class="reference internal" href="#how-to-commit-changes-to-git-and-push-to-respository" id="id6">How to commit changes to git and push to respository?</a></li>
-<li><a class="reference internal" href="#how-to-commit-three-folders-to-git-and-push-to-respository" id="id7">How to commit three folders to git and push to respository?</a></li>
+<li><a class="reference internal" href="#example-of-how-to-create-a-project" id="id5">Example of how to create a project</a></li>
+<li><a class="reference internal" href="#how-to-change-the-origin" id="id6">How to change the origin?</a></li>
+<li><a class="reference internal" href="#how-to-commit-changes-to-git-and-push-to-respository" id="id7">How to commit changes to git and push to respository?</a></li>
+<li><a class="reference internal" href="#how-to-commit-three-folders-to-git-and-push-to-respository" id="id8">How to commit three folders to git and push to respository?</a></li>
+<li><a class="reference internal" href="#how-to-change-a-project-from-private-to-public-in-gitlab" id="id9">How to change a project from private to public in gitlab?</a></li>
+<li><a class="reference internal" href="#how-to-create-a-new-repository" id="id10">How to create a new repository</a></li>
+<li><a class="reference internal" href="#if-i-change-something" id="id11">If I change something?</a></li>
+<li><a class="reference internal" href="#if-i-change-something-else" id="id12">If I change something else?</a></li>
+<li><a class="reference internal" href="#use-git-k-to-revert-commits-you-can-see-the-tree" id="id13">Use git k to revert commits (you can see the tree)</a></li>
+<li><a class="reference internal" href="#how-to-remove-reverts" id="id14">how to remove reverts?</a></li>
+<li><a class="reference internal" href="#how-to-create-a-branch" id="id15">How to create a branch?</a></li>
+<li><a class="reference internal" href="#how-to-delete-a-branch" id="id16">How to delete a branch?</a></li>
+<li><a class="reference internal" href="#how-to-view-branches" id="id17">How to view branches?</a></li>
+<li><a class="reference internal" href="#how-to-branch-off-to-previous-state" id="id18">How to branch off to previous state?</a></li>
+<li><a class="reference internal" href="#how-to-go-back-to-master-branch" id="id19">How to go back to master branch?</a></li>
 </ul>
 </div>
 <div class="section" id="commands">
@@ -222,8 +234,20 @@ $ git config --global user.email en9apr@hotmail.co.uk
 </table>
 <p>You can now add new files and repeat the add, commit and push stages.</p>
 </div>
+<div class="section" id="example-of-how-to-create-a-project">
+<h2><a class="toc-backref" href="#id5">2.5. Example of how to create a project</a><a class="headerlink" href="#example-of-how-to-create-a-project" title="Permalink to this headline">¶</a></h2>
+<p>Exact steps after creating a project twoPhaseEulerSrivastavaFrictionFoam:</p>
+<div class="highlight-python"><div class="highlight"><pre>cd twoPhaseEulerSrivastavaFrictionFoam
+git init
+git remote add origin https://gitlab.com/apr207/twoPhaseEulerSrivastavaFrictionFoam.git
+git add .
+git commit -m &quot;16/05/2018 solver working with explicit friction, but massflow is too high&quot;
+git push -u origin master
+</pre></div>
+</div>
+</div>
 <div class="section" id="how-to-change-the-origin">
-<h2><a class="toc-backref" href="#id5">2.5. How to change the origin?</a><a class="headerlink" href="#how-to-change-the-origin" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">2.6. How to change the origin?</a><a class="headerlink" href="#how-to-change-the-origin" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="40%" />
@@ -263,7 +287,7 @@ $ git config --global user.email en9apr@hotmail.co.uk
 </table>
 </div>
 <div class="section" id="how-to-commit-changes-to-git-and-push-to-respository">
-<h2><a class="toc-backref" href="#id6">2.6. How to commit changes to git and push to respository?</a><a class="headerlink" href="#how-to-commit-changes-to-git-and-push-to-respository" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id7">2.7. How to commit changes to git and push to respository?</a><a class="headerlink" href="#how-to-commit-changes-to-git-and-push-to-respository" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="40%" />
@@ -297,7 +321,7 @@ $ git config --global user.email en9apr@hotmail.co.uk
 </table>
 </div>
 <div class="section" id="how-to-commit-three-folders-to-git-and-push-to-respository">
-<h2><a class="toc-backref" href="#id7">2.7. How to commit three folders to git and push to respository?</a><a class="headerlink" href="#how-to-commit-three-folders-to-git-and-push-to-respository" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id8">2.8. How to commit three folders to git and push to respository?</a><a class="headerlink" href="#how-to-commit-three-folders-to-git-and-push-to-respository" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="40%" />
@@ -329,6 +353,76 @@ $ git config --global user.email en9apr@hotmail.co.uk
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="how-to-change-a-project-from-private-to-public-in-gitlab">
+<h2><a class="toc-backref" href="#id9">2.9. How to change a project from private to public in gitlab?</a><a class="headerlink" href="#how-to-change-a-project-from-private-to-public-in-gitlab" title="Permalink to this headline">¶</a></h2>
+<p>Projects &gt; Your Projects &gt; (click on project)</p>
+<p>Settings &gt; Permissions (expand) &gt; Project visibility = Private</p>
+</div>
+<div class="section" id="how-to-create-a-new-repository">
+<h2><a class="toc-backref" href="#id10">2.10. How to create a new repository</a><a class="headerlink" href="#how-to-create-a-new-repository" title="Permalink to this headline">¶</a></h2>
+<p>Sign into github as en9apr:</p>
+<p><a class="reference external" href="https://github.com/">https://github.com/</a></p>
+<p>Click New button</p>
+<p>Public repository</p>
+<p>Create repository</p>
+<p>cd existing_folder</p>
+<p>echo &#8220;# darcyFoam&#8221; &gt;&gt; README.md</p>
+<p>git init</p>
+<p>git add .</p>
+<p>git commit -m &#8220;first commit&#8221;</p>
+<p>git remote add origin <a class="reference external" href="https://github.com/en9apr/darcyFoam.git">https://github.com/en9apr/darcyFoam.git</a></p>
+<p>git push -u origin master</p>
+<p>username
+password</p>
+</div>
+<div class="section" id="if-i-change-something">
+<h2><a class="toc-backref" href="#id11">2.11. If I change something?</a><a class="headerlink" href="#if-i-change-something" title="Permalink to this headline">¶</a></h2>
+<p>git add .</p>
+<p>git commit -m &#8220;second commit&#8221;</p>
+<p>In gitk: File &gt; Reload</p>
+</div>
+<div class="section" id="if-i-change-something-else">
+<h2><a class="toc-backref" href="#id12">2.12. If I change something else?</a><a class="headerlink" href="#if-i-change-something-else" title="Permalink to this headline">¶</a></h2>
+<p>git add .</p>
+<p>git commit -m &#8220;third commit&#8221;</p>
+<p>In gitk: File &gt; Reload</p>
+</div>
+<div class="section" id="use-git-k-to-revert-commits-you-can-see-the-tree">
+<h2><a class="toc-backref" href="#id13">2.13. Use git k to revert commits (you can see the tree)</a><a class="headerlink" href="#use-git-k-to-revert-commits-you-can-see-the-tree" title="Permalink to this headline">¶</a></h2>
+<p>Right click &gt; revert commit</p>
+<p>(can only take you one step backwards)</p>
+</div>
+<div class="section" id="how-to-remove-reverts">
+<h2><a class="toc-backref" href="#id14">2.14. how to remove reverts?</a><a class="headerlink" href="#how-to-remove-reverts" title="Permalink to this headline">¶</a></h2>
+<p>hard reset.</p>
+<p>In git k: Right click &gt; Reset master branch to here (select Hard reset)</p>
+<p>In git k: File &gt; Reload (should remove all commits)</p>
+</div>
+<div class="section" id="how-to-create-a-branch">
+<h2><a class="toc-backref" href="#id15">2.15. How to create a branch?</a><a class="headerlink" href="#how-to-create-a-branch" title="Permalink to this headline">¶</a></h2>
+<p>In git k: right click &gt; new branch &gt; name_of_branch</p>
+</div>
+<div class="section" id="how-to-delete-a-branch">
+<h2><a class="toc-backref" href="#id16">2.16. How to delete a branch?</a><a class="headerlink" href="#how-to-delete-a-branch" title="Permalink to this headline">¶</a></h2>
+<p>git branch -d name_of_branch</p>
+</div>
+<div class="section" id="how-to-view-branches">
+<h2><a class="toc-backref" href="#id17">2.17. How to view branches?</a><a class="headerlink" href="#how-to-view-branches" title="Permalink to this headline">¶</a></h2>
+<p>git branch</p>
+</div>
+<div class="section" id="how-to-branch-off-to-previous-state">
+<h2><a class="toc-backref" href="#id18">2.18. How to branch off to previous state?</a><a class="headerlink" href="#how-to-branch-off-to-previous-state" title="Permalink to this headline">¶</a></h2>
+<p>Create a branch where the state is - In git k: right click &gt; new branch &gt; name_of_branch</p>
+<p>git checkout name_of_branch</p>
+<p>can still make commits to this branch:</p>
+<p>git add .</p>
+<p>git commit -m &#8220;third commit&#8221;</p>
+<p>In gitk: File &gt; Reload</p>
+</div>
+<div class="section" id="how-to-go-back-to-master-branch">
+<h2><a class="toc-backref" href="#id19">2.19. How to go back to master branch?</a><a class="headerlink" href="#how-to-go-back-to-master-branch" title="Permalink to this headline">¶</a></h2>
+<p>git checkout master</p>
 </div>
 </div>
 

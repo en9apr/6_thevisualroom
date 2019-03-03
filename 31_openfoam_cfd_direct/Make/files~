@@ -1,0 +1,4 @@
+
+cppSandbox.C
+
+EXE = $(FOAM_APPBIN)/31_openfoam_cfd_direct

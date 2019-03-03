@@ -1012,6 +1012,11 @@ Done
 
     $ discord
 
-link account    
+link account 
+
+Install Spyder
+==============
+
+Ubuntu software centre   
     
     

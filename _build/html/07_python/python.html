@@ -608,17 +608,17 @@
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [77]: </span><span class="n">f</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
 
 <span class="gp">In [78]: </span><span class="n">timeit</span> <span class="n">ff</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">f</span><span class="p">)]</span>
-<span class="go">1000 loops, best of 3: 610 us per loop</span>
+<span class="go">1000 loops, best of 3: 857 us per loop</span>
 </pre></div>
 </div>
 <p>Create a NumPy array and time the addition:</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [79]: </span><span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="gp">In [80]: </span><span class="n">timeit</span> <span class="n">gg</span> <span class="o">=</span> <span class="n">g</span> <span class="o">+</span> <span class="n">g</span>
-<span class="go">100000 loops, best of 3: 3.29 us per loop</span>
+<span class="go">100000 loops, best of 3: 4.75 us per loop</span>
 
 <span class="gp">In [81]: </span><span class="n">timeit</span> <span class="n">hh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">g</span><span class="p">)</span>
-<span class="go">100000 loops, best of 3: 3.38 us per loop</span>
+<span class="go">100000 loops, best of 3: 4.77 us per loop</span>
 </pre></div>
 </div>
 <ul class="simple">
